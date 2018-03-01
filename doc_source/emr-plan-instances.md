@@ -1,0 +1,33 @@
+# Configure Cluster Hardware and Networking<a name="emr-plan-instances"></a>
+
+An important consideration when you create an EMR cluster is how you configure Amazon EC2 instances and network options\. EC2 instances in an EMR cluster are organized into *node types*\. There are three: the *master node*, the *core node*, and *task nodes*\. Each node performs a set of roles defined by the distributed applications that you install on the cluster\. During a Hadoop MapReduce or Spark job, for example, components on core and task nodes process data, transfer output to Amazon S3 or HDFS, and provide status metadata back to the master node\. With a single\-node cluster, all components run on the master node\.
+
+The collection of EC2 instances that host each node type is called either an *instance fleet* or a *uniform instance group*\. The instance fleets or uniform instance groups configuration is a choice you make when you create a cluster\. It applies to all node types, and it can't be changed later\.
+
+**Note**  
+The instance fleets configuration is available only in Amazon EMR release versions 4\.8\.0 and later, excluding 5\.0\.0 and 5\.0\.3\.
+
+## Master Node<a name="emr-plan-master"></a>
+
+The master node manages the cluster and typically runs master components of distributed applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications, as well as the HDFS NameNode service\. It also tracks the status of jobs submitted to the cluster and monitors the health of the instance groups\. Because there is only one master node, the instance group or instance fleet consists of a single EC2 instance\.
+
+To monitor the progress of a cluster and interact directly with applications, you can connect to the master node over SSH as the Hadoop user\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. Connecting to the master node allows you to access directories and files, such as Hadoop log files, directly\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. You can also view user interfaces that applications publish as websites running on the master node\. For more information, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. 
+
+## Core Nodes<a name="emr-plan-core"></a>
+
+Core nodes are managed by the master node\. Core nodes run the Data Node daemon to coordinate data storage as part of the Hadoop Distributed File System \(HDFS\)\. They also run the Task Tracker daemon and perform other parallel computation tasks on data that installed applications require\. For example, a core node runs YARN NodeManager daemons, Hadoop MapReduce tasks, and Spark executors\. Like the master node, at least one core node is required per cluster\. However, unlike the master node, there can be multiple core nodes—and therefore multiple EC2 instances—in the instance group or instance fleet\. There is only one core instance group or instance fleet\. With instance groups, you can add and remove EC2 instances while the cluster is running or set up automatic scaling\. For more information about adding and removing EC2 instances with the instance groups configuration, see [Scaling Cluster Resources](emr-scale-on-demand.md)\. With instance fleets, you can effectively add and remove instances by modifying the instance fleet's target capacities for On\-Demand and Spot accordingly\. For more information about target capacities, see [Instance Fleet Options](emr-instance-fleet.md#emr-instance-fleet-options)\.
+
+**Warning**  
+Removing HDFS daemons from a running node runs the risk of losing data\. 
+
+## Task Nodes<a name="emr-plan-task"></a>
+
+Task nodes are optional\. You can use them to add power to perform parallel computation tasks on data, such as Hadoop MapReduce tasks and Spark executors\. Task nodes don't run the Data Node daemon, nor do they store data in HDFS\. As with core nodes, you can add task nodes to a cluster by adding EC2 instances to an existing uniform instance group, or modifying target capacities for a task instance fleet\. Clusters with the uniform instance group configuration can have up to a total of 48 task instance groups\. The ability to add uniform instance groups in this way allows you to mix EC2 instance types and pricing options, such as On\-Demand Instances and Spot Instances\. This gives you flexibility to respond to workload requirements in a cost\-effective way\. When you use the instance fleet configuration for your cluster, the ability to mix instance types and purchasing options is built in, so there is only one task instance fleet\.
+
+## Instance Fleets<a name="emr-plan-instance-fleets"></a>
+
+The instance fleets configuration offers the widest variety of provisioning options for EC2 instances\. Each node type has a single instance fleet, and the task instance fleet is optional\. For each instance fleet, you specify up to five instance types, which can be provisioned as On\-Demand and Spot Instances\. For the core and task instance fleets, you assign a *target capacity* for On\-Demand Instances, and another for Spot Instances\. Amazon EMR chooses any mix of the five instance types to fulfill the target capacities, provisioning both On\-Demand and Spot Instances\. For the master node type, Amazon EMR chooses a single instance type from your list of up to five, and you specify whether it's provisioned as an On\-Demand or Spot Instance\. Instance fleets also provide additional options for Spot Instance purchases, which include a defined duration \(also known as a spot block\) and a timeout that specifies an action to take if Spot capacity can't be provisioned\. For more information, see [Configure Instance Fleets](emr-instance-fleet.md)\.
+
+## Uniform Instance Groups<a name="emr-plan-instance-groups"></a>
+
+Uniform instance groups offer a simplified setup\. Each Amazon EMR cluster can include up to 50 instance groups: one master instance group that contains one EC2 instance, a core instance group that contains one or more EC2 instances, and up to 48 optional task instance groups\. Each core and task instance group can contain any number of EC2 instances\. You can scale each instance group by adding and removing EC2 instances manually, or you can set up automatic scaling\. For more information about configuring uniform instance groups, see [Configure Uniform Instance Groups](emr-uniform-instance-group.md)\. For information about adding and removing instances, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
