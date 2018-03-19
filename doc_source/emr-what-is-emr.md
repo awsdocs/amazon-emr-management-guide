@@ -4,8 +4,6 @@
 
 If you are a first\-time user of Amazon EMR, we recommend that you begin by reading the following: 
 
-+ [What Is Amazon EMR?](#emr-what-is-emr) \(*this section*\) – This section provides an overview of Amazon EMR functionality and features\.
-
 + [Amazon EMR](https://aws.amazon.com/elasticmapreduce/) – This service page provides the Amazon EMR highlights, product details, and pricing information\.
 
 + [Getting Started: Analyzing Big Data with Amazon EMR](emr-gs.md) – This section provides a tutorial of using Amazon EMR to create a sample cluster and run a Hive script as a step\.
