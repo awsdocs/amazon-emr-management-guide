@@ -7,9 +7,7 @@ You can use one of several methods to overcome the 256 step limit in pre\-3\.1\.
 1. Have each step submit several jobs to Hadoop\. This does not allow you unlimited steps in pre\-3\.1\.1 and pre\-2\.4\.8 AMIs, but it is the easiest solution if you need a fixed number of steps greater than 256\.
 
 1. Write a workflow program that runs in a step on a long\-running cluster and submits jobs to Hadoop\. You could have the workflow program either:
-
    + Listen to an Amazon SQS queue to receive information about new steps to run\.
-
    + Check an Amazon S3 bucket on a regular schedule for files containing information about the new steps to run\.
 
 1. Write a workflow program that runs on an EC2 instance outside of Amazon EMR and submits jobs to your long\-running clusters using SSH\.

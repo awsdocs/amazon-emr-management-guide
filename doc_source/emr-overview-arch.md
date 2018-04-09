@@ -2,7 +2,7 @@
 
 Amazon EMR service architecture consists of several layers, each of which provides certain capabilities and functionality to the cluster\. This section provides an overview of the layers and the components of each\.
 
-
+**Topics**
 + [Storage](#emr-arch-storage)
 + [Cluster Resource Management](#emr-arch-resource-management)
 + [Data Processing Frameworks](#emr-arch-processing-frameworks)

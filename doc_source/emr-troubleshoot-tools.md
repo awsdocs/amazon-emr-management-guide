@@ -2,7 +2,7 @@
 
  There are several tools you can use to gather information about your cluster to help determine what went wrong\. Some require that you initialize them when you launch the cluster; others are available for every cluster\. 
 
-
+**Topics**
 + [Tools to Display Cluster Details](#emr-troubleshoot-tools-details)
 + [Tools to View Log Files](#emr-troubleshoot-tools-logs)
 + [Tools to Monitor Cluster Performance](#emr-troubleshoot-tools-performance)

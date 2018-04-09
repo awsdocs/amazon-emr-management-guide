@@ -8,9 +8,7 @@ When you add a tag to an Amazon EMR cluster, the tag is also propagated to each 
 Use the Amazon EMR console or CLI to manage tags on Amazon EC2 instances that are part of a cluster instead of the Amazon EC2 console or CLI, because changes that you make in Amazon EC2 do not synchronize back to the Amazon EMR tagging system\.
 
 You can identify an Amazon EC2 instance that is part of an Amazon EMR cluster by looking for the following system tags\. In this example, *CORE* is the value for the instance group role and *j\-12345678* is an example job flow \(cluster\) identifier value:
-
 + aws:elasticmapreduce:instance\-group\-role=*CORE*
-
 + aws:elasticmapreduce:job\-flow\-id=*j\-12345678*
 
 **Note**  

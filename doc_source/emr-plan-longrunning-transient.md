@@ -21,13 +21,12 @@ By default, clusters you create are long\-running clusters\. If you use quick cr
 **To launch a transient cluster using the AWS CLI**
 
 Specify the `--auto-terminate` parameter when you use the `create-cluster` command to create a transient cluster\.
-
 + The following example demonstrates using the `--auto-terminate` parameter\. You can type the following command and replace *myKey* with the name of your EC2 key pair\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.12.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.13.0 \
   --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey \
   --instance-type m3.xlarge --instance-count 3 --auto-terminate
   ```

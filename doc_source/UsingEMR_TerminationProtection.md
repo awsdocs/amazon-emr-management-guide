@@ -10,11 +10,8 @@ By default, termination protection is enabled when you launch a cluster using th
 If you attempt to terminate a protected cluster with the API or CLI, the API returns an error, and the CLI exits with a non\-zero return code\. 
 
 When you submit steps to a cluster, the ActionOnFailure setting determines what the cluster does in response to any errors\. The possible values for this setting are: 
-
 + TERMINATE\_JOB\_FLOW: If the step fails, terminate the cluster\. If the cluster has termination protection enabled AND auto\-terminate disabled, it will not terminate\.
-
 + CANCEL\_AND\_WAIT: If the step fails, cancel the remaining steps\. If the cluster has auto\-terminate disabled, the cluster will not terminate\.
-
 + CONTINUE: If the step fails, continue to the next step\. 
 
 ## Termination Protection in Amazon EMR and Amazon EC2<a name="TerminationProtectioninEMRandEC2"></a>
@@ -54,7 +51,6 @@ You can enable or disable termination protection when you launch a cluster using
 **To configure termination protection for a new cluster using the AWS CLI**
 
 Using the AWS CLI, you can launch a cluster with termination protection enabled by typing the `create-cluster` command with the `--termination-protected` parameter\. By default, termination protection is disabled when you launch a cluster using the AWS CLI\. You can also use the `--no-termination-protected` parameter to disable termination protection\.
-
 + To launch a protected cluster, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
@@ -81,7 +77,6 @@ You can configure termination protection for a running cluster using the console
 **To configure termination protection for a running cluster using the AWS CLI**
 
 To enable termination protection on a running cluster using the AWS CLI, type the `modify-cluster-attributes` subcommand with the `--termination-protected` parameter\. To disable it, type the `--no-termination-protected` parameter\.
-
 + Type the following command to enable termination protection on a running cluster\.
 
   ```

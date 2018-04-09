@@ -6,13 +6,9 @@ Developers can call the Amazon EMR API using custom Java code to do the same thi
 This example focuses on Java, but Amazon EMR also supports several programming languages with a collection of Amazon EMR SDKs\. For more information, see [Use SDKs to Call Amazon EMR APIs](call-emr-using-sdks.md)\.
 
  This Java source code example demonstrates how to perform the following tasks using the Amazon EMR API: 
-
 + Retrieve AWS credentials and send them to Amazon EMR to make API calls
-
 + Configure a new custom step and a new predefined step
-
 + Add new steps to an existing Amazon EMR cluster
-
 + Retrieve cluster step IDs from a running cluster
 
 **Note**  

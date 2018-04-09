@@ -2,7 +2,7 @@
 
 The following errors are common to custom JAR clusters\.
 
-
+**Topics**
 + [Is your JAR throwing an exception before creating a job?](#emr-troubleshoot-error-custom-jar-1)
 + [Is your JAR throwing an error inside a map task?](#emr-troubleshoot-error-custom-jar-2)
 

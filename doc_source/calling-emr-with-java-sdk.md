@@ -1,11 +1,8 @@
 # Using the AWS SDK for Java to Create an Amazon EMR Cluster<a name="calling-emr-with-java-sdk"></a>
 
 The AWS SDK for Java provides three packages with Amazon EMR functionality:
-
 +  [com\.amazonaws\.services\.elasticmapreduce](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc//com/amazonaws/services/elasticmapreduce/package-summary.html) 
-
 +  [com\.amazonaws\.services\.elasticmapreduce\.model](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc//com/amazonaws/services/elasticmapreduce/model/package-summary.html) 
-
 +  [com\.amazonaws\.services\.elasticmapreduce\.util](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc//com/amazonaws/services/elasticmapreduce/util/package-summary.html) 
 
 For more information about these packages, see the [AWS SDK for Java API Reference](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/)\.

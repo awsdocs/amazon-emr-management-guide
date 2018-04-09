@@ -43,7 +43,6 @@ You can terminate one or more clusters using the Amazon EMR console\. The steps 
 **To terminate an unprotected cluster using the AWS CLI**
 
 To terminate an unprotected cluster using the AWS CLI, use the `terminate-clusters` subcommand with the \-\-cluster\-ids parameter\. 
-
 + Type the following command to terminate a single cluster and replace *j\-3KVXXXXXXX7UG* with your cluster ID\.
 
   ```

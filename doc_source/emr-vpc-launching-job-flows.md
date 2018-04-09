@@ -42,7 +42,6 @@ There is an additional cost for launching an EC2 instance for your NAT device\.
 The AWS CLI does not provide a way to create a NAT instance automatically and connect it to your private subnet\. However, to create a S3 endpoint in your subnet, you can use the Amazon VPCCLI commands\. Use the console to create NAT instances and launch clusters in a private subnet\.
 
 After your VPC is configured, you can launch EMR clusters in it by using the `create-cluster` subcommand with the `--ec2-attributes` parameter\. Use the `--ec2-attributes` parameter to specify the VPC subnet for your cluster\.
-
 + To create a cluster in a specific subnet, type the following command, replace *myKey* with the name of your EC2 key pair, and replace *77XXXX03* with your subnet ID\.
 
   ```

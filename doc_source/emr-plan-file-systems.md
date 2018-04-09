@@ -20,7 +20,6 @@ The `s3a` protocol is not supported\. We suggest you use `s3` in place of `s3a` 
 You specify which file system to use by the prefix of the uniform resource identifier \(URI\) used to access the data\. The following procedures illustrate how to reference several different types of file systems\. 
 
 **To access a local HDFS**
-
 + Specify the `hdfs:///` prefix in the URI\. Amazon EMR resolves paths that do not specify a prefix in the URI to the local HDFS\. For example, both of the following URIs would resolve to the same location in HDFS\. 
 
   ```
@@ -30,7 +29,6 @@ You specify which file system to use by the prefix of the uniform resource ident
   ```
 
 **To access a remote HDFS**
-
 + Include the IP address of the master node in the URI, as shown in the following examples\. 
 
   ```
@@ -40,7 +38,6 @@ You specify which file system to use by the prefix of the uniform resource ident
   ```
 
 **To access Amazon S3**
-
 + Use the `s3://` prefix\.
 
   ```
@@ -49,7 +46,6 @@ You specify which file system to use by the prefix of the uniform resource ident
   ```
 
 **To access the Amazon S3 block file system**
-
 + Use only for legacy applications that require the Amazon S3 block file system\. To access or store data with this file system, use the `s3bfs://` prefix in the URI\. 
 
   The Amazon S3 block file system is a legacy file system that was used to support uploads to Amazon S3 that were larger than 5 GB in size\. With the multipart upload functionality Amazon EMR provides through the AWS Java SDK, you can upload files of up to 5 TB in size to the Amazon S3 native file system, and the Amazon S3 block file system is deprecated\. 

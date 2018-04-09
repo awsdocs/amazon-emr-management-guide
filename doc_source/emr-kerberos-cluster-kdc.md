@@ -85,13 +85,13 @@ For more information about SSH connections, see [Connect to the Cluster](emr-con
 
 The following procedure demonstrates the steps to connect to an EMR cluster using Kerberos from a Linux client using the [ssh command](https://www.ssh.com/ssh/command/)\.
 
-For *MasterPublicDNS*, use the value that appears for **Master public DNS **on the **Summary** tab of the cluster details pane, for example, ec2\-11\-222\-33\-44\.compute\-1\.amazonaws\.com
+For *MasterPublicDNS*, use the value that appears for **Master public DNS **on the **Summary** tab of the cluster details pane, for example, ec2\-11\-222\-33\-44\.compute\-1\.amazonaws\.com\.
 
 **To use SSH to connect to a Kerberized EMR cluster from a Linux client**
 
 1. Use SSH to connect to the master node using an EC2 key pair and copy the contents of the `/etc/krb5.conf` file\. For more information, see [Connect to the Cluster](emr-connect-master-node.md)\.
 
-1. On each client computer that is used to connect to the cluster, create an identical `/etc/krb5.conf` file based on the copy you made in the previous step\.
+1. On each client computer that is used to connect to the cluster, create an identical `/etc/krb5.conf` file based on the copy that you made in the previous step\.
 
 1. Each time a user connects from a client computer, the user first renews Kerberos tickets as shown in the following example\.
 

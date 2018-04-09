@@ -27,19 +27,12 @@ The following parameters for each rule in a policy determine automatic scaling b
 
 **Note**  
 The parameters listed here are based on the AWS Management Console for Amazon EMR\. When you use the AWS CLI or Amazon EMR API, additional advanced configuration options are available\. For more information about advanced options, see [SimpleScalingPolicyConfiguration](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_PutAutoScalingPolicy.html) in the *Amazon EMR API Reference*\.
-
 + Maximum instances and minimum instances\. The **Maximum instances** constraint specifies the maximum number of Amazon EC2 instances that can be in the instance group, and applies to all scale\-out rules\. Similarly, the **Minimum instances** constraint specifies the minimum number of Amazon EC2 instances and applies to all scale\-in rules\.
-
 + The **Rule name**, which must be unique within the policy\.
-
 + The **scaling adjustment**, which determines the number of EC2 instances to add \(for scale\-out rules\) or terminate \(for scale\-in rules\) during the scaling activity triggered by the rule\. 
-
 + The **CloudWatch metric**, which is watched for an alarm condition\.
-
 + A **comparison operator**, which is used to compare the CloudWatch metric to the **Threshold** value and determine a trigger condition\.
-
 + An **evaluation period**, in five\-minute increments, for which the CloudWatch metric must be in a trigger condition before scaling activity is triggered\.
-
 + A **Cooldown period**, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it\. When an instance group has finished a scaling activity and reached its post\-scale state, the cooldown period provides an opportunity for the CloudWatch metrics that might trigger subsequent scaling activities to stabilize\. For more information, see [Auto Scaling Cooldowns](http://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)in the *Amazon EC2 Auto Scaling User Guide*\.  
 ![\[AWS Management Console automatic scaling rule parameters for Amazon EMR.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/auto-scaling-rule-params.png)
 

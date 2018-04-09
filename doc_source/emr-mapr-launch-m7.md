@@ -6,7 +6,6 @@
 To use the commands in this tutorial, download and install the AWS CLI\. For more information see [Installing the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide//installing.html) in the *AWS Command Line Interface User Guide*\.
 
 1. To launch a cluster with MapR, m7 edition, type the following command and replace *myKey* with the name of your EC2 key pair\.
-
    + Linux, UNIX, and Mac OS X users:
 
      ```
@@ -15,7 +14,6 @@ To use the commands in this tutorial, download and install the AWS CLI\. For mor
      3. --use-default-roles --ec2-attributes KeyName=myKey \
      4. --instance-type m3.xlarge --instance-count 3
      ```
-
    + Windows users:
 
      ```

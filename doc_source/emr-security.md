@@ -1,19 +1,11 @@
 # Security<a name="emr-security"></a>
 
 Amazon EMR provides several features to help secure cluster resources and data:
-
 + **AWS Identity and Access Management \(IAM\) policies** allow or deny permissions for IAM users and groups to perform actions\. Policies can be combined with tagging to control access on a cluster\-by\-cluster basis\. For more information, see [Use IAM Policies to Allow and Deny User Permissions](emr-plan-access-iam.md)\.
-
 + **Kerberos** can be set up to provide strong authentication through secret\-key cryptography\. For more information, see [Use Kerberos Authentication](emr-kerberos.md)\.
-
 + **Secure Socket Shell \(SSH\)** provides a secure way for users to connect to the command line on cluster instances\. It also provides tunneling to view Web interfaces that applications run on the master node\. Clients can authenticate using Kerberos or an Amazon EC2 key pair\. For more information, see [Use an Amazon EC2 Key Pair for SSH Credentials](emr-plan-access-ssh.md) and [Connect to the Cluster](emr-connect-master-node.md)\.
-
 + **Data encryption** helps protect data at rest and in transit\. For more information, see [Encrypt Data in Transit and At Rest](emr-data-encryption.md)\.
-
-+ **EMRFS Authorization for Data in Amazon S3** allows you to control whether S3 files can be accessed from within EMR based on user, group, or the location of EMRFS data in Amazon S3\. For more information, see [Configure EMRFS Authorization for Data in Amazon S3](emr-emrfs-authz.md)\.
-
++ **IAM roles for EMRFS requests to Amazon S3** allow you to control whether S3 files can be accessed from within EMR based on user, group, or the location of EMRFS data in Amazon S3\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 + **Security groups** act as a virtual firewall for Amazon EMR cluster instances, limiting inbound and outbound network traffic\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
-
 + **Security configurations** are templates for security configurations so that you can conveniently re\-use a security setup whenever you create a cluster\. For more information, see [Use Security Configurations to Set Up Cluster Security](emr-security-configurations.md)\.
-
 + **The Amazon EMR service role, instance profile, and service\-based role** control how Amazon EMR is able to access other AWS services\. For more information, see [Configure IAM Roles for Amazon EMR Permissions to AWS Services](emr-iam-roles.md)\.

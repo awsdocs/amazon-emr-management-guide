@@ -15,7 +15,6 @@ If you no longer need a tag, you can remove it from the cluster\.
 **To remove tags from a cluster using the AWS CLI**
 
 To remove tags from a cluster using the AWS CLI, type the `remove-tags` subcommand with the `--tag-keys` parameter\. When removing a tag, only the key name is required\.
-
 + To remove a tag from a cluster, type the following command and replace *j\-KT4XXXXXXXX1NM* with your cluster ID\.
 
   ```

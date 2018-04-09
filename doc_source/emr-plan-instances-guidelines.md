@@ -5,19 +5,12 @@ Use the guidance in this section to help you determine the instance types, purch
 ## What Instance Type Should You Use?<a name="emr-instance-group-size"></a>
 
 There are several ways to add EC2 instances to a cluster, which depend on whether you use the instance groups configuration or the instance fleets configuration for the cluster\.
-
 + **Instance Groups**
-
   + Manually add instances of the same type to existing core and task instance groups\.
-
   + Manually add a task instance group, which can use a different instance type\.
-
   + Set up automatic scaling in Amazon EMR for an instance group, adding and removing instances automatically based on the value of an Amazon CloudWatch metric that you specify\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
-
 + **Instance Fleets**
-
   + Add a single task instance fleet\.
-
   + Change the target capacity for On\-Demand and Spot Instances for existing core and task instance fleets\. For more information, see [Configure Instance Fleets](emr-instance-fleet.md)\.
 
 One way to plan the instances of your cluster is to run a test cluster with a representative sample set of data and monitor the utilization of the nodes in the cluster\. For more information, see [View and Monitor a Cluster](emr-manage-view.md)\. Another way is to calculate the capacity of the instances you are considering and compare that value against the size of your data\.
@@ -25,17 +18,11 @@ One way to plan the instances of your cluster is to run a test cluster with a re
 In general, the master node type, which assigns tasks, doesn't require an EC2 instance with much processing power; EC2 instances for the core node type, which process tasks and store data in HDFS, need both processing power and storage capacity; EC2 instances for the task node type, which don't store data, need only processing power\. For guidelines about available EC2 instances and their configuration, see [Plan and Configure EC2 Instances](emr-plan-ec2-instances.md)\.
 
  The following guidelines apply to most Amazon EMR clusters\. 
-
 + The master node does not have large computational requirements\. For most clusters of 50 or fewer nodes, consider using an m3\.xlarge instance\. For clusters of more than 50 nodes, consider using an m3\.2xlarge\.
-
 + The computational needs of the core and task nodes depend on the type of processing your application performs\. Many jobs can be run on m3\.xlarge instance types, which offer balanced performance in terms of CPU, disk space, and input/output\. If your application has external dependencies that introduce delays \(such as web crawling to collect data\), you may be able to run the cluster on m3\.large instances to reduce costs while the instances are waiting for dependencies to finish\. For improved performance, consider running the cluster using m3\.2xlarge instances for the core and task nodes\. If different phases of your cluster have different capacity needs, you can start with a small number of core nodes and increase or decrease the number of task nodes to meet your job flow's varying capacity requirements\. 
-
 + Most Amazon EMR clusters can run on standard EC2 instance types such as m3\.xlarge and m3\.2xlarge\. Computation\-intensive clusters may benefit from running on High CPU instances, which have proportionally more CPU than RAM\. Database and memory\-caching applications may benefit from running on High Memory instances\. Network\-intensive and CPU\-intensive applications like parsing, NLP, and machine learning may benefit from running on Cluster Compute instances, which provide proportionally high CPU resources and increased network performance\.
-
 + The amount of data you can process depends on the capacity of your core nodes and the size of your data as input, during processing, and as output\. The input, intermediate, and output datasets all reside on the cluster during processing\. 
-
 + By default, the total number of EC2 instances you can run on a single AWS account is 20\. This means that the total number of nodes you can have in a cluster is 20\. For more information about how to request that this limit be increased for your account, see [AWS Limits](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-ec2-instances)\. 
-
 + In Amazon EMR, m1\.small and m1\.medium instances are recommended only for testing purposes and m1\.small is not supported on Hadoop 2 clusters\.
 
 ## When Should You Use Spot Instances?<a name="emr-plan-spot-instances"></a>
@@ -101,27 +88,18 @@ You can add or remove task nodes using the console, AWS CLI, or API\. You can al
 ## Calculating the Required HDFS Capacity of a Cluster<a name="emr-plan-instances-hdfs"></a>
 
  The amount of HDFS storage available to your cluster depends on these factors:
-
 + The number of EC2 instances used for core nodes\.
-
 + The capacity of the EC2 instance store for the instance type used\. For more information on instance store volumes, see [Amazon EC2 Instance Store](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-
 + The number and size of EBS volumes attached to core nodes\.
-
 + A replication factor, which accounts for how each data block is stored in HDFS for RAID\-like redundancy\. By default, the replication factor is three for a cluster of 10 or more core nodes, two for a cluster of 4\-9 core nodes, and one for a cluster of three or fewer nodes\.
 
 To calculate the HDFS capacity of a cluster, for each core node, add the instance store volume capacity to the EBS storage capacity \(if used\)\. Multiply the result by the number of core nodes, and then divide the total by the replication factor based on the number of core nodes\. For example, a cluster with 10 core nodes of type i2\.xlarge, which have 800 GB of instance storage without any attached EBS volumes, has a total of approximately 2,666 GB available for HDFS \(10 nodes x 800 GB ÷ 3 replication factor\)\.
 
  If the calculated HDFS capacity value is smaller than your data, you can increase the amount of HDFS storage in the following ways: 
-
 + Creating a cluster with additional EBS volumes or adding instance groups with attached EBS volumes to an existing cluster
-
 + Adding more core nodes
-
 + Choosing an EC2 instance type with greater storage capacity
-
 + Using data compression
-
 + Changing the Hadoop configuration settings to reduce the replication factor
 
 Reducing the replication factor should be used with caution as it reduces the redundancy of HDFS data and the ability of the cluster to recover from lost or corrupted HDFS blocks\. 

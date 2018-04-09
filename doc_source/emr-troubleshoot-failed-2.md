@@ -2,7 +2,7 @@
 
 Amazon EMR operates as part of an ecosystem of web services and open\-source software\. Things that affect those dependencies can impact the performance of Amazon EMR\.
 
-
+**Topics**
 + [Check for Service Outages](#emr-troubleshoot-failed-2-outages)
 + [Check Usage Limits](#emr-troubleshoot-failed-2-limits)
 + [Check the Release Version](#emr-troubleshoot-failed-2-ami)

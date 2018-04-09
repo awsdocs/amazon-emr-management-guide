@@ -6,7 +6,7 @@ IAM is available at no charge to all AWS account holders\. You don't need to sig
 
 IAM policies adhere to the principle of least privilege, which means that a user can't perform an action until permission is granted to do so\. For more information, see the *[IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)*\.
 
-
+**Topics**
 + [Amazon EMR Actions in User\-Based IAM Policies](#emr-set-iam-policy)
 + [Use Managed Policies for User Access](#emr-managed-iam-policies)
 + [Use Inline Policies for User Permissions](#emr-inline-policy)
@@ -148,9 +148,9 @@ Because the **AmazonElasticMapReduceReadOnlyAccess** policy is automatically upd
 To customize policies, we recommend that you start with a managed policy and then modify permissions and conditions according to your requirements\.
 
 **Important**  
-Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permission errors\. For more information, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](emr-iam-roles-launch-jobflow.md)\.
+Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](emr-iam-roles-launch-jobflow.md)\.
 
-The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permission for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
+The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
 
 To implement a more restrictive policy, attach an inline policy to appropriate users or groups that allows `iam:PassRole` only for roles specific to Amazon EMR\. The following example demonstrates a statement that allows `iam:PassRole` permissions only for the default Amazon EMR roles: `EMR_DefaultRole`, `EMR_EC2_DefaultRole`, and `EMR_AutoScalingDefaultRole`\. If you use custom roles, replace the default role names with your custom role names\.
 
@@ -171,9 +171,7 @@ For more information about roles for Amazon EMR, see [Configure IAM Roles for Am
 ## Use Cluster Tagging with IAM Policies for Cluster\-Specific Control<a name="emr-fine-grained-cluster-access"></a>
 
 You can use the `Condition` element \(also called a `Condition` block\) along with the following Amazon EMR condition context keys in an IAM user policy to control access based on cluster tags:
-
 + Use the `elasticmapreduce:ResourceTag/TagKeyString` condition context key to allow or deny user actions on clusters with specific tags\.
-
 + Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key to require a specific tag with actions/API calls\. 
 
 **Important**  

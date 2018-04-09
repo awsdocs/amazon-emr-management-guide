@@ -2,7 +2,7 @@
 
  In this step of the tutorial, you run your Hive script in your cluster as a step in the Amazon EMR console to process your sample data\. In Amazon EMR, a *step* is a unit of work that contains one or more Hadoop jobs\. You can submit steps when you create the cluster or when the cluster is running \(if it is a long\-running cluster\)\. 
 
-
+**Topics**
 + [Submit the Hive Script as a Step](#emr-gs-add-step)
 + [View the Results](#w3ab1c16c19b9)
 
@@ -22,27 +22,20 @@ Use the **Add Step** option to submit your Hive script to the cluster using the 
 1. Scroll to the **Steps** section and expand it, then choose **Add step**\.
 
 1. In the **Add Step** dialog:
-
    + For **Step type**, choose **Hive program**\.
-
    + For **Name**, accept the default name \(Hive program\) or type a new name\.
-
    + For **Script S3 location**, type **s3://*region*\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q** 
 
      Replace *region* with your region\. For example, for US West \(Oregon\) type **s3://us\-west\-2\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q**
-
    + For **Input S3 location**, type **s3://*region*\.elasticmapreduce\.samples** 
 
      Replace *region* with your region\. For example, for US West \(Oregon\) type **s3://us\-west\-2\.elasticmapreduce\.samples**
-
    + For **Output S3 location**, type or browse to the `output` bucket that you created in [Create an Amazon S3 Bucket](emr-gs-prerequisites.md#emr-gs-create-bucket)\.
-
    + For **Arguments**, include the following argument to allow column names that are the same as reserved words:
 
      ```
      -hiveconf hive.support.sql11.reserved.keywords=false
      ```
-
    + For **Action on failure**, accept the default option **Continue**\.
 
 1. Choose **Add**\. The step appears in the console with a status of **Pending**\. 

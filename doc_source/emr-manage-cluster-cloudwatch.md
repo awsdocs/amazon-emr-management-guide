@@ -6,6 +6,6 @@ Events are useful for monitoring a specific occurrence within a cluster—for ex
 
 For more information about CloudWatch Events, see the [Amazon CloudWatch Events User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)\. For more information about CloudWatch metrics, see [Using Amazon CloudWatch Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) and [Creating Amazon CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html) in the *Amazon CloudWatch User Guide*\.
 
-
+**Topics**
 + [Monitor CloudWatch Events](emr-manage-cloudwatch-events.md)
 + [Monitor Metrics with CloudWatch](UsingEMR_ViewingMetrics.md)

@@ -4,7 +4,7 @@
 
  There are many types of logs written to the master node\. Amazon EMR writes step, bootstrap action, and instance state logs\. Apache Hadoop writes logs to report the processing of jobs, tasks, and task attempts\. Hadoop also records logs of its daemons\. For more information about the logs written by Hadoop, go to [http://hadoop\.apache\.org/docs/stable/hadoop\-project\-dist/hadoop\-common/ClusterSetup\.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/ClusterSetup.html)\. 
 
-
+**Topics**
 + [View Log Files on the Master Node](#emr-manage-view-web-log-files-master-node)
 + [View Log Files Archived to Amazon S3](#emr-manage-view-web-log-files-s3)
 + [View Log Files in the Debugging Tool](#emr-manage-view-web-log-files-debug)

@@ -43,11 +43,9 @@
 ![\[Metrics Alarm Tutorial\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/cw-display-graph.png)
 
 **To access metrics from the CloudWatch CLI**
-
 +  Call `[mon\-get\-stats](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html)`\. For more information, see the [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
 
 **To access metrics from the CloudWatch API**
-
 +  Call `[GetMetricStatistics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)`\. For more information, see [Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)\. 
 
 ## Setting Alarms on Metrics<a name="UsingEMR_ViewingMetrics_Alarm"></a>
@@ -76,11 +74,9 @@
  For more information about how to set alarms using the CloudWatch console, see [Create an Alarm that Sends Email](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html) in the *Amazon CloudWatch User Guide*\. 
 
 **To set an alarm using the CloudWatch API**
-
 +  Call `[mon\-put\-metric\-alarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-put-metric-alarm.html)`\. For more information, see *[Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)*\. 
 
 **To set an alarm using the CloudWatch API**
-
 +  Call `[PutMetricAlarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)`\. For more information, see *[Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
 
 ## Metrics Reported by Amazon EMR in CloudWatch<a name="UsingEMR_ViewingMetrics_MetricsReported"></a>
@@ -121,8 +117,8 @@ The following are Hadoop 1 metrics:
 |  TaskNodesPending  |  The number of core nodes waiting to be assigned\. All of the task nodes requested may not be immediately available; this metric reports the pending requests\. Data points for this metric are reported only when a corresponding instance group exists\. Use case: Monitor cluster health Units: *Count*  | 
 |  LiveTaskTrackers  |  The percentage of task trackers that are functional\. Use case: Monitor cluster health Units: *Percent*  | 
 | IO | 
-|  S3BytesWritten  |  The number of bytes written to Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Bytes*  | 
-|  S3BytesRead  |  The number of bytes read from Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Bytes*  | 
+|  S3BytesWritten  |  The number of bytes written to Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
+|  S3BytesRead  |  The number of bytes read from Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
 |  HDFSUtilization  |  The percentage of HDFS storage currently used\. Use case: Analyze cluster performance Units: *Percent*  | 
 |  HDFSBytesRead  |  The number of bytes read from HDFS\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Bytes*  | 
 |  HDFSBytesWritten  |  The number of bytes written to HDFS\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Bytes*  | 

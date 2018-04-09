@@ -31,7 +31,6 @@ In addition to resizing the core and task groups, you can also add one or more t
 **To resize a cluster by changing the instance count using the AWS CLI**
 
 You can add instances to the core group or task group, and you can remove instances from the task group using the AWS CLI `modify-instance-groups` subcommand with the `InstanceCount` parameter\. To add instances to the core or task groups, increase the `InstanceCount`\. To reduce the number of instances in the task group, decrease the `InstanceCount`\. Changing the instance count of the task group to 0 removes all instances but not the instance group\.
-
 + To increase the number of instances in the task instance group from 3 to 4, type the following command and replace *ig\-31JXXXXXXBTO* with the instance group ID\.
 
   ```
@@ -85,7 +84,6 @@ The following screenshot shows a task instance group that is resizing but can be
 **To interrupt a resize using the AWS CLI**
 
 You can use the AWS CLI to stop a resize by using the `modify-instance-groups` subcommand\. Assume that you have six instances in your instance group and you want to increase this to 10\. You later decide that you would like to cancel this request:
-
 + The initial request:
 
   ```
@@ -110,7 +108,6 @@ In the AWS CLI, the `list-instances` subcommand returns all instances and their 
 **To reset a cluster in an ARRESTED state using the AWS CLI**
 
 Type the `describe-cluster` subcommand with the `--cluster-id` parameter to view the state of the instances in your cluster\.
-
 + To view information on all instances and instance groups in a cluster, type the following command and replace *j\-3KVXXXXXXY7UG* with the cluster ID\.
 
   ```

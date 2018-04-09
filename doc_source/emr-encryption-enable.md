@@ -12,7 +12,7 @@ This topic provides key policy details for an AWS KMS CMK to be used with Amazon
 
 The AWS KMS encryption key must be created in the same region as your Amazon EMR cluster instance and the Amazon S3 buckets used with EMRFS\. If the key that you specify is in a different account from the one that you use to configure a cluster, you must specify the key using its ARN\.
 
-The role for the Amazon EC2 instance profile must have permission to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use EMRFS authorization to assume different roles based on the call to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permission to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
+The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
 
 You can use the AWS Management Console to add your instance profile or EC2 instance profile to the list of key users for the specified AWS KMS CMK, or you can use the AWS CLI or an AWS SDK to attach an appropriate key policy\.
 
@@ -100,9 +100,7 @@ public class MyEncryptionMaterialsProviders implements EncryptionMaterialsProvid
 ## Providing Certificates for In\-Transit Data Encryption with Amazon EMR Encryption<a name="emr-encryption-certificates"></a>
 
 For in\-transit data encryption using a security configuration \(available in Amazon EMR release version 4\.8\.0 or later\), you have two options to specify encryption artifacts:
-
 + You can manually create PEM certificates, include them in a zip file, and then reference the zip file in Amazon S3\.
-
 + You can implement a custom certificate provider as a Java class\. You specify the JAR file of the application in Amazon S3, and then provide the full class name of the provider as declared in the application\. The class must implement the [TLSArtifactsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/TLSArtifactsProvider.html) interface available beginning with the AWS SDK for Java version 1\.11\.0\.
 
 Amazon EMR automatically downloads artifacts to each node in the cluster and later uses them to implement the open\-source, in\-transit encryption features\. For more information about available options, see [In\-Transit Data Encryption](emr-data-encryption-options.md#emr-encryption-intransit)\.

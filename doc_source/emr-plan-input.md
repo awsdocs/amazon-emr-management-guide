@@ -4,6 +4,6 @@ Most clusters load input data and then process that data\. In order to load data
 
 The default input format in Hadoop is text files, though you can customize Hadoop and use tools to import data stored in other formats\. 
 
-
+**Topics**
 + [Types of Input Amazon EMR Can Accept](emr-plan-input-accept.md)
 + [How to Get Data Into Amazon EMR](emr-plan-get-data-in.md)

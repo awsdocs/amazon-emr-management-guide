@@ -2,7 +2,7 @@
 
  This topic provides an overview of Amazon EMR clusters, including how to submit work to a cluster, how that data is processed, and the various states that the cluster goes through during processing\. 
 
-
+**Topics**
 + [Understanding Clusters and Nodes](#emr-overview-clusters)
 + [Submitting Work to a Cluster](#emr-work-cluster)
 + [Processing Data](#emr-overview-data-processing)
@@ -13,11 +13,8 @@
  The central component of Amazon EMR is the *cluster*\. A cluster is a collection of Amazon Elastic Compute Cloud \(Amazon EC2\) instances\. Each instance in the cluster is called a *node*\. Each node has a role within the cluster, referred to as the *node type*\. Amazon EMR also installs different software components on each node type, giving each node a role in a distributed application like Apache Hadoop\.
 
  The node types in Amazon EMR are as follows: 
-
 + **Master node**:  A node that manages the cluster by running software components to coordinate the distribution of data and tasks among other nodes—collectively referred to as slave nodes—for processing\. The master node tracks the status of tasks and monitors the health of the cluster\.
-
 + **Core node**:  A slave node with software components that run tasks and store data in the Hadoop Distributed File System \(HDFS\) on your cluster\.
-
 + **Task node**:  A slave node with software components that only run tasks\. Task nodes are optional\.
 
  The following diagram represents a cluster with one master node and four slave nodes\. 
@@ -27,13 +24,9 @@
 ## Submitting Work to a Cluster<a name="emr-work-cluster"></a>
 
  When you run your cluster on Amazon EMR, you have several options as to how you specify the work that needs to be done\. 
-
 +  Provide the entire definition of the work to be done in the Map and Reduce functions\. This is typically done for clusters that process a set amount of data and then terminate when processing is complete\. For more information, see [Apache Hadoop](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hadoop.html) in the *Amazon EMR Release Guide*\. 
-
 +  Create a long\-running cluster and use the Amazon EMR console, the Amazon EMR API, or the AWS CLI to submit steps, which may contain one or more Hadoop jobs\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\. 
-
 +  Create a cluster with a Hadoop application, such as Hive or Pig, installed and use the interface provided by the application to submit queries, either scripted or interactively\. For more information, see the [Amazon EMR Release Guide](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\. 
-
 +  Create a long\-running cluster, connect to it, and submit Hadoop jobs using the Hadoop API\. For more information, go to [Class JobClient](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapred/JobClient.html) in the Apache Hadoop API documentation\. 
 
 ## Processing Data<a name="emr-overview-data-processing"></a>
@@ -95,9 +88,7 @@ The following diagram represents the step sequence and default change of state w
 1.  After all bootstrap actions are successfully completed, the cluster state is `RUNNING`\. The cluster sequentially runs all steps during this phase\. 
 
 1.  After steps run successfully, the cluster either goes into a `WAITING` state or a `SHUTTING_DOWN` state, described as follows\. 
-
    +  If you configured your cluster as a long\-running cluster by disabling auto\-terminate or by using the KeepJobFlowAliveWhenNoSteps parameter in the API, the cluster will go into a `WAITING` state after processing all submitted steps and wait for the next set of instructions\. If you have more data to process, you can add more steps\. You must manually terminate a long\-running cluster when you no longer need it\. After you manually terminate the cluster, it goes into the `SHUTTING_DOWN` state and then into the `TERMINATED` state\. 
-
    +  If you configured your cluster as a transient cluster by enabling auto\-terminate or by using the KeepJobFlowAliveWhenNoSteps parameter in the API, it automatically goes into the `SHUTTING_DOWN` state after all of the steps complete\. The instances are terminated, and all data stored in the cluster itself is deleted\. Information stored in other locations, such as in your Amazon S3 bucket, persists\. When the shutdown process completes, the cluster state is set to `COMPLETED`\. 
 
 A failure during the cluster process terminates the cluster and all of its instances unless: a\) you enable termination protection; or b\) you supply an ActionOnFailure in the [StepConfig](Amazon EMR API ReferenceAPI_StepConfig.html) for the step\. Any data stored on the cluster is deleted\. The cluster state is set to `TERMINATED_WITH_ERRORS`\. If you have enabled termination protection so that you can retrieve data from your cluster in the event of a failure, then the cluster is not terminated\. Once you are truly done with the cluster, you can remove termination protection and terminate the cluster\. For more information, see [Managing Cluster Termination](UsingEMR_TerminationProtection.md)\. 

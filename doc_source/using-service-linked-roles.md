@@ -11,31 +11,19 @@ For information about other services that support service\-linked roles, see [AW
 Amazon EMR uses the **AWSServiceRoleForEMRCleanup** role, which is a service\-based role that allows Amazon EMR to terminate and delete Amazon EC2 resources on your behalf if the Amazon EMR service role has lost that ability\. Amazon EMR creates the role automatically during cluster creation if it does not already exist\.
 
 The AWSServiceRoleForEMRCleanup service\-linked role trusts the following services to assume the role:
-
 + `elasticmapreduce.amazonaws.com`
 
 The AWSServiceRoleForEMRCleanup service\-linked role permissions policy allows Amazon EMR to complete the following actions on the specified resources:
-
 + Action: `DescribeInstances` on `ec2`
-
 + Action: `DescribeSpotInstanceRequests` on `ec2`
-
 + Action: `ModifyInstanceAttribute` on `ec2`
-
 + Action: `TerminateInstances` on `ec2`
-
 + Action: `CancelSpotInstanceRequests` on `ec2`
-
 + Action: `DeleteNetworkInterface` on `ec2`
-
 + Action: `DescribeInstanceAttribute` on `ec2`
-
 + Action: `DescribeVolumeStatus` on `ec2`
-
 + Action: `DescribeVolumes` on `ec2`
-
 + Action: `DetachVolume` on `ec2`
-
 + Action: `DeleteVolume` on `ec2`
 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\.
@@ -169,7 +157,7 @@ You can use the IAM API to edit the description of a service\-linked role\.
 
 ## Deleting a Service\-Linked Role for Amazon EMR<a name="delete-service-linked-role"></a>
 
-If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don’t have an unused entity that is not being actively monitored or maintained\. However, you must clean up your service\-linked role before you can delete it\.
+If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way, you don’t have an unused entity that is not being actively monitored or maintained\. However, you must clean up your service\-linked role before you can delete it\.
 
 ### Cleaning Up a Service\-Linked Role<a name="service-linked-role-review-before-delete"></a>
 
@@ -188,7 +176,6 @@ Before you can use IAM to delete a service\-linked role, you must first confirm 
 If you are unsure whether Amazon EMR is using the AWSServiceRoleForEMRCleanup role, you can try to delete the role\. If the service is using the role, then the deletion fails and you can view the regions where the role is being used\. If the role is being used, then you must wait for the session to end before you can delete the role\. You cannot revoke the session for a service\-linked role\. 
 
 **To remove Amazon EMR resources used by the AWSServiceRoleForEMRCleanup**
-
 + Terminate all clusters in your account\. For more information, see [Terminate a Cluster](UsingEMR_TerminateJobFlow.md)\.
 
 ### Deleting a Service\-Linked Role \(IAM Console\)<a name="delete-service-linked-role-iam-console"></a>

@@ -4,7 +4,7 @@
 
 The following errors are common to streaming clusters\.
 
-
+**Topics**
 + [Is data being sent to the mapper in the wrong format?](#emr-troubleshoot-error-streaming-1)
 + [Is your script timing out?](#emr-troubleshoot-error-streaming-2)
 + [Are you passing in invalid streaming arguments?](#invalidarg)

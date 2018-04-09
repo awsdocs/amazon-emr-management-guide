@@ -7,7 +7,6 @@ You can submit Hadoop jobs interactively by establishing an SSH connection to th
 The following examples demonstrate interactively submitting Hadoop jobs and Hive jobs to the master node\. The process for submitting jobs for other programming frameworks \(such as Pig\) is similar to these examples\. 
 
 **To submit Hadoop jobs interactively using the AWS CLI**
-
 + You can submit Hadoop jobs interactively using the AWS CLI by establishing an SSH connection in the CLI command \(using the `ssh` subcommand\)\. ``To copy a JAR file from your local Windows machine to the master node's file system, type the following command\. Replace *j\-2A6HXXXXXXL7J* with your cluster ID, replace *mykey\.ppk* with the name of your key pair file, and replace *myjar\.jar* with the name of your JAR file\.
 
   ```

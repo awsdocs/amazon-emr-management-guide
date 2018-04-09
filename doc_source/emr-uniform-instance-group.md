@@ -25,19 +25,14 @@ The following procedure covers **Advanced options** when you create a cluster\. 
 Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Within each **Node type** row:
-
    + Under **Node type**, if you want to change the default name of the instance group, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance group, click the X icon or choose **Add task instance group** to add additional **Task** instance groups\.
-
    + Under **Instance type** click the pencil icon and then choose the instance type you want to use for that node type\.
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
-
    + Under **Instance count**, enter the number of instances on which to run that node type\. There is only one instance in the **Master** node type\.
-
    + Under **Purchasing option** choose **On\-demand**, or choose **Spot** and enter the **Maximum Spot price** you are willing to pay per instance\. Instances in this instance group launch when the Spot price in the Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
 **Tip**  
 Mouse over the information tooltip for **Maximum Spot price** to see the Spot price for all Availability Zones in the current region\. The lowest Spot price is in green\. You might want to use this information to inform your **EC2 Subnet** selection\.
-
    + Under **Auto Scaling for Core and Task node types**, choose the pencil icon, and then configure the automatic scaling options\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
 
 1. To add another task instance group to the cluster, click and configure settings for the instance group as described in the previous step\.
@@ -58,7 +53,7 @@ If you have not previously created the default Amazon EMR service role and Amazo
 Linux, UNIX, and macOS users:
 
 ```
-1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.12.0 \
+1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.13.0 \
 2. --use-default-roles --ec2-attributes KeyName=myKey \
 3. --instance-groups InstanceGroupType=MASTER,InstanceType=m3.xlarge,InstanceCount=1,BidPrice=0.25 \
 4. InstanceGroupType=CORE,InstanceType=m3.xlarge,InstanceCount=2,BidPrice=0.03 \ 
@@ -69,7 +64,7 @@ Linux, UNIX, and macOS users:
 Windows users:
 
 ```
-1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.12.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m3.xlarge,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m3.xlarge,InstanceCount=2
+1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.13.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m3.xlarge,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m3.xlarge,InstanceCount=2
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>

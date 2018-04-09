@@ -6,6 +6,6 @@ Beginning with Amazon EMR version 4\.8\.0, you can use Amazon EMR security confi
 
 Optionally, beginning with Amazon EMR release version 4\.1\.0 and later, you can choose to configure transparent encryption in HDFS\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hdfs-config.html#emr-encryption-tdehdfs) in the *Amazon EMR Release Guide*\. Beginning with Amazon EMR release version 5\.7\.0, you can specify a custom AMI with an encrypted EBS root device volume\. For more information, see [Using a Custom AMI](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html)\. These features are not configured using security configurations\.
 
-
+**Topics**
 + [Encryption Options](emr-data-encryption-options.md)
 + [Create Keys and Certificates for Data Encryption](emr-encryption-enable.md)

@@ -9,7 +9,7 @@ Pricing for Amazon EMR varies by region and service\. In this tutorial, charges 
 **Note**  
  You can use the [Amazon Web Services Simple Monthly Calculator](http://calculator.s3.amazonaws.com/calc5.html) to estimate your bill\. 
 
-
+**Topics**
 + [Step 1: Set Up Prerequisites for Your Sample Cluster](emr-gs-prerequisites.md)
 + [Step 2: Launch Your Sample Amazon EMR Cluster](emr-gs-launch-sample-cluster.md)
 + [Step 3: Prepare Your Sample Data and Script](emr-gs-prepare-data-and-script.md)

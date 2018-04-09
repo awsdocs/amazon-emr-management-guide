@@ -23,9 +23,7 @@ Whether you add steps during cluster creation or to a cluster, the procedure is 
 The following procedures demonstrate adding steps to a newly\-created cluster and to a running cluster using the AWS CLI\. In both examples, the `--steps` subcommand is used to add steps to the cluster\. 
 
 **To add a step during cluster creation**
-
 + Type the following command to create a cluster and add a Pig step\. Replace *myKey* with the name of your EC2 key pair and replace *mybucket* with the name of your Amazon S3 bucket\.
-
   + Linux, UNIX, and Mac OS X users:
 
     ```
@@ -34,7 +32,6 @@ The following procedures demonstrate adding steps to a newly\-created cluster an
     3. --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m3.xlarge InstanceGroupType=CORE,InstanceCount=2,InstanceType=m3.xlarge \
     4. --steps Type=PIG,Name="Pig Program",ActionOnFailure=CONTINUE,Args=[-f,s3://mybucket/scripts/pigscript.pig,-p,INPUT=s3://mybucket/inputdata/,-p,OUTPUT=s3://mybucket/outputdata/,$INPUT=s3://mybucket/inputdata/,$OUTPUT=s3://mybucket/outputdata/]
     ```
-
   + Windows users:
 
     ```
@@ -52,7 +49,6 @@ The list of arguments changes depending on the type of step\.
   ```
 
 **To add a step to a running cluster**
-
 + Type the following command to add a step to a running cluster\. Replace *j\-2AXXXXXXGAPLF* with your cluster ID and replace *mybucket* with your Amazon S3 bucket name\. 
 
   ```
@@ -98,7 +94,6 @@ You can cancel steps using the the AWS Management Console, the AWS CLI, or the A
 1. For each step you want to cancel, select the step from the list of **Steps**, select **Cancel step**, and then confirm you want to cancel the step\.
 
 **To cancel steps using the AWS CLI**
-
 + Use the `aws emr cancel-steps` command, specifying the cluster and steps to cancel\. The following example demonstrates an AWS CLI command to cancel two steps\.
 
   ```

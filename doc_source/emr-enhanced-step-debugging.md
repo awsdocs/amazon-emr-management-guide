@@ -1,11 +1,8 @@
 # Enhanced Step Debugging<a name="emr-enhanced-step-debugging"></a>
 
 If an Amazon EMR step fails and you submitted your work using the Step API operation with an AMI of version 5\.x or later, Amazon EMR can identify and return the root cause of the step failure in some cases, along with the name of the relevant log file and a portion of the application stack trace via API\. For example, the following failures can be identified: 
-
 + A common Hadoop error such as the output directory already exists, the input directory does not exist, or an application runs out of memory\.
-
 + Java errors such as an application that was compiled with an incompatible version of Java or run with a main class that is not found\.
-
 + An issue accessing objects stored in Amazon S3\.
 
 This information is available using the [DescribeStep](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_DescribeStep.html) and [ListSteps](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListSteps.html) API operations\. The [FailureDetails](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_FailureDetails.html) field of the [StepSummary](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_StepSummary.html) returned by those operations\. To access the FailureDetails information, use the AWS CLI, console, or AWS SDK\.
@@ -23,7 +20,6 @@ If the step has failed and Amazon EMR can identify the root cause, you see the d
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/DebuggingFailedStep.png)
 
 **To view failure details using the AWS CLI**
-
 + To get failure details for a step using the AWS CLI, use the describe\-step command\.
 
   ```

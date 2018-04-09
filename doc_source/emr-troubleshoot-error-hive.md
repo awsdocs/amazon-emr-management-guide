@@ -4,7 +4,7 @@
 
 The following errors are common to Hive clusters\.
 
-
+**Topics**
 + [Are you using the latest version of Hive?](#emr-troubleshoot-error-hive-0)
 + [Did you encounter a syntax error in the Hive script?](#emr-troubleshoot-error-hive-1)
 + [Did a job fail when running interactively?](#emr-troubleshoot-error-hive-2)
@@ -25,15 +25,10 @@ The following errors are common to Hive clusters\.
 ## Are you having trouble loading data to or from Amazon S3 into Hive?<a name="emr-troubleshoot-error-hive-3"></a>
 
  If you are having trouble accessing data in Amazon S3, first check the possible causes listed in [Are you experiencing trouble loading data to or from Amazon S3?](emr-troubleshoot-errors-io.md#emr-troubleshoot-errors-io-1)\. If none of those issues is the cause, consider the following options specific to Hive\. 
-
 + Make sure you are using the latest version of Hive, which has all the current patches and bug fixes that may resolve your issue\. For more information, see [Apache Hive](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive.html)\.
-
 +  Using `INSERT OVERWRITE` requires listing the contents of the Amazon S3 bucket or folder\. This is an expensive operation\. If possible, manually prune the path instead of having Hive list and delete the existing objects\. 
-
 +  Pre\-cache the results of an Amazon S3 list operation locally on the cluster\. You do this in HiveQL with the following command: `set hive.optimize.s3.query=true;`\. 
-
 +  Use static partitions where possible\. 
-
 + In some versions of Hive and Amazon EMR, it is possible that using ALTER TABLES will fail because the table is stored in a different location than expected by Hive\. The solution is to add or update following in `/home/hadoop/conf/core-site.xml`:
 
   ```

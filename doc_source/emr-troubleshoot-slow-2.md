@@ -1,6 +1,6 @@
 # Step 2: Check the Environment<a name="emr-troubleshoot-slow-2"></a>
 
-
+**Topics**
 + [Check for Service Outages](#emr-troubleshoot-slow-2-outages)
 + [Check Usage Limits](#emr-troubleshoot-slow-2-limits)
 + [Check the Amazon VPC Subnet Configuration](#emr-troubleshoot-slow-2-vpc)

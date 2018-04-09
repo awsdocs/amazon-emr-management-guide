@@ -5,9 +5,9 @@ Amazon EMR provides the default roles listed below\. The managed policies listed
 
 | Default Role | Description | Default Managed Policy | 
 | --- | --- | --- | 
-|  `EMR_DefaultRole`  |  The service role for Amazon EMR, which allows Amazon EMR to call other AWS services such as Amazon EC2 on your behalf\.  |  `AmazonElasticMapReduceRole`\. Requesting Spot Instances requires a service\-linked role\. If this role doesn't exist, the Amazon EMR service role must have permissions to create it or a permission error occurs\. The managed policy includes a statement to allow this action\. If you customize this role or policy, be sure to include a statement that allows the creation of this service\-linked role\. For more information, see [Default Contents of AmazonElasticMapReduceRole](#emr-iam-contents-servicerole) and [Service\-Linked Role for Spot Instance Requests](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#service-linked-roles-spot-instance-requests) in the *Amazon EC2 User Guide for Linux Instances*\.   | 
-|  `EMR_EC2_DefaultRole`  |  The service role for EC2 instances within a cluster\. This role is assumed by processes that run on cluster instances when they call other AWS services\. For accessing EMRFS data in Amazon S3, you can specify different roles to be assumed based on the user or group making the request, or on the location of data in Amazon S3\. For more information, see [Configure EMRFS Authorization for Data in Amazon S3](emr-emrfs-authz.md)\.  |  `AmazonElasticMapReduceforEC2Role`\. For more information, see [Default Contents of AmazonElasticMapReduceforEC2Role](#emr-iam-contents-ec2role)\.  | 
-|  `EMR_AutoScaling_DefaultRole`  |  Allows additional actions for dynamically scaling environments\. Required only for clusters that use automatic scaling in Amazon EMR\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.  |  `AmazonElasticMapReduceforAutoScalingRole`\. For more information, see [Default Contents of AmazonMapReduceforAutoScalingRole](#emr-iam-contents-autoscalingrole)\.  | 
+|  `EMR_DefaultRole`  |  This is the EMR role, which allows Amazon EMR to call other AWS services such as Amazon EC2 on your behalf\.  |  `AmazonElasticMapReduceRole`\. Requesting Spot Instances requires a service\-linked role\. If this role doesn't exist, the Amazon EMR service role must have permissions to create it or a permission error occurs\. The managed policy includes a statement to allow this action\. If you customize this role or policy, be sure to include a statement that allows the creation of this service\-linked role\. For more information, see [Default Contents of AmazonElasticMapReduceRole Permissions Policy](#emr-iam-contents-servicerole) and [Service\-Linked Role for Spot Instance Requests](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#service-linked-roles-spot-instance-requests) in the *Amazon EC2 User Guide for Linux Instances*\.   | 
+|  `EMR_EC2_DefaultRole`  |  The EMR role for EC2 instances within a cluster\. Processes that run on cluster instances use this role when they call other AWS services\. For accessing EMRFS data in Amazon S3, you can specify different roles to be assumed based on the user or group making the request, or on the location of data in Amazon S3\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.  |  `AmazonElasticMapReduceforEC2Role`\. For more information, see [Default Contents of AmazonElasticMapReduceforEC2Role Permissions Policy](#emr-iam-contents-ec2role)\.  | 
+|  `EMR_AutoScaling_DefaultRole`  |  Allows additional actions for dynamically scaling environments\. Required only for clusters that use automatic scaling in Amazon EMR\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.  |  `AmazonElasticMapReduceforAutoScalingRole`\. For more information, see [Default Contents of AmazonMapReduceforAutoScalingRole Permissions Policy](#emr-iam-contents-autoscalingrole)\.  | 
 
 **To create default IAM roles for Amazon EMR in your account for the first time**
 
@@ -19,7 +19,7 @@ Amazon EMR provides the default roles listed below\. The managed policies listed
 
    Use the `emr create-default-roles` command from the AWS CLI\. 
 
-   The output of the command lists the contents of the roles\. The CLI configuration file \(`config`\) is populated with these role names for the service\_role and instance\_profile values\. For example:
+   The output of the command lists the contents of the roles\. The CLI configuration file \(`config`\) is populated with these role names for the `service_role` and `instance_profile` values\. For example:
 
    ```
    [default]
@@ -52,7 +52,7 @@ The contents of managed policies for Amazon EMR default roles are shown below\. 
 
 1. Choose **Policy versions** to see the current policy version number, a history of policy updates, and the policy JSON for past versions\.
 
-### Default Contents of AmazonElasticMapReduceRole<a name="emr-iam-contents-servicerole"></a>
+### Default Contents of AmazonElasticMapReduceRole Permissions Policy<a name="emr-iam-contents-servicerole"></a>
 
 The contents of version 9 of this policy are shown below\.
 
@@ -143,7 +143,7 @@ The contents of version 9 of this policy are shown below\.
 }
 ```
 
-### Default Contents of AmazonElasticMapReduceforEC2Role<a name="emr-iam-contents-ec2role"></a>
+### Default Contents of AmazonElasticMapReduceforEC2Role Permissions Policy<a name="emr-iam-contents-ec2role"></a>
 
 The contents of version 3 of this policy are shown below\.
 
@@ -207,7 +207,7 @@ The contents of version 3 of this policy are shown below\.
 }
 ```
 
-### Default Contents of AmazonMapReduceforAutoScalingRole<a name="emr-iam-contents-autoscalingrole"></a>
+### Default Contents of AmazonMapReduceforAutoScalingRole Permissions Policy<a name="emr-iam-contents-autoscalingrole"></a>
 
 The contents of version 1 of this policy are shown below\.
 

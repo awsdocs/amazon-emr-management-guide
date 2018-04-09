@@ -11,7 +11,6 @@ To work with processes directly on a cluster, you connect to the master node\. F
 If you are using Amazon EMR version 4\.x or later, application releases are packaged using a system based on Apache Bigtop, so these application processes are configured via \.conf scripts under the upstart init system\. Amazon EMR processes, on the other hand, are configured using SysV \(init\.d scripts\) which is backwards compatible with upstart\.
 
 ## To view a list of running Amazon EMR processes
-
 + Type the following command \(without the `$`, which indicates the Linux command prompt\):
 
   ```
@@ -25,7 +24,6 @@ If you are using Amazon EMR version 4\.x or later, application releases are pack
   ```
 
 ## To view a list of processes associated with application releases
-
 + Type the following command:
 
   ```

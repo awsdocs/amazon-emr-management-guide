@@ -2,7 +2,7 @@
 
  In this step, you launch your sample cluster by using the Amazon EMR console\. Before you perform this step, make sure that you meet the requirements in [Step 1: Set Up Prerequisites for Your Sample Cluster](emr-gs-prerequisites.md)\.
 
-
+**Topics**
 + [Using Quick Cluster Configuration Overview](#emr-gs-quick-cluster-options)
 + [Launch the Sample Cluster](#emr-gs-launch-quick-cluster)
 
@@ -35,9 +35,7 @@ Sign in to the AWS Management Console and open the Amazon EMR console at [https:
 1. Choose **Create cluster**\.
 
 1.  On the **Quick cluster configuration** page, accept the default values except for the following fields: 
-
    + For **S3 folder**, choose the folder icon to select the path to the `logs` folder that you created in [Create an Amazon S3 Bucket](emr-gs-prerequisites.md#emr-gs-create-bucket)\. 
-
    + For **EC2 key pair**, choose the key pair that you created in [Create an Amazon EC2 Key Pair](emr-gs-prerequisites.md#emr-gs-key-pair)\.
 
 1. Choose **Create cluster**\. 

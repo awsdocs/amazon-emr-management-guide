@@ -109,13 +109,9 @@ Now that the Active Directory domain controller is configured, you must configur
 1. Create the cluster, specifying the security configuration \(in this example, `MyKerberosConfig`\) and the same subnet you created in [Step 1: Set Up the VPC and Subnet](#emr-kerberos-ad-network)\. 
 
    Also specify the following cluster\-specific `kerberos-attributes`:
-
    + The realm for the cluster that you specified when you set up the Active Directory domain controller
-
    + The cross\-realm trust principal password that you specified as `passwordt` in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
-
    + A `KdcAdminPassword`, which you can use to administer the cluster\-dedicated KDC\.
-
    + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
 
    The following example launches a kerberized cluster\.
@@ -127,7 +123,7 @@ Now that the Active Directory domain controller is configured, you must configur
    --instance-count 3 \
    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \
    --service-role EMR_DefaultRole \
-   --security-configuration MyKerberosConfig\
+   --security-configuration MyKerberosConfig \
    --applications Name=Hadoop Name=Hive Name=Oozie Name=Hue Name=HCatalog Name=Spark \
    --kerberos-attributes Realm=EC2.INTERNAL,\
    KdcAdminPassword=MyClusterKDCAdminPwd,\
@@ -173,7 +169,7 @@ Amazon EMR uses System Security Services Daemon \(SSD\) to map Active Directory 
 
 ### Step 8: Use SSH to Log in to the Cluster<a name="emr-kerberos-ad-login"></a>
 
-Users in the Active Directory domain should now be able to log on to the cluster with their domain credentials\. Linux users can connect using `ssh` as shown in the following example, replacing *myusername* with the user logon name from Active Directory and replacing *ec2\-xx\-xxx\-xx\-xx\.compute\-1\.amazonaws\.com* with the **Master public DNS** value listed on the cluster's **Summary** page\.
+Users in the Active Directory domain should now be able to log on to the cluster with their domain credentials\. Linux users can connect using `ssh` as shown in the following example\. Replace *myusername* with the user logon name from Active Directory\. Replace *ec2\-xx\-xxx\-xx\-xx\.compute\-1\.amazonaws\.com* with the **Master public DNS** value listed on the cluster's **Summary** page\.
 
 `myusername@ec2-xx-xxx-xx-xx.compute-1.amazonaws.com`
 

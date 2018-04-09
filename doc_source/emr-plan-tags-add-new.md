@@ -17,7 +17,6 @@ You can add tags to a cluster while you are creating it\.
 **To add tags when creating a new cluster using the AWS CLI**
 
 The following example demonstrates how to add a tag to a new cluster using the AWS CLI\. To add tags when you create a cluster, type the `create-cluster` subcommand with the `--tags` parameter\. 
-
 + To add a tag named *costCenter* with key value *marketing* when you create a cluster, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```

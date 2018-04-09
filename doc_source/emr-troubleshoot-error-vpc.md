@@ -2,7 +2,7 @@
 
 The following errors are common to VPC configuration in Amazon EMR\.
 
-
+**Topics**
 + [Invalid Subnet Configuration](#emr-troubleshoot-error-gateway)
 + [Missing DHCP Options Set](#emr-troubleshoot-error-dhcp)
 + [Permissions Errors](#emr-troubleshoot-error-denied)
@@ -33,11 +33,9 @@ To solve this problem, you must configure a VPC that includes a DHCP Options Set
 
 **Note**  
 If you use the AWS GovCloud \(US\) region, set domain\-name to **us\-gov\-west\-1\.compute\.internal** instead of the value used in the following example\.
-
 + **domain\-name** = **ec2\.internal**
 
   Use **ec2\.internal** if your region is US East \(N\. Virginia\)\. For other regions, use *region\-name***\.compute\.internal**\. For example in us\-west\-2, use **domain\-name**=**us\-west\-2\.compute\.internal**\.
-
 + **domain\-name\-servers** = **AmazonProvidedDNS**
 
 For more information, see [DHCP Options Sets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\.
@@ -53,17 +51,13 @@ Exception in thread "main" com.amazonaws.services.s3.model.AmazonS3Exception: Ac
 If the ActionOnFailure is set to `TERMINATE_JOB_FLOW`, then this would result in the cluster terminating with the state, `SHUTDOWN_COMPLETED_WITH_ERRORS`\.
 
 A few ways to troubleshoot this problem include:
-
 + If you are using an Amazon S3 bucket policy within a VPC, make sure to give access to all buckets by creating a VPC endpoint and selecting **Allow all** under the Policy option when creating the endpoint\. 
-
 + Make sure that any policies associated with S3 resources include the VPC in which you launch the cluster\.
-
 + Try running the following command from your cluster to verify you can access the bucket
 
   ```
   hadoop fs -copyToLocal s3://path-to-bucket /tmp/
   ```
-
 + You can get more specific debugging information by setting the `log4j.logger.org.apache.http.wire` parameter to `DEBUG` in `/home/hadoop/conf/log4j.properties` file on the cluster\. You can check the `stderr` log file after trying to access the bucket from the cluster\. The log file will provide more detailed information:
 
   ```

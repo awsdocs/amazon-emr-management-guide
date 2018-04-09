@@ -10,7 +10,7 @@ You can use the EMRFS utility \(`emrfs`\) from the command line of the master no
 
 If you directly delete objects from Amazon S3 that are tracked in EMRFS metadata, EMRFS treats the object as inconsistent and throws an exception after it has exhausted retries\. Use EMRFS to delete objects in Amazon S3 that are tracked using consistent view\. Alternatively, you can use the `emrfs` command line to purge metadata entries for objects that have been directly deleted, or you can sync the consistent view with Amazon S3 immediately after you delete the objects\.
 
-
+**Topics**
 + [Enable Consistent View](enable-consistent-view.md)
 + [Understanding How EMRFS Consistent View Tracks Objects in Amazon S3](emrfs-files-tracked.md)
 + [Retry Logic](emrfs-retry-logic.md)

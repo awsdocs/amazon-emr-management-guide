@@ -1,6 +1,6 @@
 # Write Applications that Launch and Manage Clusters<a name="making_api_requests"></a>
 
-
+**Topics**
 + [End\-to\-End Amazon EMR Java Source Code Sample](emr-common-programming-sample.md)
 + [Common Concepts for API Calls](emr-common-programming-concepts.md)
 + [Use SDKs to Call Amazon EMR APIs](call-emr-using-sdks.md)

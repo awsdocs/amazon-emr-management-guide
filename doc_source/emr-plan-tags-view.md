@@ -11,7 +11,6 @@ If you would like to see all the tags associated with a cluster, you can view th
 **To view the tags on a cluster using the AWS CLI**
 
 To view the tags on a cluster using the AWS CLI, type the `describe-cluster` subcommand with the `--query` parameter\. 
-
 + To view a cluster's tags, type the following command and replace *j\-KT4XXXXXXXX1NM* with your cluster ID\.
 
   ```

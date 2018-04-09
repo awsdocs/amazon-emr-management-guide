@@ -17,7 +17,6 @@ For best performance, use the same region for all of your AWS resources that wil
 Your default region is displayed automatically\.
 
 **To change regions using the console**
-
 + To switch regions, choose the region list to the right of your account information on the navigation bar\.
 
 ## Specify a Region Using the AWS CLI<a name="emr-dev-specify-region-cli"></a>

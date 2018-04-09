@@ -1,6 +1,6 @@
 # Import files with Distributed Cache<a name="emr-plan-input-distributed-cache"></a>
 
-
+**Topics**
 + [Supported File Types](#emr-dev-supported-file-types)
 + [Location of Cached Files](#locationofcache)
 + [Access Cached Files From Streaming Applications](#cachemapper)
@@ -18,15 +18,10 @@ You invoke Distributed Cache when you create the cluster\. The files are cached 
 Distributed Cache allows both single files and archives\. Individual files are cached as read only\. Executables and binary files have execution permissions set\.
 
 Archives are one or more files packaged using a utility, such as `gzip`\. Distributed Cache passes the compressed files to each slave node and decompresses the archive as part of caching\. Distributed Cache supports the following compression formats:
-
 + zip
-
 + tgz
-
 + tar\.gz
-
 + tar
-
 + jar
 
 ## Location of Cached Files<a name="locationofcache"></a>
@@ -69,7 +64,6 @@ You can use the Amazon EMR console to create clusters that use Distributed Cache
 You can use the CLI to create clusters that use Distributed Cache\. 
 
 **To specify Distributed Cache files using the AWS CLI**
-
 + To submit a Streaming step when a cluster is created, type the `create-cluster` command with the `--steps` parameter\. To specify Distributed Cache files using the AWS CLI, specify the appropriate arguments when submitting a Streaming step\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-input-distributed-cache.html)
 

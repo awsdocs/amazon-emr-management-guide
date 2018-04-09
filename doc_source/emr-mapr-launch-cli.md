@@ -5,9 +5,7 @@
 You cannot yet launch MapR clusters when specifying the `--release-label` parameter\.
 
 To launch a cluster with MapR using the AWS CLI, type the `create-cluster` command with the `--applications` parameter\.
-
 + To launch a cluster with MapR, m7 edition, type the following command and replace *myKey* with the name of your EC2 key pair\.
-
   + Linux, UNIX, and Mac OS X users:
 
     ```
@@ -16,7 +14,6 @@ To launch a cluster with MapR using the AWS CLI, type the `create-cluster` comma
     3. --use-default-roles --ec2-attributes KeyName=myKey \
     4. --instance-type m3.xlarge --instance-count 3
     ```
-
   + Windows users:
 
     ```

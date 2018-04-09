@@ -13,11 +13,7 @@ When you configure instance types in Amazon EMR, you can specify additional EBS 
 You can only attach EBS volumes to instances at cluster startup time unless you add an extra task node instance group, at which time you can add EBS volumes\. If an instance in an EMR cluster fails, then both the instance and attached EBS volumes are replaced as new\. Consequently, if you manually detach an EBS volume, Amazon EMR treats that as a failure and replaces both instance storage \(if applicable\) and the volume stores\.
 
 Other caveats for using Amazon EBS with EMR clusters are:
-
 + You can't snapshot an EBS volume and then restore it within Amazon EMR\. To create reusable custom configurations, use a custom AMI \(available in Amazon EMR version 5\.7\.0 and later\)\. For more information, see [Using a Custom AMI](emr-custom-ami.md)\.
-
 + An encrypted EBS root storage volume is supported only when using a custom AMI\. For more information, see [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](emr-custom-ami.md#emr-custom-ami-encrypted)\.\. Encrypted EBS storage volumes are not supported\.
-
 + If you apply tags using the Amazon EMR API, those operations are applied to EBS volumes\.
-
 + There is a limit of 25 volumes per instance\.

@@ -2,7 +2,7 @@
 
  After you've launched your cluster, you can monitor and manage it\. Amazon EMR provides several tools you can use to connect to and control your cluster\. 
 
-
+**Topics**
 + [View and Monitor a Cluster](emr-manage-view.md)
 + [Connect to the Cluster](emr-connect-master-node.md)
 + [Control Cluster Termination](emr-manage-termination.md)

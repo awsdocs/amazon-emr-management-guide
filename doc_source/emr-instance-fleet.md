@@ -37,21 +37,13 @@ You can specify multiple EC2 subnets within a VPC, each corresponding to a diffe
 Because the master instance fleet is only a single instance, its configuration is slightly different from core and task instance fleets\. You only select either On\-Demand or Spot for the master instance fleet because it consists of only one instance\. If you use the console to create the instance fleet, the target capacity for the purchasing option you select is set to 1\. If you use the AWS CLI, always set either `TargetSpotCapacity` or `TargetOnDemandCapacity` to 1 as appropriate\. You can still choose up to five instance types for the master instance fleet\. However, unlike core and task instance fleets, where Amazon EMR might provision multiple instances of different types, Amazon EMR selects a single instance type to provision for the master instance fleet\.
 
 ### **Summary of Key Features**<a name="emr-key-feature-summary"></a>
-
 + One instance fleet, and only one, per node type \(master, core, task\)\. Up to five EC2 instance types specified for each fleet\. 
-
 + Amazon EMR chooses any or all of the five EC2 instance types to provision with both Spot and On\-Demand purchasing options\.
-
 + Establish target capacities for Spot and On\-Demand Instances per instance fleet\. Assign a weighted capacity to each instance type, which counts toward the target\. Amazon EMR provisions instances until each target capacity is totally fulfilled\.
-
 + Choose one subnet \(Availability Zone\) or a range\. Amazon EMR provisions capacity in the Availability Zone that is the best fit\. 
-
 + When you specify a target capacity for Spot Instances:
-
   + For each instance type, specify a maximum Spot price, either as a dollar amount or as percentage of the On\-Demand price\.
-
   + Specify a defined duration \(also known as a Spot block\) if desired\. Spot Instances terminate only after the defined duration expires\.
-
   + Define a timeout period for provisioning Spot Instances and the action to take if the timeout expires—terminate the cluster or switch to On\-Demand\.
 
 ## Use the Console to Configure Instance Fleets<a name="emr-instance-fleet-console"></a>
@@ -75,43 +67,30 @@ Your account and region may give you the option to choose **Launch into EC2\-Cla
 1. Within each node type row, under **Node type**, if you want to change the default name of an instance fleet, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance fleet, click the X icon\.
 
 1. Under **Target capacity**, choose options according to the following guidelines:
-
    + Choose how you want to define the **Target capacity**\. If you choose **vCPU**, the number of YARN vcores for each **Fleet instance type** is used as its weighted capacity\. If you choose **Generic units**, you assign a custom number for each target capacity, and then assign a custom weighted capacity to each instance type\. A field for this purpose appears for each instance you add under **Fleet instance type**\.
-
    + For the **Master** node, select whether the instance is **On\-demand** or **Spot**\.
-
    + For the **Core** and **Task** nodes, enter target capacities for **On\-demand** and **Spot**\. Amazon EMR provisions the **Fleet instance types** that you specify until these capacities are fulfilled\.
 
 1. Under **Fleet instance types** for each **Node type**, choose options according to the following guidelines:
-
    + Choose **Add/remove instance types to fleet**, and then choose up to five instance types from the list\. Amazon EMR may choose to provision any mix of these instance types when it launches the cluster\.
-
    + If a Node type is configured with a **Target capacity** for **Spot**, choose **Maximum Spot price** options\. You can enter your maximum Spot price as a **% of On\-Demand** pricing, or you can enter a **Dollars \($\)** amount in USD\.
 **Tip**  
 Hover over the information tooltip for **Maximum Spot price** to see the Spot price for all Availability Zones in the current region\. The lowest Spot price is in green\. You can use this information to inform your **EC2 Subnet** selection\.
-
    + If you chose **Default units** for **Target capacity**, enter the weighted capacity you want to assign to each instance type in the **Each instance counts as** box\.
-
    + To have EBS volumes attached to the instance type when it's provisioned, click the pencil next to **EBS Storage ** and then enter EBS configuration options\.
 
 1. If you established a **Target capacity** for **Spot**, choose **Advanced Spot options** according to the following guidelines:
-
    + **Defined duration**—if left to the default, **Not set**, Spot Instances terminate as soon as the Spot price rises above the Maximum Spot price, or when the cluster terminates\. If you set a value, Spot Instances don't terminate until the duration has expired\.
 **Important**  
 If you set a **Defined duration**, special defined duration pricing applies\. For pricing details, see [Amazon EC2 Spot Instances Pricing](https://aws.amazon.com/ec2/spot/pricing/)\.
-
    + **Provisioning timeout**—Use these settings to control what Amazon EMR does when it can't provision Spot Instances from among the **Fleet instance types** you specify\. You enter a timeout period in minutes, and then choose whether to **Terminate the cluster** or **Switch to provisioning On\-Demand Instances**\. If you choose to switch to On\-Demand Instances, the weighted capacity of On\-Demand Instances counts toward the target capacity for Spot Instances, and Amazon EMR provisions On\-Demand Instances until the target capacity for Spot Instances is fulfilled\.
 
 1. Choose **Next**, modify other cluster settings, and then launch the cluster\.
 
 ## Use the CLI to Configure Instance Fleets<a name="emr-instance-fleet-cli"></a>
-
 + To create and launch a cluster with instance fleets, use the `create-cluster` command along with `--instance-fleet` parameters\.
-
 + To get configuration details of the instance fleets in a cluster, use the `list-instance-fleets` command\.
-
 + To make changes to the target capacity for an instance fleet, use the `modify-instance-fleet` command\.
-
 + To add a task instance fleet to a cluster that doesn't already have one, use the `add-instance-fleet` command\.
 
 **Note**  

@@ -2,7 +2,7 @@
 
 There are many benefits to using Amazon EMR\. This section provides an overview of these benefits and links to additional information to help you explore further\.
 
-
+**Topics**
 + [Cost Savings](#emr-benefits-cost)
 + [AWS Integration](#emr-benefits-integration)
 + [Deployment](#emr-benefits-deployment)
@@ -24,19 +24,12 @@ For more information about pricing options and details, see [Amazon EMR Pricing]
 ## AWS Integration<a name="emr-benefits-integration"></a>
 
 Amazon EMR integrates with other AWS services to provide capabilities and functionality related to networking, storage, security, and so on, for your cluster\. The following list provides several examples of this integration:
-
 + Amazon EC2 for the instances that comprise the nodes in the cluster
-
 + Amazon Virtual Private Cloud \(Amazon VPC\) to configure the virtual network in which you launch your instances
-
 + Amazon S3 to store input and output data
-
 + Amazon CloudWatch to monitor cluster performance and configure alarms
-
 + AWS Identity and Access Management \(IAM\) to configure permissions
-
 + AWS CloudTrail to audit requests made to the service
-
 + AWS Data Pipeline to schedule and start your clusters
 
 ## Deployment<a name="emr-benefits-deployment"></a>
@@ -104,11 +97,7 @@ Amazon EMR integrates with CloudWatch to track performance metrics for the clust
 ## Management Interfaces<a name="emr-what-tools"></a>
 
  There are several ways you can interact with Amazon EMR: 
-
 + **Console** — A graphical user interface that you can use to launch and manage clusters\. With it, you fill out web forms to specify the details of clusters to launch, view the details of existing clusters, debug, and terminate clusters\. Using the console is the easiest way to get started with Amazon EMR; no programming knowledge is required\. The console is available online at [https://console\.aws\.amazon\.com//elasticmapreduce/home](https://console.aws.amazon.com//elasticmapreduce/home)\. 
-
 + **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option \. For more information, see [Amazon EMR](http://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
-
 + **Software Development Kit \(SDK\)** — SDKs provide functions that call Amazon EMR to create and manage clusters\. With them, you can write applications that automate the process of creating and managing clusters\. Using the SDK is the best option to extend or customize the functionality of Amazon EMR\. Amazon EMR is currently available in the following SDKs: Go, Java, \.NET \(C\# and VB\.NET\), Node\.js, PHP, Python, and Ruby\. For more information about these SDKs, see [Tools for AWS](https://aws.amazon.com/tools/) and [Amazon EMR Sample Code & Libraries](https://aws.amazon.com//code/Elastic-MapReduce)\. 
-
 + **Web Service API** — A low\-level interface that you can use to call the web service directly, using JSON\. Using the API is the best option to create a custom SDK that calls Amazon EMR\. For more information, see the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/Welcome.html)\. 

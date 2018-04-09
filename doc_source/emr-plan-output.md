@@ -4,7 +4,7 @@
 
 For more information, see the following topics:
 
-
+**Topics**
 + [Create and Configure an Amazon S3 Bucket](#create-s3-bucket-output)
 + [What formats can Amazon EMR return?](emr-plan-output-formats.md)
 + [How to write data to an Amazon S3 bucket you don't own](emr-s3-acls.md)

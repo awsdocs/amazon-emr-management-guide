@@ -21,11 +21,8 @@ If you need separate clusters to communicate, and you are using your own securit
 1. Choose **Create cluster**\.
 
 1. In the **Security and Access** section, in the **EC2 Security Groups** subsection:
-
    + For **Master**, if the default security groups do not exist, the field is populated with **Create ElasticMapReduce\-master** or **Create ElasticMapReduce\-Master\-Private**\. If the default security groups exist, the field is populated with the default security group ID; for example, **Default: sg\-01XXXX6a \(ElasticMapReduce\-master\)**\. To specify your own master security group, choose it from the list\.
-
    + For **Core & Task**, if the default security groups do not exist, the field is populated with **Create ElasticMapReduce\-slave** or **Create ElasticMapReduce\-Slave\-Private**\. If the default security groups exist, the field is populated with the default security group ID; for example, **Default: sg\-07XXXX6c \(ElasticMapReduce\-slave\)**\. To specify your own core/task security group, choose it from the list\.
-
    + \(Optional\) For **Service Access** to clusters in private subnets, if the default security groups do not exist, the field is populated with **Create ElasticMapReduce\-ServiceAccess**\. If the default security groups exist, the field is populated with the default security group ID; for example, **Default: sg\-4dXXXX34 \(ElasticMapReduce\-ServiceAccess\)**\. To specify your own service access security group, choose it from the list\.
 
 1. Proceed with creating the cluster as described in [Use an Amazon EC2 Key Pair for SSH Credentials](emr-plan-access-ssh.md)\.
@@ -34,7 +31,7 @@ If you need separate clusters to communicate, and you are using your own securit
 
 Use the `create-cluster` command with the `--emr-managed-master-security-group` and `--emr-managed-slave-security-group` parameters\. 
 
-If you are using the default options for Amazon EMR–managed security groups, no additional parameters are required\. Use the `create-cluster` command as you normally would using the CLI\. If the default security groups do not exist, they are created before your cluster is launched\. If they do exist, they are automatically assigned\.
+If you are using the default options for Amazon EMR–managed security groups, no additional parameters are required\. Use the `create-cluster` command as you normally would, using the CLI\. If the default security groups do not exist, they are created before your cluster is launched\. If they do exist, they are automatically assigned\.
 **Note**  
 Amazon EMR–managed security groups are not supported in the Amazon EMR CLI\.
 
@@ -67,12 +64,9 @@ For private subnets, you can additionally specify `ServiceAccessSecurityGroup=sg
 ## Default Options for Amazon EMR–Managed Security Groups<a name="emr-def-sec-groups"></a>
 
 If you launch an Amazon EMR cluster using the default security groups, two groups are created for public subnets: ElasticMapReduce\-master and ElasticMapReduce\-slave\. For private subnets, three groups are created:
-
-+ Create ElasticMapReduce\-Master\-Private
-
-+ Create ElasticMapReduce\-Slave\-Private
-
-+ Create ElasticMapReduce\-ServiceAccess
++ Create `ElasticMapReduce-Master-Private`
++ Create `ElasticMapReduce-Slave-Private`
++ Create `ElasticMapReduce-ServiceAccess`
 
 The inbound and outbound access rules written to these groups ensure that the master and core/task instances in a cluster can communicate properly\. 
 

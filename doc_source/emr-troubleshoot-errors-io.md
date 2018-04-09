@@ -2,7 +2,7 @@
 
 The following errors are common in cluster input and output operations\.
 
-
+**Topics**
 + [Does your path to Amazon Simple Storage Service \(Amazon S3\) have at least three slashes?](#threeslashes)
 + [Are you trying to recursively traverse input directories?](#recurseinput)
 + [Does your output directory already exist?](#directoryexist)
@@ -35,27 +35,17 @@ The following errors are common in cluster input and output operations\.
 ## Are you experiencing trouble loading data to or from Amazon S3?<a name="emr-troubleshoot-errors-io-1"></a>
 
  Amazon S3 is the most popular input and output source for Amazon EMR\. A common mistake is to treat Amazon S3 as you would a typical file system\. There are differences between Amazon S3 and a file system that you need to take into account when running your cluster\. 
-
 +  If an internal error occurs in Amazon S3, your application needs to handle this gracefully and re\-try the operation\. 
-
 +  If calls to Amazon S3 take too long to return, your application may need to reduce the frequency at which it calls Amazon S3\. 
-
 +  Listing all the objects in an Amazon S3 bucket is an expensive call\. Your application should minimize the number of times it does this\. 
 
  There are several ways you can improve how your cluster interacts with Amazon S3\. 
-
 +  Launch your cluster using the most recent release version of Amazon EMR\. 
-
 + Use S3DistCp to move objects in and out of Amazon S3\. S3DistCp implements error handling, retries and back\-offs to match the requirements of Amazon S3\. For more information, see [Distributed Copy Using S3DistCp](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/UsingEMR_s3distcp.html)\. 
-
 +  Design your application with eventual consistency in mind\. Use HDFS for intermediate data storage while the cluster is running and Amazon S3 only to input the initial data and output the final results\. 
-
 +  If your clusters will commit 200 or more transactions per second to Amazon S3, [contact support](https://aws.amazon.com//contact-us/) to prepare your bucket for greater transactions per second and consider using the key partition strategies described in [Amazon S3 Performance Tips & Tricks](http://aws.typepad.com/aws/2012/03/amazon-s3-performance-tips-tricks-seattle-hiring-event.html)\. 
-
 +  Set the Hadoop configuration setting io\.file\.buffer\.size to 65536\. This causes Hadoop to spend less time seeking through Amazon S3 objects\. 
-
 +  Consider disabling Hadoop's speculative execution feature if your cluster is experiencing Amazon S3 concurrency issues\. You do this through the mapred\.map\.tasks\.speculative\.execution and mapred\.reduce\.tasks\.speculative\.execution configuration settings\. This is also useful when you are troubleshooting a slow cluster\. 
-
 +  If you are running a Hive cluster, see [Are you having trouble loading data to or from Amazon S3 into Hive?](emr-troubleshoot-error-hive.md#emr-troubleshoot-error-hive-3)\. 
 
  For additional information, see [Amazon S3 Error Best Practices](http://docs.aws.amazon.com/AmazonS3/latest/dev//ErrorBestPractices.html) in the *Amazon Simple Storage Service Developer Guide*\. 

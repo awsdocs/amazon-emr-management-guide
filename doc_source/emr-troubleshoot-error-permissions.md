@@ -2,7 +2,7 @@
 
 The following errors are common when using permissions or credentials\.
 
-
+**Topics**
 + [Are you passing the correct credentials into SSH?](#correctcred)
 + [If you are using IAM, do you have the proper Amazon EC2 policies set?](#check-iam-permissions)
 

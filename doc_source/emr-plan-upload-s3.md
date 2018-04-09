@@ -2,7 +2,7 @@
 
 For information on how to upload objects to Amazon S3, see [ Add an Object to Your Bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg//PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. For more information about using Amazon S3 with Hadoop, see [http://wiki\.apache\.org/hadoop/AmazonS3](http://wiki.apache.org/hadoop/AmazonS3)\. 
 
-
+**Topics**
 + [Create and Configure an Amazon S3 Bucket](#create-s3-bucket-input)
 + [Best Practices](#emr-bucket-bestpractices)
 + [Configure Multipart Upload for Amazon S3](#Config_Multipart)
@@ -14,15 +14,10 @@ Amazon EMR uses the AWS SDK for Java with Amazon S3 to store input data, log fil
 This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. You can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or AWS CLI\. You can also use Curl along with a modification to pass the appropriate authentication parameters for Amazon S3\.
 
 See the following resources:
-
 + To create a bucket using the console, see [Create a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
-
 + To create and work with buckets using the AWS CLI, see [Using High\-Level S3 Commands with the AWS Command Line Interface](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-s3-commands.html) in the *Amazon Simple Storage Service Console User Guide*\.
-
 + To create a bucket using an SDK, see [Examples of Creating a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html) in the *Amazon Simple Storage Service Developer Guide*\.
-
 + To work with buckets using Curl, see [Amazon S3 Authentication Tool for Curl](https://aws.amazon.com/code/amazon-s3-authentication-tool-for-curl/)\.
-
 + For more information on specifying Region\-specific buckets, see [Accessing a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev//UsingBucket.html#access-bucket-intro) in the *Amazon Simple Storage Service Developer Guide*\.
 
 **Note**  
@@ -65,7 +60,7 @@ The Amazon EMR configuration parameters for multipart upload are described in th
 
 | Configuration Parameter Name | Default Value | Description | 
 | --- | --- | --- | 
-| fs\.\[s3|s3n\]\.multipart\.uploads\.enabled | True | A boolean type that indicates whether to enable multipart uploads\. | 
+| fs\.\[s3\|s3n\]\.multipart\.uploads\.enabled | True | A boolean type that indicates whether to enable multipart uploads\. | 
 | fs\.s3n\.ssl\.enabled | True | A boolean type that indicates whether to use http or https\.  | 
 | fs\.s3\.buckets\.create\.enabled | True | This setting automatically creates a bucket if it doesn't exist\. Setting to False will cause an exception on CreateBucket operations for that case\. | 
 

@@ -22,9 +22,7 @@ For AWS CLI instructions, see the appropriate section for your encryption type b
 1. On the **Security** pane, under **Authentication and encryption**, select the **S3 Encryption \(with EMRFS\)** option to use\.
 **Note**  
 **S3 server\-side encryption with KMS Key Management** \(SSE\-KMS\) is not available when using Amazon EMR release version 4\.4 or earlier\.
-
    + If you choose an option that uses **AWS Key Management**, choose an **AWS KMS Key ID**\. For more information, see [Using AWS KMS Customer Master Keys \(CMKs\) for EMRFS Encryption](#emr-emrfs-awskms)\.
-
    + If you choose **S3 client\-side encryption with custom materials provider**, provide the **Class name** and the **JAR location**\. For more information, see [Amazon S3 Client\-Side Encryption](emr-emrfs-encryption-cse.md)\.
 
 1. Choose other options as appropriate for your application and then choose **Create Cluster**\.
@@ -33,7 +31,7 @@ For AWS CLI instructions, see the appropriate section for your encryption type b
 
 The AWS KMS encryption key must be created in the same region as your Amazon EMR cluster instance and the Amazon S3 buckets used with EMRFS\. If the key that you specify is in a different account from the one that you use to configure a cluster, you must specify the key using its ARN\.
 
-The role for the Amazon EC2 instance profile must have permission to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use EMRFS authorization to assume different roles based on the call to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permission to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
+The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
 
 You can use the AWS Management Console to add your instance profile or EC2 instance profile to the list of key users for the specified AWS KMS CMK, or you can use the AWS CLI or an AWS SDK to attach an appropriate key policy\.
 
@@ -60,15 +58,12 @@ The procedure below describes how to add the default EMR instance profile, `EMR_
 When you set up Amazon S3 server\-side encryption, Amazon S3 encrypts data at the object level as it writes the data to disk and decrypts the data when it is accessed\. For more information about SSE, see [Protecting Data Using Server\-Side Encryption](http://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon Simple Storage Service Developer Guide*\.
 
 You can choose between two different key management systems when you specify SSE in Amazon EMR: 
-
 + **SSE\-S3**: Amazon S3 manages keys for you\.
-
 + **SSE\-KMS**: You use an AWS KMS customer master key \(CMK\) set up with policies suitable for Amazon EMR\. For more information about key requirements for Amazon EMR, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
 
 SSE with customer\-provided keys \(SSE\-C\) is not available for use with Amazon EMR\.
 
 **To create a cluster with SSE\-S3 enabled using the AWS CLI**
-
 + Type the following command:
 
   ```
@@ -81,7 +76,6 @@ You can also enable SSE\-S3 by setting the fs\.s3\.enableServerSideEncryption pr
 **To create a cluster with SSE\-KMS enabled using the AWS CLI**
 **Note**  
 SSE\-KMS is available only in Amazon EMR release version 4\.5\.0 and later\.
-
 + Type the following AWS CLI command to create a cluster with SSE\-KMS, where *keyID* is an AWS KMS customer master key \(CMK\), for example, *a4567b8\-9900\-12ab\-1234\-123a45678901*:
 
   ```

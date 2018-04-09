@@ -1,6 +1,6 @@
 # Compress the Output of your Cluster<a name="emr-plan-output-compression"></a>
 
-
+**Topics**
 + [Output Data Compression](#HadoopOutputDataCompression)
 + [Intermediate Data Compression](#HadoopIntermediateDataCompression)
 + [Using the Snappy Library with Amazon EMR](#emr-using-snappy)

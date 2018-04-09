@@ -1,6 +1,6 @@
 # Common Concepts for API Calls<a name="emr-common-programming-concepts"></a>
 
-
+**Topics**
 + [Endpoints for Amazon EMR](#endpoints)
 + [Specifying Cluster Parameters in Amazon EMR](#API_SpecifyingParameters)
 + [Availability Zones in Amazon EMR](#AvailabilityZones)
@@ -35,7 +35,6 @@ If `KeepJobAlive` is `true`, after successfully getting the cluster to complete 
 There are times when you might like to use additional files or custom libraries with your mapper or reducer applications\. For example, you might like to use a library that converts a PDF file into plain text\. 
 
 **To cache a file for the mapper or reducer to use when using Hadoop streaming**
-
 + In the JAR `args` field:, add the following argument:
 
   ```

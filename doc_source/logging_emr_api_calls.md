@@ -4,7 +4,7 @@ Amazon EMR is integrated with AWS CloudTrail, a service that captures API calls 
 
 To learn more about CloudTrail, including how to configure and enable it, see the [AWS CloudTrail User Guide](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/) 
 
-
+**Topics**
 + [Amazon EMR Information in CloudTrail](#emr_info_in_ct)
 + [Understanding Amazon EMR Log File Entries](#understanding_emr_log_file_entries)
 

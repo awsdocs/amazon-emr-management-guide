@@ -1,6 +1,6 @@
 # Use SDKs to Call Amazon EMR APIs<a name="call-emr-using-sdks"></a>
 
-
+**Topics**
 + [Using the AWS SDK for Java to Create an Amazon EMR Cluster](calling-emr-with-java-sdk.md)
 + [Using the Java SDK to Sign an API Request](API_SignatureSampleCode.md)
 

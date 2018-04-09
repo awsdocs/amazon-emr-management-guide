@@ -7,11 +7,8 @@ For more information about launching clusters using the CLI, see the instruction
 ## Editions<a name="emr-mapr-editions"></a>
 
 Using the CLI, you can pass the `--edition` parameter to specify the following editions:
-
 + m3
-
 + m5
-
 + m7
 
 The default edition is **m3** if not specified\.
@@ -19,11 +16,8 @@ The default edition is **m3** if not specified\.
 ## Versions<a name="emr-mapr-versions"></a>
 
 You can use `--version` to specify the following versions: 
-
 + M3 Edition \- 4\.0\.2, 3\.1\.1, 3\.0\.3, 3\.0\.2, 2\.1\.3
-
 + M5 Edition \- 4\.0\.2, 3\.1\.1, 3\.0\.3, 3\.0\.2, 2\.1\.3
-
 + M7 Edition \- 4\.0\.2, 3\.1\.1, 3\.0\.3, 3\.0\.2
 
 **Note**  

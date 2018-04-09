@@ -7,14 +7,12 @@ After you create a cluster, you can monitor its status and get detailed informat
 The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com//elasticmapreduce/home) lists all the clusters in your account and region, including terminated clusters\. The list shows the **Name** and **ID**of each cluster, the **Status**, the cluster **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that has accrued for all EC2 instances in the cluster\. This list is the starting point, and it's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
 
 **To view an abridged summary of cluster information**
-
 + Select the down arrow next to the link for the cluster under **Name**\.
 
   The cluster's row expands to provide more information about the cluster, hardware, steps, and bootstrap actions\. Use the links in this section to drill into specifics\. For example, click a link under **Steps** to access step log files, see the JAR associated with the step, drill into the step's jobs and tasks, and access log files\.  
 ![\[Cluster information\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/expanded-row.png)
 
 **To view cluster status in depth**
-
 + Choose the cluster link under **Name** to open a cluster details page for the cluster\. Use each tab to view information as described in the following section\.
 
   Use each tab for the following information:  
@@ -167,11 +165,8 @@ To list clusters by state, use the `list-clusters` command with the `--cluster-s
 aws emr list-clusters --cluster-states TERMINATED
 ```
 You can also use the following shortcut parameters to list all clusters in the states specified\.:  
-
 + `--active` filters clusters in the STARTING,BOOTSTRAPPING, RUNNING, WAITING, or TERMINATING states\.
-
 + `--terminated` filters clusters in the TERMINATED state\.
-
 + `--failed` parameter filters clusters in the TERMINATED\_WITH\_ERRORS state\.
 The following commands return the same result\.  
 

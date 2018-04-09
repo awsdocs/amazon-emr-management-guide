@@ -25,20 +25,17 @@ Subsequent retries use an exponential backoff\.
 **To launch a cluster with consistent view enabled using the AWS CLI**
 
 We recommend that you install the current version of AWS CLI\. To download the latest release, see [https://aws\.amazon\.com//cli/](https://aws.amazon.com/cli/)\.
-
 + 
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
   1. aws emr create-cluster --instance-type m3.xlarge --instance-count 3 --emrfs Consistent=true \
-  2. --release-label emr-5.12.0 --ec2-attributes KeyName=myKey
+  2. --release-label emr-5.13.0 --ec2-attributes KeyName=myKey
   ```
 
 **To check if consistent view is enabled using the AWS Management Console**
-
 + To check whether consistent view is enabled in the console, navigate to the **Cluster List** and select your cluster name to view **Cluster Details**\. The "EMRFS consistent view" field has a value of `Enabled` or `Disabled`\.
 
 **To check if consistent view is enabled by examining the `emrfs-site.xml` file**
-
 + You can check if consistency is enabled by inspecting the `emrfs-site.xml` configuration file on the master node of the cluster\. If the Boolean value for `fs.s3.consistent` is set to `true` then consistent view is enabled for file system operations involving Amazon S3\.

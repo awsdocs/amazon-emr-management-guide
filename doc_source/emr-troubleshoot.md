@@ -2,7 +2,7 @@
 
  A cluster hosted by Amazon EMR runs in a complex ecosystem made up of several types of open\-source software, custom application code, and Amazon Web Services\. An issue in any of these parts can cause the cluster to fail or take longer than expected to complete\. The following topics will help you figure out what has gone wrong in your cluster and give you suggestions on how to fix it\. 
 
-
+**Topics**
 + [What Tools are Available for Troubleshooting?](emr-troubleshoot-tools.md)
 + [Viewing and Restarting Amazon EMR and Application Processes \(Daemons\)](emr-process-restart-stop-view.md)
 + [Troubleshoot a Failed Cluster](emr-troubleshoot-failed.md)

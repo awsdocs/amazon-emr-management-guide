@@ -5,13 +5,10 @@ Amazon EMR uses an Amazon Linux Amazon Machine Image \(AMI\) to initialize Amazo
 Alternatively, if you use Amazon EMR version 5\.7\.0 or later, you can specify a custom Amazon Linux AMI when you create a cluster and customize its root volume size as well\. When each EC2 instance launches, it starts with your custom AMI instead of the EMR\-owned AMI\.
 
 Specifying a custom AMI is useful for the following use cases:
-
 + Encrypt the EBS root device volumes \(boot volumes\) of EC2 instances in your cluster\. For more information, see [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](#emr-custom-ami-encrypted)\.
 **Note**  
 A custom AMI is only required when you need to encrypt the EBS root device volumes of instances\. You can also encrypt EBS storage volumes using Amazon EMR security configuration to enable at\-rest encryption\. For more information, see [At\-Rest Encryption for Local Disks](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-data-encryption-options.html#emr-encryption-localdisk) in the *Amazon EMR Release Guide*\.
-
 + Pre\-install applications and perform other customizations instead of using bootstrap actions, which can improve cluster start time and streamline the startup work flow\. For more information and an example, see [Creating a Custom Amazon Linux AMI from a Preconfigured Instance](#emr-custom-ami-preconfigure)\.
-
 + Implement more sophisticated cluster and node configurations than bootstrap actions allow\.
 
 For more information, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)\. For more information about using bootstrap actions, see [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)\.
@@ -19,19 +16,12 @@ For more information, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon
 ## Best Practices and Considerations<a name="emr-custom-ami-considerations"></a>
 
 When you create a custom AMI for Amazon EMR, consider the following:
-
 + You must use an Amazon Linux AMI, only 64\-bit Amazon Linux AMIs are supported, and Amazon Linux AMIs with multiple Amazon EBS volumes are not supported\.
-
 + Base your customization on the most recent EBS\-backed [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\. For a list of Amazon Linux AMIs and corresponding AMI IDs, see [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\.
-
 + Do not copy a snapshot of an existing Amazon EMR instance to create a custom AMI\. This causes errors\.
-
 + Only the HVM virtualization type and instances compatible with Amazon EMR are supported\. Be sure to select the HVM image and an instance type compatible with Amazon EMR as you go through the AMI customization process\. For compatible instances and virtualization types, see [Supported Instance Types](emr-supported-instance-types.md)\.
-
 + Your service role must have launch permissions on the AMI, so either the AMI must be public, or you must be the owner of the AMI or have it shared with you by the owner\.
-
 + Creating users on the AMI with the same name as applications causes errors \(for example, `hadoop`, `hdfs`, `yarn`, or `spark`\)\.
-
 + The contents of `/tmp`, `/var`, and `/emr`—if they exist on the AMI—are moved to `/mnt/tmp`, `/mnt/var`, and `/mnt/emr` respectively during startup\. Files are preserved, but if there is a large amount of data, startup may take longer than expected\.
 
 For more information, see [Creating an Amazon EBS\-Backed Linux AMI](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
@@ -56,7 +46,6 @@ You can specify a custom AMI ID when you create a cluster using the AWS Manageme
 1. To launch the cluster, choose **Next** and complete other configuration options\.
 
 **To specify a custom AMI using the AWS CLI**
-
 + Use the `--custom-ami-id` parameter to specify the AMI ID when you run the `aws emr [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)` command\.
 
   The following example specifies a cluster that uses a custom AMI with a 20 GiB boot volume\. For more information, see [Specifying the Amazon EBS Root Device Volume Size](#emr-custom-ami-boot-volume-size)\.
@@ -86,11 +75,8 @@ Using the Amazon EMR API, you can specify `NONE` for the [RepoUpgradeOnBoot](htt
 ## Creating a Custom Amazon Linux AMI from a Preconfigured Instance<a name="emr-custom-ami-preconfigure"></a>
 
 The basic steps for pre\-installing software and performing other configurations to create a custom Amazon Linux AMI for Amazon EMR are as follows:
-
 + Launch an instance from the base Amazon Linux AMI\.
-
 + Connect to the instance to install software and perform other customizations\.
-
 + Create a new image \(AMI snapshot\) of the instance you configured\.
 
 After you create the image based on your customized instance, you can copy that image to an encrypted target as described in [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](#emr-custom-ami-encrypted)\.
@@ -131,7 +117,6 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
    ```
 
 **To create a snapshot from your customized image**
-
 + After you customize the instance, use the `create-image` command to create an AMI from the instance\.
 
   ```
@@ -147,17 +132,11 @@ To encrypt the Amazon EBS root device volume of an Amazon Linux AMI for Amazon E
 This encryption method only applies to the EBS root device volumes\. Use the local\-disk encryption feature of security configurations \(Amazon EMR version 4\.8 or later\), to encrypt EBS storage volumes\. For more information, see [At\-Rest Encryption for Local Disks](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-data-encryption-options.html#emr-encryption-localdisk)\.
 
 You can use an external key provider or an AWS customer master key \(CMK\) to encrypt the EBS root volume\. The service role that Amazon EMR uses \(usually the default `EMR_DefaultRole`\) must be allowed to encrypt and decrypt the volume, at minimum, for Amazon EMR to create a cluster using the AMI\. When using AWS KMS as the key provider, this means that the following actions must be allowed:
-
 + `kms:encrypt`
-
 + `kms:decrypt`
-
 + `kms:ReEncrypt*`
-
 + `kms:CreateGrant`
-
 + `kms:GenerateDataKeyWithoutPlaintext"`
-
 + `kms:DescribeKey"`
 
 The easiest way to do this is to add the role as a key user as described in the following tutorial\. The following example policy statement is provided if you need to customize role policies\.
@@ -209,7 +188,6 @@ The first step in this example is to find the ARN of a KMS CMK or create a new o
 1. Choose **Attach**\.
 
 **To create an encrypted AMI using the AWS CLI**
-
 + Use the `aws ec2 copy-image` command from the AWS CLI to create an AMI with an encrypted EBS root device volume and the key that you modified\. Replace the `--kms-key-id` value specified with the full ARN of the key that you created or modified earlier\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
@@ -249,7 +227,6 @@ For example, take a cluster that has a master node, a core node, and uses the ba
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/ebs-volume-size.png)
 
 **To specify the EBS root device volume size using the AWS CLI**
-
 + Use the `--ebs-root-volume-size` parameter of the [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) command as shown in the following example\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.

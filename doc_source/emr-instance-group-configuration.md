@@ -11,7 +11,7 @@ In the EMR console, if you use the default **Quick Options** settings when you c
 **Tip**  
 To quickly and easily replicate a cluster you have already created, Amazon EMR gives you two options in the console\. You can clone the cluster or generate a `create cluster` CLI command\. First, choose **Cluster list** and then choose the cluster you want to replicate\. Choose **AWS CLI export** to have Amazon EMR generate the equivalent `create cluster` CLI command for the cluster, which you can then copy and paste\. Choose the **Clone** button to have Amazon EMR replicate your console setup\. Amazon EMR presents you with the last step of the **Advanced Options** to confirm the cluster's configuration\. You can either choose **Create cluster** to create the new cluster \(with the same name and a different cluster ID\), or you can choose **Previous** to go back and change settings\.
 
-
+**Topics**
 + [Configure Instance Fleets](emr-instance-fleet.md)
 + [Configure Uniform Instance Groups](emr-uniform-instance-group.md)
 + [Cluster Configuration Guidelines](emr-plan-instances-guidelines.md)

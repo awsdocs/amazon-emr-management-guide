@@ -6,7 +6,6 @@ With Amazon S3 client\-side encryption, the Amazon S3 encryption and decryption 
 Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted; not all data on cluster instance volumes is encrypted\. Furthermore, because Hue does not use EMRFS, objects that the Hue S3 File Browser writes to Amazon S3 are not encrypted\.
 
 **To specify CSE\-KMS for EMRFS data in Amazon S3 using the AWS CLI**
-
 + Type the following command and replace *MyKMSKeyID* with the Key ID or ARN of the AWS KMS CMK to use:
 
   ```
@@ -105,7 +104,7 @@ For example, in the AWS SDK for Java using RunJobFlowRequest, your code might lo
 
 		RunJobFlowRequest request = new RunJobFlowRequest()
 			.withName("Custom EncryptionMaterialsProvider")
-			.withReleaseLabel("emr-5.12.0")
+			.withReleaseLabel("emr-5.13.0")
 			.withApplications(myApp)
 			.withConfigurations(myEmrfsConfig)
 			.withServiceRole("EMR_DefaultRole")
@@ -142,7 +141,7 @@ You may need to pass arguments directly to the provider\. To do this, you can us
 Using the `create-cluster` command from the AWS CLI, you can use the `--configurations` option to specify the file as shown below:
 
 ```
-aws emr create-cluster --release-label emr-5.12.0 --instance-type m3.xlarge --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
+aws emr create-cluster --release-label emr-5.13.0 --instance-type m3.xlarge --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
 ```
 
 ## `emrfs-site.xml` Properties for Amazon S3 Client\-Side Encryption<a name="emr-emrfs-cse-config"></a>

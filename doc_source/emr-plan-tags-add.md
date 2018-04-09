@@ -21,7 +21,6 @@ You can also add tags to an existing cluster\.
 The following example demonstrates how to add tags to a running cluster using the AWS CLI\. Type the `add-tags` subcommand with the `--tag` parameter to assign tags to a resource identifier \(cluster ID\)\. The resource ID is the cluster identifier available via the console or the `list-clusters` command\.
 **Note**  
 The `add-tags` subcommand currently accepts only one resource ID\.
-
 + To add two tags to a running cluster \(one with a key named *production* with no value and the other with a key named *costCenter* with a value of *marketing*\) type the following command and replace *j\-KT4XXXXXXXX1NM* with your cluster ID\. 
 
   ```

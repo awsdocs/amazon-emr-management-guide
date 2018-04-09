@@ -6,7 +6,7 @@
 
  The following topics walk you through the process of identifying alternative causes of a slow cluster\. 
 
-
+**Topics**
 + [Step 1: Gather Data About the Issue](emr-troubleshoot-slow-1.md)
 + [Step 2: Check the Environment](emr-troubleshoot-slow-2.md)
 + [Step 3: Examine the Log Files](emr-troubleshoot-slow-3.md)

@@ -5,17 +5,13 @@ Whether you use the default managed security groups or your own custom managed s
 For example, if you are using your own managed security groups, and you want to allow inbound SSH access to the master group for a particular cluster, you can create an additional security group containing the rule and add it to the master security group for that cluster\. Additional security groups are not modified by or maintained by Amazon EMR\. 
 
 Typically, additional security groups are used to: 
-
 + Add access rules to instances in your cluster that are not present in the Amazon EMR–managed security groups
-
 + Give particular clusters access to a specific resource such as an Amazon Redshift database
 
 Security groups are restrictive by default\. They reject all traffic\. You can add a rule to allow traffic on a particular port to your custom or additional security groups\. If there is more than one rule for a specific port in two security groups that apply to the same instances, the most permissive rule is applied\. For example, if you have a rule that allows SSH access via TCP port 22 from IP address 203\.0\.113\.1 and another rule that allows access to TCP port 22 from any IP address \(0\.0\.0\.0/0\), the rule allowing access by any IP address takes precedence\. 
 
 You can apply up to four additional security groups to both the master and core/task security groups\. The number of additional groups allowed is dependent upon:
-
 + The number of security groups allowed for your account
-
 + The number of individual rules allowed for your account
 
 For more information about rule limits in VPC security groups, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. You can assign the same additional security groups to both the master and core/task security groups\.
@@ -31,13 +27,9 @@ Additional security groups can be applied using the console, the API, the CLI, o
 1. Choose **Go to advanced options**\.
 
 1. In the **Security and Access** section, in the **EC2 Security Groups** subsection:
-
    + For **Master**, choose either the default security group or a custom security group from the list\. 
-
    + In the **Additional security groups** column, choose the icon to add up to four additional groups to the master security group\.
-
    + For **Core & Task**, choose either the default security group or a custom security group from the list\. 
-
    + In the **Additional security groups** column, choose the icon to add up to four additional groups to the core/task security group\.
 **Note**  
 You cannot combine custom and default security groups\.

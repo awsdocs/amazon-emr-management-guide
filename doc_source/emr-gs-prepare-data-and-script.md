@@ -2,7 +2,7 @@
 
  For this tutorial, the sample data and sample script are already provided for you\. However, this step describes them so that you understand how they fit into the overall process of using Amazon EMR to analyze data\.
 
-
+**Topics**
 + [Sample Data Overview](#emr-gs-sample-data-overview)
 + [Sample Hive Script Overview](#emr-gs-hive-script-overview)
 
@@ -21,15 +21,10 @@ Each entry in the CloudFront log files provides details about a single user requ
 The sample script calculates the total number of requests per operating system over a specified timeframe\. The script uses HiveQL, which is a SQL\-like scripting language for data warehousing and analysis\. The script is stored in Amazon S3 at **s3://*region*\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q** where *region* is your region\.
 
 The sample Hive script does the following: 
-
 + Creates a Hive table named `cloudfront_logs`\.
-
 + Reads the CloudFront log files from Amazon S3 using EMRFS and parses the CloudFront log files using the regular expression serializer/deserializer \(RegEx SerDe\)\.
-
 + Writes the parsed results to the Hive table `cloudfront_logs`\.
-
 + Submits a HiveQL query against the data to retrieve the total requests per operating system for a given time frame\.
-
 + Writes the query results to your Amazon S3 output bucket\.
 
  The Hive code that creates the table looks like the following:

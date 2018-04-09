@@ -5,21 +5,14 @@ If you use an SSH tunnel with dynamic port forwarding, you must use a SOCKS prox
 For more information about creating an SSH tunnel, see [Option 2, Part 1: Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding](emr-ssh-tunnel.md)\. For more information about the available web interfaces, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. 
 
 The following example demonstrates a FoxyProxy configuration using Google Chrome\. The relevant settings that are loaded from the configuration file in the example are as follows:
-
 + **Host or IP Address**—This is set to **localhost** with the Port set to **8157** in the example\. You should set this port to the local port number that you used to establish the SSH tunnel with the master node in [Option 2, Part 1: Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding](emr-ssh-tunnel.md)\. This port must also match the port number you use in PuTTY or other terminal emulator you use to connect\.
-
 + **SOCKS v5** configuration is specified\.
-
 + Login credentials are not specified\.
-
 + **URL Patterns**
 
   The following URL patterns are whitelisted and specified with a wildcard pattern type:
-
   + The **\*ec2\*\.amazonaws\.com\*** and **\*10\*\.amazonaws\.com\*** patterns match the public DNS name of clusters in US regions\.
-
   + The **\*ec2\*\.compute\*** and **\*10\*\.compute\*** patterns match the public DNS name of clusters in all other regions\.
-
   + The **10\.\*** pattern provides access to the JobTracker log files in Hadoop\. Alter this filter if it conflicts with your network access plan\.
 
 ## Configure FoxyProxy for Google Chrome<a name="emr-connect-foxy-proxy-chrome"></a>

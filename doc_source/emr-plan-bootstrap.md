@@ -4,7 +4,7 @@ You can use a *bootstrap action* to install additional software or customize the
 
 Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x Release Versions](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
 
-
+**Topics**
 + [Bootstrap Action Basics](#bootstrapUses)
 + [Run If Bootstrap Action](#emr-bootstrap-runif)
 + [Shutdown Actions](#bootstrap_Shutown)
@@ -39,7 +39,6 @@ The following example echoes the string "running on master node" if the node is 
 **To run a command conditionally using the AWS CLI**
 
 When using the AWS CLI to include a bootstrap action, specify the `Path` and `Args` as a comma\-separated list\.
-
 + To launch a cluster with a bootstrap action that conditionally runs a command when an instance\-specific value is found in the `instance.json` or `job-flow.json` file, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
@@ -65,7 +64,7 @@ When using Amazon EMR versions 4\.0 and later, you must manually create the `/mn
 
 You can create a custom script to perform a customized bootstrap action\. Any of the Amazon EMR interfaces can reference a custom bootstrap action\.
 
-
+**Topics**
 + [Add Custom Bootstrap Actions Using the AWS CLI or the Amazon EMR CLI](#CustombootstrapCLI)
 + [Add Custom Bootstrap Actions Using the Console](#CustombootstrapConsole)
 + [Use a Custom Bootstrap Action to Copy an Object from Amazon S3 to Each Node](#CustomBootstrapCopyS3Object)
@@ -87,9 +86,7 @@ The following example uses a bootstrap action script to download and extracts a 
 **To create a cluster with a custom bootstrap action using the AWS CLI**
 
 When using the AWS CLI to include a bootstrap action, specify the `Path` and `Args` as a comma\-separated list\. The following example does not use an arguments list\.
-
 + To launch a cluster with a custom bootstrap action, type the following command, replace *myKey* with the name of your EC2 key pair\. 
-
   + Linux, UNIX, and Mac OS X users:
 
     ```
@@ -99,7 +96,6 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
     4. --instance-count 3 --instance-type m3.xlarge \
     5. --bootstrap-actions Path="s3://elasticmapreduce/bootstrap-actions/download.sh"
     ```
-
   + Windows users:
 
     ```
@@ -135,7 +131,6 @@ The following procedure describes how to use your own custom bootstrap action\.
 While the cluster's master node is running, you can connect to the master node and see the log files that the bootstrap action script generated in the `/mnt/var/log/bootstrap-actions/1` directory\.
 
 **Related Topics**
-
 + [View Log Files](emr-manage-view-web-log-files.md)
 
 ### Use a Custom Bootstrap Action to Copy an Object from Amazon S3 to Each Node<a name="CustomBootstrapCopyS3Object"></a>
@@ -151,7 +146,7 @@ aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.12.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.13.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m3.xlarge \

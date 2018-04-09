@@ -6,19 +6,34 @@ All clusters in all regions require a service role and a role for the EC2 instan
 
 If you are creating a cluster for the first time in an account, roles for Amazon EMR do not yet exist\. You can specify default roles for Amazon EMR to create, or you can create custom roles and specify them when you create a cluster\. For more information, see [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md), and [Customize IAM Roles](emr-iam-roles-custom.md)\.
 
-**Summary of Amazon EMR Roles and Their Purposes**
+## Summary of IAM Roles for Amazon EMR<a name="emr-roles-summary"></a>
 
-+ The **service role **defines the allowable actions for Amazon EMR when provisioning resources and performing other service\-level tasks that are not performed in the context of a particular EC2 instance\.
+Amazon EMR uses the following roles when interacting with other AWS services\.
 
-+ The **Amazon EC2 instance profile role** is assumed by EC2 instances within the cluster\. The permissions associated with this role apply to processes that run on cluster instances\. As long as an application process runs on top of the Hadoop ecosystem, the application assumes the role\. If you have application code that calls AWS services directly, you may need to use the SDK to specify roles\. For more information, see [Use IAM Roles with Applications That Call AWS Services Directly](emr-iam-roles-calling.md)\.
+### EMR Role<a name="emr-iam-role"></a>
 
-  Clusters typically read and write data to Amazon S3 using EMRFS\. When you have multiple cluster users and multiple data stores, you may want users to have different permissions to EMRFS data in Amazon S3\. Use *EMRFS authorization* to do this, which allows EMRFS to assume a different, customized role based on the user or group making the request or the location of EMRFS data in Amazon S3\. For more information, see [Configure EMRFS Authorization for Data in Amazon S3](emr-emrfs-authz.md)\.
+The EMR role defines the allowable actions for Amazon EMR when provisioning resources and performing other service\-level tasks that are not performed in the context of an EC2 instance running within a cluster\. The default role is `EMR_DefaultRole`\.
 
-+ The **Auto Scaling role **performs a similar function as the service role, but allows additional actions for dynamically scaling environments\.
+### EMR Role for EC2<a name="emr-iam-role-for-ec2"></a>
 
-+ A **service\-linked role** is created automatically by Amazon EMR and allows Amazon EMR to clean up Amazon EC2 resources if the service for Amazon EMR has lost that ability\. For more information, see [Using the Service\-Linked Role for Amazon EMR](using-service-linked-roles.md)\. Amazon EMR must also be allowed to create a service\-linked role for Spot Instances\.
+The EMR role for EC2 is used by EC2 instances within the cluster\. In other words, this is the role associated with the EC2 instance profile for cluster instances\. The permissions associated with this role apply to processes that run on cluster instances\. As long as an application process runs on top of the Hadoop ecosystem, the application assumes this role to interact with other AWS services\. The default role is `EMR_EC2_DefaultRole`\.
 
-The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permission for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
+**Note**  
+If you create a custom EMR role for EC2, follow the basic work flow, which automatically creates an instance profile of the same name\. Amazon EC2 allows you to create instance profiles and roles with different names, but Amazon EMR does not support this configuration, and it results in an "invalid instance profile" error when you create the cluster\. 
+
+Clusters typically read and write data to Amazon S3 using EMRFS\. EMRFS uses this role by default\. When you have multiple cluster users and multiple data stores, you may want users to have different permissions to EMRFS data in Amazon S3\. To do this, you can set up a security configuration with IAM roles for EMRFS requests to Amazon S3\. EMRFS can assume different roles with different permissions policies, based on the user or group making the request or the location of EMRFS data in Amazon S3\. For requests that match the criteria that you specify, EMRFS uses the corresponding roles instead of the EMR role for EC2\. If no match is found, EMRFS falls back to the EMR role for EC2\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
+
+If you have application code on your cluster that calls AWS services directly, you may need to use the SDK to specify roles\. For more information, see [Use IAM Roles with Applications That Call AWS Services Directly](emr-iam-roles-calling.md)\.
+
+### Automatic Scaling Role<a name="emr-automatic-scaling-role"></a>
+
+The automatic scaling role for EMR performs a similar function as the service role, but allows additional actions for dynamically scaling environments\. The default role is `EMR_AutoScaling_DefaultRole`\.
+
+### Service\-Linked Role<a name="emr-iam-role-slr"></a>
+
+EMR automatically creates a service\-linked role\. If the service for Amazon EMR has lost the ability to clean up Amazon EC2 resources, Amazon EMR can use this role to do so \. For more information, see [Using the Service\-Linked Role for Amazon EMR](using-service-linked-roles.md)\. The EMR role must be allowed to create a service\-linked role for Spot Instances\.
+
+The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
 
 To implement a more restrictive policy, attach an inline policy to appropriate users or groups that allows `iam:PassRole` only for roles specific to Amazon EMR\. The following example demonstrates a statement that allows `iam:PassRole` permissions only for the default Amazon EMR roles: `EMR_DefaultRole`, `EMR_EC2_DefaultRole`, and `EMR_AutoScalingDefaultRole`\. If you use custom roles, replace the default role names with your custom role names\.
 
@@ -34,7 +49,8 @@ To implement a more restrictive policy, attach an inline policy to appropriate u
 }
 ```
 
-
+**Topics**
++ [Summary of IAM Roles for Amazon EMR](#emr-roles-summary)
 + [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)
 + [Allow Users and Groups to Create and Modify Roles](emr-iam-roles-create-permissions.md)
 + [Customize IAM Roles](emr-iam-roles-custom.md)

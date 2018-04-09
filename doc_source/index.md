@@ -100,7 +100,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Encrypt Data in Transit and At Rest](emr-data-encryption.md)
       + [Encryption Options](emr-data-encryption-options.md)
       + [Create Keys and Certificates for Data Encryption](emr-encryption-enable.md)
-   + [Configure EMRFS Authorization for Data in Amazon S3](emr-emrfs-authz.md)
+   + [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)
    + [Control Network Traffic with Security Groups](emr-security-groups.md)
       + [Use Amazon EMR–Managed Security Groups](emr-man-sec-groups.md)
       + [Configure Additional Security Groups](emr-additional-sec-groups.md)
@@ -178,3 +178,4 @@ Amazon's trademarks and trade dress may not be used in
    + [Use SDKs to Call Amazon EMR APIs](call-emr-using-sdks.md)
       + [Using the AWS SDK for Java to Create an Amazon EMR Cluster](calling-emr-with-java-sdk.md)
       + [Using the Java SDK to Sign an API Request](API_SignatureSampleCode.md)
++ [AWS Glossary](glossary.md)
