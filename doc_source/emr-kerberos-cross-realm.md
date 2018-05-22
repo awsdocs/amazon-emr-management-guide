@@ -112,7 +112,7 @@ Now that the Active Directory domain controller is configured, you must configur
    + The realm for the cluster that you specified when you set up the Active Directory domain controller
    + The cross\-realm trust principal password that you specified as `passwordt` in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
    + A `KdcAdminPassword`, which you can use to administer the cluster\-dedicated KDC\.
-   + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
+   + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 3: Add User Accounts to the Domain for the EMR Cluster](#emr-kerberos-ad-configure-trust)\.
 
    The following example launches a kerberized cluster\.
 
