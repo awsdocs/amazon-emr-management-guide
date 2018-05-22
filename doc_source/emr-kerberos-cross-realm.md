@@ -74,7 +74,7 @@ Open the Windows command prompt with administrator privileges and type the follo
 
 ```
 C:\Users\Administrator> ksetup /addkdc EC2.INTERNAL
-C:\Users\Administrator> netdom trust EC2.INTERNAL /Domain:AD.DOMAIN.COM /add /realm /passwordt:MyVeryStrongPassword
+C:\Users\Administrator> netdom trust EC2.INTERNAL /Domain:<red>AD.DOMAIN.COM</red> /add /realm /passwordt:MyVeryStrongPassword
 C:\Users\Administrator> ksetup /SetEncTypeAttr EC2.INTERNAL AES256-CTS-HMAC-SHA1-96
 ```
 
