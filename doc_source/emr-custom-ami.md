@@ -56,7 +56,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   aws emr create-cluster --name "Cluster with My Custom AMI" \
   --custom-ami-id MyAmiID --ebs-root-volume-size 20 \
   --release-label emr-5.7.0 --use-default-roles \
-  --instance-count 2 --instance-type m3.xlarge
+  --instance-count 2 --instance-type m4.large
   ```
 
 ## Managing AMI Package Repository Updates<a name="emr-custom-ami-package-update"></a>
@@ -91,7 +91,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    aws ec2 run-instances --image-id MyAmiID \
-   --count 1 --instance-type m3.xlarge \
+   --count 1 --instance-type m4.large \
    --key-name MyKeyName --region us-west-2
    ```
 
@@ -234,5 +234,5 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   ```
   aws emr create-cluster --release-label emr-5.7.0 \
   --ebs-root-volume-size 20 --instance-groups InstanceGroupType=MASTER,\
-  InstanceCount=1,InstanceType=m3.xlarge InstanceGroupType=CORE,InstanceCount=2,InstanceType=m3.xlarge
+  InstanceCount=1,InstanceType=m4.large InstanceGroupType=CORE,InstanceCount=2,InstanceType=m4.large
   ```

@@ -12,12 +12,12 @@ To launch a cluster with MapR using the AWS CLI, type the `create-cluster` comma
     1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig \
     2. Name=MapR,Args=--edition,m7,--version,4.0.2 --ami-version 3.3.2 \
     3. --use-default-roles --ec2-attributes KeyName=myKey \
-    4. --instance-type m3.xlarge --instance-count 3
+    4. --instance-type m4.large --instance-count 3
     ```
   + Windows users:
 
     ```
-    1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig Name=MapR,Args=--edition,m7,--version,3.1.1 --ami-version 2.4 --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3
+    1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig Name=MapR,Args=--edition,m7,--version,3.1.1 --ami-version 2.4 --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3
     ```
 **Note**  
 The version of MapR available in Amazon EMR that supports Hadoop 2\.x is 4\.0\.2, and it is only available with Amazon EMR AMI 3\.3\.2

@@ -45,7 +45,7 @@ Amazon EMR\-managed security groups and additional security groups are not suppo
 1. To launch a cluster using additional security groups, type the following command\. Replace *myKey* with the name of your Amazon EC2 key pair, and replace *securityGroupId* with the ID of your master security group, core/task security group, and additional security groups\.
 
    ```
-   1. aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hue Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,ServiceAccessSecurityGroup=sg-service-accessId,EmrManagedMasterSecurityGroup=sg-masterId,EmrManagedSlaveSecurityGroup=sg-slaveId,AdditionalMasterSecurityGroups=securityGroupId,AdditionalSlaveSecurityGroups=securityGroupId --instance-type m3.xlarge --instance-count 3
+   1. aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hue Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,ServiceAccessSecurityGroup=sg-service-accessId,EmrManagedMasterSecurityGroup=sg-masterId,EmrManagedSlaveSecurityGroup=sg-slaveId,AdditionalMasterSecurityGroups=securityGroupId,AdditionalSlaveSecurityGroups=securityGroupId --instance-type m4.large --instance-count 3
    ```
 
    When you specify the instance count without using the `--instance-groups` parameter, a single master node is launched, and the remaining instances are launched as core nodes\. All nodes use the instance type specified in the command\.

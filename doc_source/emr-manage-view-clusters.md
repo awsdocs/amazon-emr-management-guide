@@ -75,7 +75,7 @@ The output of your command is similar to the following:
                 "InstanceGroupType": "CORE", 
                 "Id": "ig-2EEXAMPLEXXP", 
                 "Configurations": [], 
-                "InstanceType": "m3.xlarge", 
+                "InstanceType": "m4.large", 
                 "Market": "ON_DEMAND", 
                 "RunningInstanceCount": 1
             }, 
@@ -95,7 +95,7 @@ The output of your command is similar to the following:
                 "InstanceGroupType": "MASTER", 
                 "Id": "ig-2A1234567XP", 
                 "Configurations": [], 
-                "InstanceType": "m3.xlarge", 
+                "InstanceType": "m4.large", 
                 "Market": "ON_DEMAND", 
                 "RunningInstanceCount": 1
             }

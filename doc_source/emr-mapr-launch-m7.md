@@ -12,12 +12,12 @@ To use the commands in this tutorial, download and install the AWS CLI\. For mor
      1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig \
      2. Name=MapR,Args=--edition,m7,--version,4.0.2 --ami-version 3.3.2 \
      3. --use-default-roles --ec2-attributes KeyName=myKey \
-     4. --instance-type m3.xlarge --instance-count 3
+     4. --instance-type m4.large --instance-count 3
      ```
    + Windows users:
 
      ```
-     1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig Name=MapR,Args=--edition,m7,--version,3.1.1 --ami-version 2.4 --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3
+     1. aws emr create-cluster --name "MapR cluster" --applications Name=Hive Name=Pig Name=MapR,Args=--edition,m7,--version,3.1.1 --ami-version 2.4 --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3
      ```
 **Note**  
 The versions of MapR available in Amazon EMR do not currently support Hadoop 2\.x\. When specifying the `--ami-version`, use a Hadoop 1\.x AMI\.

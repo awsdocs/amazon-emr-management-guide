@@ -53,18 +53,18 @@ If you have not previously created the default Amazon EMR service role and Amazo
 Linux, UNIX, and macOS users:
 
 ```
-1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.13.0 \
+1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.14.0 \
 2. --use-default-roles --ec2-attributes KeyName=myKey \
-3. --instance-groups InstanceGroupType=MASTER,InstanceType=m3.xlarge,InstanceCount=1,BidPrice=0.25 \
-4. InstanceGroupType=CORE,InstanceType=m3.xlarge,InstanceCount=2,BidPrice=0.03 \ 
-5. InstanceGroupType=TASK,InstanceType=m3.xlarge,InstanceCount=4,BidPrice=0.03 \
-6. InstanceGroupType=TASK,InstanceType=m3.xlarge,InstanceCount=2,BidPrice=0.04
+3. --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 \
+4. InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,BidPrice=0.03 \ 
+5. InstanceGroupType=TASK,InstanceType=m4.large,InstanceCount=4,BidPrice=0.03 \
+6. InstanceGroupType=TASK,InstanceType=m4.large,InstanceCount=2,BidPrice=0.04
 ```
 
 Windows users:
 
 ```
-1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.13.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m3.xlarge,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m3.xlarge,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m3.xlarge,InstanceCount=2
+1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.14.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>
@@ -75,21 +75,21 @@ You instantiate an `InstanceGroupConfig` object that specifies the configuration
  1. InstanceGroupConfig instanceGroupConfigMaster = new InstanceGroupConfig()
  2. 	.withInstanceCount(1)
  3. 	.withInstanceRole(“MASTER”)
- 4. 	.withInstanceType(“m3.xlarge”)
+ 4. 	.withInstanceType(“m4.large”)
  5. 	.withMarket("SPOT")
  6. 	.withBidPrice(“0.25”); 
  7. 	
  8. InstanceGroupConfig instanceGroupConfigCore = new InstanceGroupConfig()
  9. 	.withInstanceCount(4)
 10. 	.withInstanceRole(“CORE”)
-11. 	.withInstanceType(“m3.xlarge”)
+11. 	.withInstanceType(“m4.large”)
 12. 	.withMarket("SPOT")
 13. 	.withBidPrice(“0.03”);
 14. 	
 15. InstanceGroupConfig instanceGroupConfigTask = new InstanceGroupConfig()
 16. 	.withInstanceCount(2)
 17. 	.withInstanceRole(“TASK”)
-18. 	.withInstanceType(“m3.xlarge”)
+18. 	.withInstanceType(“m4.large”)
 19. 	.withMarket("SPOT")
 20. 	.withBidPrice(“0.10”);
 ```

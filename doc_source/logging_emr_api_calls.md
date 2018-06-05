@@ -57,10 +57,10 @@ The following log file record shows that an IAM user called the **RunJobFlow** a
                }
             ],
             "instances":{
-               "slaveInstanceType":"m3.xlarge",
+               "slaveInstanceType":"m4.large",
                "ec2KeyName":"emr-integtest",
                "instanceCount":1,
-               "masterInstanceType":"m3.xlarge",
+               "masterInstanceType":"m4.large",
                "keepJobFlowAliveWhenNoSteps":true,
                "terminationProtected":false
             },

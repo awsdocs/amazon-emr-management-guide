@@ -38,7 +38,7 @@ Amazon EMR–managed security groups are not supported in the Amazon EMR CLI\.
 1. To launch a cluster using the default security group options, type the following command, replace *myKey* with the name of your Amazon EC2 key pair\.
 
    ```
-   aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3
+   aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3
    ```
 
    When you specify the instance count without using the `--instance-groups` parameter, a single master node is launched, and the remaining instances are launched as core nodes\. All nodes use the instance type specified in the command\.
@@ -46,7 +46,7 @@ Amazon EMR–managed security groups are not supported in the Amazon EMR CLI\.
 1. To launch a cluster using your own security groups, type the following command, replace *myKey* with the name of your Amazon EC2 key pair, replace *masterSecurityGroupId* with the ID of the master security group, and replace *slaveSecurityGroupId* with the ID of the core/task security group\.
 
    ```
-   aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hive Name=Pig --ec2-attributes KeyName=myKey,EmrManagedMasterSecurityGroup=sg-masterId,EmrManagedSlaveSecurityGroup=sg-slaveId --instance-type m3.xlarge --instance-count 3 --use-default-roles
+   aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hive Name=Pig --ec2-attributes KeyName=myKey,EmrManagedMasterSecurityGroup=sg-masterId,EmrManagedSlaveSecurityGroup=sg-slaveId --instance-type m4.large --instance-count 3 --use-default-roles
    ```
 **Note**  
 For private subnets, you can additionally specify `ServiceAccessSecurityGroup=sg-service-accessId` with the `--ec2-attributes` parameter\.

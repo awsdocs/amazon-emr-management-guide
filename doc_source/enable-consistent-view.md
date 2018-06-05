@@ -30,8 +30,8 @@ We recommend that you install the current version of AWS CLI\. To download the l
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  1. aws emr create-cluster --instance-type m3.xlarge --instance-count 3 --emrfs Consistent=true \
-  2. --release-label emr-5.13.0 --ec2-attributes KeyName=myKey
+  1. aws emr create-cluster --instance-type m4.large --instance-count 3 --emrfs Consistent=true \
+  2. --release-label emr-5.14.0 --ec2-attributes KeyName=myKey
   ```
 
 **To check if consistent view is enabled using the AWS Management Console**

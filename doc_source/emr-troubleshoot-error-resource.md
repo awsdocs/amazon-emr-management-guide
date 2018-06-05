@@ -7,7 +7,7 @@ The following errors are commonly caused by constrained resources on the cluster
 + [Are you seeing "EC2 Quota Exceeded" errors?](#emr-dev-terminate-time)
 + [Are you seeing "Too many fetch\-failures" errors?](#emr-troubleshoot-error-resource-1)
 + [Are you seeing "File could only be replicated to 0 nodes instead of 1" errors?](#emr-troubleshoot-error-resource-2)
-+ [Are your TaskTracker nodes being blacklisted?](#emr-troubleshoot-error-resource-3)
++ [Are your nodes being blacklisted?](#emr-troubleshoot-error-resource-3)
 
 ## Do you have enough HDFS space for your cluster?<a name="enough-hdfs-space"></a>
 
@@ -65,36 +65,12 @@ To check whether this issue is caused by HDFS running out of disk space, look at
 
 If HDFS running out of space was not the issue, check the DataNode logs, the NameNode logs and network connectivity for other issues that could have prevented HDFS from replicating data\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. 
 
-## Are your TaskTracker nodes being blacklisted?<a name="emr-troubleshoot-error-resource-3"></a>
+## Are your nodes being blacklisted?<a name="emr-troubleshoot-error-resource-3"></a>
 
-A TaskTracker node is a node in the cluster that accepts map and reduce tasks\. These are assigned by a JobTracker daemon\. The JobTracker monitors the TaskTracker node through a heartbeat\. 
+The NodeManager daemon is responsible for launching and managing containers on core and task nodes\. The containers are allocated to the NodeManager daemon by the ResourceManager daemon that runs on the master node\. The ResourceManager monitors the NodeManager node through a heartbeat\.
 
-There are a couple of situations in which the JobTracker daemon blacklists a TaskTacker node, removing it from the pool of nodes available to process tasks: 
-+ If the TaskTracker node has not sent a heartbeat to the JobTracker daemon in the past 10 minutes \(60000 milliseconds\)\. This time period can be configured using the `mapred.tasktracker.expiry.interval` configuration setting\. For more information about changing Hadoop configuration settings, see [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)\. 
-+ If the TaskTracker node has more than 4 failed tasks\. You can change this to a higher value using the `modify mapred.max.tracker.failures` configuration parameter\. Other configuration settings you might want to change are the settings that control how many times to attempt a task before marking it as failed: `mapred.map.max.attempts` for map tasks and `mapreduce.reduce.maxattempts` for reduce tasks\. For more information about changing Hadoop configuration settings, see [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)\. 
+There are a couple of situations in which the ResourceManager daemon blacklists a NodeManager, removing it from the pool of nodes available to process tasks: 
++ If the NodeManager has not sent a heartbeat to the ResourceManager daemon in the past 10 minutes \(60000 milliseconds\)\. This time period can be configured using the `yarn.nm.liveness-monitor.expiry-interval-ms` configuration setting\. For more information about changing Yarn configuration settings, see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. 
++ NodeManager checks the health of the disks determined by `yarn.nodemanager.local-dirs` and `yarn.nodemanager.log-dirs`\. The checks include permissions and free disk space \(< 90%\)\. If a disk fails the check, the NodeManager stops using that particular disk but still reports the node status as healthy\. If a number of disks fail the check, the node is reported as unhealthy to the ResourceManager and new containers are not assigned to the node\.
 
-You can use the CloudWatch CLI to view the number of blacklisted TaskTracker nodes\. The command for doing so is shown in the following example\. For more information, see the [Amazon CloudWatch CLI Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli//CLIReference.html)\. 
-
-```
-mon-get-stats NoOfBlackListedTaskTrackers --dimensions JobFlowId=JobFlowID --statistics Maximum --namespace AWS/ElasticMapReduce
-```
-
-The following example shows how to launch a cluster and use a bootstrap action to set the value of `mapred.max.tracker.failures` to 7, instead of the default 4\.
-
-Type the following command using the AWS CLI and replace *myKey* with the name of your EC2 key pair\. 
-
-```
-aws emr create-cluster --name "Test cluster" --ami-version 2.4 --applications Name=Hive Name=Pig \
---use-default-roles --ec2-attributes KeyName=myKey \
---instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m3.xlarge InstanceGroupType=CORE,InstanceCount=2,InstanceType=m3.xlarge \
---bootstrap-actions Path=s3://elasticmapreduce/bootstrap-actions/configure-hadoop,Name="Modified  mapred.max.tracker.failures",Args=["-m","mapred.max.tracker.failures=7"]
-```
-
-**Note**  
-If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
-
-When you launch a cluster using the preceding example, you can connect to the master node and see the changed configuration setting in `/home/hadoop/conf/mapred-site.xml`\. The modified line will appear as shown in the following example\. 
-
-```
-<property><name>mapred.max.tracker.failures</name><value>7</value></property>
-```
+The application master can also blacklist a NodeManager node if it has more than three failed tasks\. You can change this to a higher value using the `mapreduce.job.maxtaskfailures.per.tracker` configuration parameter\. Other configuration settings you might change control how many times to attempt a task before marking it as failed: `mapreduce.map.max.attempts` for map tasks and `mapreduce.reduce.maxattempts` for reduce tasks\. For more information about changing configuration settings, see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\.

@@ -108,8 +108,8 @@ If you have not previously created the default EMR service role and EC2 instance
 ```
 aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
---instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge}'] \
-InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge}']
+--instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large}'] \
+InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large}']
 ```
 
 **Example Example: Spot Master, Spot Core with Single Instance Type, Default VPC**  
@@ -117,8 +117,8 @@ InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceT
 ```
 aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
---instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5}'] \
-InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5}']
+--instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5}'] \
+InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5}']
 ```
 
 **Example Example: On\-Demand Master, Mixed Core with Single Instance Type, Single EC2 Subnet**  
@@ -126,8 +126,8 @@ InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=
 ```
 aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,SubnetIds=['subnet-ab12345c'] \
---instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge}'] \
-InstanceFleetType=CORE,TargetOnDemandCapacity=2,TargetSpotCapacity=6,InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5,WeightedCapacity=2}']
+--instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large}'] \
+InstanceFleetType=CORE,TargetOnDemandCapacity=2,TargetSpotCapacity=6,InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5,WeightedCapacity=2}']
 ```
 
 **Example Example: On\-Demand Master, Spot Core with Multiple Weighted Instance Types, Defined Duration and Timeout for Spot, Range of EC2 Subnets**  
@@ -135,8 +135,8 @@ InstanceFleetType=CORE,TargetOnDemandCapacity=2,TargetSpotCapacity=6,InstanceTyp
 ```
 aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,SubnetIds=['subnet-ab12345c','subnet-de67890f'] \
---instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge}'] \
-InstanceFleetType=CORE,TargetSpotCapacity=11,InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5,WeightedCapacity=3}',\
+--instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large}'] \
+InstanceFleetType=CORE,TargetSpotCapacity=11,InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5,WeightedCapacity=3}',\
 '{InstanceType=m4.2xlarge,BidPrice=0.9,WeightedCapacity=5}'],\
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=120,TimeoutAction=SWITCH_TO_ON_DEMAND}'}
 ```
@@ -146,13 +146,13 @@ LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=120,TimeoutActi
 ```
 aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,SubnetIds=['subnet-ab12345c','subnet-de67890f'] \
---instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m3.xlarge}'] \
+--instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m4.large}'] \
 InstanceFleetType=CORE,TargetOnDemandCapacity=8,TargetSpotCapacity=6,\
-InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5,WeightedCapacity=3}',\
+InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5,WeightedCapacity=3}',\
 '{InstanceType=m4.2xlarge,BidPrice=0.9,WeightedCapacity=5}'],\
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=120,TimeoutAction=SWITCH_TO_ON_DEMAND}'} \
 InstanceFleetType=TASK,TargetOnDemandCapacity=3,TargetSpotCapacity=3,\
-InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5,WeightedCapacity=3}']
+InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5,WeightedCapacity=3}']
 ```
 
 **Example Example: Spot Master, No Core or Task, EBS Configuration, Default VPC**  
@@ -162,7 +162,7 @@ aws emr create-cluster --release-label emr 5.3.1 -service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,\
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=60,TimeoutAction=TERMINATE_CLUSTER}'},\
-InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5,\
+InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5,\
 EbsConfiguration={EbsOptimized=true,EbsBlockDeviceConfigs=[{VolumeSpecification={VolumeType=gp2,\
 SizeIn GB=100}},{VolumeSpecification={VolumeType=io1,SizeInGB=100,Iop s=100},VolumesPerInstance=4}]}}']
 ```
@@ -191,7 +191,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
         },
         "InstanceTypeConfigs": [
             {
-                "InstanceType": "m3.xlarge",
+                "InstanceType": "m4.large",
                 "BidPrice": "0.89"
             }
         ]
@@ -208,7 +208,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
         },
         "InstanceTypeConfigs": [
             {
-                "InstanceType": "m3.xlarge",
+                "InstanceType": "m4.large",
                 "BidPriceAsPercentageOfOnDemandPrice": 100
             }
         ]
@@ -225,7 +225,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
         },
         "InstanceTypeConfigs": [
             {
-                "InstanceType": "m3.xlarge",
+                "InstanceType": "m4.large",
                 "BidPrice": "0.89"
             }
         ]
@@ -233,7 +233,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
 ]
 ```
 
-### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c18c29c25c14c10b8"></a>
+### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c18c29c23c14c10b8"></a>
 
 Use the `list-instance-fleets` command to get configuration details of the instance fleets in a cluster\. The command takes a cluster ID as input\. The following example demonstrates the command and its output for a cluster that contains a master task instance group and a core task instance group\. For full response syntax, see [ListInstanceFleets](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListInstanceFleets.html) in the *Amazon EMR API Reference\.*
 
@@ -268,7 +268,7 @@ list-instance-fleets --cluster-id 'j-12ABCDEFGHI34JK'
             "InstanceTypeSpecifications": [
                 {
                     "BidPrice": "0.5",
-                    "InstanceType": "m3.xlarge",
+                    "InstanceType": "m4.large",
                     "WeightedCapacity": 2
                 }
             ],
@@ -292,7 +292,7 @@ list-instance-fleets --cluster-id 'j-12ABCDEFGHI34JK'
             "InstanceTypeSpecifications": [
                 {
                     "BidPriceAsPercentageOfOnDemandPrice": 100.0,
-                    "InstanceType": "m3.xlarge",
+                    "InstanceType": "m4.large",
                     "WeightedCapacity": 1
                 }
             ],
@@ -318,5 +318,5 @@ If a cluster has only master and core instance fleets, you can use the `add-inst
 ```
 aws emr add-instance-fleet --cluster-id 'j-12ABCDEFGHI34JK' --instance-fleet  InstanceFleetType=TASK,TargetSpotCapacity=1,/
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=20,TimeoutAction=TERMINATE_CLUSTER}'},/
-InstanceTypeConfigs=['{InstanceType=m3.xlarge,BidPrice=0.5}']
+InstanceTypeConfigs=['{InstanceType=m4.large,BidPrice=0.5}']
 ```

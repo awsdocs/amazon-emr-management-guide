@@ -45,7 +45,7 @@ After your VPC is configured, you can launch EMR clusters in it by using the `cr
 + To create a cluster in a specific subnet, type the following command, replace *myKey* with the name of your EC2 key pair, and replace *77XXXX03* with your subnet ID\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,SubnetId=subnet-77XXXX03 --instance-type m3.xlarge --instance-count 3
+  aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,SubnetId=subnet-77XXXX03 --instance-type m4.large --instance-count 3
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single master node is launched, and the remaining instances are launched as core nodes\. All nodes use the instance type specified in the command\.

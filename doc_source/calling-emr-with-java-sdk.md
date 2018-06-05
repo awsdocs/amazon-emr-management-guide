@@ -40,8 +40,8 @@ If you are adding IAM user visibility to a new cluster, call [http://docs.aws.am
 25.            .withEc2KeyName("keypair")
 26.            .withInstanceCount(5)
 27.            .withKeepJobFlowAliveWhenNoSteps(true)
-28.            .withMasterInstanceType("m3.xlarge")
-29.            .withSlaveInstanceType("m3.xlarge"));
+28.            .withMasterInstanceType("m4.large")
+29.            .withSlaveInstanceType("m4.large"));
 30. 
 31.    RunJobFlowResult result = emr.runJobFlow(request);
 ```

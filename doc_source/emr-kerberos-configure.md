@@ -85,7 +85,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 ```
 aws emr create-cluster --name "MyKerberosCluster" \
 --release-label emr-5.10.0 \
---instance-type m3.xlarge \
+--instance-type m4.large \
 --instance-count 3 \
 --use-default-roles \
 --ec2-attributes KeyName=MyEC2KeyPair \

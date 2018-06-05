@@ -104,7 +104,7 @@ This procedure explains how to disable multipart upload using the AWS CLI\. To d
 1. Type the following command and replace *myKey* with the name of your EC2 key pair\.
 
    ```
-   1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3 --configurations file://./myConfig.json
+   1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3 --configurations file://./myConfig.json
    ```
 
 ### Disable Multipart Upload Using the API<a name="emr-dev-multipart-upload-api"></a>

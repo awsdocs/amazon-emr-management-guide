@@ -175,7 +175,7 @@ You can use the `Condition` element \(also called a `Condition` block\) along wi
 + Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key to require a specific tag with actions/API calls\. 
 
 **Important**  
-The condition context keys apply only to those Amazon EMR API actions that accept `ClusterID` as a request parameter\.
+The condition context keys apply only to those Amazon EMR API actions where `ClusterID` is a required request parameter\. For example, the [ModifyInstanceGroups](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ModifyInstanceGroups.html) action does not support context keys because `ClusterID` is an optional parameter\.
 
 For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. For more information about the `Condition` element and condition operators, see [IAM Policy Elements Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*, particularly [String Condition Operators](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_String)\. For more information about adding tags to EMR clusters, see [Tagging Amazon EMR Clusters](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html)\. 
 

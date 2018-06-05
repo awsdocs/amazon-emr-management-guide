@@ -68,13 +68,13 @@ In addition, create a user account with sufficient privileges to join computers 
 
 ### Step 4: Configure an Incoming Trust on the Active Directory Domain Controller<a name="emr-kerberos-ad-configure-trust"></a>
 
-The example commands below create a trust in Active Directory, which is a one\-way, incoming, non\-transitive, realm trust with the cluster\-dedicated KDC\. The example we use for the cluster's realm is `EC2.INTERNAL`\. The `passwordt` parameter specifies the **cross\-realm principal password**, which you specify along with the cluster **realm** when you create a cluster\. The realm name is derived from the default domain name in `us-east-1` for the cluster\.
+The example commands below create a trust in Active Directory, which is a one\-way, incoming, non\-transitive, realm trust with the cluster\-dedicated KDC\. The example we use for the cluster's realm is `EC2.INTERNAL`\. The `passwordt` parameter specifies the **cross\-realm principal password**, which you specify along with the cluster **realm** when you create a cluster\. The realm name is derived from the default domain name in `us-east-1` for the cluster\. The `Domain` is the Active Directory domain in which you are creating the trust, which is lower case by convention\. The example uses `ad.domain.com`
 
 Open the Windows command prompt with administrator privileges and type the following commands to create the trust relationship on the Active Directory domain controller:
 
 ```
 C:\Users\Administrator> ksetup /addkdc EC2.INTERNAL
-C:\Users\Administrator> netdom trust EC2.INTERNAL /Domain:AD.DOMAIN.COM /add /realm /passwordt:MyVeryStrongPassword
+C:\Users\Administrator> netdom trust EC2.INTERNAL /Domain:ad.domain.com /add /realm /passwordt:MyVeryStrongPassword
 C:\Users\Administrator> ksetup /SetEncTypeAttr EC2.INTERNAL AES256-CTS-HMAC-SHA1-96
 ```
 
@@ -112,14 +112,14 @@ Now that the Active Directory domain controller is configured, you must configur
    + The realm for the cluster that you specified when you set up the Active Directory domain controller
    + The cross\-realm trust principal password that you specified as `passwordt` in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
    + A `KdcAdminPassword`, which you can use to administer the cluster\-dedicated KDC\.
-   + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
+   + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 3: Add User Accounts to the Domain for the EMR Cluster](#emr-kerberos-ad-users)\.
 
    The following example launches a kerberized cluster\.
 
    ```
    aws emr create-cluster --name "MyKerberosCluster" \
    --release-label emr-5.10.0 \
-   --instance-type m3.xlarge \
+   --instance-type m4.large \
    --instance-count 3 \
    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \
    --service-role EMR_DefaultRole \

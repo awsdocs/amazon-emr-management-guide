@@ -51,7 +51,7 @@ To archive log files to Amazon S3 using the AWS CLI, type the `create-cluster` c
 + To log files to Amazon S3 type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --log-uri s3://mybucket/logs/ --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3
+  aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --log-uri s3://mybucket/logs/ --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3
   ```
 
 When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.
@@ -88,7 +88,7 @@ This setting has not worked in past 4\.x releases of EMR\. Please use releases g
   Type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.5.0 --applications Name=Hadoop --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3 --configurations file://./myConfig.json
+  aws emr create-cluster --name "Test cluster" --release-label emr-4.5.0 --applications Name=Hadoop --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3 --configurations file://./myConfig.json
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.
@@ -127,7 +127,7 @@ To enable debugging using the AWS CLI, type the `create-cluster` subcommand with
 + To enable debugging using the AWS CLI, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.1.0 --log-uri s3://mybucket/logs/ --enable-debugging --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m3.xlarge --instance-count 3
+  aws emr create-cluster --name "Test cluster" --release-label emr-4.1.0 --log-uri s3://mybucket/logs/ --enable-debugging --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.

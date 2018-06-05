@@ -26,9 +26,9 @@ Specify the `--auto-terminate` parameter when you use the `create-cluster` comma
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.13.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.14.0 \
   --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey \
-  --instance-type m3.xlarge --instance-count 3 --auto-terminate
+  --instance-type m4.large --instance-count 3 --auto-terminate
   ```
 
 **Note**  

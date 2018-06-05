@@ -68,7 +68,7 @@ SSE with customer\-provided keys \(SSE\-C\) is not available for use with Amazon
 
   ```
   aws emr create-cluster --release-label emr-4.7.2 or earlier \
-  --instance-count 3 --instance-type m3.xlarge --emrfs Encryption=ServerSide
+  --instance-count 3 --instance-type m4.large --emrfs Encryption=ServerSide
   ```
 
 You can also enable SSE\-S3 by setting the fs\.s3\.enableServerSideEncryption property to true in `emrfs-site` properties\. See the example for SSE\-KMS below and omit the property for Key ID\.
@@ -80,7 +80,7 @@ SSE\-KMS is available only in Amazon EMR release version 4\.5\.0 and later\.
 
   ```
   aws emr create-cluster --release-label emr-4.7.2 or earlier --instance-count 3 \
-  --instance-type m3.xlarge --use-default-roles \
+  --instance-type m4.large --use-default-roles \
   --emrfs Encryption=ServerSide,Args=[fs.s3.serverSideEncryption.kms.keyId=keyId]
   ```
 
@@ -89,7 +89,7 @@ SSE\-KMS is available only in Amazon EMR release version 4\.5\.0 and later\.
   Type the following AWS CLI command using the `emrfs-site` classification and provide a configuration JSON file with contents as shown similar to `myConfig.json` in the example below:
 
   ```
-  aws emr create-cluster --release-label emr-4.7.2 or earlier --instance-count 3 --instance-type m3.xlarge --applications Name=Hadoop --configurations file://myConfig.json --use-default-roles
+  aws emr create-cluster --release-label emr-4.7.2 or earlier --instance-count 3 --instance-type m4.large --applications Name=Hadoop --configurations file://myConfig.json --use-default-roles
   ```
 
   Example contents of **myConfig\.json**:
