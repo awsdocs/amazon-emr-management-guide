@@ -57,6 +57,8 @@ Several encryption mechanisms are enabled with in\-transit encryption\. These ar
   + [Hadoop MapReduce Encrypted Shuffle](https://hadoop.apache.org/docs/r2.7.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/EncryptedShuffle.html) uses TLS\.
   + [Secure Hadoop RPC](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_RPC) is set to "Privacy" and uses SASL \(activated in Amazon EMR when at\-rest encryption is enabled\)\.
   + [Data encryption on HDFS block data transfer](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_Block_data_transfer.) uses AES 256 \(activated in Amazon EMR when at\-rest encryption is enabled in the security configuration\)\. 
++ HBase:
+  + When Kerberos is enabled, the `hbase.rpc.protection` property is set to `privacy` for encrypted communication\. For more information, see [Client\-side Configuration for Secure Operation](http://hbase.apache.org/0.94/book/security.html#d1984e4501) in Apache HBase documentation\. For more information about Kerberos with Amazon EMR, see [Use Kerberos Authentication](emr-kerberos.md)\.
 + Presto:
   + Internal communication between Presto nodes uses SSL/TLS \(Amazon EMR version 5\.6\.0 and later only\)\.
 + Tez:

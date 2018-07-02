@@ -32,7 +32,6 @@ The following log file record shows that an IAM user called the **RunJobFlow** a
             "principalId":"EX_PRINCIPAL_ID",
             "arn":"arn:aws:iam::123456789012:user/temporary-user-xx-7M",
             "accountId":"123456789012",
-            "accessKeyId":"EXAMPLE_KEY_ID",
             "userName":"temporary-user-xx-7M"
          },
          "eventTime":"2014-03-31T17:59:21Z",

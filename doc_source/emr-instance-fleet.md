@@ -1,50 +1,56 @@
 # Configure Instance Fleets<a name="emr-instance-fleet"></a>
 
-The instance fleets configuration for a cluster offers the widest variety of provisioning options for EC2 instances\. You can specify up to five instance types per fleet, and those instance types can be provisioned using both On\-Demand and Spot purchasing options\. You can also select multiple Availability Zones, specify different maximum Spot prices for each instance, and choose additional Spot options for each instance fleet\. Amazon EMR uses the options you specify to more intelligently and quickly provision capacity when the cluster launches\. Also, while the cluster is running, if Amazon EC2 reclaims a Spot Instance because of a price increase, or an instance fails, Amazon EMR can try to replace the instances with any of the instance types that you specify\. This makes it easier to regain cluster capacity during a spike in Spot pricing\. You can develop a flexible and elastic resourcing strategy for each node type\. For example, within specific fleets, you can have a core of On\-Demand capacity supplemented with less\-expensive Spot capacity if available\. 
+The instance fleets configuration for a cluster offers the widest variety of provisioning options for EC2 instances\. With instance fleets, you specify *target capacities* for On\-Demand Instances and Spot Instances within each fleet\. When the cluster launches, Amazon EMR provisions instances until the targets are fulfilled\. You can specify up to five EC2 instance types per fleet for Amazon EMR to use when fulfilling the targets\. You can also select multiple subnets for different Availability Zones\. When Amazon EMR launches the cluster, it looks across those subnets to find the instances and purchasing options you specify\.
+
+While a cluster is running, if Amazon EC2 reclaims a Spot Instance because of a price increase, or an instance fails, Amazon EMR tries to replace the instance with any of the instance types that you specify\. This makes it easier to regain capacity during a spike in Spot pricing\. Instance fleets allow you to develop a flexible and elastic resourcing strategy for each node type\. For example, within specific fleets, you can have a core of On\-Demand capacity supplemented with less\-expensive Spot capacity if available, and then switch to On\-Demand capacity if Spot isn't available at your price\.
 
 **Note**  
 The instance fleets configuration is available only in Amazon EMR release versions 4\.8\.0 and later, excluding 5\.0\.0 and 5\.0\.3\.
 
+## **Summary of Key Features**<a name="emr-key-feature-summary"></a>
++ One instance fleet, and only one, per node type \(master, core, task\)\. Up to five EC2 instance types specified for each fleet\. 
++ Amazon EMR chooses any or all of the five EC2 instance types to provision with both Spot and On\-Demand purchasing options\.
++ Establish target capacities for Spot and On\-Demand Instances for the core fleet and task fleet\. Use vCPU or a generic unit assigned to each EC2 instance that counts toward the targets\. Amazon EMR provisions instances until each target capacity is totally fulfilled\. For the master fleet, the target is always one\.
++ Choose one subnet \(Availability Zone\) or a range\. Amazon EMR provisions capacity in the Availability Zone that is the best fit\.
++ When you specify a target capacity for Spot Instances:
+  + For each instance type, specify a maximum Spot price\. Amazon EMR provisions Spot Instances if the Spot price is below the maximum Spot price\. You pay the Spot price, not necessarily the maximum Spot price\.
+  + Optionally, specify a defined duration \(also known as a Spot block\) for each fleet\. Spot Instances terminate only after the defined duration expires\.
+  + For each fleet, define a timeout period for provisioning Spot Instances\. If Amazon EMR can't provision Spot capacity, you can terminate the cluster or switch to provisioning On\-Demand capacity instead\.
+
 ## Instance Fleet Options<a name="emr-instance-fleet-options"></a>
 
-### **Target Capacities and Weighted Capacity**<a name="emr-fleet-capacity"></a>
+Use the following guidelines to understand instance fleet options\.
 
-With each instance fleet, you establish a *target capacity* for On\-Demand Instances and a target capacity for Spot Instances\. Each of the five instance types available per instance fleet has a *weighted capacity* that you assign\. When you use the console, you can choose to have the vCPU of the instance type automatically assigned as the weighted capacity\. When using the CLI, you assign weighted capacities manually\.
+### **Setting Target Capacities**<a name="emr-fleet-capacity"></a>
+
+Specify the target capacities you want for the core fleet and task fleet\. When you do, that determines the number of On\-Demand Instances and Spot Instances that Amazon EMR provisions\. When you specify an instance, you decide how much each instance counts toward the target\. When an On\-Demand Instance is provisioned, it counts toward the On\-Demand target\. The same is true for Spot Instances\. Unlike core and task fleets, the master fleet is always one instance\. Therefore, the target capacity for this fleet is always one\. 
+
+When you use the console, the vCPUs of the EC2 instance type are used as the count for target capacities by default\. You can change this to **Generic units**, and then specify the count for each EC2 instance type\. When you use the AWS CLI, you manually assign generic units for each instance type\. 
 
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
 
-When Amazon EMR provisions a particular instance type, it can choose any mix of the five instance types you specify to fulfill these targets, and the weighted capacity of each provisioned instance counts toward the target capacity for On\-Demand or Spot as appropriate\. 
+For each fleet, you specify up to five EC2 instance types\. Amazon EMR chooses any combination of these EC2 instance types to fulfill your target capacities\. Because Amazon EMR wants to fill target capacity completely, an overage might happen\. For example, if there are two unfulfilled units, and Amazon EMR can only provision an instance with a count of five units, the instance still gets provisioned, meaning that the target capacity is exceeded by three units\. 
 
-Amazon EMR provisions instances in a fleet until the target capacities are totally fulfilled, even if this results in an overage\. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a weighted capacity of 5 units, the instance is provisioned nevertheless, and the target capacity is exceeded by 3 units\. 
+If you reduce the target capacity to resize a running cluster, Amazon EMR attempts to complete application tasks and terminates instances to meet the new target\. For more information, see [Terminate at Task Completion](emr-scaledown-behavior.md#emr-scaledown-terminate-task)\. Amazon EMR has a 60\-minute timeout for completing a resize operation\. In some cases, a node may still have tasks running after 60 minutes, and Amazon EMR reports that the resize operation was successful and that the new target was not met\.
 
 ### **Spot Instance Options**<a name="emr-fleet-spot-options"></a>
 
-When you specify a target capacity for Spot Instances, you can specify a maximum Spot price for each of the five instance types\. Amazon EMR compares the maximum Spot price to Spot prices offered in the Availability Zones you select, provisioning Spot Instances if the current Spot price is below the maximum Spot price that you specify\.
+You specify a **Maximum Spot price** for each of the five instance types in a fleet\. You can set this price either as a percentage of the On\-Demand price, or as a specific dollar amount\. Amazon EMR provisions Spot Instances if the current Spot price in an Availability Zone is below your maximum Spot price\. You pay the Spot price, not necessarily the maximum Spot price\.
 
-<a name="emr-fleet-defined-duration"></a>For the fleet as a whole, when you specify a **Defined duration**, Spot Instances are not interrupted during the defined duration and terminate after it expires\. Defined duration pricing applies when you select this option\. For more information, see [Amazon EC2 Spot Instances Pricing](https://aws.amazon.com/ec2/spot/pricing/)\. If you don't specify a defined duration, instances terminate as soon as the Spot price exceeds the maximum Spot price\.
+<a name="emr-fleet-defined-duration"></a>You can specify a **Defined duration** for Spot Instances in a fleet\. When the Spot price changes, Amazon EMR doesn't terminate instances until the **Defined duration** expires\. Defined duration pricing applies when you select this option\. If you don't specify a defined duration, instances terminate as soon as the Spot price exceeds the maximum Spot price\. For more information, see [Specifying a Duration for Your Spot Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#fixed-duration-spot-instances) and [Amazon EC2 Spot Instances Pricing](https://aws.amazon.com/ec2/spot/pricing/) for defined duration pricing\. 
 
-<a name="emr-fleet-spot-timeout"></a>For the fleet as a whole, you also define a **provisioning timeout** and the action to take when there is unfulfilled target capacity for Spot Instances when the timeout expires\. The timeout applies when the cluster is provisioning capacity when it is created\. You can have the cluster terminate or switch to provisioning On\-Demand capacity to fulfill the remaining Spot capacity\.
+<a name="emr-fleet-spot-timeout"></a>For each fleet, you also define a **Provisioning timeout**\. The timeout applies when the cluster is provisioning capacity when it is created and can't provision enough Spot Instances to fulfill target capacity according to your specifications\. You specify the timeout period and the action to take\. You can have the cluster terminate or switch to provisioning On\-Demand capacity to fulfill the remaining Spot capacity\. When you choose to switch to On\-Demand, the remaining Spot capacity is effectively added to the On\-Demand target capacity after the timeout expires\.
 
 For more information about Spot Instances, see [Spot Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html) in the Amazon EC2 User Guide for Linux Instances\.
 
 ### **Multiple Subnet \(Availability Zones\) Options**<a name="emr-multiple-subnet-options"></a>
 
-You can specify multiple EC2 subnets within a VPC, each corresponding to a different Availability Zone\. \(If you use EC2\-Classic, you specify Availability Zones explicitly\.\) Amazon EMR hunts for the best fit from among those Availability Zones, and then provisions instances in the Availability Zone that offers the best fit\. Instances are always provisioned in only one Availability Zone\. You can select private subnets or public subnets, but you can't mix the two, and the subnets you specify must be within the same VPC\.
+When you use instance fleets, you can specify multiple EC2 subnets within a VPC, each corresponding to a different Availability Zone\. If you use EC2\-Classic, you specify Availability Zones explicitly\. Amazon EMR identifies the best Availability Zone to launch instances according to your fleet specifications\. Instances are always provisioned in only one Availability Zone\. You can select private subnets or public subnets, but you can't mix the two, and the subnets you specify must be within the same VPC\.
 
 ### **Master Node Configuration**<a name="emr-master-node-configuration"></a>
 
 Because the master instance fleet is only a single instance, its configuration is slightly different from core and task instance fleets\. You only select either On\-Demand or Spot for the master instance fleet because it consists of only one instance\. If you use the console to create the instance fleet, the target capacity for the purchasing option you select is set to 1\. If you use the AWS CLI, always set either `TargetSpotCapacity` or `TargetOnDemandCapacity` to 1 as appropriate\. You can still choose up to five instance types for the master instance fleet\. However, unlike core and task instance fleets, where Amazon EMR might provision multiple instances of different types, Amazon EMR selects a single instance type to provision for the master instance fleet\.
-
-### **Summary of Key Features**<a name="emr-key-feature-summary"></a>
-+ One instance fleet, and only one, per node type \(master, core, task\)\. Up to five EC2 instance types specified for each fleet\. 
-+ Amazon EMR chooses any or all of the five EC2 instance types to provision with both Spot and On\-Demand purchasing options\.
-+ Establish target capacities for Spot and On\-Demand Instances per instance fleet\. Assign a weighted capacity to each instance type, which counts toward the target\. Amazon EMR provisions instances until each target capacity is totally fulfilled\.
-+ Choose one subnet \(Availability Zone\) or a range\. Amazon EMR provisions capacity in the Availability Zone that is the best fit\. 
-+ When you specify a target capacity for Spot Instances:
-  + For each instance type, specify a maximum Spot price, either as a dollar amount or as percentage of the On\-Demand price\.
-  + Specify a defined duration \(also known as a Spot block\) if desired\. Spot Instances terminate only after the defined duration expires\.
-  + Define a timeout period for provisioning Spot Instances and the action to take if the timeout expires—terminate the cluster or switch to On\-Demand\.
 
 ## Use the Console to Configure Instance Fleets<a name="emr-instance-fleet-console"></a>
 
@@ -233,7 +239,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
 ]
 ```
 
-### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c18c29c23c14c10b8"></a>
+### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c18c29c23c14c14b8"></a>
 
 Use the `list-instance-fleets` command to get configuration details of the instance fleets in a cluster\. The command takes a cluster ID as input\. The following example demonstrates the command and its output for a cluster that contains a master task instance group and a core task instance group\. For full response syntax, see [ListInstanceFleets](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListInstanceFleets.html) in the *Amazon EMR API Reference\.*
 

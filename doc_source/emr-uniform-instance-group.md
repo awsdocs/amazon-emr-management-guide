@@ -1,8 +1,8 @@
 # Configure Uniform Instance Groups<a name="emr-uniform-instance-group"></a>
 
-With the instance groups configuration, each node type \(master, core, or task\) consists of the same instance type and the same purchasing option for instances: On\-Demand or Spot\. You specify these settings when you create an instance group and they can't be changed later\. You can, however, add instances of the same type and purchasing option to core and task instance groups\. You can also remove instances\.
+With the instance groups configuration, each node type \(master, core, or task\) consists of the same instance type and the same purchasing option for instances: On\-Demand or Spot\. You specify these settings when you create an instance group\. They can't be changed later\. You can, however, add instances of the same type and purchasing option to core and task instance groups\. You can also remove instances\.
 
-To add different instance types after a cluster is created, you can add additional task instance groups, specifying different instance types and purchasing options for each instance group\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
+To add different instance types after a cluster is created, you can add additional task instance groups\. You can choose different instance types and purchasing options for each instance group\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
 
 This section covers creating a cluster with uniform instance groups\. For more information about modifying an existing instance group by adding or removing instances manually or with automatic scaling, see [Manage Clusters](emr-manage.md)\.
 
@@ -20,22 +20,22 @@ The following procedure covers **Advanced options** when you create a cluster\. 
 
 1. In the **Hardware Configuration** screen, leave **Uniform instance groups** selected\.
 
-1. Choose the **Network**, and then choose the **EC2 Subnet** in which you want your cluster to run\. For more information about VPCs and subnets, see [Plan and Configure Networking](emr-plan-vpc-subnet.md)\.
+1. Choose the **Network**, and then choose the **EC2 Subnet** for your cluster\. The subnet that you choose is associated with an Availability Group, which is listed with each subnet\. For more information, see [Plan and Configure Networking](emr-plan-vpc-subnet.md)\.
 **Note**  
 Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Within each **Node type** row:
-   + Under **Node type**, if you want to change the default name of the instance group, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance group, click the X icon or choose **Add task instance group** to add additional **Task** instance groups\.
+   + Under **Node type**, if you want to change the default name of the instance group, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance group, click the X icon\. Choose **Add task instance group** to add additional **Task** instance groups\.
    + Under **Instance type** click the pencil icon and then choose the instance type you want to use for that node type\.
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
-   + Under **Instance count**, enter the number of instances on which to run that node type\. There is only one instance in the **Master** node type\.
-   + Under **Purchasing option** choose **On\-demand**, or choose **Spot** and enter the **Maximum Spot price** you are willing to pay per instance\. Instances in this instance group launch when the Spot price in the Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
+   + Under **Instance count**, enter the number of instances to use for each node type\. There is only one instance in the **Master** node type\.
+   + Under **Purchasing option, **choose **On\-demand** or **Spot**\. If you choose **Spot**, select an option for the maximum price for Spot Instances\. By default, **Use on\-demand as max price** is selected\. You can select **Set max $/hr** and then enter your maximum price\. Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
 **Tip**  
-Mouse over the information tooltip for **Maximum Spot price** to see the Spot price for all Availability Zones in the current region\. The lowest Spot price is in green\. You might want to use this information to inform your **EC2 Subnet** selection\.
+Mouse over the information tooltip for **Spot** to see the current Spot price for Availability Zones in the current region\. The lowest Spot price is in green\. You might want to use this information to change your **EC2 Subnet** selection\.
    + Under **Auto Scaling for Core and Task node types**, choose the pencil icon, and then configure the automatic scaling options\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
 
-1. To add another task instance group to the cluster, click and configure settings for the instance group as described in the previous step\.
+1. Choose **Add task instance group** as desired and configure settings as described in the previous step\.
 
 1. Choose **Next**, modify other cluster settings, and then launch the cluster\.
 
@@ -53,7 +53,7 @@ If you have not previously created the default Amazon EMR service role and Amazo
 Linux, UNIX, and macOS users:
 
 ```
-1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.14.0 \
+1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.15.0 \
 2. --use-default-roles --ec2-attributes KeyName=myKey \
 3. --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 \
 4. InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,BidPrice=0.03 \ 
@@ -64,7 +64,7 @@ Linux, UNIX, and macOS users:
 Windows users:
 
 ```
-1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.14.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
+1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.15.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>

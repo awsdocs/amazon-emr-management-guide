@@ -9,15 +9,16 @@ No web user interfaces hosted on the cluster are Kerberized\.
 + **YARN**
 + **Tez**
 + **Hadoop MapReduce**
++ **Hbase**
++ **HCatalog**
 + **Hive**
   + Do not enable Hive with LDAP authentication\. This may cause issues communicating with Kerberized YARN\.
-+ **HCatalog**
-+ **Spark**
-+ **Oozie**
 + **Hue**
   + Hue user authentication isn't set automatically and can be configured using the configuration API\.
   + Hue server is Kerberized\. The Hue front\-end \(UI\) is not configured for authentication\. LDAP authentication can be configured for the Hue UI\. 
-+ **Hbase**
++ **Livy**
++ **Oozie**
++ **Spark**
 + **Zeppelin**
   + Zeppelin is only configured to use Kerberos with the Spark interpreter\. It is not configured for other interpreters\.
   + Zeppelin impersonation with Kerberos is not supported\. All users logged in to Zeppelin use the same Zeppelin user principal to run Spark jobs and authenticate to YARN\.

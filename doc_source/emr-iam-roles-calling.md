@@ -11,7 +11,7 @@ The version of Hadoop available on AMI 2\.3\.0 and later has already been update
   +  [Using IAM Roles for Amazon EC2 Instances with the SDK for Java](http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/java-dg-roles.html) in the *AWS SDK for Java Developer Guide* 
   +  [Using IAM Roles for Amazon EC2 Instances with the SDK for \.NET](http://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-roles.html) in the *AWS SDK for \.NET Developer Guide* 
   +  [Using IAM Roles for Amazon EC2 Instances with the SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/guide/latest/php-dg-roles.html) in the *AWS SDK for PHP Developer Guide* 
-  +  [Using IAM Roles for Amazon EC2 Instances with the SDK for Ruby](http://docs.aws.amazon.com/sdk-for-ruby/v2/developer-guide/ruby-dg-roles.html) in the *AWS SDK for Ruby Developer Guide* 
+  +  [Using IAM Roles for Amazon EC2 Instances with the SDK for Ruby](http://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/ruby-dg-roles.html) in the *AWS SDK for Ruby Developer Guide* 
 
 **To obtain temporary credentials from EC2 instance metadata**
 + Call the following URL from an EC2 instance that is running with the specified IAM role, which returns the associated temporary security credentials \(AccessKeyId, SecretAccessKey, SessionToken, and Expiration\)\. The example that follows uses the default instance profile for Amazon EMR, `EMR_EC2_DefaultRole`\. 
