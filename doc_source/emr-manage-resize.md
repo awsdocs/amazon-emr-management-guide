@@ -6,7 +6,7 @@ You can add and remove instances from core and task instance groups and instance
 
 You can use the Amazon EMR console to resize a running cluster\.
 
-**To change the instance count for existing a running cluster using the console**
+**To change the instance count for an existing running cluster using the console**
 
 1. From the **Cluster List** page, choose a cluster to resize\.
 
