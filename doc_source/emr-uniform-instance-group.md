@@ -53,7 +53,7 @@ If you have not previously created the default Amazon EMR service role and Amazo
 Linux, UNIX, and macOS users:
 
 ```
-1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.15.0 \
+1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.17.0 \
 2. --use-default-roles --ec2-attributes KeyName=myKey \
 3. --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 \
 4. InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,BidPrice=0.03 \ 
@@ -64,7 +64,7 @@ Linux, UNIX, and macOS users:
 Windows users:
 
 ```
-1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.15.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
+1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.17.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>

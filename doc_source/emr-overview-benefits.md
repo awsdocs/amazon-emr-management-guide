@@ -17,7 +17,7 @@ There are many benefits to using Amazon EMR\. This section provides an overview 
 Amazon EMR pricing depends on the instance type and number of EC2 instances that you deploy and the region in which you launch your cluster\. On\-demand pricing offers low rates, but you can reduce the cost even further by purchasing Reserved Instances or Spot Instances\. Spot Instances can offer significant savings—as low as a tenth of on\-demand pricing in some cases\.
 
 **Note**  
-If you use Amazon S3, Amazon Kinesis, or DynamoDB with your EMR cluster, there are additional charges for those services that are billed separately from your Amazon EMR usage\. Also, if you install Splunk Hunk or use MapR M5 or M7 distributions on your cluster, there are charges in addition to your Amazon EMR usage\.
+If you use Amazon S3, Amazon Kinesis, or DynamoDB with your EMR cluster, there are additional charges for those services that are billed separately from your Amazon EMR usage\.
 
 For more information about pricing options and details, see [Amazon EMR Pricing](https://aws.amazon.com//elasticmapreduce/pricing/)\.
 
@@ -52,7 +52,7 @@ Amazon EMR monitors nodes in your cluster and automatically terminates and repla
 
 Amazon EMR provides configuration options that control how your cluster is terminated—automatically or manually\. If you configure your cluster to be automatically terminated, it is terminated after all the steps complete\. This is referred to as a transient cluster\. However, you can configure the cluster to continue running after processing completes so that you can choose to terminate it manually when you no longer need it\. Or, you can create a cluster, interact with the installed applications directly, and then manually terminate the cluster when you no longer need it\. The clusters in these examples are referred to as *long\-running clusters*\. 
 
-Additionally, you can configure termination protection to prevent core instances in your cluster from being terminated due to errors or issues during processing\. When termination protection is enabled, you can recover data from instances before termination\. The default settings for these options differ depending on whether you launch your cluster by using the console, CLI, or API\. For more information, see [Control Cluster Termination](emr-manage-termination.md)\.
+Additionally, you can configure termination protection to prevent instances in your cluster from being terminated due to errors or issues during processing\. When termination protection is enabled, you can recover data from instances before termination\. The default settings for these options differ depending on whether you launch your cluster by using the console, CLI, or API\. For more information, see [Control Cluster Termination](emr-manage-termination.md)\.
 
 ## Security<a name="emr-benefits-security"></a>
 
@@ -82,7 +82,7 @@ Amazon EMR supports launching clusters in a virtual private cloud \(VPC\) in Ama
 
 ### AWS CloudTrail<a name="emr-benefits-cloudtrail"></a>
 
-Amazon EMR integrates with CloudTrail to log information about requests made by or on behalf of your AWS account\. With this information, you can track who is accessing your cluster when, and the IP address from which they made the request\. For more information, see [ Logging Amazon EMR API Calls in AWS CloudTrail ](logging_emr_api_calls.md)\.
+Amazon EMR integrates with CloudTrail to log information about requests made by or on behalf of your AWS account\. With this information, you can track who is accessing your cluster when, and the IP address from which they made the request\. For more information, see [Logging Amazon EMR API Calls in AWS CloudTrail ](logging_emr_api_calls.md)\.
 
 ### Amazon EC2 Key Pairs<a name="emr-benefits-key-pairs"></a>
 
@@ -98,6 +98,6 @@ Amazon EMR integrates with CloudWatch to track performance metrics for the clust
 
  There are several ways you can interact with Amazon EMR: 
 + **Console** — A graphical user interface that you can use to launch and manage clusters\. With it, you fill out web forms to specify the details of clusters to launch, view the details of existing clusters, debug, and terminate clusters\. Using the console is the easiest way to get started with Amazon EMR; no programming knowledge is required\. The console is available online at [https://console\.aws\.amazon\.com//elasticmapreduce/home](https://console.aws.amazon.com//elasticmapreduce/home)\. 
-+ **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option \. For more information, see [Amazon EMR](http://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
++ **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option\. For more information, see [Amazon EMR](http://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
 + **Software Development Kit \(SDK\)** — SDKs provide functions that call Amazon EMR to create and manage clusters\. With them, you can write applications that automate the process of creating and managing clusters\. Using the SDK is the best option to extend or customize the functionality of Amazon EMR\. Amazon EMR is currently available in the following SDKs: Go, Java, \.NET \(C\# and VB\.NET\), Node\.js, PHP, Python, and Ruby\. For more information about these SDKs, see [Tools for AWS](https://aws.amazon.com/tools/) and [Amazon EMR Sample Code & Libraries](https://aws.amazon.com//code/Elastic-MapReduce)\. 
 + **Web Service API** — A low\-level interface that you can use to call the web service directly, using JSON\. Using the API is the best option to create a custom SDK that calls Amazon EMR\. For more information, see the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/Welcome.html)\. 

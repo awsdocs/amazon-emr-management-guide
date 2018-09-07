@@ -21,17 +21,17 @@ See the following resources:
 + For more information on specifying Region\-specific buckets, see [Accessing a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev//UsingBucket.html#access-bucket-intro) in the *Amazon Simple Storage Service Developer Guide*\.
 
 **Note**  
- If you enable logging for a bucket, it enables only bucket access logs, not Amazon EMR cluster logs\. 
+If you enable logging for a bucket, it enables only bucket access logs, not Amazon EMR cluster logs\. 
 
 During bucket creation or after, you can set the appropriate permissions to access the bucket depending on your application\. Typically, you give yourself \(the owner\) read and write access and give authenticated users read access\.
 
- Required Amazon S3 buckets must exist before you can create a cluster\. You must upload any required scripts or data referenced in the cluster to Amazon S3\. The following table describes example data, scripts, and log file locations\. 
+Required Amazon S3 buckets must exist before you can create a cluster\. You must upload any required scripts or data referenced in the cluster to Amazon S3\. The following table describes example data, scripts, and log file locations\. 
 
 ## Best Practices<a name="emr-bucket-bestpractices"></a>
 
 The following are recommendations for using Amazon S3 Buckets with EMR clusters\.
 
-### Enable Versioning<a name="w3ab1c18b9c17c13b9c11b4"></a>
+### Enable Versioning<a name="w3aac17b9c17c13b9c11b4"></a>
 
 Versioning is a recommended configuration for your Amazon S3 bucket\. By enabling versioning, you ensure that even if data is unintentionally deleted or overwritten it can be recovered\. For more information, go to [Using Versioning](http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html) in the Amazon Simple Storage Service Developer Guide\.
 
@@ -39,13 +39,13 @@ Versioning is a recommended configuration for your Amazon S3 bucket\. By enablin
 
 Lifecycle Management in Amazon S3 allows you to create rules which control the storage class and lifetime of your objects\. For more information, see [Object Lifecycle Management](http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
 
-### Clean Up Failed Multipart Uploads and Version Markers<a name="w3ab1c18b9c17c13b9c11b8"></a>
+### Clean Up Failed Multipart Uploads and Version Markers<a name="w3aac17b9c17c13b9c11b8"></a>
 
 EMR cluster components use multipart uploads via the AWS SDK for Java with Amazon S3 APIs to write log files and output data to Amazon S3 by default\. For information about changing this configuration, see [Configure Multipart Upload for Amazon S3](#Config_Multipart)\. Amazon EMR does not automatically manage incomplete multipart uploads\. Sometimes the upload of a large file can result in an incomplete Amazon S3 multipart upload\. When a multipart upload is unable to complete successfully, the in\-progress multipart upload continues to occupy your bucket and incurs storage charges\. We recommend that for buckets you use with Amazon EMR, you use a lifecycle rule to remove incomplete multipart uploads three days after the upload initiation date\. For more information, see [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)\.
 
 When deleting an object in a versioned bucket a delete marker is created\. If all previous versions of the object subsequently expire, an expired object delete marker is left within the bucket\. While there is no charge for these delete markers, removing the expired delete markers can improve the performance of LIST requests\. It is recommended that for versioned buckets you will use with Amazon EMR, you should also enable a rule to remove expired object delete markers\. For more information, see [Lifecycle Configuration for a Bucket with Versioning](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/lifecycle-configuration-bucket-with-versioning.html) in the Amazon Simple Storage Service Console User Guide\.
 
-### Performance best practices<a name="w3ab1c18b9c17c13b9c11c10"></a>
+### Performance best practices<a name="w3aac17b9c17c13b9c11c10"></a>
 
 Depending on your workloads, specific types of usage of EMR clusters and applications on those clusters can result in a high number of requests against a bucket\. For more information, see [Request Rate and Performance Considerations](http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 

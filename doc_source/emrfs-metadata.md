@@ -42,7 +42,7 @@ Users may wish to remove particular entries in the DynamoDB\-based metadata\. Th
 Programmatically purging after the completion of a job can be done by submitting a final step to your cluster, which executes a command on the EMRFS CLI\. For instance, type the following command to submit a step to your cluster to delete all entries older than two days\.
 
 ```
-aws emr add-steps --cluster-id j-2AL4XXXXXX5T9 --steps Name="emrfsCLI",Jar="command-runner.jar",Args=["emrfs","delete","--time","2","time-unit","days"]
+aws emr add-steps --cluster-id j-2AL4XXXXXX5T9 --steps Name="emrfsCLI",Jar="command-runner.jar",Args=["emrfs","delete","--time","2","--time-unit","days"]
 {
     "StepIds": [
         "s-B12345678902"

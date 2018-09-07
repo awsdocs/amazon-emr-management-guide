@@ -13,10 +13,14 @@ Amazon EMR supports *Previous Generation Instances* to support applications that
 
 | Instance Class | Instance Types | 
 | --- | --- | 
-| General purpose |  *m1\.medium\** \| *m1\.large\** \| *m1\.xlarge\** \| *m2\.xlarge\** \| *m2\.2xlarge\** \| *m2\.4xlarge\** \| *m3\.xlarge\** \| *m3\.2xlarge\** \| m4\.large \| m4\.xlarge \| m4\.2xlarge \| m4\.4xlarge \| m4\.10xlarge \| m4\.16xlarge \| m5\.xlarge \| m5\.2xlarge \| m5\.4xlarge \| m5\.12xlarge \| m5\.24xlarge  | 
-| Compute optimized |  *c1\.medium\** \| *c1\.xlarge\** \| *c3\.xlarge\** \| *c3\.2xlarge\** \| *c3\.4xlarge\** \| *c3\.8xlarge\** \| c4\.large \| c4\.xlarge \| c4\.2xlarge \| c4\.4xlarge \| c4\.8xlarge \| c5\.xlarge \| c5\.2xlarge \| c5\.4xlarge \| c5\.9xlarge \| c5\.18xlarge \| *cc2\.8xlarge*  | 
-| Memory optimized |  r3\.xlarge \| r3\.2xlarge \| r3\.4xlarge \| r3\.8xlarge \| r4\.xlarge \| r4\.2xlarge \| r4\.4xlarge \| r4\.8xlarge \| r4\.16xlarge \| *cr1\.8xlarge*  | 
-| Storage optimized |  *hs1\.8xlarge\** \| *i2\.xlarge* \| *i2\.2xlarge* \| *i2\.4xlarge* \| *i2\.8xlarge* \| i3\.xlarge \| i3\.2xlarge \| i3\.4xlarge \| i3\.8xlarge \| i3\.16xlarge \| d2\.xlarge \| d2\.2xlarge \| d2\.4xlarge \| d2\.8xlarge  i3\-series instances available when using Amazon EMR version 5\.9\.0 and later\.   | 
+| General purpose |  *m1\.medium¹* \| *m1\.large¹* \| *m1\.xlarge¹* \| *m2\.xlarge¹* \| *m2\.2xlarge¹* \| *m2\.4xlarge¹* \| *m3\.xlarge¹* \| *m3\.2xlarge¹* \| m4\.large \| m4\.xlarge \| m4\.2xlarge \| m4\.4xlarge \| m4\.10xlarge \| m4\.16xlarge \| m5\.xlarge \| m5\.2xlarge \| m5\.4xlarge \| m5\.12xlarge \| m5\.24xlarge \| m5d\.xlarge³ \| m5d\.2xlarge³ \| m5d\.4xlarge³ \| m5d\.12xlarge³ \| m5d\.24xlarge³  | 
+| Compute optimized |  *c1\.medium¹ ²* \| *c1\.xlarge¹* \| *c3\.xlarge¹* \| *c3\.2xlarge¹* \| *c3\.4xlarge¹* \| *c3\.8xlarge¹* \| c4\.large \| c4\.xlarge \| c4\.2xlarge \| c4\.4xlarge \| c4\.8xlarge \| c5\.xlarge \| c5\.2xlarge \| c5\.4xlarge \| c5\.9xlarge \| c5\.18xlarge \| c5d\.xlarge³ \| c5d\.2xlarge³ \| c5d\.4xlarge³ \| c5d\.9xlarge³ \| c5d\.18xlarge³ *cc2\.8xlarge*  | 
+| Memory optimized |  r3\.xlarge \| r3\.2xlarge \| r3\.4xlarge \| r3\.8xlarge \| r4\.xlarge \| r4\.2xlarge \| r4\.4xlarge \| r4\.8xlarge \| r4\.16xlarge \| r5\.xlarge³ \| r5\.2xlarge³ \| r5\.4xlarge³ \| r5\.12xlarge³ \| r5d\.xlarge³ \| r5d\.2xlarge³ \| r5d\.4xlarge³ \| r5d\.12xlarge³ \| r5d\.24xlarge³ \| *cr1\.8xlarge*  | 
+| Storage optimized |  *hs1\.8xlarge¹* \| *i2\.xlarge* \| *i2\.2xlarge* \| *i2\.4xlarge* \| *i2\.8xlarge* \| i3\.xlarge \| i3\.2xlarge \| i3\.4xlarge \| i3\.8xlarge \| i3\.16xlarge \| d2\.xlarge \| d2\.2xlarge \| d2\.4xlarge \| d2\.8xlarge  i3\-series instances available when using Amazon EMR version 5\.9\.0 and later\.   | 
 | GPU instances |  *g2\.2xlarge* \| *cg1\.4xlarge* \| p2\.xlarge \| p2\.8xlarge \| p2\.16xlarge \| p3\.2xlarge \| p3\.8xlarge \| p3\.16xlarge  NVIDIA and CUDA drivers are installed on P2 and P3 instance types by default\.  | 
 
-*\* Uses PVM virtualization AMI with Amazon EMR release versions earlier than 5\.13\.0\. For more information, see [Linux AMI Virtualization Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html)\.*
+¹*Uses PVM virtualization AMI with Amazon EMR release versions earlier than 5\.13\.0\. For more information, see [Linux AMI Virtualization Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html)\.*
+
+²*Not supported in release version 5\.15\.0\.*
+
+³*Supported in release version 5\.13\.0 and later\.*

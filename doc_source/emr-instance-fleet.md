@@ -239,7 +239,7 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
 ]
 ```
 
-### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c18c29c23c14c14b8"></a>
+### Get Configuration Details of Instance Fleets in a Cluster<a name="w3aac17c29c23c14c14b8"></a>
 
 Use the `list-instance-fleets` command to get configuration details of the instance fleets in a cluster\. The command takes a cluster ID as input\. The following example demonstrates the command and its output for a cluster that contains a master task instance group and a core task instance group\. For full response syntax, see [ListInstanceFleets](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListInstanceFleets.html) in the *Amazon EMR API Reference\.*
 

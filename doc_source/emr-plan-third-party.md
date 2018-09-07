@@ -4,4 +4,3 @@
 
 **Topics**
 + [Use Business Intelligence Tools with Amazon EMR](emr-bi-tools.md)
-+ [Using the MapR Distribution for Hadoop](emr-mapr.md)

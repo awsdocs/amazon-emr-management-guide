@@ -1,19 +1,23 @@
-# Step 5: Reset Your Environment<a name="emr-gs-reset-environment"></a>
+# Step 5: Terminate the Cluster and Delete the Bucket<a name="emr-gs-reset-environment"></a>
 
-After you have completed this tutorial, you should remove your Amazon S3 bucket and terminate your Amazon EMR cluster to avoid incurring additional charges\.
+After you complete the tutorial, you may want to terminate your cluster and delete your Amazon S3 bucket to avoid additional charges\. 
 
-**Deleting Your Amazon S3 Bucket**  
- You cannot delete an Amazon S3 bucket that has items in it\. First, delete your `logs` and `output` folders, and then delete your bucket\. For more information about deleting folders and buckets, go to [Delete an Object and Bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/DeletingAnObjectandBucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+Terminating your cluster terminates the associated Amazon EC2 instances and stops the accrual of Amazon EMR charges\. Amazon EMR preserves metadata information about completed clusters for your reference, at no charge, for two months\. The console does not provide a way to delete terminated clusters so that they aren't viewable in the console\. Terminated clusters are removed from the cluster when the metadata is removed\.
 
-**Terminating Your Sample Cluster**  
-Terminating your cluster terminates the associated Amazon EC2 instances and stops the accrual of Amazon EMR charges\. Amazon EMR preserves metadata information about completed clusters for your reference, at no charge, for two months\. The console does not provide a way to delete completed clusters from the console; these are automatically removed for you after two months\. 
-
-**To terminate your Amazon EMR cluster**
+**To terminate the cluster**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
-1. On the **Cluster List** page, select your cluster and choose **Terminate**\. 
+1. Choose **Clusters**, choose your cluster, and then choose **Terminate**\. 
 
-1. Clusters are often created with termination protection on, which helps prevent accidental shutdown\. If termination protection is on, you are prompted to change the setting\. Choose **Change**, **Off**\.
+   Clusters are often created with termination protection on, which helps prevent accidental shutdown\. If you followed the tutorial precisely, termination protection should be off\. If termination protection is on, you are prompted to change the setting as a precaution before terminating the cluster\. Choose **Change**, **Off**\.
 
-1. Choose **Terminate**\. 
+**To delete the output bucket**
+
+1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. Choose the bucket from the list, so that the whole bucket row is selected\.
+
+1. Choose delete bucket, type the name of the bucket, and then click **Confirm**\.
+
+   For more information about deleting folders and buckets, go to [How Do I Delete an S3 Bucket](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 

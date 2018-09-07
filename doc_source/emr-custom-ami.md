@@ -16,19 +16,24 @@ For more information, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon
 ## Best Practices and Considerations<a name="emr-custom-ami-considerations"></a>
 
 When you create a custom AMI for Amazon EMR, consider the following:
-+ You must use an Amazon Linux AMI, only 64\-bit Amazon Linux AMIs are supported, and Amazon Linux AMIs with multiple Amazon EBS volumes are not supported\.
++ You must use an Amazon Linux AMI\. Amazon Linux 2 AMIs are not supported\. Only 64\-bit Amazon Linux AMIs are supported\. Amazon Linux AMIs with multiple Amazon EBS volumes are not supported\.
 + Base your customization on the most recent EBS\-backed [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\. For a list of Amazon Linux AMIs and corresponding AMI IDs, see [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\.
 + Do not copy a snapshot of an existing Amazon EMR instance to create a custom AMI\. This causes errors\.
 + Only the HVM virtualization type and instances compatible with Amazon EMR are supported\. Be sure to select the HVM image and an instance type compatible with Amazon EMR as you go through the AMI customization process\. For compatible instances and virtualization types, see [Supported Instance Types](emr-supported-instance-types.md)\.
 + Your service role must have launch permissions on the AMI, so either the AMI must be public, or you must be the owner of the AMI or have it shared with you by the owner\.
 + Creating users on the AMI with the same name as applications causes errors \(for example, `hadoop`, `hdfs`, `yarn`, or `spark`\)\.
 + The contents of `/tmp`, `/var`, and `/emr`—if they exist on the AMI—are moved to `/mnt/tmp`, `/mnt/var`, and `/mnt/emr` respectively during startup\. Files are preserved, but if there is a large amount of data, startup may take longer than expected\.
++ If you use a custom Amazon Linux AMI based on an Amazon Linux AMI with a creation date of 2018\-08\-11, the Oozie server fails to start\. If you use Oozie, create a custom AMI based on an Amazon Linux AMI ID with a different creation date\. You can use the following AWS CLI command to return a list of Image IDs for all HVM Amazon Linux AMIs with a 2018\.03 version, along with the release date, so that you can choose an appropriate Amazon Linux AMI as your base\. Replace MyRegion with your region identifier, such as us\-west\-2\.
+
+  ```
+  aws ec2 --region MyRegion describe-images --owner amazon --query 'Images[?Name!=`null`]|[?starts_with(Name, `amzn-ami-hvm-2018.03`) == `true`].[CreationDate,ImageId,Name]' --output text | sort -rk1
+  ```
 
 For more information, see [Creating an Amazon EBS\-Backed Linux AMI](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 ## Specifying a Custom AMI<a name="emr-specify-custom-ami"></a>
 
-You can specify a custom AMI ID when you create a cluster using the AWS Management Console, AWS CLI, or the Amazon EMR API\. The AMI must exist in the same region where you create the cluster\.<a name="emr-specify-custom-ami-console"></a>
+You can specify a custom AMI ID when you create a cluster using the AWS Management Console, AWS CLI, [Amazon CloudWatch](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-cluster.html), or the Amazon EMR API\. The AMI must exist in the same AWS Region where you create the cluster\.<a name="emr-specify-custom-ami-console"></a>
 
 **To specify a custom AMI using the console**
 

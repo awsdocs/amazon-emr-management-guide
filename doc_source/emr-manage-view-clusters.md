@@ -4,7 +4,7 @@ After you create a cluster, you can monitor its status and get detailed informat
 
 ## View Cluster Status Using the AWS Management Console<a name="emr-view-cluster-console"></a>
 
-The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com//elasticmapreduce/home) lists all the clusters in your account and region, including terminated clusters\. The list shows the **Name** and **ID**of each cluster, the **Status**, the cluster **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that has accrued for all EC2 instances in the cluster\. This list is the starting point, and it's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
+The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com//elasticmapreduce/home) lists all the clusters in your account and AWS Region, including terminated clusters\. The list shows the following for each cluster: the **Name** and **ID**, the **Status**, the **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that have accrued for all EC2 instances in the cluster\. This list is the starting point for monitoring the status of your clusters\. It's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
 
 **To view an abridged summary of cluster information**
 + Select the down arrow next to the link for the cluster under **Name**\.

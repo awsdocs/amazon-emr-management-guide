@@ -9,7 +9,7 @@ You can set up your cluster without a cross\-realm trust, manually adding Linux 
    ```
    aws emr create-security-configuration --name MyKerberosConfig \
    --security-configuration '{"AuthenticationConfiguration": {"KerberosConfiguration": \
-   {"Provider": "ClusterDedicatedKdc", "ClusterDedicatedKdcConfiguration": {"TicketLifeTimeInHours": 24}}}}}'
+   {"Provider": "ClusterDedicatedKdc", "ClusterDedicatedKdcConfiguration": {"TicketLifetimeInHours": 24}}}}}'
    ```
 
 1. Create a cluster that references the security configuration, establishes Kerberos attributes for the cluster, and adds Linux accounts using a bootstrap action\. The following example demonstrates a `create-cluster `command using the AWS CLI\. The command references the security configuration that you created above, `MyKerberosConfig`\. It also references a simple script, `createlinuxusers.sh`, as a bootstrap action, which you create and upload to Amazon S3 before creating the cluster\.

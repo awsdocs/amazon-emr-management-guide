@@ -286,7 +286,7 @@ The following example shows JSON parameters for a Kerberos configuration, follow
         "KerberosConfiguration": {
             "Provider": "ClusterDedicatedKdc",
             "ClusterDedicatedKdcConfiguration": {
-                "TicketLifeTimeInHours": number,
+                "TicketLifetimeInHours": number,
                 "CrossRealmTrustConfiguration": {
                     "Realm": "DOMAIN.EXAMPLE.COM",
                     "Domain": "domain.example.com",
@@ -306,7 +306,7 @@ The following example shows JSON parameters for a Kerberos configuration, follow
 | "KerberosConfiguration" : | Required\. Contains Kerberos configuration parameters\. | 
 | "Provider": "ClusterDedicatedKdc" | Required\. Specifies that a cluster\-dedicated KDC is created on the master node\. | 
 | "ClusterDedicatedKdcConfiguration" | Required\. Contains configuration parameters for the cluster\-dedicated KDC on the master node\. | 
-| "TicketLifeTimeInHours": number | Optional\. If omitted, defaults to 24\. Specifies the period for which a Kerberos ticket issued by the cluster\-dedicated KDC is valid\. Ticket lifetimes are limited for security reasons\. Cluster applications and services auto\-renew tickets after they expire\. Users who connect to the cluster over SSH using Kerberos credentials need to run kinit from the master node command line to renew after a ticket expires\. | 
+| "TicketLifetimeInHours": number | Optional\. If omitted, defaults to 24\. Specifies the period for which a Kerberos ticket issued by the cluster\-dedicated KDC is valid\. Ticket lifetimes are limited for security reasons\. Cluster applications and services auto\-renew tickets after they expire\. Users who connect to the cluster over SSH using Kerberos credentials need to run kinit from the master node command line to renew after a ticket expires\. | 
 | "CrossRealmTrustConfiguration": | Optional\. Contains parameters that define a cross\-realm trust configuration\. If you provide a cross\-realm trust configuration, principals \(typically users\) from another realm are authenticated to clusters that use this configuration\. Additional configuration in the other Kerberos realm is also required\. For more information, see [Configure a Cross\-Realm Trust](emr-kerberos-cross-realm.md)\. | 
 | "Realm": "DOMAIN\.EXAMPLE\.COM" | Specifies the Kerberos realm name of the other realm in the trust relationship\. Any string can be used, but by convention, this is typically the same as the Domain, but in all capital letters\. | 
 | "Domain": "domain\.example\.com"  |  Specifies the domain name of the other realm in the trust relationship\.  | 
@@ -319,7 +319,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3ab1c20c21c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3aac19c21c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

@@ -14,7 +14,7 @@ Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are 
 
 Bootstrap actions execute as the Hadoop user by default\. You can execute a bootstrap action with root privileges by using `sudo`\. 
 
-All Amazon EMR management interfaces support bootstrap actions\. You can specify up to 16 bootstrap actions per cluster by providing multiple `bootstrap-action` parameters from the console, AWS CLI, or API\. 
+All Amazon EMR management interfaces support bootstrap actions\. You can specify up to 16 bootstrap actions per cluster by providing multiple `bootstrap-actions` parameters from the console, AWS CLI, or API\. 
 
 From the Amazon EMR console, you can optionally specify a bootstrap action while creating a cluster\.
 
@@ -71,7 +71,7 @@ You can create a custom script to perform a customized bootstrap action\. Any of
 
 ### Add Custom Bootstrap Actions Using the AWS CLI or the Amazon EMR CLI<a name="CustombootstrapCLI"></a>
 
-The following example uses a bootstrap action script to download and extracts a compressed TAR archive from Amazon S3\. The sample script is stored at [ http://elasticmapreduce\.s3\.amazonaws\.com/bootstrap\-actions/download\.sh](http://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/download.sh)\. 
+The following example uses a bootstrap action script to download and extract a compressed TAR archive from Amazon S3\. The sample script is stored at [ http://elasticmapreduce\.s3\.amazonaws\.com/bootstrap\-actions/download\.sh](http://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/download.sh)\. 
 
  The sample script looks like the following: 
 
@@ -146,7 +146,7 @@ aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.15.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.17.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m4.large \

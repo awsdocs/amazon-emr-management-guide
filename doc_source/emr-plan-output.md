@@ -37,7 +37,7 @@ This section shows you how to use the Amazon S3 AWS Management Console to create
 You created a bucket with the URI **s3n://myawsbucket/**\. 
 
 **Note**  
- If you enable logging in the **Create a Bucket** wizard, it enables only bucket access logs, not Amazon EMR cluster logs\. 
+ If you enable logging in the **Create a Bucket** wizard, it enables only bucket access logs, not cluster logs\. 
 
 **Note**  
 For more information on specifying Region\-specific buckets, refer to [Buckets and Regions](http://docs.aws.amazon.com/AmazonS3/latest/dev/LocationSelection.html) in the *Amazon Simple Storage Service Developer Guide* and [ Available Region Endpoints for the AWS SDKs ](http://aws.amazon.com/articles/3912)\.

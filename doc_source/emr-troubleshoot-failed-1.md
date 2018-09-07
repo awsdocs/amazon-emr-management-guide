@@ -1,6 +1,6 @@
 # Step 1: Gather Data About the Issue<a name="emr-troubleshoot-failed-1"></a>
 
- The first step in troubleshooting an cluster is to gather information about what went wrong and the current status and configuration of the cluster\. This information will be used in the following steps to confirm or rule out possible causes of the issue\. 
+ The first step in troubleshooting a cluster is to gather information about what went wrong and the current status and configuration of the cluster\. This information will be used in the following steps to confirm or rule out possible causes of the issue\. 
 
 ## Define the Problem<a name="emr-troubleshoot-failed-1-problem"></a>
 

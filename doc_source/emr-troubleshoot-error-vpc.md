@@ -68,7 +68,7 @@ A few ways to troubleshoot this problem include:
 
 ## Errors That Result in `START_FAILED`<a name="emr-troubleshoot-error-vpc-dns"></a>
 
-Before AMI 3\.7\.0, for VPCs where a hostname is specified Amazon EC2 instances, Amazon EMR Amazon EMR maps the internal hostnames of the subnet with custom domain addresses as follows: `ip-X.X.X.X.customdomain.com.tld`\. For example, if the hostname was `ip-10.0.0.10` and the VPC has the domain name option set to customdomain\.com, the resulting hostname mapped by Amazon EMR would be `ip-10.0.1.0.customdomain.com`\. An entry is added in `/etc/hosts` to resolve the hostname to 10\.0\.0\.10\. This behavior is changed with AMI 3\.7\.0 and now Amazon EMR honors the DHCP configuration of the VPC entirely\. Previously, customers could also use a bootstrap action to specify a hostname mapping\.
+Before AMI 3\.7\.0, for VPCs where a hostname is specified, Amazon EMR maps the internal hostnames of the subnet with custom domain addresses as follows: `ip-X.X.X.X.customdomain.com.tld`\. For example, if the hostname was `ip-10.0.0.10` and the VPC has the domain name option set to customdomain\.com, the resulting hostname mapped by Amazon EMR would be `ip-10.0.1.0.customdomain.com`\. An entry is added in `/etc/hosts` to resolve the hostname to 10\.0\.0\.10\. This behavior is changed with AMI 3\.7\.0 and now Amazon EMR honors the DHCP configuration of the VPC entirely\. Previously, customers could also use a bootstrap action to specify a hostname mapping\.
 
 If you would like to preserve this behavior, you must provide the DNS and forward resolution setup you require for the custom domain\.
 
