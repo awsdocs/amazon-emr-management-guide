@@ -6,7 +6,7 @@ With your cluster up and running, you can now submit a Hive script\. In this tut
 
 The sample data and script that you use in this tutorial are already available in an Amazon S3 location that you can access\.
 
-The sample data is a series of Amazon CloudFront access log files\. For more information about CloudFront and log file formats, see [Amazon CloudFront Developer Guide](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/)\. The data is stored in Amazon S3 at **s3://*region*\.elasticmapreduce\.samples/cloudfront/data** where *region* is your region, for example, *us\-west\-2*\. When you enter the location when you submit the step, you omit the `cloudfront/data` portion because the script adds it\.
+The sample data is a series of Amazon CloudFront access log files\. For more information about CloudFront and log file formats, see [Amazon CloudFront Developer Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/)\. The data is stored in Amazon S3 at **s3://*region*\.elasticmapreduce\.samples/cloudfront/data** where *region* is your region, for example, *us\-west\-2*\. When you enter the location when you submit the step, you omit the `cloudfront/data` portion because the script adds it\.
 
 Each entry in the CloudFront log files provides details about a single user request in the following format:
 
@@ -66,7 +66,7 @@ Use the **Add Step** option to submit your Hive script to the cluster using the 
 1. Configure the step according to the following guidelines:
    + For **Step type**, choose **Hive program**\.
    + For **Name**, you can leave the default or type a new name\. If you have many steps in a cluster, the name helps you keep track of them\.
-   + For **Script S3 location**, type **s3://*region*\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q**\. Replace *region* with your region identifier\. For example, **s3://us\-west\-2\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q** if you are working in the **Oregon** region\. For a list of regions and corresponding Region identifiers, see [AWS Regions and Endpoints for Amazon EMR](http://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *AWS General Reference*\.
+   + For **Script S3 location**, type **s3://*region*\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q**\. Replace *region* with your region identifier\. For example, **s3://us\-west\-2\.elasticmapreduce\.samples/cloudfront/code/Hive\_CloudFront\.q** if you are working in the **Oregon** region\. For a list of regions and corresponding Region identifiers, see [AWS Regions and Endpoints for Amazon EMR](https://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *AWS General Reference*\.
    + For **Input S3 location**, type **s3://*region*\.elasticmapreduce\.samples** 
 
      Replace *region* with your region identifier\.

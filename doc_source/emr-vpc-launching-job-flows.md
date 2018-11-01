@@ -5,15 +5,9 @@ After you have a subnet that is configured to host Amazon EMR clusters, launch t
 **Note**  
 Amazon EMR supports private subnets in release versions 4\.2 and above\. 
 
-When the cluster is launched, Amazon EMR adds security groups based on whether the cluster is launching into VPC private or public subnets\. All security groups allow ingress at port 8443 to communicate to the Amazon EMR service, but IP address ranges vary for public and private subnets\. Amazon EMR manages all of these security groups, and may need to add additional IP addresses to the AWS range over time\.
+When the cluster is launched, Amazon EMR adds security groups based on whether the cluster is launching into VPC private or public subnets\. All security groups allow ingress at port 8443 to communicate to the Amazon EMR service, but IP address ranges vary for public and private subnets\. Amazon EMR manages all of these security groups, and may need to add additional IP addresses to the AWS range over time\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
 
-In public subnets, Amazon EMR creates ElasticMapReduce\-slave and ElasticMapReduce\-master for the slave and master instance groups, respectively\. By default, the ElasticMapReduce\-master security group allows inbound SSH connections while the ElasticMapReduce\-slave group does not\. Both master and slave security groups allow inbound traffic on port 8443 from the AWS public IP range\. If you require SSH access for slave \(core and task\) nodes, you can add a rule to the ElasticMapReduce\-slave security group or use SSH agent forwarding\.
-
-Other security groups and rules are required when launching clusters in a private subnet\. This is to ensure that the service can still manage those resources while they are private\. The additional security groups are: *ElasticMapReduce\-Master\-Private, ElasticMapReduce\-Slave\-Private\.*\. The security group for the elastic network interface is of the form ElasticMapReduce\-ServiceAccess\. Inbound traffic on port 8443 is open to allow contact to the Amazon EMR web service\. Outbound traffic on port 80 and 443 should be allowed so that the cluster can communicate back to the service\. Furthermore, inbound and output ephemeral ports should be open in your network ACLs\.
-
-For more information about modifying security group rules, see [Adding Rules to a Security Group](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\. For more information about connecting to instances in your VPC, see [Securely connect to Linux instances running in a private Amazon VPC](https://blogs.aws.amazon.com/security/post/Tx3N8GFK85UN1G6/Securely-connect-to-Linux-instances-running-in-a-private-Amazon-VPC)\.
-
-To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [http://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
+To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html](https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
 
 **To launch a cluster into a VPC using the Amazon EMR console**
 
@@ -52,4 +46,4 @@ After your VPC is configured, you can launch EMR clusters in it by using the `cr
 **Note**  
 If you have not previously created the default Amazon EMR service role and EC2 instance profile, type `aws emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information about using Amazon EMR commands in the AWS CLI, see the [AWS CLI](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information about using Amazon EMR commands in the AWS CLI, see the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

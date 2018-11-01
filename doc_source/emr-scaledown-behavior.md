@@ -17,7 +17,7 @@ If there are still running containers or YARN applications when the decommission
 
 ### Task Node Groups<a name="emr-scaledown-task-nodes"></a>
 
-Amazon EMR intelligently selects instances that are not running tasks and remove them from a cluster first\. If all instances in the cluster are being used, Amazon EMR waits for tasks to complete on a given instance before removing it from the cluster\. The default wait time is 1 hour and this value can be changed by setting `yarn.resourcemanager.decommissioning.timeout`\. Amazon EMR dynamically uses the new setting\. You can set this to an arbitrarily large number to ensure that no tasks are killed while shrinking the cluster\.
+Amazon EMR intelligently selects instances that are not running tasks related to any step or application, and removes them from a cluster first\. If all instances in the cluster are being used, Amazon EMR waits for tasks to complete on a given instance before removing it from the cluster\. The default wait time is 1 hour and this value can be changed by setting `yarn.resourcemanager.decommissioning.timeout`\. Amazon EMR dynamically uses the new setting\. You can set this to an arbitrarily large number to ensure that no tasks are killed while shrinking the cluster\.
 
 ### Core Node Groups<a name="emr-scaledown-core-nodes"></a>
 

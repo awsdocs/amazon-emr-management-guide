@@ -1,12 +1,21 @@
-# Configure a Cluster to be Transient or Long\-Running<a name="emr-plan-longrunning-transient"></a>
+# Configuring a Cluster to Auto\-Terminate or Continue<a name="emr-plan-longrunning-transient"></a>
 
-You can run your cluster as a transient process: one that launches the cluster, loads the input data, processes the data, stores the output results, and then automatically shuts down\. This is the standard model for a cluster that performs a periodic processing task\. Shutting down the cluster automatically ensures that you are only billed for the time required to process your data\. 
+By default, clusters that you create using the console or the AWS CLI continue to run until you shut them down\. To have a cluster terminate after running steps, you need to enable auto\-termination\. In contrast, clusters that you launch using the EMR API have auto\-termination enabled by default\.
 
-The other model for running a cluster is as a long\-running cluster\. In this model, the cluster launches and loads the input data\. From there, you might interactively query the data, use the cluster as a data warehouse, or do periodic processing on a data set so large that it would be inefficient to load the data into new clusters each time\. In this model, the cluster persists even when there are no tasks queued for processing\. Another option you might want to enable on a long\-running cluster is termination protection\. This protects your cluster from being terminated accidentally or in the event that an error occurs\. For more information, see [Managing Cluster Termination](UsingEMR_TerminationProtection.md)\.
+**To disable auto\-termination using the EMR API**
++ When using the [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow.html) action to create a cluster, set the [KeepJobFlowAliveWhenNoSteps](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_JobFlowInstancesConfig.html#EMR-Type-JobFlowInstancesConfig-KeepJobFlowAliveWhenNoSteps) property to `true`\.
 
-By default, clusters you create are long\-running clusters\. If you use quick create in the console or don't specify an option when using `create-cluster` from the command line or the API, auto\-terminate is disabled\. However, clusters launched using the API have auto\-terminate enabled\. You can specify auto\-termination using the console, the AWS CLI, or programmatically using the [KeepJobFlowAliveWhenNoSteps parameter](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_JobFlowInstancesConfig.html#EMR-Type-JobFlowInstancesConfig-KeepJobFlowAliveWhenNoSteps) while executing the [RunJobFlow](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow.html) action\.
+**To enable auto\-termination using Quick Options in the AWS Management Console**
 
-**To launch a transient cluster using the console**
+1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
+
+1. Choose **Create cluster**\.
+
+1. Choose **Step execution**\.
+
+1. Choose other settings as appropriate for your application, and then choose **Create cluster**\.
+
+**To enable auto\-termination using Advanced Options in the AWS Management Console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
@@ -16,22 +25,23 @@ By default, clusters you create are long\-running clusters\. If you use quick cr
 
 1. Under **Add steps \(optional\)** select **Auto\-terminate cluster after the last step is completed**\.
 
-1. Proceed with creating the cluster as described in [Plan and Configure Clusters](emr-plan.md)\.
+1. Choose other settings as appropriate for your application, and then choose **Create cluster**\.
 
-**To launch a transient cluster using the AWS CLI**
+**To enable auto\-termination using the AWS CLI**
++ Specify the `--auto-terminate` parameter when you use the `create-cluster` command to create a transient cluster\.
 
-Specify the `--auto-terminate` parameter when you use the `create-cluster` command to create a transient cluster\.
-+ The following example demonstrates using the `--auto-terminate` parameter\. You can type the following command and replace *myKey* with the name of your EC2 key pair\.
+  The following example demonstrates using the `--auto-terminate` parameter\. You can type the following command and replace *myKey* with the name of your EC2 key pair\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.17.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.18.0 \
   --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey \
+  --steps Type=PIG,Name="Pig Program",ActionOnFailure=CONTINUE,\
+  Args=[-f,s3://mybucket/scripts/pigscript.pig,-p,\
+  INPUT=s3://mybucket/inputdata/,-p,OUTPUT=s3://mybucket/outputdata/,\
+  $INPUT=s3://mybucket/inputdata/,$OUTPUT=s3://mybucket/outputdata/]
   --instance-type m4.large --instance-count 3 --auto-terminate
   ```
 
-**Note**  
-If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before you use the `create-cluster` command\.
-
-For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

@@ -6,17 +6,17 @@ Before you specify encryption options using a security configuration, decide on 
 
 You can use AWS Key Management Service \(AWS KMS\) or a custom key provider for at\-rest data encryption in Amazon EMR\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\. 
 
-This topic provides key policy details for an AWS KMS CMK to be used with Amazon EMR, as well as guidelines and code examples for writing a custom key provider class for Amazon S3 encryption\. For more information about creating keys, see [Creating Keys](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the *AWS Key Management Service Developer Guide*\.
+This topic provides key policy details for an AWS KMS CMK to be used with Amazon EMR, as well as guidelines and code examples for writing a custom key provider class for Amazon S3 encryption\. For more information about creating keys, see [Creating Keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the *AWS Key Management Service Developer Guide*\.
 
 ### Using AWS KMS Customer Master Keys \(CMKs\) for Encryption<a name="emr-awskms-keys"></a>
 
 The AWS KMS encryption key must be created in the same region as your Amazon EMR cluster instance and the Amazon S3 buckets used with EMRFS\. If the key that you specify is in a different account from the one that you use to configure a cluster, you must specify the key using its ARN\.
 
-The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
+The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
 
 You can use the AWS Management Console to add your instance profile or EC2 instance profile to the list of key users for the specified AWS KMS CMK, or you can use the AWS CLI or an AWS SDK to attach an appropriate key policy\.
 
-The procedure below describes how to add the default EMR instance profile, `EMR_EC2_DefaultRole` as a *key user* using the AWS Management Console\. It assumes that you have already created a CMK\. To create a new CMK, see [Creating Keys](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the *AWS Key Management Service Developer Guide*\.
+The procedure below describes how to add the default EMR instance profile, `EMR_EC2_DefaultRole` as a *key user* using the AWS Management Console\. It assumes that you have already created a CMK\. To create a new CMK, see [Creating Keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the *AWS Key Management Service Developer Guide*\.
 
 **To add the EC2 instance profile for Amazon EMR to the list of encryption key users**
 
@@ -38,7 +38,7 @@ The procedure below describes how to add the default EMR instance profile, `EMR_
 
 When using a security configuration, you must specify a different provider class name for local disk encryption and Amazon S3 encryption\.
 
-When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
+When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
 
 The encryption algorithm used for custom encryption materials must be **AES/GCM/NoPadding**\.
 
@@ -103,7 +103,7 @@ public class MyEncryptionMaterialsProviders implements EncryptionMaterialsProvid
 
 For in\-transit data encryption using a security configuration \(available in Amazon EMR release version 4\.8\.0 or later\), you have two options to specify encryption artifacts:
 + You can manually create PEM certificates, include them in a zip file, and then reference the zip file in Amazon S3\.
-+ You can implement a custom certificate provider as a Java class\. You specify the JAR file of the application in Amazon S3, and then provide the full class name of the provider as declared in the application\. The class must implement the [TLSArtifactsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/TLSArtifactsProvider.html) interface available beginning with the AWS SDK for Java version 1\.11\.0\.
++ You can implement a custom certificate provider as a Java class\. You specify the JAR file of the application in Amazon S3, and then provide the full class name of the provider as declared in the application\. The class must implement the [TLSArtifactsProvider](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/TLSArtifactsProvider.html) interface available beginning with the AWS SDK for Java version 1\.11\.0\.
 
 Amazon EMR automatically downloads artifacts to each node in the cluster and later uses them to implement the open\-source, in\-transit encryption features\. For more information about available options, see [In\-Transit Data Encryption](emr-data-encryption-options.md#emr-encryption-intransit)\.
 
@@ -120,15 +120,17 @@ When you specify a zip file for in\-transit encryption, the security configurati
 | certificateChain\.pem | Required | Certificate chain | 
 | trustedCertificates\.pem | Optional | Required if the provided certificate is not signed by either the Java default trusted root certification authority \(CA\) or an intermediate CA that can link to the Java default trusted root CA\. The Java default trusted root CAs can be found in jre/lib/security/cacerts\. | 
 
-You likely want to configure the private key PEM file to be a wildcard certificate that enables access to the Amazon VPC domain in which your cluster instances reside\. For example, if your cluster resides in us\-east\-1, you may choose to specify a common name in the certificate configuration that allows access to the cluster by specifying `CN=*.ec2.internal` in the certificate subject definition\. For more information about Amazon EMR cluster configuration within Amazon VPC, see [Select an Amazon VPC Subnet for the Cluster](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-vpc-subnet.html)\. 
+You likely want to configure the private key PEM file to be a wildcard certificate that enables access to the Amazon VPC domain in which your cluster instances reside\. For example, if your cluster resides in us\-east\-1 \(N\. Virginia\), you could specify a common name in the certificate configuration that allows access to the cluster by specifying `CN=*.ec2.internal` in the certificate subject definition\. If your cluster resides in us\-west\-2 \(Oregon\), you could specify `CN=*.us-west-2.compute.internal`\. For more information about Amazon EMR cluster configuration within Amazon VPC, see [Select an Amazon VPC Subnet for the Cluster](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-vpc-subnet.html)\. 
 
-The following example demonstrates how to use [OpenSSL](https://www.openssl.org/) to generate a self\-signed X\.509 certificate with a 1024\-bit RSA private key that allows access to the issuer's Amazon EMR cluster instances in the US East \(N\. Virginia\) region\. This is identified by the `*.ec2.internal` domain name as the common name\. Other optional subject items—such as country \(C\), state \(S\), Locale \(L\), etc\.—are specified\. Because a self\-signed certificate is generated, the example then copies the `certificateChain.pem` file to the `trustedCertificates.pem` file\. The `zip` command is then used to create the `my-certs.zip` file that contains the certificates\.
+The following example demonstrates how to use [OpenSSL](https://www.openssl.org/) to generate a self\-signed X\.509 certificate with a 1024\-bit RSA private key\. The key allows access to the issuer's Amazon EMR cluster instances in the us\-west\-2 \(Oregon\) region as specified by the `*.us-west-2.compute.internal` domain name as the common name\.
+
+Other optional subject items—such as country \(C\), state \(S\), Locale \(L\), etc\.—are specified\. Because a self\-signed certificate is generated, the second command in the example copies the `certificateChain.pem` file to the `trustedCertificates.pem` file\. The third command uses `zip` to create the `my-certs.zip` file that contains the certificates\.
 
 **Important**  
 This example is a proof\-of\-concept demonstration only\. Using self\-signed certificates is not recommended and presents a potential security risk\. For production systems, use a trusted certification authority \(CA\) to issue certificates\.
 
 ```
-$ openssl req -x509 -newkey rsa:1024 -keyout privateKey.pem -out certificateChain.pem -days 365 -nodes -subj '/C=US/ST=Washington/L=Seattle/O=MyOrg/OU=MyDept/CN=*.ec2.internal'
+$ openssl req -x509 -newkey rsa:1024 -keyout privateKey.pem -out certificateChain.pem -days 365 -nodes -subj '/C=US/ST=Washington/L=Seattle/O=MyOrg/OU=MyDept/CN=*.us-west-2.compute.internal'
 $ cp certificateChain.pem trustedCertificates.pem
 $ zip -r -X my-certs.zip certificateChain.pem privateKey.pem trustedCertificates.pem
 ```

@@ -5,7 +5,7 @@
 **Topics**
 + [View and Monitor a Cluster](emr-manage-view.md)
 + [Connect to the Cluster](emr-connect-master-node.md)
-+ [Control Cluster Termination](emr-manage-termination.md)
++ [Terminate a Cluster](UsingEMR_TerminateJobFlow.md)
 + [Scaling Cluster Resources](emr-scale-on-demand.md)
 + [Cloning a Cluster Using the Console](clone-console.md)
 + [Submit Work to a Cluster](AddingStepstoaJobFlow.md)

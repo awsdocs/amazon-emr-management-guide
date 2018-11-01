@@ -12,7 +12,7 @@
 
 An endpoint is a URL that is the entry point for a web service\. Every web service request must contain an endpoint\. The endpoint specifies the AWS region where clusters are created, described, or terminated\. It has the form `elasticmapreduce.regionname.amazonaws.com`\. If you specify the general endpoint \(`elasticmapreduce.amazonaws.com`\), Amazon EMR directs your request to an endpoint in the default region\. For accounts created on or after March 8, 2013, the default region is us\-west\-2; for older accounts, the default region is us\-east\-1\.
 
-For more information about the endpoints for Amazon EMR, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *Amazon Web Services General Reference*\.
+For more information about the endpoints for Amazon EMR, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *Amazon Web Services General Reference*\.
 
 ## Specifying Cluster Parameters in Amazon EMR<a name="API_SpecifyingParameters"></a>
 
@@ -22,13 +22,13 @@ For more information about the endpoints for Amazon EMR, see [Regions and Endpoi
 
 If `KeepJobAlive` is `true`, after successfully getting the cluster to complete its work, you must send a `TerminateJobFlows` request or the cluster continues to run and generate AWS charges\. 
 
- For more information about parameters that are unique to `RunJobFlow`, see [RunJobFlow](http://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_RunJobFlow.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](http://docs.aws.amazon.com/ElasticMapReduce/latest/API//CommonParameters.html)\. 
+ For more information about parameters that are unique to `RunJobFlow`, see [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_RunJobFlow.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//CommonParameters.html)\. 
 
 ## Availability Zones in Amazon EMR<a name="AvailabilityZones"></a>
 
- Amazon EMR uses EC2 instances as nodes to process clusters\. These EC2 instances have locations composed of Availability Zones and regions\. Regions are dispersed and located in separate geographic areas\. Availability Zones are distinct locations within a region insulated from failures in other Availability Zones\. Each Availability Zone provides inexpensive, low\-latency network connectivity to other Availability Zones in the same region\. For a list of the regions and endpoints for Amazon EMR, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *Amazon Web Services General Reference*\. 
+ Amazon EMR uses EC2 instances as nodes to process clusters\. These EC2 instances have locations composed of Availability Zones and regions\. Regions are dispersed and located in separate geographic areas\. Availability Zones are distinct locations within a region insulated from failures in other Availability Zones\. Each Availability Zone provides inexpensive, low\-latency network connectivity to other Availability Zones in the same region\. For a list of the regions and endpoints for Amazon EMR, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#emr_region) in the *Amazon Web Services General Reference*\. 
 
- The `AvailabilityZone` parameter specifies the general location of the cluster\. This parameter is optional and, in general, we discourage its use\. When `AvailabilityZone` is not specified Amazon EMR automatically picks the best `AvailabilityZone` value for the cluster\. You might find this parameter useful if you want to colocate your instances with other existing running instances, and your cluster needs to read or write data from those instances\. For more information, see the [Amazon EC2 User Guide for Linux Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/)\. 
+ The `AvailabilityZone` parameter specifies the general location of the cluster\. This parameter is optional and, in general, we discourage its use\. When `AvailabilityZone` is not specified Amazon EMR automatically picks the best `AvailabilityZone` value for the cluster\. You might find this parameter useful if you want to colocate your instances with other existing running instances, and your cluster needs to read or write data from those instances\. For more information, see the [Amazon EC2 User Guide for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/)\. 
 
 ## How to Use Additional Files and Libraries in Amazon EMR Clusters<a name="HowtoUseAdditionalFilesandLibrariesWiththeMapperorReducer"></a>
 

@@ -22,7 +22,7 @@ The following procedure covers **Advanced options** when you create a cluster\. 
 
 1. Choose the **Network**, and then choose the **EC2 Subnet** for your cluster\. The subnet that you choose is associated with an Availability Group, which is listed with each subnet\. For more information, see [Plan and Configure Networking](emr-plan-vpc-subnet.md)\.
 **Note**  
-Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Within each **Node type** row:
    + Under **Node type**, if you want to change the default name of the instance group, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance group, click the X icon\. Choose **Add task instance group** to add additional **Task** instance groups\.
@@ -41,7 +41,7 @@ Mouse over the information tooltip for **Spot** to see the current Spot price fo
 
 ## Use the AWS CLI to Create a Cluster with Uniform Instance Groups<a name="emr-uniform-instance-group-cli"></a>
 
-To specify the instance groups configuration for a cluster using the AWS CLI, use the `create-cluster` command along with the `--instance-groups` parameter\. Amazon EMR assumes the On\-Demand purchasing option unless you specify the `BidPrice` argument for an instance group\. For examples of `create-cluster` commands that launch uniform instance groups with On\-Demand Instances and a variety of cluster options, type `aws emr create-cluster help `at the command line, or see [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
+To specify the instance groups configuration for a cluster using the AWS CLI, use the `create-cluster` command along with the `--instance-groups` parameter\. Amazon EMR assumes the On\-Demand purchasing option unless you specify the `BidPrice` argument for an instance group\. For examples of `create-cluster` commands that launch uniform instance groups with On\-Demand Instances and a variety of cluster options, type `aws emr create-cluster help `at the command line, or see [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
 
 You can use the AWS CLI to create uniform instance groups in a cluster that use Spot Instances\. The offered Spot price depends on Availability Zone\. When you use the CLI or API, you can specify the Availability Zone either with the `AvailabilityZone` argument \(if you're using an EC2\-classic network\) or the `SubnetID `argument of the `--ec2-attributes `parameter\. The Availability Zone or subnet that you select applies to the cluster, so it's used for all instance groups\. If you don't specify an Availability Zone or subnet explicitly, Amazon EMR selects the Availability Zone with the lowest Spot price when it launches the cluster\.
 
@@ -53,7 +53,7 @@ If you have not previously created the default Amazon EMR service role and Amazo
 Linux, UNIX, and macOS users:
 
 ```
-1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.17.0 \
+1. aws emr create-cluster --name "MySpotCluster" --release-label emr-5.18.0 \
 2. --use-default-roles --ec2-attributes KeyName=myKey \
 3. --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 \
 4. InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,BidPrice=0.03 \ 
@@ -64,7 +64,7 @@ Linux, UNIX, and macOS users:
 Windows users:
 
 ```
-1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.17.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
+1. aws emr create-cluster --name "Spot cluster" --release-label emr-5.18.0 --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 InstanceGroupType=CORE,BidPrice=0.03,InstanceType=m4.large,InstanceCount=2 InstanceGroupType=TASK,BidPrice=0.03,InstanceType=m4.large,InstanceCount=4							InstanceGroupType=TASK,BidPrice=0.04,InstanceType=m4.large,InstanceCount=2
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>

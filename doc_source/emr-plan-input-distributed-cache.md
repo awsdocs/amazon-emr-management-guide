@@ -17,7 +17,7 @@ You invoke Distributed Cache when you create the cluster\. The files are cached 
 
 Distributed Cache allows both single files and archives\. Individual files are cached as read only\. Executables and binary files have execution permissions set\.
 
-Archives are one or more files packaged using a utility, such as `gzip`\. Distributed Cache passes the compressed files to each slave node and decompresses the archive as part of caching\. Distributed Cache supports the following compression formats:
+Archives are one or more files packaged using a utility, such as `gzip`\. Distributed Cache passes the compressed files to each core node and decompresses the archive as part of caching\. Distributed Cache supports the following compression formats:
 + zip
 + tgz
 + tar\.gz
@@ -26,7 +26,7 @@ Archives are one or more files packaged using a utility, such as `gzip`\. Distri
 
 ## Location of Cached Files<a name="locationofcache"></a>
 
-Distributed Cache copies files to slave nodes only\. If there are no slave nodes in the cluster, Distributed Cache copies the files to the master node\.
+Distributed Cache copies files to core nodes only\. If there are no core nodes in the cluster, Distributed Cache copies the files to the master node\.
 
 Distributed Cache associates the cache files to the current working directory of the mapper and reducer using symlinks\. A symlink is an alias to a file location, not the actual file location\. The value of the parameter, `yarn.nodemanager.local-dirs` in `yarn-site.xml`, specifies the location of temporary files\. Amazon EMR sets this parameter to , `/mnt/mapred`, or some variation based on instance type and EMR version\. For example, a setting may have `/mnt/mapred` and `/mnt1/mapred` because the instance type has two ephemeral volumes\. Cache files are located in a subdirectory of the temporary file location at `/mnt/mapred/taskTracker/archive`\. 
 
@@ -67,7 +67,7 @@ You can use the CLI to create clusters that use Distributed Cache\.
 + To submit a Streaming step when a cluster is created, type the `create-cluster` command with the `--steps` parameter\. To specify Distributed Cache files using the AWS CLI, specify the appropriate arguments when submitting a Streaming step\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-input-distributed-cache.html)
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **Example 1**  
 Type the following command to launch a cluster and submit a Streaming step that uses `-cacheFile` to add one file, `sample_dataset_cached.dat`, to the cache\.   

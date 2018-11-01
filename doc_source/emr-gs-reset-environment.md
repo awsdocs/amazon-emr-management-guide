@@ -20,4 +20,4 @@ Terminating your cluster terminates the associated Amazon EC2 instances and stop
 
 1. Choose delete bucket, type the name of the bucket, and then click **Confirm**\.
 
-   For more information about deleting folders and buckets, go to [How Do I Delete an S3 Bucket](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+   For more information about deleting folders and buckets, go to [How Do I Delete an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 

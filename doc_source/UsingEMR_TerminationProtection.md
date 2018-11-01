@@ -1,41 +1,63 @@
-# Managing Cluster Termination<a name="UsingEMR_TerminationProtection"></a>
+# Using Termination Protection<a name="UsingEMR_TerminationProtection"></a>
 
-Termination protection helps ensure that the EC2 instances in your job flow are not shut down by an accident or error\. This protection is especially useful if your cluster contains data in instance storage that you need to recover before those instances are terminated\. When termination protection is not enabled, you can terminate clusters either through calls to the `TerminateJobFlows` API, through the Amazon EMR console, or by using the command line interface\. In addition, the master node may terminate a node that has become unresponsive or has returned an error\.
+When termination protection is enabled on a long\-running cluster, you can still terminate the cluster, but you must explicitly remove termination protection from the cluster first\. This helps ensure that EC2 instances are not shut down by an accident or error\. Termination protection is especially useful if your cluster might have data stored on local disks that you need to recover before the instances are terminated\. You can enable termination protection when you create a cluster, and you can change the setting on a running cluster\.
+
+With termination protection enabled, the `TerminateJobFlows` action in the Amazon EMR API does not work\. Users cannot terminate the cluster using this API or the `terminate-clusters` command from the AWS CLI\. The API returns an error, and the CLI exits with a non\-zero return code\. When using the Amazon EMR console to terminate a cluster, you are prompted with an extra step to turn termination protection off\.
 
 **Warning**  
-Termination protection helps protect cluster instances from accidental shutdown, but it does not guarantee that data is retained in the event of a human error—for example, if a reboot command is issued from the command line while connected to the instance, or if termination protection is disabled and a shutdown or reboot call is made through the API, the AWS CLI, or the AWS Management Console\. When an instance shuts down, data saved to ephemeral storage on the instance, such as HDFS data, is lost and cannot be recovered\. Back up critical data to Amazon S3 and as appropriate for your business continuity requirements\.
+Termination protection does not guarantee that data is retained in the event of a human error or a workaround—for example, if a reboot command is issued from the command line while connected to the instance using SSH, if an application or script running on the instance issues a reboot command, or if the Amazon EC2 or Amazon EMR API is used to disable termination protection\. Even with termination protection enabled, data saved to instance storage, including HDFS data, can be lost\. Write data output to Amazon S3 locations and create backup strategies as appropriate for your business continuity requirements\.
 
-By default, termination protection is enabled when you launch a cluster using the console\. Termination protection is disabled by default when you launch a cluster using the CLI or API\. When termination protection is enabled, you must explicitly remove termination protection from the cluster before you can terminate it\. With termination protection enabled, `TerminateJobFlows` cannot terminate the cluster and users cannot terminate the cluster using the CLI\. Users terminating the cluster using the Amazon EMR console are prompted with an extra step to turn termination protection off before terminating the cluster\. 
+Termination protection does not affect your ability to scale cluster resources using any of the following actions:
++ Resizing a cluster manually using the AWS Management Console or AWS CLI\. For more information, see [Manually Resizing a Running Cluster](emr-manage-resize.md)\.
++ Removing instances from a core or task instance group using a scale\-in policy with automatic scaling\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
++ Removing instances from an instance fleet by reducing target capacity\. For more information, see [Instance Fleet Options](emr-instance-fleet.md#emr-instance-fleet-options)\.
 
-If you attempt to terminate a protected cluster with the API or CLI, the API returns an error, and the CLI exits with a non\-zero return code\. 
+## Termination Protection and Amazon EC2<a name="emr-termination-protection-ec2"></a>
 
-When you submit steps to a cluster, the ActionOnFailure setting determines what the cluster does in response to any errors\. The possible values for this setting are: 
-+ TERMINATE\_JOB\_FLOW: If the step fails, terminate the cluster\. If the cluster has termination protection enabled AND auto\-terminate disabled, it will not terminate\.
-+ CANCEL\_AND\_WAIT: If the step fails, cancel the remaining steps\. If the cluster has auto\-terminate disabled, the cluster will not terminate\.
-+ CONTINUE: If the step fails, continue to the next step\. 
+An Amazon EMR cluster with termination protection enabled has the `disableAPITermination` attribute set for all Amazon EC2 instances in the cluster\. If a termination request originates with Amazon EMR, and the Amazon EMR and Amazon EC2 settings for an instance conflict, the Amazon EMR setting overrides the Amazon EC2 setting\. For example, if you use the Amazon EC2 console to *enable* termination protection on an Amazon EC2 instance in a cluster that has termination protection *disabled*, when you use the Amazon EMR console, AWS CLI commands for Amazon EMR, or the Amazon EMR API to terminate the cluster, Amazon EMR sets `DisableApiTermination` to `false` and terminates the instance along with other instances\.
 
-## Termination Protection in Amazon EMR and Amazon EC2<a name="TerminationProtectioninEMRandEC2"></a>
+**Important**  
+If an instance is created as part of an Amazon EMR cluster with termination protection, and the Amazon EC2 API or AWS CLI commands are used to modify the instance so that `DisableApiTermination` is `false`, and then the Amazon EC2 API or AWS CLI commands execute the `TerminateInstances` action, the Amazon EC2 instance terminates\.
 
-An EMR cluster with termination protection enabled has the `disableAPITermination` attribute set for all EC2 instances in the cluster\. If there is a conflict between the termination protection setting in Amazon EC2 and the setting in Amazon EMR for an instance, the Amazon EMR setting overrides the Amazon EC2 setting on the given instance\. For example, if you use the Amazon EC2 console to *enable* termination protection on an EC2 instance in an Amazon EMR cluster that has termination protection *disabled*, Amazon EMR turns off termination protection on that EC2 instance and shuts down the instance when the rest of the cluster terminates\. 
+## Termination Protection and Unhealthy YARN Nodes<a name="emr-termination-protection-unhealthy"></a>
 
-## Termination Protection and Spot Instances<a name="TerminationProtectionandSpotInstances"></a>
+Amazon EMR periodically checks the Apache Hadoop YARN status of nodes running on core and task Amazon EC2 instances in a cluster\. The health status is reported by the [NodeManager Health Checker Service](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeManager.html#Health_checker_service)\. If a node reports `UNHEALTHY`, the Amazon EMR instance controller blacklists the node and does not allocate YARN containers to it until it becomes healthy again\. A common reason for unhealthy nodes is that disk utilization goes above 90%\. For more information about identifying unhealthy nodes and recovering, see [Resource Errors](emr-troubleshoot-error-resource.md)\.
 
-Amazon EMR termination protection does not prevent an Amazon EC2 Spot Instance from terminating when the Spot Price rises above the maximum Spot price\. 
+If the node remains `UNHEALTHY` for more than 45 minutes, Amazon EMR takes the following action based on the status of termination protection\.
 
-## Termination Protection and Auto\-Terminate<a name="TerminationProtectionandKeepAlive"></a>
 
-Enabling auto\-terminate creates a transient cluster\. The cluster automatically terminates when the last step is successfully completed even if termination protection is enabled\. 
+| Termination Protection | Result | 
+| --- | --- | 
+|  Enabled \(Recommended\)  |  The Amazon EC2 instance remains in a blacklisted state and continues to count toward cluster capacity\. You can connect to the Amazon EC2 instance for configuration and data recovery, and resize your cluster to add capacity\. For more information, see [Resource Errors](emr-troubleshoot-error-resource.md)\.  | 
+|  Disabled  |  The Amazon EC2 instance is terminated\. Amazon EMR provisions a new instance based on the specified number of instances in the instance group or the target capacity for instance fleets\. If all core nodes are `UNHEALTHY` for more than 45 minutes, the cluster terminates, reporting a `NO_SLAVES_LEFT` status\.  HDFS data may be lost if a core instance terminates because of an unhealthy state\. If the node stored blocks that were not replicated to other nodes, these blocks are lost, which might lead to data loss\. We recommend that you use termination protection so that you can connect to instances and recover data as necessary\.   | 
 
-Disabling auto\-terminate causes instances in a cluster to persist after steps have successfully completed, but still allows the cluster to be terminated by user action, by errors, and by calls to `TerminateJobFlows` \(if termination protection is disabled\)\. 
+## Termination Protection, Auto\-Termination, and Step Execution<a name="emr-termination-protection-steps"></a>
 
-**Note**  
-By default, auto\-terminate is disabled for clusters launched using the console and the CLI\. Clusters launched using the API have auto\-terminate enabled\.
+The auto\-terminate setting takes precedence over termination protection\. If both are enabled, when steps finish executing, the cluster terminates instead of entering a waiting state\.
 
-## Configuring Termination Protection for New Clusters<a name="ProtectingaNewJobFlow"></a>
+When you submit steps to a cluster, you can set the `ActionOnFailure` property to determine what happens if the step can't complete execution because of an error\. The possible values for this setting are `TERMINATE_CLUSTER` \(`TERMINATE_JOB_FLOW` with earlier versions\), `CANCEL_AND_WAIT`, and `CONTINUE`\. For more information, see [Work with Steps Using the CLI and Console](emr-work-with-steps.md)\.
+
+If a step fails that is configured with `ActionOnFailure` set to `CANCEL_AND_WAIT`, if auto\-termination is enabled, the cluster terminates without executing subsequent steps\.
+
+If a step fails that is configured with `ActionOnFailure` set to `TERMINATE_CLUSTER`, use the table of settings below to determine the outcome\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
+
+## Termination Protection and Spot Instances<a name="emr-termination-protection-spot"></a>
+
+Amazon EMR termination protection does not prevent an Amazon EC2 Spot Instance from terminating when the Spot Price rises above the maximum Spot price\.
+
+## Configuring Termination Protection When You Launch a Cluster<a name="emr-termination-protection-create-cluster"></a>
 
 You can enable or disable termination protection when you launch a cluster using the console, the AWS CLI, or the API\. 
 
-**To configure termination protection for a new cluster using the console**
+The default termination protection setting depends on how you launch the cluster:
++ Amazon EMR Console Quick Options—Termination Protection is **disabled** by default\.
++ Amazon EMR Console Advanced Options—Termination Protection is **enabled** by default\.
++ AWS CLI `aws emr create-cluster`—Termination Protection is **disabled** unless `--termination-protected` is specified\.
++ Amazon EMR API [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow) command—Termination Protection is **disabled** unless the `TerminationProtected` boolean value is set to `true`\.
+
+**To enable or disable termination protection when creating a cluster using the console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
@@ -43,47 +65,52 @@ You can enable or disable termination protection when you launch a cluster using
 
 1. Choose **Go to advanced options**\.
 
-1. In the **Cluster Configuration** section, set the **Termination protection** field to **Yes** to enable protection, or set the field to **No** to disable it\. By default, termination protection is enabled\.   
-![\[Termination protection setting\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/termination-protection.png)
+1. For **Step 3: General Cluster Settings**, under **General Options** make sure **Termination protection** is selected to enable it, or clear the selection to disable it\.  
+![\[Termination protection setting in advanced options for cluster creation.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/termination-protection.png)
 
-1. Proceed with creating the cluster\.
+1. Choose other settings as appropriate for your application, choose **Next**, and then finish configuring your cluster\.
 
-**To configure termination protection for a new cluster using the AWS CLI**
+**To enable termination protection when creating a cluster using the AWS CLI**
++ Using the AWS CLI, you can launch a cluster with termination protection enabled by using the `create-cluster` command with the `--termination-protected` parameter\. Termination protection is disabled by default\.
 
-Using the AWS CLI, you can launch a cluster with termination protection enabled by typing the `create-cluster` command with the `--termination-protected` parameter\. By default, termination protection is disabled when you launch a cluster using the AWS CLI\. You can also use the `--no-termination-protected` parameter to disable termination protection\.
-+ To launch a protected cluster, type the following command and replace *myKey* with the name of your EC2 key pair\.
+  The following example creates cluster with termination protection enabled:
+**Note**  
+Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large --instance-count 3 --termination-protected
+  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.18.0 \
+  --applications Name=Hadoop Name=Hive Name=Pig \
+  --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large \
+  --instance-count 3 --termination-protected
   ```
 
-  For more information about using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Configuring Termination Protection for Running Clusters<a name="ProtectinganExistingJobFlow"></a>
+## Configuring Termination Protection for Running Clusters<a name="emr-termination-protection-running-cluster"></a>
 
 You can configure termination protection for a running cluster using the console or the AWS CLI\. 
 
-**To configure termination protection for a running cluster using the console**
+**To enable or disable termination protection for a running cluster using the console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
-1. On the **Cluster List** page, choose the link for your cluster\. 
+1. On the **Clusters** page, choose the **Name** of your cluster\. 
 
-1. On the **Cluster Details** page, in the **Summary** section, for **Termination protection**, choose **Change**\.
+1. On the **Summary** tab, for **Termination protection**, choose **Change**\.
 
-1. To enable termination protection, choose **On** and select the check mark icon\. Alternatively, choose **Off** to disable it\.  
+1. To enable termination protection, choose **On**\. To disable termination protection, choose **Off**\. Then choose the green check mark to confirm\.  
 ![\[Confirm termination protection change\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/change-termination-console.png)
 
-**To configure termination protection for a running cluster using the AWS CLI**
+**To enable or disable termination protection for a running cluster using the AWS CLI**
++ To enable termination protection on a running cluster using the AWS CLI, use the `modify-cluster-attributes` command with the `--termination-protected` parameter\. To disable it, use the `--no-termination-protected` parameter\.
 
-To enable termination protection on a running cluster using the AWS CLI, type the `modify-cluster-attributes` subcommand with the `--termination-protected` parameter\. To disable it, type the `--no-termination-protected` parameter\.
-+ Type the following command to enable termination protection on a running cluster\.
+  The following example enables termination protection on the cluster with ID *j\-3KVTXXXXXX7UG*:
 
   ```
   1. aws emr modify-cluster-attributes --cluster-id j-3KVTXXXXXX7UG --termination-protected
   ```
 
-  To disable termination protection, type:
+  The following example disables termination protection on the same cluster:
 
   ```
   1. aws emr modify-cluster-attributes --cluster-id j-3KVTXXXXXX7UG --no-termination-protected

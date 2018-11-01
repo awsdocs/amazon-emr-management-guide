@@ -5,7 +5,7 @@ If an Amazon EMR step fails and you submitted your work using the Step API opera
 + Java errors such as an application that was compiled with an incompatible version of Java or run with a main class that is not found\.
 + An issue accessing objects stored in Amazon S3\.
 
-This information is available using the [DescribeStep](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_DescribeStep.html) and [ListSteps](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListSteps.html) API operations\. The [FailureDetails](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_FailureDetails.html) field of the [StepSummary](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_StepSummary.html) returned by those operations\. To access the FailureDetails information, use the AWS CLI, console, or AWS SDK\.
+This information is available using the [DescribeStep](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_DescribeStep.html) and [ListSteps](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListSteps.html) API operations\. The [FailureDetails](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_FailureDetails.html) field of the [StepSummary](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_StepSummary.html) returned by those operations\. To access the FailureDetails information, use the AWS CLI, console, or AWS SDK\.
 
 **To view failure details using the AWS Console**
 

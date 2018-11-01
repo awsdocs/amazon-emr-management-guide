@@ -1,19 +1,22 @@
 # View Web Interfaces Hosted on Amazon EMR Clusters<a name="emr-web-interfaces"></a>
 
-Hadoop and other applications you install on your Amazon EMR cluster, publish user interfaces as web sites hosted on the master node\. For security reasons, when using EMR\-Managed Security Groups, these web sites are only available on the master node's local web server, so you need to connect to the master node to view them\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. Hadoop also publishes user interfaces as web sites hosted on the core and task \(slave\) nodes\. These web sites are also only available on local web servers on the nodes\. 
+Hadoop and other applications you install on your Amazon EMR cluster, publish user interfaces as web sites hosted on the master node\. For security reasons, when using EMR\-Managed Security Groups, these web sites are only available on the master node's local web server, so you need to connect to the master node to view them\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. Hadoop also publishes user interfaces as web sites hosted on the core and task nodes\. These web sites are also only available on local web servers on the nodes\. 
 
 **Warning**  
 It is possible to configure a custom security group to allow inbound access to these web interfaces\. Keep in mind that any port on which you allow inbound traffic represents a potential security vulnerability\. Carefully review custom security groups to ensure that you minimize vulnerabilities\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
 
-The following table lists web interfaces that you can view on the core and task nodes\. These Hadoop interfaces are available on all clusters\. To access the following interfaces, replace *slave\-public\-dns\-name* in the URI with the public DNS name of the node\. For more information about retrieving the public DNS name of a core or task node instance, see [Connecting to Your Linux/Unix Instances Using SSH](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html) in the *Amazon EC2 User Guide for Linux Instances*\. In addition to retrieving the public DNS name of the core or task node, you must also edit the ElasticMapReduce\-slave security group to allow SSH access over TCP port 22\. For more information about modifying security group rules, see [Adding Rules to a Security Group](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+The following table lists web interfaces that you can view on cluster instances\. These Hadoop interfaces are available on all clusters\. For the master instance interfaces, replace *master\-public\-dns\-name* with the **Master public DNS** listed on the cluster **Summary** tab in the EMR console\. For core and task instance interfaces, replace *coretask\-public\-dns\-name* with the **Public DNS name** listed for the instance\. To find an instance's **Public DNS name**, in the EMR console, choose your cluster from the list, choose the **Hardware** tab, choose the **ID** of the instance group that contains the instance you want to connect to, and then note the **Public DNS name** listed for the instance\.
+
+**Important**  
+To access web interfaces, you must edit the security groups associated with master and core instances so that they have an inbound rule that allows SSH traffic \(port 22\) from trusted clients, such as your computer's IP address\. For more information about modifying security group rules, see [Adding Rules to a Security Group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 
 |  Name of interface |   URI  | 
 | --- | --- | 
 | YARN ResourceManager | http://master\-public\-dns\-name:8088/ | 
-| YARN NodeManager | http://slave\-public\-dns\-name:8042/ | 
+| YARN NodeManager | http://coretask\-public\-dns\-name:8042/ | 
 | Hadoop HDFS NameNode | http://master\-public\-dns\-name:50070/ | 
-| Hadoop HDFS DataNode | http://slave\-public\-dns\-name:50075/ | 
+| Hadoop HDFS DataNode | http://coretask\-public\-dns\-name:50075/ | 
 | Spark HistoryServer | http://master\-public\-dns\-name:18080/ | 
 | Zeppelin | http://master\-public\-dns\-name:8890/ | 
 | Hue | http://master\-public\-dns\-name:8888/ | 

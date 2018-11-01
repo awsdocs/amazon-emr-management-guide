@@ -31,7 +31,7 @@
 
 ## Intermediate Data Compression<a name="HadoopIntermediateDataCompression"></a>
 
- If your job shuffles a significant amount data from the mappers to the reducers, you can see a performance improvement by enabling intermediate compression\. Compress the map output and decompresses it when it arrives on the slave node\. The configuration setting is mapred\.compress\.map\.output\. You can enable this similarly to output compression\. 
+ If your job shuffles a significant amount data from the mappers to the reducers, you can see a performance improvement by enabling intermediate compression\. Compress the map output and decompress it when it arrives on the core node\. The configuration setting is mapred\.compress\.map\.output\. You can enable this similarly to output compression\. 
 
  When writing a Custom Jar, use the following command: 
 

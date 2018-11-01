@@ -43,16 +43,16 @@
 ![\[Metrics Alarm Tutorial\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/cw-display-graph.png)
 
 **To access metrics from the CloudWatch CLI**
-+  Call `[mon\-get\-stats](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html)`\. For more information, see the [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
++  Call `[mon\-get\-stats](https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html)`\. For more information, see the [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
 
 **To access metrics from the CloudWatch API**
-+  Call `[GetMetricStatistics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)`\. For more information, see [Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)\. 
++  Call `[GetMetricStatistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)`\. For more information, see [Amazon CloudWatch API Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)\. 
 
 ## Setting Alarms on Metrics<a name="UsingEMR_ViewingMetrics_Alarm"></a>
 
  Amazon EMR pushes metrics to CloudWatch, which means you can use CloudWatch to set alarms on your Amazon EMR metrics\. You can, for example, configure an alarm in CloudWatch to send you an email any time the HDFS utilization rises above 80%\. 
 
- The following topics give you a high\-level overview of how to set alarms using CloudWatch\. For detailed instructions, see [Create or Edit a CloudWatch Alarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html) in the *Amazon CloudWatch User Guide*\. 
+ The following topics give you a high\-level overview of how to set alarms using CloudWatch\. For detailed instructions, see [Create or Edit a CloudWatch Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html) in the *Amazon CloudWatch User Guide*\. 
 
 **Set alarms using the CloudWatch console**
 
@@ -71,13 +71,13 @@
 1.  At this point, the **Define Alarm** screen gives you a chance to review the alarm that you’re about to create\. Choose **Create Alarm**\. 
 
 **Note**  
- For more information about how to set alarms using the CloudWatch console, see [Create an Alarm that Sends Email](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html) in the *Amazon CloudWatch User Guide*\. 
+ For more information about how to set alarms using the CloudWatch console, see [Create an Alarm that Sends Email](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html) in the *Amazon CloudWatch User Guide*\. 
 
 **To set an alarm using the CloudWatch API**
-+  Call `[mon\-put\-metric\-alarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-put-metric-alarm.html)`\. For more information, see *[Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)*\. 
++  Call `[mon\-put\-metric\-alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-put-metric-alarm.html)`\. For more information, see *[Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)*\. 
 
 **To set an alarm using the CloudWatch API**
-+  Call `[PutMetricAlarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)`\. For more information, see *[Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
++  Call `[PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)`\. For more information, see *[Amazon CloudWatch API Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
 
 ## Metrics Reported by Amazon EMR in CloudWatch<a name="UsingEMR_ViewingMetrics_MetricsReported"></a>
 

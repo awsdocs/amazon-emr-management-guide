@@ -14,7 +14,7 @@ For more information, see the following topics:
 
 Amazon EMR \(Amazon EMR\) uses Amazon S3 to store input data, log files, and output data\. Amazon S3 refers to these storage locations as *buckets*\. Buckets have certain restrictions and limitations to conform with Amazon S3 and DNS requirements\. For more information, go to [Bucket Restrictions and Limitations](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) in the *Amazon Simple Storage Service Developers Guide*\.
 
-This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. However, you can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or the third\-party Curl command line tool\. For information about Curl, go to [Amazon S3 Authentication Tool for Curl](http://aws.amazon.com/code/128)\. For information about using the Amazon S3 API to create and configure an Amazon S3 bucket, go to the [Amazon Simple Storage Service API Reference](http://docs.aws.amazon.com/AmazonS3/latest/API/)\. 
+This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. However, you can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or the third\-party Curl command line tool\. For information about Curl, go to [Amazon S3 Authentication Tool for Curl](http://aws.amazon.com/code/128)\. For information about using the Amazon S3 API to create and configure an Amazon S3 bucket, go to the [Amazon Simple Storage Service API Reference](https://docs.aws.amazon.com/AmazonS3/latest/API/)\. 
 
 **To create an Amazon S3 bucket using the console**
 

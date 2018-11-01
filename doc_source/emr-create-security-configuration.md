@@ -42,13 +42,13 @@ Choose options under **Encryption** according to the following guidelines\.
   What you do next depends on the encryption mode you chose:
   + **SSE\-S3**
 
-    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
+    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
   + **SSE\-KMS** or **CSE\-KMS**
 
-    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your Amazon EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your Amazon EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **CSE\-Custom**
 
-    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
+    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
 + Under **Local disk encryption**, choose a value for **Key provider type**\. Amazon EMR uses this key for Linux Unified Key System \(LUKS\) encryption for the local volumes \(except boot volumes\) attached to your cluster nodes\.
   + **AWS KMS**
 
@@ -319,7 +319,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3aac19c21c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3aac19c23c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

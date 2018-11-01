@@ -41,7 +41,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
 ```
  1. aws emr create-cluster --name "ClusterCustomManagedAndAdditionalSGs" \
- 2. --release-label emr-emr-5.17.0 --applications Name=Hue Name=Hive \
+ 2. --release-label emr-emr-5.18.0 --applications Name=Hue Name=Hive \
  3. Name=Pig --use-default-roles --ec2-attributes \
  4. SubnetIds=subnet-xxxxxxxxxxxx,KeyName=myKey,\
  5. ServiceAccessSecurityGroup=sg-xxxxxxxxxxxx,\
@@ -53,4 +53,4 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 11. --instance-type m4.large
 ```
 
-For more information, see [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
+For more information, see [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.

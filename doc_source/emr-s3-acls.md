@@ -6,7 +6,7 @@
 +  Have the other AWS user grant you write permissions for their Amazon S3 bucket\. The cluster you launch runs under your AWS credentials, so any clusters you launch will also be able to write to that other AWS user's bucket\. 
 +  Set read permissions for the other AWS user on the files that you or the cluster write to the Amazon S3 bucket\. The easiest way to set these read permissions is to use canned access control lists \(ACLs\), a set of pre\-defined access policies defined by Amazon S3\. 
 
- For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing Bucket Permissions](http://docs.aws.amazon.com/AmazonS3/latest/user-guide//EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+ For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing Bucket Permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide//EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
  For your cluster to use canned ACLs when it writes files to Amazon S3, set the `fs.s3.canned.acl` cluster configuration option to the canned ACL to use\. The following table lists the currently defined canned ACLs\. 
 

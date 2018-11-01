@@ -1,4 +1,4 @@
-# Using EMR File System \(EMRFS\)<a name="emr-fs"></a>
+# Use EMR File System \(EMRFS\)<a name="emr-fs"></a>
 
 The EMR File System \(EMRFS\) is an implementation of HDFS that all Amazon EMR clusters use for reading and writing regular files from Amazon EMR directly to Amazon S3\. EMRFS provides the convenience of storing persistent data in Amazon S3 for use with Hadoop while also providing features like consistent view and data encryption\. 
 

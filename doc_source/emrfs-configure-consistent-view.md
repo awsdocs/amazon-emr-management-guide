@@ -5,7 +5,7 @@ You can configure additional settings for consistent view by providing them usin
 **Example Changing default metadata read and write values at cluster launch**  
 
 ```
-aws emr create-cluster --release-label emr-5.17.0 --instance-type m4.large \
+aws emr create-cluster --release-label emr-5.18.0 --instance-type m4.large \
 --emrfs Consistent=true,Args=[fs.s3.consistent.metadata.read.capacity=600,\
 fs.s3.consistent.metadata.write.capacity=300] --ec2-attributes KeyName=myKey
 ```
@@ -27,14 +27,14 @@ Alternatively, use the following configuration file and save it locally or in Am
 Use the configuration you created with the following syntax:
 
 ```
-aws emr create-cluster --release-label emr-5.17.0 --applications Name=Hive \
+aws emr create-cluster --release-label emr-5.18.0 --applications Name=Hive \
 --instance-type m4.large --instance-count 2 --configurations file://./myConfig.json
 ```
 
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
-The following options can be set using configurations or AWS CLI `--emrfs` arguments\. For information about those arguments, see the [AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/)\.
+The following options can be set using configurations or AWS CLI `--emrfs` arguments\. For information about those arguments, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)\.
 
 
 **`emrfs-site.xml` properties for consistent view**  

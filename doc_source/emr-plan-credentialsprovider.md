@@ -8,7 +8,7 @@ Alternatively, if your Amazon EMR solution has demands beyond what IAM roles for
 
 ## Creating a Custom Credentials Provider for EMRFS Data in Amazon S3<a name="emr-create-credentialsprovider"></a>
 
-To create a custom credentials provider, you implement the [AWSCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProvider.html) and the Hadoop [Configurable](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/conf/Configurable.html) classes\.
+To create a custom credentials provider, you implement the [AWSCredentialsProvider](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProvider.html) and the Hadoop [Configurable](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/conf/Configurable.html) classes\.
 
 For a detailed explanation of this approach, see [Securely Analyze Data from Another AWS Account with EMRFS](http://aws.amazon.com/blogs/big-data/securely-analyze-data-from-another-aws-account-with-emrfs) in the AWS Big Data blog\. The blog post includes a tutorial that walks you through the process end\-to\-end, from creating IAM roles to launching the cluster\. It also provides a Java code example that implements the custom credential provider class\.
 
@@ -18,9 +18,9 @@ The basic steps are as follows:
 
 1. Create a custom credentials provider class compiled as a JAR file\.
 
-1. Run a script as a bootstrap action to copy the custom credentials provider JAR file to the `/usr/share/aws/emr/emrfs/auxlib` location on the cluster's master node\. For more information about bootstrap actions, see [\(Optional\) Create Bootstrap Actions to Install Additional Software](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html)\.
+1. Run a script as a bootstrap action to copy the custom credentials provider JAR file to the `/usr/share/aws/emr/emrfs/auxlib` location on the cluster's master node\. For more information about bootstrap actions, see [\(Optional\) Create Bootstrap Actions to Install Additional Software](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html)\.
 
-1. Customize the `emrfs-site` classification to specify the class that you implement in the JAR file\. For more information about specifying configuration objects to customize applications, see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\.
+1. Customize the `emrfs-site` classification to specify the class that you implement in the JAR file\. For more information about specifying configuration objects to customize applications, see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\.
 
    The following example demonstrates a `create-cluster` command that launches a Hive cluster with common configuration parameters, and also includes:
    + A bootstrap action that runs the script, `copy_jar_file.sh`, which is saved to `mybucket` in Amazon S3\.
@@ -34,7 +34,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
    --ec2-attributes '{"KeyName":"MyKeyPair","InstanceProfile":"EMR_EC2_DefaultRole",\
    "SubnetId":"subnet-xxxxxxxx","EmrManagedSlaveSecurityGroup":"sg-xxxxxxxx",\
    "EmrManagedMasterSecurityGroup":"sg-xxxxxxxx"}' \
-   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.17.0 \
+   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.18.0 \
    --log-uri 's3n://my-emr-log-bucket/' --name 'test-awscredentialsprovider-emrfs' \
    --instance-type=m4.large --instance-count 3  \
    --configurations '[{"Classification":"emrfs-site",\
