@@ -51,4 +51,4 @@ The default managed security group for core and task instances in private subnet
 
 ## Amazon EMR\-Managed Security Group for Service Access \(Private Subnets\)<a name="emr-sg-elasticmapreduce-sa-private"></a>
 
-The default managed security group for service access in private subnets has the **Group Name** of **ElasticMapReduce\-ServiceAccess**\. It has no inbound rules, and outbound rules that allow traffic over HTTPS \(port 8443\) to the other managed security groups in private subnets\. This rule allows the cluster manager to communicate with core and task nodes\. The same rules are added if you specify a custom security group\.
+The default managed security group for service access in private subnets has the **Group Name** of **ElasticMapReduce\-ServiceAccess**\. It has no inbound rules, and outbound rules that allow traffic over HTTPS \(port 8443\) to the other managed security groups in private subnets\. These rules allow the cluster manager to communicate with the master node and with core and task nodes\. The same rules are added if you specify a custom security group\.
