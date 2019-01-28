@@ -1,0 +1,19 @@
+# Configuring Kerberos on Amazon EMR<a name="emr-kerberos-configure"></a>
+
+This section provides configuration details and examples for setting up Kerberos with common architectures\. Regardless of the architecture you choose, the configuration basics are the same and done in three steps\. If you use an external KDC or set up a cross\-realm trust, you must ensure that every node in a cluster has a network route to the external KDC, including the configuration of applicable security groups to allow inbound and outbound Kerberos traffic\.
+
+## Step 1: Create a security configuration with Kerberos properties<a name="emr-kerberos-step1-summary"></a>
+
+The security configuration specifies details about the Kerberos KDC, and allows the Kerberos configuration to be re\-used each time you create a cluster\. You can create a security configuration using the Amazon EMR console, the AWS CLI, or the EMR API\. The security configuration can also contain other security options, such as encryption\. For more information about creating security configurations and specifying a security configuration when you create a cluster, see [Use Security Configurations to Set Up Cluster Security](emr-security-configurations.md)\. For information about Kerberos properties in a security configuration, see [Kerberos Settings for Security Configurations](emr-kerberos-configure-settings.md#emr-kerberos-security-configuration)\.
+
+## Step 2: Create a cluster and specify cluster\-specific Kerberos attributes<a name="emr-kerberos-step2-summary"></a>
+
+When you create a cluster, you specify a Kerberos security configuration along with cluster\-specific Kerberos options\. When you use the Amazon EMR console, only the Kerberos options compatible with the specified security configuration are available\. When you use the AWS CLI or Amazon EMR API, ensure that you specify Kerberos options compatible with the specified security configuration\. For example, if you specify a principal password for a cross\-realm trust when you create a cluster using the CLI, and the specified security configuration is not configured with cross\-realm trust parameters, an error occurs\. For more information, see [Kerberos Settings for Clusters](emr-kerberos-configure-settings.md#emr-kerberos-cluster-configuration)\.
+
+## Step 3: Configure the cluster master node<a name="emr-kerberos-step3-summary"></a>
+
+Depending on the requirements of your architecture and implementation, additional set up on the cluster may be required\. You can do this after you create it or using steps or bootstrap actions during the creation process\.
+
+For each Kerberos\-authenticated user that connects to the cluster using SSH, you must ensure that Linux user accounts are created that correspond to the Kerberos user\. If user principals are provided by an Active Directory Domain Controller, either as the external KDC or through a cross\-realm trust, Amazon EMR creates Linux user accounts automatically\. If Active Directory is not used, you must create principals for each user that correspond to their Linux user\. For more information, see [Configuring a Cluster for Kerberos\-Authenticated HDFS Users and SSH Connections](emr-kerberos-configuration-users.md)\.
+
+Each user also must also have an HDFS user directory that they own, which you must create\. In addition, SSH must be configured with GSSAPI enabled to allow connections from Kerberos\-authenticated users\. GSSAPI must be enabled on the master node, and the client SSH application must be configured to use GSSAPI\. For more information, see [Configuring a Cluster for Kerberos\-Authenticated HDFS Users and SSH Connections](emr-kerberos-configuration-users.md)\.
