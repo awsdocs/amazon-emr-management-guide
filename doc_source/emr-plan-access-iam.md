@@ -4,7 +4,7 @@ Amazon EMR supports AWS Identity and Access Management \(IAM\) policies\. IAM is
 
 IAM is available at no charge to all AWS account holders\. You don't need to sign up for IAM\. You can use IAM through the Amazon EMR console and the AWS CLI\. You can also use it programmatically through the Amazon EMR API and the AWS SDKs\.
 
-IAM policies adhere to the principle of least privilege, which means that a user can't perform an action until permission is granted to do so\. For more information, see the *[IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)*\.
+IAM policies adhere to the principle of least privilege, which means that a user can't perform an action until permission is granted to do so\. For more information, see the *[IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)*\.
 
 **Topics**
 + [Amazon EMR Actions in User\-Based IAM Policies](#emr-set-iam-policy)
@@ -14,7 +14,7 @@ IAM policies adhere to the principle of least privilege, which means that a user
 
 ## Amazon EMR Actions in User\-Based IAM Policies<a name="emr-set-iam-policy"></a>
 
-In IAM user policies for Amazon EMR, all Amazon EMR actions are prefixed with the lowercase `elasticmapreduce` element\. You can specify the `"elasticmapreduce:*"` key, using the wildcard character \(\*\) to specify all actions related to Amazon EMR, or you can allow a subset of actions, for example, `"elasticmapreduce:Describe*"`\. You can also explicitly specify individual Amazon EMR actions, for example `"elasticmapreduce:DescribeCluster"`\. For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. Because Amazon EMR relies on other services such as Amazon EC2 and Amazon S3, users need to be allowed a subset of permissions for these services as well\. For more information, see [IAM Managed Policy for Full Access](#emr-managed-policy-fullaccess)\.
+In IAM user policies for Amazon EMR, all Amazon EMR actions are prefixed with the lowercase `elasticmapreduce` element\. You can specify the `"elasticmapreduce:*"` key, using the wildcard character \(\*\) to specify all actions related to Amazon EMR, or you can allow a subset of actions, for example, `"elasticmapreduce:Describe*"`\. You can also explicitly specify individual Amazon EMR actions, for example `"elasticmapreduce:DescribeCluster"`\. For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. Because Amazon EMR relies on other services such as Amazon EC2 and Amazon S3, users need to be allowed a subset of permissions for these services as well\. For more information, see [IAM Managed Policy for Full Access](#emr-managed-policy-fullaccess)\.
 
 **Note**  
 At a minimum, to access the Amazon EMR console, an IAM user needs to have an attached IAM policy that allows the following action:   
@@ -23,7 +23,7 @@ At a minimum, to access the Amazon EMR console, an IAM user needs to have an att
 elasticmapreduce:ListClusters
 ```
 
-For more information about permissions and policies, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\.
+For more information about permissions and policies, see [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\.
 
 Amazon EMR does not support resource\-based and resource\-level policies, but you can use the `Condition` element \(also called the `Condition` block\) to specify fine\-grained access control based on cluster tags\. For more information, see [Use Cluster Tagging with IAM Policies for Cluster\-Specific Control](#emr-fine-grained-cluster-access)\. Because Amazon EMR does not support resource\-based or resource\-level policies, the `Resource` element always has a wildcard value\.
 
@@ -33,7 +33,7 @@ The easiest way to grant full access or read\-only access to required Amazon EMR
 
 These policies not only include actions for Amazon EMR; they also include actions for Amazon EC2, Amazon S3, and Amazon CloudWatch, which Amazon EMR uses to perform actions like launching instances, writing log files, and managing Hadoop jobs and tasks\. To create custom policies, we recommend that you begin with the managed policies and edit them according to your requirements\.
 
-For information about how to attach policies to IAM users \(principals\), see [Working with Managed Policies Using the AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console)in the *IAM User Guide*\.
+For information about how to attach policies to IAM users \(principals\), see [Working with Managed Policies Using the AWS Management Console](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console)in the *IAM User Guide*\.
 
 ### IAM Managed Policy for Full Access<a name="emr-managed-policy-fullaccess"></a>
 
@@ -148,7 +148,7 @@ Because the **AmazonElasticMapReduceReadOnlyAccess** policy is automatically upd
 To customize policies, we recommend that you start with a managed policy and then modify permissions and conditions according to your requirements\.
 
 **Important**  
-Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](emr-iam-roles-custom.md#emr-iam-roles-launch-jobflow)\.
+Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](emr-iam-roles-custom.md#emr-iam-roles-launch-jobflow)\.
 
 The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
 
@@ -175,13 +175,13 @@ You can use the `Condition` element \(also called a `Condition` block\) along wi
 + Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key to require a specific tag with actions/API calls\. 
 
 **Important**  
-The condition context keys apply only to those Amazon EMR API actions where `ClusterID` is a required request parameter\. For example, the [ModifyInstanceGroups](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ModifyInstanceGroups.html) action does not support context keys because `ClusterID` is an optional parameter\.
+The condition context keys apply only to those Amazon EMR API actions where `ClusterID` is a required request parameter\. For example, the [ModifyInstanceGroups](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ModifyInstanceGroups.html) action does not support context keys because `ClusterID` is an optional parameter\.
 
-For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. For more information about the `Condition` element and condition operators, see [IAM Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*, particularly [String Condition Operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_String)\. For more information about adding tags to EMR clusters, see [Tagging Amazon EMR Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html)\. 
+For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. For more information about the `Condition` element and condition operators, see [IAM Policy Elements Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*, particularly [String Condition Operators](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_String)\. For more information about adding tags to EMR clusters, see [Tagging EMR clusters](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html)\. 
 
 ### Example Amazon EMR Policy Statements<a name="emr-cluster-access-resourcetag"></a>
 
-The following examples demonstrate different scenarios and ways to use condition operators with Amazon EMR condition context keys\. These IAM policy statements are intended for demonstration purposes only and should not be used in production environments\. There are multiple ways to combine policy statements to grant and deny permissions according to your requirements\. For more information about planning and testing IAM policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
+The following examples demonstrate different scenarios and ways to use condition operators with Amazon EMR condition context keys\. These IAM policy statements are intended for demonstration purposes only and should not be used in production environments\. There are multiple ways to combine policy statements to grant and deny permissions according to your requirements\. For more information about planning and testing IAM policies, see the [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 #### Allow Actions Only on Clusters with Specific Tag Values<a name="emr-cluster-access-example-tagvalue"></a>
 
@@ -197,13 +197,13 @@ In the following policy example, the `StringEquals` condition operator tries to 
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Stmt14793345241244",
+      "Sid": "Stmt12345678901234",
       "Effect": "Allow",
       "Action": [
         "elasticmapreduce:DescribeCluster",
         "elasticmapreduce:ListSteps",
-        "elasticmapreduce:TerminateJobFlows ",
-        "elasticmapreduce:SetTerminationProtection ",
+        "elasticmapreduce:TerminateJobFlows",
+        "elasticmapreduce:SetTerminationProtection",
         "elasticmapreduce:ListInstances",
         "elasticmapreduce:ListInstanceGroups",
         "elasticmapreduce:ListBootstrapActions",
@@ -285,7 +285,7 @@ In the following example, the EMR actions that allow the addition and removal of
 
 #### Allow Actions on Clusters with a Specific Tag, Regardless of Tag Value<a name="emr-cluster-access-example-tag"></a>
 
-You can also allow actions only on clusters that have a particular tag, regardless of the tag value\. To do this, you can use the `Null` operator\. For more information, see [Condition Operator to Check Existence of Condition Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_Null) in the *IAM User Guide*\. For example, to allow actions only on EMR clusters that have the `department` tag, regardless of the value it contains, you could replace the Condition blocks in the earlier example with the following one\. The `Null` operator looks for the presence of the tag `department` on an EMR cluster\. If the tag exists, the `Null` statement evaluates to false, matching the condition specified in this policy statement, and the appropriate actions are allowed\. 
+You can also allow actions only on clusters that have a particular tag, regardless of the tag value\. To do this, you can use the `Null` operator\. For more information, see [Condition Operator to Check Existence of Condition Keys](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_Null) in the *IAM User Guide*\. For example, to allow actions only on EMR clusters that have the `department` tag, regardless of the value it contains, you could replace the Condition blocks in the earlier example with the following one\. The `Null` operator looks for the presence of the tag `department` on an EMR cluster\. If the tag exists, the `Null` statement evaluates to false, matching the condition specified in this policy statement, and the appropriate actions are allowed\. 
 
 ```
 1. "Condition": {

@@ -30,11 +30,15 @@ The local file system refers to a locally connected disk\. When you create a Had
 
 The resource management layer is responsible for managing cluster resources and scheduling the jobs for processing data\.
 
-By default, Amazon EMR uses YARN \(Yet Another Resource Negotiator\), which is a component introduced in Apache Hadoop 2\.0 to centrally manage cluster resources for multiple data\-processing frameworks\. However, there are other frameworks and applications that are offered in Amazon EMR that do not use YARN as a resource manager\. Amazon EMR also has an agent on each node that administers YARN components, keeps the cluster healthy, and communicates with the Amazon EMR service\.
+By default, Amazon EMR uses YARN \(Yet Another Resource Negotiator\), which is a component introduced in Apache Hadoop 2\.0 to centrally manage cluster resources for multiple data\-processing frameworks\. However, there are other frameworks and applications that are offered in Amazon EMR that do not use YARN as a resource manager\. Amazon EMR also has an agent on each node that administers YARN components, keeps the cluster healthy, and communicates with Amazon EMR\.
+
+Because Spot Instances are often used to run task nodes, Amazon EMR has default functionality for scheduling YARN jobs so that running jobs don’t fail when task nodes running on Spot Instances are terminated\. Amazon EMR does this by allowing application master processes to run only on core nodes\. The application master process controls running jobs and needs to stay alive for the life of the job\.
+
+Amazon EMR release version 5\.19\.0 and later uses the built\-in [YARN node labels](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeLabel.html) feature to achieve this\. \(Earlier versions used a code patch\)\. Properties in the `yarn-site` and `capacity-scheduler` configuration classifications are configured by default so that the YARN capacity\-scheduler and fair\-scheduler take advantage of node labels\. Amazon EMR automatically labels core nodes with the `CORE` label, and sets properties so that application masters are scheduled only on nodes with the CORE label\. Manually modifying related properties in the yarn\-site and capacity\-scheduler configuration classifications, or directly in associated XML files, could break this feature or modify this functionality\.
 
 ## Data Processing Frameworks<a name="emr-arch-processing-frameworks"></a>
 
- The data processing framework layer is the engine used to process and analyze data\. There are many frameworks available that run on YARN or have their own resource management\. Different frameworks are available for different kinds of processing needs, such as batch, interactive, in\-memory, streaming, and so on\. The framework that you choose depends on your use case\. This impacts the languages and interfaces available from the application layer, which is the layer used to interact with the data you want to process\. The main processing frameworks available for Amazon EMR are Hadoop MapReduce and Spark\. 
+The data processing framework layer is the engine used to process and analyze data\. There are many frameworks available that run on YARN or have their own resource management\. Different frameworks are available for different kinds of processing needs, such as batch, interactive, in\-memory, streaming, and so on\. The framework that you choose depends on your use case\. This impacts the languages and interfaces available from the application layer, which is the layer used to interact with the data you want to process\. The main processing frameworks available for Amazon EMR are Hadoop MapReduce and Spark\. 
 
 ### Hadoop MapReduce<a name="emr-processing-framework-mapreduce"></a>
 
@@ -46,7 +50,7 @@ For more information, go to [How Map and Reduce operations are actually carried 
 
 Spark is a cluster framework and programming model for processing big data workloads\. Like Hadoop MapReduce, Spark is an open\-source, distributed processing system but uses directed acyclic graphs for execution plans and in\-memory caching for datasets\. When you run Spark on Amazon EMR, you can use EMRFS to directly access your data in Amazon S3\. Spark supports multiple interactive query modules such as SparkSQL\.
 
-For more information, see [Apache Spark on Amazon EMR Clusters](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html) in the *Amazon EMR Release Guide*\.
+For more information, see [Apache Spark on Amazon EMR Clusters](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html) in the *Amazon EMR Release Guide*\.
 
 ## Applications and Programs<a name="emr-arch-applications"></a>
 
@@ -54,4 +58,4 @@ For more information, see [Apache Spark on Amazon EMR Clusters](https://docs.aws
 
 You use various libraries and languages to interact with the applications that you run in Amazon EMR\. For example, you can use Java, Hive, or Pig with MapReduce or Spark Streaming, Spark SQL, MLlib, and GraphX with Spark\.
 
-For more information, see the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.
+For more information, see the [Amazon EMR Release Guide](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.

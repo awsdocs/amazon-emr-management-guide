@@ -65,7 +65,7 @@ The list of arguments changes depending on the type of step\.
   5. }
   ```
 
-For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Viewing Steps<a name="emr-view-steps"></a>
 

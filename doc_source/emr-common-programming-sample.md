@@ -56,7 +56,7 @@ Next, create a new AWS Java project and run the sample Java source code\.
 
 1. In the **New AWS Java Project** dialog, in the **Project name:** field, enter the name of your new project, for example **EMR\-sample\-code**\.
 
-1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr//getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
+1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](http://docs.aws.amazon.com/general/latest/gr//getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
 **Note**  
 You should **not** embed access keys directly in code\. The Amazon EMR SDK allows you to put access keys in known locations so that you do not have to keep them in code\.
 

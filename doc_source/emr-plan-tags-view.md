@@ -24,4 +24,4 @@ To view the tags on a cluster using the AWS CLI, type the `describe-cluster` sub
   Key: other            Key: costCenter
   ```
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.

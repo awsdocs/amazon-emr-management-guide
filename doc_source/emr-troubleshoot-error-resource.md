@@ -8,25 +8,25 @@ Usually, this happens because termination protection is disabled, and all core n
 
 Exceeding disk utilization on one core node might lead to a chain reaction\. If a single node exceeds the disk utilization threshold because of HDFS, other nodes are likely to be near the threshold as well\. The first node exceeds the disk utilization threshold, so Amazon EMR blacklists it\. This increases the burden of disk utilization for remaining nodes because they begin to replicate HDFS data among themselves that they lost on the blacklisted node\. Each node subsequently goes `UNHEALTHY` in the same way, and the cluster eventually terminates\.
 
-### Best Practices and Recommendations<a name="w3aac23c33c24b5b7"></a>
+### Best Practices and Recommendations<a name="w3ab1c25c33c24b5b7"></a>
 
-#### Configure Cluster Hardware with Adequate Storage<a name="w3aac23c33c24b5b7b3"></a>
+#### Configure Cluster Hardware with Adequate Storage<a name="w3ab1c25c33c24b5b7b3"></a>
 
 When you create a cluster, make sure that there are enough core nodes and that each has an adequate instance store and EBS storage volumes for HDFS\. For more information, see [Calculating the Required HDFS Capacity of a Cluster](emr-plan-instances-guidelines.md#emr-plan-instances-hdfs)\. You can also add core instances to existing instance groups manually or by using auto\-scaling\. The new instances have the same storage configuration as other instances in the instance group\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
 
-#### Enable Termination Protection<a name="w3aac23c33c24b5b7b5"></a>
+#### Enable Termination Protection<a name="w3ab1c25c33c24b5b7b5"></a>
 
 Enable termination protection\. This way, if a core node is blacklisted, you can connect to the associated Amazon EC2 instance using SSH to troubleshoot and recover data\. If you enable termination protection, be aware that Amazon EMR does not replace the Amazon EC2 instance with a new instance\. For more information, see [Using Termination Protection](UsingEMR_TerminationProtection.md)\.
 
-#### Create an Alarm for the MRUnhealthyNodes CloudWatch Metric<a name="w3aac23c33c24b5b7b7"></a>
+#### Create an Alarm for the MRUnhealthyNodes CloudWatch Metric<a name="w3ab1c25c33c24b5b7b7"></a>
 
 This metric reports the number of nodes reporting an `UNHEALTHY` status\. It's equivalent to the YARN metric `mapred.resourcemanager.NoOfUnhealthyNodes`\. You can set up a notification for this alarm to warn you of unhealthy nodes before the 45\-minute timeout is reached\. For more information, see [Monitor Metrics with CloudWatch](UsingEMR_ViewingMetrics.md)\.
 
-#### Tweak Settings Using yarn\-site<a name="w3aac23c33c24b5b7b9"></a>
+#### Tweak Settings Using yarn\-site<a name="w3ab1c25c33c24b5b7b9"></a>
 
 The settings below can be adjusted according to your application requirements\. For example, you may want to increase the disk utilization threshold where a node reports `UNHEALTHY` by increasing the value of `yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage`\.
 
-You can set these values when you create a cluster using the `yarn-site` configuration classification\. For more information see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. You can also connect to the Amazon EC2 instances associated with core nodes using SSH, and then add the values in `/etc/hadoop/conf.empty/yarn-site.xml` using a text editor\. After making the change, you must restart hadoop\-yarn\-nodemanager as shown below\.
+You can set these values when you create a cluster using the `yarn-site` configuration classification\. For more information see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. You can also connect to the Amazon EC2 instances associated with core nodes using SSH, and then add the values in `/etc/hadoop/conf.empty/yarn-site.xml` using a text editor\. After making the change, you must restart hadoop\-yarn\-nodemanager as shown below\.
 
 **Important**  
 When you restart the NodeManager service, active YARN containers are killed unless `yarn.nodemanager.recovery.enabled` is set to `true` using the `yarn-site` configuration classification when you create the cluster\. You must also specify the directory in which to store container state using the `yarn.nodemanager.recovery.dir` property\.
@@ -50,7 +50,7 @@ For more information about current `yarn-site` properties and default values, se
 
 If you do not, Amazon EMR returns the following error: **“Cannot replicate block, only managed to replicate to zero nodes\.”** This error occurs when you generate more data in your cluster than can be stored in HDFS\. You will see this error only while the cluster is running, because when the cluster ends it releases the HDFS space it was using\. 
 
-The amount of HDFS space available to a cluster depends on the number and type of Amazon EC2 instances that are used as core nodes\. All of the disk space on each Amazon EC2 instance is available to be used by HDFS\. For more information about the amount of local storage for each EC2 instance type, see [Instance Types and Families](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide//instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*\. 
+The amount of HDFS space available to a cluster depends on the number and type of Amazon EC2 instances that are used as core nodes\. All of the disk space on each Amazon EC2 instance is available to be used by HDFS\. For more information about the amount of local storage for each EC2 instance type, see [Instance Types and Families](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide//instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*\. 
 
 The other factor that can affect the amount of HDFS space available is the replication factor, which is the number of copies of each data block that are stored in HDFS for redundancy\. The replication factor increases with the number of nodes in the cluster: there are 3 copies of each data block for a cluster with 10 or more nodes, 2 copies of each block for a cluster with 4 to 9 nodes, and 1 copy \(no redundancy\) for clusters with 3 or fewer nodes\. The total HDFS space available is divided by the replication factor\. In some cases, such as increasing the number of nodes from 9 to 10, the increase in replication factor can actually cause the amount of available HDFS space to decrease\. 
 
@@ -98,7 +98,7 @@ When a file is written to HDFS, it is replicated to multiple core nodes\. When y
 + Permissions may be missing\. For example, the JobTracker daemon may not have permissions to create job tracker information\. 
 + The reserved space setting for a DataNode instance may be insufficient\. Check whether this is the case by checking the dfs\.datanode\.du\.reserved configuration setting\. 
 
-To check whether this issue is caused by HDFS running out of disk space, look at the `HDFSUtilization` metric in CloudWatch\. If this value is too high, you can add additional core nodes to the cluster\. Keep in mind that you can only add core nodes to a cluster, you cannot remove them\. If you have a cluster that you think might run out of HDFS disk space, you can set an alarm in CloudWatch to alert you when the value of `HDFSUtilization` rises above a certain level\. For more information, see [Manually Resizing a Running Cluster](emr-manage-resize.md) and [Monitor Metrics with CloudWatch](UsingEMR_ViewingMetrics.md)\. 
+To check whether this issue is caused by HDFS running out of disk space, look at the `HDFSUtilization` metric in CloudWatch\. If this value is too high, you can add additional core nodes to the cluster\. If you have a cluster that you think might run out of HDFS disk space, you can set an alarm in CloudWatch to alert you when the value of `HDFSUtilization` rises above a certain level\. For more information, see [Manually Resizing a Running Cluster](emr-manage-resize.md) and [Monitor Metrics with CloudWatch](UsingEMR_ViewingMetrics.md)\. 
 
 If HDFS running out of space was not the issue, check the DataNode logs, the NameNode logs and network connectivity for other issues that could have prevented HDFS from replicating data\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. 
 
@@ -107,7 +107,7 @@ If HDFS running out of space was not the issue, check the DataNode logs, the Nam
 The NodeManager daemon is responsible for launching and managing containers on core and task nodes\. The containers are allocated to the NodeManager daemon by the ResourceManager daemon that runs on the master node\. The ResourceManager monitors the NodeManager node through a heartbeat\.
 
 There are a couple of situations in which the ResourceManager daemon blacklists a NodeManager, removing it from the pool of nodes available to process tasks: 
-+ If the NodeManager has not sent a heartbeat to the ResourceManager daemon in the past 10 minutes \(60000 milliseconds\)\. This time period can be configured using the `yarn.nm.liveness-monitor.expiry-interval-ms` configuration setting\. For more information about changing Yarn configuration settings, see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. 
++ If the NodeManager has not sent a heartbeat to the ResourceManager daemon in the past 10 minutes \(60000 milliseconds\)\. This time period can be configured using the `yarn.nm.liveness-monitor.expiry-interval-ms` configuration setting\. For more information about changing Yarn configuration settings, see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. 
 + NodeManager checks the health of the disks determined by `yarn.nodemanager.local-dirs` and `yarn.nodemanager.log-dirs`\. The checks include permissions and free disk space \(< 90%\)\. If a disk fails the check, the NodeManager stops using that particular disk but still reports the node status as healthy\. If a number of disks fail the check, the node is reported as unhealthy to the ResourceManager and new containers are not assigned to the node\.
 
-The application master can also blacklist a NodeManager node if it has more than three failed tasks\. You can change this to a higher value using the `mapreduce.job.maxtaskfailures.per.tracker` configuration parameter\. Other configuration settings you might change control how many times to attempt a task before marking it as failed: `mapreduce.map.max.attempts` for map tasks and `mapreduce.reduce.maxattempts` for reduce tasks\. For more information about changing configuration settings, see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\.
+The application master can also blacklist a NodeManager node if it has more than three failed tasks\. You can change this to a higher value using the `mapreduce.job.maxtaskfailures.per.tracker` configuration parameter\. Other configuration settings you might change control how many times to attempt a task before marking it as failed: `mapreduce.map.max.attempts` for map tasks and `mapreduce.reduce.maxattempts` for reduce tasks\. For more information about changing configuration settings, see [Configuring Applications](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\.

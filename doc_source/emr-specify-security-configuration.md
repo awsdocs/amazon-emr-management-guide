@@ -4,7 +4,7 @@ You can specify encryption settings when you create a cluster by specifying the 
 
 ## Specifying a Security Configuration Using the Console<a name="emr-specify-security-configuration-console"></a>
 
-When using the AWS console to create an Amazon EMR cluster, you choose the security configuration during **Step 4: Security** of the advanced options creation process\.
+When using the AWS console to create an EMR cluster, you choose the security configuration during **Step 4: Security** of the advanced options creation process\.
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 

@@ -16,16 +16,13 @@ This topic covers general procedures for creating a security configuration using
 1. Choose options for **Encryption** and **Authentication** as described in the sections below and then choose **Create**\.
 
 **To create a security configuration using the AWS CLI**
++ Use the `create-security-configuration` command as shown in the following example\.
+  + For *SecConfigName*, specify the name of the security configuration\. This is the name you specify when you create a cluster that uses this security configuration\.
+  + For `SecConfigDef`, specify an inline JSON structure or the path to a local JSON file, such as `file://MySecConfig.json`\. The JSON parameters define options for **Encryption**, **IAM Roles for EMRFS access to Amazon S3**, and **Authentication** as described in the sections below\.
 
-1. Use the `create-security-configuration` command with the following syntax:
-
-   ```
-   aws emr create-security-configuration --name "SecConfigName" --security-configuration SecConfigDef
-   ```
-
-   For *SecConfigName*, specify the name of the security configuration\. This is the name you specify when you create a cluster that uses this security configuration\.
-
-1. For `SecConfigDef`, specify an inline JSON structure or the path to a JSON file in Amazon S3, such as `s3://mybucket/MySecConfig.json`, or a local file, such as `file://MySecConfig.json`\. The JSON parameters define options for **Encryption**, **IAM Roles for EMRFS access to Amazon S3**, and **Authentication** as described in the sections below\.
+  ```
+  aws emr create-security-configuration --name "SecConfigName" --security-configuration SecConfigDef
+  ```
 
 ## Configure Data Encryption<a name="emr-security-configuration-encryption"></a>
 
@@ -42,17 +39,17 @@ Choose options under **Encryption** according to the following guidelines\.
   What you do next depends on the encryption mode you chose:
   + **SSE\-S3**
 
-    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
+    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
   + **SSE\-KMS** or **CSE\-KMS**
 
-    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your Amazon EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **CSE\-Custom**
 
-    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
+    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
 + Under **Local disk encryption**, choose a value for **Key provider type**\. Amazon EMR uses this key for Linux Unified Key System \(LUKS\) encryption for the local volumes \(except boot volumes\) attached to your cluster nodes\.
   + **AWS KMS**
 
-    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your Amazon EMR cluster\. For more information about key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your EMR cluster\. For more information about key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **Custom**
 
     Select this option to specify a custom key provider\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. For **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\. The class name you provide here must be different from the class name provided for CSE\-Custom\.
@@ -259,59 +256,19 @@ The following table lists the JSON parameters for encryption settings and provid
 
 ## Configure Kerberos Authentication<a name="emr-security-configuration-kerberos"></a>
 
-A security configuration with Kerberos settings can only be used by a cluster that is created with Kerberos attributes or an error occurs\. For more information, see [Configure Kerberos](emr-kerberos-configure.md)\. Kerberos is only available in Amazon EMR release version 5\.10\.0 and later\.
+A security configuration with Kerberos settings can only be used by a cluster that is created with Kerberos attributes or an error occurs\. For more information, see [Use Kerberos Authentication](emr-kerberos.md)\. Kerberos is only available in Amazon EMR release version 5\.10\.0 and later\.
 
 ### Specifying Kerberos Settings Using the Console<a name="emr-security-configuration-console-kerberos"></a>
 
 Choose options under **Kerberos authentication** according to the following guidelines\.
 
-
-| Parameter | Description | 
-| --- | --- | 
-|  **Enable Kerberos**  | Specifies that Kerberos is enabled for clusters that use this security configuration\. If a cluster uses this security configuration, the cluster must also have Kerberos settings specified or an error occurs\. | 
-|   **Ticket Lifetime**  |  Specifies the period for which a Kerberos ticket issued by the cluster\-dedicated KDC is valid\. Ticket lifetimes are limited for security reasons\. Cluster applications and services auto\-renew tickets after they expire\. Users who connect to the cluster over SSH using Kerberos credentials need to run `kinit` from the master node command line to renew after a ticket expires\.  | 
-|  **Cross\-realm trust**  |  If you provide a cross\-realm trust configuration, principals \(typically users\) from another realm are authenticated to clusters that use this configuration\. Additional configuration in the other Kerberos realm is also required\. For more information, see [Configure a Cross\-Realm Trust](emr-kerberos-cross-realm.md)\.  | 
-|   **Realm**  |  Specifies the Kerberos realm name of the other realm in the trust relationship\. Any string can be used, but by convention, this is typically the same as the Domain, but in all capital letters\.  | 
-|   **Domain**  |  Specifies the domain name of the other realm in the trust relationship\.  | 
-|   **Admin server**  |  Specifies the fully qualified domain name \(FQDN\) of the admin server in the other realm of the trust relationship\. The admin server and KDC server typically run on the same machine with the same FQDN, but communicate on different ports\. If no port is specified, port 749 is used, which is the Kerberos default\. Optionally, you can specify the port \(for example, domain\.example\.com:749\)\.  | 
-|   **KDC server**  |  Specifies the fully qualified domain name \(FQDN\) of the KDC server in the other realm of the trust relationship\. The KDC server and admin server typically run on the same machine with the same FQDN, but communicate on different ports\. If no port is specified, port 88 is used, which is the Kerberos default\. Optionally, you can specify the port \(for example, domain\.example\.com:88\)\.  | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)
 
 ### Specifying Kerberos Settings Using the AWS CLI<a name="emr-kerberos-cli-parameters"></a>
 
-The following example shows JSON parameters for a Kerberos configuration, followed by a reference for parameters and values\.
+The following reference table shows JSON parameters for Kerberos settings in a security configuration\. For example configurations, see, [Configuration Examples](emr-kerberos-config-examples.md)\.
 
-```
-{
-    "AuthenticationConfiguration": {
-        "KerberosConfiguration": {
-            "Provider": "ClusterDedicatedKdc",
-            "ClusterDedicatedKdcConfiguration": {
-                "TicketLifetimeInHours": number,
-                "CrossRealmTrustConfiguration": {
-                    "Realm": "DOMAIN.EXAMPLE.COM",
-                    "Domain": "domain.example.com",
-                    "AdminServer": "domain.example.com",
-					"KdcServer": "domain.example.com"
-                }
-            }
-        }
-    }
-}
-```
-
-
-| Parameter | Description | 
-| --- | --- | 
-| "AuthenticationConfiguration" : | Required\. Contains Kerberos configuration parameters\. | 
-| "KerberosConfiguration" : | Required\. Contains Kerberos configuration parameters\. | 
-| "Provider": "ClusterDedicatedKdc" | Required\. Specifies that a cluster\-dedicated KDC is created on the master node\. | 
-| "ClusterDedicatedKdcConfiguration" | Required\. Contains configuration parameters for the cluster\-dedicated KDC on the master node\. | 
-| "TicketLifetimeInHours": number | Optional\. If omitted, defaults to 24\. Specifies the period for which a Kerberos ticket issued by the cluster\-dedicated KDC is valid\. Ticket lifetimes are limited for security reasons\. Cluster applications and services auto\-renew tickets after they expire\. Users who connect to the cluster over SSH using Kerberos credentials need to run kinit from the master node command line to renew after a ticket expires\. | 
-| "CrossRealmTrustConfiguration": | Optional\. Contains parameters that define a cross\-realm trust configuration\. If you provide a cross\-realm trust configuration, principals \(typically users\) from another realm are authenticated to clusters that use this configuration\. Additional configuration in the other Kerberos realm is also required\. For more information, see [Configure a Cross\-Realm Trust](emr-kerberos-cross-realm.md)\. | 
-| "Realm": "DOMAIN\.EXAMPLE\.COM" | Specifies the Kerberos realm name of the other realm in the trust relationship\. Any string can be used, but by convention, this is typically the same as the Domain, but in all capital letters\. | 
-| "Domain": "domain\.example\.com"  |  Specifies the domain name of the other realm in the trust relationship\.  | 
-| "AdminServer": "domain\.example\.com" | Specifies the fully qualified domain name \(FQDN\) of the admin server in the other realm of the trust relationship\. The admin server and KDC server typically run on the same machine with the same FQDN, but communicate on different ports\. If no port is specified, port 749 is used, which is the Kerberos default\. Optionally, you can specify the port \(for example, domain\.example\.com:749\)\. | 
-| "KdcServer": "domain\.example\.com" | Specifies the fully qualified domain name \(FQDN\) of the KDC server in the other realm of the trust relationship\. The KDC server and admin server typically run on the same machine with the same FQDN, but communicate on different ports\. If no port is specified, port 88 is used, which is the Kerberos default\. Optionally, you can specify the port \(for example, domain\.example\.com:88\)\. | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)
 
 ## Configure IAM Roles for EMRFS Requests to Amazon S3<a name="emr-security-configuration-emrfs"></a>
 
@@ -319,7 +276,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3aac19c23c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3ab1c21c23c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

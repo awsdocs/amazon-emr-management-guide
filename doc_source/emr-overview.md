@@ -26,11 +26,11 @@ The central component of Amazon EMR is the *cluster*\. A cluster is a collection
 When you run a cluster on Amazon EMR, you have several options as to how you specify the work that needs to be done\. 
 + Provide the entire definition of the work to be done in functions that you specify as steps when you create a cluster\. This is typically done for clusters that process a set amount of data and then terminate when processing is complete\. 
 + Create a long\-running cluster and use the Amazon EMR console, the Amazon EMR API, or the AWS CLI to submit steps, which may contain one or more jobs\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\. 
-+ Create a cluster, connect to the master node and other nodes as required using SSH, and use the interfaces that the installed applications provide to perform tasks and submit queries, either scripted or interactively\. For more information, see the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\. 
++ Create a cluster, connect to the master node and other nodes as required using SSH, and use the interfaces that the installed applications provide to perform tasks and submit queries, either scripted or interactively\. For more information, see the [Amazon EMR Release Guide](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\. 
 
 ## Processing Data<a name="emr-overview-data-processing"></a>
 
-When you launch your cluster, you choose the frameworks and applications to install for your data processing needs\. There are three ways to process data in your Amazon EMR cluster: by submitting jobs or queries directly to the applications that are installed on your cluster or by running *steps* in the cluster\.
+When you launch your cluster, you choose the frameworks and applications to install for your data processing needs\. To process data in your Amazon EMR cluster, you can submit jobs or queries directly to installed applications, or you can run *steps* in the cluster\.
 
 ### Submitting Jobs Directly to Applications<a name="emr-overview-submitting-jobs"></a>
 

@@ -2,7 +2,7 @@
 
 You can use a *bootstrap action* to install additional software or customize the configuration of cluster instances\. Bootstrap actions are scripts that run on cluster after Amazon EMR launches the instance using the Amazon Linux Amazon Machine Image \(AMI\)\. Bootstrap actions run before Amazon EMR installs the applications that you specify when you create the cluster and before cluster nodes begin processing data\. If you add nodes to a running cluster, bootstrap actions also run on those nodes in the same way\. You can create custom bootstrap actions and specify them when you create your cluster\. 
 
-Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x Release Versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
+Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x Release Versions](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
 
 **Topics**
 + [Bootstrap Action Basics](#bootstrapUses)
@@ -49,7 +49,7 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
 **Note**  
 If you have not previously created the default Amazon EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Shutdown Actions<a name="bootstrap_Shutown"></a>
 
@@ -106,7 +106,7 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
 **Note**  
 If you have not previously created the default Amazon EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ### Add Custom Bootstrap Actions Using the Console<a name="CustombootstrapConsole"></a>
 
@@ -146,7 +146,7 @@ aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.18.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.20.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m4.large \

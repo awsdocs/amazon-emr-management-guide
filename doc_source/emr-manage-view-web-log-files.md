@@ -66,7 +66,7 @@ The following table lists some of the log files you'll find on Amazon S3\.
 
 1.  Double\-click on a log file to view it in the browser\. 
 
- If you don't want to view the log files in the Amazon S3 console, you can download the files from Amazon S3 to your local machine using a tool such as the Amazon S3 Organizer plug\-in for the Firefox web browser, or by writing an application to retrieve the objects from Amazon S3\. For more information, see [Getting Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/GettingObjectsUsingAPIs.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+ If you don't want to view the log files in the Amazon S3 console, you can download the files from Amazon S3 to your local machine using a tool such as the Amazon S3 Organizer plug\-in for the Firefox web browser, or by writing an application to retrieve the objects from Amazon S3\. For more information, see [Getting Objects](http://docs.aws.amazon.com/AmazonS3/latest/dev/GettingObjectsUsingAPIs.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 
 ## View Log Files in the Debugging Tool<a name="emr-manage-view-web-log-files-debug"></a>
 

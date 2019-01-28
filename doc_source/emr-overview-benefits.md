@@ -52,7 +52,7 @@ Amazon EMR monitors nodes in your cluster and automatically terminates and repla
 
 Amazon EMR provides configuration options that control how your cluster is terminated—automatically or manually\. If you configure your cluster to be automatically terminated, it is terminated after all the steps complete\. This is referred to as a transient cluster\. However, you can configure the cluster to continue running after processing completes so that you can choose to terminate it manually when you no longer need it\. Or, you can create a cluster, interact with the installed applications directly, and then manually terminate the cluster when you no longer need it\. The clusters in these examples are referred to as *long\-running clusters*\. 
 
-Additionally, you can configure termination protection to prevent instances in your cluster from being terminated due to errors or issues during processing\. When termination protection is enabled, you can recover data from instances before termination\. The default settings for these options differ depending on whether you launch your cluster by using the console, CLI, or API\. For more information, see [](UsingEMR_TerminationProtection.md)\.
+Additionally, you can configure termination protection to prevent instances in your cluster from being terminated due to errors or issues during processing\. When termination protection is enabled, you can recover data from instances before termination\. The default settings for these options differ depending on whether you launch your cluster by using the console, CLI, or API\. For more information, see [Using Termination Protection](UsingEMR_TerminationProtection.md)\.
 
 ## Security<a name="emr-benefits-security"></a>
 
@@ -74,11 +74,11 @@ Amazon EMR supports optional Amazon S3 server\-side and client\-side encryption 
 
 With client\-side encryption, the encryption and decryption process occurs in the EMRFS client on your EMR cluster\. You manage the master key for client\-side encryption using either the AWS Key Management Service \(AWS KMS\) or your own key management system\.
 
-For more information, see [Encryption for Amazon S3 Data with EMRFS in the *Amazon EMR Release Guide*](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-s3.html)\.
+For more information, see [Encryption for Amazon S3 Data with EMRFS in the *Amazon EMR Release Guide*](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-s3.html)\.
 
 ### Amazon VPC<a name="emr-benefits-vpc"></a>
 
-Amazon EMR supports launching clusters in a virtual private cloud \(VPC\) in Amazon VPC\. A VPC is an isolated, virtual network in AWS that provides the ability to control advanced aspects of network configuration and access\. For more information, see [Plan and Configure Networking](emr-plan-vpc-subnet.md)\.
+Amazon EMR supports launching clusters in a virtual private cloud \(VPC\) in Amazon VPC\. A VPC is an isolated, virtual network in AWS that provides the ability to control advanced aspects of network configuration and access\. For more information, see [Configure Networking](emr-plan-vpc-subnet.md)\.
 
 ### AWS CloudTrail<a name="emr-benefits-cloudtrail"></a>
 
@@ -98,6 +98,6 @@ Amazon EMR integrates with CloudWatch to track performance metrics for the clust
 
  There are several ways you can interact with Amazon EMR: 
 + **Console** — A graphical user interface that you can use to launch and manage clusters\. With it, you fill out web forms to specify the details of clusters to launch, view the details of existing clusters, debug, and terminate clusters\. Using the console is the easiest way to get started with Amazon EMR; no programming knowledge is required\. The console is available online at [https://console\.aws\.amazon\.com//elasticmapreduce/home](https://console.aws.amazon.com//elasticmapreduce/home)\. 
-+ **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option\. For more information, see [Amazon EMR](https://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
++ **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option\. For more information, see [Amazon EMR](http://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
 + **Software Development Kit \(SDK\)** — SDKs provide functions that call Amazon EMR to create and manage clusters\. With them, you can write applications that automate the process of creating and managing clusters\. Using the SDK is the best option to extend or customize the functionality of Amazon EMR\. Amazon EMR is currently available in the following SDKs: Go, Java, \.NET \(C\# and VB\.NET\), Node\.js, PHP, Python, and Ruby\. For more information about these SDKs, see [Tools for AWS](https://aws.amazon.com/tools/) and [Amazon EMR Sample Code & Libraries](https://aws.amazon.com//code/Elastic-MapReduce)\. 
-+ **Web Service API** — A low\-level interface that you can use to call the web service directly, using JSON\. Using the API is the best option to create a custom SDK that calls Amazon EMR\. For more information, see the [Amazon EMR API Reference](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/Welcome.html)\. 
++ **Web Service API** — A low\-level interface that you can use to call the web service directly, using JSON\. Using the API is the best option to create a custom SDK that calls Amazon EMR\. For more information, see the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/Welcome.html)\. 

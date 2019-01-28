@@ -59,7 +59,7 @@ When you specify the instance count without using the `--instance-groups` parame
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **To aggregate logs in Amazon S3 using the AWS CLI**
 **Note**  
@@ -95,7 +95,7 @@ This setting has not worked in past 4\.x releases of EMR\. Please use releases g
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Enable the Debugging Tool<a name="emr-plan-debugging-logs-archive-debug"></a>
 
@@ -134,7 +134,7 @@ To enable debugging using the AWS CLI, type the `create-cluster` subcommand with
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **Example Enabling debugging using the Java SDK**  
 Enable debugging using the following StepConfig:  

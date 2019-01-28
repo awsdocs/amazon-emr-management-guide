@@ -30,4 +30,4 @@ Compare the release label that you used to launch the cluster with the latest Am
 
 ## Check the Amazon VPC Subnet Configuration<a name="emr-troubleshoot-failed-2-vpc"></a>
 
-If your cluster was launched in a Amazon VPC subnet, the subnet needs to be configured as described in [Plan and Configure Networking](emr-plan-vpc-subnet.md)\. In addition, check that the subnet you launch the cluster into has enough free elastic IP addresses to assign one to each node in the cluster\.
+If your cluster was launched in a Amazon VPC subnet, the subnet needs to be configured as described in [Configure Networking](emr-plan-vpc-subnet.md)\. In addition, check that the subnet you launch the cluster into has enough free elastic IP addresses to assign one to each node in the cluster\.

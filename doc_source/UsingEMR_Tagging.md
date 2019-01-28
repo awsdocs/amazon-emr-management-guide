@@ -18,7 +18,7 @@ The values are further defined as follows:
 + The <job\-flow\-identifier> is the ID of the cluster the instance is provisioned for\. It appears in the format j\-XXXXXXXXXXXXX\. 
 + The <group\-role> is one of the following values: master, core, or task\. These values correspond to the master instance group, core instance group, and task instance group\.
 
- You can view and filter on the tags that Amazon EMR adds\. For more information, see [Using Tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide for Linux Instances*\. Because the tags set by Amazon EMR are system tags and cannot be edited or deleted, the sections on displaying and filtering tags are the most relevant\. 
+ You can view and filter on the tags that Amazon EMR adds\. For more information, see [Using Tags](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide for Linux Instances*\. Because the tags set by Amazon EMR are system tags and cannot be edited or deleted, the sections on displaying and filtering tags are the most relevant\. 
 
 **Note**  
  Amazon EMR adds tags to the EC2 instance when its status is updated to running\. If there's a latency period between the time the EC2 instance is provisioned and the time its status is set to running, the tags set by Amazon EMR do not appear until the instance starts\. If you don't see the tags, wait for a few minutes and refresh the view\. 

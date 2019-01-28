@@ -55,7 +55,7 @@ The default termination protection setting depends on how you launch the cluster
 + Amazon EMR Console Quick Options—Termination Protection is **disabled** by default\.
 + Amazon EMR Console Advanced Options—Termination Protection is **enabled** by default\.
 + AWS CLI `aws emr create-cluster`—Termination Protection is **disabled** unless `--termination-protected` is specified\.
-+ Amazon EMR API [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow) command—Termination Protection is **disabled** unless the `TerminationProtected` boolean value is set to `true`\.
++ Amazon EMR API [RunJobFlow](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow) command—Termination Protection is **disabled** unless the `TerminationProtected` boolean value is set to `true`\.
 
 **To enable or disable termination protection when creating a cluster using the console**
 
@@ -78,13 +78,13 @@ The default termination protection setting depends on how you launch the cluster
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.18.0 \
+  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.20.0 \
   --applications Name=Hadoop Name=Hive Name=Pig \
   --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large \
   --instance-count 3 --termination-protected
   ```
 
-  For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information about using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Configuring Termination Protection for Running Clusters<a name="emr-termination-protection-running-cluster"></a>
 

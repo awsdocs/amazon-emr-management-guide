@@ -4,7 +4,7 @@ With Amazon EMR release version 4\.8\.0 or later, you can use security configura
 
 After you create a security configuration, you specify it when you create a cluster, and you can re\-use it for any number of clusters\.
 
-You can use the console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDKs to create security configurations\. You can also use an AWS CloudFormation template to create a security configuration\. For more information, see [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) and the template reference for [AWS::EMR::SecurityConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html#cfn-emr-securityconfiguration-securityconfiguration)\.
+You can use the console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDKs to create security configurations\. You can also use an AWS CloudFormation template to create a security configuration\. For more information, see [AWS CloudFormation User Guide](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) and the template reference for [AWS::EMR::SecurityConfiguration](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html#cfn-emr-securityconfiguration-securityconfiguration)\.
 
 **Topics**
 + [Create a Security Configuration](emr-create-security-configuration.md)

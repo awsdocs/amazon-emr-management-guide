@@ -21,7 +21,7 @@ Amazon EMR provides several features to help secure cluster resources and data:
   You can implement data encryption to help protect data at rest in Amazon S3 and in cluster instance storage, and data in transit\. For more information, see [Encrypt Data in Transit and At Rest](emr-data-encryption.md)\. You can also use a custom Amazon Linux AMI to encrypt the EBS root device volume of cluster instances\. For more information, see [Using a Custom AMI](emr-custom-ami.md)\.
 + **Security groups**
 
-  Security groups act as a virtual firewall for Amazon EMR cluster instances, limiting inbound and outbound network traffic\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
+  Security groups act as a virtual firewall for EMR cluster instances, limiting inbound and outbound network traffic\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
 + **Security configurations**
 
   Security configurations in Amazon EMR are templates for a security setup\. You can create a security configuration to conveniently re\-use a security setup whenever you create a cluster\. For more information, see [Use Security Configurations to Set Up Cluster Security](emr-security-configurations.md)\.

@@ -2,7 +2,7 @@
 
 Amazon EMR tracks events and keeps information about them for up to seven days\. Changes in the state of clusters, instance groups, automatic scaling policies, and steps cause an event to be recorded\. Each event has information such as the date and time the event occurred, along with further detail about the event, such as the cluster or instance group affected\. 
 
-The following table lists Amazon EMR events, along with the state or state change that the event indicates, the severity of the event, and event messages\. Each event is represented as a JSON object that is sent automatically to an event stream\. The JSON object includes further detail about the event\. The JSON object is particularly important when you set up rules for event processing using CloudWatch Events because rules seek to match patterns in the JSON object\. For more information, see [Events and Event Patterns](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) and [Amazon EMR Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
+The following table lists Amazon EMR events, along with the state or state change that the event indicates, the severity of the event, and event messages\. Each event is represented as a JSON object that is sent automatically to an event stream\. The JSON object includes further detail about the event\. The JSON object is particularly important when you set up rules for event processing using CloudWatch Events because rules seek to match patterns in the JSON object\. For more information, see [Events and Event Patterns](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) and [Amazon EMR Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
 
 ## Cluster Events<a name="emr-cloudwatch-cluster-events"></a>
 
@@ -100,18 +100,6 @@ If you don't want a user to see all cluster events for a region, add a statement
 
 ## Creating Rules for Amazon EMR Events Using CloudWatch<a name="emr-events-cloudwatch-console"></a>
 
-Amazon EMR automatically sends events to a CloudWatch event stream\. You can create rules that match events according to a specified pattern, and route the events to targets to take action, such as sending an email notification\. Patterns are matched against the event JSON object\. For more information about Amazon EMR event details, see [Amazon EMR Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
+Amazon EMR automatically sends events to a CloudWatch event stream\. You can create rules that match events according to a specified pattern, and route the events to targets to take action, such as sending an email notification\. Patterns are matched against the event JSON object\. For more information about Amazon EMR event details, see [Amazon EMR Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
 
-**To create a rule for an Amazon EMR event using the CloudWatch console**
-
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
-
-1. In the navigation pane, choose **Rules**, **Create rule**\.
-
-1. For **Event source**, choose **Amazon EMR**\.
-
-1. Choose event states and other details according to your requirements for event handling\. To create a rule by modifying the JSON according to the guidelines in [Events and Event Patterns](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatchEventsandEventPatterns.html), choose **Show advanced options**, **edit\.**
-
-1. Select a target and add additional targets according to your requirements for event handling\.
-
-1. Choose **Configure details**, provide rule definition details, and then choose **Create rule**\.
+For information about setting up CloudWatch event rules, see [Creating a CloudWatch Rule That Triggers on an Event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\.

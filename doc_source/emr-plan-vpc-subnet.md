@@ -1,6 +1,6 @@
-# Plan and Configure Networking<a name="emr-plan-vpc-subnet"></a>
+# Configure Networking<a name="emr-plan-vpc-subnet"></a>
 
-There may be two network platform options you can choose for your cluster: **EC2\-Classic** or **EC2\-VPC**\. In EC2\-Classic, your instances run in a single, flat network that you share with other customers\. EC2\-Classic is available only with certain accounts in certain regions\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\. In EC2\-VPC, your cluster uses Amazon Virtual Private Cloud \(Amazon VPC\), and EC2 instances run in a VPC that's logically isolated within your AWS account\. Amazon VPC enables you to provision a virtual private cloud \(VPC\), an isolated area within AWS where you can configure a virtual network, controlling aspects such as private IP address ranges, subnets, routing tables, and network gateways\.
+There may be two network platform options you can choose for your cluster: **EC2\-Classic** or **EC2\-VPC**\. In EC2\-Classic, your instances run in a single, flat network that you share with other customers\. EC2\-Classic is available only with certain accounts in certain regions\. For more information, see [Amazon EC2 and Amazon VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\. In EC2\-VPC, your cluster uses Amazon Virtual Private Cloud \(Amazon VPC\), and EC2 instances run in a VPC that's logically isolated within your AWS account\. Amazon VPC enables you to provision a virtual private cloud \(VPC\), an isolated area within AWS where you can configure a virtual network, controlling aspects such as private IP address ranges, subnets, routing tables, and network gateways\.
 
 VPC offers the following capabilities:
 + **Processing sensitive data**
@@ -16,7 +16,7 @@ You can launch EMR clusters in both public and private VPC subnets\. This means 
 **Important**  
 Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or greater\. 
 
-For more information about Amazon VPC, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
+For more information about Amazon VPC, see the [Amazon VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/)\.
 
 **Topics**
 + [Amazon VPC Options](emr-clusters-in-a-vpc.md)
@@ -30,13 +30,13 @@ For more information about Amazon VPC, see the [Amazon VPC User Guide](https://d
 
 Use the following topics to learn more about VPCs and subnets\.
 + Private Subnets in a VPC
-  + [Scenario 2: VPC with Public and Private Subnets \(NAT\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)
-  + [NAT Instances](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html)
+  + [Scenario 2: VPC with Public and Private Subnets \(NAT\)](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html)
+  + [NAT Instances](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html)
   + [High Availability for Amazon VPC NAT Instances: An Example](https://aws.amazon.com//articles/2781451301784570)
 + Public Subnets in a VPC
-  + [Scenario 1: VPC with a Single Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario1.html)
+  + [Scenario 1: VPC with a Single Public Subnet](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario1.html)
 + General VPC Information
-  + [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)
-  + [VPC Peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html)
-  + [Using Elastic Network Interfaces with Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html)
+  + [Amazon VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/)
+  + [VPC Peering](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html)
+  + [Using Elastic Network Interfaces with Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ElasticNetworkInterfaces.html)
   + [Securely connect to Linux instances running in a private VPC](https://blogs.aws.amazon.com/security/post/Tx3N8GFK85UN1G6/Securely-connect-to-Linux-instances-running-in-a-private-Amazon-VPC)

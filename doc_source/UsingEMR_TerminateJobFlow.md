@@ -55,7 +55,7 @@ To terminate an unprotected cluster using the AWS CLI, use the `terminate-cluste
   1. aws emr terminate-clusters --cluster-ids j-3KVXXXXXXX7UG j-WJ2XXXXXX8EU
   ```
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **To terminate a protected cluster using the AWS CLI**
 
@@ -79,7 +79,7 @@ To terminate a protected cluster using the AWS CLI, first disable termination pr
    1. aws emr terminate-clusters --cluster-ids j-3KVXXXXXXX7UG j-WJ2XXXXXX8EU
    ```
 
-   For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+   For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Terminate a Cluster Using the API<a name="emr-dev-terminate-job-flow-api"></a>
 
@@ -87,4 +87,4 @@ The `TerminateJobFlows` operation ends step processing, uploads any log data fro
 
 You can use this action to terminate either a single cluster or a list of clusters by their cluster IDs\.
 
-For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//CommonParameters.html)\.
+For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](http://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](http://docs.aws.amazon.com/ElasticMapReduce/latest/API//CommonParameters.html)\.

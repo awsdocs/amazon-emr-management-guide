@@ -53,7 +53,7 @@ Specifying `EC2InstanceIdsToTerminate` must be done with caution\. Instances are
   1. aws emr modify-instance-groups --instance-groups InstanceGroupId=ig-6RXXXXXX07SA,EC2InstanceIdsToTerminate=i-f9XXXXf2
   ```
 
-  For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information about using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **To resize a cluster by adding task instance groups using the AWS CLI**
 
@@ -71,7 +71,7 @@ Using the AWS CLI, you can add from 1–48 task instance groups to a cluster wit
    aws emr add-instance-groups --cluster-id j-JXBXXXXXX37R --instance-groups InstanceCount=6,InstanceGroupType=task,InstanceType=m4.large InstanceCount=10,InstanceGroupType=task,InstanceType=m4.large
    ```
 
-   For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+   For more information about using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Interrupting a Resize<a name="interruptible-resize"></a>
 
