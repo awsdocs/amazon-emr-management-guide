@@ -22,7 +22,7 @@ To access web interfaces, you must edit the security groups associated with mast
 | Hue | http://master\-public\-dns\-name:8888/ | 
 | Ganglia | http://master\-public\-dns\-name/ganglia/ | 
 | HBase | http://master\-public\-dns\-name:16010/ | 
-| JupyterHub | http://master\-public\-dns\-name:9443/ | 
+| JupyterHub | https://master\-public\-dns\-name:9443/ | 
 
 Because there are several application\-specific interfaces available on the master node that are not available on the core and task nodes, the instructions in this document are specific to the Amazon EMR master node\. Accessing the web interfaces on the core and task nodes can be done in the same manner as you would access the web interfaces on the master node\. 
 

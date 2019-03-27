@@ -8,4 +8,4 @@ When you choose an instance type using the AWS Management Console, the number of
 **Topics**
 + [Supported Instance Types](emr-supported-instance-types.md)
 + [Instance Purchasing Options](emr-instance-purchasing-options.md)
-+ [Instance Store and Amazon EBS](emr-plan-storage.md)
++ [Instance Storage](emr-plan-storage.md)

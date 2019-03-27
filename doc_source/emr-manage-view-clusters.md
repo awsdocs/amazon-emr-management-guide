@@ -118,7 +118,6 @@ The output of your command is similar to the following:
                 "Name": "Spark"
             }
         ], 
-        "VisibleToAllUsers": true, 
         "BootstrapActions": [], 
         "MasterPublicDnsName": "ec2-X-X-X-X.compute-1.amazonaws.com", 
         "AutoTerminate": false, 

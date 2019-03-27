@@ -363,7 +363,6 @@ The command produces the following example output\.
         ],
         "AutoScalingRole": "EMR_AutoScaling_DefaultRole",
         "Tags": [],
-        "VisibleToAllUsers": true,
         "BootstrapActions": [],
         "Status": {
             "Timeline": {

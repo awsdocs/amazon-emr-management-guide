@@ -19,5 +19,5 @@ There are many reasons why a cluster might fail or be slow in processing data\. 
 
 Check the following:
 + The cluster age is less than two months\. Amazon EMR preserves metadata information about completed clusters for your reference, at no charge, for two months\. The console does not provide a way to delete completed clusters from the console; these are automatically removed for you after two months\.
-+ You have permissions to view the cluster\. If the `VisibleToAllUsers` property is set to false, other users in the same IAM account will not be able to view a cluster\.
++ You have permissions to view the cluster\.
 + You are viewing the correct region\.

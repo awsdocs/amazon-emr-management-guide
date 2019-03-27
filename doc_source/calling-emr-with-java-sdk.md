@@ -9,9 +9,6 @@ For more information about these packages, see the [AWS SDK for Java API Referen
 
  The following example illustrates how the SDKs can simplify programming with Amazon EMR The code sample below uses the `StepFactory` object, a helper class for creating common Amazon EMR step types, to create an interactive Hive cluster with debugging enabled\. 
 
-**Note**  
-If you are adding IAM user visibility to a new cluster, call [http://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_RunJobFlow.html](http://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_RunJobFlow.html) and set `VisibleToAllUsers=true`, otherwise IAM users cannot view the cluster\.
-
 ```
  1.    AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
  2.    AmazonElasticMapReduceClient emr = new AmazonElasticMapReduceClient(credentials);

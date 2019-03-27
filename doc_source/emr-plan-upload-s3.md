@@ -87,7 +87,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    1. aws emr create-cluster --name "Test cluster" \
-   2. --release-label emr-5.20.0 --applications Name=Hive Name=Pig \
+   2. --release-label emr-5.22.0 --applications Name=Hive Name=Pig \
    3. --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large \
    4. --instance-count 3 --configurations file://myConfig.json
    ```

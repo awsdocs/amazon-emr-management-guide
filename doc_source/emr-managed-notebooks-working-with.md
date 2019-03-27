@@ -23,9 +23,12 @@ An EMR notebook can have the following for **Status** in the **Notebooks** list\
 
 An advantage of using an EMR notebook is that you can launch the Jupyter notebook editor directly from the console\.
 
-With EMR Notebooks, the notebook editor you access from the Amazon EMR console is the familiar open\-source Jupyter Notebook editor\. Because the notebook editor is launched within the Amazon EMR console, it's more efficient to configure access than it is with a notebook hosted on an Amazon EMR cluster\. You don't need to configure a user's client to have web access through SSH, security group rules, and proxy configurations\. If a user has sufficient permissions, they simply open the notebook editor within the Amazon EMR console\.
+With EMR Notebooks, the notebook editor you access from the Amazon EMR console is the familiar open\-source Jupyter Notebook editor\. Because the notebook editor is launched within the Amazon EMR console, it's more efficient to configure access than it is with a notebook hosted on an Amazon EMR cluster\. You don't need to configure a user's client to have web access through SSH, security group rules, and proxy configurations\. If a user has sufficient permissions, they can simply open the notebook editor within the Amazon EMR console\.
 
-Only one user can have an EMR notebook open at a time\. If another user tries to open an EMR notebook that is already open, an error occurs\.
+Only one user can have an EMR notebook open at a time from within Amazon EMR\. If another user tries to open an EMR notebook that is already open, an error occurs\.
+
+**Important**  
+Amazon EMR creates a unique pre\-signed URL for each notebook editor session, which is valid only for a short time\. We recommend that you do not share the notebook editor URL\. Doing this creates a security risk because recipients of the URL adopt your permissions to edit the notebook and run notebook code for the lifetime of the URL\. If others need access to a notebook, provide permissions to their IAM user through permissions policies\. For more information, see [EMR Notebooks Security and Access Control](emr-managed-notebooks-security.md)\.
 
 **To open the notebook editor for an EMR notebook**
 
