@@ -38,7 +38,7 @@ The procedure below describes how to add the default EMR instance profile, `EMR_
 
 When using a security configuration, you must specify a different provider class name for local disk encryption and Amazon S3 encryption\.
 
-When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
+When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.10 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
 
 The encryption algorithm used for custom encryption materials must be **AES/GCM/NoPadding**\.
 
