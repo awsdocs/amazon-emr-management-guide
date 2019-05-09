@@ -1,0 +1,10 @@
+# Configure Cluster Software<a name="emr-plan-software"></a>
+
+When you select a software release, Amazon EMR uses an Amazon Machine Image \(AMI\) with Amazon Linux to install the software that you choose when you launch your cluster, such as Hadoop, Spark, and Hive\. Amazon EMR provides new releases on a regular basis, adding new features, new applications, and general updates\. We recommend that you use the latest release to launch your cluster whenever possible\. The latest release is the default option when you launch a cluster from the console\. 
+
+For more information about Amazon EMR releases and versions of software available with each release, go to the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\. For more information about how to edit the default configurations of applications and software installed on your cluster, go to [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the Amazon EMR Release Guide\. Some versions of the open\-source Hadoop and Spark ecosystem components that are included in Amazon EMR releases have patches and improvements, which are documented in the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.
+
+ In addition to the standard software and applications that are available for installation on your cluster, you can use bootstrap actions to install custom software\. Bootstrap actions are scripts that run on the instances when your cluster is launched, and that run on new nodes that are added to your cluster when they are created\. Bootstrap actions are also useful to invoke AWS CLI commands on each node to copy objects from Amazon S3 to each node in your cluster\. 
+
+**Note**  
+ Bootstrap actions are used differently in Amazon EMR release 4\.x and later\. For more information about these differences from Amazon EMR AMI versions 2\.x and 3\.x, go to [Differences Introduced in 4\.x](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\. 
