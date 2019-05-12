@@ -130,7 +130,7 @@ Because the **AmazonElasticMapReduceReadOnlyAccess** policy is automatically upd
  6.       "Action": [
  7.         "elasticmapreduce:Describe*",
  8.         "elasticmapreduce:List*",
- 9.         "elasticmapreduce:ViewEventsFromAllClustersInConsole"
+ 9.         "elasticmapreduce:ViewEventsFromAllClustersInConsole",
 10.         "s3:GetObject",
 11.         "s3:ListAllMyBuckets",
 12.         "s3:ListBucket",
