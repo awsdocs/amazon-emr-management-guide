@@ -2,7 +2,7 @@
 
 Within an EMR cluster, Kerberos principals are the big data application services and subsystems that run on all cluster nodes\. Amazon EMR can configure the applications and components listed below to use Kerberos\. Each application has a Kerberos user principal associated with it\.
 
-Amazon EMR does not support cross\-realm trusts with AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\)\.
+Amazon EMR does not support cross\-realm trusts with AWS Directory Service for Microsoft Active Directory\.
 
 Amazon EMR only configures the open\-source Kerberos authentication features for the applications and components listed below\. Any other applications installed are not Kerberized, which can result in an inability to communicate with Kerberized components and cause application errors\. Applications and components that are not Kerberized do not have authentication enabled\. Supported applications and components may vary by Amazon EMR release version\.
 

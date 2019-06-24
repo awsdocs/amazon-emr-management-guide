@@ -16,9 +16,9 @@ When a cluster application makes a request to Amazon S3 through EMRFS, EMRFS eva
 
 ## Configure Roles<a name="emr-emrfs-iam-roles-role-configuration"></a>
 
-Before you set up a security configuration with IAM roles for EMRFS, plan and create the roles and permission policies to attach to the roles\. For more information, see [How Do Roles for EC2 Instances Work?](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. When creating permissions policies, we recommend that you start with the managed policy attached to the default EMR role for EC2, and then edit this policy according to your requirements\. The default role is `EMR_EC2_DefaultRole`, and the default managed policy to edit is `AmazonElasticMapReduceforEC2Role`\. For more information, see [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\.
+Before you set up a security configuration with IAM roles for EMRFS, plan and create the roles and permission policies to attach to the roles\. For more information, see [How Do Roles for EC2 Instances Work?](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. When creating permissions policies, we recommend that you start with the managed policy attached to the default EMR role for EC2, and then edit this policy according to your requirements\. The default role is `EMR_EC2_DefaultRole`, and the default managed policy to edit is `AmazonElasticMapReduceforEC2Role`\. For more information, see [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\.
 
-### Updating Trust Policies for Assume Role Permissions<a name="w3ab1c21c19b9b5"></a>
+### Updating Trust Policies for Assume Role Permissions<a name="emr-emrfs-iam-role-trust-policy"></a>
 
 Each role that EMRFS uses must have a trust policy that allows the cluster's EMR role for EC2 to assume it\. Similarly, the cluster's EMR role for EC2 must have a trust policy that allows EMRFS roles to assume it\.
 
@@ -66,9 +66,9 @@ Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console
 
 1. Add a trust statement according to the **Policy Document** according to the guidelines above, and then choose **Update Trust Policy**\.
 
-### Specifying a Role as a Key User<a name="w3ab1c21c19b9b7"></a>
+### Specifying a Role as a Key User<a name="emr-emrfs-iam-role-key-user"></a>
 
-If a role allows access to a location in Amazon S3 that is encrypted using an AWS Key Management Service customer master key \(CMK\), make sure that the role is specified as a key user\. This gives the role permission to use the CMK\. For more information, see [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide*\.
+If a role allows access to a location in Amazon S3 that is encrypted using an AWS Key Management Service customer master key \(CMK\), make sure that the role is specified as a key user\. This gives the role permission to use the CMK\. For more information, see [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide*\.
 
 ## Set Up a Security Configuration with IAM Roles for EMRFS<a name="emr-emrfs-iam-roles-setup"></a>
 
@@ -132,13 +132,13 @@ If none of the IAM roles for EMRFS that you specify apply, EMRFS falls back to t
 
 1. Use the `aws emr create-cluster` command to create a cluster and specify the security configuration you created in the previous step\. 
 
-   The following example creates a cluster with default core Hadoop applications installed\. The cluster uses the security configuration created above as `ERMFS_Roles_Security_Configuration` and also uses a custom EMR role for EC2, `EC2_Role_EMR_Restrict_S3`, which is specified using the `InstanceProfile` argument of the `--ec2-attributes` parameter\.
+   The following example creates a cluster with default core Hadoop applications installed\. The cluster uses the security configuration created above as `EMRFS_Roles_Security_Configuration` and also uses a custom EMR role for EC2, `EC2_Role_EMR_Restrict_S3`, which is specified using the `InstanceProfile` argument of the `--ec2-attributes` parameter\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
    ```
    aws emr create-cluster --name MyEmrFsS3RolesCluster \
-   --release-label emr-5.22.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
+   --release-label emr-5.24.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
    --instance-type m4.large --instance-count 3 \
    --security-configuration EMRFS_Roles_Security_Configuration
    ```

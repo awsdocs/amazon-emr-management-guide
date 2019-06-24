@@ -116,7 +116,7 @@ When you are testing a new application in order to prepare it for launch in a pr
 
  The amount of HDFS storage available to your cluster depends on these factors:
 + The number of EC2 instances used for core nodes\.
-+ The capacity of the EC2 instance store for the instance type used\. For more information on instance store volumes, see [Amazon EC2 Instance Store](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*\.
++ The capacity of the EC2 instance store for the instance type used\. For more information on instance store volumes, see [Amazon EC2 Instance Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 + The number and size of EBS volumes attached to core nodes\.
 + A replication factor, which accounts for how each data block is stored in HDFS for RAID\-like redundancy\. By default, the replication factor is three for a cluster of 10 or more core nodes, two for a cluster of 4\-9 core nodes, and one for a cluster of three or fewer nodes\.
 

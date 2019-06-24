@@ -20,17 +20,17 @@ When you create a cluster that supports notebooks, consider the EC2 Instance typ
 ## Creating a Cluster When You Create a Notebook<a name="emr-managed-notebooks-new-cluster"></a>
 
 When you have Amazon EMR create a cluster when you create an EMR notebook, the cluster has the following characteristics and limitations:
-+ It uses the most recent Amazon EMR release version and the versions of Hadoop, Spark, and Livy included with that release version\. For more information, see the [Amazon EMR Release Guide](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.
++ It uses the most recent Amazon EMR release version and the versions of Hadoop, Spark, and Livy included with that release version\. For more information, see the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.
 + It is created without an EC2 key pair, so you are unable to connect to cluster EC2 instances using SSH\. If an SSH connection is required, create a cluster first and then specify it when you create an EMR notebook\.
 + It uses On\-Demand Instances, and the same instance type for all instances\. One instance is used for the master node, and the remainder are used for core nodes\. 
-+ It uses the uniform instance groups configuration\. For more information, see [Create a Cluster with Instance Fleets or Uniform Instance Groups](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-group-configuration.html) in the *Amazon EMR Management Guide*\.
++ It uses the uniform instance groups configuration\. For more information, see [Create a Cluster with Instance Fleets or Uniform Instance Groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-group-configuration.html) in the *Amazon EMR Management Guide*\.
 + It is launched in the default VPC for the AWS account\.
 
-You can specify a custom AWS service role and security groups, if required\. For more information, see [Specifying the AWS Service Role](emr-managed-notebooks-service-role.md) and [Specifying EC2 Security Groups for EMR Notebooks and Clusters](emr-managed-notebooks-security-groups.md)\. If you need additional customization or different settings, create a cluster beforehand using Amazon EMR, and then specify that cluster when you create the notebook\.
+You can specify a custom AWS service role and security groups, if required\. For more information, see [The IAM Role for EMR Notebooks](emr-iam-roles.md#emr-managed-notebooks-service-role) and [Specifying EC2 Security Groups for EMR Notebooks](emr-managed-notebooks-security-groups.md)\. If you need additional customization or different settings, create a cluster beforehand using Amazon EMR, and then specify that cluster when you create the notebook\.
 
 ## Using an Existing Amazon EMR Cluster<a name="emr-managed-notebooks-existing-cluster"></a>
 
-EMR Notebooks supports clusters created only by using Amazon EMR\. You can create a cluster using Amazon EMR if you require more processing power, storage, or any of the extensive cluster customization features that Amazon EMR offers\. For more information about creating clusters, see [Plan and Configure Clusters](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan.html) in the *Amazon EMR Management Guide*\.
+EMR Notebooks supports clusters created only by using Amazon EMR\. You can create a cluster using Amazon EMR if you require more processing power, storage, or any of the extensive cluster customization features that Amazon EMR offers\. For more information about creating clusters, see [Plan and Configure Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan.html) in the *Amazon EMR Management Guide*\.
 
 A cluster must meet the following requirements to be used with EMR Notebooks:
 + The cluster must be launched within an EC2\-VPC\. Public and private subnets are supported\. The EC2\-Classic platform is not supported\.

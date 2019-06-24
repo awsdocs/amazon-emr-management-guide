@@ -8,7 +8,7 @@ It is possible to configure a custom security group to allow inbound access to t
 The following table lists web interfaces that you can view on cluster instances\. These Hadoop interfaces are available on all clusters\. For the master instance interfaces, replace *master\-public\-dns\-name* with the **Master public DNS** listed on the cluster **Summary** tab in the EMR console\. For core and task instance interfaces, replace *coretask\-public\-dns\-name* with the **Public DNS name** listed for the instance\. To find an instance's **Public DNS name**, in the EMR console, choose your cluster from the list, choose the **Hardware** tab, choose the **ID** of the instance group that contains the instance you want to connect to, and then note the **Public DNS name** listed for the instance\.
 
 **Important**  
-To access web interfaces, you must edit the security groups associated with master and core instances so that they have an inbound rule that allows SSH traffic \(port 22\) from trusted clients, such as your computer's IP address\. For more information about modifying security group rules, see [Adding Rules to a Security Group](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+To access web interfaces, you must edit the security groups associated with master and core instances so that they have an inbound rule that allows SSH traffic \(port 22\) from trusted clients, such as your computer's IP address\. For more information about modifying security group rules, see [Adding Rules to a Security Group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 
 |  Name of interface |   URI  | 

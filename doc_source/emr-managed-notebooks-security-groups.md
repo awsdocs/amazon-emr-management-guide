@@ -1,8 +1,8 @@
-# Specifying EC2 Security Groups for EMR Notebooks and Clusters<a name="emr-managed-notebooks-security-groups"></a>
+# Specifying EC2 Security Groups for EMR Notebooks<a name="emr-managed-notebooks-security-groups"></a>
 
 When you create an EMR notebook, two security groups are used to control network traffic between the EMR notebook and the Amazon EMR cluster when the notebook editor is used\. The default security groups have minimal rules that allow only network traffic between the EMR Notebooks service and the clusters to which notebooks are attached\.
 
-An EMR notebook uses [Apache Livy](https://livy.incubator.apache.org/) to communicate with the cluster via a proxy using TCP Port 18888\. By creating custom security groups with rules tailored to your environment, you can limit network traffic so that only a subset of notebooks can run code within the notebook editor on particular clusters\. The security groups are used in addition to the security groups for the cluster\. For more information, see [Control Network Traffic with Security Groups](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html) in the *Amazon EMR Management Guide* and [Specifying EC2 Security Groups for EMR Notebooks and Clusters](#emr-managed-notebooks-security-groups)\.
+An EMR notebook uses [Apache Livy](https://livy.incubator.apache.org/) to communicate with the cluster via a proxy using TCP Port 18888\. By creating custom security groups with rules tailored to your environment, you can limit network traffic so that only a subset of notebooks can run code within the notebook editor on particular clusters\. The security groups are used in addition to the security groups for the cluster\. For more information, see [Control Network Traffic with Security Groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html) in the *Amazon EMR Management Guide* and [Specifying EC2 Security Groups for EMR Notebooks](#emr-managed-notebooks-security-groups)\.
 
 ## Default EC2 Security Group for the Master Instance<a name="emr-managed-notebooks-security-group-for-master"></a>
 
@@ -20,7 +20,7 @@ Group Name: **ElasticMapReduceEditors\-Livy**
 
 ## EC2 Security Group for EMR Notebooks<a name="emr-managed-notebooks-security-group-for-notebooks"></a>
 
-The default EC2 security group for the EMR Notebooks is associated with the notebook editor for any EMR notebook to which it is assigned\.
+The default EC2 security group for the EMR notebook is associated with the notebook editor for any EMR notebook to which it is assigned\.
 
 Group Name: **ElasticMapReduceEditors\-Editor**
 

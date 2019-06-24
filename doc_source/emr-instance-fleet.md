@@ -38,11 +38,11 @@ If you reduce the target capacity to resize a running cluster, Amazon EMR attemp
 
 You specify a **Maximum Spot price** for each of the five instance types in a fleet\. You can set this price either as a percentage of the On\-Demand price, or as a specific dollar amount\. Amazon EMR provisions Spot Instances if the current Spot price in an Availability Zone is below your maximum Spot price\. You pay the Spot price, not necessarily the maximum Spot price\.
 
-<a name="emr-fleet-defined-duration"></a>You can specify a **Defined duration** for Spot Instances in a fleet\. When the Spot price changes, Amazon EMR doesn't terminate instances until the **Defined duration** expires\. Defined duration pricing applies when you select this option\. If you don't specify a defined duration, instances terminate as soon as the Spot price exceeds the maximum Spot price\. For more information, see [Specifying a Duration for Your Spot Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#fixed-duration-spot-instances) and [Amazon EC2 Spot Instances Pricing](https://aws.amazon.com/ec2/spot/pricing/) for defined duration pricing\. 
+<a name="emr-fleet-defined-duration"></a>You can specify a **Defined duration** for Spot Instances in a fleet\. When the Spot price changes, Amazon EMR doesn't terminate instances until the **Defined duration** expires\. Defined duration pricing applies when you select this option\. If you don't specify a defined duration, instances terminate as soon as the Spot price exceeds the maximum Spot price\. For more information, see [Specifying a Duration for Your Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#fixed-duration-spot-instances) and [Amazon EC2 Spot Instances Pricing](https://aws.amazon.com/ec2/spot/pricing/) for defined duration pricing\. 
 
 <a name="emr-fleet-spot-timeout"></a>For each fleet, you also define a **Provisioning timeout**\. The timeout applies when the cluster is provisioning capacity when it is created and can't provision enough Spot Instances to fulfill target capacity according to your specifications\. You specify the timeout period and the action to take\. You can have the cluster terminate or switch to provisioning On\-Demand capacity to fulfill the remaining Spot capacity\. When you choose to switch to On\-Demand, the remaining Spot capacity is effectively added to the On\-Demand target capacity after the timeout expires\.
 
-For more information about Spot Instances, see [Spot Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html) in the Amazon EC2 User Guide for Linux Instances\.
+For more information about Spot Instances, see [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html) in the Amazon EC2 User Guide for Linux Instances\.
 
 ### **Multiple Subnet \(Availability Zones\) Options**<a name="emr-multiple-subnet-options"></a>
 
@@ -68,7 +68,7 @@ To create a cluster using instance fleets, use the **Advanced options** configur
 
 1. For **Network**, enter a value\. If you choose a VPC for **Network**, choose a single **EC2 Subnet** or CTRL \+ click to choose multiple EC2 subnets\. The subnets you select must be the same type \(public or private\)\. If you choose only one, your cluster launches in that subnet\. If you choose a group, the subnet with the best fit is selected from the group when the cluster launches\. 
 **Note**  
-Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose one or more from **EC2 Availability Zones** rather than **EC2 Subnets**\. For more information, see [Amazon EC2 and Amazon VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose one or more from **EC2 Availability Zones** rather than **EC2 Subnets**\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Within each node type row, under **Node type**, if you want to change the default name of an instance fleet, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance fleet, click the X icon\.
 
@@ -239,9 +239,9 @@ The my\-fleet\-config\.json specifies master, core, and task instance fleets as 
 ]
 ```
 
-### Get Configuration Details of Instance Fleets in a Cluster<a name="w3ab1c19c29c19c18c14b8"></a>
+### Get Configuration Details of Instance Fleets in a Cluster<a name="w10aac19c33c19c18c14b8"></a>
 
-Use the `list-instance-fleets` command to get configuration details of the instance fleets in a cluster\. The command takes a cluster ID as input\. The following example demonstrates the command and its output for a cluster that contains a master task instance group and a core task instance group\. For full response syntax, see [ListInstanceFleets](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListInstanceFleets.html) in the *Amazon EMR API Reference\.*
+Use the `list-instance-fleets` command to get configuration details of the instance fleets in a cluster\. The command takes a cluster ID as input\. The following example demonstrates the command and its output for a cluster that contains a master task instance group and a core task instance group\. For full response syntax, see [ListInstanceFleets](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListInstanceFleets.html) in the *Amazon EMR API Reference\.*
 
 ```
 list-instance-fleets --cluster-id 'j-12ABCDEFGHI34JK'

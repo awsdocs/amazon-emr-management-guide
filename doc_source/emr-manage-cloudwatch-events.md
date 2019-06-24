@@ -2,7 +2,7 @@
 
 Amazon EMR tracks events and keeps information about them for up to seven days\. Changes in the state of clusters, instance groups, automatic scaling policies, and steps cause an event to be recorded\. Each event has information such as the date and time the event occurred, along with further detail about the event, such as the cluster or instance group affected\. 
 
-The following table lists Amazon EMR events, along with the state or state change that the event indicates, the severity of the event, and event messages\. Each event is represented as a JSON object that is sent automatically to an event stream\. The JSON object includes further detail about the event\. The JSON object is particularly important when you set up rules for event processing using CloudWatch Events because rules seek to match patterns in the JSON object\. For more information, see [Events and Event Patterns](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) and [Amazon EMR Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
+The following table lists Amazon EMR events, along with the state or state change that the event indicates, the severity of the event, and event messages\. Each event is represented as a JSON object that is sent automatically to an event stream\. The JSON object includes further detail about the event\. The JSON object is particularly important when you set up rules for event processing using CloudWatch Events because rules seek to match patterns in the JSON object\. For more information, see [Events and Event Patterns](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html) and [Amazon EMR Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
 
 ## Cluster Events<a name="emr-cloudwatch-cluster-events"></a>
 
@@ -49,6 +49,26 @@ The instance fleets configuration is available only in Amazon EMR release versio
 |  `ARRESTED`  |  `ERROR`  |  Instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* was arrested at *Time* for the following reason: *ReasonDesc*\.  | 
 |  `RESIZING`  |  `WARNING`  |  The resizing operation for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* is stuck for the following reason: *ReasonDesc*\.  | 
 |  `WAITING` or `RUNNING`  |  `INFO`  |  A resize for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* was initiated by *Entity* at *Time*\.  | 
+
+**Note**  
+With Amazon EMR version 5\.21\.0 and later, you can override cluster configurations and specify additional configuration classifications for each instance group in a running cluster\. You do this by using the Amazon EMR console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDK\. For more information, see [Supplying a Configuration for an Instance Group in a Running Cluster](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps-running-cluster.html)\.
+
+The following table lists Amazon EMR events for the reconfiguration operation, along with the state or state change that the event indicates, the severity of the event, and event messages\. 
+
+
+****  
+
+| State or State Change | Severity | Message | 
+| --- | --- | --- | 
+|  `RUNNING`  |  `INFO`  |  A reconfiguration for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* was initiated by user at *Time*\. Version of requested configuration is *Num*\.  | 
+|  From `RECONFIGURING` to `RUNNING`  |  `INFO`  |  The reconfiguration operation for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* is complete\. The reconfiguration started at *Time* and took *Num* minutes to complete\. Current configuration version is *Num*\.  | 
+|  From `RUNNING` to `RECONFIGURING`  |  `INFO`  |  A reconfiguration for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* started at *Time*\. It is configuring from version number *Num* to version number *Num*\.  | 
+|  `RESIZING`  |  `INFO`  |  Reconfiguring operation towards configuration version *Num* for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* is temporarily blocked at *Time* because instance group is in *State*\.  | 
+|  `RECONFIGURING`  |  `INFO`  | Resizing operation towards instance count Num for instance group InstanceGroupID in the Amazon EMR cluster ClusterId \(ClusterName\) is temporarily blocked at Time because the instance group is in State\. | 
+|  `RECONFIGURING`  |  `WARNING`  |  The reconfiguration operation for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* failed at *Time* and took *Num* minutes to fail\. Failed configuration version is *Num*\.   | 
+|  `RECONFIGURING`  |  `INFO`  |  Configurations are reverting to the previous successful version number *Num*for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* at *Time*\. New configuration version is *Num*\.   | 
+|  From `RECONFIGURING` to `RUNNING`  |  `INFO`  |  Configurations were successfully reverted to the previous successful version *Num* for instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* at *Time*\. New configuration version is *Num*\.  | 
+|  From `RECONFIGURING` to `ARRESTED`  |  `CRITICAL`  |  Failed to revert to the previous successful version *Num* for Instance group *InstanceGroupID* in the Amazon EMR cluster *ClusterId \(ClusterName\)* at *Time*\.  | 
 
 ## Automatic Scaling Policy Events<a name="emr-cloudwatch-autoscale-events"></a>
 
@@ -100,6 +120,6 @@ If you don't want a user to see all cluster events for a region, add a statement
 
 ## Creating Rules for Amazon EMR Events Using CloudWatch<a name="emr-events-cloudwatch-console"></a>
 
-Amazon EMR automatically sends events to a CloudWatch event stream\. You can create rules that match events according to a specified pattern, and route the events to targets to take action, such as sending an email notification\. Patterns are matched against the event JSON object\. For more information about Amazon EMR event details, see [Amazon EMR Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
+Amazon EMR automatically sends events to a CloudWatch event stream\. You can create rules that match events according to a specified pattern, and route the events to targets to take action, such as sending an email notification\. Patterns are matched against the event JSON object\. For more information about Amazon EMR event details, see [Amazon EMR Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EventTypes.html#emr-event-types) in the *Amazon CloudWatch Events User Guide*\.
 
-For information about setting up CloudWatch event rules, see [Creating a CloudWatch Rule That Triggers on an Event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\.
+For information about setting up CloudWatch event rules, see [Creating a CloudWatch Rule That Triggers on an Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\.

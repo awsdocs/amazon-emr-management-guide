@@ -25,7 +25,7 @@ For example, take a cluster that has a master node, a core node, and uses the ba
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/ebs-volume-size.png)
 
 **To specify the EBS root device volume size using the AWS CLI**
-+ Use the `--ebs-root-volume-size` parameter of the [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) command as shown in the following example\.
++ Use the `--ebs-root-volume-size` parameter of the [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) command as shown in the following example\.
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 

@@ -7,7 +7,7 @@ Amazon EMR supports private subnets in release versions 4\.2 and above\.
 
 When the cluster is launched, Amazon EMR adds security groups based on whether the cluster is launching into VPC private or public subnets\. All security groups allow ingress at port 8443 to communicate to the Amazon EMR service, but IP address ranges vary for public and private subnets\. Amazon EMR manages all of these security groups, and may need to add additional IP addresses to the AWS range over time\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
 
-To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [http://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
+To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html](https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
 
 **To launch a cluster into a VPC using the Amazon EMR console**
 
@@ -46,4 +46,4 @@ After your VPC is configured, you can launch EMR clusters in it by using the `cr
 **Note**  
 If you have not previously created the default Amazon EMR service role and EC2 instance profile, type `aws emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information about using Amazon EMR commands in the AWS CLI, see the [AWS CLI](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information about using Amazon EMR commands in the AWS CLI, see the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

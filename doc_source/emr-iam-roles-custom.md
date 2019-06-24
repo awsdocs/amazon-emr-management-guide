@@ -5,12 +5,12 @@ You may want to customize IAM roles and permissions for your requirements\. For 
 If you create a custom EMR role for EC2, follow the basic work flow, which automatically creates an instance profile of the same name\. Amazon EC2 allows you to create instance profiles and roles with different names, but Amazon EMR does not support this configuration, and it results in an "invalid instance profile" error when you create the cluster\. 
 
 **Important**  
-Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](#emr-iam-roles-launch-jobflow)\.
+Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](#emr-iam-roles-launch-jobflow)\.
 
 For more information about working with IAM roles, see the following topics in the *IAM User Guide*:
-+  [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) 
-+  [Modifying a Role](http://docs.aws.amazon.com/IAM/latest/UserGuide/modifying-role.html) 
-+  [Deleting a Role](http://docs.aws.amazon.com/IAM/latest/UserGuide/deleting-roles.html) 
++  [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) 
++  [Modifying a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/modifying-role.html) 
++  [Deleting a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/deleting-roles.html) 
 
 ## Specify Custom IAM Roles When You Create a Cluster<a name="emr-iam-roles-launch-jobflow"></a>
 
@@ -51,7 +51,7 @@ The Auto Scaling role is specified using a separate option, `--auto-scaling-role
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.22.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.24.0 \
   --applications Name=Hive Name=Pig --service-role MyEMRServiceRole \
   --ec2-attributes InstanceProfile=MyEC2RoleForEMR,\
   KeyName=myKey --instance-type m4.large --instance-count 3

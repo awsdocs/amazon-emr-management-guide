@@ -1,6 +1,6 @@
 # Control Network Traffic with Security Groups<a name="emr-security-groups"></a>
 
-Security groups act as virtual firewalls for EC2 instances in your cluster to control inbound and outbound traffic\. Each security group has a set of rules that control inbound traffic, and a separate set of rules to control outbound traffic\. For more information, see [Amazon EC2 Security Groups for Linux Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)\.
+Security groups act as virtual firewalls for EC2 instances in your cluster to control inbound and outbound traffic\. Each security group has a set of rules that control inbound traffic, and a separate set of rules to control outbound traffic\. For more information, see [Amazon EC2 Security Groups for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 You use two classes of security groups with Amazon EMR: *Amazon EMR\-managed security groups* and *additional security groups*\.
 
@@ -8,9 +8,10 @@ Every cluster has managed security groups associated with it\. You can use the d
 
 Additional security groups are optional\. You can specify them in addition to managed security groups to tailor access to cluster instances\. Additional security groups contain only rules that you define\. Amazon EMR does not modify them\.
 
-The rules that Amazon EMR creates in managed security groups only allow the cluster to communicate among internal components\. To allow users and applications to access a cluster from outside the cluster, you can edit rules in managed security groups, you can create additional security groups with additional rules, or do both\.
+The rules that Amazon EMR creates in managed security groups allow the cluster to communicate among internal components\. To allow users and applications to access a cluster from outside the cluster, you can edit rules in managed security groups, you can create additional security groups with additional rules, or do both\.
 
-For example, to allow a trusted client to connect to the master node using SSH, you must create an inbound rule associated with the master instance that allows SSH \(Port 22\) from the client\. You can add this rule to the managed security group for the master instance after the cluster is created, or you can add it to an additional security group that you specify when you create the cluster\.
+**Warning**  
+The default EMR\-managed security group for the master instance in public subnets, `ElasticMapReduce-master`, is pre\-configured with a rule that allows inbound traffic on Port 22 from all sources \(IPv4 0\.0\.0\.0/0\)\. This is to simplify initial SSH client connections to the master node\. We strongly recommend that you edit this inbound rule to restrict traffic only from trusted sources or specify a custom security group that restricts access\. For more information, see [Working With Amazon EMR\-Managed Security Groups](emr-man-sec-groups.md)\.
 
 You can specify security groups only when you create a cluster\. They can't be added to a cluster or cluster instances while a cluster is running, but you can edit, add, and remove rules from existing security groups\. The rules take effect as soon as you save them\.
 
@@ -24,3 +25,4 @@ In addition, editing rules in managed security groups may have unintended conseq
 + [Working With Amazon EMR\-Managed Security Groups](emr-man-sec-groups.md)
 + [Working With Additional Security Groups](emr-additional-sec-groups.md)
 + [Specifying Amazon EMR\-Managed and Additional Security Groups](emr-sg-specify.md)
++ [Specifying EC2 Security Groups for EMR Notebooks](emr-managed-notebooks-security-groups.md)

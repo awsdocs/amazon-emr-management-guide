@@ -50,7 +50,7 @@ For more information, go to [How Map and Reduce operations are actually carried 
 
 Spark is a cluster framework and programming model for processing big data workloads\. Like Hadoop MapReduce, Spark is an open\-source, distributed processing system but uses directed acyclic graphs for execution plans and in\-memory caching for datasets\. When you run Spark on Amazon EMR, you can use EMRFS to directly access your data in Amazon S3\. Spark supports multiple interactive query modules such as SparkSQL\.
 
-For more information, see [Apache Spark on Amazon EMR Clusters](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html) in the *Amazon EMR Release Guide*\.
+For more information, see [Apache Spark on Amazon EMR Clusters](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html) in the *Amazon EMR Release Guide*\.
 
 ## Applications and Programs<a name="emr-arch-applications"></a>
 
@@ -58,4 +58,4 @@ For more information, see [Apache Spark on Amazon EMR Clusters](http://docs.aws.
 
 You use various libraries and languages to interact with the applications that you run in Amazon EMR\. For example, you can use Java, Hive, or Pig with MapReduce or Spark Streaming, Spark SQL, MLlib, and GraphX with Spark\.
 
-For more information, see the [Amazon EMR Release Guide](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.
+For more information, see the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)\.

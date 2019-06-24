@@ -15,9 +15,9 @@ The following errors are common to VPC configuration in Amazon EMR\.
 
 `The subnet configuration was invalid: Cannot find route to InternetGateway in main RouteTable rtb-id for vpc vpc-id.`
 
-To solve this problem, you must create an Internet Gateway and attach it to your VPC\. For more information, see [Adding an Internet Gateway to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)\.
+To solve this problem, you must create an Internet Gateway and attach it to your VPC\. For more information, see [Adding an Internet Gateway to Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)\.
 
-Alternatively, verify that you have configured your VPC with **Enable DNS resolution** and **Enable DNS hostname support** enabled\. For more information, see [Using DNS with Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
+Alternatively, verify that you have configured your VPC with **Enable DNS resolution** and **Enable DNS hostname support** enabled\. For more information, see [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
 
 ## Missing DHCP Options Set<a name="emr-troubleshoot-error-dhcp"></a>
 
@@ -32,13 +32,13 @@ or
 To solve this problem, you must configure a VPC that includes a DHCP Options Set whose parameters are set to the following values: 
 
 **Note**  
-If you use the AWS GovCloud \(US\) region, set domain\-name to **us\-gov\-west\-1\.compute\.internal** instead of the value used in the following example\.
+If you use the AWS GovCloud \(US\-West\) region, set domain\-name to **us\-gov\-west\-1\.compute\.internal** instead of the value used in the following example\.
 + **domain\-name** = **ec2\.internal**
 
   Use **ec2\.internal** if your region is US East \(N\. Virginia\)\. For other regions, use *region\-name***\.compute\.internal**\. For example in us\-west\-2, use **domain\-name**=**us\-west\-2\.compute\.internal**\.
 + **domain\-name\-servers** = **AmazonProvidedDNS**
 
-For more information, see [DHCP Options Sets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\.
+For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\.
 
 ## Permissions Errors<a name="emr-troubleshoot-error-denied"></a>
 

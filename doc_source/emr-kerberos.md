@@ -9,7 +9,7 @@ A common scenario for establishing a cross\-realm trust or using an external KDC
 When you use Kerberos authentication, Amazon EMR configures Kerberos for the applications, components, and subsystems that it installs on the cluster so that they are authenticated with each other\.
 
 **Important**  
-Amazon EMR does not support AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\) in a cross\-realm trust or as an external KDC\.
+Amazon EMR does not support AWS Directory Service for Microsoft Active Directory in a cross\-realm trust or as an external KDC\.
 
 Before you configure Kerberos using Amazon EMR, we recommend that you become familiar with Kerberos concepts, the services that run on a KDC, and the tools for administering Kerberos services\. For more information, see [MIT Kerberos Documentation](http://web.mit.edu/kerberos/krb5-latest/doc/), which is published by the [Kerberos Consortium](http://kerberos.org/)\.
 

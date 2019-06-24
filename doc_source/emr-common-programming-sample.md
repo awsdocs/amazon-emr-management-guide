@@ -56,7 +56,7 @@ Next, create a new AWS Java project and run the sample Java source code\.
 
 1. In the **New AWS Java Project** dialog, in the **Project name:** field, enter the name of your new project, for example **EMR\-sample\-code**\.
 
-1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](http://docs.aws.amazon.com/general/latest/gr//getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
+1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr//getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
 **Note**  
 You should **not** embed access keys directly in code\. The Amazon EMR SDK allows you to put access keys in known locations so that you do not have to keep them in code\.
 
@@ -68,53 +68,58 @@ You should **not** embed access keys directly in code\. The Amazon EMR SDK allow
 
 1. Enter the Java source code inside your new class and add the appropriate **import **statements for the classes and methods in the sample\. For your convenience, the full source code listing is shown below\. 
 **Note**  
-In the following sample code, replace the example cluster ID \(`j-1HTE8WKS7SODR`\) with a valid cluster ID in your account found either in the AWS Management Console or by using the following AWS CLI command:   
+In the following sample code, replace the example cluster ID \(JobFlowId\), *`j-xxxxxxxxxxxx`*, with a valid cluster ID in your account found either in the AWS Management Console or by using the following AWS CLI command:   
 
    ```
    aws emr list-clusters --active | grep "Id"
    ```
-In addition, replace the example Amazon S3 path \(`s3://mybucket/my-jar-location1`\) with the valid path to your JAR\. Lastly, replace the example class name \(`com.my.Main1`\) with the correct name of the class in your JAR, if applicable\. 
+In addition, replace the example Amazon S3 path, *`s3://path/to/my/jarfolder`*, with the valid path to your JAR\. Lastly, replace the example class name, *`com.my.Main1`*, with the correct name of the class in your JAR, if applicable\. 
 
    ```
-   import java.io.IOException;
+   import com.amazonaws.AmazonClientException;
    import com.amazonaws.auth.AWSCredentials;
-   import com.amazonaws.auth.PropertiesCredentials;
-   import com.amazonaws.services.elasticmapreduce.*;
-   import com.amazonaws.services.elasticmapreduce.model.AddJobFlowStepsRequest;
-   import com.amazonaws.services.elasticmapreduce.model.AddJobFlowStepsResult;
-   import com.amazonaws.services.elasticmapreduce.model.HadoopJarStepConfig;
-   import com.amazonaws.services.elasticmapreduce.model.StepConfig;
+   import com.amazonaws.auth.AWSStaticCredentialsProvider;
+   import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+   import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce;
+   import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClientBuilder;
+   import com.amazonaws.services.elasticmapreduce.model.*;
    import com.amazonaws.services.elasticmapreduce.util.StepFactory;
    
-   public class main {
+   public class Main {
    
    	public static void main(String[] args) {
-   		
-   		AWSCredentials credentials = null;
+   		AWSCredentials credentials_profile = null;		
    		try {
-   		    credentials = new PropertiesCredentials(
-   		        main.class.getResourceAsStream("AwsCredentials.properties"));
-   		} catch (IOException e1) {
-   		    System.out.println("Credentials were not properly entered into AwsCredentials.properties.");
-   		    System.out.println(e1.getMessage());
-   		    System.exit(-1);
-   		}
+   			credentials_profile = new ProfileCredentialsProvider("default").getCredentials();
+           } catch (Exception e) {
+               throw new AmazonClientException(
+                       "Cannot load credentials from .aws/credentials file. " +
+                       "Make sure that the credentials file exists and the profile name is specified within it.",
+                       e);
+           }
    		
-   		AmazonElasticMapReduce client = new AmazonElasticMapReduceClient(credentials);
+   		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.standard()
+   			.withCredentials(new AWSStaticCredentialsProvider(credentials_profile))
+   			.withRegion(Regions.US_WEST_1)
+   			.build();
+           
+   		// Run a bash script using a predefined step in the StepFactory helper class
+   	    StepFactory stepFactory = new StepFactory();
+   	    StepConfig runBashScript = new StepConfig()
+   	    		.withName("Run a bash script") 
+   	    		.withHadoopJarStep(stepFactory.newScriptRunnerStep("s3://jeffgoll/emr-scripts/create_users.sh"))
+   	    		.withActionOnFailure("CONTINUE");
    
-   	    // predefined steps. See StepFactory for list of predefined steps
-   	    StepConfig hive = new StepConfig("Hive", new StepFactory().newInstallHiveStep());
-   
-   	    // A custom step
+   	    // Run a custom jar file as a step
    	    HadoopJarStepConfig hadoopConfig1 = new HadoopJarStepConfig()
-   	        .withJar("s3://mybucket/my-jar-location1")
-   	        .withMainClass("com.my.Main1") // optional main class, this can be omitted if jar above has a manifest
-   	        .withArgs("--verbose"); // optional list of arguments
-   	    StepConfig customStep = new StepConfig("Step1", hadoopConfig1);
+   	       .withJar("s3://path/to/my/jarfolder") // replace with the location of the jar to run as a step
+   	       .withMainClass("com.my.Main1") // optional main class, this can be omitted if jar above has a manifest
+   	       .withArgs("--verbose"); // optional list of arguments to pass to the jar
+   	    StepConfig myCustomJarStep = new StepConfig("RunHadoopJar", hadoopConfig1);
    
-   	    AddJobFlowStepsResult result = client.addJobFlowSteps(new AddJobFlowStepsRequest()
-   		  .withJobFlowId("j-1HTE8WKS7SODR")
-   		  .withSteps(hive, customStep));
+   	    AddJobFlowStepsResult result = emr.addJobFlowSteps(new AddJobFlowStepsRequest()
+   		  .withJobFlowId("j-xxxxxxxxxxxx") // replace with cluster id to run the steps
+   		  .withSteps(runBashScript,myCustomJarStep));
    	    
              System.out.println(result.getStepIds());
    

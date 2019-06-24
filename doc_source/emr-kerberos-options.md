@@ -10,7 +10,7 @@ This configuration is available with Amazon EMR release version 5\.10\.0 and lat
 
 **Advantages**
 + Amazon EMR has full ownership of the KDC\.
-+ The KDC on the EMR cluster is independent from centralized KDC implementations such as Microsoft Active Directory or Microsoft AD\.
++ The KDC on the EMR cluster is independent from centralized KDC implementations such as Microsoft Active Directory or AWS Managed Microsoft AD\.
 + Performance impact is minimal because the KDC manages authentication only for local nodes within the cluster\.
 + Optionally, other Kerberized clusters can reference the KDC as an external KDC\. For more information, see [External KDC—Master Node on a Different Cluster](#emr-kerberos-extkdc-cluster-summary)\.
 
@@ -91,7 +91,7 @@ In this configuration, you first create a cluster with a cluster\-dedicated KDC 
 + Amazon EMR joins the Active Directory realm, which eliminates the need to create Linux users that correspond Active Directory users\. You still must create HDFS directories for each user\.
 + Multiple clusters can use the same KDC in the same Kerberos realm, which is different from the Active Directory realm\. This allows cluster applications to interoperate\.
 + User principals in the Active Directory domain can access Kerberized clusters using `kinit` credentials, without the EC2 private key file\. This eliminates the need to share the private key file among cluster users\.
-+ Only one Amazon EMR master node has the burden of maintaining the KDC, and only that cluster must be created with Active Directory credentials for the cross\-realm trust between the KDC and Acitve Directory\.
++ Only one Amazon EMR master node has the burden of maintaining the KDC, and only that cluster must be created with Active Directory credentials for the cross\-realm trust between the KDC and Active Directory\.
 
 **Considerations and Limitations**
 + Each node in each EMR cluster must have a network route to the KDC and the Active Directory domain controller\.

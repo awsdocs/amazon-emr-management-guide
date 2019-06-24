@@ -27,27 +27,27 @@ You can also delete an EMRFS Amazon SQS queue using the `delete-sqs` command\.
 1. To read messages from an Amazon SQS queue, type the following command\. Replace *queuename* with the name of the Amazon SQS queue that you configured and replace */path/filename* with the path to the output file:
 
    ```
-   emrfs read-sqs -queue-name queuename -output-file /path/filename
+   emrfs read-sqs --queue-name queuename --output-file /path/filename
    ```
 
    For example, to read and output Amazon SQS messages from the default queue, type:
 
    ```
-   emrfs read-sqs -queue-name EMRFS-Inconsistency-j-162XXXXXXM2CU -output-file /path/filename
+   emrfs read-sqs --queue-name EMRFS-Inconsistency-j-162XXXXXXM2CU --output-file /path/filename
    ```
 **Note**  
-You can also use the `-q` and `-o` shortcuts instead of `-queue-name` and `-output-file` respectively\.
+You can also use the `-q` and `-o` shortcuts instead of `--queue-name` and `--output-file` respectively\.
 
 1. To delete an Amazon SQS queue, type the following command:
 
    ```
-   emrfs delete-sqs -queue-name queuename
+   emrfs delete-sqs --queue-name queuename
    ```
 
    For example, to delete the default queue, type:
 
    ```
-   emrfs delete-sqs -queue-name EMRFS-Inconsistency-j-162XXXXXXM2CU
+   emrfs delete-sqs --queue-name EMRFS-Inconsistency-j-162XXXXXXM2CU
    ```
 **Note**  
-You can also use the `-q` shortcut instead of `-queue-name`\.
+You can also use the `-q` shortcut instead of `--queue-name`\.

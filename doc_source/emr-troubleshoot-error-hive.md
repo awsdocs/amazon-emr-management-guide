@@ -25,7 +25,7 @@ The following errors are common to Hive clusters\.
 ## Are you having trouble loading data to or from Amazon S3 into Hive?<a name="emr-troubleshoot-error-hive-3"></a>
 
  If you are having trouble accessing data in Amazon S3, first check the possible causes listed in [Are you experiencing trouble loading data to or from Amazon S3?](emr-troubleshoot-errors-io.md#emr-troubleshoot-errors-io-1)\. If none of those issues is the cause, consider the following options specific to Hive\. 
-+ Make sure you are using the latest version of Hive, which has all the current patches and bug fixes that may resolve your issue\. For more information, see [Apache Hive](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive.html)\.
++ Make sure you are using the latest version of Hive, which has all the current patches and bug fixes that may resolve your issue\. For more information, see [Apache Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive.html)\.
 +  Using `INSERT OVERWRITE` requires listing the contents of the Amazon S3 bucket or folder\. This is an expensive operation\. If possible, manually prune the path instead of having Hive list and delete the existing objects\. 
 + If you use Amazon EMR release versions earlier than 5\.0, you can use the following command in HiveQL to pre\-cache the results of an Amazon S3 list operation locally on the cluster:
 

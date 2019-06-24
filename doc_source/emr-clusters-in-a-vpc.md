@@ -22,7 +22,7 @@ The following diagram shows how to set up a VPC so that a cluster in the VPC can
 
 ## Private Subnets<a name="emr-vpc-private-subnet"></a>
 
-Private subnets allow you to launch AWS resources without requiring the subnet to have an attached internet gateway\. This might be useful, for example, in an application that uses these private resources in the backend\. Those resources can then initiate outbound traffic using a NAT instance located in another subnet that has an internet gateway attached\. For more information about this scenario, see [Scenario 2: VPC with Public and Private Subnets \(NAT\)](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html)\. 
+Private subnets allow you to launch AWS resources without requiring the subnet to have an attached internet gateway\. This might be useful, for example, in an application that uses these private resources in the backend\. Those resources can then initiate outbound traffic using a NAT instance located in another subnet that has an internet gateway attached\. For more information about this scenario, see [Scenario 2: VPC with Public and Private Subnets \(NAT\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)\. 
 
 **Important**  
 Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or later\.
@@ -32,7 +32,7 @@ The following are differences from public subnets:
 + At a minimum, you must provide a route to the Amazon EMR service logs bucket and Amazon Linux repository in Amazon S3\. For more information, see [Minimum Amazon S3 Policy for Private Subnet](private-subnet-iampolicy.md)
 + If you use EMRFS features, you need to have an Amazon S3 VPC endpoint and a route from your private subnet to DynamoDB\.
 + Debugging only works if you provide a route from your private subnet to a public Amazon SQS endpoint\.
-+ Creating a private subnet configuration with a NAT instance or gateway in a public subnet is only supported using the AWS Management Console\. The easiest way to add and configure NAT instances and Amazon S3 VPC endpoints for EMR clusters is to use the **VPC Subnets List** page in the Amazon EMR console\. To configure NAT gateways, see [NAT Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
++ Creating a private subnet configuration with a NAT instance or gateway in a public subnet is only supported using the AWS Management Console\. The easiest way to add and configure NAT instances and Amazon S3 VPC endpoints for EMR clusters is to use the **VPC Subnets List** page in the Amazon EMR console\. To configure NAT gateways, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
 + You cannot change a subnet with an existing EMR cluster from public to private or vice versa\. To locate an EMR cluster within a private subnet, the cluster must be started in that private subnet\. 
 
 Amazon EMR creates and uses different default security groups for the clusters in a private subnet: ElasticMapReduce\-Master\-Private, ElasticMapReduce\-Slave\-Private, and ElasticMapReduce\-ServiceAccess\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.

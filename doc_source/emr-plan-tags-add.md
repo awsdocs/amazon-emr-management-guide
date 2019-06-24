@@ -29,4 +29,4 @@ The `add-tags` subcommand currently accepts only one resource ID\.
 **Note**  
 When tags are added using the AWS CLI, there is no output from the command\.
 
-  For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+  For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

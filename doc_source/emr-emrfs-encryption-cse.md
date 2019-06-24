@@ -1,6 +1,6 @@
 # Amazon S3 Client\-Side Encryption<a name="emr-emrfs-encryption-cse"></a>
 
-With Amazon S3 client\-side encryption, the Amazon S3 encryption and decryption takes place in the EMRFS client on your cluster\. Objects are encrypted before being uploaded to Amazon S3 and decrypted after they are downloaded\. The provider you specify supplies the encryption key that the client uses\. The client can use keys provided by AWS KMS \(CSE\-KMS\) or a custom Java class that provides the client\-side master key \(CSE\-C\)\. The encryption specifics are slightly different between CSE\-KMS and CSE\-C, depending on the specified provider and the metadata of the object being decrypted or encrypted\. For more information about these differences, see [Protecting Data Using Client\-Side Encryption](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\.
+With Amazon S3 client\-side encryption, the Amazon S3 encryption and decryption takes place in the EMRFS client on your cluster\. Objects are encrypted before being uploaded to Amazon S3 and decrypted after they are downloaded\. The provider you specify supplies the encryption key that the client uses\. The client can use keys provided by AWS KMS \(CSE\-KMS\) or a custom Java class that provides the client\-side master key \(CSE\-C\)\. The encryption specifics are slightly different between CSE\-KMS and CSE\-C, depending on the specified provider and the metadata of the object being decrypted or encrypted\. For more information about these differences, see [Protecting Data Using Client\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\.
 
 **Note**  
 Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted; not all data on cluster instance volumes is encrypted\. Furthermore, because Hue does not use EMRFS, objects that the Hue S3 File Browser writes to Amazon S3 are not encrypted\.
@@ -15,7 +15,7 @@ Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted
 
 ## Creating a Custom Key Provider<a name="emr-emrfs-create-cse-key"></a>
 
-When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
+When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
 
 The encryption algorithm used for custom encryption materials must be **AES/GCM/NoPadding**\.
 
@@ -106,7 +106,7 @@ For example, in the AWS SDK for Java using RunJobFlowRequest, your code might lo
 
 		RunJobFlowRequest request = new RunJobFlowRequest()
 			.withName("Custom EncryptionMaterialsProvider")
-			.withReleaseLabel("emr-5.22.0")
+			.withReleaseLabel("emr-5.24.0")
 			.withApplications(myApp)
 			.withConfigurations(myEmrfsConfig)
 			.withServiceRole("EMR_DefaultRole")
@@ -143,7 +143,7 @@ You may need to pass arguments directly to the provider\. To do this, you can us
 Using the `create-cluster` command from the AWS CLI, you can use the `--configurations` option to specify the file as shown below:
 
 ```
-aws emr create-cluster --release-label emr-5.22.0 --instance-type m4.large --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
+aws emr create-cluster --release-label emr-5.24.0 --instance-type m4.large --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
 ```
 
 ## `emrfs-site.xml` Properties for Amazon S3 Client\-Side Encryption<a name="emr-emrfs-cse-config"></a>

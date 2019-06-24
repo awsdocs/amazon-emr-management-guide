@@ -1,348 +1,81 @@
-# Use IAM Policies to Allow and Deny User Permissions<a name="emr-plan-access-iam"></a>
+# AWS Identity and Access Management for Amazon EMR<a name="emr-plan-access-iam"></a>
 
-Amazon EMR supports AWS Identity and Access Management \(IAM\) policies\. IAM is a web service that enables AWS customers to manage users and their permissions\. You can use IAM to create policies and attach them to principals, such as users and groups\. The policies grant or deny permissions and determine what actions a user can perform with Amazon EMR and other AWS resources\. For example, you can allow a user to view EMR clusters in an AWS account but not create or delete them\. In addition, you can tag EMR clusters and then use the tags to apply fine\-grained permissions to users on individual clusters or a group of clusters that share the same tag\.
-
-IAM is available at no charge to all AWS account holders\. You don't need to sign up for IAM\. You can use IAM through the Amazon EMR console and the AWS CLI\. You can also use it programmatically through the Amazon EMR API and the AWS SDKs\.
-
-IAM policies adhere to the principle of least privilege, which means that a user can't perform an action until permission is granted to do so\. For more information, see the *[IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)*\.
+AWS Identity and Access Management \(IAM\) is an AWS service that helps an administrator securely control access to AWS resources\. IAM administrators control who can be *authenticated* \(signed in\) and *authorized* \(have permissions\) to use Amazon EMR resources\. IAM is an AWS service that you can use with no additional charge\.
 
 **Topics**
-+ [Amazon EMR Actions in User\-Based IAM Policies](#emr-set-iam-policy)
-+ [Use Managed Policies for User Access](#emr-managed-iam-policies)
-+ [Use Inline Policies for User Permissions](#emr-inline-policy)
-+ [Use Cluster Tagging with IAM Policies for Cluster\-Specific Control](#emr-fine-grained-cluster-access)
++ [Audience](#security_iam_audience)
++ [Authenticating With Identities](#security_iam_authentication)
++ [Managing Access Using Policies](#security_iam_access-manage)
++ [How Amazon EMR Works with IAM](security_iam_emr-with-iam.md)
++ [Configure IAM Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)
++ [Amazon EMR Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)
 
-## Amazon EMR Actions in User\-Based IAM Policies<a name="emr-set-iam-policy"></a>
+## Audience<a name="security_iam_audience"></a>
 
-In IAM user policies for Amazon EMR, all Amazon EMR actions are prefixed with the lowercase `elasticmapreduce` element\. You can specify the `"elasticmapreduce:*"` key, using the wildcard character \(\*\) to specify all actions related to Amazon EMR, or you can allow a subset of actions, for example, `"elasticmapreduce:Describe*"`\. You can also explicitly specify individual Amazon EMR actions, for example `"elasticmapreduce:DescribeCluster"`\. For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. Because Amazon EMR relies on other services such as Amazon EC2 and Amazon S3, users need to be allowed a subset of permissions for these services as well\. For more information, see [IAM Managed Policy for Full Access](#emr-managed-policy-fullaccess)\.
+How you use AWS Identity and Access Management \(IAM\) differs, depending on the work you do in Amazon EMR\.
 
-**Note**  
-At a minimum, to access the Amazon EMR console, an IAM user needs to have an attached IAM policy that allows the following action:   
+**Service user** – If you use the Amazon EMR service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more Amazon EMR features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\.
 
-```
-elasticmapreduce:ListClusters
-```
+**Service administrator** – If you're in charge of Amazon EMR resources at your company, you probably have full access to Amazon EMR\. It's your job to determine which Amazon EMR features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with Amazon EMR, see [How Amazon EMR Works with IAM](security_iam_emr-with-iam.md)\.
 
-For more information about permissions and policies, see [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\.
+**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to Amazon EMR\. To view example Amazon EMR identity\-based policies that you can use in IAM, see [Amazon EMR Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)\.
 
-Amazon EMR does not support resource\-based and resource\-level policies, but you can use the `Condition` element \(also called the `Condition` block\) to specify fine\-grained access control based on cluster tags\. For more information, see [Use Cluster Tagging with IAM Policies for Cluster\-Specific Control](#emr-fine-grained-cluster-access)\. Because Amazon EMR does not support resource\-based or resource\-level policies, the `Resource` element always has a wildcard value\.
+## Authenticating With Identities<a name="security_iam_authentication"></a>
 
-## Use Managed Policies for User Access<a name="emr-managed-iam-policies"></a>
+Authentication is how you sign in to AWS using your identity credentials\. For more information about signing in using the AWS Management Console, see [The IAM Console and Sign\-in Page](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
 
-The easiest way to grant full access or read\-only access to required Amazon EMR actions is to use the IAM managed policies for Amazon EMR\. Managed policies offer the benefit of updating automatically if permission requirements change\. If you use inline policies, service changes may occur that cause permission errors to appear\. 
+You must be *authenticated* \(signed in to AWS\) as the AWS account root user, an IAM user, or by assuming an IAM role\. You can also use your company's single sign\-on authentication, or even sign in using Google or Facebook\. In these cases, your administrator previously set up identity federation using IAM roles\. When you access AWS using credentials from another company, you are assuming a role indirectly\. 
 
-These policies not only include actions for Amazon EMR; they also include actions for Amazon EC2, Amazon S3, and Amazon CloudWatch, which Amazon EMR uses to perform actions like launching instances, writing log files, and managing Hadoop jobs and tasks\. To create custom policies, we recommend that you begin with the managed policies and edit them according to your requirements\.
+To sign in directly to the [AWS Management Console](https://console.aws.amazon.com/), use your password with your root user email or your IAM user name\. You can access AWS programmatically using your root user or IAM user access keys\. AWS provides SDK and command line tools to cryptographically sign your request using your credentials\. If you don’t use AWS tools, you must sign the request yourself\. Do this using *Signature Version 4*, a protocol for authenticating inbound API requests\. For more information about authenticating requests, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference*\.
 
-For information about how to attach policies to IAM users \(principals\), see [Working with Managed Policies Using the AWS Management Console](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console)in the *IAM User Guide*\.
+Regardless of the authentication method that you use, you might also be required to provide additional security information\. For example, AWS recommends that you use multi\-factor authentication \(MFA\) to increase the security of your account\. To learn more, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
-### IAM Managed Policy for Full Access<a name="emr-managed-policy-fullaccess"></a>
+### AWS Account Root User<a name="security_iam_authentication-rootuser"></a>
 
-To grant all the required actions for Amazon EMR, attach the `AmazonElasticMapReduceFullAccess` managed policy\. The content of this policy statement is shown below\. It reveals all the actions that Amazon EMR requires for other services\. 
+  When you first create an AWS account, you begin with a single sign\-in identity that has complete access to all AWS services and resources in the account\. This identity is called the AWS account *root user* and is accessed by signing in with the email address and password that you used to create the account\. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones\. Instead, adhere to the [best practice of using the root user only to create your first IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)\. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks\. 
 
-The contents of Version 6 of this policy are shown below\. Because the **AmazonElasticMapReduceFullAccess** policy is automatically updated, the policy shown here may be out\-of\-date\. Use the AWS Management Console to view the current policy\.
+### IAM Users and Groups<a name="security_iam_authentication-iamuser"></a>
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "cloudwatch:*",
-                "cloudformation:CreateStack",
-                "cloudformation:DescribeStackEvents",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:CancelSpotInstanceRequests",
-                "ec2:CreateRoute",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateTags",
-                "ec2:DeleteRoute",
-                "ec2:DeleteTags",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DescribeAvailabilityZones",
-                "ec2:DescribeAccountAttributes",
-                "ec2:DescribeInstances",
-                "ec2:DescribeKeyPairs",
-                "ec2:DescribeRouteTables",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSpotInstanceRequests",
-                "ec2:DescribeSpotPriceHistory",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcAttribute",
-                "ec2:DescribeVpcs",
-                "ec2:DescribeRouteTables",
-                "ec2:DescribeNetworkAcls",
-                "ec2:CreateVpcEndpoint",
-                "ec2:ModifyImageAttribute",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:RequestSpotInstances",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RunInstances",
-                "ec2:TerminateInstances",
-                "elasticmapreduce:*",
-                "iam:GetPolicy",
-                "iam:GetPolicyVersion",
-                "iam:ListRoles",
-                "iam:PassRole",
-                "kms:List*",
-                "s3:*",
-                "sdb:*",
-                "support:CreateCase",
-                "support:DescribeServices",
-                "support:DescribeSeverityLevels"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "iam:CreateServiceLinkedRole",
-            "Resource": "*",
-            "Condition": {
-                "StringLike": {
-                    "iam:AWSServiceName": [
-                        "elasticmapreduce.amazonaws.com",
-                        "elasticmapreduce.amazonaws.com.cn"
-                    ]
-                }
-            }
-        }
-    ]
-}
-```
+An *[IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)* is an identity within your AWS account that has specific permissions for a single person or application\. An IAM user can have long\-term credentials such as a user name and password or a set of access keys\. To learn how to generate access keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) in the *IAM User Guide*\. When you generate access keys for an IAM user, make sure you view and securely save the key pair\. You cannot recover the secret access key in the future\. Instead, you must generate a new access key pair\.
 
-**Note**  
-The `ec2:TerminateInstances` action enables the IAM user to terminate any of the Amazon EC2 instances associated with the IAM account, even those that are not part of an EMR cluster\. 
+An [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html) is an identity that specifies a collection of IAM users\. You can't sign in as a group\. You can use groups to specify permissions for multiple users at a time\. Groups make permissions easier to manage for large sets of users\. For example, you could have a group named *IAMAdmins* and give that group permissions to administer IAM resources\.
 
-### IAM Managed Policy for Read\-Only Access<a name="emr-managed-policy-readonly"></a>
+Users are different from roles\. A user is uniquely associated with one person or application, but a role is intended to be assumable by anyone who needs it\. Users have permanent long\-term credentials, but roles provide temporary credentials\. To learn more, see [When to Create an IAM User \(Instead of a Role\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose) in the *IAM User Guide*\.
 
-To grant read\-only privileges to Amazon EMR, attach the **AmazonElasticMapReduceReadOnlyAccess** managed policy\. The content of this policy statement is shown below\. Wildcard characters for the `elasticmapreduce` element specify that only actions that begin with the specified strings are allowed\. Keep in mind that because this policy does not explicitly deny actions, a different policy statement may still be used to grant access to specified actions\.
+### IAM Roles<a name="security_iam_authentication-iamrole"></a>
 
-**Note**  
-Because the **AmazonElasticMapReduceReadOnlyAccess** policy is automatically updated, the policy shown here may be out\-of\-date\. Use the AWS Management Console to view the current policy\.
+An *[IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)* is an identity within your AWS account that has specific permissions\. It is similar to an IAM user, but is not associated with a specific person\. You can temporarily assume an IAM role in the AWS Management Console by [switching roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html)\. You can assume a role by calling an AWS CLI or AWS API operation or by using a custom URL\. For more information about methods for using roles, see [Using IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the *IAM User Guide*\.
 
-```
- 1. {
- 2.   "Version": "2012-10-17",
- 3.   "Statement": [
- 4.     {
- 5.       "Effect": "Allow",
- 6.       "Action": [
- 7.         "elasticmapreduce:Describe*",
- 8.         "elasticmapreduce:List*",
- 9.         "elasticmapreduce:ViewEventsFromAllClustersInConsole",
-10.         "s3:GetObject",
-11.         "s3:ListAllMyBuckets",
-12.         "s3:ListBucket",
-13.         "sdb:Select",
-14.         "cloudwatch:GetMetricStatistics"
-15.       ],
-16.       "Resource": "*"
-17.     }
-18.   ]
-19. }
-```
+IAM roles with temporary credentials are useful in the following situations:
++ **Temporary IAM user permissions** – An IAM user can assume an IAM role to temporarily take on different permissions for a specific task\. 
++ **Federated user access** –  Instead of creating an IAM user, you can use existing identities from AWS Directory Service, your enterprise user directory, or a web identity provider\. These are known as *federated users*\. AWS assigns a role to a federated user when access is requested through an [identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html)\. For more information about federated users, see [Federated Users and Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html#intro-access-roles) in the *IAM User Guide*\. 
++ **Cross\-account access** – You can use an IAM role to allow someone \(a trusted principal\) in a different account to access resources in your account\. Roles are the primary way to grant cross\-account access\. However, with some AWS services, you can attach a policy directly to a resource \(instead of using a role as a proxy\)\. To learn the difference between roles and resource\-based policies for cross\-account access, see [How IAM Roles Differ from Resource\-based Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.
++ **AWS service access** –  A service role is an IAM role that a service assumes to perform actions in your account on your behalf\. When you set up some AWS service environments, you must define a role for the service to assume\. This service role must include all the permissions that are required for the service to access the AWS resources that it needs\. Service roles vary from service to service, but many allow you to choose your permissions as long as you meet the documented requirements for that service\. Service roles provide access only within your account and cannot be used to grant access to services in other accounts\. You can create, modify, and delete a service role from within IAM\. For example, you can create a role that allows Amazon Redshift to access an Amazon S3 bucket on your behalf and then load data from that bucket into an Amazon Redshift cluster\. For more information, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. 
++ **Applications running on Amazon EC2** –  You can use an IAM role to manage temporary credentials for applications that are running on an EC2 instance and making AWS CLI or AWS API requests\. This is preferable to storing access keys within the EC2 instance\. To assign an AWS role to an EC2 instance and make it available to all of its applications, you create an instance profile that is attached to the instance\. An instance profile contains the role and enables programs that are running on the EC2 instance to get temporary credentials\. For more information, see [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. 
 
-## Use Inline Policies for User Permissions<a name="emr-inline-policy"></a>
+To learn whether to use IAM roles, see [When to Create an IAM Role \(Instead of a User\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose_role) in the *IAM User Guide*\.
 
-To customize policies, we recommend that you start with a managed policy and then modify permissions and conditions according to your requirements\.
+## Managing Access Using Policies<a name="security_iam_access-manage"></a>
 
-**Important**  
-Inline policies are not automatically updated when service requirements change\. If you create and attach inline policies, be aware that service updates might occur that suddenly cause permissions errors\. For more information, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html) in the *IAM User Guide* and [Specify Custom IAM Roles When You Create a Cluster](emr-iam-roles-custom.md#emr-iam-roles-launch-jobflow)\.
+You control access in AWS by creating policies and attaching them to IAM identities or AWS resources\. A policy is an object in AWS that, when associated with an identity or resource, defines their permissions\. AWS evaluates these policies when an entity \(root user, IAM user, or IAM role\) makes a request\. Permissions in the policies determine whether the request is allowed or denied\. Most policies are stored in AWS as JSON documents\. For more information about the structure and contents of JSON policy documents, see [Overview of JSON Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json) in the *IAM User Guide*\.
 
-The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
+An IAM administrator can use policies to specify who has access to AWS resources, and what actions they can perform on those resources\. Every IAM entity \(user or role\) starts with no permissions\. In other words, by default, users can do nothing, not even change their own password\. To give a user permission to do something, an administrator must attach a permissions policy to a user\. Or the administrator can add the user to a group that has the intended permissions\. When an administrator gives permissions to a group, all users in that group are granted those permissions\.
 
-To implement a more restrictive policy, attach an inline policy to appropriate users or groups that allows `iam:PassRole` only for roles specific to Amazon EMR\. The following example demonstrates a statement that allows `iam:PassRole` permissions only for the default Amazon EMR roles: `EMR_DefaultRole`, `EMR_EC2_DefaultRole`, and `EMR_AutoScalingDefaultRole`\. If you use custom roles, replace the default role names with your custom role names\.
+IAM policies define permissions for an action regardless of the method that you use to perform the operation\. For example, suppose that you have a policy that allows the `iam:GetRole` action\. A user with that policy can get role information from the AWS Management Console, the AWS CLI, or the AWS API\.
 
-```
-{
-    "Action": "iam:PassRole",
-    "Effect": "Allow",
-    "Resource": [
-        "arn:aws:iam::*:role/EMR_DefaultRole",
-        "arn:aws:iam::*:role/EMR_EC2_DefaultRole",
-        "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole"
-    ]
-}
-```
+### Identity\-Based Policies<a name="security_iam_access-manage-id-based-policies"></a>
 
-For more information about roles for Amazon EMR, see [Configure IAM Roles for Amazon EMR Permissions to AWS Services](emr-iam-roles.md)\.
+Identity\-based policies are JSON permissions policy documents that you can attach to an identity, such as an IAM user, role, or group\. These policies control what actions that identity can perform, on which resources, and under what conditions\. To learn how to create an identity\-based policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
 
-## Use Cluster Tagging with IAM Policies for Cluster\-Specific Control<a name="emr-fine-grained-cluster-access"></a>
+Identity\-based policies can be further categorized as *inline policies* or *managed policies*\. Inline policies are embedded directly into a single user, group, or role\. Managed policies are standalone policies that you can attach to multiple users, groups, and roles in your AWS account\. Managed policies include AWS managed policies and customer managed policies\. To learn how to choose between a managed policy or an inline policy, see [Choosing Between Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#choosing-managed-or-inline) in the *IAM User Guide*\.
 
-You can use the `Condition` element \(also called a `Condition` block\) along with the following Amazon EMR condition context keys in an IAM user policy to control access based on cluster tags:
-+ Use the `elasticmapreduce:ResourceTag/TagKeyString` condition context key to allow or deny user actions on clusters with specific tags\.
-+ Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key to require a specific tag with actions/API calls\. 
+### Other Policy Types<a name="security_iam_access-manage-other-policies"></a>
 
-**Important**  
-The condition context keys apply only to those Amazon EMR API actions where `ClusterID` is a required request parameter\. For example, the [ModifyInstanceGroups](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ModifyInstanceGroups.html) action does not support context keys because `ClusterID` is an optional parameter\.
+AWS supports additional, less\-common policy types\. These policy types can set the maximum permissions granted to you by the more common policy types\. 
++ **Permissions boundaries** – A permissions boundary is an advanced feature in which you set the maximum permissions that an identity\-based policy can grant to an IAM entity \(IAM user or role\)\. You can set a permissions boundary for an entity\. The resulting permissions are the intersection of entity's identity\-based policies and its permissions boundaries\. Resource\-based policies that specify the user or role in the `Principal` field are not limited by the permissions boundary\. An explicit deny in any of these policies overrides the allow\. For more information about permissions boundaries, see [Permissions Boundaries for IAM Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*\.
++ **Service control policies \(SCPs\)** – SCPs are JSON policies that specify the maximum permissions for an organization or organizational unit \(OU\) in AWS Organizations\. AWS Organizations is a service for grouping and centrally managing multiple AWS accounts that your business owns\. If you enable all features in an organization, then you can apply service control policies \(SCPs\) to any or all of your accounts\. The SCP limits permissions for entities in member accounts, including each AWS account root user\. For more information about Organizations and SCPs, see [How SCPs Work](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html) in the *AWS Organizations User Guide*\.
++ **Session policies** – Session policies are advanced policies that you pass as a parameter when you programmatically create a temporary session for a role or federated user\. The resulting session's permissions are the intersection of the user or role's identity\-based policies and the session policies\. Permissions can also come from a resource\-based policy\. An explicit deny in any of these policies overrides the allow\. For more information, see [Session Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *IAM User Guide*\. 
 
-For a complete list of Amazon EMR actions, see the API action names in the [Amazon EMR API Reference](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/)\. For more information about the `Condition` element and condition operators, see [IAM Policy Elements Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*, particularly [String Condition Operators](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_String)\. For more information about adding tags to EMR clusters, see [Tagging EMR clusters](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html)\. 
+### Multiple Policy Types<a name="security_iam_access-manage-multiple-policies"></a>
 
-### Example Amazon EMR Policy Statements<a name="emr-cluster-access-resourcetag"></a>
-
-The following examples demonstrate different scenarios and ways to use condition operators with Amazon EMR condition context keys\. These IAM policy statements are intended for demonstration purposes only and should not be used in production environments\. There are multiple ways to combine policy statements to grant and deny permissions according to your requirements\. For more information about planning and testing IAM policies, see the [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
-
-#### Allow Actions Only on Clusters with Specific Tag Values<a name="emr-cluster-access-example-tagvalue"></a>
-
-The examples below demonstrate a policy that allows a user to perform actions based on the cluster tag `department` with the value dev `dev` and also allows a user to tag clusters with that same tag\. The final policy example demonstrates how to deny privileges to tag EMR clusters with anything but that same tag\.
-
-**Important**  
-Explicitly denying permission for tagging actions is an important consideration\. This prevents users from granting permissions to themselves through cluster tags that you did not intend to grant\. If the actions shown in the last example had not been denied, a user could add and remove tags of their choosing to any cluster, and circumvent the intention of the preceding policies\.
-
-In the following policy example, the `StringEquals` condition operator tries to match `dev` with the value for the tag `department`\. If the tag `department` hasn't been added to the cluster, or doesn't contain the value `dev`, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with clusters that have this tag with this value\.
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt12345678901234",
-      "Effect": "Allow",
-      "Action": [
-        "elasticmapreduce:DescribeCluster",
-        "elasticmapreduce:ListSteps",
-        "elasticmapreduce:TerminateJobFlows",
-        "elasticmapreduce:SetTerminationProtection",
-        "elasticmapreduce:ListInstances",
-        "elasticmapreduce:ListInstanceGroups",
-        "elasticmapreduce:ListBootstrapActions",
-        "elasticmapreduce:DescribeStep"
-      ],
-      "Resource": [
-        "*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "elasticmapreduce:ResourceTag/department": "dev"
-        }
-      }
-    }
-  ]
-}
-```
-
-You can also specify multiple tag values using a condition operator\. For example, to allow all actions on clusters where the `department` tag contains the value `dev` or `test`, you could replace the condition block in the earlier example with the following\. 
-
-```
-            "Condition": {
-              "StringEquals": {
-                "elasticmapreduce:ResourceTag/department":["dev", "test"]
-              }
-            }
-```
-
-As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition context key specifies that the policy applies during tag creation, so the user must create a tag that matches the specified value\.
-
-```
- 1. {
- 2.   "Version": "2012-10-17",
- 3.   "Statement": [
- 4.     {
- 5.       "Sid": "Stmt1479334524000",
- 6.       "Effect": "Allow",
- 7.       "Action": [
- 8.         "elasticmapreduce:RunJobFlow",
- 9.         "iam:PassRole"
-10.       ],
-11.       "Resource": [
-12.         "*"
-13.       ],
-14.       "Condition": {
-15.         "StringEquals": {
-16.           "elasticmapreduce:RequestTag/department": "dev"
-17.         }
-18.       }
-19.     }
-20.   ]
-21. }
-```
-
-In the following example, the EMR actions that allow the addition and removal of tags is combined with a `StringNotEquals` operator specifying the `dev` tag we've seen in earlier examples\. The effect of this policy is to deny a user the permission to add or remove any tags on EMR clusters that are tagged with a `department` tag that contains the `dev` value\.
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-    "Effect": "Deny",
-    "Action": [
-      "elasticmapreduce:AddTags",
-      "elasticmapreduce:RemoveTags"
-      ],
-      "Condition": {
-        "StringNotEquals": {
-          "elasticmapreduce:ResourceTag/department": "dev"
-        }
-      },
-      "Resource": [
-        "*"
-      ]
-    }
-  ]
-}
-```
-
-#### Allow Actions on Clusters with a Specific Tag, Regardless of Tag Value<a name="emr-cluster-access-example-tag"></a>
-
-You can also allow actions only on clusters that have a particular tag, regardless of the tag value\. To do this, you can use the `Null` operator\. For more information, see [Condition Operator to Check Existence of Condition Keys](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_Null) in the *IAM User Guide*\. For example, to allow actions only on EMR clusters that have the `department` tag, regardless of the value it contains, you could replace the Condition blocks in the earlier example with the following one\. The `Null` operator looks for the presence of the tag `department` on an EMR cluster\. If the tag exists, the `Null` statement evaluates to false, matching the condition specified in this policy statement, and the appropriate actions are allowed\. 
-
-```
-1. "Condition": {
-2.   "Null": {
-3.     "elasticmapreduce:ResourceTag/department":"false"
-4.   }
-5. }
-```
-
-The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag, which can contain any value\. 
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-    "Action": [
-      "elasticmapreduce:RunJobFlow",
-      "iam:PassRole"
-      ],
-    "Condition": {
-      "Null": {
-        "elasticmapreduce:RequestTag/department": "false"
-        }
-      },
-    "Effect": "Allow",
-    "Resource": [
-      "*"
-      ]
-    }
-  ]
-}
-```
-
-#### Require Users to Add Tags When Creating a Cluster<a name="emr-cluster-access-requesttag"></a>
-
-The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag that contains the value `dev` when it is created\.
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "elasticmapreduce:RunJobFlow",
-                "iam:PassRole"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "elasticmapreduce:RequestTag/department": "dev"
-                }
-            },
-            "Effect": "Allow",
-            "Resource": [
-                "*"
-            ]
-        }
-    ]
-}
-```
+When multiple types of policies apply to a request, the resulting permissions are more complicated to understand\. To learn how AWS determines whether to allow a request when multiple policy types are involved, see [Policy Evaluation Logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the *IAM User Guide*\.

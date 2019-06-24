@@ -1,12 +1,15 @@
 # Understanding Master, Core, and Task Nodes<a name="emr-master-core-task-nodes"></a>
 
-Every Amazon EMR cluster has a single master node that runs on an EC2 instance\. In addition, you can add capacity to a cluster additional instance groups or instance fleets for core nodes and task nodes\. Use this section to understand how Amazon EMR uses each of these node types and as a foundation for cluster capacity planning\.
+Use this section to understand how Amazon EMR uses each of these node types and as a foundation for cluster capacity planning\.
 
 ## Master Node<a name="emr-plan-master"></a>
 
-The master node manages the cluster and typically runs master components of distributed applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications, as well as the HDFS NameNode service\. It also tracks the status of jobs submitted to the cluster and monitors the health of the instance groups\. Because there is only one master node, the instance group or instance fleet consists of a single EC2 instance\.
+The master node manages the cluster and typically runs master components of distributed applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications, as well as the HDFS NameNode service\. It also tracks the status of jobs submitted to the cluster and monitors the health of the instance groups\.
 
 To monitor the progress of a cluster and interact directly with applications, you can connect to the master node over SSH as the Hadoop user\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. Connecting to the master node allows you to access directories and files, such as Hadoop log files, directly\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. You can also view user interfaces that applications publish as websites running on the master node\. For more information, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. 
+
+**Note**  
+With Amazon EMR 5\.23\.0 and later, you can launch a cluster with three master nodes to support high availability of applications like YARN Resource Manager, HDFS Name Node, Spark, Hive, and Ganglia\. The master node is no longer a potential single point of failure with this feature\. If one of the master nodes fails, Amazon EMR automatically fails over to a standby master node and replaces the failed master node with a new one with the same configuration and bootstrap actions\. For more information, see [Plan and Configure Master Nodes](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-ha.html)\.
 
 ## Core Nodes<a name="emr-plan-core"></a>
 

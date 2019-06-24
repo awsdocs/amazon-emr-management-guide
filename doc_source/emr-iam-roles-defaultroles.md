@@ -5,9 +5,10 @@ Amazon EMR provides the default roles listed below\. The managed policies listed
 
 | Default Role | Description | Default Managed Policy | 
 | --- | --- | --- | 
-|  `EMR_DefaultRole`  |  This is the EMR role, which allows Amazon EMR to call other AWS services such as Amazon EC2 on your behalf\.  |  `AmazonElasticMapReduceRole`\. Requesting Spot Instances requires a service\-linked role\. If this role doesn't exist, the Amazon EMR service role must have permissions to create it or a permission error occurs\. The managed policy includes a statement to allow this action\. If you customize this role or policy, be sure to include a statement that allows the creation of this service\-linked role\. For more information, see [Default Contents of AmazonElasticMapReduceRole Permissions Policy](#emr-iam-contents-servicerole) and [Service\-Linked Role for Spot Instance Requests](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#service-linked-roles-spot-instance-requests) in the *Amazon EC2 User Guide for Linux Instances*\.   | 
+|  `EMR_DefaultRole`  |  This is the EMR role, which allows Amazon EMR to call other AWS services such as Amazon EC2 on your behalf\.  |  `AmazonElasticMapReduceRole` Requesting Spot Instances requires a service\-linked role\. If this role doesn't exist, the Amazon EMR service role must have permissions to create it or a permission error occurs\. The managed policy includes a statement to allow this action\. If you customize this role or policy, be sure to include a statement that allows the creation of this service\-linked role\. For more information, see [Default Contents of AmazonElasticMapReduceRole Permissions Policy](#emr-iam-contents-servicerole) and [Service\-Linked Role for Spot Instance Requests](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#service-linked-roles-spot-instance-requests) in the *Amazon EC2 User Guide for Linux Instances*\.   | 
 |  `EMR_EC2_DefaultRole`  |  The EMR role for EC2 instances within a cluster\. Processes that run on cluster instances use this role when they call other AWS services\. For accessing EMRFS data in Amazon S3, you can specify different roles to be assumed based on the user or group making the request, or on the location of data in Amazon S3\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.  |  `AmazonElasticMapReduceforEC2Role`\. For more information, see [Default Contents of AmazonElasticMapReduceforEC2Role Permissions Policy](#emr-iam-contents-ec2role)\.  | 
 |  `EMR_AutoScaling_DefaultRole`  |  Allows additional actions for dynamically scaling environments\. Required only for clusters that use automatic scaling in Amazon EMR\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.  |  `AmazonElasticMapReduceforAutoScalingRole`\. For more information, see [Default Contents of AmazonMapReduceforAutoScalingRole Permissions Policy](#emr-iam-contents-autoscalingrole)\.  | 
+|  `EMR_Notebooks_DefaultRole`  |  Provides permissions that an EMR notebook needs to access other AWS resources and perform actions\.  |  `AmazonElasticMapReduceEditorsRole`\. For more information, see [Default Contents of the AmazonElasticMapReduceEditorsRole Permissions Policy](#emr-iam-contents-notebooksrole)\. `S3FullAccessPolicy` is also attached by default\. The contents of this policy are shown below\. <pre>{<br />    "Version": "2012-10-17",<br />    "Statement": [<br />        {<br />            "Effect": "Allow",<br />            "Action": "s3:*",<br />            "Resource": "*"<br />        }<br />    ]<br />}<br /></pre>  | 
 
 **To create default IAM roles for Amazon EMR in your account for the first time**
 
@@ -202,6 +203,53 @@ The contents of version 3 of this policy are shown below\.
                 "glue:GetUserDefinedFunction",
                 "glue:GetUserDefinedFunctions"
             ]
+        }
+    ]
+}
+```
+
+### Default Contents of the AmazonElasticMapReduceEditorsRole Permissions Policy<a name="emr-iam-contents-notebooksrole"></a>
+
+The contents of version 1 of this policy are shown below\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateSecurityGroup",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:CreateNetworkInterface",
+                "ec2:CreateNetworkInterfacePermission",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DeleteNetworkInterfacePermission",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+                "ec2:DescribeSubnets",
+                "elasticmapreduce:ListInstances",
+                "elasticmapreduce:DescribeCluster"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "ec2:CreateTags",
+            "Resource": "arn:aws:ec2:*:*:network-interface/*",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": [
+                        "aws:elasticmapreduce:editor-id",
+                        "aws:elasticmapreduce:job-flow-id"
+                    ]
+                }
+            }
         }
     ]
 }

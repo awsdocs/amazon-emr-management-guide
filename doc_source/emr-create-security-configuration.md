@@ -1,7 +1,7 @@
 # Create a Security Configuration<a name="emr-create-security-configuration"></a>
 
 This topic covers general procedures for creating a security configuration using the EMR console and the AWS CLI, followed by a reference for the parameters that comprise encryption, authentication, and IAM roles for EMRFS\. For more information about these features, see the following topics:
-+ [Encrypt Data in Transit and At Rest](emr-data-encryption.md)
++ [Encrypt Data at Rest and in Transit](emr-data-encryption.md)
 + [Use Kerberos Authentication](emr-kerberos.md)
 + [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)
 
@@ -26,9 +26,9 @@ This topic covers general procedures for creating a security configuration using
 
 ## Configure Data Encryption<a name="emr-security-configuration-encryption"></a>
 
-Before you configure encryption in a security configuration, create the keys and certificates that are used for encryption\. For more information, see [Providing Keys for At\-Rest Data Encryption with Amazon EMR](emr-encryption-enable.md#emr-encryption-create-keys) and [Providing Certificates for In\-Transit Data Encryption with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates)\.
+Before you configure encryption in a security configuration, create the keys and certificates that are used for encryption\. For more information, see [Providing Keys for Encrypting Data at Rest with Amazon EMR](emr-encryption-enable.md#emr-encryption-create-keys) and [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates)\.
 
-When you create a security configuration, you specify two sets of encryption options: at\-rest data encryption and in\-transit data encryption\. Options for at\-rest data encryption include both Amazon S3 with EMRFS and local\-disk encryption\. In\-transit encryption options enable the open\-source encryption features for certain applications that support Transport Layer Security \(TLS\)\. At\-rest options and in\-transit options can be enabled together or separately\. For more information, see [Encrypt Data in Transit and At Rest](emr-data-encryption.md)\.
+When you create a security configuration, you specify two sets of encryption options: at\-rest data encryption and in\-transit data encryption\. Options for at\-rest data encryption include both Amazon S3 with EMRFS and local\-disk encryption\. In\-transit encryption options enable the open\-source encryption features for certain applications that support Transport Layer Security \(TLS\)\. At\-rest options and in\-transit options can be enabled together or separately\. For more information, see [Encrypt Data at Rest and in Transit](emr-data-encryption.md)\.
 
 ### Specifying Encryption Options Using the Console<a name="emr-security-configuration-encryption-console"></a>
 
@@ -39,13 +39,13 @@ Choose options under **Encryption** according to the following guidelines\.
   What you do next depends on the encryption mode you chose:
   + **SSE\-S3**
 
-    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
+    Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
   + **SSE\-KMS** or **CSE\-KMS**
 
-    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **CSE\-Custom**
 
-    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
+    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
 + Under **Local disk encryption**, choose a value for **Key provider type**\. Amazon EMR uses this key for Linux Unified Key System \(LUKS\) encryption for the local volumes \(except boot volumes\) attached to your cluster nodes\.
   + **AWS KMS**
 
@@ -56,7 +56,7 @@ Choose options under **Encryption** according to the following guidelines\.
 + Choose **In\-transit encryption** to enable the open\-source TLS encryption features for in\-transit data\. Choose a **Certificate provider type** according to the following guidelines: 
   + **PEM**
 
-    Select this option to use PEM files that you provide within a zip file\. Two artifacts are required within the zip file: privateKey\.pem and certificateChain\.pem\. A third file, trustedCertificates\.pem, is optional\. See [Providing Certificates for In\-Transit Data Encryption with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for details\. For **S3 object**, specify the location in Amazon S3, or the Amazon S3 ARN, of the zip file field\. 
+    Select this option to use PEM files that you provide within a zip file\. Two artifacts are required within the zip file: privateKey\.pem and certificateChain\.pem\. A third file, trustedCertificates\.pem, is optional\. See [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for details\. For **S3 object**, specify the location in Amazon S3, or the Amazon S3 ARN, of the zip file field\. 
   + **Custom**
 
     Select this option to specify a custom certificate provider and then, for **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom certificate\-provider JAR file\. For **Key provider class**, enter the full class name of a class declared in your application that implements the TLSArtifactsProvider interface\. 
@@ -69,7 +69,7 @@ The sections that follow use sample scenarios to illustrate well\-formed \-\-sec
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is enabled and at\-rest data encryption is disabled\.
-+ A zip file with certificates in Amazon S3 is used as the key provider \(see [Providing Certificates for In\-Transit Data Encryption with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\.
++ A zip file with certificates in Amazon S3 is used as the key provider \(see [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -88,7 +88,7 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is enabled and at\-rest data encryption is disabled\.
-+ A custom key provider is used \(see [Providing Certificates for In\-Transit Data Encryption with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\)\.
++ A custom key provider is used \(see [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\)\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -237,7 +237,7 @@ The following table lists the JSON parameters for encryption settings and provid
 | In\-transit encryption parameters | 
 | "InTransitEncryptionConfiguration" : | Specifies a collection of values used to configure in\-transit encryption when EnableInTransitEncryption is true\. | 
 |  "CertificateProviderType" : "PEM" \| "Custom" | Specifies whether to use PEM certificates referenced with a zipped file, or a Custom certificate provider\. If PEM is specified, S3Object must be a reference to the location in Amazon S3 of a zip file containing the certificates\. If Custom is specified, S3Object must be a reference to the location in Amazon S3 of a JAR file, followed by a CertificateProviderClass entry\. | 
-|  "S3Object" : "ZipLocation" \| "JarLocation" | Provides the location in Amazon S3 to a zip file when PEM is specified, or to a JAR file when Custom is specified\. The format can be a path \(for example, s3://MyConfig/articfacts/CertFiles\.zip\) or an ARN \(for example, arn:aws:s3:::Code/MyCertProvider\.jar\)\. If a zip file is specified, it must contain files named exactly privateKey\.pem and certificateChain\.pem\. A file named trustedCertificates\.pem is optional\. | 
+|  "S3Object" : "ZipLocation" \| "JarLocation" | Provides the location in Amazon S3 to a zip file when PEM is specified, or to a JAR file when Custom is specified\. The format can be a path \(for example, s3://MyConfig/artifacts/CertFiles\.zip\) or an ARN \(for example, arn:aws:s3:::Code/MyCertProvider\.jar\)\. If a zip file is specified, it must contain files named exactly privateKey\.pem and certificateChain\.pem\. A file named trustedCertificates\.pem is optional\. | 
 |   "CertificateProviderClass" : "MyClassID" | Required only if Custom is specified for CertificateProviderType\. MyClassID specifies a full class name declared in the JAR file, which implements the TLSArtifactsProvider interface\. For example, com\.mycompany\.MyCertProvider\. | 
 | At\-rest encryption parameters | 
 | "AtRestEncryptionConfiguration" :  | Specifies a collection of values for at\-rest encryption when EnableAtRestEncryption is true, including Amazon S3 encryption and local disk encryption\. | 
@@ -245,13 +245,13 @@ The following table lists the JSON parameters for encryption settings and provid
 | "S3EncryptionConfiguration" : | Specifies a collection of values used for Amazon S3 encryption with the EMR File System \(EMRFS\)\. | 
 | "EncryptionMode" : "SSE\-S3" \| "SSE\-KMS" \| "CSE\-KMS" \| "CSE\-Custom" | Specifies the type of Amazon S3 encryption to use\. If SSE\-S3 is specified, no further Amazon S3 encryption values are required\. If either SSE\-KMS or CSE\-KMS is specified, an AWS KMS customer master key \(CMK\) ARN must be specified as the AwsKmsKey value\. If CSE\-Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
 | "AwsKmsKey" : "MyKeyARN" | Required only when either SSE\-KMS or CSE\-KMS is specified for EncryptionMode\. MyKeyARN must be a fully specified ARN to a key \(for example, arn:aws:kms:us\-east\-1:123456789012:key/12345678\-1234\-1234\-1234\-123456789012\)\. | 
-|  "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/articfacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
+|  "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 | "EncryptionKeyProviderClass" : "MyS3KeyClassID" | Required only when CSE\-Custom is specified for EncryptionMode\. MyS3KeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyS3KeyProvider\. | 
 | Local disk encryption parameters | 
 | "LocalDiskEncryptionKeyProvider" | Specifies the key provider and corresponding values to be used for local disk encryption\. | 
 | "Type" : "AwsKms" \| "Custom" | Specifies the key provider\. If AwsKms is specified, an AWS KMS CMK ARN must be specified as the AwsKmsKey value\. If Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
 | "AwsKmsKey : "MyKeyARN" | Required only when AwsKms is specified for Type\. MyKeyARN must be a fully specified ARN to a key \(for example, arn:aws:kms:us\-east\-1:123456789012:key/12345678\-1234\-1234\-1234\-456789012123\)\. | 
-| "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/articfacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
+| "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 |  `"EncryptionKeyProviderClass" : "MyLocalDiskKeyClassID"`  | Required only when Custom is specified for Type\. MyLocalDiskKeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyLocalDiskKeyProvider\. | 
 
 ## Configure Kerberos Authentication<a name="emr-security-configuration-kerberos"></a>
@@ -276,7 +276,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w3ab1c21c23c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w10aac21c25c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

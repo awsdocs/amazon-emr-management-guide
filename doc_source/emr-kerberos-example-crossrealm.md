@@ -17,7 +17,7 @@ aws emr create-security-configuration --name LocalKDCWithADTrustSecurityConfig \
 **Create Cluster**
 
 ```
-aws emr create-cluster --release-label emr-5.22.0 \
+aws emr create-cluster --release-label emr-5.24.0 \
 --instance-count 3 --instance-type m4.large --applications Name=Hadoop Name=Hive \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2Key \
 --service-role EMR_DefaultRole --security-configuration KDCWithADTrustSecurityConfig \

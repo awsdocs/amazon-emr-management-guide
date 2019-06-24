@@ -59,7 +59,7 @@ When you specify the instance count without using the `--instance-groups` parame
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **To aggregate logs in Amazon S3 using the AWS CLI**
 **Note**  
@@ -95,7 +95,7 @@ This setting has not worked in past 4\.x releases of EMR\. Please use releases g
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 ## Enable the Debugging Tool<a name="emr-plan-debugging-logs-archive-debug"></a>
 
@@ -134,18 +134,17 @@ To enable debugging using the AWS CLI, type the `create-cluster` subcommand with
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, type aws `emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
-For more information on using Amazon EMR commands in the AWS CLI, see [http://docs.aws.amazon.com/cli/latest/reference/emr](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
 **Example Enabling debugging using the Java SDK**  
 Enable debugging using the following StepConfig:  
 
 ```
-StepConfig stepConfig = new StepConfig()
-    .withName("Enable Debugging")
-    .withActionOnFailure("TERMINATE_JOB_FLOW")
-    .withHadoopJarStep(new HadoopJarStepConfig()
-    .withJar("command-runner.jar")
-    .withArgs("state-pusher-script");
+    StepFactory stepFactory = new StepFactory(); 
+	StepConfig enabledebugging = new StepConfig()
+   		.withName("Enable debugging")
+   		.withActionOnFailure("TERMINATE_JOB_FLOW")
+   		.withHadoopJarStep(stepFactory.newEnableDebuggingStep());
 ```
 
 ## Debugging Option Information<a name="emr-plan-debugging-info"></a>
@@ -154,4 +153,4 @@ Amazon EMR release 4\.1 or later supports debugging in all regions\.
 
 The Amazon EMR creates an Amazon SQS queue to process debugging data\. Message charges may apply\. However, Amazon SQS does have Free Tier of up to 1,000,000 requests available\. For more information, see the [Amazon SQS detail page](https://aws.amazon.com/sqs)\.
 
-Debugging requires the use of roles; your service role and instance profile must allow you to use all Amazon SQS API operations\. If your roles are attached to Amazon EMR managed policies, you do not need to do anything to modify your roles\. If you have custom roles, you need to add `sqs:*` permissions\. For more information, see [Configure IAM Roles for Amazon EMR Permissions to AWS Services](emr-iam-roles.md)\.
+Debugging requires the use of roles; your service role and instance profile must allow you to use all Amazon SQS API operations\. If your roles are attached to Amazon EMR managed policies, you do not need to do anything to modify your roles\. If you have custom roles, you need to add `sqs:*` permissions\. For more information, see [Configure IAM Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)\.

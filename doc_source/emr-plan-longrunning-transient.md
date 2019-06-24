@@ -3,7 +3,7 @@
 By default, clusters that you create using the console or the AWS CLI continue to run until you shut them down\. To have a cluster terminate after running steps, you need to enable auto\-termination\. In contrast, clusters that you launch using the EMR API have auto\-termination enabled by default\.
 
 **To disable auto\-termination using the EMR API**
-+ When using the [RunJobFlow](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow.html) action to create a cluster, set the [KeepJobFlowAliveWhenNoSteps](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_JobFlowInstancesConfig.html#EMR-Type-JobFlowInstancesConfig-KeepJobFlowAliveWhenNoSteps) property to `true`\.
++ When using the [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow.html) action to create a cluster, set the [KeepJobFlowAliveWhenNoSteps](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_JobFlowInstancesConfig.html#EMR-Type-JobFlowInstancesConfig-KeepJobFlowAliveWhenNoSteps) property to `true`\.
 
 **To enable auto\-termination using Quick Options in the AWS Management Console**
 
@@ -35,7 +35,7 @@ By default, clusters that you create using the console or the AWS CLI continue t
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.22.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.24.0 \
   --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey \
   --steps Type=PIG,Name="Pig Program",ActionOnFailure=CONTINUE,\
   Args=[-f,s3://mybucket/scripts/pigscript.pig,-p,\
@@ -44,4 +44,4 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   --instance-type m4.large --instance-count 3 --auto-terminate
   ```
 
-For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](http://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

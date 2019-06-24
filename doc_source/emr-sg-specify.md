@@ -31,7 +31,7 @@ To specify security groups using the AWS CLI you use the `create-cluster` comman
 | --- | --- | 
 |  `EmrManagedMasterSecurityGroup`  |  Use this parameter to specify a custom managed security group for the master instance\. If this parameter is specified, `EmrManagedSlaveSecurityGroup` you must also be specified\. For clusters in private subnets, `ServiceAccessSecurityGroup` must also be specified\.  | 
 |  `EmrManagedSlaveSecurityGroup`  |  Use this parameter to specify a custom managed security group for core and task instances\. If this parameter is specified, `EmrManagedMasterSecurityGroup` you must also be specified\. For clusters in private subnets, `ServiceAccessSecurityGroup` must also be specified\.  | 
-|  `ServiceAccessSecurityGroup`  |  Use this parameter to specify a custom managed security group for service access, which applies only to clusters in private subnets\. If this parameter is specified, `EmrManagedMasterSecurityGroup` and `ServiceAccessSecurityGroup` must also be specified\.  | 
+|  `ServiceAccessSecurityGroup`  |  Use this parameter to specify a custom managed security group for service access, which applies only to clusters in private subnets\. If this parameter is specified, `EmrManagedMasterSecurityGroup` must also be specified\.  | 
 |  `AdditionalMasterSecurityGroups`  |  Use this parameter to specify up to four additional security groups for the master instance\.  | 
 |  `AdditionalSlaveSecurityGroups`  |  Use this parameter to specify up to four additional security groups for core and task instances\.  | 
 
@@ -41,7 +41,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
 ```
  1. aws emr create-cluster --name "ClusterCustomManagedAndAdditionalSGs" \
- 2. --release-label emr-emr-5.22.0 --applications Name=Hue Name=Hive \
+ 2. --release-label emr-emr-5.24.0 --applications Name=Hue Name=Hive \
  3. Name=Pig --use-default-roles --ec2-attributes \
  4. SubnetIds=subnet-xxxxxxxxxxxx,KeyName=myKey,\
  5. ServiceAccessSecurityGroup=sg-xxxxxxxxxxxx,\
@@ -53,4 +53,4 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 11. --instance-type m4.large
 ```
 
-For more information, see [create\-cluster](http://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
+For more information, see [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.

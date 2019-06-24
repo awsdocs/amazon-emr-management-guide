@@ -1,22 +1,184 @@
-# Using Tags to Control User Permissions<a name="emr-managed-notebooks-tags"></a>
+# IAM Policies for Tag\-Based Access to Clusters and EMR Notebooks<a name="emr-fine-grained-cluster-access"></a>
 
-Permission for Amazon EMR actions associated with EMR Notebooks can be fine\-tuned using tag\-based access control in IAM policies\. You can use a `Condition` element \(also called a `Condition` block\) to allow certain actions only when a notebook, cluster, or both has a certain tag key or key\-value combination\. You can also limit the `CreateEditor` action so that a request for a tag must be submitted when a user creates a notebook\.
+You can use conditions in your identity\-based policy to control access to clusters and EMR notebooks based on tags\.
 
-When you create an EMR notebook, a default tag is applied with a key string of `creatorUserId` set to the value of the IAM User ID who created the notebook\. This is useful for limiting allowed actions for the notebook only to the creator\.
+For more information about adding tags to clusters, see [Tagging EMR clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html)\. For more information about using condition keys, see [Condition Keys](security_iam_emr-with-iam.md#security_iam_emr-with-iam-id-based-policies-conditionkeys)\.
 
-The context keys that are available for Amazon EMR resources are available for notebooks as well:
-+ Use the `elasticmapreduce:ResourceTag/TagKeyString` condition context key to allow or deny user actions on clusters with tags that have the `TagKeyString` that you specify\.
-+ Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key along with the `CreateEditor` action to require that a key with `TagKeyString` is applied to a notebook when it's created\.
+The following examples demonstrate different scenarios and ways to use condition operators with Amazon EMR condition keys\. These IAM policy statements are intended for demonstration purposes only and should not be used in production environments\. There are multiple ways to combine policy statements to grant and deny permissions according to your requirements\. For more information about planning and testing IAM policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
-For more information about using resource tags with actions that pass `ClusterID` as a required request parameter, see [Use Cluster Tagging with IAM Policies for Cluster\-Specific Control](emr-plan-access-iam.md#emr-fine-grained-cluster-access)\.
+## Example Identity\-Based Policy Statements for Clusters<a name="emr-cluster-access-resourcetag"></a>
 
-If an action passes both `ClusterID` and `NotebookID` and you use the `ResourceTag` condition context key, the condition applies to both the cluster and the notebook\. This means that both resources must have the tag key string or key\-value combination\. You can use the `Resource` element to limit the statement so that it applies only to clusters or notebooks as required\. For more information, see the examples in the following sections\.
+The examples below demonstrate identity\-based permissions policies that are used to control the actions that are allowed with EMR clusters\.
 
-## Example Policy Statements Using Tags as Context Keys<a name="emr-managed-notebooks-tags-examples"></a>
+### Allow Actions Only on Clusters with Specific Tag Values<a name="emr-cluster-access-example-tagvalue"></a>
+
+The examples below demonstrate a policy that allows a user to perform actions based on the cluster tag `department` with the value `dev` and also allows a user to tag clusters with that same tag\. The final policy example demonstrates how to deny privileges to tag EMR clusters with anything but that same tag\.
+
+**Important**  
+Explicitly denying permission for tagging actions is an important consideration\. This prevents users from granting permissions to themselves through cluster tags that you did not intend to grant\. If the actions shown in the last example had not been denied, a user could add and remove tags of their choosing to any cluster, and circumvent the intention of the preceding policies\.
+
+In the following policy example, the `StringEquals` condition operator tries to match `dev` with the value for the tag `department`\. If the tag `department` hasn't been added to the cluster, or doesn't contain the value `dev`, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with clusters that have this tag with this value\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt12345678901234",
+      "Effect": "Allow",
+      "Action": [
+        "elasticmapreduce:DescribeCluster",
+        "elasticmapreduce:ListSteps",
+        "elasticmapreduce:TerminateJobFlows",
+        "elasticmapreduce:SetTerminationProtection",
+        "elasticmapreduce:ListInstances",
+        "elasticmapreduce:ListInstanceGroups",
+        "elasticmapreduce:ListBootstrapActions",
+        "elasticmapreduce:DescribeStep"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "elasticmapreduce:ResourceTag/department": "dev"
+        }
+      }
+    }
+  ]
+}
+```
+
+You can also specify multiple tag values using a condition operator\. For example, to allow all actions on clusters where the `department` tag contains the value `dev` or `test`, you could replace the condition block in the earlier example with the following\. 
+
+```
+            "Condition": {
+              "StringEquals": {
+                "elasticmapreduce:ResourceTag/department":["dev", "test"]
+              }
+            }
+```
+
+As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a tag that matches the specified value\.
+
+```
+ 1. {
+ 2.   "Version": "2012-10-17",
+ 3.   "Statement": [
+ 4.     {
+ 5.       "Sid": "Stmt1479334524000",
+ 6.       "Effect": "Allow",
+ 7.       "Action": [
+ 8.         "elasticmapreduce:RunJobFlow",
+ 9.         "iam:PassRole"
+10.       ],
+11.       "Resource": [
+12.         "*"
+13.       ],
+14.       "Condition": {
+15.         "StringEquals": {
+16.           "elasticmapreduce:RequestTag/department": "dev"
+17.         }
+18.       }
+19.     }
+20.   ]
+21. }
+```
+
+In the following example, the EMR actions that allow the addition and removal of tags is combined with a `StringNotEquals` operator specifying the `dev` tag we've seen in earlier examples\. The effect of this policy is to deny a user the permission to add or remove any tags on EMR clusters that are tagged with a `department` tag that contains the `dev` value\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+    "Effect": "Deny",
+    "Action": [
+      "elasticmapreduce:AddTags",
+      "elasticmapreduce:RemoveTags"
+      ],
+      "Condition": {
+        "StringNotEquals": {
+          "elasticmapreduce:ResourceTag/department": "dev"
+        }
+      },
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+```
+
+### Allow Actions on Clusters with a Specific Tag, Regardless of Tag Value<a name="emr-cluster-access-example-tag"></a>
+
+You can also allow actions only on clusters that have a particular tag, regardless of the tag value\. To do this, you can use the `Null` operator\. For more information, see [Condition Operator to Check Existence of Condition Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_Null) in the *IAM User Guide*\. For example, to allow actions only on EMR clusters that have the `department` tag, regardless of the value it contains, you could replace the Condition blocks in the earlier example with the following one\. The `Null` operator looks for the presence of the tag `department` on an EMR cluster\. If the tag exists, the `Null` statement evaluates to false, matching the condition specified in this policy statement, and the appropriate actions are allowed\. 
+
+```
+1. "Condition": {
+2.   "Null": {
+3.     "elasticmapreduce:ResourceTag/department":"false"
+4.   }
+5. }
+```
+
+The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag, which can contain any value\. 
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+    "Action": [
+      "elasticmapreduce:RunJobFlow",
+      "iam:PassRole"
+      ],
+    "Condition": {
+      "Null": {
+        "elasticmapreduce:RequestTag/department": "false"
+        }
+      },
+    "Effect": "Allow",
+    "Resource": [
+      "*"
+      ]
+    }
+  ]
+}
+```
+
+### Require Users to Add Tags When Creating a Cluster<a name="emr-cluster-access-requesttag"></a>
+
+The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag that contains the value `dev` when it is created\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "elasticmapreduce:RunJobFlow",
+                "iam:PassRole"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "elasticmapreduce:RequestTag/department": "dev"
+                }
+            },
+            "Effect": "Allow",
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
+
+## Example Identity\-Based Policy Statements for EMR Notebooks<a name="emr-managed-notebooks-tags-examples"></a>
 
 The example IAM policy statements in this section demonstrate common scenarios for using keys to limit allowed actions using EMR Notebooks\. As long as no other policy associated with the principal \(user\) allows the actions, the condition context keys limit allowed actions as indicated\.
 
-**Example –Allow access only to notebooks that a user creates based on tagging**  
+**Example – Allow access only to notebooks that a user creates based on tagging**  
 The example policy statement below, when attached to a role or user, allows the IAM user to work only with notebooks that they have created\. This policy statement uses the default tag applied when a notebook is created\.  
 In the example, the `StringEquals` condition operator tries to match a variable representing the current users IAM user ID \(`{aws:userId}`\) with the value of the tag `creatorUserID`\. If the tag `creatorUserID` hasn't been added to the notebook, or doesn't contain the value of the current user's ID, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with notebooks that have this tag with this value\.  
 
