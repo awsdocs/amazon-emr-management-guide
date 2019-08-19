@@ -1,6 +1,6 @@
 # Amazon VPC Options<a name="emr-clusters-in-a-vpc"></a>
 
-When launching an EMR cluster within a VPC, you can launch it within either a public or private subnet\. There are slight, notable differences in configuration, depending on the subnet type you choose for a cluster\.
+When you launch an Amazon EMR cluster within a VPC, you can launch it within either a public, private, or shared subnet\. There are slight but notable differences in configuration, depending on the subnet type you choose for a cluster\.
 
 ## Public Subnets<a name="emr-vpc-public-subnet"></a>
 
@@ -46,3 +46,13 @@ The following image shows how an EMR cluster is configured within a private subn
 The following image shows a sample configuration for an EMR cluster within a private subnet connected to a NAT instance that is residing in a public subnet\.
 
 ![\[Private subnet with NAT\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/vpc_private_subnet_nat_v3a.png)
+
+## Shared Subnets<a name="emr-vpc-shared-subnet"></a>
+
+VPC sharing allows customers to share subnets with other AWS accounts within the same AWS Organization\. You can launch Amazon EMR clusters into both public shared and private shared subnets, with the following caveats\.
+
+The subnet owner must share a subnet with you before you can launch an Amazon EMR cluster into it\. However, shared subnets can later be unshared\. For more information, see [Working with Shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)\. When a cluster is launched into a shared subnet and that shared subnet is then unshared, you can observe specific behaviors based on the state of the Amazon EMR cluster when the subnet is unshared\.
++ Subnet is unshared *before* the cluster is successfully launched \- If the owner stops sharing the Amazon VPC or subnet while the participant is launching a cluster, the cluster could fail to start or be partially initialized without provisioning all requested instances\. 
++ Subnet is unshared *after* the cluster is successfully launched \- When the owner stops sharing a subnet or Amazon VPC with the participant, the participant's clusters will not be able to resize to add new instances or to replace unhealthy instances\.
+
+When you launch an Amazon EMR cluster, multiple security groups are created\. In a shared subnet, the subnet participant controls these security groups\. The subnet owner can see these security groups but cannot perform any actions on them\. If the subnet owner wants to remove or modify the security group, the participant that created the security group must take the action\.

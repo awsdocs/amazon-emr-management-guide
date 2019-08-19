@@ -1,6 +1,6 @@
 # Authorizing Access to EMRFS Data in Amazon S3<a name="emr-plan-credentialsprovider"></a>
 
-By default, the EMR role for EC2 determines the permissions for accessing EMRFS data in Amazon S3\. The IAM policies that are attached to this role apply regardless of the user or group making the request through EMRFS\. The default is `EMR_EC2_DefaultRole`\. For more information, see [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\.
+By default, the EMR role for EC2 determines the permissions for accessing EMRFS data in Amazon S3\. The IAM policies that are attached to this role apply regardless of the user or group making the request through EMRFS\. The default is `EMR_EC2_DefaultRole`\. For more information, see [Service Role for Cluster EC2 Instances \(EC2 Instance Profile\)](emr-iam-role-for-ec2.md)\.
 
 Beginning with Amazon EMR release version 5\.10\.0, you can use a security configuration to specify IAM roles for EMRFS\. This allows you to customize permissions for EMRFS requests to Amazon S3 for clusters that have multiple users\. You can specify different IAM roles for different users and groups, and for different Amazon S3 bucket locations based on the prefix in Amazon S3\. When EMRFS makes a request to Amazon S3 that matches users, groups, or the locations that you specify, the cluster uses the corresponding role that you specify instead of the EMR role for EC2\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
@@ -34,7 +34,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
    --ec2-attributes '{"KeyName":"MyKeyPair","InstanceProfile":"EMR_EC2_DefaultRole",\
    "SubnetId":"subnet-xxxxxxxx","EmrManagedSlaveSecurityGroup":"sg-xxxxxxxx",\
    "EmrManagedMasterSecurityGroup":"sg-xxxxxxxx"}' \
-   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.24.0 \
+   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.26.0 \
    --log-uri 's3n://my-emr-log-bucket/' --name 'test-awscredentialsprovider-emrfs' \
    --instance-type=m4.large --instance-count 3  \
    --configurations '[{"Classification":"emrfs-site",\

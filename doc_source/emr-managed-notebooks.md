@@ -15,3 +15,4 @@ Applicable charges for Amazon S3 storage and for Amazon EMR clusters apply\.
 + [Working with Notebooks](emr-managed-notebooks-working-with.md)
 + [Monitoring](emr-managed-notebooks-spark-monitor.md)
 + [Security](emr-managed-notebooks-security.md)
++ [Using Notebook\-Scoped Libraries](emr-managed-notebooks-scoped-libraries.md)

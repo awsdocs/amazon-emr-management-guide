@@ -5,7 +5,7 @@ You can configure additional settings for consistent view by providing them usin
 **Example Changing default metadata read and write values at cluster launch**  
 
 ```
-aws emr create-cluster --release-label emr-5.24.0 --instance-type m4.large \
+aws emr create-cluster --release-label emr-5.26.0 --instance-type m4.large \
 --emrfs Consistent=true,Args=[fs.s3.consistent.metadata.read.capacity=600,\
 fs.s3.consistent.metadata.write.capacity=300] --ec2-attributes KeyName=myKey
 ```
@@ -27,7 +27,7 @@ Alternatively, use the following configuration file and save it locally or in Am
 Use the configuration you created with the following syntax:
 
 ```
-aws emr create-cluster --release-label emr-5.24.0 --applications Name=Hive \
+aws emr create-cluster --release-label emr-5.26.0 --applications Name=Hive \
 --instance-type m4.large --instance-count 2 --configurations file://./myConfig.json
 ```
 
@@ -47,6 +47,7 @@ The following options can be set using configurations or AWS CLI `--emrfs` argum
 | fs\.s3\.consistent\.retryCount | 5 | This property sets the maximum number of retries when inconsistency is detected\. | 
 | fs\.s3\.consistent\.throwExceptionOnInconsistency | true | This property determines whether to throw or log a consistency exception\. When set to true, a ConsistencyException is thrown\. | 
 | fs\.s3\.consistent\.metadata\.autoCreate | true | When set to true, this property enables automatic creation of metadata tables\. | 
+| fs\.s3\.consistent\.metadata\.etag\.verification\.enabled | false | \(Beta\) You can enable this property with Amazon EMR 5\.26\.0\. When enabled, EMRFS uses S3 ETags to verify that objects being read are the latest available version\. This feature is helpful for read\-after\-update use cases in which files on S3 are being overwritten while retaining the same name\. This ETag verification capability currently does not work with S3 Select\. | 
 | fs\.s3\.consistent\.metadata\.tableName | EmrFSMetadata | This property specifies the name of the metadata table in DynamoDB\. | 
 | fs\.s3\.consistent\.metadata\.read\.capacity | 400 | This property specifies the DynamoDB read capacity to provision when the metadata table is created\. | 
 | fs\.s3\.consistent\.metadata\.write\.capacity | 100 | This property specifies the DynamoDB write capacity to provision when the metadata table is created\. | 

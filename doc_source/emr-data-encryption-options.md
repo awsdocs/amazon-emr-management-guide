@@ -9,7 +9,10 @@ The following diagram shows the different data encryption options available with
 The following encryption options are also available and are not configured using a security configuration:
 + Optionally, with Amazon EMR versions 4\.1\.0 and later, you can choose to configure transparent encryption in HDFS\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-tdehdfs.html) in the *Amazon EMR Release Guide*\.
 + If you are using a release version of Amazon EMR that does not support security configurations, you can configure encryption for EMRFS data in Amazon S3 manually\. For more information, see [Specifying Amazon S3 Encryption Using EMRFS Properties](emr-emrfs-encryption.md)\.
-+ Optionally, beginning with Amazon EMR release version 4\.1\.0 and later, you can choose to configure transparent encryption in HDFS\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hdfs-config.html#emr-encryption-tdehdfs) in the *Amazon EMR Release Guide*\.
++  If you are using an Amazon EMR version earlier than 5\.24\.0, an encrypted EBS root device volume is supported only when using a custom AMI\. For more information, see [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html#emr-custom-ami-encrypted) in the *Amazon EMR Management Guide*
+
+**Note**  
+Beginning with Amazon EMR version 5\.24\.0, you can use a security configuration option to encrypt EBS root device and storage volumes when you specify AWS KMS as your key provider\. For more information, see [Local Disk Encryption](#emr-encryption-localdisk)\.
 
 Data encryption requires keys and certificates\. A security configuration gives you the flexibility to choose from several options, including keys managed by AWS Key Management Service, keys managed by Amazon S3, and keys and certificates from custom providers that you supply\. When using AWS KMS as your key provider, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
 
@@ -17,7 +20,7 @@ Before you specify encryption options, decide on the key and certificate managem
 
 ## Encryption at Rest for EMRFS Data in Amazon S3<a name="emr-encryption-s3"></a>
 
-Amazon S3 encryption works with EMR File System \(EMRFS\) objects read from and written to Amazon S3\. You specify Amazon S3 server\-side encryption \(SSE\) or client\-side encryption \(CSE\) when you enable encryption at rest\. Amazon S3 SSE and CSE encryption with EMRFS are mutually exclusive; you can choose either but not both\. Regardless of whether Amazon S3 encryption is enabled, Transport Layer Security \(TLS\) encrypts the EMRFS objects in transit between EMR cluster nodes and Amazon S3\. For in\-depth information about Amazon S3 encryption, see [Protecting Data Using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+Amazon S3 encryption works with EMR File System \(EMRFS\) objects read from and written to Amazon S3\. You specify Amazon S3 server\-side encryption \(SSE\) or client\-side encryption \(CSE\) as the **Default encryption mode** when you enable encryption at rest\. Optionally, you can specify different encryption methods for individual buckets using **Per bucket encryption overrides**\. Regardless of whether Amazon S3 encryption is enabled, Transport Layer Security \(TLS\) encrypts the EMRFS objects in transit between EMR cluster nodes and Amazon S3\. For in\-depth information about Amazon S3 encryption, see [Protecting Data Using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 
 ### Amazon S3 Server\-Side Encryption<a name="emr-encryption-s3-sse"></a>
 
@@ -36,19 +39,32 @@ With Amazon S3 client\-side encryption, the Amazon S3 encryption and decryption 
 **Note**  
 Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted; not all data on cluster instance volumes is encrypted\. Furthermore, because Hue does not use EMRFS, objects that the Hue S3 File Browser writes to Amazon S3 are not encrypted\.
 
-## Encryption at Rest for Local Disks<a name="emr-encryption-localdisk"></a>
+## Local Disk Encryption<a name="emr-encryption-localdisk"></a>
 
-Local disk encryption within a security configuration applies to instance store and EBS storage volumes in a cluster\. It does not apply to EBS root device volumes\. Beginning with Amazon EMR version 5\.7\.0, you can specify a custom AMI to encrypt the EBS root device volumes of EC2 instances\. This is a separate setting from security configurations\. For more information, see [Using a Custom AMI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html) in the *Amazon EMR Management Guide*\. 
+The following mechanisms work together to encrypt local disks when you enable local disk encryption using an Amazon EMR security configuration\.
 
-Two mechanisms work together to encrypt storage volumes when you enable at\-rest data encryption:
-+ **Open\-source HDFS Encryption** – HDFS exchanges data between cluster instances during distributed processing, and also reads from and writes data to instance store volumes and the EBS volumes attached to instances\. The following open\-source Hadoop encryption options are activated when you enable local\-disk encryption:
-  + [Secure Hadoop RPC](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_RPC) is set to `Privacy`, which uses Simple Authentication Security Layer \(SASL\)\. 
-  + [Data encryption on HDFS block data transfer](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_Block_data_transfer.) is set to `true` and is configured to use AES 256 encryption\.
+### Open\-source HDFS Encryption<a name="w12aac21c29c13c11c21b5"></a>
+
+HDFS exchanges data between cluster instances during distributed processing\. It also reads from and writes data to instance store volumes and the EBS volumes attached to instances\. The following open\-source Hadoop encryption options are activated when you enable local disk encryption:
++ [Secure Hadoop RPC](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_RPC) is set to `Privacy`, which uses Simple Authentication Security Layer \(SASL\)\. 
++ [Data encryption on HDFS block data transfer](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_Block_data_transfer.) is set to `true` and is configured to use AES 256 encryption\.
+
 **Note**  
 You can activate additional Apache Hadoop encryption by enabling in\-transit encryption \(see [Encryption in Transit](#emr-encryption-intransit)\)\. These encryption settings do not activate HDFS transparent encryption, which you can configure manually\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-tdehdfs.html) in the *Amazon EMR Release Guide*\.
-+ **LUKS**\. In addition to HDFS encryption, the Amazon EC2 instance store volumes and the attached Amazon EBS volumes of cluster instances are encrypted using LUKS\. For more information about LUKS encryption, see the [LUKS on\-disk specification](https://gitlab.com/cryptsetup/cryptsetup/wikis/Specification)\. At\-rest encryption does not encrypt the EBS root device volume \(boot volume\)\. To encrypt the EBS root device volume, use Amazon EMR version 5\.7\.0 or later and specify a custom AMI\. For more information, see [Customizing an AMI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html) in the *Amazon EMR Management Guide*\.
 
-  For your key provider, you can use an AWS KMS CMK set up with policies suitable for Amazon EMR, or a custom Java class that provides the encryption artifacts\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
+### Instance Store Encryption<a name="w12aac21c29c13c11c21b7"></a>
+
+For EC2 instance types that use NVMe\-based SSDs as the instance store volume, NVMe encryption is used regardless of Amazon EMR encryption settings\. For more information, see [NVMe SSD Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes) in the *Amazon EC2 User Guide for Linux Instances*\. For other instance store volumes, Amazon EMR uses LUKS to encrypt the instance store volume when local disk encryption is enabled regardless of whether EBS volumes are encrypted using EBS encryption or LUKS\.
+
+### EBS Volume Encryption<a name="w12aac21c29c13c11c21b9"></a>
+
+If you create a cluster in a region where Amazon EC2 encryption of EBS volumes is enabled by default for your account, EBS volumes are encrypted even if local disk encryption is not enabled\. For more information, see [Encryption by Default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default) in the *Amazon EC2 User Guide for Linux Instances*\. With local disk encryption enabled in a security configuration, the Amazon EMR settings take precedence over the Amazon EC2 encryption\-by\-default settings for cluster EC2 instances\.
+
+The following options are available to encrypt EBS volumes using a security configuration:
++ **EBS encryption** – Beginning with Amazon EMR version 5\.24\.0, you can choose to enable EBS encryption\. The EBS encryption option encrypts the EBS root device volume and attached storage volumes\. The EBS encryption option is available only when you specify AWS Key Management Service as your key provider\. We recommend using EBS encryption\. 
++ **LUKS encryption** – If you choose to use LUKS encryption for Amazon EBS volumes, the LUKS encryption applies only to attached storage volumes, not to the root device volume\. Using EBS encryption requires AWS KMS as the encryption method\. For more information about LUKS encryption, see the [LUKS on\-disk specification](https://gitlab.com/cryptsetup/cryptsetup/wikis/Specification)\.
+
+  For your key provider, you can set up an AWS KMS customer master key \(CMK\) with policies suitable for Amazon EMR, or a custom Java class that provides the encryption artifacts\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
 
 ## Encryption in Transit<a name="emr-encryption-intransit"></a>
 

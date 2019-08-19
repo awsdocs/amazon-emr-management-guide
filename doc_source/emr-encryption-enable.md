@@ -12,7 +12,7 @@ This topic provides key policy details for an AWS KMS CMK to be used with Amazon
 
 The AWS KMS encryption key must be created in the same Region as your Amazon EMR cluster instance and the Amazon S3 buckets used with EMRFS\. If the key that you specify is in a different account from the one that you use to configure a cluster, you must specify the key using its ARN\.
 
-The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Use Default IAM Roles and Managed Policies](emr-iam-roles-defaultroles.md)\. Although you may use the same AWS KMS customer master key \(CMK\) for Amazon S3 data encryption as you use for local disk encryption, using separate keys is recommended\. 
+The role for the Amazon EC2 instance profile must have permissions to use the CMK you specify\. The default role for the instance profile in Amazon EMR is `EMR_EC2_DefaultRole`\. If you use a different role for the instance profile, or you use IAM roles for EMRFS requests to Amazon S3, make sure that each role is added as a key user as appropriate\. This gives the role permissions to use the CMK\. For more information, see [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide* and [Service Role for Cluster EC2 Instances \(EC2 Instance Profile\)](emr-iam-role-for-ec2.md)\.
 
 You can use the AWS Management Console to add your instance profile or EC2 instance profile to the list of key users for the specified AWS KMS CMK, or you can use the AWS CLI or an AWS SDK to attach an appropriate key policy\.
 
@@ -29,6 +29,28 @@ The procedure below describes how to add the default EMR instance profile, `EMR_
 1. On the key details page under **Key Users**, choose **Add**\.
 
 1. In the **Attach** dialog box, select the appropriate role\. The name of the default role is `EMR_EC2_DefaultRole`\.
+
+1. Choose **Attach**\.
+
+### Enabling EBS Encryption by Providing Additional Permissions for AWS KMS CMKs<a name="emr-awskms-ebs-encryption"></a>
+
+Beginning with Amazon EMR version 5\.24\.0, you can encrypt EBS root device and storage volumes by using a security configuration option\. To enable such option, you must specify AWS KMS as your key provider\. Additionally, you must grant the EMR service role `EMR_DefaultRole` with permissions to use the customer master key \(CMK\) that you specify\.
+
+You can use the AWS Management Console to add the EMR service role to the list of key users for the specified AWS KMS CMK, or you can use the AWS CLI or an AWS SDK to attach an appropriate key policy\.
+
+The procedure below describes how to add the default EMR service role, `EMR_DefaultRole` as a *key user* using the AWS Management Console\. It assumes that you have already created a CMK\. To create a new CMK, see [Creating Keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the *AWS Key Management Service Developer Guide*\.
+
+**To add the EMR service role to the list of encryption key users**
+
+1. Sign in to the AWS Management Console and open the AWS Key Management Service \(AWS KMS\) console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
+
+1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
+
+1. Select the alias of the CMK to modify\.
+
+1. On the key details page under **Key Users**, choose **Add**\.
+
+1. In the **Attach** dialog box, select the appropriate role\. The name of the default EMR service role is `EMR_DefaultRole`\.
 
 1. Choose **Attach**\.
 

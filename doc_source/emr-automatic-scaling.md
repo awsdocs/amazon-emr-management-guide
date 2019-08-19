@@ -15,7 +15,7 @@ For most workloads, setting up both scale\-in and scale\-out rules is desirable 
 
 Automatic scaling in Amazon EMR requires an IAM role with permissions to add and terminate instances when scaling activities are triggered\. A default role configured with the appropriate role policy and trust policy, `EMR_AutoScaling_DefaultRole`, is available for this purpose\. When you create a cluster with a scaling policy for the first time using the AWS Management Console, Amazon EMR creates the default role and attaches the default managed policy for permissions, `AmazonElasticMapReduceforAutoScalingRole`\.
 
-When you create a cluster with an automatic scaling policy using the AWS CLI, you must first ensure that either the default IAM role exists, or that you have a custom IAM role with a policy attached that provides the appropriate permissions\. To create the default role, you can run the `create-default-roles` command before you create a cluster\. You can then specify `--auto-scaling-role EMR_AutoScaling_DefaultRole` option when you create a cluster\. Alternatively, you can create a custom automatic scaling role and then specify it when you create a cluster, for example `--auto-scaling-role MyEMRAutoScalingRole`\. If you create a customized automatic scaling role for Amazon EMR, we recommend that you base permissions policies for your custom role based on the managed policy\. For more information, see [Configure IAM Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)\.
+When you create a cluster with an automatic scaling policy using the AWS CLI, you must first ensure that either the default IAM role exists, or that you have a custom IAM role with a policy attached that provides the appropriate permissions\. To create the default role, you can run the `create-default-roles` command before you create a cluster\. You can then specify `--auto-scaling-role EMR_AutoScaling_DefaultRole` option when you create a cluster\. Alternatively, you can create a custom automatic scaling role and then specify it when you create a cluster, for example `--auto-scaling-role MyEMRAutoScalingRole`\. If you create a customized automatic scaling role for Amazon EMR, we recommend that you base permissions policies for your custom role based on the managed policy\. For more information, see [Configure IAM Service Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)\.
 
 ## Understanding Automatic Scaling Rules<a name="emr-scaling-rules"></a>
 
@@ -157,46 +157,41 @@ aws emr put-auto-scaling-policy --cluster-id j-1EKZ3TYEVF1S2 --instance-group-id
 The contents of the `autoscaleconfig.json` file, which defines the same scale\-out rule as shown in the previous example, is shown below\.
 
 ```
-"AutoScalingPolicy":
-    {
-     "Constraints":
-      {
-       "MinCapacity": 2,
-       "MaxCapacity": 10
-      },
-     "Rules":
-     [
-      {
-       "Name": "Default-scale-out",
-       "Description": "Replicates the default scale-out rule in the console for YARN memory.",
-       "Action":{
-        "SimpleScalingPolicyConfiguration":{
-          "AdjustmentType": "CHANGE_IN_CAPACITY",
-          "ScalingAdjustment": 1,
-          "CoolDown": 300
-        }
-       },
-       "Trigger":{
-        "CloudWatchAlarmDefinition":{
-          "ComparisonOperator": "LESS_THAN",
-          "EvaluationPeriods": 1,
-          "MetricName": "YARNMemoryAvailablePercentage",
-          "Namespace": "AWS/ElasticMapReduce",
-          "Period": 300,
-          "Threshold": 15,
-          "Statistic": "AVERAGE",
-          "Unit": "PERCENT",
-          "Dimensions":[
-             {
-               "Key" : "JobFlowId",
-               "Value" : "${emr.clusterId}"
-             }
-          ]
-        }
-       }
-      }
-     ]
-   }
+[{
+	"AutoScalingPolicy": {
+		"Constraints": {
+			"MinCapacity": 2,
+			"MaxCapacity": 10
+		},
+		"Rules": [{
+			"Name": "Default-scale-out",
+			"Description": "Replicates the default scale-out rule in the console for YARN memory.",
+			"Action": {
+				"SimpleScalingPolicyConfiguration": {
+					"AdjustmentType": "CHANGE_IN_CAPACITY",
+					"ScalingAdjustment": 1,
+					"CoolDown": 300
+				}
+			},
+			"Trigger": {
+				"CloudWatchAlarmDefinition": {
+					"ComparisonOperator": "LESS_THAN",
+					"EvaluationPeriods": 1,
+					"MetricName": "YARNMemoryAvailablePercentage",
+					"Namespace": "AWS/ElasticMapReduce",
+					"Period": 300,
+					"Threshold": 15,
+					"Statistic": "AVERAGE",
+					"Unit": "PERCENT",
+					"Dimensions": [{
+						"Key": "JobFlowId",
+						"Value": "${emr.clusterId}"
+					}]
+				}
+			}
+		}]
+	}
+}]
 ```
 
 ### Removing an Automatic Scaling Policy from an Instance Group<a name="emr-autoscale-cli-removepolicy"></a>

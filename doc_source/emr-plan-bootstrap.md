@@ -140,13 +140,14 @@ You can use a bootstrap action to copy objects from Amazon S3 to each node in a 
 The following example demonstrates a simple bootstrap action script that copies a file, `myfile.jar`, from Amazon S3 to a local folder, `/mnt1/myfolder`, on each cluster node\. The script is saved to Amazon S3 with the file name `copymyfile.sh` with the following contents\.
 
 ```
-aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
+#!/bin/bash
+				aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 ```
 
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.24.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.26.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m4.large \

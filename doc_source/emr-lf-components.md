@@ -1,0 +1,9 @@
+# Amazon EMR Components<a name="emr-lf-components"></a>
+
+Amazon EMR enables fine\-grained access control with Lake Formation by using the following components: 
++ **Proxy agent** \- The proxy agent is based on Apache Knox\. It receives SAML\-authenticated requests from users and translates SAML claims to temporary credentials\. It also stores the temporary credentials in the secret agent\. The proxy agent runs on the master node as the `knox` system user and writes logs to the `/var/log/knox` directory\.
++ **Secret agent** \- The secret agent securely stores secrets and distributes secrets to other EMR components or applications\. The secrets can include temporary user credentials, encryption keys, or Kerberos tickets\. The secret agent runs on every node in the cluster and uses Lake Formation and AWS Glue APIs to retrieve temporary credentials and AWS Glue Data Catalog metadata\. The secret agent runs as the `emrsecretagent` user, and writes logs to the `/emr/secretagent/log` directory\. The process relies on a specific set of `iptables` rules to function\. It is important to ensure `iptables` is not disabled, and, if you customize `iptables` configuration, the `nat` table rules must be preserved and left unaltered\.
++ **Record server** \- The record server receives requests for accessing data\. It then authorizes requests based on temporary credentials and table access control policies distributed by the secret agent\. The record server reads data from Amazon S3 and returns column\-level data that the user is authorized to access\. The record server runs on every node in the cluster as the `emr_record_server` user and writes logs to the `/var/log/emr-record-server` directory\.
+
+**Note**  
+Spark SQL has been integrated with each of these components, allowing Spark SQL jobs to read and process data that are protected by Lake Formation policies\.

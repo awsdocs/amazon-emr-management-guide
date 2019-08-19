@@ -4,7 +4,7 @@ The easiest way to grant full access or read\-only access to required Amazon EMR
 
 These policies not only include actions for Amazon EMR; they also include actions for Amazon EC2, Amazon S3, and Amazon CloudWatch, which Amazon EMR uses to perform actions like launching instances, writing log files, and managing Hadoop jobs and tasks\.
 
-The `AmazonElasticMapReduceFullAccess`, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
+Cluster users require permissions for applications to pass the service roles for Amazon EMR on their behalf\. The `AmazonElasticMapReduceFullAccess` permissions policy, which is the default managed policy for users to have full permissions for Amazon EMR, includes a statement that allows the `iam:PassRole` permissions for all resources\. This statement allows the user to pass any role to other AWS services so that Amazon EMR can interact with those services on behalf of the user\.
 
 To implement a more restrictive policy, attach an inline policy to appropriate users or groups that allows `iam:PassRole` only for roles specific to Amazon EMR\. The following example demonstrates a statement that allows `iam:PassRole` permissions only for the default Amazon EMR roles: `EMR_DefaultRole`, `EMR_EC2_DefaultRole`, and `EMR_AutoScalingDefaultRole`\. If you use custom roles, replace the default role names with your custom role names\.
 
@@ -15,7 +15,8 @@ To implement a more restrictive policy, attach an inline policy to appropriate u
     "Resource": [
         "arn:aws:iam::*:role/EMR_DefaultRole",
         "arn:aws:iam::*:role/EMR_EC2_DefaultRole",
-        "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole"
+        "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole",
+        "arn:aws:iam::*:role/EMR_Notebooks_DefaultRole
     ]
 }
 ```

@@ -18,7 +18,7 @@ You create an EMR notebook using the Amazon EMR console\. Creating notebooks usi
 
 1. For **Security groups**, choose **Use default security groups**\. Alternatively, choose **Choose security groups** and select custom security groups\. You select one for the master instance and another for the notebook service\. For more information, see [Specifying EC2 Security Groups for EMR Notebooks](emr-managed-notebooks-security-groups.md)\.
 
-1. For **AWS Service Role**, leave the default or choose a custom role from the list\. For more information, see [The IAM Role for EMR Notebooks](emr-iam-roles.md#emr-managed-notebooks-service-role)\.
+1. For **AWS Service Role**, leave the default or choose a custom role from the list\. For more information, see [Service Role for EMR Notebooks](emr-managed-notebooks-service-role.md)\.
 
 1. For **Notebook location** choose the location in Amazon S3 where the notebook file is saved, or specify your own location\. If the bucket and folder don't exist, Amazon EMR creates it\.
 

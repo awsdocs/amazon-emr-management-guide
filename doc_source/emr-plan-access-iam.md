@@ -7,7 +7,7 @@ AWS Identity and Access Management \(IAM\) is an AWS service that helps an admin
 + [Authenticating With Identities](#security_iam_authentication)
 + [Managing Access Using Policies](#security_iam_access-manage)
 + [How Amazon EMR Works with IAM](security_iam_emr-with-iam.md)
-+ [Configure IAM Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)
++ [Configure IAM Service Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)
 + [Amazon EMR Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)
 
 ## Audience<a name="security_iam_audience"></a>

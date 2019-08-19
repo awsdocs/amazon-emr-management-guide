@@ -47,8 +47,9 @@ You can install and run the following applications on an EMR cluster with multip
 | Hive | High availability for service components only |  To run Hive on an EMR cluster with multiple master nodes, you must specify an external metastore for Hive\. When a master node fails, any local data is lost\. The external metastore exists outside the cluster and makes data persistent during the master node failover process\.   | 
 | Livy | High availability |  Livy is installed on all three master nodes\. When the active master node fails, you lose access to the current Livy session and need to create a new Livy session on a different master node or on the new replacement node\.   | 
 | Mahout |  Availability not affected by master node failover  | Since Mahout has no daemon, it is not affected by the master node failover process\. | 
+| Pig |  Availability not affected by master node failover  | Since Pig has no daemon, it is not affected by the master node failover process\. | 
 | Spark | High availability | All Spark applications run in YARN containers and can react to master node failover in the same way as high availability YARN features\. | 
-| Tez |  High availability  | Since Tez containers run on YARN, Tez behaves the same way as YARN during the master node failover process\. Known issue: Tez UI does not work on an EMR cluster with multiple master nodes\.  | 
+| Tez |  High availability  | Since Tez containers run on YARN, Tez behaves the same way as YARN during the master node failover process\. | 
 | ZooKeeper | High availability |  ZooKeeper is the foundation of the HDFS automatic failover feature\. ZooKeeper provides a highly available service for maintaining coordination data, notifying clients of changes in that data, and monitoring clients for failures\. For more information, see [HDFS Automatic Failover](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html#Automatic_Failover)\.  | 
 
 Pig, Hue, JupyterHub, MXNet, Zeppelin, Presto, Sqoop, Phoenix, Flink, Oozie, and TensorFlow are currently not supported in an EMR cluster with multiple master nodes\.
@@ -84,4 +85,7 @@ The following EMR features are currently not available in an EMR cluster with mu
 + EMR Notebooks
 + Instance fleets
 + Reconfiguring applications in a running cluster
-+ In\-transit encryption options
++ Transparent encryption in HDFS on Amazon EMR
+
+**Note**  
+ To use Kerberos authentication in your cluster, you must configure an external KDC\.

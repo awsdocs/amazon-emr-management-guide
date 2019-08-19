@@ -16,7 +16,7 @@ This topic guides you through creating a cluster with a cluster\-dedicated KDC, 
 
    ```
    aws emr create-cluster --name "MyKerberosCluster" \
-   --release-label emr-5.24.0 \
+   --release-label emr-5.26.0 \
    --instance-type m4.large \
    --instance-count 3 \
    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \

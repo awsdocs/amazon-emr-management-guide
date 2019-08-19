@@ -26,7 +26,7 @@ When you have Amazon EMR create a cluster when you create an EMR notebook, the c
 + It uses the uniform instance groups configuration\. For more information, see [Create a Cluster with Instance Fleets or Uniform Instance Groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-group-configuration.html) in the *Amazon EMR Management Guide*\.
 + It is launched in the default VPC for the AWS account\.
 
-You can specify a custom AWS service role and security groups, if required\. For more information, see [The IAM Role for EMR Notebooks](emr-iam-roles.md#emr-managed-notebooks-service-role) and [Specifying EC2 Security Groups for EMR Notebooks](emr-managed-notebooks-security-groups.md)\. If you need additional customization or different settings, create a cluster beforehand using Amazon EMR, and then specify that cluster when you create the notebook\.
+You can specify a custom AWS service role and security groups, if required\. For more information, see [Service Role for EMR Notebooks](emr-managed-notebooks-service-role.md) and [Specifying EC2 Security Groups for EMR Notebooks](emr-managed-notebooks-security-groups.md)\. If you need additional customization or different settings, create a cluster beforehand using Amazon EMR, and then specify that cluster when you create the notebook\.
 
 ## Using an Existing Amazon EMR Cluster<a name="emr-managed-notebooks-existing-cluster"></a>
 

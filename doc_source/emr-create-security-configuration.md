@@ -33,8 +33,10 @@ When you create a security configuration, you specify two sets of encryption opt
 ### Specifying Encryption Options Using the Console<a name="emr-security-configuration-encryption-console"></a>
 
 Choose options under **Encryption** according to the following guidelines\.
-+ Choose **At rest encryption** to encrypt data stored within the file system\. This also enables Hadoop Distributed File System \(HDFS\) block\-transfer encryption and RPC encryption, which need no further configuration\.
-+ Under **S3 data encryption**, for **Encryption mode**, choose a value to determines how Amazon EMR encrypts Amazon S3 data with EMRFS\. 
++ Choose options under **At rest encryption** to encrypt data stored within the file system\. 
+
+  You can choose to encrypt data in Amazon S3, local disks, or both\. 
++ Under **S3 data encryption**, for **Encryption mode**, choose a value to determine how Amazon EMR encrypts Amazon S3 data with EMRFS\. 
 
   What you do next depends on the encryption mode you chose:
   + **SSE\-S3**
@@ -46,10 +48,14 @@ Choose options under **Encryption** according to the following guidelines\.
   + **CSE\-Custom**
 
     Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
-+ Under **Local disk encryption**, choose a value for **Key provider type**\. Amazon EMR uses this key for Linux Unified Key System \(LUKS\) encryption for the local volumes \(except boot volumes\) attached to your cluster nodes\.
++ Under **Local disk encryption**, choose a value for **Key provider type**\.
   + **AWS KMS**
 
-    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS Key**, select a key\. The key must exist in the same region as your EMR cluster\. For more information about key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS customer master key**, select a key\. The key must exist in the same region as your EMR cluster\. For more information about key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+
+    **EBS Encryption**
+
+    When you specify AWS KMS as your key provider, you can enable EBS encryption to encrypt EBS root device and storage volumes\. To enable such option, you must grant the EMR service role `EMR_DefaultRole` with permissions to use the customer master key \(CMK\) that you specify\. For more information about key requirements, see [Enabling EBS Encryption by Providing Additional Permissions for AWS KMS CMKs](emr-encryption-enable.md#emr-awskms-ebs-encryption)\.
   + **Custom**
 
     Select this option to specify a custom key provider\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. For **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\. The class name you provide here must be different from the class name provided for CSE\-Custom\.
@@ -109,9 +115,9 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 #### Example At\-Rest Data Encryption Options<a name="emr-encryption-atrest-cli"></a>
 
 The example below illustrates the following scenario:
-+ In\-transit data encryption is disabled and at\-rest data encryption is enabled
-+ SSE\-S3 is used for Amazon S3 encryption
-+ Local disk encryption uses AWS KMS as the key provider
++ In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
++ SSE\-S3 is used for Amazon S3 encryption\.
++ Local disk encryption uses AWS KMS as the key provider\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -132,9 +138,9 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 ```
 
 The example below illustrates the following scenario:
-+ In\-transit data encryption is enabled and references a zip file with PEM certificates in Amazon S3, using the ARN
-+ SSE\-KMS is used for Amazon S3 encryption
-+ Local disk encryption uses AWS KMS as the key provider
++ In\-transit data encryption is enabled and references a zip file with PEM certificates in Amazon S3, using the ARN\.
++ SSE\-KMS is used for Amazon S3 encryption\.
++ Local disk encryption uses AWS KMS as the key provider\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -162,9 +168,9 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 ```
 
 The example below illustrates the following scenario:
-+ In\-transit data encryption is enabled and references a zip file with PEM certificates in Amazon S3
-+ CSE\-KMS is used for Amazon S3 encryption
-+ Local disk encryption uses a custom key provider referenced by its ARN
++ In\-transit data encryption is enabled and references a zip file with PEM certificates in Amazon S3\.
++ CSE\-KMS is used for Amazon S3 encryption\.
++ Local disk encryption uses a custom key provider referenced by its ARN\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -193,9 +199,9 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 ```
 
 The example below illustrates the following scenario:
-+ In\-transit data encryption is enabled with a custom key provider
-+ CSE\-Custom is used for Amazon S3 data
-+ Local disk encryption uses a custom key provider
++ In\-transit data encryption is enabled with a custom key provider\.
++ CSE\-Custom is used for Amazon S3 data\.
++ Local disk encryption uses a custom key provider\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -222,6 +228,100 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 			}
 		}
 	}
+}'
+```
+
+The example below illustrates the following scenario:
++ In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
++ Amazon S3 encryption is enabled with SSE\-KMS and encryption exceptions are applied to individual S3 buckets\.
++ Local disk encryption is disabled\.
+
+```
+aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
+  	"EncryptionConfiguration": {
+   		"AtRestEncryptionConfiguration": {
+      	     	"S3EncryptionConfiguration": {
+        			"EncryptionMode" : "SSE-KMS",
+        			"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012",
+        			"Overrides" : [
+         				 {
+           				 "BucketName" : "sse-s3-bucket-name",
+            				"EncryptionMode" : "SSE-S3"
+          				},
+          				{
+            				"BucketName" : "cse-kms-bucket-name",
+           				 "EncryptionMode" : "CSE-KMS",
+            				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+         				 },
+         				 {
+           				 "BucketName" : "sse-kms-bucket-name",
+          				  "EncryptionMode" : "SSE-KMS",
+           				 "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+          				}
+        					]
+      							}
+   						 	},
+   		"EnableInTransitEncryption": false,
+    		"EnableAtRestEncryption": true
+  }
+}'
+```
+
+The example below illustrates the following scenario:
++ In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
++ Amazon S3 encryption is enabled with SSE\-S3 and local disk encryption is disabled\.
+
+```
+aws emr create-security-configuration --name "MyS3EncryptionConfig" --security-configuration '{
+    "EncryptionConfiguration": {
+        "EnableInTransitEncryption" : false,
+        "EnableAtRestEncryption" : true,
+        "AtRestEncryptionConfiguration" : {
+            "S3EncryptionConfiguration" : {
+                "EncryptionMode" : "SSE-S3"
+            }
+        }
+     }
+}'
+```
+
+The example below illustrates the following scenario:
++ In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
++ Local disk encryption is enabled with AWS KMS as the key provider and Amazon S3 encryption is disabled\.
+
+```
+aws emr create-security-configuration --name "MyLocalDiskEncryptionConfig" --security-configuration '{
+    "EncryptionConfiguration": {
+        "EnableInTransitEncryption" : false,
+        "EnableAtRestEncryption" : true,
+        "AtRestEncryptionConfiguration" : {
+            "LocalDiskEncryptionConfiguration" : {
+                "EncryptionKeyProviderType" : "AwsKms",
+                "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+            }
+        }
+     }
+}'
+```
+
+The example below illustrates the following scenario:
++ In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
++ Local disk encryption is enabled with AWS KMS as the key provider and Amazon S3 encryption is disabled\.
++ EBS encryption is enabled\. 
+
+```
+aws emr create-security-configuration --name "MyLocalDiskEncryptionConfig" --security-configuration '{
+    "EncryptionConfiguration": {
+        "EnableInTransitEncryption" : false,
+        "EnableAtRestEncryption" : true,
+        "AtRestEncryptionConfiguration" : {
+            "LocalDiskEncryptionConfiguration" : {
+                "EnableEbsEncryption" : true,
+                "EncryptionKeyProviderType" : "AwsKms",
+                "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+            }
+        }
+     }
 }'
 ```
 
@@ -276,7 +376,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w10aac21c25c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w12aac21c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

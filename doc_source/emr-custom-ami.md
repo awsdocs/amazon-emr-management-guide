@@ -4,6 +4,8 @@ When you use Amazon EMR 5\.7\.0 or later, you can choose to specify a custom Ama
 + Pre\-install applications and perform other customizations instead of using bootstrap actions\. This can improve cluster start time and streamline the startup work flow\. For more information and an example, see [Creating a Custom Amazon Linux AMI from a Preconfigured Instance](#emr-custom-ami-preconfigure)\.
 + Implement more sophisticated cluster and node configurations than bootstrap actions allow\.
 + Encrypt the EBS root device volumes \(boot volumes\) of EC2 instances in your cluster if you are using an Amazon EMR version earlier than 5\.24\.0\. For more information, see [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](#emr-custom-ami-encrypted)\.
+**Note**  
+Beginning with Amazon EMR version 5\.24\.0, you can use a security configuration option to encrypt EBS root device and storage volumes when you specify AWS KMS as your key provider\. For more information, see [Local Disk Encryption](emr-data-encryption-options.md#emr-encryption-localdisk)\.
 
 ## Best Practices and Considerations<a name="emr-custom-ami-considerations"></a>
 
@@ -125,6 +127,9 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 ## Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume<a name="emr-custom-ami-encrypted"></a>
 
 To encrypt the Amazon EBS root device volume of an Amazon Linux AMI for Amazon EMR, copy a snapshot image from an unencrypted AMI to an encrypted target\. For information about creating encrypted EBS volumes, see [Amazon EBS encryption](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the *Amazon EC2 User Guide for Linux Instances*\. The source AMI for the snapshot can be the base Amazon Linux AMI, or you can copy a snapshot from an AMI derived from the base Amazon Linux AMI that you customized\. 
+
+**Note**  
+Beginning with Amazon EMR version 5\.24\.0, you can use a security configuration option to encrypt EBS root device and storage volumes when you specify AWS KMS as your key provider\. For more information, see [Local Disk Encryption](emr-data-encryption-options.md#emr-encryption-localdisk)\.
 
 You can use an external key provider or an AWS customer master key \(CMK\) to encrypt the EBS root volume\. The service role that Amazon EMR uses \(usually the default `EMR_DefaultRole`\) must be allowed to encrypt and decrypt the volume, at minimum, for Amazon EMR to create a cluster using the AMI\. When using AWS KMS as the key provider, this means that the following actions must be allowed:
 + `kms:encrypt`
