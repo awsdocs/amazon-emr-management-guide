@@ -157,46 +157,45 @@ aws emr put-auto-scaling-policy --cluster-id j-1EKZ3TYEVF1S2 --instance-group-id
 The contents of the `autoscaleconfig.json` file, which defines the same scale\-out rule as shown in the previous example, is shown below\.
 
 ```
-"AutoScalingPolicy":
-    {
-     "Constraints":
-      {
-       "MinCapacity": 2,
-       "MaxCapacity": 10
-      },
-     "Rules":
-     [
-      {
-       "Name": "Default-scale-out",
-       "Description": "Replicates the default scale-out rule in the console for YARN memory.",
-       "Action":{
-        "SimpleScalingPolicyConfiguration":{
-          "AdjustmentType": "CHANGE_IN_CAPACITY",
-          "ScalingAdjustment": 1,
-          "CoolDown": 300
-        }
-       },
-       "Trigger":{
-        "CloudWatchAlarmDefinition":{
-          "ComparisonOperator": "LESS_THAN",
-          "EvaluationPeriods": 1,
-          "MetricName": "YARNMemoryAvailablePercentage",
-          "Namespace": "AWS/ElasticMapReduce",
-          "Period": 300,
-          "Threshold": 15,
-          "Statistic": "AVERAGE",
-          "Unit": "PERCENT",
-          "Dimensions":[
-             {
-               "Key" : "JobFlowId",
-               "Value" : "${emr.clusterId}"
-             }
-          ]
-        }
-       }
-      }
-     ]
+{
+ "Constraints":
+  {
+   "MinCapacity": 2,
+   "MaxCapacity": 10
+  },
+ "Rules":
+ [
+  {
+   "Name": "Default-scale-out",
+   "Description": "Replicates the default scale-out rule in the console for YARN memory.",
+   "Action":{
+    "SimpleScalingPolicyConfiguration":{
+      "AdjustmentType": "CHANGE_IN_CAPACITY",
+      "ScalingAdjustment": 1,
+      "CoolDown": 300
+    }
+   },
+   "Trigger":{
+    "CloudWatchAlarmDefinition":{
+      "ComparisonOperator": "LESS_THAN",
+      "EvaluationPeriods": 1,
+      "MetricName": "YARNMemoryAvailablePercentage",
+      "Namespace": "AWS/ElasticMapReduce",
+      "Period": 300,
+      "Threshold": 15,
+      "Statistic": "AVERAGE",
+      "Unit": "PERCENT",
+      "Dimensions":[
+         {
+           "Key" : "JobFlowId",
+           "Value" : "${emr.clusterId}"
+         }
+      ]
+    }
    }
+  }
+ ]
+}
 ```
 
 ### Removing an Automatic Scaling Policy from an Instance Group<a name="emr-autoscale-cli-removepolicy"></a>
