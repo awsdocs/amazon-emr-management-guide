@@ -35,7 +35,7 @@ If the node remains `UNHEALTHY` for more than 45 minutes, Amazon EMR takes the f
 
 The auto\-terminate setting takes precedence over termination protection\. If both are enabled, when steps finish executing, the cluster terminates instead of entering a waiting state\.
 
-When you submit steps to a cluster, you can set the `ActionOnFailure` property to determine what happens if the step can't complete execution because of an error\. The possible values for this setting are `TERMINATE_CLUSTER` \(`TERMINATE_JOB_FLOW` with earlier versions\), `CANCEL_AND_WAIT`, and `CONTINUE`\. For more information, see [Work with Steps Using the CLI and Console](emr-work-with-steps.md)\.
+When you submit steps to a cluster, you can set the `ActionOnFailure` property to determine what happens if the step can't complete execution because of an error\. The possible values for this setting are `TERMINATE_CLUSTER` \(`TERMINATE_JOB_FLOW` with earlier versions\), `CANCEL_AND_WAIT`, and `CONTINUE`\. For more information, see [Work with Steps Using the AWS CLI and Console](emr-work-with-steps.md)\.
 
 If a step fails that is configured with `ActionOnFailure` set to `CANCEL_AND_WAIT`, if auto\-termination is enabled, the cluster terminates without executing subsequent steps\.
 
@@ -78,9 +78,9 @@ The default termination protection setting depends on how you launch the cluster
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.26.0 \
+  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.29.0 \
   --applications Name=Hadoop Name=Hive Name=Pig \
-  --use-default-roles --ec2-attributes KeyName=myKey --instance-type m4.large \
+  --use-default-roles --ec2-attributes KeyName=myKey --instance-type m5.xlarge \
   --instance-count 3 --termination-protected
   ```
 

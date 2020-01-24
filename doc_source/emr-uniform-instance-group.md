@@ -52,12 +52,12 @@ The following example demonstrates a `create-cluster` command that creates maste
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
 ```
-aws emr create-cluster --name "MySpotCluster" --release-label emr-5.26.0 \
+aws emr create-cluster --name "MySpotCluster" --release-label emr-5.29.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
---instance-groups InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1,BidPrice=0.25 \
-InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,BidPrice=0.03 \
-InstanceGroupType=TASK,InstanceType=m4.large,InstanceCount=4,BidPrice=0.03 \
-InstanceGroupType=TASK,InstanceType=m4.large,InstanceCount=2,BidPrice=0.04
+--instance-groups InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,BidPrice=0.25 \
+InstanceGroupType=CORE,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.03 \
+InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=4,BidPrice=0.03 \
+InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.04
 ```
 
 ## Use the Java SDK to Create an Instance Group<a name="emr-instance-group-sdk"></a>

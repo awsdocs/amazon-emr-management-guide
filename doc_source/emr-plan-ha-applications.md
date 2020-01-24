@@ -35,24 +35,38 @@ yarn rmadmin -getAllServiceState
 
 ## Supported Applications in an EMR Cluster with Multiple Master Nodes<a name="emr-plan-ha-applications-list"></a>
 
-You can install and run the following applications on an EMR cluster with multiple master nodes:
+You can install and run the following applications on an EMR cluster with multiple master nodes\. For each application, the master node failover process varies\. 
 
 
 | Application | Availability during master node failover | Notes | 
 | --- | --- | --- | 
+| Flink | Availability not affected by master node failover | Flink jobs on Amazon EMR run as YARN applications\. Flink's JobManagers run as YARN's ApplicationMasters on core nodes\. The JobManager is not affected by the master node failover process\.  If you use Amazon EMR version 5\.27\.0 or earlier, the JobManager is a single point of failure\. When the JobManager fails, it loses all job states and will not resume the running jobs\. You can enable JobManager high availability by configuring application attempt count, checkpointing, and enabling ZooKeeper as state storage for Flink\. For more information, see [Configuring Flink on an EMR Cluster with Multiple Master Nodes](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/flink-configure.html#flink-multi-master)\. Beginning with Amazon EMR version 5\.28\.0, no manual configuration is needed to enable JobManager high availability\. | 
 | Ganglia | Availability not affected by master node failover | Ganglia is available on all master nodes, so Ganglia can continue to run during the master node failover process\. | 
 | Hadoop | High availability |  HDFS NameNode and YARN ResourceManager automatically fail over to the standby node when the active master node fails\.  | 
 | HBase |  High availability  | HBase automatically fails over to the standby node when the active master node fails\.  If you are connecting to HBase through a REST or Thrift server, you must switch to a different master node when the active master node fails\. | 
 | HCatalog |  Availability not affected by master node failover  | HCatalog is built upon Hive metastore, which exists outside of the cluster\. HCatalog remains available during the master node failover process\. | 
-| Hive | High availability for service components only |  To run Hive on an EMR cluster with multiple master nodes, you must specify an external metastore for Hive\. When a master node fails, any local data is lost\. The external metastore exists outside the cluster and makes data persistent during the master node failover process\.   | 
+| JupyterHub | High availability |  JupyterHub is installed on all three master instances\. It is highly recommended to configure notebook persistence to prevent notebook loss upon master node failure\. For more information, see [Configuring Persistence for Notebooks in Amazon S3](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-jupyterhub-s3.html)\.  | 
 | Livy | High availability |  Livy is installed on all three master nodes\. When the active master node fails, you lose access to the current Livy session and need to create a new Livy session on a different master node or on the new replacement node\.   | 
 | Mahout |  Availability not affected by master node failover  | Since Mahout has no daemon, it is not affected by the master node failover process\. | 
+| MXNet |  Availability not affected by master node failover  | Since MXNet has no daemon, it is not affected by the master node failover process\. | 
+| Phoenix |  High Availability   | Phoenix’ QueryServer runs only on one of the three master nodes\. Phoenix on all three masters is configured to connect the Phoenix QueryServer\. You can find the private IP of Phoenix’s Query server by using `/etc/phoenix/conf/phoenix-env.sh` file | 
 | Pig |  Availability not affected by master node failover  | Since Pig has no daemon, it is not affected by the master node failover process\. | 
 | Spark | High availability | All Spark applications run in YARN containers and can react to master node failover in the same way as high availability YARN features\. | 
+| Sqoop | High availability | By default, sqoop\-job and sqoop\-metastore store data\(job descriptions\) on local disk of master that runs the command, if you want to save metastore data on external Database, please refer to apache Sqoop documentation | 
 | Tez |  High availability  | Since Tez containers run on YARN, Tez behaves the same way as YARN during the master node failover process\. | 
+| TensorFlow |  Availability not affected by master node failover  |  Since TensorFlow has no daemon, it is not affected by the master node failover process\. | 
+| Zeppelin |  High availability  | Zeppelin is installed on all three master nodes\. Zeppelin stores notes and interpreter configurations in HDFS by default to prevent data loss\. Interpreter sessions are completely isolated across all three master instances\. Session data will be lost upon master failure\. It is recommended to not modify the same note concurrently on different master instances\. | 
 | ZooKeeper | High availability |  ZooKeeper is the foundation of the HDFS automatic failover feature\. ZooKeeper provides a highly available service for maintaining coordination data, notifying clients of changes in that data, and monitoring clients for failures\. For more information, see [HDFS Automatic Failover](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html#Automatic_Failover)\.  | 
 
-Pig, Hue, JupyterHub, MXNet, Zeppelin, Presto, Sqoop, Phoenix, Flink, Oozie, and TensorFlow are currently not supported in an EMR cluster with multiple master nodes\.
+To run the following applications in an EMR cluster with multiple master nodes, you must configure an external database\. The external database exists outside the cluster and makes data persistent during the master node failover process\. For the following applications, the service components will automatically recover during the master node failover process, but active jobs may fail and need to be retried\.
+
+
+| Application | Availability during master node failover | Notes | 
+| --- | --- | --- | 
+| Hive | High availability for service components only |  An external metastore for Hive is required\. For more information, see [Configuring an External Metastore for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-metastore-external-hive.html)\.  | 
+| Hue | High availability for service components only |  An external database for Hue is required\. For more information, see [Using Hue with a Remote Database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-rds.html)\.  | 
+| Oozie |  High availability for service components only  | An external database for Oozie is required\. For more information, see [Using Oozie with a Remote Database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/oozie-rds.html)\. Oozie\-server is installed on only one master node, while oozie\-client is installed on all three master nodes\. The oozie\-clients are configured to connect to the correct oozie\-server by default\. You can find the private DNS name of the master node where oozie\-server is installed by checking the variable `OOZIE_URL` on any master node in the file `/etc/oozie/conf.dist/oozie-client-env.sh`\. | 
+| Presto |  High availability for service components only  | An external Hive metastore for Presto is required\. You can use [Presto with the AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-presto-glue.html) or [use an External MySQL Database for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive-metastore-external.html)\.  | 
 
 **Note**  
 When a master node fails, your Java Database Connectivity \(JDBC\) or Open Database Connectivity \(ODBC\) terminates its connection to the master node\. You can connect to any of the remaining master nodes to continue your work because the Hive metastore daemon runs on all master nodes\. Or you can wait for the failed master node to be replaced\.
@@ -84,8 +98,8 @@ The following are considerations for working with steps in an EMR cluster with m
 The following EMR features are currently not available in an EMR cluster with multiple master nodes:
 + EMR Notebooks
 + Instance fleets
-+ Reconfiguring applications in a running cluster
-+ Transparent encryption in HDFS on Amazon EMR
++ One\-click access to persistent Spark history server
 
 **Note**  
- To use Kerberos authentication in your cluster, you must configure an external KDC\.
+ To use Kerberos authentication in your cluster, you must configure an external KDC\.  
+Beginning with Amazon EMR version 5\.27\.0, you can configure HDFS Transparent encryption on an EMR cluster with multiple master nodes\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-tdehdfs.html)\.

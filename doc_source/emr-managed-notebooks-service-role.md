@@ -48,3 +48,19 @@ The contents of version 1 of `AmazonElasticMapReduceEditorsRole` are shown below
     ]
 }
 ```
+
+When you link Git repositories to your notebook and need to create a secret for the repository, you must add the `secretsmanager:GetSecretValue` permission in the IAM policy attached to the service role for EMR notebooks\. An example policy is demonstrated below: 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "secretsmanager:GetSecretValue",
+            "Resource": "*"
+        }
+    ]
+}
+```

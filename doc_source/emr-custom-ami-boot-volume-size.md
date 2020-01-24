@@ -32,5 +32,5 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   ```
   aws emr create-cluster --release-label emr-5.7.0 \
   --ebs-root-volume-size 20 --instance-groups InstanceGroupType=MASTER,\
-  InstanceCount=1,InstanceType=m4.large InstanceGroupType=CORE,InstanceCount=2,InstanceType=m4.large
+  InstanceCount=1,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=2,InstanceType=m5.xlarge
   ```

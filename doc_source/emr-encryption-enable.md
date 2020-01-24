@@ -28,9 +28,9 @@ The procedure below describes how to add the default EMR instance profile, `EMR_
 
 1. On the key details page under **Key Users**, choose **Add**\.
 
-1. In the **Attach** dialog box, select the appropriate role\. The name of the default role is `EMR_EC2_DefaultRole`\.
+1. In the **Add key users** dialog box, select the appropriate role\. The name of the default role is `EMR_EC2_DefaultRole`\.
 
-1. Choose **Attach**\.
+1. Choose **Add**\.
 
 ### Enabling EBS Encryption by Providing Additional Permissions for AWS KMS CMKs<a name="emr-awskms-ebs-encryption"></a>
 
@@ -50,9 +50,9 @@ The procedure below describes how to add the default EMR service role, `EMR_Defa
 
 1. On the key details page under **Key Users**, choose **Add**\.
 
-1. In the **Attach** dialog box, select the appropriate role\. The name of the default EMR service role is `EMR_DefaultRole`\.
+1. In the **Add key users** dialog box, select the appropriate role\. The name of the default EMR service role is `EMR_DefaultRole`\.
 
-1. Choose **Attach**\.
+1. Choose **Add**\.
 
 ### Creating a Custom Key Provider<a name="emr-custom-keys"></a>
 

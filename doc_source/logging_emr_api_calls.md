@@ -63,10 +63,10 @@ The following example shows a CloudTrail log entry that demonstrates the **RunJo
                }
             ],
             "instances":{
-               "slaveInstanceType":"m4.large",
+               "slaveInstanceType":"m5.xlarge",
                "ec2KeyName":"emr-integtest",
                "instanceCount":1,
-               "masterInstanceType":"m4.large",
+               "masterInstanceType":"m5.xlarge",
                "keepJobFlowAliveWhenNoSteps":true,
                "terminationProtected":false
             },

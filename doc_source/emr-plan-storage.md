@@ -33,7 +33,7 @@ EBS costs are pro\-rated by the hour based on the monthly Amazon EBS charges for
 |  \*\.18xlarge  |  4  |  288  |  1152  | 
 |  \*\.24xlarge  |  4  |  384  |  1536  | 
 
-## Specifying Additional EBS Storage Volumes<a name="w12aac19c33c15c12c14"></a>
+## Specifying Additional EBS Storage Volumes<a name="w19aac19c38c15c12c14"></a>
 
 When you configure instance types in Amazon EMR, you can specify additional EBS volumes, which adds capacity beyond the instance store \(if present\) and the default EBS volume\. Amazon EBS provides the following volume types: General Purpose \(SSD\), Provisioned IOPS \(SSD\), Throughput Optimized \(HDD\), Cold \(HDD\), and Magnetic\. They differ in performance characteristics and price, so you can tailor your storage based on the analytic and business needs of your applications\. For example, some applications may have a need to spill to disk while others can safely work in\-memory or using Amazon S3\.
 

@@ -1,7 +1,7 @@
 # Amazon EMR Management Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -32,6 +32,12 @@ Amazon's trademarks and trade dress may not be used in
    + [Monitoring Spark User and Job Activity](emr-managed-notebooks-spark-monitor.md)
    + [EMR Notebooks Security and Access Control](emr-managed-notebooks-security.md)
    + [Using Notebook-Scoped Libraries](emr-managed-notebooks-scoped-libraries.md)
+   + [Associate Git Repositories with Amazon EMR Notebooks](emr-git-repo.md)
+      + [Add a Git Repository to Amazon EMR](emr-git-repo-add.md)
+      + [Update or Delete a Git Repository](emr-git-repo-delete.md)
+      + [Link or Unlink a Git Repository](emr-git-repo-link.md)
+      + [Create a New Notebook with an Associated Git Repository](emr-git-repo-create-notebook.md)
+      + [Use Git Repositories in a Notebook](emr-git-repo-open.md)
 + [Plan and Configure Clusters](emr-plan.md)
    + [Configure Cluster Location and Data Storage](emr-cluster-location-data-storage.md)
       + [Choose an AWS Region](emr-plan-region.md)
@@ -53,6 +59,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Supported Applications and Features](emr-plan-ha-applications.md)
       + [Launching an EMR Cluster with Multiple Master Nodes](emr-plan-ha-launch.md)
       + [Considerations and Best Practices](emr-plan-ha-considerations.md)
+   + [EMR Clusters on AWS Outposts](emr-plan-outposts.md)
    + [Use EMR File System (EMRFS)](emr-fs.md)
       + [Consistent View](emr-plan-consistent-view.md)
          + [Enable Consistent View](enable-consistent-view.md)
@@ -135,10 +142,6 @@ Amazon's trademarks and trade dress may not be used in
          + [Configuring Kerberos on Amazon EMR](emr-kerberos-configure.md)
             + [Security Configuration and Cluster Settings for Kerberos on Amazon EMR](emr-kerberos-configure-settings.md)
                + [Configuration Examples](emr-kerberos-config-examples.md)
-                  + [Local KDC](emr-kerberos-example-local-kdc.md)
-                  + [Cluster-Dedicated KDC with Active Directory Cross-Realm Trust](emr-kerberos-example-crossrealm.md)
-                  + [External KDC on a Different Cluster](emr-kerberos-example-extkdc-cluster.md)
-                  + [External Cluster KDC with Active Directory Cross-Realm Trust](emr-kerberos-example-extkdc-ad-trust.md)
             + [Configuring a Cluster for Kerberos-Authenticated HDFS Users and SSH Connections](emr-kerberos-configuration-users.md)
          + [Using SSH to Connect to Kerberized Clusters](emr-kerberos-connect-ssh.md)
          + [Tutorial: Configure a Cluster-Dedicated KDC](emr-kerberos-cluster-kdc.md)
@@ -170,11 +173,14 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance Validation for Amazon EMR](emr-compliance.md)
    + [Resilience in Amazon EMR](disaster-recovery-resiliency.md)
    + [Infrastructure Security in Amazon EMR](infrastructure-security.md)
+      + [Connect to Amazon EMR Using an Interface VPC Endpoint](interface-vpc-endpoint.md)
 + [Manage Clusters](emr-manage.md)
    + [View and Monitor a Cluster](emr-manage-view.md)
       + [View Cluster Status and Details](emr-manage-view-clusters.md)
       + [Enhanced Step Debugging](emr-enhanced-step-debugging.md)
       + [View Application History](emr-cluster-application-history.md)
+         + [One-click Access to Persistent Spark History Server](app-history-spark-UI.md)
+         + [View a Summary of Application History](app-history-summary.md)
       + [View Log Files](emr-manage-view-web-log-files.md)
       + [View Cluster Instances in Amazon EC2](UsingEMR_Tagging.md)
       + [CloudWatch Events and Metrics](emr-manage-cluster-cloudwatch.md)
@@ -196,7 +202,12 @@ Amazon's trademarks and trade dress may not be used in
       + [Cluster Scale-Down](emr-scaledown-behavior.md)
    + [Cloning a Cluster Using the Console](clone-console.md)
    + [Submit Work to a Cluster](AddingStepstoaJobFlow.md)
-      + [Work with Steps Using the CLI and Console](emr-work-with-steps.md)
+      + [Work with Steps Using the AWS CLI and Console](emr-work-with-steps.md)
+         + [Adding Steps to a Cluster Using the Console](emr-add-steps-console.md)
+         + [Adding Steps to a Cluster Using the AWS CLI](add-step-cli.md)
+         + [Considerations for Running Multiple Steps in Parallel](emr-concurrent-steps.md)
+         + [Viewing Steps](emr-view-steps.md)
+         + [Canceling Steps](emr-cancel-steps.md)
       + [Submit Hadoop Jobs Interactively](interactive-jobs.md)
       + [Add More than 256 Steps to a Cluster](AddMoreThan256Steps.md)
    + [Automate Recurring Clusters with AWS Data Pipeline](emr-manage-recurring.md)

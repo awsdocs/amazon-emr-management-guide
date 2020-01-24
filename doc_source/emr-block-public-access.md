@@ -4,6 +4,9 @@ Amazon EMR block public access prevents a cluster from launching when any securi
 
 Block public access is enabled and configured for each AWS Region for your AWS account\. In other words, each Region has a block public access configuration that applies to all clusters created by your account in that Region\.
 
+**Note**  
+For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region\. To use this feature, you must manually enable and configure it\. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region\. 
+
 ## Configure Block Public Access<a name="configure-block-public-access"></a>
 
 You can enable and disable block public access settings using the AWS Management Console, the AWS CLI, and the Amazon EMR API\. Settings apply across your account on a Region\-by\-Region basis\.

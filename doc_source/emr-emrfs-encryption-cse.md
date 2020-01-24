@@ -81,7 +81,7 @@ public class MyEncryptionMaterialsProviders implements EncryptionMaterialsProvid
 To use the AWS CLI, pass the `Encryption`, `ProviderType`, `CustomProviderClass`, and `CustomProviderLocation` arguments to the `emrfs` option\.
 
 ```
-aws emr create-cluster --instance-type m4.large --release-label emr-4.7.2 or earlier --emrfs Encryption=ClientSide,ProviderType=Custom,CustomProviderLocation=s3://mybucket/myfolder/provider.jar,CustomProviderClass=classname
+aws emr create-cluster --instance-type m5.xlarge --release-label emr-4.7.2 or earlier --emrfs Encryption=ClientSide,ProviderType=Custom,CustomProviderLocation=s3://mybucket/myfolder/provider.jar,CustomProviderClass=classname
 ```
 
 Setting `Encryption` to `ClientSide` enables client\-side encryption, `CustomProviderClass` is the name of your EncryptionMaterialsProvider object, and `CustomProviderLocation` is the local or Amazon S3 location from which Amazon EMR copies `CustomProviderClass` to each node in the cluster and places it in the classpath\.
@@ -106,7 +106,7 @@ For example, in the AWS SDK for Java using RunJobFlowRequest, your code might lo
 
 		RunJobFlowRequest request = new RunJobFlowRequest()
 			.withName("Custom EncryptionMaterialsProvider")
-			.withReleaseLabel("emr-5.26.0")
+			.withReleaseLabel("emr-5.29.0")
 			.withApplications(myApp)
 			.withConfigurations(myEmrfsConfig)
 			.withServiceRole("EMR_DefaultRole")
@@ -116,8 +116,8 @@ For example, in the AWS SDK for Java using RunJobFlowRequest, your code might lo
 				.withEc2KeyName("myEc2Key")
 				.withInstanceCount(2)
 				.withKeepJobFlowAliveWhenNoSteps(true)
-				.withMasterInstanceType("m4.large")
-				.withSlaveInstanceType("m4.large")
+				.withMasterInstanceType("m5.xlarge")
+				.withSlaveInstanceType("m5.xlarge")
 			);						
 					
 		RunJobFlowResult result = emr.runJobFlow(request);
@@ -143,7 +143,7 @@ You may need to pass arguments directly to the provider\. To do this, you can us
 Using the `create-cluster` command from the AWS CLI, you can use the `--configurations` option to specify the file as shown below:
 
 ```
-aws emr create-cluster --release-label emr-5.26.0 --instance-type m4.large --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
+aws emr create-cluster --release-label emr-5.29.0 --instance-type m5.xlarge --instance-count 2 --configurations file://myConfig.json --emrfs Encryption=ClientSide,CustomProviderLocation=s3://mybucket/myfolder/myprovider.jar,CustomProviderClass=classname
 ```
 
 ## `emrfs-site.xml` Properties for Amazon S3 Client\-Side Encryption<a name="emr-emrfs-cse-config"></a>

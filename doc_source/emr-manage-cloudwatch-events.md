@@ -48,7 +48,7 @@ The instance fleets configuration is available only in Amazon EMR release versio
 |  From `RUNNING` to `RESIZING`  |  `INFO`  |  A resize for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* started at *Time*\. It is resizing from an instance count of *Num* to *Num*\.  | 
 |  `ARRESTED`  |  `ERROR`  |  Instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* was arrested at *Time* for the following reason: *ReasonDesc*\.  | 
 |  `RESIZING`  |  `WARNING`  |  The resizing operation for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* is stuck for the following reason: *ReasonDesc*\.  | 
-|  `WAITING` or `RUNNING`  |  `INFO`  |  A resize for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* was initiated by *Entity* at *Time*\.  | 
+|  From `RUNNING` to `RESIZING`  |  `INFO`  |  A resize for instance group *InstanceGroupID* in Amazon EMR cluster *ClusterId \(ClusterName\)* was initiated by *Entity* at *Time*\.  | 
 
 **Note**  
 With Amazon EMR version 5\.21\.0 and later, you can override cluster configurations and specify additional configuration classifications for each instance group in a running cluster\. You do this by using the Amazon EMR console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDK\. For more information, see [Supplying a Configuration for an Instance Group in a Running Cluster](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps-running-cluster.html)\.

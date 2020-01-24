@@ -16,7 +16,7 @@ To implement a more restrictive policy, attach an inline policy to appropriate u
         "arn:aws:iam::*:role/EMR_DefaultRole",
         "arn:aws:iam::*:role/EMR_EC2_DefaultRole",
         "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole",
-        "arn:aws:iam::*:role/EMR_Notebooks_DefaultRole
+        "arn:aws:iam::*:role/EMR_Notebooks_DefaultRole"
     ]
 }
 ```

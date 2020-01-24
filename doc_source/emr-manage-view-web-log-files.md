@@ -55,6 +55,7 @@ The following table lists some of the log files you'll find on Amazon S3\.
 |  /*JobFlowId*/node/*instanceId*/*application*  | The logs created by each application or daemon associated with an application\. For example, the Hive server log is located at `JobFlowId/node/instanceId/hive/hive-server.log`\. | 
 |  /*JobFlowId*/steps/*N*/  | Step logs that contain information about the processing of the step\. The value of *N* indicates the stepId assigned by Amazon EMR\. For example, a cluster has two steps: `s-1234ABCDEFGH` and `s-5678IJKLMNOP`\. The first step is located in `/mnt/var/log/hadoop/steps/s-1234ABCDEFGH/` and the second step in `/mnt/var/log/hadoop/steps/s-5678IJKLMNOP/`\.  The step logs written by Amazon EMR are as follows\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)  | 
 |  /*JobFlowId*/containers  |  Application container logs\. The logs for each YARN application are stored in these locations\.  | 
+|  /*JobFlowId*/hadoop\-mapreduce/  | The logs that contain information about configuration details and job history of MapReduce jobs\.  | 
 
 **To view log files archived to Amazon S3 using the console**
 

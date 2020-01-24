@@ -82,7 +82,7 @@ This configuration is nearly identical to the external MIT KDC implementation ab
 
 ### External KDC—Cluster KDC on a Different Cluster with Active Directory Cross\-Realm Trust<a name="emr-kerberos-extkdc-ad-trust-summary"></a>
 
-In this configuration, you first create a cluster with a cluster\-dedicated KDC that has a one\-way cross\-realm trust with Active Directory\. For a detailed tutorial, see [Tutorial: Configure a Cross\-Realm Trust with an Active Directory Domain](emr-kerberos-cross-realm.md)\. You then launch additional clusters, referencing the cluster KDC that has the trust as an external KDC\. For an example, see [External Cluster KDC with Active Directory Cross\-Realm Trust](emr-kerberos-example-extkdc-ad-trust.md)\. This allows each Amazon EMR cluster that uses the external KDC to authenticate principals defined and maintained in a Microsoft Active Directory domain\.
+In this configuration, you first create a cluster with a cluster\-dedicated KDC that has a one\-way cross\-realm trust with Active Directory\. For a detailed tutorial, see [Tutorial: Configure a Cross\-Realm Trust with an Active Directory Domain](emr-kerberos-cross-realm.md)\. You then launch additional clusters, referencing the cluster KDC that has the trust as an external KDC\. For an example, see [External Cluster KDC with Active Directory Cross\-Realm Trust](emr-kerberos-config-examples.md#emr-kerberos-example-extkdc-ad-trust)\. This allows each Amazon EMR cluster that uses the external KDC to authenticate principals defined and maintained in a Microsoft Active Directory domain\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/kerb-external-ad-trust-kdc.png)
 

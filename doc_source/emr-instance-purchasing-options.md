@@ -18,7 +18,7 @@ To use Reserved Instances in Amazon EMR, you use Amazon EC2 to purchase the Rese
 + The cluster is launched within the scope of the instance reservation \(the Availability Zone or region\)
 + The Reserved Instance capacity is still available
 
-For example, let's say you purchase one `m4.large` Reserved Instance with the instance reservation scoped to the US\-East region\. You then launch an EMR cluster in US\-East that uses two `m4.large` instances\. The first instance is billed at the Reserved Instance rate and the other is billed at the On\-Demand rate\. Reserved Instance capacity is used before any On\-Demand Instances are created\.
+For example, let's say you purchase one `m5.xlarge` Reserved Instance with the instance reservation scoped to the US\-East region\. You then launch an EMR cluster in US\-East that uses two `m5.xlarge` instances\. The first instance is billed at the Reserved Instance rate and the other is billed at the On\-Demand rate\. Reserved Instance capacity is used before any On\-Demand Instances are created\.
 
 ### Using Dedicated Instances<a name="emr-dedicated-instances"></a>
 

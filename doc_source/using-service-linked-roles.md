@@ -248,8 +248,8 @@ Amazon EMR supports using service\-linked roles in the following regions\.
 | Asia Pacific \(Sydney\) | ap\-southeast\-2 | Yes | 
 | Asia Pacific \(Tokyo\) | ap\-northeast\-1 | Yes | 
 | Canada \(Central\) | ca\-central\-1 | Yes | 
-| EU \(Frankfurt\) | eu\-central\-1 | Yes | 
-| EU \(Ireland\) | eu\-west\-1 | Yes | 
-| EU \(London\) | eu\-west\-2 | Yes | 
-| EU \(Paris\) | eu\-west\-3 | Yes | 
+| Europe \(Frankfurt\) | eu\-central\-1 | Yes | 
+| Europe \(Ireland\) | eu\-west\-1 | Yes | 
+| Europe \(London\) | eu\-west\-2 | Yes | 
+| Europe \(Paris\) | eu\-west\-3 | Yes | 
 | South America \(São Paulo\) | sa\-east\-1 | Yes | 

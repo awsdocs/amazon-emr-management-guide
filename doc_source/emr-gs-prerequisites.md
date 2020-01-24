@@ -17,7 +17,7 @@ If you do not have an AWS account, complete the following steps to create one\.
 ## Create an Amazon S3 Bucket<a name="emr-gs-create-bucket"></a>
 
  In this tutorial, you specify an Amazon S3 bucket and folder to store the output data from a Hive query\. The tutorial uses the default log location, but you can also specify a custom location if you prefer\. Because of Hadoop requirements, bucket and folder names that you use with Amazon EMR have the following limitations:
-+ They must contain only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\.
++ They must contain only letters, numbers, periods \(\.\), and hyphens \(\-\)\.
 + They cannot end in numbers\.
 
 If you already have access to a folder that meets these requirements, you can use it for this tutorial\. The output folder should be empty\. Another requirement to remember is that bucket names must be unique *across all AWS accounts*\. 

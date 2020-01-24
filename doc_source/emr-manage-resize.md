@@ -62,13 +62,13 @@ Using the AWS CLI, you can add from 1–48 task instance groups to a cluster wit
 1. To add a single task instance group to a cluster, type the following command and replace *j\-JXBXXXXXX37R* with the cluster ID\.
 
    ```
-   1. aws emr add-instance-groups --cluster-id j-JXBXXXXXX37R --instance-groups InstanceCount=6,InstanceGroupType=task,InstanceType=m4.large
+   1. aws emr add-instance-groups --cluster-id j-JXBXXXXXX37R --instance-groups InstanceCount=6,InstanceGroupType=task,InstanceType=m5.xlarge
    ```
 
 1. To add multiple task instance groups to a cluster, type the following command and replace *j\-JXBXXXXXX37R* with the cluster ID\. You can add up to five task instance groups in a single command\.
 
    ```
-   aws emr add-instance-groups --cluster-id j-JXBXXXXXX37R --instance-groups InstanceCount=6,InstanceGroupType=task,InstanceType=m4.large InstanceCount=10,InstanceGroupType=task,InstanceType=m4.large
+   aws emr add-instance-groups --cluster-id j-JXBXXXXXX37R --instance-groups InstanceCount=6,InstanceGroupType=task,InstanceType=m5.xlarge InstanceCount=10,InstanceGroupType=task,InstanceType=m5.xlarge
    ```
 
    For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
@@ -152,7 +152,7 @@ Type the `describe-cluster` subcommand with the `--cluster-id` parameter to view
   33.                 },
   34.                 "Name": "MASTER",
   35.                 "InstanceGroupType": "MASTER",
-  36.                 "InstanceType": "m4.large",
+  36.                 "InstanceType": "m5.xlarge",
   37.                 "Id": "ig-3ETXXXXXXFYV8",
   38.                 "Market": "ON_DEMAND",
   39.                 "RunningInstanceCount": 1
@@ -171,7 +171,7 @@ Type the `describe-cluster` subcommand with the `--cluster-id` parameter to view
   52.                 },
   53.                 "Name": "CORE",
   54.                 "InstanceGroupType": "CORE",
-  55.                 "InstanceType": "m4.large",
+  55.                 "InstanceType": "m5.xlarge",
   56.                 "Id": "ig-3SUXXXXXXQ9ZM",
   57.                 "Market": "ON_DEMAND",
   58.                 "RunningInstanceCount": 1

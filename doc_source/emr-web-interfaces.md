@@ -15,8 +15,8 @@ To access web interfaces, you must edit the security groups associated with mast
 | --- | --- | 
 | YARN ResourceManager | http://master\-public\-dns\-name:8088/ | 
 | YARN NodeManager | http://coretask\-public\-dns\-name:8042/ | 
-| Hadoop HDFS NameNode | http://master\-public\-dns\-name:50070/ | 
-| Hadoop HDFS DataNode | http://coretask\-public\-dns\-name:50075/ | 
+| Hadoop HDFS NameNode | https://master\-public\-dns\-name:50470/ | 
+| Hadoop HDFS DataNode | https://coretask\-public\-dns\-name:50475/ | 
 | Spark HistoryServer | http://master\-public\-dns\-name:18080/ | 
 | Zeppelin | http://master\-public\-dns\-name:8890/ | 
 | Hue | http://master\-public\-dns\-name:8888/ | 
@@ -35,6 +35,8 @@ lynx http://ip-###-##-##-###.us-west-2.compute.internal:8088/
 There are two remaining options for accessing web interfaces on the master node that provide full browser functionality\. Choose one of the following: 
 + Option 1 \(recommended for more technical users\): Use an SSH client to connect to the master node, configure SSH tunneling with local port forwarding, and use an Internet browser to open web interfaces hosted on the master node\. This method allows you to configure web interface access without using a SOCKS proxy\.
 + Option 2 \(recommended for new users\): Use an SSH client to connect to the master node, configure SSH tunneling with dynamic port forwarding, and configure your Internet browser to use an add\-on such as FoxyProxy or SwitchySharp to manage your SOCKS proxy settings\. This method allows you to automatically filter URLs based on text patterns and to limit the proxy settings to domains that match the form of the master node's DNS name\. The browser add\-on automatically handles turning the proxy on and off when you switch between viewing websites hosted on the master node, and those on the Internet\. For more information about how to configure FoxyProxy for Firefox and Google Chrome, see [Option 2, Part 2: Configure Proxy Settings to View Websites Hosted on the Master Node](emr-connect-master-node-proxy.md)\.
+
+With Amazon EMR version 5\.25\.0 or later, you can access Spark history server UI from the console without setting up a web proxy through an SSH connection\. For more information, see [One\-click Access to Persistent Spark History Server](https://docs.aws.amazon.com/emr/latest/ManagementGuide/app-history-spark-UI.html)\.
 
 **Topics**
 + [Option 1: Set Up an SSH Tunnel to the Master Node Using Local Port Forwarding](emr-ssh-tunnel-local.md)

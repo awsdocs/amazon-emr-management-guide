@@ -5,8 +5,8 @@ EMRFS tries to verify list consistency for objects tracked in its metadata for a
 **Example Setting retry period to a fixed amount**  
 
 ```
-aws emr create-cluster --release-label emr-5.26.0 \
---instance-type m4.large --instance-count 1 \
+aws emr create-cluster --release-label emr-5.29.0 \
+--instance-type m5.xlarge --instance-count 1 \
 --emrfs Consistent=true,Args=[fs.s3.consistent.throwExceptionOnInconsistency=false, fs.s3.consistent.retryPolicyType=fixed,fs.s3.consistent.retryPeriodSeconds=10] --ec2-attributes KeyName=myKey
 ```
 

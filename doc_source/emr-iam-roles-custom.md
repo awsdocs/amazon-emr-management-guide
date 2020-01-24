@@ -49,10 +49,10 @@ The Auto Scaling role is specified using a separate option, `--auto-scaling-role
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.26.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
   --applications Name=Hive Name=Pig --service-role MyCustomServiceRoleForEMR \
   --ec2-attributes InstanceProfile=MyCustomServiceRoleForClusterEC2Instances,\
-  KeyName=myKey --instance-type m4.large --instance-count 3
+  KeyName=myKey --instance-type m5.xlarge --instance-count 3
   ```
 
 You can use these options to specify default roles explicitly rather than using the `--use-default-roles` option\. The `--use-default-roles` option specifies the service role and the role for the EC2 instance profile defined in the `config` file for the AWS CLI\.

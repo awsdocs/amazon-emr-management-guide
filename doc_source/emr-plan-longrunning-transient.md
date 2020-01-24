@@ -35,13 +35,13 @@ By default, clusters that you create using the console or the AWS CLI continue t
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.26.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
   --applications Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey \
   --steps Type=PIG,Name="Pig Program",ActionOnFailure=CONTINUE,\
   Args=[-f,s3://mybucket/scripts/pigscript.pig,-p,\
   INPUT=s3://mybucket/inputdata/,-p,OUTPUT=s3://mybucket/outputdata/,\
   $INPUT=s3://mybucket/inputdata/,$OUTPUT=s3://mybucket/outputdata/]
-  --instance-type m4.large --instance-count 3 --auto-terminate
+  --instance-type m5.xlarge --instance-count 3 --auto-terminate
   ```
 
 For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

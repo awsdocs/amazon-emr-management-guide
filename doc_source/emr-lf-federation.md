@@ -52,7 +52,7 @@ To establish a trust relationship between your organization's Identity Provider 
 
    1. Choose **Trust relationships**, and then select **Edit trust relationship**\.
 
-   1. Override the existing policy document with the trust policy specified in the previous section [Overview of the IAM Roles for Lake Formation](emr-lf-iam-role.md)\. Then click **Update Trust Relationship**Update Trust Relationship\. 
+   1. Override the existing policy document with the IAM Role for Lake Formation trust policy specified in the [Overview of the IAM Roles for Lake Formation](emr-lf-iam-role.md) section\. Then click **Update Trust Relationship**\. 
 
 1. In your organization's IdP, you must configure SAML assertions that map the users in your organization to the Identity Provider and the IAM role for Lake Formation that was just created\. You do this by configuring the three attribute elements shown in the following table\. 
    + Replace *account\-id* with your AWS account ID\.

@@ -137,7 +137,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    aws emr create-cluster --name MyEmrFsS3RolesCluster \
-   --release-label emr-5.26.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
-   --instance-type m4.large --instance-count 3 \
+   --release-label emr-5.29.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
+   --instance-type m5.xlarge --instance-count 3 \
    --security-configuration EMRFS_Roles_Security_Configuration
    ```

@@ -86,7 +86,7 @@ The following diagram represents the step sequence and default change of state w
 
 1. Amazon EMR installs the native applications that you specify when you create the cluster, such as Hive, Hadoop, Spark, and so on\.
 
-1.  After bootstrap actions are successfully completed and native applications are installed, the cluster state is `RUNNING`\. At this point, you can connect to cluster instances, and the cluster sequentially runs any steps that you specified when you created the cluster\. You can submit additional steps, which run after any previous steps complete\. For more information, see [Work with Steps Using the CLI and Console](emr-work-with-steps.md)\. 
+1.  After bootstrap actions are successfully completed and native applications are installed, the cluster state is `RUNNING`\. At this point, you can connect to cluster instances, and the cluster sequentially runs any steps that you specified when you created the cluster\. You can submit additional steps, which run after any previous steps complete\. For more information, see [Work with Steps Using the AWS CLI and Console](emr-work-with-steps.md)\. 
 
 1. After steps run successfully, the cluster goes into a `WAITING` state\. If a cluster is configured to auto\-terminate after the last step is complete, it goes into a `SHUTTING_DOWN` state\. 
 

@@ -27,7 +27,7 @@ For more information, see [Creating an Amazon EBS\-Backed Linux AMI](https://doc
 
 ## Specifying a Custom AMI<a name="emr-specify-custom-ami"></a>
 
-You can specify a custom AMI ID when you create a cluster using the AWS Management Console, AWS CLI, [Amazon CloudWatch](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-cluster.html), or the Amazon EMR API\. The AMI must exist in the same AWS Region where you create the cluster\.<a name="emr-specify-custom-ami-console"></a>
+You can specify a custom AMI ID when you create a cluster using the AWS Management Console, AWS CLI, [Amazon CloudWatch](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html), or the Amazon EMR API\. The AMI must exist in the same AWS Region where you create the cluster\.<a name="emr-specify-custom-ami-console"></a>
 
 **To specify a custom AMI using the console**
 
@@ -55,7 +55,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   aws emr create-cluster --name "Cluster with My Custom AMI" \
   --custom-ami-id MyAmiID --ebs-root-volume-size 20 \
   --release-label emr-5.7.0 --use-default-roles \
-  --instance-count 2 --instance-type m4.large
+  --instance-count 2 --instance-type m5.xlarge
   ```
 
 ## Managing AMI Package Repository Updates<a name="emr-custom-ami-package-update"></a>
@@ -90,7 +90,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    aws ec2 run-instances --image-id MyAmiID \
-   --count 1 --instance-type m4.large \
+   --count 1 --instance-type m5.xlarge \
    --key-name MyKeyName --region us-west-2
    ```
 

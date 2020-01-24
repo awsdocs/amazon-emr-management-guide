@@ -4,7 +4,7 @@ When you set up a cross\-realm trust, you allow principals \(usually users\) fro
 
 A cross\-realm trust requires that the KDCs can reach one another over the network and resolve each other's domain names\. Steps for establishing a cross\-realm trust relationship with a Microsoft AD domain controller running as an EC2 instance are provided below, along with an example network setup that provides the required connectivity and domain\-name resolution\. Any network setup that allows the required network traffic between KDCs is acceptable\.
 
-Optionally, after you establish a cross\-realm trust with Active Directory using a KDC on one cluster, you can create another cluster using a different security configuration to reference the KDC on the first cluster as an external KDC\. For an example security configuration and cluster set up, see [External Cluster KDC with Active Directory Cross\-Realm Trust](emr-kerberos-example-extkdc-ad-trust.md)\.
+Optionally, after you establish a cross\-realm trust with Active Directory using a KDC on one cluster, you can create another cluster using a different security configuration to reference the KDC on the first cluster as an external KDC\. For an example security configuration and cluster set up, see [External Cluster KDC with Active Directory Cross\-Realm Trust](emr-kerberos-config-examples.md#emr-kerberos-example-extkdc-ad-trust)\.
 
 **Important**  
 Amazon EMR does not support cross\-realm trusts with AWS Directory Service for Microsoft Active Directory\.
@@ -55,6 +55,8 @@ An internet gateway is used in this example because you are establishing a new d
 
 1. Launch an EC2 instance based on the Microsoft Windows Server 2016 Base AMI\. We recommend an m4\.xlarge or better instance type\. For more information, see [Launching an AWS Marketplace Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/launch-marketplace-console.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
+1. Make a note of the Group ID of the security group associated with the EC2 instance\. You need it for [Step 6: Launch a Kerberized EMR Cluster](#emr-kerberos-ad-cluster)\. We use *sg\-012xrlmdomain345*\. Alternatively, you can specify different security groups for the EMR cluster and this instance that allows traffic between them\. For more information, see [Amazon EC2 Security Groups for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
 1. Connect to the EC2 instance using RDP\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Start **Server Manager** to install and configure the Active Directory Domain Services role on the server\. Promote the server to a domain controller and assign a domain name \(the example we use here is `ad.domain.com`\)\. Make a note of the domain name because you need it later when you create the EMR security configuration and cluster\. If you are new to setting up Active Directory, you can follow the instructions in [How to Set Up Active Directory \(AD\) in Windows Server 2016](https://ittutorials.net/microsoft/windows-server-2016/setting-up-active-directory-ad-in-windows-server-2016/)\.
@@ -69,19 +71,19 @@ In addition, create a user account with sufficient privileges to join computers 
 
 ## Step 4: Configure an Incoming Trust on the Active Directory Domain Controller<a name="emr-kerberos-ad-configure-trust"></a>
 
-The example commands below create a trust in Active Directory, which is a one\-way, incoming, non\-transitive, realm trust with the cluster\-dedicated KDC\. The example we use for the cluster's realm is `EC2.INTERNAL`\. The `passwordt` parameter specifies the **cross\-realm principal password**, which you specify along with the cluster **realm** when you create a cluster\. The realm name is derived from the default domain name in `us-east-1` for the cluster\. The `Domain` is the Active Directory domain in which you are creating the trust, which is lower case by convention\. The example uses `ad.domain.com`
+The example commands below create a trust in Active Directory, which is a one\-way, incoming, non\-transitive, realm trust with the cluster\-dedicated KDC\. The example we use for the cluster's realm is `EC2.INTERNAL`\. Replace the *KDC\-FQDN* with the **Public DNS** name listed for the Amazon EMR master node hosting the KDC\. The `passwordt` parameter specifies the **cross\-realm principal password**, which you specify along with the cluster **realm** when you create a cluster\. The realm name is derived from the default domain name in `us-east-1` for the cluster\. The `Domain` is the Active Directory domain in which you are creating the trust, which is lower case by convention\. The example uses `ad.domain.com`
 
 Open the Windows command prompt with administrator privileges and type the following commands to create the trust relationship on the Active Directory domain controller:
 
 ```
-C:\Users\Administrator> ksetup /addkdc EC2.INTERNAL
+C:\Users\Administrator> ksetup /addkdc EC2.INTERNAL KDC-FQDN
 C:\Users\Administrator> netdom trust EC2.INTERNAL /Domain:ad.domain.com /add /realm /passwordt:MyVeryStrongPassword
 C:\Users\Administrator> ksetup /SetEncTypeAttr EC2.INTERNAL AES256-CTS-HMAC-SHA1-96
 ```
 
 ## Step 5: Use a DHCP Option Set to Specify the Active Directory Domain Controller as a VPC DNS Server<a name="emr-kerberos-ad-DHCP"></a>
 
-Now that the Active Directory domain controller is configured, you must configure the VPC to use it as a domain name server for name resolution within your VPC\. To do this, attach a DHCP options set\. Specify the **Domain name** as the domain name of your cluster—for example, `ec2.internal` if your cluster is in us\-east\-1 or `region.compute.amazon.aws` for other regions\. For **Domain name servers**, you must specify the IP address of the Active Directory domain controller \(which must be reachable from the cluster\) as the first entry, followed by **AmazonProvidedDNS** \(for example, ***xx\.xx\.xx\.xx*,AmazonProvidedDNS**\)\. For more information, see [Changing DHCP Option Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html#DHCPOptions)\.
+Now that the Active Directory domain controller is configured, you must configure the VPC to use it as a domain name server for name resolution within your VPC\. To do this, attach a DHCP options set\. Specify the **Domain name** as the domain name of your cluster—for example, `ec2.internal` if your cluster is in us\-east\-1 or `region.compute.internal` for other regions\. For **Domain name servers**, you must specify the IP address of the Active Directory domain controller \(which must be reachable from the cluster\) as the first entry, followed by **AmazonProvidedDNS** \(for example, ***xx\.xx\.xx\.xx*,AmazonProvidedDNS**\)\. For more information, see [Changing DHCP Option Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html#DHCPOptions)\.
 
 ## Step 6: Launch a Kerberized EMR Cluster<a name="emr-kerberos-ad-cluster"></a>
 
@@ -107,10 +109,13 @@ Now that the Active Directory domain controller is configured, you must configur
    }'
    ```
 
-1. Create the cluster, specifying the security configuration \(in this example, `MyKerberosConfig`\) and the same subnet you created in [Step 1: Set Up the VPC and Subnet](#emr-kerberos-ad-network)\. 
+1. Create the cluster with the following attributes:
+   + Use the `--security-configuration` option to specify the security configuration that you created\. We use *MyKerberosConfig* in the example\.
+   + Use the `SubnetId` property of the `--ec2-attributes option` to specify the subnet that you created in [Step 1: Set Up the VPC and Subnet](#emr-kerberos-ad-network)\. We use *step1\-subnet* in the example\.
+   + Use the `AdditionalMasterSecurityGroups` and `AdditionalSlaveSecurityGroups` of the `--ec2-attributes` option to specify that the security group associated with the AD Domain Controller from [Step 2: Launch and Install the Active Directory Domain Controller](#emr-kerberos-ad-dc) is associated with the cluster master node as well as core and task nodes\. We use *sg\-012xrlmdomain345* in the example\.
 
-   Also specify the following cluster\-specific `kerberos-attributes`:
-   + The realm for the cluster that you specified when you set up the Active Directory domain controller
+   Use `--kerberos-attributes` to specify the following cluster\-specific Kerberos attributes:
+   + The realm for the cluster that you specified when you set up the Active Directory domain controller\.
    + The cross\-realm trust principal password that you specified as `passwordt` in [Step 4: Configure an Incoming Trust on the Active Directory Domain Controller](#emr-kerberos-ad-configure-trust)\.
    + A `KdcAdminPassword`, which you can use to administer the cluster\-dedicated KDC\.
    + The user logon name and password of the Active Directory account with computer join privileges that you created in [Step 3: Add User Accounts to the Domain for the EMR Cluster](#emr-kerberos-ad-users)\.
@@ -120,9 +125,11 @@ Now that the Active Directory domain controller is configured, you must configur
    ```
    aws emr create-cluster --name "MyKerberosCluster" \
    --release-label emr-5.10.0 \
-   --instance-type m4.large \
+   --instance-type m5.xlarge \
    --instance-count 3 \
-   --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \
+   --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair,\
+   SubnetId=step1-subnet, AdditionalMasterSecurityGroups=sg-012xrlmdomain345,
+   AdditionalSlaveSecurityGroups=sg-012xrlmdomain345\
    --service-role EMR_DefaultRole \
    --security-configuration MyKerberosConfig \
    --applications Name=Hadoop Name=Hive Name=Oozie Name=Hue Name=HCatalog Name=Spark \

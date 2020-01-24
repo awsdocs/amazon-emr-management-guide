@@ -2,6 +2,9 @@
 
 Automatic scaling in Amazon EMR release versions 4\.0 and later allows you to programmatically scale out and scale in core nodes and task nodes based on a CloudWatch metric and other parameters that you specify in a *scaling policy*\. Automatic scaling is available with the instance groups configuration and is not available when you use instance fleets\. For more information about instance groups and instance fleets, see [Create a Cluster with Instance Fleets or Uniform Instance Groups](emr-instance-group-configuration.md)\.
 
+**Note**  
+To use the automatic scaling feature in Amazon EMR, you must keep the default setting, `true`, for the `VisibleToAllUsers` parameter when you create a cluster\. For more information, see [SetVisibleToAllUsers](https://docs.aws.amazon.com/emr/latest/APIReference/API_SetVisibleToAllUsers.html)\.
+
 The scaling policy is part of an instance group configuration\. You can specify a policy during initial configuration of an instance group, or by modifying an instance group in an existing cluster, even when that instance group is active\. Each instance group in a cluster, except the master instance group, can have its own scaling policy, which consists of scale\-out and scale\-in rules\. Scale\-out and scale\-in rules can be configured independently, with different parameters for each rule\.
 
 You can configure scaling policies using the AWS Management Console, the AWS CLI, or the Amazon EMR API\. When you use the AWS CLI or Amazon EMR API, you specify the scaling policy in JSON format\. In addition, when using the AWS CLI or the Amazon EMR API, you can specify custom CloudWatch metrics\. Custom metrics are not available for selection using the AWS Management Console\. When you initially create a scaling policy using the console, a default policy suitable for many applications is pre\-configured to help you get started\. You can delete or modify the default rules\.
@@ -33,7 +36,7 @@ The parameters listed here are based on the AWS Management Console for Amazon EM
 + The **CloudWatch metric**, which is watched for an alarm condition\.
 + A **comparison operator**, which is used to compare the CloudWatch metric to the **Threshold** value and determine a trigger condition\.
 + An **evaluation period**, in five\-minute increments, for which the CloudWatch metric must be in a trigger condition before scaling activity is triggered\.
-+ A **Cooldown period**, in five\-minute increments, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it\. When an instance group has finished a scaling activity and reached its post\-scale state, the cooldown period provides an opportunity for the CloudWatch metrics that might trigger subsequent scaling activities to stabilize\. For more information, see [Auto Scaling Cooldowns](https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the *Amazon EC2 Auto Scaling User Guide*\.  
++ A **Cooldown period**, in seconds, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it\. When an instance group has finished a scaling activity and reached its post\-scale state, the cooldown period provides an opportunity for the CloudWatch metrics that might trigger subsequent scaling activities to stabilize\. For more information, see [Auto Scaling Cooldowns](https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the *Amazon EC2 Auto Scaling User Guide*\.  
 ![\[AWS Management Console automatic scaling rule parameters for Amazon EMR.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/auto-scaling-rule-params.png)
 
 ## Using the AWS Management Console to Configure Automatic Scaling<a name="emr-automatic-scale-console"></a>
@@ -70,7 +73,7 @@ For a detailed description of the parameters available when configuring an autom
 You can specify an automatic scaling configuration within the `--instance-groups` option of the `aws emr create-cluster` command\. The following example illustrates a create\-cluster command where an automatic scaling policy for the core instance group is provided inline\. The command creates a scaling configuration equivalent to the default scale\-out policy that appears when you create an automatic scaling policy using the AWS Management Console for Amazon EMR\. For brevity, a scale\-in policy is not shown\. We do not recommend creating a scale\-out rule without a scale\-in rule\.
 
 ```
-aws emr create-cluster --release-label emr-5.2.0 --service-role EMR_DefaultRole --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole --auto-scaling-role EMR_AutoScaling_DefaultRole  --instance-groups Name=MyMasterIG,InstanceGroupType=MASTER,InstanceType=m4.large,InstanceCount=1 'Name=MyCoreIG,InstanceGroupType=CORE,InstanceType=m4.large,InstanceCount=2,AutoScalingPolicy={Constraints={MinCapacity=2,MaxCapacity=10},Rules=[{Name=Default-scale-out,Description=Replicates the default scale-out rule in the console.,Action={SimpleScalingPolicyConfiguration={AdjustmentType=CHANGE_IN_CAPACITY,ScalingAdjustment=1,CoolDown=300}},Trigger={CloudWatchAlarmDefinition={ComparisonOperator=LESS_THAN,EvaluationPeriods=1,MetricName=YARNMemoryAvailablePercentage,Namespace=AWS/ElasticMapReduce,Period=300,Statistic=AVERAGE,Threshold=15,Unit=PERCENT,Dimensions=[{Key=JobFlowId,Value="${emr.clusterId}"}]}}}]}'
+aws emr create-cluster --release-label emr-5.2.0 --service-role EMR_DefaultRole --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole --auto-scaling-role EMR_AutoScaling_DefaultRole  --instance-groups Name=MyMasterIG,InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1 'Name=MyCoreIG,InstanceGroupType=CORE,InstanceType=m5.xlarge,InstanceCount=2,AutoScalingPolicy={Constraints={MinCapacity=2,MaxCapacity=10},Rules=[{Name=Default-scale-out,Description=Replicates the default scale-out rule in the console.,Action={SimpleScalingPolicyConfiguration={AdjustmentType=CHANGE_IN_CAPACITY,ScalingAdjustment=1,CoolDown=300}},Trigger={CloudWatchAlarmDefinition={ComparisonOperator=LESS_THAN,EvaluationPeriods=1,MetricName=YARNMemoryAvailablePercentage,Namespace=AWS/ElasticMapReduce,Period=300,Statistic=AVERAGE,Threshold=15,Unit=PERCENT,Dimensions=[{Key=JobFlowId,Value="${emr.clusterId}"}]}}}]}'
 ```
 
  The following command illustrates using the command line to provide the automatic scaling policy definition as part of an instance group configuration file named `instancegroupconfig.json`\.
@@ -87,13 +90,13 @@ With the contents of the configuration file as follows:
   "InstanceCount": 1,
   "Name": "MyMasterIG",
   "InstanceGroupType": "MASTER",
-  "InstanceType": "m4.large"
+  "InstanceType": "m5.xlarge"
 },
 {
   "InstanceCount": 2,
   "Name": "MyCoreIG",
   "InstanceGroupType": "CORE",
-  "InstanceType": "m4.large",
+  "InstanceType": "m5.xlarge",
   "AutoScalingPolicy":
     {
      "Constraints":
@@ -157,8 +160,7 @@ aws emr put-auto-scaling-policy --cluster-id j-1EKZ3TYEVF1S2 --instance-group-id
 The contents of the `autoscaleconfig.json` file, which defines the same scale\-out rule as shown in the previous example, is shown below\.
 
 ```
-[{
-	"AutoScalingPolicy": {
+{
 		"Constraints": {
 			"MinCapacity": 2,
 			"MaxCapacity": 10
@@ -288,7 +290,7 @@ The command produces the following example output\.
                                     "MetricName": "YARNMemoryAvailablePercentage",
                                     "Unit": "PERCENT",
                                     "Namespace": "AWS/ElasticMapReduce",
-                                    "Threshold": 0.75,
+                                    "Threshold": 75,
                                     "Dimensions": [
                                         {
                                             "Key": "JobFlowId",
@@ -313,7 +315,7 @@ The command produces the following example output\.
                     ]
                 },
                 "Configurations": [],
-                "InstanceType": "m4.large",
+                "InstanceType": "m5.xlarge",
                 "Market": "ON_DEMAND",
                 "Name": "Core - 2",
                 "ShrinkPolicy": {},
@@ -337,7 +339,7 @@ The command produces the following example output\.
                 "Configurations": [],
                 "Id": "ig-OP62I28NSE8M",
                 "InstanceGroupType": "MASTER",
-                "InstanceType": "m4.large",
+                "InstanceType": "m5.xlarge",
                 "Market": "ON_DEMAND",
                 "Name": "Master - 1",
                 "ShrinkPolicy": {},

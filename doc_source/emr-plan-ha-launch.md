@@ -3,26 +3,27 @@
 This topic provides configuration details and examples for launching an EMR cluster with multiple master nodes\.
 
 ## Prerequisites<a name="emr-plan-ha-launch-config"></a>
-+ You can launch an EMR cluster with multiple master nodes in both public and private VPC subnets\. To launch an EMR cluster with multiple master nodes in a public subnet, you must enable the instances in this subnet to receive a public IP address by selecting **Auto\-assign IPv4** in the console or running the following command\. Replace *22XXXX01* with your subnet ID\.
++ You can launch an EMR cluster with multiple master nodes in both public and private VPC subnets\. **EC2\-Classic** is not supported\. To launch an EMR cluster with multiple master nodes in a public subnet, you must enable the instances in this subnet to receive a public IP address by selecting **Auto\-assign IPv4** in the console or running the following command\. Replace *22XXXX01* with your subnet ID\.
 
   ```
   aws ec2 modify-subnet-attribute --subnet-id subnet-22XXXX01 --map-public-ip-on-launch					
   ```
-**Note**  
-**EC2\-Classic** is not supported\.
-+ To run Hive on an EMR cluster with multiple master nodes, you must create an external metastore for Hive\. For more information, see [Configuring an External Metastore for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-metastore-external-hive.html)\.
++ To run Hive, Hue, or Oozie on an EMR cluster with multiple master nodes, you must create an external metastore\. For more information, see [Configuring an External Metastore for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-metastore-external-hive.html), [Using Hue with a Remote Database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-rds.html), or [Apache Oozie](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-oozie.html)\.
 + To use Kerberos authentication in your cluster, you must configure an external KDC\. For more information, see [Configuring Kerberos on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos-configure.html)\.
 
 ## Launch an EMR Cluster with Multiple Master Nodes<a name="emr-plan-ha-launch-examples"></a>
 
-You must specify an instance count value of three for the master node instance group when you launch an EMR cluster with multiple master nodes\. The following examples demonstrate how to launch the cluster using the default AMI or a custom AMI\. Replace *22XXXX01* with your subnet ID in the following examples\.
+You must specify an instance count value of three for the master node instance group when you launch an EMR cluster with multiple master nodes\. The following examples demonstrate how to launch the cluster using the default AMI or a custom AMI\. 
+
+**Note**  
+You must specify the subnet ID when you launch an EMR cluster with multiple master nodes using the AWS CLI\. Replace *22XXXX01* with your subnet ID in the following examples\.
 
 **Example –Launching an EMR cluster with multiple master nodes using a default AMI**  
 
 ```
 aws emr create-cluster \
 --name "ha-cluster" \
---release-label emr-5.26.0 \
+--release-label emr-5.29.0 \
 --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
 --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
 --service-role EMR_DefaultRole \
@@ -34,7 +35,7 @@ aws emr create-cluster \
 ```
 aws emr create-cluster \
 --name "custom-ami-ha-cluster" \
---release-label emr-5.26.0 \
+--release-label emr-5.29.0 \
 --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
 --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
 --service-role EMR_DefaultRole \
@@ -66,7 +67,7 @@ To run Hive on an EMR cluster with multiple master nodes, you must specify an ex
    ```
    aws emr create-cluster \
    --name "ha-cluster-with-hive-metastore" \
-   --release-label emr-5.26.0 \
+   --release-label emr-5.29.0 \
    --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
    --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
    --service-role EMR_DefaultRole \

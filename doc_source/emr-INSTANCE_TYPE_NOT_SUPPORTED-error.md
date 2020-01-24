@@ -25,9 +25,9 @@ A consolidated list of supported Amazon EMR instance types by Region and Availab
 1. You can continue creating the cluster, or choose **Cancel**, choose a different **Network** and **EC2 Subnet**, and repeat the previous steps\.
 
 **To determine available instance types in an Availability Zone using the AWS CLI**
-+ Use the `ec2 run-instances` command with the `--dry-run` option\. In the example below, replace *m4\.large* with the instance type you want to use, *ami\-035be7bafff33b6b6* with the AMI associated with that instance type, and *subnet\-12ab3c45* with a subnet in the Availability Zone you want to query\.
++ Use the `ec2 run-instances` command with the `--dry-run` option\. In the example below, replace *m5\.xlarge* with the instance type you want to use, *ami\-035be7bafff33b6b6* with the AMI associated with that instance type, and *subnet\-12ab3c45* with a subnet in the Availability Zone you want to query\.
 
-  `aws ec2 run-instances --instance-type m4.large --dry-run --image-id ami-035be7bafff33b6b6 --subnet-id subnet-12ab3c45`
+  `aws ec2 run-instances --instance-type m5.xlarge --dry-run --image-id ami-035be7bafff33b6b6 --subnet-id subnet-12ab3c45`
 
 After you determine the instance types available, you can do any of the following:
 + Create the cluster in the same Region and EC2 Subnet, and choose a different instance type with similar capabilities as your initial choice\. For a list of supported instance types, see [Supported Instance Types](emr-supported-instance-types.md)\. To compare capabilities of EC2 instance types, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.

@@ -43,7 +43,7 @@ The following command installs the [Celery](https://pypi.org/project/celery/) li
 ```
 sc.install_pypi_package("celery")
 ```
-After installing the library, the following command confirms that the libary is available on the Spark driver and executors\.  
+After installing the library, the following command confirms that the library is available on the Spark driver and executors\.  
 
 ```
 import celery

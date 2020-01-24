@@ -18,7 +18,7 @@ Group Name: **ElasticMapReduceEditors\-Livy**
 
   None
 
-## EC2 Security Group for EMR Notebooks<a name="emr-managed-notebooks-security-group-for-notebooks"></a>
+## Default EC2 Security Group for EMR Notebooks<a name="emr-managed-notebooks-security-group-for-notebooks"></a>
 
 The default EC2 security group for the EMR notebook is associated with the notebook editor for any EMR notebook to which it is assigned\.
 
@@ -31,3 +31,16 @@ Group Name: **ElasticMapReduceEditors\-Editor**
 + Outbound
 
   Allow TCP Port 18888 to any resources in the default EC2 security group for EMR Notebooks\.
+
+## Custom EC2 Security Group for EMR Notebooks When Associating Notebooks with Git Repositories<a name="emr-managed-notebooks-security-group-for-notebooks-git"></a>
+
+To link a Git repository to your notebook, the security group for the EMR notebook must include an outbound rule to allow the notebook to route traffic to the internet\. It is recommended that you create a new security group for this purpose\. Updating the default **ElasticMapReduceEditors\-Editor** security group may give the same outbound rules to other notebooks that are attached to this security group\. 
+
+**Rules**
++ Inbound
+
+  None
++ Outbound
+
+  Allow the notebook to route traffic to the internet via the cluster, as the following example demonstrates:    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html)

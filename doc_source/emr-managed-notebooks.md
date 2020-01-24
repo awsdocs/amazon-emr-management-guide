@@ -16,3 +16,4 @@ Applicable charges for Amazon S3 storage and for Amazon EMR clusters apply\.
 + [Monitoring](emr-managed-notebooks-spark-monitor.md)
 + [Security](emr-managed-notebooks-security.md)
 + [Using Notebook\-Scoped Libraries](emr-managed-notebooks-scoped-libraries.md)
++ [Associate Git Repositories with Amazon EMR Notebooks](emr-git-repo.md)

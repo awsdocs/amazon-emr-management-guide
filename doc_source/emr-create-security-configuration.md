@@ -348,8 +348,8 @@ The following table lists the JSON parameters for encryption settings and provid
 |  "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 | "EncryptionKeyProviderClass" : "MyS3KeyClassID" | Required only when CSE\-Custom is specified for EncryptionMode\. MyS3KeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyS3KeyProvider\. | 
 | Local disk encryption parameters | 
-| "LocalDiskEncryptionKeyProvider" | Specifies the key provider and corresponding values to be used for local disk encryption\. | 
-| "Type" : "AwsKms" \| "Custom" | Specifies the key provider\. If AwsKms is specified, an AWS KMS CMK ARN must be specified as the AwsKmsKey value\. If Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
+| "LocalDiskEncryptionConfiguration" | Specifies the key provider and corresponding values to be used for local disk encryption\. | 
+| "EncryptionKeyProviderType" : "AwsKms" \| "Custom" | Specifies the key provider\. If AwsKms is specified, an AWS KMS CMK ARN must be specified as the AwsKmsKey value\. If Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
 | "AwsKmsKey : "MyKeyARN" | Required only when AwsKms is specified for Type\. MyKeyARN must be a fully specified ARN to a key \(for example, arn:aws:kms:us\-east\-1:123456789012:key/12345678\-1234\-1234\-1234\-456789012123\)\. | 
 | "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 |  `"EncryptionKeyProviderClass" : "MyLocalDiskKeyClassID"`  | Required only when Custom is specified for Type\. MyLocalDiskKeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyLocalDiskKeyProvider\. | 
@@ -376,7 +376,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w12aac21c27c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w19aac21c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

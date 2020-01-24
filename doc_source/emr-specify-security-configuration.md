@@ -23,5 +23,5 @@ When using the AWS console to create an EMR cluster, you choose the security con
 When you use `aws emr create-cluster`, you can optionally apply a security configuration using `--security-configuration MySecConfig`, where `MySecConfig` is the name of the security configuration, as shown in the following example\. The `--release-label` specified must be 4\.8\.0 or later and the `--instance-type` can be any available\.
 
 ```
-aws emr create-cluster --instance-type m4.large --release-label emr-5.0.0 --security-configuration mySecConfig
+aws emr create-cluster --instance-type m5.xlarge --release-label emr-5.0.0 --security-configuration mySecConfig
 ```

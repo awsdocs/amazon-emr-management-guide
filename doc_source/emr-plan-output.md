@@ -24,7 +24,7 @@ This section shows you how to use the Amazon S3 AWS Management Console to create
 
    The **Create a Bucket** dialog box opens\.
 
-1. Enter a bucket name, such as **myawsbucket**\. 
+1. Enter a bucket name, such as ***aws\-s3\-bucket1***\. 
 
    This name should be globally unique, and cannot be the same name used by another bucket\.
 
@@ -34,7 +34,7 @@ This section shows you how to use the Amazon S3 AWS Management Console to create
 
 1. Choose **Create**\. 
 
-You created a bucket with the URI **s3n://myawsbucket/**\. 
+You created a bucket with the URI **s3n://*aws\-s3\-bucket1*/**\. 
 
 **Note**  
  If you enable logging in the **Create a Bucket** wizard, it enables only bucket access logs, not cluster logs\. 
@@ -69,7 +69,7 @@ You have created a bucket and restricted permissions to authenticated users\.
 
 | Information | Example Location on Amazon S3 | 
 | --- | --- | 
-| script or program |  s3://myawsbucket/script/MapperScript\.py  | 
-| log files |  s3://myawsbucket/logs  | 
-| input data |  s3://myawsbucket/input  | 
-| output data |  s3://myawsbucket/output  | 
+| script or program |  s3://aws\-s3\-bucket1/script/MapperScript\.py  | 
+| log files |  s3://aws\-s3\-bucket1/logs  | 
+| input data |  s3://aws\-s3\-bucket1/input  | 
+| output data |  s3://aws\-s3\-bucket1/output  | 

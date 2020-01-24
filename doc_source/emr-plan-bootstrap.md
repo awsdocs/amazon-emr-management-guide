@@ -42,7 +42,7 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
 + To launch a cluster with a bootstrap action that conditionally runs a command when an instance\-specific value is found in the `instance.json` or `job-flow.json` file, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
-  1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive --instance-count 1 --instance-type m4.large --bootstrap-actions Path=s3://elasticmapreduce/bootstrap-actions/run-if,Args=["instance.isMaster=true","echo running on master node"]
+  1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive --instance-count 1 --instance-type m5.xlarge --bootstrap-actions Path=s3://elasticmapreduce/bootstrap-actions/run-if,Args=["instance.isMaster=true","echo running on master node"]
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.
@@ -93,13 +93,13 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
     1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 \
     2. --use-default-roles --ec2-attributes KeyName=myKey \
     3. --applications Name=Hive Name=Pig \
-    4. --instance-count 3 --instance-type m4.large \
+    4. --instance-count 3 --instance-type m5.xlarge \
     5. --bootstrap-actions Path="s3://elasticmapreduce/bootstrap-actions/download.sh"
     ```
   + Windows users:
 
     ```
-    1. aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive Name=Pig --instance-count 3 --instance-type m4.large --bootstrap-actions Path="s3://elasticmapreduce/bootstrap-actions/download.sh"
+    1. aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive Name=Pig --instance-count 3 --instance-type m5.xlarge --bootstrap-actions Path="s3://elasticmapreduce/bootstrap-actions/download.sh"
     ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.
@@ -147,9 +147,9 @@ The following example demonstrates a simple bootstrap action script that copies 
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.26.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
---instance-count 3 --instance-type m4.large \
+--instance-count 3 --instance-type m5.xlarge \
 --bootstrap-actions Path="s3://mybucket/myscriptfolder/copymyfile.sh"
 ```

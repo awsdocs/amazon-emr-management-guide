@@ -44,7 +44,7 @@ The following procedure assumes that the **ElasticMapReduce\-master** security g
 1. Choose the **Name** of the cluster\.
 
 1. Under **Security and access** choose the **Security groups for Master** link\.  
-![\[Edit security groups from EMR cluster status.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/../shared/images/cluster-sg-select.png)
+![\[Edit security groups from EMR cluster status.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/cluster-sg-select.png)
 
 1. Choose **ElasticMapReduce\-master** from the list\.
 
