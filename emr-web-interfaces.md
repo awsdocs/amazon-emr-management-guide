@@ -18,6 +18,7 @@ To access web interfaces, you must edit the security groups associated with mast
 | Hadoop HDFS NameNode | http://master\-public\-dns\-name:50070/ | 
 | Hadoop HDFS DataNode | http://coretask\-public\-dns\-name:50075/ | 
 | Spark HistoryServer | http://master\-public\-dns\-name:18080/ | 
+| Livy | https://master\-public\-dns\-name:8998/ | 
 | Zeppelin | http://master\-public\-dns\-name:8890/ | 
 | Hue | http://master\-public\-dns\-name:8888/ | 
 | Ganglia | http://master\-public\-dns\-name/ganglia/ | 
