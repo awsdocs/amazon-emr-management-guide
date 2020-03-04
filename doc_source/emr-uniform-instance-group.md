@@ -29,7 +29,7 @@ Your account and region may give you the option to choose **Launch into EC2\-Cla
    + Under **Instance type**, click the pencil icon and then choose the instance type you want to use for that node type\.
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
-   + Under **Instance type**, click the pencil icon for **Configurations**and then edit the configurations for applications for each instance group\.
+   + Under **Instance type**, click the pencil icon for **Configurations** and then edit the configurations for applications for each instance group\.
    + Under **Instance count**, enter the number of instances to use for each node type\.
    + Under **Purchasing option, **choose **On\-demand** or **Spot**\. If you choose **Spot**, select an option for the maximum price for Spot Instances\. By default, **Use on\-demand as max price** is selected\. You can select **Set max $/hr** and then enter your maximum price\. Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
 **Tip**  
