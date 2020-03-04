@@ -22,7 +22,7 @@ When you use the CLI, you can pass references to bootstrap action scripts to Ama
 
 **AWS CLI**
 
-```
+```bash
 --bootstrap-actions Path=s3://mybucket/filename",Args=[arg1,arg2]
 ```
 
@@ -75,7 +75,7 @@ The following example uses a bootstrap action script to download and extract a c
 
  The sample script looks like the following: 
 
-```
+```bash
 1. #!/bin/bash
 2. set -e
 3. wget -S -T 10 -t 5 http://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/file.tar.gz
@@ -139,14 +139,14 @@ You can use a bootstrap action to copy objects from Amazon S3 to each node in a 
 
 The following example demonstrates a simple bootstrap action script that copies a file, `myfile.jar`, from Amazon S3 to a local folder, `/mnt1/myfolder`, on each cluster node\. The script is saved to Amazon S3 with the file name `copymyfile.sh` with the following contents\.
 
-```
+```bash
 #!/bin/bash
-				aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
+aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 ```
 
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
-```
+```bash
 aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
