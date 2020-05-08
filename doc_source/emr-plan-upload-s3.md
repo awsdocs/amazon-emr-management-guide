@@ -58,7 +58,7 @@ This procedure explains how to disable multipart upload using the Amazon EMR con
 
 1. Choose **Create cluster**, **Go to advanced options**\.
 
-1. Under **Edit Software Settings** and enter the following configuration: `classification=core-site,properties=[fs.s3.multipart.uploads.enabled=false]`
+1. Under **Edit Software Settings** and enter the following configuration: `classification=core-site,properties=[fs.s3n.multipart.uploads.enabled=false]`
 
 1. Proceed with creating the cluster\.
 
