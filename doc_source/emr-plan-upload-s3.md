@@ -118,4 +118,4 @@ We recommend that you enable a lifecycle configuration rule in Amazon S3 to remo
 
 ### Performance best practices<a name="w19aac19b9c17c13b9c13c10"></a>
 
-Depending on your workloads, specific types of usage of EMR clusters and applications on those clusters can result in a high number of requests against a bucket\. For more information, see [Request Rate and Performance Considerations](https://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html) in the *Amazon Simple Storage Service Developer Guide*\.
+Depending on your workloads, specific types of usage of EMR clusters and applications on those clusters can result in a high number of requests against a bucket\. For more information, see [Request Rate and Performance Considerations](https://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html) in the *Amazon Simple Storage Service Developer Guide*\. 
