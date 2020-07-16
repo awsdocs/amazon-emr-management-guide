@@ -120,7 +120,7 @@ When you are testing a new application in order to prepare it for launch in a pr
 + The number and size of EBS volumes attached to core nodes\.
 + A replication factor, which accounts for how each data block is stored in HDFS for RAID\-like redundancy\. By default, the replication factor is three for a cluster of 10 or more core nodes, two for a cluster of 4\-9 core nodes, and one for a cluster of three or fewer nodes\.
 
-To calculate the HDFS capacity of a cluster, for each core node, add the instance store volume capacity to the EBS storage capacity \(if used\)\. Multiply the result by the number of core nodes, and then divide the total by the replication factor based on the number of core nodes\. For example, a cluster with 10 core nodes of type i2\.xlarge, which have 800 GB of instance storage without any attached EBS volumes, has a total of approximately 2,666 GB available for HDFS \(10 nodes x 800 GB ÷ 3 replication factor\)\.
+To calculate the HDFS capacity of a cluster, for each core node, add the instance store volume capacity to the EBS storage capacity \(if used\)\. Multiply the result by the number of core nodes, and then divide the total by the replication factor based on the number of core nodes\. For example, a cluster with 10 core nodes of type i2\.xlarge, which have 800 GB of instance storage without any attached EBS volumes, has a total of approximately 2,666 TB available for HDFS \(10 nodes x 800 GB ÷ 3 replication factor\)\.
 
  If the calculated HDFS capacity value is smaller than your data, you can increase the amount of HDFS storage in the following ways: 
 + Creating a cluster with additional EBS volumes or adding instance groups with attached EBS volumes to an existing cluster
