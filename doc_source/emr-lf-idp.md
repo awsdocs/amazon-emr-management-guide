@@ -82,6 +82,6 @@ To enable federated access to Lake Formation, customize the following steps:
 
      Value: `user_alias`
 
-  1. Name: `https://glue.amazon.com/SAML/Attributes/UserName`
+  1. Name: `https://lakeformation.amazon.com/SAML/Attributes/Username`
 
      Value: `user_alias`
