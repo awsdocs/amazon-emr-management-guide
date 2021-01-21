@@ -53,3 +53,11 @@
   hadoop jar hadoop-examples.jar wordcount 
   -Dfs.s3.canned.acl=BucketOwnerFullControl s3://mybucket/input s3://mybucket/output
   ```
+  
+ **To write files using canned ACLs in a s3-dist-cp**
++  Set the `fs.s3.canned.acl` configuration option using s3-dist-cp with the \-D flag\. This is shown in the example below\. 
+
+  ```
+  s3-dist-cp
+  -Dfs.s3.canned.acl=BucketOwnerFullControl --src s3://mybucket/input --dest s3://mybucket/output
+  ```
