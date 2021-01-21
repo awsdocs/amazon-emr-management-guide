@@ -15,7 +15,8 @@ It is up to you to determine the policy restrictions that meet your business nee
            "Action": "s3:GetObject",
            "Resource": [
                "arn:aws:s3:::packages.*.amazonaws.com/*",
-               "arn:aws:s3:::repo.*.amazonaws.com/*"
+               "arn:aws:s3:::repo.*.amazonaws.com/*",
+               "arn:aws:s3:::amazonlinux.*.amazonaws.com/*"
            ]
        },
        {
