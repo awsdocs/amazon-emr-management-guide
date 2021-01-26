@@ -14,7 +14,7 @@ VPC offers the following capabilities:
 You can launch EMR clusters in both public and private VPC subnets\. This means you do not need internet connectivity to run an EMR cluster; however, you may need to configure network address translation \(NAT\) and VPN gateways to access services or resources located outside of the VPC, for example in a corporate intranet or public AWS service endpoints like AWS Key Management Service\.
 
 **Important**  
-Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or greater\. 
+Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or greater\.
 
 For more information about Amazon VPC, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
@@ -22,7 +22,6 @@ For more information about Amazon VPC, see the [Amazon VPC User Guide](https://d
 + [Amazon VPC Options](emr-clusters-in-a-vpc.md)
 + [Set up a VPC to Host Clusters](emr-vpc-host-job-flows.md)
 + [Launch Clusters into a VPC](emr-vpc-launching-job-flows.md)
-+ [Restrict Permissions to a VPC Using IAM](emr-iam-on-vpc.md)
 + [Minimum Amazon S3 Policy for Private Subnet](private-subnet-iampolicy.md)
 + [More Resources for Learning About VPCs](#emr-resources-about-vpcs)
 
@@ -32,7 +31,7 @@ Use the following topics to learn more about VPCs and subnets\.
 + Private Subnets in a VPC
   + [Scenario 2: VPC with Public and Private Subnets \(NAT\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)
   + [NAT Instances](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html)
-  + [High Availability for Amazon VPC NAT Instances: An Example](https://aws.amazon.com//articles/2781451301784570)
+  + [High Availability for Amazon VPC NAT Instances: An Example](https://aws.amazon.com/articles/2781451301784570)
 + Public Subnets in a VPC
   + [Scenario 1: VPC with a Single Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario1.html)
 + General VPC Information

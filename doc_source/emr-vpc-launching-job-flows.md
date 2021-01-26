@@ -3,11 +3,11 @@
 After you have a subnet that is configured to host Amazon EMR clusters, launch the cluster in that subnet by specifying the associated subnet identifier when creating the cluster\.
 
 **Note**  
-Amazon EMR supports private subnets in release versions 4\.2 and above\. 
+Amazon EMR supports private subnets in release versions 4\.2 and above\.
 
 When the cluster is launched, Amazon EMR adds security groups based on whether the cluster is launching into VPC private or public subnets\. All security groups allow ingress at port 8443 to communicate to the Amazon EMR service, but IP address ranges vary for public and private subnets\. Amazon EMR manages all of these security groups, and may need to add additional IP addresses to the AWS range over time\. For more information, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
 
-To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html](https://docs.aws.amazon.com/AWSEC2/latest/APIReference//ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
+To manage the cluster on a VPC, Amazon EMR attaches a network device to the master node and manages it through this device\. You can view this device using the Amazon EC2 API action [https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeInstances.html](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeInstances.html)\. If you modify this device in any way, the cluster may fail\.
 
 **To launch a cluster into a VPC using the Amazon EMR console**
 

@@ -1,6 +1,6 @@
 # Throttling Errors<a name="emr-throttling-error"></a>
 
-The errors "Throttled from *Amazon EC2* while launching cluster" and "Failed to provision instances due to throttling from *Amazon EC2*" occur when Amazon EMR can not complete a request because another service has throttled the activity\. Amazon EC2 is the most common source of throttling errors, but other services may be the cause of throttling errors\. [AWS service limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) apply on a per\-Region basis to improve performance, and a throttling error indicates that you have exceeded the service limit for your account in that Region\.
+The errors "Throttled from *Amazon EC2* while launching cluster" and "Failed to provision instances due to throttling from *Amazon EC2*" occur when Amazon EMR cannot complete a request because another service has throttled the activity\. Amazon EC2 is the most common source of throttling errors, but other services may be the cause of throttling errors\. [AWS service limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) apply on a per\-Region basis to improve performance, and a throttling error indicates that you have exceeded the service limit for your account in that Region\.
 
 ## Possible Causes<a name="emr-failed-to-provision-instances-due-to-throttling-causes"></a>
 
@@ -15,6 +15,6 @@ It is also possible that the frequency or type of API request being made to Amaz
 ## Solutions<a name="emr-throttling-error-solutions"></a>
 
 Consider the following solutions:
-+ [Create a support case](https://console.aws.amazon.com/support/cases#/create) to request a **Service limit increase**\.
++ Follow the instructions in [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) in the *Amazon Web Services General Reference* to request a service limit increase\. For some APIs, setting up a CloudWatch event might be a better option than increasing limits\. For more details, see [When to set up EMR events in CloudWatch](emr-service-limits-cloudwatch-events.md)\.
 + If you have clusters that launch on the same schedule—for example, at the top of the hour—consider staggering start times\.
-+ If you have clusters that are sized for peak demand, and you periodically have instance capacity, consider specifying automatic scaling to add and remove instances on\-demand\. In this way, instances are used more efficiently, and depending on the demand profile, fewer instances may be requested at a given time across an account\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
++ If you have clusters that are sized for peak demand, and you periodically have instance capacity, consider specifying automatic scaling to add and remove instances on\-demand\. In this way, instances are used more efficiently, and depending on the demand profile, fewer instances may be requested at a given time across an account\. For more information, see [Using Automatic Scaling with a Custom Policy for Instance Groups ](emr-automatic-scaling.md)\.

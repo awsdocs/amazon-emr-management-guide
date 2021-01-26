@@ -1,6 +1,6 @@
-# Link or Unlink a Git Repository<a name="emr-git-repo-link"></a>
+# Link or Unlink a Git\-based Repository<a name="emr-git-repo-link"></a>
 
-**To link a Git repository to an EMR notebook**
+**To link a Git\-based repository to an EMR notebook**
 
 The repository can be linked to a notebook once the notebook is **Ready**\. 
 
@@ -33,7 +33,7 @@ Linking a Git repository to a notebook clones the remote repository to your loca
 
 ## Understanding Repository Status<a name="emr-managed-notebooks-repository-status"></a>
 
-A Git repository may have any of the following status in the repository list\. For more information about linking EMR notebooks with Git repositories, see [Link or Unlink a Git Repository](#emr-git-repo-link)\.
+A Git repository may have any of the following status in the repository list\. For more information about linking EMR notebooks with Git repositories, see [Link or Unlink a Git\-based Repository](#emr-git-repo-link)\.
 
 
 | Status | Meaning | 

@@ -1,6 +1,6 @@
 # Work with Storage and File Systems<a name="emr-plan-file-systems"></a>
 
-Amazon EMR and Hadoop provide a variety of file systems that you can use when processing cluster steps\. You specify which file system to use by the prefix of the URI used to access the data\. For example, `s3://aws-s3-bucket1/path` references an Amazon S3 bucket using EMRFS\. The following table lists the available file systems, with recommendations about when it's best to use each one\. 
+Amazon EMR and Hadoop provide a variety of file systems that you can use when processing cluster steps\. You specify which file system to use by the prefix of the URI used to access the data\. For example, `s3://DOC-EXAMPLE-BUCKET1/path` references an Amazon S3 bucket using EMRFS\. The following table lists the available file systems, with recommendations about when it's best to use each one\. 
 
 Amazon EMR and Hadoop typically use two or more of the following file systems when processing a cluster\. HDFS and EMRFS are the two main file systems used with Amazon EMR\.
 

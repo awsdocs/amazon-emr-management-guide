@@ -13,10 +13,10 @@ To implement a more restrictive policy, attach an inline policy to appropriate u
     "Action": "iam:PassRole",
     "Effect": "Allow",
     "Resource": [
-        "arn:aws:iam::*:role/EMR_DefaultRole",
-        "arn:aws:iam::*:role/EMR_EC2_DefaultRole",
-        "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole",
-        "arn:aws:iam::*:role/EMR_Notebooks_DefaultRole"
+        "arn:aws:iam:::role/EMR_DefaultRole",
+        "arn:aws:iam:::role/EMR_EC2_DefaultRole",
+        "arn:aws:iam:::role/EMR_AutoScaling_DefaultRole",
+        "arn:aws:iam:::role/EMR_Notebooks_DefaultRole"
     ]
 }
 ```

@@ -12,7 +12,7 @@ The following errors are common in cluster input and output operations\.
 
 ## Does your path to Amazon Simple Storage Service \(Amazon S3\) have at least three slashes?<a name="threeslashes"></a>
 
- When you specify an Amazon S3 bucket, you must include a terminating slash on the end of the URL\. For example, instead of referencing a bucket as “s3n://*aws\-s3\-bucket1*”, you should use “s3n://*aws\-s3\-bucket1*/”, otherwise Hadoop fails your cluster in most cases\. 
+ When you specify an Amazon S3 bucket, you must include a terminating slash on the end of the URL\. For example, instead of referencing a bucket as “s3n://*DOC\-EXAMPLE\-BUCKET1*”, you should use “s3n://*DOC\-EXAMPLE\-BUCKET1*/”, otherwise Hadoop fails your cluster in most cases\. 
 
 ## Are you trying to recursively traverse input directories?<a name="recurseinput"></a>
 
@@ -30,7 +30,7 @@ The following errors are common in cluster input and output operations\.
 
 ## Are you referencing an Amazon S3 bucket using an invalid name format?<a name="validdnsname"></a>
 
- If you attempt to use a bucket name such as “*aws\-s3\-bucket1*\.1” with Amazon EMR, your cluster will fail because Amazon EMR requires that bucket names be valid RFC 2396 host names; the name cannot end with a number\. In addition, because of the requirements of Hadoop, Amazon S3 bucket names used with Amazon EMR must contain only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\. For more information about how to format Amazon S3 bucket names, see [Bucket Restrictions and Limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev//index.html?BucketRestrictions.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+ If you attempt to use a bucket name such as “*DOC\-EXAMPLE\-BUCKET1*\.1” with Amazon EMR, your cluster will fail because Amazon EMR requires that bucket names be valid RFC 2396 host names; the name cannot end with a number\. In addition, because of the requirements of Hadoop, Amazon S3 bucket names used with Amazon EMR must contain only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\. For more information about how to format Amazon S3 bucket names, see [Bucket Restrictions and Limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/index.html?BucketRestrictions.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 
 ## Are you experiencing trouble loading data to or from Amazon S3?<a name="emr-troubleshoot-errors-io-1"></a>
 
@@ -43,9 +43,9 @@ The following errors are common in cluster input and output operations\.
 +  Launch your cluster using the most recent release version of Amazon EMR\. 
 + Use S3DistCp to move objects in and out of Amazon S3\. S3DistCp implements error handling, retries and back\-offs to match the requirements of Amazon S3\. For more information, see [Distributed Copy Using S3DistCp](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/UsingEMR_s3distcp.html)\. 
 +  Design your application with eventual consistency in mind\. Use HDFS for intermediate data storage while the cluster is running and Amazon S3 only to input the initial data and output the final results\. 
-+  If your clusters will commit 200 or more transactions per second to Amazon S3, [contact support](https://aws.amazon.com//contact-us/) to prepare your bucket for greater transactions per second and consider using the key partition strategies described in [Amazon S3 Performance Tips & Tricks](http://aws.typepad.com/aws/2012/03/amazon-s3-performance-tips-tricks-seattle-hiring-event.html)\. 
++  If your clusters will commit 200 or more transactions per second to Amazon S3, [contact support](https://aws.amazon.com/contact-us/) to prepare your bucket for greater transactions per second and consider using the key partition strategies described in [Amazon S3 Performance Tips & Tricks](http://aws.typepad.com/aws/2012/03/amazon-s3-performance-tips-tricks-seattle-hiring-event.html)\. 
 +  Set the Hadoop configuration setting io\.file\.buffer\.size to 65536\. This causes Hadoop to spend less time seeking through Amazon S3 objects\. 
 +  Consider disabling Hadoop's speculative execution feature if your cluster is experiencing Amazon S3 concurrency issues\. This is also useful when you are troubleshooting a slow cluster\. You do this by setting the `mapreduce.map.speculative` and `mapreduce.reduce.speculative` properties to `false`\. When you launch a cluster, you can set these values using the `mapred-env` configuration classification\. For more information, see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. 
 +  If you are running a Hive cluster, see [Are you having trouble loading data to or from Amazon S3 into Hive?](emr-troubleshoot-error-hive.md#emr-troubleshoot-error-hive-3)\. 
 
- For additional information, see [Amazon S3 Error Best Practices](https://docs.aws.amazon.com/AmazonS3/latest/dev//ErrorBestPractices.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+ For additional information, see [Amazon S3 Error Best Practices](https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html) in the *Amazon Simple Storage Service Developer Guide*\. 

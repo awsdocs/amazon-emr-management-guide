@@ -19,7 +19,7 @@ The central component of Amazon EMR is the *cluster*\. A cluster is a collection
 
  The following diagram represents a cluster with one master node and four core nodes\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/cluster-node-types.png)
+![\[Cluster diagram for Amazon EMR showing the relationship between master and core nodes in an EMR cluster.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/cluster-node-types.png)
 
 ## Submitting Work to a Cluster<a name="emr-work-cluster"></a>
 
@@ -68,13 +68,13 @@ Generally, when you process data in Amazon EMR, the input is data stored as file
 
 The following diagram represents the step sequence and change of state for the steps as they are processed\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/step-sequence.png)
+![\[Sequence diagram for Amazon EMR showing the different cluster step states.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/step-sequence.png)
 
-If a step fails during processing, its state changes to **TERMINATED\_WITH\_ERRORS**\. You can determine what happens next for each step\. By default, any remaining steps in the sequence are set to **CANCELLED** and do not run\. You can also choose to ignore the failure and allow remaining steps to proceed, or to terminate the cluster immediately\.
+If a step fails during processing, its state changes to **FAILED**\. You can determine what happens next for each step\. By default, any remaining steps in the sequence are set to **CANCELLED** and do not run if a preceeding step fails\. You can also choose to ignore the failure and allow remaining steps to proceed, or to terminate the cluster immediately\.
 
 The following diagram represents the step sequence and default change of state when a step fails during processing\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/step-sequence-failed.png)
+![\[Sequence diagram for Amazon EMR showing what happens to subsequent steps when a preceeding cluster step fails.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/step-sequence-failed.png)
 
 ## Understanding the Cluster Lifecycle<a name="emr-overview-cluster-lifecycle"></a>
 
@@ -86,10 +86,12 @@ The following diagram represents the step sequence and default change of state w
 
 1. Amazon EMR installs the native applications that you specify when you create the cluster, such as Hive, Hadoop, Spark, and so on\.
 
-1.  After bootstrap actions are successfully completed and native applications are installed, the cluster state is `RUNNING`\. At this point, you can connect to cluster instances, and the cluster sequentially runs any steps that you specified when you created the cluster\. You can submit additional steps, which run after any previous steps complete\. For more information, see [Work with Steps Using the AWS CLI and Console](emr-work-with-steps.md)\. 
+1. After bootstrap actions are successfully completed and native applications are installed, the cluster state is `RUNNING`\. At this point, you can connect to cluster instances, and the cluster sequentially runs any steps that you specified when you created the cluster\. You can submit additional steps, which run after any previous steps complete\. For more information, see [Work with Steps Using the AWS CLI and Console](emr-work-with-steps.md)\. 
 
-1. After steps run successfully, the cluster goes into a `WAITING` state\. If a cluster is configured to auto\-terminate after the last step is complete, it goes into a `SHUTTING_DOWN` state\. 
+1. After steps run successfully, the cluster goes into a `WAITING` state\. If a cluster is configured to auto\-terminate after the last step is complete, it goes into a `TERMINATING` state and then into the `TERMINATED` state\. If the cluster is configured to wait, you must manually shut it down when you no longer need it\. After you manually shut down the cluster, it goes into the `TERMINATING` state and then into the `TERMINATED` state\.
 
-1. After all instances are terminated, the cluster goes into the `COMPLETED` state\.
+A failure during the cluster lifecycle causes Amazon EMR to terminate the cluster and all of its instances unless you enable termination protection\. If a cluster terminates because of a failure, any data stored on the cluster is deleted, and the cluster state is set to `TERMINATED_WITH_ERRORS`\. If you enabled termination protection, you can retrieve data from your cluster, and then remove termination protection and terminate the cluster\. For more information, see [Using Termination Protection](UsingEMR_TerminationProtection.md)\. 
 
-A failure during the cluster lifecycle causes Amazon EMR to terminate the cluster and all of its instances unless you enable termination protection\. If a cluster terminates because of a failure, any data stored on the cluster is deleted, and the cluster state is set to `FAILED`\. If you enabled termination protection, you can retrieve data from your cluster, and then remove termination protection and terminate the cluster\. For more information, see [Using Termination Protection](UsingEMR_TerminationProtection.md)\. 
+The following diagram represents the lifecycle of a cluster, and how each stage of the lifecycle maps to a particular cluster state\. 
+
+![\[Diagram for Amazon EMR showing the cluster lifecycle, and how each stage of the lifecycle maps to a particular cluster state.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/emr-cluster-lifecycle.png)

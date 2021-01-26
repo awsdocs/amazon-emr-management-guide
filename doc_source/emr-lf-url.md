@@ -1,9 +1,9 @@
-# Update the callback or single sign\-on URL in IdP<a name="emr-lf-url"></a>
+# Update the Callback or Single Sign\-on URL with Your Identity Provider<a name="emr-lf-url"></a>
 
 1. Locate the public IP address of the master node and the master instance ID in your cluster by using the console or CLI\.
 
-1. Set up a callback URL in your IdP account:
-   + When using AD FS as your IDP, complete the following steps:
+1. Set up a callback URL in your identity provider \(IdP\) account:
+   + When using AD FS as your IdP, complete the following steps:
 
      1. From the AD FS Management Console, go to **Relying Party Trusts**\.
 

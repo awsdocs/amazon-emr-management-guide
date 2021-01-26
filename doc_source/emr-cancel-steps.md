@@ -18,9 +18,9 @@ You can cancel pending and running steps using the AWS Management Console, the A
 + Use the `aws emr cancel-steps` command, specifying the cluster and steps to cancel\. The following example demonstrates an AWS CLI command to cancel two steps\.
 
   ```
-  aws emr cancel-steps --cluster-id j-2QUAJ7T3OTEI8 --step-ids s-3M8DKCZYYN1QE,s-3M8DKCZYYN1QE
+  aws emr cancel-steps --cluster-id j-2QUAXXXXXXXXX --step-ids s-3M8DXXXXXXXXX s-3M8DXXXXXXXXX --step-cancellation-option SEND_INTERRUPT
   ```
 
 With Amazon EMR version 5\.28\.0, you can choose one of the two following cancellation options for `StepCancellationOption` parameter when canceling steps\. 
-+ `SEND_INTERRUPT_SIGNAL`– This is the default option\. When a step cancellation request is received, EMR will send a SIGTERM signal to the step child process until it ends\.
++ `SEND_INTERRUPT`– This is the default option\. When a step cancellation request is received, EMR will send a SIGTERM signal to the step child process until it ends\.
 + `TERMINATE_PROCESS` – When this option is selected, EMR sends a SIGKILL signal to the step child process\. 

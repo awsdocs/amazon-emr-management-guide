@@ -17,7 +17,7 @@ You can use the Amazon EMR console to resize a running cluster\.
 
    **–OR–**
 
-   If your cluster uses instance fleets, choose **Resize** in the **Provisioned capacity** column, type new values for **On\-demand units** and **Spot units**, and then choose **Resize**\.  
+   If your cluster uses instance fleets, choose **Resize** in the **Provisioned capacity** column, type new values for **On\-Demand units** and **Spot units**, and then choose **Resize**\.  
 ![\[Resize instance fleets for an Amazon EMR cluster\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/resize-instance-fleet.png)
 
 When you make a change to the number of nodes, the **Status** of the instance group updates\. When the change you requested is complete, the **Status** is **Running**\.
@@ -99,13 +99,13 @@ You can use the AWS CLI to stop a resize by using the `modify-instance-groups` s
 **Note**  
 Because this process is asynchronous, you may see instance counts change with respect to previous API requests before subsequent requests are honored\. In the case of shrinking, it is possible that if you have work running on the nodes, the instance group may not shrink until nodes have completed their work\.
 
-## Arrested State<a name="emr-manage-resizeArrested"></a>
+## Suspended State<a name="emr-manage-resizeSuspended"></a>
 
-An instance group goes into an arrested state if it encounters too many errors while trying to start the new cluster nodes\. For example, if new nodes fail while performing bootstrap actions, the instance group goes into an *ARRESTED* state, rather than continuously provisioning new nodes\. After you resolve the underlying issue, reset the desired number of nodes on the cluster's instance group, and then the instance group resumes allocating nodes\. Modifying an instance group instructs Amazon EMR to attempt to provision nodes again\. No running nodes are restarted or terminated\.
+An instance group goes into a suspended state if it encounters too many errors while trying to start the new cluster nodes\. For example, if new nodes fail while performing bootstrap actions, the instance group goes into a *SUSPENDED* state, rather than continuously provisioning new nodes\. After you resolve the underlying issue, reset the desired number of nodes on the cluster's instance group, and then the instance group resumes allocating nodes\. Modifying an instance group instructs Amazon EMR to attempt to provision nodes again\. No running nodes are restarted or terminated\.
 
-In the AWS CLI, the `list-instances` subcommand returns all instances and their states as does the `describe-cluster` subcommand\. If Amazon EMR detects a fault with an instance group, it changes the group's state to `ARRESTED`\. 
+In the AWS CLI, the `list-instances` subcommand returns all instances and their states as does the `describe-cluster` subcommand\. If Amazon EMR detects a fault with an instance group, it changes the group's state to `SUSPENDED`\. 
 
-**To reset a cluster in an ARRESTED state using the AWS CLI**
+**To reset a cluster in a SUSPENDED state using the AWS CLI**
 
 Type the `describe-cluster` subcommand with the `--cluster-id` parameter to view the state of the instances in your cluster\.
 + To view information on all instances and instance groups in a cluster, type the following command and replace *j\-3KVXXXXXXY7UG* with the cluster ID\.
@@ -186,7 +186,7 @@ Type the `describe-cluster` subcommand with the `--cluster-id` parameter to view
   1. aws emr list-instances --cluster-id j-3KVXXXXXXY7UG --instance-group-types "CORE"
   ```
 
-  Use the `modify-instance-groups` subcommand with the `--instance-groups` parameter to reset a cluster in the `ARRESTED` state\. The instance group id is returned by the `describe-cluster` subcommand\.
+  Use the `modify-instance-groups` subcommand with the `--instance-groups` parameter to reset a cluster in the `SUSPENDED` state\. The instance group id is returned by the `describe-cluster` subcommand\.
 
   ```
   1. aws emr modify-instance-groups --instance-groups InstanceGroupId=ig-3SUXXXXXXQ9ZM,InstanceCount=3

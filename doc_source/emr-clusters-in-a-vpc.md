@@ -1,5 +1,7 @@
 # Amazon VPC Options<a name="emr-clusters-in-a-vpc"></a>
 
+
+
 When you launch an Amazon EMR cluster within a VPC, you can launch it within either a public, private, or shared subnet\. There are slight but notable differences in configuration, depending on the subnet type you choose for a cluster\.
 
 ## Public Subnets<a name="emr-vpc-public-subnet"></a>
@@ -56,3 +58,11 @@ The subnet owner must share a subnet with you before you can launch an Amazon EM
 + Subnet is unshared *after* the cluster is successfully launched \- When the owner stops sharing a subnet or Amazon VPC with the participant, the participant's clusters will not be able to resize to add new instances or to replace unhealthy instances\.
 
 When you launch an Amazon EMR cluster, multiple security groups are created\. In a shared subnet, the subnet participant controls these security groups\. The subnet owner can see these security groups but cannot perform any actions on them\. If the subnet owner wants to remove or modify the security group, the participant that created the security group must take the action\.
+
+## Control VPC Permissions with IAM<a name="emr-iam-on-vpc"></a>
+
+By default, all IAM users can see all of the subnets for the account, and any user can launch a cluster in any subnet\. 
+
+When you launch a cluster into a VPC, you can use AWS Identity and Access Management \(IAM\) to control access to clusters and restrict actions using policies, just as you would with clusters launched into EC2\-Classic\. For more information about IAM, see [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\. 
+
+You can also use IAM to control who can create and administer subnets\. For example, you can create one user account to administer subnets, and a second user account that can launch clusters but cannot modify Amazon VPC settings\. For more information about administering policies and actions in Amazon EC2 and Amazon VPC, see [IAM Policies for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\. 

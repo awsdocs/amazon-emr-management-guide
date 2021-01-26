@@ -14,8 +14,8 @@ One thing to look for in the logs is a map progress percentage that goes to 100%
 If you are seeing this issue, there are several things you can try:
 + Instruct the reduce phase to wait longer before starting\. You can do this by altering the Hadoop configuration setting mapred\.reduce\.slowstart\.completed\.maps to a longer time\. For more information, see [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)\. 
 + Match the reducer count to the total reducer capability of the cluster\. You do this by adjusting the Hadoop configuration setting mapred\.reduce\.tasks for the job\. 
-+ Use a combiner class code to minimize the amount of outputs that need to be fetched\. 
-+ Check that there are no issues with the Amazon EC2 service that are affecting the network performance of the cluster\. You can do this using the [Service Health Dashboard](http://status.aws.amazon.com//)\. 
++ Use a combiner class code to minimize the number of outputs that need to be fetched\. 
++ Check that there are no issues with the Amazon EC2 service that are affecting the network performance of the cluster\. You can do this using the [Service Health Dashboard](http://status.aws.amazon.com/)\. 
 + Review the CPU and memory resources of the instances in your cluster to make sure that your data processing is not overwhelming the resources of your nodes\. For more information, see [Configure Cluster Hardware and Networking](emr-plan-instances.md)\. 
 + Check the version of the Amazon Machine Image \(AMI\) used in your Amazon EMR cluster\. If the version is 2\.3\.0 through 2\.4\.4 inclusive, update to a later version\. AMI versions in the specified range use a version of Jetty that may fail to deliver output from the map phase\. The fetch error occurs when the reducers cannot obtain output from the map phase\.
 

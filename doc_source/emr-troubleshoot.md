@@ -8,6 +8,6 @@
 + [Troubleshoot a Failed Cluster](emr-troubleshoot-failed.md)
 + [Troubleshoot a Slow Cluster](emr-troubleshoot-slow.md)
 + [Common Errors in Amazon EMR](emr-troubleshoot-errors.md)
-+ [Troubleshoot a Lake Formation Cluster \(Beta\)](emr-troubleshoot-lf.md)
++ [Troubleshoot a Lake Formation Cluster](emr-troubleshoot-lf.md)
 
  When you are developing a new Hadoop application, we recommend that you enable debugging and process a small but representative subset of your data to test the application\. You may also want to run the application step\-by\-step to test each step separately\. For more information, see [Configure Cluster Logging and Debugging](emr-plan-debugging.md) and [Step 5: Test the Cluster Step by Step](emr-troubleshoot-failed-5-test-steps.md)\. 

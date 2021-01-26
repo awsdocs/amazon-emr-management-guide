@@ -1,6 +1,6 @@
-# Using Notebooks with Lake Formation<a name="emr-lf-notebook"></a>
+# Use Notebooks with Lake Formation<a name="emr-lf-notebook"></a>
 
-Both Apache Zeppelin and EMR Notebooks are integrated with Lake Formation, and can be used once an EMR cluster integrated with Lake Formation has been created\. 
+After you opt in to data filtering on Amazon EMR and create a cluster integrated with Lake Formation, you can use both Apache Zeppelin and EMR Notebooks to access data\. 
 
 In order to access both notebook applications, you must first ensure that your cluster’s EC2 security group or VPC network access control list \(ACL\) is configured to allow access to the Proxy Agent \(port 8442\) from your desktop\.
 

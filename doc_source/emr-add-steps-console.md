@@ -1,6 +1,6 @@
 # Adding Steps to a Cluster Using the Console<a name="emr-add-steps-console"></a>
 
-You can add steps to a cluster using the AWS CLI, the Amazon EMR SDK, or the AWS Management Console\. 
+Use the following procedures to add steps to a cluster using the AWS Management Console\. For detailed information about how to submit steps for specific big data applications, see the *[Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)*\.
 
 **To add steps during cluster creation**
 

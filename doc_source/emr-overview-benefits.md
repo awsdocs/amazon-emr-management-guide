@@ -14,12 +14,12 @@ There are many benefits to using Amazon EMR\. This section provides an overview 
 
 ## Cost Savings<a name="emr-benefits-cost"></a>
 
-Amazon EMR pricing depends on the instance type and number of EC2 instances that you deploy and the region in which you launch your cluster\. On\-demand pricing offers low rates, but you can reduce the cost even further by purchasing Reserved Instances or Spot Instances\. Spot Instances can offer significant savings—as low as a tenth of on\-demand pricing in some cases\.
+Amazon EMR pricing depends on the instance type and number of Amazon EC2 instances that you deploy and the Region in which you launch your cluster\. On\-demand pricing offers low rates, but you can reduce the cost even further by purchasing Reserved Instances or Spot Instances\. Spot Instances can offer significant savings—as low as a tenth of on\-demand pricing in some cases\.
 
 **Note**  
 If you use Amazon S3, Amazon Kinesis, or DynamoDB with your EMR cluster, there are additional charges for those services that are billed separately from your Amazon EMR usage\.
 
-For more information about pricing options and details, see [Amazon EMR Pricing](https://aws.amazon.com//elasticmapreduce/pricing/)\.
+For more information about pricing options and details, see [Amazon EMR Pricing](https://aws.amazon.com/elasticmapreduce/pricing/)\.
 
 ## AWS Integration<a name="emr-benefits-integration"></a>
 
@@ -31,6 +31,7 @@ Amazon EMR integrates with other AWS services to provide capabilities and functi
 + AWS Identity and Access Management \(IAM\) to configure permissions
 + AWS CloudTrail to audit requests made to the service
 + AWS Data Pipeline to schedule and start your clusters
++ AWS Lake Formation to discover, catalog, and secure data in an Amazon S3 data lake
 
 ## Deployment<a name="emr-benefits-deployment"></a>
 
@@ -42,7 +43,7 @@ Amazon EMR offers a variety of ways to configure software on your cluster\. For 
 
 Amazon EMR provides flexibility to scale your cluster up or down as your computing needs change\. You can resize your cluster to add instances for peak workloads and remove instances to control costs when peak workloads subside\. For more information, see [Manually Resizing a Running Cluster](emr-manage-resize.md)\.
 
- Amazon EMR also provides the option to run multiple instance groups so that you can use On\-Demand Instances in one group for guaranteed processing power together with Spot Instances in another group to have your jobs completed faster and for lower costs\. You can also mix different instance types to take advantage of better pricing for one Spot Instance type over another\. For more information, see [When Should You Use Spot Instances?](emr-plan-instances-guidelines.md#emr-plan-spot-instances)\. 
+ Amazon EMR also provides the option to run multiple instance groups so that you can use On\-Demand Instances in one group for guaranteed processing power together with Spot Instances in another group to have your jobs completed faster and at lower costs\. You can also mix different instance types to take advantage of better pricing for one Spot Instance type over another\. For more information, see [When Should You Use Spot Instances?](emr-plan-instances-guidelines.md#emr-plan-spot-instances)\. 
 
 Additionally, Amazon EMR provides the flexibility to use several file systems for your input, output, and intermediate data\. For example, you might choose the Hadoop Distributed File System \(HDFS\) which runs on the master and core nodes of your cluster for processing data that you do not need to store beyond your cluster’s lifecycle\. You might choose the EMR File System \(EMRFS\) to use Amazon S3 as a data layer for applications running on your cluster so that you can separate your compute and storage, and persist data outside of the lifecycle of your cluster\. EMRFS provides the added benefit of allowing you to scale up or down for your compute and storage needs independently\. You can scale your compute needs by resizing your cluster and you can scale your storage needs by using Amazon S3\. For more information, see [Work with Storage and File Systems](emr-plan-file-systems.md)\.
 
@@ -97,7 +98,7 @@ Amazon EMR integrates with CloudWatch to track performance metrics for the clust
 ## Management Interfaces<a name="emr-what-tools"></a>
 
  There are several ways you can interact with Amazon EMR: 
-+ **Console** — A graphical user interface that you can use to launch and manage clusters\. With it, you fill out web forms to specify the details of clusters to launch, view the details of existing clusters, debug, and terminate clusters\. Using the console is the easiest way to get started with Amazon EMR; no programming knowledge is required\. The console is available online at [https://console\.aws\.amazon\.com//elasticmapreduce/home](https://console.aws.amazon.com//elasticmapreduce/home)\. 
++ **Console** — A graphical user interface that you can use to launch and manage clusters\. With it, you fill out web forms to specify the details of clusters to launch, view the details of existing clusters, debug, and terminate clusters\. Using the console is the easiest way to get started with Amazon EMR; no programming knowledge is required\. The console is available online at [https://console\.aws\.amazon\.com/elasticmapreduce/home](https://console.aws.amazon.com/elasticmapreduce/home)\. 
 + **AWS Command Line Interface \(AWS CLI\)** — A client application you run on your local machine to connect to Amazon EMR and create and manage clusters\. The AWS CLI contains a feature\-rich set of commands specific to Amazon EMR\. With it, you can write scripts that automate the process of launching and managing clusters\. If you prefer working from a command line, using the AWS CLI is the best option\. For more information, see [Amazon EMR](https://docs.aws.amazon.com/cli/latest/reference/emr/index.html) in the *AWS CLI Command Reference*\.
-+ **Software Development Kit \(SDK\)** — SDKs provide functions that call Amazon EMR to create and manage clusters\. With them, you can write applications that automate the process of creating and managing clusters\. Using the SDK is the best option to extend or customize the functionality of Amazon EMR\. Amazon EMR is currently available in the following SDKs: Go, Java, \.NET \(C\# and VB\.NET\), Node\.js, PHP, Python, and Ruby\. For more information about these SDKs, see [Tools for AWS](https://aws.amazon.com/tools/) and [Amazon EMR Sample Code & Libraries](https://aws.amazon.com//code/Elastic-MapReduce)\. 
++ **Software Development Kit \(SDK\)** — SDKs provide functions that call Amazon EMR to create and manage clusters\. With them, you can write applications that automate the process of creating and managing clusters\. Using the SDK is the best option to extend or customize the functionality of Amazon EMR\. Amazon EMR is currently available in the following SDKs: Go, Java, \.NET \(C\# and VB\.NET\), Node\.js, PHP, Python, and Ruby\. For more information about these SDKs, see [Tools for AWS](https://aws.amazon.com/tools/) and [Amazon EMR Sample Code & Libraries](https://aws.amazon.com/code/Elastic-MapReduce)\. 
 + **Web Service API** — A low\-level interface that you can use to call the web service directly, using JSON\. Using the API is the best option to create a custom SDK that calls Amazon EMR\. For more information, see the [Amazon EMR API Reference](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/Welcome.html)\. 

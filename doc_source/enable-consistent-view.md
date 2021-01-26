@@ -24,14 +24,14 @@ Subsequent retries use an exponential backoff\.
 
 **To launch a cluster with consistent view enabled using the AWS CLI**
 
-We recommend that you install the current version of AWS CLI\. To download the latest release, see [https://aws\.amazon\.com//cli/](https://aws.amazon.com/cli/)\.
+We recommend that you install the current version of AWS CLI\. To download the latest release, see [https://aws\.amazon\.com/cli/](https://aws.amazon.com/cli/)\.
 + 
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
   1. aws emr create-cluster --instance-type m5.xlarge --instance-count 3 --emrfs Consistent=true \
-  2. --release-label emr-5.29.0 --ec2-attributes KeyName=myKey
+  2. --release-label emr-5.32.0 --ec2-attributes KeyName=myKey
   ```
 
 **To check if consistent view is enabled using the AWS Management Console**

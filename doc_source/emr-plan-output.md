@@ -12,9 +12,9 @@ For more information, see the following topics:
 
 ## Create and Configure an Amazon S3 Bucket<a name="create-s3-bucket-output"></a>
 
-Amazon EMR \(Amazon EMR\) uses Amazon S3 to store input data, log files, and output data\. Amazon S3 refers to these storage locations as *buckets*\. Buckets have certain restrictions and limitations to conform with Amazon S3 and DNS requirements\. For more information, go to [Bucket Restrictions and Limitations](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) in the *Amazon Simple Storage Service Developers Guide*\.
+Amazon EMR \(Amazon EMR\) uses Amazon S3 to store input data, log files, and output data\. Amazon S3 refers to these storage locations as *buckets*\. Buckets have certain restrictions and limitations to conform with Amazon S3 and DNS requirements\. For more information, go to [Bucket Restrictions and Limitations](http://docs.aws.amazon.comAmazonS3/latest/dev/BucketRestrictions.html) in the *Amazon Simple Storage Service Developers Guide*\.
 
-This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. However, you can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or the third\-party Curl command line tool\. For information about Curl, go to [Amazon S3 Authentication Tool for Curl](http://aws.amazon.com/code/128)\. For information about using the Amazon S3 API to create and configure an Amazon S3 bucket, go to the [Amazon Simple Storage Service API Reference](https://docs.aws.amazon.com/AmazonS3/latest/API/)\. 
+This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. However, you can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or the third\-party Curl command line tool\. For information about using the Amazon S3 API to create and configure an Amazon S3 bucket, go to the [Amazon Simple Storage Service API Reference](https://docs.aws.amazon.com/AmazonS3/latest/API/)\. 
 
 **To create an Amazon S3 bucket using the console**
 
@@ -24,7 +24,7 @@ This section shows you how to use the Amazon S3 AWS Management Console to create
 
    The **Create a Bucket** dialog box opens\.
 
-1. Enter a bucket name, such as ***aws\-s3\-bucket1***\. 
+1. Enter a bucket name, such as ***DOC\-EXAMPLE\-BUCKET1***\. 
 
    This name should be globally unique, and cannot be the same name used by another bucket\.
 
@@ -34,13 +34,13 @@ This section shows you how to use the Amazon S3 AWS Management Console to create
 
 1. Choose **Create**\. 
 
-You created a bucket with the URI **s3n://*aws\-s3\-bucket1*/**\. 
+You created a bucket with the URI **s3n://*DOC\-EXAMPLE\-BUCKET1*/**\. 
 
 **Note**  
  If you enable logging in the **Create a Bucket** wizard, it enables only bucket access logs, not cluster logs\. 
 
 **Note**  
-For more information on specifying Region\-specific buckets, refer to [Buckets and Regions](http://docs.aws.amazon.com/AmazonS3/latest/dev/LocationSelection.html) in the *Amazon Simple Storage Service Developer Guide* and [ Available Region Endpoints for the AWS SDKs ](http://aws.amazon.com/articles/3912)\.
+For more information on specifying Region\-specific buckets, refer to [Buckets and Regions](http://docs.aws.amazon.comAmazonS3/latest/dev/LocationSelection.html) in the *Amazon Simple Storage Service Developer Guide* and [ Available Region Endpoints for the AWS SDKs ](http://aws.amazon.comarticles/3912)\.
 
  After you create your bucket you can set the appropriate permissions on it\. Typically, you give yourself \(the owner\) read and write access and authenticated users read access\. 
 
@@ -69,7 +69,7 @@ You have created a bucket and restricted permissions to authenticated users\.
 
 | Information | Example Location on Amazon S3 | 
 | --- | --- | 
-| script or program |  s3://aws\-s3\-bucket1/script/MapperScript\.py  | 
-| log files |  s3://aws\-s3\-bucket1/logs  | 
-| input data |  s3://aws\-s3\-bucket1/input  | 
-| output data |  s3://aws\-s3\-bucket1/output  | 
+| script or program |  s3://DOC\-EXAMPLE\-BUCKET1/script/MapperScript\.py  | 
+| log files |  s3://DOC\-EXAMPLE\-BUCKET1/logs  | 
+| input data |  s3://DOC\-EXAMPLE\-BUCKET1/input  | 
+| output data |  s3://DOC\-EXAMPLE\-BUCKET1/output  | 

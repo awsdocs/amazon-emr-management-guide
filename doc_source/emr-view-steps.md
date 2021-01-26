@@ -4,6 +4,8 @@ The total number of step records you can view \(regardless of status\) is 1,000\
 
 The step information you can view depends on the mechanism used to retrieve cluster information\. The following table indicates the step information returned by each of the available options\. 
 
+ 
+
 
 | Option | DescribeJobFlow or \-\-describe \-\-jobflow | ListSteps or list\-steps | 
 | --- | --- | --- | 

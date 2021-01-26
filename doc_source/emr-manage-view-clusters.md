@@ -1,10 +1,12 @@
 # View Cluster Status and Details<a name="emr-manage-view-clusters"></a>
 
-After you create a cluster, you can monitor its status and get detailed information about its execution and errors that may have occurred, even after it has terminated\. Amazon EMR saves metadata about terminated clusters for your reference for two months, after which the metadata is deleted\. Application history is saved for one week from the time it is recorded, regardless of whether the cluster is running or terminated\. You can't delete clusters from the cluster history, but using the AWS Management Console, you can use the **Filter**, and using the AWS CLI, you can use options with the `list-clusters` command to focus on the clusters that you care about\.
+After you create a cluster, you can monitor its status and get detailed information about its execution and errors that may have occurred, even after it has terminated\. Amazon EMR saves metadata about terminated clusters for your reference for two months, after which the metadata is deleted\. You can't delete clusters from the cluster history, but using the AWS Management Console, you can use the **Filter**, and using the AWS CLI, you can use options with the `list-clusters` command to focus on the clusters that you care about\.
+
+You can access application history stored on\-cluster for one week from the time it is recorded, regardless of whether the cluster is running or terminated\. In addition, persistent application user interfaces store application history off\-cluster for 30 days after a cluster terminates\. See [View Application History](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-cluster-application-history.html)\.
 
 ## View Cluster Status Using the AWS Management Console<a name="emr-view-cluster-console"></a>
 
-The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com//elasticmapreduce/home) lists all the clusters in your account and AWS Region, including terminated clusters\. The list shows the following for each cluster: the **Name** and **ID**, the **Status**, the **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that have accrued for all EC2 instances in the cluster\. This list is the starting point for monitoring the status of your clusters\. It's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
+The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com/elasticmapreduce/home) lists all the clusters in your account and AWS Region, including terminated clusters\. The list shows the following for each cluster: the **Name** and **ID**, the **Status**, the **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that have accrued for all EC2 instances in the cluster\. This list is the starting point for monitoring the status of your clusters\. It's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
 
 **To view an abridged summary of cluster information**
 + Select the down arrow next to the link for the cluster under **Name**\.
@@ -31,6 +33,7 @@ The following command describes cluster *j\-1K48XXXXXXHCB*, which you replace wi
 aws emr describe-cluster --cluster-id j-1K48XXXXXXHCB
 ```
 The output of your command is similar to the following:  
+   
 
 ```
 {
@@ -151,10 +154,10 @@ The output of your command is similar to the following:
 
 **Example Listing Clusters by Creation Date**  
 To retrieve clusters created within a specific data range, use the `list-clusters` command with the `--created-after` and `--created-before` parameters\.  
-The following command lists all clusters created between October 09, 2014 and October 12, 2014\.  
+The following command lists all clusters created between October 09, 2019 and October 12, 2019\.  
 
 ```
-aws emr list-clusters --created-after 2014-10-09T00:12:00 --created-before 2014-10-12T00:12:00
+aws emr list-clusters --created-after 2019-10-09T00:12:00 --created-before 2019-10-12T00:12:00
 ```
 
 **Example Listing Clusters by State**  
@@ -172,6 +175,7 @@ The following commands return the same result\.
 ```
 aws emr list-clusters --cluster-states TERMINATED
 ```
+  
 
 ```
 aws emr list-clusters --terminated

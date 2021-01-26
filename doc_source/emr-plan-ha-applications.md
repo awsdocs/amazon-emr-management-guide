@@ -66,7 +66,7 @@ To run the following applications in an EMR cluster with multiple master nodes, 
 | Hive | High availability for service components only |  An external metastore for Hive is required\. For more information, see [Configuring an External Metastore for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-metastore-external-hive.html)\.  | 
 | Hue | High availability for service components only |  An external database for Hue is required\. For more information, see [Using Hue with a Remote Database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-rds.html)\.  | 
 | Oozie |  High availability for service components only  | An external database for Oozie is required\. For more information, see [Using Oozie with a Remote Database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/oozie-rds.html)\. Oozie\-server is installed on only one master node, while oozie\-client is installed on all three master nodes\. The oozie\-clients are configured to connect to the correct oozie\-server by default\. You can find the private DNS name of the master node where oozie\-server is installed by checking the variable `OOZIE_URL` on any master node in the file `/etc/oozie/conf.dist/oozie-client-env.sh`\. | 
-| Presto |  High availability for service components only  | An external Hive metastore for Presto is required\. You can use [Presto with the AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-presto-glue.html) or [use an External MySQL Database for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive-metastore-external.html)\.  | 
+| PrestoDB or PrestoSQL |  High availability for service components only  | An external Hive metastore for PrestoDB \(or for PrestoSQL on emr\-6\.1\.0 and later\) is required\. You can use [Presto with the AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-presto-glue.html) or [use an External MySQL Database for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive-metastore-external.html)\.  | 
 
 **Note**  
 When a master node fails, your Java Database Connectivity \(JDBC\) or Open Database Connectivity \(ODBC\) terminates its connection to the master node\. You can connect to any of the remaining master nodes to continue your work because the Hive metastore daemon runs on all master nodes\. Or you can wait for the failed master node to be replaced\.
@@ -99,6 +99,7 @@ The following EMR features are currently not available in an EMR cluster with mu
 + EMR Notebooks
 + Instance fleets
 + One\-click access to persistent Spark history server
++ Persistent application user interfaces
 
 **Note**  
  To use Kerberos authentication in your cluster, you must configure an external KDC\.  

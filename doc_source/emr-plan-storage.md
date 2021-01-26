@@ -6,9 +6,9 @@ Amazon EBS works differently within Amazon EMR than it does with regular Amazon 
 
 Other caveats for using Amazon EBS with EMR clusters are:
 + You can't snapshot an EBS volume and then restore it within Amazon EMR\. To create reusable custom configurations, use a custom AMI \(available in Amazon EMR version 5\.7\.0 and later\)\. For more information, see [Using a Custom AMI](emr-custom-ami.md)\.
-+ An encrypted EBS root device volume is supported only when using a custom AMI\. For more information, see [Creating a Custom AMI with an Encrypted Amazon EBS Root Device Volume](emr-custom-ami.md#emr-custom-ami-encrypted)\. Encrypted EBS storage volumes are not supported\.
 + If you apply tags using the Amazon EMR API, those operations are applied to EBS volumes\.
 + There is a limit of 25 volumes per instance\.
++ The EBS volumes on core nodes cannot be less than 5 GB\.
 
 ## Default EBS Storage for Instances<a name="emr-plan-storage-ebs-storage-default"></a>
 
@@ -33,7 +33,7 @@ EBS costs are pro\-rated by the hour based on the monthly Amazon EBS charges for
 |  \*\.18xlarge  |  4  |  288  |  1152  | 
 |  \*\.24xlarge  |  4  |  384  |  1536  | 
 
-## Specifying Additional EBS Storage Volumes<a name="w19aac19c38c15c12c14"></a>
+## Specifying Additional EBS Storage Volumes<a name="w201aac26c51c15c12c14"></a>
 
 When you configure instance types in Amazon EMR, you can specify additional EBS volumes, which adds capacity beyond the instance store \(if present\) and the default EBS volume\. Amazon EBS provides the following volume types: General Purpose \(SSD\), Provisioned IOPS \(SSD\), Throughput Optimized \(HDD\), Cold \(HDD\), and Magnetic\. They differ in performance characteristics and price, so you can tailor your storage based on the analytic and business needs of your applications\. For example, some applications may have a need to spill to disk while others can safely work in\-memory or using Amazon S3\.
 

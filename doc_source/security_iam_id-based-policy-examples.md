@@ -9,3 +9,4 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 + [Allow Users to View Their Own Permissions](security_iam_id-based-policy-examples-view-own-permissions.md)
 + [Amazon EMR Managed Policies](emr-managed-iam-policies.md)
 + [IAM Policies for Tag\-Based Access to Clusters and EMR Notebooks](emr-fine-grained-cluster-access.md)
++ [Denying the ModifyInstanceGroup Action](emr-cluster-deny-modifyinstancegroup.md)

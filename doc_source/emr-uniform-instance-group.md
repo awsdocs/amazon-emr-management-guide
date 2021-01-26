@@ -29,12 +29,12 @@ Your account and region may give you the option to choose **Launch into EC2\-Cla
    + Under **Instance type**, click the pencil icon and then choose the instance type you want to use for that node type\.
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
-   + Under **Instance type**, click the pencil icon for **Configurations** and then edit the configurations for applications for each instance group\.
+   + Under **Instance type**, click the pencil icon for **Configurations**and then edit the configurations for applications for each instance group\.
    + Under **Instance count**, enter the number of instances to use for each node type\.
    + Under **Purchasing option, **choose **On\-demand** or **Spot**\. If you choose **Spot**, select an option for the maximum price for Spot Instances\. By default, **Use on\-demand as max price** is selected\. You can select **Set max $/hr** and then enter your maximum price\. Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
 **Tip**  
 Mouse over the information tooltip for **Spot** to see the current Spot price for Availability Zones in the current region\. The lowest Spot price is in green\. You might want to use this information to change your **EC2 Subnet** selection\.
-   + Under **Auto Scaling for Core and Task node types**, choose the pencil icon, and then configure the automatic scaling options\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
+   + Under **Auto Scaling for Core and Task node types**, choose the pencil icon, and then configure the automatic scaling options\. For more information, see [Using Automatic Scaling with a Custom Policy for Instance Groups ](emr-automatic-scaling.md)\.
 
 1. Choose **Add task instance group** as desired and configure settings as described in the previous step\.
 
@@ -52,7 +52,7 @@ The following example demonstrates a `create-cluster` command that creates maste
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
 ```
-aws emr create-cluster --name "MySpotCluster" --release-label emr-5.29.0 \
+aws emr create-cluster --name "MySpotCluster" --release-label emr-5.32.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --instance-groups InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,BidPrice=0.25 \
 InstanceGroupType=CORE,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.03 \

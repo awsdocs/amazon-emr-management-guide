@@ -30,6 +30,9 @@ Before you configure encryption in a security configuration, create the keys and
 
 When you create a security configuration, you specify two sets of encryption options: at\-rest data encryption and in\-transit data encryption\. Options for at\-rest data encryption include both Amazon S3 with EMRFS and local\-disk encryption\. In\-transit encryption options enable the open\-source encryption features for certain applications that support Transport Layer Security \(TLS\)\. At\-rest options and in\-transit options can be enabled together or separately\. For more information, see [Encrypt Data at Rest and in Transit](emr-data-encryption.md)\.
 
+**Note**  
+When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](http://aws.amazon.com/kms/pricing/)\.
+
 ### Specifying Encryption Options Using the Console<a name="emr-security-configuration-encryption-console"></a>
 
 Choose options under **Encryption** according to the following guidelines\.
@@ -331,15 +334,17 @@ The following table lists the JSON parameters for encryption settings and provid
 
 
 | Parameter | Description | 
-| --- | --- | 
+| --- |--- |
 | "EnableInTransitEncryption" : true \| false | Specify true to enable in\-transit encryption and false to disable it\. If omitted, false is assumed, and in\-transit encryption is disabled\. | 
 | "EnableAtRestEncryption" : true \| false | Specify true to enable at\-rest encryption and false to disable it\. If omitted, false is assumed and at\-rest encryption is disabled\. | 
-| In\-transit encryption parameters | 
+| **In\-transit encryption parameters** | 
+| --- |
 | "InTransitEncryptionConfiguration" : | Specifies a collection of values used to configure in\-transit encryption when EnableInTransitEncryption is true\. | 
 |  "CertificateProviderType" : "PEM" \| "Custom" | Specifies whether to use PEM certificates referenced with a zipped file, or a Custom certificate provider\. If PEM is specified, S3Object must be a reference to the location in Amazon S3 of a zip file containing the certificates\. If Custom is specified, S3Object must be a reference to the location in Amazon S3 of a JAR file, followed by a CertificateProviderClass entry\. | 
 |  "S3Object" : "ZipLocation" \| "JarLocation" | Provides the location in Amazon S3 to a zip file when PEM is specified, or to a JAR file when Custom is specified\. The format can be a path \(for example, s3://MyConfig/artifacts/CertFiles\.zip\) or an ARN \(for example, arn:aws:s3:::Code/MyCertProvider\.jar\)\. If a zip file is specified, it must contain files named exactly privateKey\.pem and certificateChain\.pem\. A file named trustedCertificates\.pem is optional\. | 
 |   "CertificateProviderClass" : "MyClassID" | Required only if Custom is specified for CertificateProviderType\. MyClassID specifies a full class name declared in the JAR file, which implements the TLSArtifactsProvider interface\. For example, com\.mycompany\.MyCertProvider\. | 
-| At\-rest encryption parameters | 
+| **At\-rest encryption parameters** | 
+| --- |
 | "AtRestEncryptionConfiguration" :  | Specifies a collection of values for at\-rest encryption when EnableAtRestEncryption is true, including Amazon S3 encryption and local disk encryption\. | 
 | Amazon S3 encryption parameters | 
 | "S3EncryptionConfiguration" : | Specifies a collection of values used for Amazon S3 encryption with the EMR File System \(EMRFS\)\. | 
@@ -376,7 +381,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w19aac21c27c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w201aac28c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 

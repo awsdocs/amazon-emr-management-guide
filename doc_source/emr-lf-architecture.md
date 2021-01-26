@@ -18,8 +18,8 @@ The following diagram illustrates the architecture of SAML\-enabled single sign\
 
 1. The proxy agent enables successful user login\.
 
-1. When the user runs a Spark job by using the EMR notebook or Zeppelin, the record server calls the secret agent to obtain temporary user credentials\. 
+1. When the user runs a Spark job by using the EMR notebooks or Zeppelin, the record server calls the secret agent to obtain temporary user credentials\. 
 
 1. The record server reads and filters data from Amazon S3 based on the policies defined in Lake Formation\. 
 
-From the user's perspective, this process happens transparently\. The user starts at your organization's authentication page and ends up at the EMR notebook or Zeppelin through the browser without ever having to supply any AWS credentials\.
+From the user's perspective, this process happens transparently\. The user starts at your organization's authentication page and ends up at the EMR notebooks or Zeppelin interface through the browser without ever having to supply any AWS credentials\.

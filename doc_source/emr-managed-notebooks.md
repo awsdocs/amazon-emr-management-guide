@@ -1,19 +1,12 @@
-# Using Amazon EMR Notebooks<a name="emr-managed-notebooks"></a>
+# Amazon EMR Notebooks<a name="emr-managed-notebooks"></a>
 
-Use Amazon EMR Notebooks to create and open Jupyter notebooks with the Amazon EMR console\. You can use an EMR notebook with Amazon EMR clusters running [Apache Spark](https://aws.amazon.com/emr/features/spark/) to remotely run queries and code\. An EMR notebook is a "serverless" Jupyter notebook\. Unlike a traditional notebook, the contents of an EMR notebook itself—the equations, visualizations, queries, models, code, and narrative text—are saved in Amazon S3 separately from the cluster that runs the code\. This provides an EMR notebook with durable storage, efficient access, and flexibility\. 
+You can use Amazon EMR Notebooks along with Amazon EMR clusters running [Apache Spark](https://aws.amazon.com/emr/features/spark/) to create and open [Jupyter](https://jupyter.org) Notebook and JupyterLab interfaces within the Amazon EMR console\. An EMR notebook is a "serverless" notebook that you can use to run queries and code\. Unlike a traditional notebook, the contents of an EMR notebook itself—the equations, queries, models, code, and narrative text within notebook cells—run in a client\. The commands are executed using a kernel on the EMR cluster\. Notebook contents are also saved to Amazon S3 separately from cluster data for durability and flexible re\-use\.
 
-An Amazon EMR cluster is required to execute the code and queries within an EMR notebook, but the notebook isn't locked to the cluster\. This makes support for transient clusters more efficient\. You can start a cluster, attach an EMR notebook to it, and terminate the cluster\. The notebook still exists, so the next time you want to analyze or model data, you can create another cluster and attach the same notebook to it\.
+You can start a cluster, attach an EMR notebook for analysis, and then terminate the cluster\. You can also close a notebook attached to one running cluster and switch to another\. Multiple users can attach notebooks to the same cluster simultaneously and share notebook files in Amazon S3 with each other\. These features let you run clusters on\-demand to save cost, and reduce the time spent re\-configuring notebooks for different clusters and datasets\.
 
-You can also stop an EMR notebook attached to a running cluster and then change clusters\. You can attach to another running cluster or create a new one without having to reconfigure the notebook or terminate clusters\. These features let you run clusters on\-demand to save cost\. Also, you can save time re\-configuring notebooks when you want to use the same notebook on a different cluster or dataset\.
+You can also execute an EMR notebook programmatically using the EMR API, without the need to interact with EMR console \("headless execution"\)\. You need to include a cell in the EMR notebook that has a parameters tag\. That cell allows a script to pass new input values to the notebook\. Parameterized notebooks can be re\-used with different sets of input values\. There's no need to make copies of the same notebook to edit and execute with new input values\. EMR creates and saves the output notebook on S3 for each run of the parameterized notebook\. For EMR notebook API code samples, see [Sample commands to execute EMR Notebooks programmatically](emr-managed-notebooks-headless.md)\.
+
+**Important**  
+EMR Notebooks is supported with clusters created using Amazon EMR 5\.18\.0 and later\. We strongly recommend that you use EMR Notebooks with clusters created using the latest version of Amazon EMR–particularly Amazon EMR release version 5\.30\.0 and later, excluding 6\.0\.0\. With Amazon EMR 5\.30\.0, a change was made so that Jupyter kernels run on the attached cluster, rather than on a Jupyter instance\. This change helps improve performance and enhances your ability to customize kernels and libraries\. For more information, see [Differences in Capabilities by Cluster Release Version](emr-managed-notebooks-considerations.md#considerations-cluster-version)\.
 
 Applicable charges for Amazon S3 storage and for Amazon EMR clusters apply\.
-
-**Topics**
-+ [Considerations](emr-managed-notebooks-considerations.md)
-+ [Creating a Notebook](emr-managed-notebooks-create.md)
-+ [Creating Clusters for Notebooks](emr-managed-notebooks-cluster.md)
-+ [Working with Notebooks](emr-managed-notebooks-working-with.md)
-+ [Monitoring](emr-managed-notebooks-spark-monitor.md)
-+ [Security](emr-managed-notebooks-security.md)
-+ [Using Notebook\-Scoped Libraries](emr-managed-notebooks-scoped-libraries.md)
-+ [Associate Git Repositories with Amazon EMR Notebooks](emr-git-repo.md)

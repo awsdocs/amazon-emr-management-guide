@@ -6,16 +6,26 @@ For more information about adding tags to clusters, see [Tagging EMR clusters](h
 
 The following examples demonstrate different scenarios and ways to use condition operators with Amazon EMR condition keys\. These IAM policy statements are intended for demonstration purposes only and should not be used in production environments\. There are multiple ways to combine policy statements to grant and deny permissions according to your requirements\. For more information about planning and testing IAM policies, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
+**Important**  
+Explicitly denying permission for tagging actions is an important consideration\. This prevents users from tagging a resource and thereby granting themselves permissions that you did not intend to grant\. If tagging actions for a resource are not denied, a user can modify tags and circumvent the intention of the tag\-based policies\. For an example of a policy that denies tagging actions, see [Deny Access to Add and Remove Tags](#emr-cluster-deny-tagging-example)\.
+
 ## Example Identity\-Based Policy Statements for Clusters<a name="emr-cluster-access-resourcetag"></a>
 
 The examples below demonstrate identity\-based permissions policies that are used to control the actions that are allowed with EMR clusters\.
 
+**Important**  
+The `ModifyInstanceGroup` action in Amazon EMR does not require that you specify a cluster ID\. For that reason, denying this action based on cluster tags requires additional consideration\. For more information, see [Denying the ModifyInstanceGroup Action](emr-cluster-deny-modifyinstancegroup.md)\.
+
+**Topics**
++ [Allow Actions Only on Clusters with Specific Tag Values](#emr-cluster-access-example-tagvalue)
++ [Require Cluster Tagging When a Cluster is Created](#emr-cluster-access-example-require-tagging)
++ [Deny Access to Add and Remove Tags](#emr-cluster-deny-tagging-example)
++ [Allow Actions on Clusters with a Specific Tag, Regardless of Tag Value](#emr-cluster-access-example-tag)
++ [Require Users to Add Tags When Creating a Cluster](#emr-cluster-access-requesttag)
+
 ### Allow Actions Only on Clusters with Specific Tag Values<a name="emr-cluster-access-example-tagvalue"></a>
 
 The examples below demonstrate a policy that allows a user to perform actions based on the cluster tag `department` with the value `dev` and also allows a user to tag clusters with that same tag\. The final policy example demonstrates how to deny privileges to tag EMR clusters with anything but that same tag\.
-
-**Important**  
-Explicitly denying permission for tagging actions is an important consideration\. This prevents users from granting permissions to themselves through cluster tags that you did not intend to grant\. If the actions shown in the last example had not been denied, a user could add and remove tags of their choosing to any cluster, and circumvent the intention of the preceding policies\.
 
 In the following policy example, the `StringEquals` condition operator tries to match `dev` with the value for the tag `department`\. If the tag `department` hasn't been added to the cluster, or doesn't contain the value `dev`, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with clusters that have this tag with this value\.
 
@@ -59,6 +69,8 @@ You can also specify multiple tag values using a condition operator\. For exampl
             }
 ```
 
+### Require Cluster Tagging When a Cluster is Created<a name="emr-cluster-access-example-require-tagging"></a>
+
 As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a tag that matches the specified value\.
 
 ```
@@ -84,6 +96,8 @@ As in the preceding example, the following example policy looks for the same mat
 20.   ]
 21. }
 ```
+
+### Deny Access to Add and Remove Tags<a name="emr-cluster-deny-tagging-example"></a>
 
 In the following example, the EMR actions that allow the addition and removal of tags is combined with a `StringNotEquals` operator specifying the `dev` tag we've seen in earlier examples\. The effect of this policy is to deny a user the permission to add or remove any tags on EMR clusters that are tagged with a `department` tag that contains the `dev` value\.
 

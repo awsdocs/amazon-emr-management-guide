@@ -16,9 +16,9 @@ This sample demonstrates how to add steps to an existing cluster and thus requir
 
 Before you begin, install a version of the **Eclipse IDE for Java EE Developers** that matches your computer platform\. For more information, go to [Eclipse Downloads](http://www.eclipse.org/downloads/)\.
 
-Next, install the Database Development plug\-in for Eclipse\.
+Next, install the Database Development plugin for Eclipse\.
 
-**To install the Database Development Eclipse plug\-in**
+**To install the Database Development Eclipse plugin**
 
 1. Open the Eclipse IDE\.
 
@@ -38,7 +38,7 @@ Next, install the Toolkit for Eclipse to make the helpful, pre\-configured sourc
 
 1. Choose **Help** and **Install New Software**\.
 
-1. In the **Work with:** field, type **https://aws\.amazon\.com//eclipse**\.
+1. In the **Work with:** field, type **https://aws\.amazon\.com/eclipse**\.
 
 1. In the items list, choose **AWS Toolkit for Eclipse** and **Finish**\.
 
@@ -56,7 +56,7 @@ Next, create a new AWS Java project and run the sample Java source code\.
 
 1. In the **New AWS Java Project** dialog, in the **Project name:** field, enter the name of your new project, for example **EMR\-sample\-code**\.
 
-1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr//getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
+1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
 **Note**  
 You should **not** embed access keys directly in code\. The Amazon EMR SDK allows you to put access keys in known locations so that you do not have to keep them in code\.
 

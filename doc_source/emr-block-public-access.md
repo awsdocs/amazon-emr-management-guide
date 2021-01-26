@@ -1,15 +1,32 @@
 # Using Amazon EMR Block Public Access<a name="emr-block-public-access"></a>
 
-Amazon EMR block public access prevents a cluster from launching when any security group associated with the cluster has a rule that allows inbound traffic from IPv4 0\.0\.0\.0/0 or IPv6 ::/0 \(public access\) on a port, unless the port has been specified as an exception\. Port 22 is an exception by default\. You can configure exceptions to allow public access on a port or range of ports\. In addition, you can enable or disable block public access\. We recommend that you enable it\.
+Amazon EMR block public access prevents a cluster from launching when any security group associated with the cluster has a rule that allows inbound traffic from IPv4 0\.0\.0\.0/0 or IPv6 ::/0 \(public access\) on a port, unless the port has been specified as an exception\. Port 22 is an exception by default\. You can configure exceptions to allow public access on a port or range of ports\.
 
-Block public access is enabled and configured for each AWS Region for your AWS account\. In other words, each Region has a block public access configuration that applies to all clusters created by your account in that Region\.
+Block public access is enabled for each AWS Region for your AWS account\. In other words, each Region has block public access enabled for all clusters created by your account in that Region\.
 
-**Note**  
-For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region\. To use this feature, you must manually enable and configure it\. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region\. 
+Block public access is only applicable during cluster creation\. Block public access does not block IAM principals with appropriate permissions from updating security group configurations to allow public access on running clusters\.
+
+Amazon EMR block public access is available in the following regions:
++ US East \(N\. Virginia\) — us\-east\-1
++ US East \(Ohio\) — us\-east\-2
++ Europe \(Stockholm\) — eu\-north\-1
++ Asia Pacific \(Mumbai\) — ap\-south\-1
++ Europe \(Paris\) — eu\-west\-3
++ Europe \(Ireland\) — eu\-west\-1
++ Europe \(Frankfurt\) — eu\-central\-1
++ South America \(São Paulo\) — sa\-east\-1
++ Asia Pacific \(Seoul\) — ap\-northeast\-2
++ Europe \(London\) — eu\-west\-2
++ Asia Pacific \(Osaka\-Local\) — ap\-northeast\-1
++ US West \(Oregon\) — us\-west\-2
++ US West \(N\. California\) — us\-west\-1
++ Asia Pacific \(Singapore\) — ap\-southeast\-1
++ Asia Pacific \(Sydney\) — ap\-southeast\-2
++ Canada \(Central\) — ca\-central\-1
 
 ## Configure Block Public Access<a name="configure-block-public-access"></a>
 
-You can enable and disable block public access settings using the AWS Management Console, the AWS CLI, and the Amazon EMR API\. Settings apply across your account on a Region\-by\-Region basis\.
+You can enable and disable block public access settings using the AWS Management Console, the AWS CLI, and the Amazon EMR API\. Settings apply across your account on a Region\-by\-Region basis\. To maintain cluster security, it’s recommended that you keep BPA enabled\.
 
 ### To configure block public access using the AWS Management Console<a name="configure-bpa-console"></a>
 

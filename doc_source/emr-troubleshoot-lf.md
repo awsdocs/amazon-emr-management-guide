@@ -1,6 +1,12 @@
-# Troubleshoot a Lake Formation Cluster \(Beta\)<a name="emr-troubleshoot-lf"></a>
+# Troubleshoot a Lake Formation Cluster<a name="emr-troubleshoot-lf"></a>
 
- This section walks you through the process of troubleshooting common issues when using Amazon EMR with AWS Lake Formation\. 
+ This section walks you through the process of troubleshooting common issues when using Amazon EMR with AWS Lake Formation\.
+
+## Data Lake Access Not Allowed<a name="emr-troubleshoot-lf-data-access"></a>
+
+You must explicitly opt in to data filtering on Amazon EMR clusters before you can analyze and process data in your data lake\. When data access fails, you will see a generic `Access is not allowed` message in the output of your notebook entries\.
+
+To opt in and allow data filtering on Amazon EMR, see [Allow Data Filtering on Amazon EMR](https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch) in the *AWS Lake Formation Developer Guide* for instructions\.
 
 ## Session Expiration<a name="emr-troubleshoot-lf-expiration"></a>
 

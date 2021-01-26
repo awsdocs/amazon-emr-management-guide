@@ -1,12 +1,16 @@
 # Option 2, Part 1: Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding<a name="emr-ssh-tunnel"></a>
 
-To connect to the local web server on the master node, you create an SSH tunnel between your computer and the master node\. This is also known as *port forwarding*\. If you create your SSH tunnel using dynamic port forwarding, all traffic routed to a specified unused local port is forwarded to the local web server on the master node\. This creates a SOCKS proxy\. You can then configure your Internet browser to use an add\-on such as FoxyProxy or SwitchySharp to manage your SOCKS proxy settings\. Using a proxy management add\-on allows you to automatically filter URLs based on text patterns and to limit the proxy settings to domains that match the form of the master node's public DNS name\. The browser add\-on automatically handles turning the proxy on and off when you switch between viewing websites hosted on the master node, and those on the Internet\. 
+To connect to the local web server on the master node, you create an SSH tunnel between your computer and the master node\. This is also known as *port forwarding*\. If you create your SSH tunnel using dynamic port forwarding, all traffic routed to a specified unused local port is forwarded to the local web server on the master node\. This creates a SOCKS proxy\. You can then configure your Internet browser to use an add\-on such as FoxyProxy or SwitchyOmega to manage your SOCKS proxy settings\. 
+
+Using a proxy management add\-on allows you to automatically filter URLs based on text patterns and to limit the proxy settings to domains that match the form of the master node's public DNS name\. The browser add\-on automatically handles turning the proxy on and off when you switch between viewing websites hosted on the master node, and those on the Internet\. 
 
 Before you begin, you need the public DNS name of the master node and your key pair private key file\. For information about how to locate the master public DNS name, see [To retrieve the public DNS name of the master node using the Amazon EMR console](emr-connect-master-node-ssh.md#public-dns-name-master)\. For more information about accessing your key pair, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\. For more information about the sites you might want to view on the master node, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\.
 
 ## Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding on Linux, Unix, and Mac OS X<a name="emr-ssh-tunnel-linux"></a><a name="emr-ssh-tunnel-unix"></a>
 
 **To set up an SSH tunnel using dynamic port forwarding on Linux, Unix, and Mac OS X**
+
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
 
 1. Open a terminal window\. On Mac OS X, choose **Applications > Utilities > Terminal**\. On other Linux distributions, terminal is typically found at **Applications > Accessories > Terminal**\.
 
@@ -29,6 +33,8 @@ Before you begin, you need the public DNS name of the master node and your key p
 You can create an SSH connection with the master node using the AWS CLI on Windows and on Linux, Unix, and Mac OS X\. If you are using the AWS CLI on Linux, Unix, or Mac OS X, you must set permissions on the `.pem` file as shown in [To configure the key pair private key file permissions](emr-connect-master-node-ssh.md#emr-keypair-file-permission-config)\. If you are using the AWS CLI on Windows, PuTTY must appear in the path environment variable or you may receive an error such as OpenSSH or PuTTY not available\.<a name="ssh-tunnel-cli"></a>
 
 **To set up an SSH tunnel using dynamic port forwarding with the AWS CLI**
+
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
 
 1. Create an SSH connection with the master node as shown in [Connect to the Master Node Using the AWS CLI](emr-connect-master-node-ssh.md#emr-connect-cli)\. 
 
@@ -80,6 +86,8 @@ For more information about converting your key, see [Converting Your Private Key
 
 **To set up an SSH tunnel using dynamic port forwarding on Windows**
 
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
+
 1. Double\-click `putty.exe` to start PuTTY\. You can also launch PuTTY from the Windows programs list\. 
 **Note**  
 If you already have an active SSH session with the master node, you can add a tunnel by right\-clicking the PuTTY title bar and choosing **Change Settings**\. 
@@ -96,13 +104,13 @@ PuTTY does not natively support the key pair private key file format \(`.pem`\) 
 
 1. In the **Category** list, expand **Connection > SSH**, and then choose **Tunnels**\. 
 
-1. In the **Source port** field, type `8157` \(an unused local port\)\.
+1. In the **Source port** field, type `8157` \(an unused local port\), and then choose **Add**\.
 
 1. Leave the **Destination** field blank\.
 
 1. Select the **Dynamic** and **Auto** options\.
 
-1. Choose **Add** and **Open**\. 
+1. Choose **Open**\. 
 
 1. Choose **Yes** to dismiss the PuTTY security alert\.
 **Important**  

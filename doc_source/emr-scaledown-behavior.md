@@ -36,4 +36,4 @@ You can use the AWS Management Console, the AWS CLI, or the Amazon EMR API to co
 
 ![\[Scale-down configuration for Amazon EMR instance termination.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/auto-scaling-scaledown.png)
 
-When you create a cluster using the AWS CLI, use the `--ScaleDownBehavior` option to specify either `TERMINATE_AT_INSTANCE_HOUR` or `TERMINATE_AT_TASK_COMPLETION`\.
+When you create a cluster using the AWS CLI, use the `--scale-down-behavior` option to specify either `TERMINATE_AT_INSTANCE_HOUR` or `TERMINATE_AT_TASK_COMPLETION`\.

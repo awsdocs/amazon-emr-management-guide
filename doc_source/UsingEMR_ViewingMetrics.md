@@ -134,7 +134,7 @@ The following metrics are available for clusters running Hadoop 2\.x versions\.
 |  MemoryTotalMB  |  The total amount of memory in the cluster\. Use case: Monitor cluster progress Units: *Count*  | 
 |  MemoryReservedMB  |  The amount of memory reserved\. Use case: Monitor cluster progress Units: *Count*  | 
 |  MemoryAvailableMB  |  The amount of memory available to be allocated\. Use case: Monitor cluster progress Units: *Count*  | 
-|  YARNMemoryAvailablePercentage  |  The percentage of remaining memory available to YARN \(YARNMemoryAvailablePercentage = MemoryAvailableMB / MemoryTotalMB\)\. This value is useful for scaling cluster resources based on YARN memory usage\.  | 
+|  YARNMemoryAvailablePercentage  |  The percentage of remaining memory available to YARN \(YARNMemoryAvailablePercentage = MemoryAvailableMB / MemoryTotalMB\)\. This value is useful for scaling cluster resources based on YARN memory usage\. Units: *Percent*  | 
 |  MemoryAllocatedMB  |  The amount of memory allocated to the cluster\. Use case: Monitor cluster progress Units: *Count*  | 
 |  PendingDeletionBlocks  |  The number of blocks marked for deletion\. Use case: Monitor cluster progress, Monitor cluster health Units: *Count*  | 
 |  UnderReplicatedBlocks  |  The number of blocks that need to be replicated one or more times\. Use case: Monitor cluster progress, Monitor cluster health Units: *Count*  | 
@@ -181,6 +181,20 @@ The following are Hadoop 1 metrics:
 |  BackupFailed  |  Whether the last backup failed\. This is set to 0 by default and updated to 1 if the previous backup attempt failed\. This metric is only reported for HBase clusters\. Use case: Monitor HBase backups Units: *Count*  | 
 |  MostRecentBackupDuration  |  The amount of time it took the previous backup to complete\. This metric is set regardless of whether the last completed backup succeeded or failed\. While the backup is ongoing, this metric returns the number of minutes after the backup started\. This metric is only reported for HBase clusters\. Use case: Monitor HBase Backups Units: *Minutes*  | 
 |  TimeSinceLastSuccessfulBackup  |  The number of elapsed minutes after the last successful HBase backup started on your cluster\. This metric is only reported for HBase clusters\. Use case: Monitor HBase backups Units: *Minutes*  | 
+
+#### Cluster Capacity Metrics<a name="emr-metrics-managed-scaling"></a>
+
+The following metrics indicate the current or target capacities of a cluster\. These metrics are only available when managed scaling is enabled\. For clusters composed of instance fleets, the cluster capacity metrics are measured in `Units`\. For clusters composed of instance groups, the cluster capacity metrics are measured in `Nodes` or `VCPU` based on the unit type used in the managed scaling policy\. For more information, see [Using EMR\-Managed Scaling in Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-scaling.html) in the *Amazon EMR Management Guide*\.
+
+
+| Metric | Description | 
+| --- | --- | 
+| [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html) |  The target total number of units/nodes/vCPUs in a cluster as determined by managed scaling\. Units: *Count*  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The current total number of units/nodes/vCPUs available in a running cluster\. When a cluster resize is requested, this metric will be updated after the new instances are added or removed from the cluster\. Units: *Count*  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The target number of CORE units/nodes/vCPUs in a cluster as determined by managed scaling\. Units: *Count*  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The current number of CORE units/nodes/vCPUs running in a cluster\. Units: *Count*  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The target number of TASK units/nodes/vCPUs in a cluster as determined by managed scaling\. Units: *Count*  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The current number of TASK units/nodes/vCPUs running in a cluster\. Units: *Count*  | 
 
 ### Dimensions for Amazon EMR Metrics<a name="emr-metrics-dimensions"></a>
 

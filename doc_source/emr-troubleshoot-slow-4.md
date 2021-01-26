@@ -15,7 +15,7 @@
 
 ## Check Job Status and HDFS Health<a name="emr-troubleshoot-slow-4-web-ui"></a>
 
-Use the **Application history** on the cluster details page to view YARN application details\. For certain applications, you can drill into further detail and access logs directly\. This is particularly useful for Spark applications\. For more information, see [View Application History](emr-cluster-application-history.md)\.
+Use the **Application user interfaces** tab on the cluster details page to view YARN application details\. For certain applications, you can drill into further detail and access logs directly\. This is particularly useful for Spark applications\. For more information, see [View Application History](emr-cluster-application-history.md)\.
 
 Hadoop provides a series of web interfaces you can use to view information\. For more information about how to access these web interfaces, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. 
 +  JobTracker — provides information about the progress of job being processed by the cluster\. You can use this interface to identify when a job has become stuck\. 

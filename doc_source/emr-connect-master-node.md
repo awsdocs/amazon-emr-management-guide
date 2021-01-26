@@ -13,5 +13,6 @@ By default, the ElasticMapReduce\-master security group does not permit inbound 
 Do not modify the remaining rules in the ElasticMapReduce\-master security group\. Modifying these rules may interfere with the operation of the cluster\. 
 
 **Topics**
++ [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)
 + [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)
 + [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)

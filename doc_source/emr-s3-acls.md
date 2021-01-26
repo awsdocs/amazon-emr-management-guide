@@ -6,7 +6,7 @@
 +  Have the other AWS user grant you write permissions for their Amazon S3 bucket\. The cluster you launch runs under your AWS credentials, so any clusters you launch will also be able to write to that other AWS user's bucket\. 
 +  Set read permissions for the other AWS user on the files that you or the cluster write to the Amazon S3 bucket\. The easiest way to set these read permissions is to use canned access control lists \(ACLs\), a set of pre\-defined access policies defined by Amazon S3\. 
 
- For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing Bucket Permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide//EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+ For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing Bucket Permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
  For your cluster to use canned ACLs when it writes files to Amazon S3, set the `fs.s3.canned.acl` cluster configuration option to the canned ACL to use\. The following table lists the currently defined canned ACLs\. 
 
@@ -31,7 +31,7 @@
   ```
   hive> set fs.s3.canned.acl=BucketOwnerFullControl;   
   create table acl (n int) location 's3://acltestbucket/acl/'; 
-  insert overwrite table acl select count(n) from acl;
+  insert overwrite table acl select count(*) from acl;
   ```
 
    The last two lines of the example create a table that is stored in Amazon S3 and write data to the table\. 
@@ -52,12 +52,4 @@
   ```
   hadoop jar hadoop-examples.jar wordcount 
   -Dfs.s3.canned.acl=BucketOwnerFullControl s3://mybucket/input s3://mybucket/output
-  ```
-  
- **To write files using canned ACLs in a s3-dist-cp**
-+  Set the `fs.s3.canned.acl` configuration option using s3-dist-cp with the \-D flag\. This is shown in the example below\. 
-
-  ```
-  s3-dist-cp
-  -Dfs.s3.canned.acl=BucketOwnerFullControl --src s3://mybucket/input --dest s3://mybucket/output
   ```

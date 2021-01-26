@@ -1,6 +1,8 @@
 # Tutorial: Configure a Cluster\-Dedicated KDC<a name="emr-kerberos-cluster-kdc"></a>
 
-This topic guides you through creating a cluster with a cluster\-dedicated KDC, manually adding Linux user accounts to all cluster nodes, adding Kerberos principals to the KDC on the master node, and ensuring that client computers have a Kerberos client installed\.
+This topic guides you through creating a cluster with a cluster\-dedicated *key distribution center \(KDC\)*, manually adding Linux user accounts to all cluster nodes, adding Kerberos principals to the KDC on the master node, and ensuring that client computers have a Kerberos client installed\.
+
+For more information on Amazon EMR support for Kerberos and KDC, as well as links to MIT Kerberos Documentation, see [Use Kerberos Authentication](emr-kerberos.md)\.
 
 ## Step 1: Create the Kerberized Cluster<a name="emr-kerberos-clusterdedicated-cluster"></a>
 
@@ -8,7 +10,7 @@ This topic guides you through creating a cluster with a cluster\-dedicated KDC, 
 
    ```
    aws emr create-security-configuration --name MyKerberosConfig \
-   --security-configuration '{"AuthenticationConfiguration": {"KerberosConfiguration": \
+   --security-configuration '{"AuthenticationConfiguration": {"KerberosConfiguration": 
    {"Provider": "ClusterDedicatedKdc", "ClusterDedicatedKdcConfiguration": {"TicketLifetimeInHours": 24}}}}}'
    ```
 
@@ -16,12 +18,12 @@ This topic guides you through creating a cluster with a cluster\-dedicated KDC, 
 
    ```
    aws emr create-cluster --name "MyKerberosCluster" \
-   --release-label emr-5.29.0 \
+   --release-label emr-5.32.0 \
    --instance-type m5.xlarge \
    --instance-count 3 \
    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \
    --service-role EMR_DefaultRole \
-   --security-configuration MyKerberosConfig\
+   --security-configuration MyKerberosConfig \
    --applications Name=Hadoop Name=Hive Name=Oozie Name=Hue Name=HCatalog Name=Spark \
    --kerberos-attributes Realm=EC2.INTERNAL,\
    KdcAdminPassword=MyClusterKDCAdminPwd \

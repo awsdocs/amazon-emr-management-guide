@@ -87,4 +87,4 @@ The `TerminateJobFlows` operation ends step processing, uploads any log data fro
 
 You can use this action to terminate either a single cluster or a list of clusters by their cluster IDs\.
 
-For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API//CommonParameters.html)\.
+For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/CommonParameters.html)\.

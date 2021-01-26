@@ -1,10 +1,12 @@
 # Tutorial: Configure a Cross\-Realm Trust with an Active Directory Domain<a name="emr-kerberos-cross-realm"></a>
 
-When you set up a cross\-realm trust, you allow principals \(usually users\) from a different Kerberos realm to authenticate to application components on the EMR cluster\. The cluster\-dedicated KDC establishes a trust relationship with another KDC using a *cross\-realm principal* that exists in both KDCs\. The principal name and the password match precisely\.
+When you set up a cross\-realm trust, you allow principals \(usually users\) from a different Kerberos realm to authenticate to application components on the EMR cluster\. The cluster\-dedicated *key distribution center \(KDC\)* establishes a trust relationship with another KDC using a *cross\-realm principal* that exists in both KDCs\. The principal name and the password match precisely\.
 
 A cross\-realm trust requires that the KDCs can reach one another over the network and resolve each other's domain names\. Steps for establishing a cross\-realm trust relationship with a Microsoft AD domain controller running as an EC2 instance are provided below, along with an example network setup that provides the required connectivity and domain\-name resolution\. Any network setup that allows the required network traffic between KDCs is acceptable\.
 
 Optionally, after you establish a cross\-realm trust with Active Directory using a KDC on one cluster, you can create another cluster using a different security configuration to reference the KDC on the first cluster as an external KDC\. For an example security configuration and cluster set up, see [External Cluster KDC with Active Directory Cross\-Realm Trust](emr-kerberos-config-examples.md#emr-kerberos-example-extkdc-ad-trust)\.
+
+For more information on Amazon EMR support for Kerberos and KDC, as well as links to MIT Kerberos Documentation, see [Use Kerberos Authentication](emr-kerberos.md)\.
 
 **Important**  
 Amazon EMR does not support cross\-realm trusts with AWS Directory Service for Microsoft Active Directory\.

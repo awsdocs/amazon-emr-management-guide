@@ -2,7 +2,7 @@
 
 Each Amazon EMR release version uses a default Amazon Linux AMI for Amazon EMR unless you specify a custom AMI\. The default AMI is based on the most up\-to\-date Amazon Linux AMI available at the time of the Amazon EMR release\. The AMI is tested for compatibility with the big\-data applications and Amazon EMR features included with that release version\.
 
-Each Amazon EMR release version is "locked" to the Amazon Linux AMI version to maintain compatibility\. This means that the same Amazon Linux AMI version is used for an Amazon EMR release version even when newer Amazon Linux AMIs become available\. For this reason, we recommend that you use the latest Amazon EMR release version \(currently 5\.29\.0\) unless you need an earlier version for compatibility and are unable to migrate\.
+Each Amazon EMR release version is "locked" to the Amazon Linux AMI version to maintain compatibility\. This means that the same Amazon Linux AMI version is used for an Amazon EMR release version even when newer Amazon Linux AMIs become available\. For this reason, we recommend that you use the latest Amazon EMR release version \(currently 5\.32\.0\) unless you need an earlier version for compatibility and are unable to migrate\.
 
 If you must use an earlier release version of Amazon EMR for compatibility, we recommend that you use the latest release in a series\. For example, if you must use the 5\.12 series, use 5\.12\.2 instead of 5\.12\.0 or 5\.12\.1\. If a new release becomes available in a series, consider migrating your applications to the new release\.
 

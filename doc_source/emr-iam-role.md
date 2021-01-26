@@ -4,7 +4,7 @@ The EMR role defines the allowable actions for Amazon EMR when provisioning reso
 + The default role is `EMR_DefaultRole`
 + The default managed policy attached to `EMR_DefaultRole` is `AmazonElasticMapReduceRole`
 
-The contents of version 9 of `AmazonElasticMapReduceRole` are shown below\.
+The contents of version 10 of `AmazonElasticMapReduceRole` are shown below\.
 
 ```
 {
@@ -17,9 +17,12 @@ The contents of version 9 of `AmazonElasticMapReduceRole` are shown below\.
                 "ec2:AuthorizeSecurityGroupEgress",
                 "ec2:AuthorizeSecurityGroupIngress",
                 "ec2:CancelSpotInstanceRequests",
+                "ec2:CreateFleet",
+                "ec2:CreateLaunchTemplate",
                 "ec2:CreateNetworkInterface",
                 "ec2:CreateSecurityGroup",
                 "ec2:CreateTags",
+                "ec2:DeleteLaunchTemplate",
                 "ec2:DeleteNetworkInterface",
                 "ec2:DeleteSecurityGroup",
                 "ec2:DeleteTags",
@@ -30,6 +33,7 @@ The contents of version 9 of `AmazonElasticMapReduceRole` are shown below\.
                 "ec2:DescribeInstanceStatus",
                 "ec2:DescribeInstances",
                 "ec2:DescribeKeyPairs",
+                "ec2:DescribeLaunchTemplates",
                 "ec2:DescribeNetworkAcls",
                 "ec2:DescribeNetworkInterfaces",
                 "ec2:DescribePrefixLists",

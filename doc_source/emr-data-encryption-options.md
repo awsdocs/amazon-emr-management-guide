@@ -20,7 +20,10 @@ Before you specify encryption options, decide on the key and certificate managem
 
 ## Encryption at Rest for EMRFS Data in Amazon S3<a name="emr-encryption-s3"></a>
 
-Amazon S3 encryption works with EMR File System \(EMRFS\) objects read from and written to Amazon S3\. You specify Amazon S3 server\-side encryption \(SSE\) or client\-side encryption \(CSE\) as the **Default encryption mode** when you enable encryption at rest\. Optionally, you can specify different encryption methods for individual buckets using **Per bucket encryption overrides**\. Regardless of whether Amazon S3 encryption is enabled, Transport Layer Security \(TLS\) encrypts the EMRFS objects in transit between EMR cluster nodes and Amazon S3\. For in\-depth information about Amazon S3 encryption, see [Protecting Data Using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+Amazon S3 encryption works with EMR File System \(EMRFS\) objects read from and written to Amazon S3\. You specify Amazon S3 server\-side encryption \(SSE\) or client\-side encryption \(CSE\) as the **Default encryption mode** when you enable encryption at rest\. Optionally, you can specify different encryption methods for individual buckets using **Per bucket encryption overrides**\. Regardless of whether Amazon S3 encryption is enabled, Transport Layer Security \(TLS\) encrypts the EMRFS objects in transit between EMR cluster nodes and Amazon S3\. For in\-depth information about Amazon S3 encryption, see [Protecting Data Using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html) in the *Amazon Simple Storage Service Developer Guide*\.
+
+**Note**  
+When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](http://aws.amazon.com/kms/pricing/)\.
 
 ### Amazon S3 Server\-Side Encryption<a name="emr-encryption-s3-sse"></a>
 
@@ -28,7 +31,7 @@ When you set up Amazon S3 server\-side encryption, Amazon S3 encrypts data at th
 
 You can choose between two different key management systems when you specify SSE in Amazon EMR: 
 + **SSE\-S3** – Amazon S3 manages keys for you\.
-+ **SSE\-KMS** – You use an AWS KMS customer master key \(CMK\) set up with policies suitable for Amazon EMR\. For more information about key requirements for Amazon EMR, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
++ **SSE\-KMS** – You use an AWS KMS customer master key \(CMK\) set up with policies suitable for Amazon EMR\. For more information about key requirements for Amazon EMR, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
 
 SSE with customer\-provided keys \(SSE\-C\) is not available for use with Amazon EMR\.
 
@@ -43,7 +46,7 @@ Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted
 
 The following mechanisms work together to encrypt local disks when you enable local disk encryption using an Amazon EMR security configuration\.
 
-### Open\-source HDFS Encryption<a name="w19aac21c29c13c11c21b5"></a>
+### Open\-source HDFS Encryption<a name="w201aac28c29c11c11c21b5"></a>
 
 HDFS exchanges data between cluster instances during distributed processing\. It also reads from and writes data to instance store volumes and the EBS volumes attached to instances\. The following open\-source Hadoop encryption options are activated when you enable local disk encryption:
 + [Secure Hadoop RPC](https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SecureMode.html#Data_Encryption_on_RPC) is set to `Privacy`, which uses Simple Authentication Security Layer \(SASL\)\. 
@@ -52,11 +55,11 @@ HDFS exchanges data between cluster instances during distributed processing\. It
 **Note**  
 You can activate additional Apache Hadoop encryption by enabling in\-transit encryption \(see [Encryption in Transit](#emr-encryption-intransit)\)\. These encryption settings do not activate HDFS transparent encryption, which you can configure manually\. For more information, see [Transparent Encryption in HDFS on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-tdehdfs.html) in the *Amazon EMR Release Guide*\.
 
-### Instance Store Encryption<a name="w19aac21c29c13c11c21b7"></a>
+### Instance Store Encryption<a name="w201aac28c29c11c11c21b7"></a>
 
 For EC2 instance types that use NVMe\-based SSDs as the instance store volume, NVMe encryption is used regardless of Amazon EMR encryption settings\. For more information, see [NVMe SSD Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes) in the *Amazon EC2 User Guide for Linux Instances*\. For other instance store volumes, Amazon EMR uses LUKS to encrypt the instance store volume when local disk encryption is enabled regardless of whether EBS volumes are encrypted using EBS encryption or LUKS\.
 
-### EBS Volume Encryption<a name="w19aac21c29c13c11c21b9"></a>
+### EBS Volume Encryption<a name="w201aac28c29c11c11c21b9"></a>
 
 If you create a cluster in a region where Amazon EC2 encryption of EBS volumes is enabled by default for your account, EBS volumes are encrypted even if local disk encryption is not enabled\. For more information, see [Encryption by Default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default) in the *Amazon EC2 User Guide for Linux Instances*\. With local disk encryption enabled in a security configuration, the Amazon EMR settings take precedence over the Amazon EC2 encryption\-by\-default settings for cluster EC2 instances\.
 

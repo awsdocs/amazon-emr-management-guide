@@ -11,6 +11,6 @@
 + [Step 2: Check the Environment](emr-troubleshoot-slow-2.md)
 + [Step 3: Examine the Log Files](emr-troubleshoot-slow-3.md)
 + [Step 4: Check Cluster and Instance Health](emr-troubleshoot-slow-4.md)
-+ [Step 5: Check for Arrested Groups](emr-troubleshoot-slow-5.md)
++ [Step 5: Check for Suspended Groups](emr-troubleshoot-slow-5.md)
 + [Step 6: Review Configuration Settings](emr-troubleshoot-slow-6.md)
 + [Step 7: Examine Input Data](emr-troubleshoot-slow-7.md)

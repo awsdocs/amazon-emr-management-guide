@@ -15,7 +15,7 @@ You can use the AWS Management Console, AWS CLI, or EMR API to retrieve detailed
 
  In the **Clusters** list on the Amazon EMR console you can see high\-level information about the status of each cluster in your account and region\. The list displays all clusters that you have launched in the past two months, regardless of whether they are active or terminated\. From the **Clusters** list, you can select a cluster **Name** to view cluster details\. This information is organized in different categories to make it easy to navigate\. 
 
-The **Application history** available in the cluster details page can be particularly useful for troubleshooting\. It provides status of YARN applications, and for some, such as Spark applications you can drill into different metrics and facets, such as jobs, stages, and executors\. For more information, see [View Application History](emr-cluster-application-history.md)\. This feature is available only in Amazon EMR version 5\.8\.0 and later\.
+The **Application user interfaces** available in the cluster details page can be particularly useful for troubleshooting\. It provides status of YARN applications, and for some, such as Spark applications you can drill into different metrics and facets, such as jobs, stages, and executors\. For more information, see [View Application History](emr-cluster-application-history.md)\. This feature is available only in Amazon EMR version 5\.8\.0 and later\.
 
 ### Amazon EMR Command Line Interface<a name="emr-troubleshoot-tools-cli"></a>
 

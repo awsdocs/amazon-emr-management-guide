@@ -9,7 +9,7 @@ Termination protection does not guarantee that data is retained in the event of 
 
 Termination protection does not affect your ability to scale cluster resources using any of the following actions:
 + Resizing a cluster manually using the AWS Management Console or AWS CLI\. For more information, see [Manually Resizing a Running Cluster](emr-manage-resize.md)\.
-+ Removing instances from a core or task instance group using a scale\-in policy with automatic scaling\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
++ Removing instances from a core or task instance group using a scale\-in policy with automatic scaling\. For more information, see [Using Automatic Scaling with a Custom Policy for Instance Groups ](emr-automatic-scaling.md)\.
 + Removing instances from an instance fleet by reducing target capacity\. For more information, see [Instance Fleet Options](emr-instance-fleet.md#emr-instance-fleet-options)\.
 
 ## Termination Protection and Amazon EC2<a name="emr-termination-protection-ec2"></a>
@@ -78,7 +78,7 @@ The default termination protection setting depends on how you launch the cluster
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.29.0 \
+  aws emr create-cluster --name "TerminationProtectedCluster" --release-label emr-5.32.0 \
   --applications Name=Hadoop Name=Hive Name=Pig \
   --use-default-roles --ec2-attributes KeyName=myKey --instance-type m5.xlarge \
   --instance-count 3 --termination-protected

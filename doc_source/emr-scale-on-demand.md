@@ -1,19 +1,23 @@
 # Scaling Cluster Resources<a name="emr-scale-on-demand"></a>
 
-You can adjust the number of Amazon EC2 instances available to an EMR cluster automatically or manually in response to workloads that have varying demands\. The following options are available:
-+ Using Amazon EMR versions 4\.x and later, you can configure *automatic scaling* for the core instance group and task instance groups when you first create them or after the cluster is running\. Amazon EMR automatically configures Auto Scaling parameters according to rules you specify, and then adds and removes instances based on a CloudWatch metric\.
-+ You can manually *resize* the core instance group and task instance groups by manually adding or removing Amazon EC2 instances\.
-+ You can add a new task instance group to the cluster\.
+You can adjust the number of Amazon EC2 instances available to an Amazon EMR cluster automatically or manually in response to workloads that have varying demands\. To use automatic scaling, you have two options\. You can enable EMR managed scaling or create a custom automatic scaling policy\. The following table describes the differences between the two options\.
 
-The option to specify the Amazon EC2 instance type is only available during initial configuration of an instance group, so you can change the Amazon EC2 instance type only by adding a new task\. When using Amazon EMR version 5\.1\.0 or later, a cluster\-wide configuration allows you to specify whether Amazon EC2 instances removed from a cluster are terminated at the instance\-hour boundary, or when tasks on the Amazon EC2 instance are complete\. For more information, see [Cluster Scale\-Down](emr-scaledown-behavior.md)\.
 
-Before you choose one of the methods for scaling described in this section, you should be familiar with some important concepts\. First, you should understand the role of *node types* in an EMR cluster and how *instance groups* are used to manage them\. For more information about the function of node types, see [What is Amazon EMR?](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html), and for more information about instance groups, see [Instance Groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/InstanceGroups.html)\. You should also develop a strategy for right\-sizing cluster resources based on the nature of your workload\. For more information, see [Cluster Configuration Guidelines](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html)\. 
+|  | EMR managed scaling | Custom automatic scaling | 
+| --- | --- | --- | 
+|  Scaling policies and rules  |  No policy required\. EMR manages the automatic scaling activity by continuously evaluating cluster metrics and making optimized scaling decisions\.   |  You need to define and manage the automatic scaling policies and rules, such as the specific conditions that trigger scaling activities, evaluation periods, cooldown periods, etc\.  | 
+|  Supported EMR release versions  |  Amazon EMR version 5\.30\.0 and later \(except Amazon EMR version 6\.0\.0\)  |  Amazon EMR version 4\.0\.0 and later  | 
+|  Supported cluster composition  | Instance groups or instance fleets |  Instance groups only  | 
+| Scaling limits configuration |  Scaling limits are configured for the entire cluster\.  |  Scaling limits can only be configured for each instance group\.  | 
+|  Metrics evaluation frequency   |  Every 5 to 10 seconds More frequent evaluation of metrics allows EMR to make more precise scaling decisions\.  |  You can define the evaluation periods only in five\-minute increments\.  | 
+|  Supported applications  |  Only YARN applications are supported, such as Spark, Hadoop, Hive, Flink\. Other applications, such as Presto, are currently not supported\.  |  You can choose which applications are supported when defining the automatic scaling rules\.   | 
 
-**Note**  
-The master instance group in an EMR cluster always consists of a single node or three master nodes, so it can't scale after you initially configure it\. You work with the core instance groups and task instance groups to scale out and scale in a cluster\. It's possible to have a cluster with only a master node, and no core or task nodes\. You must have at least one core node at cluster creation in order to scale the cluster\. In other words, single node clusters cannot be resized\.  
-Reconfiguring and resizing an instance group cannot occur at the same time\. If a reconfiguration is initiated while an instance group is resizing, reconfiguration cannot start until the instance group has completed resizing, and vice versa\.
+**Considerations**
++ An Amazon EMR cluster always consists of one or three master nodes\. You can't scale the number of master nodes after you initially configure the cluster\. You can only scale core and task nodes in a cluster\. 
++ Reconfiguration and resizing of an instance group cannot occur at the same time\. If a reconfiguration is initiated while an instance group is resizing, then reconfiguration cannot start until the instance group has completed resizing, and the other way around\.
 
 **Topics**
-+ [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)
++ [Using EMR Managed Scaling in Amazon EMR](emr-managed-scaling.md)
++ [Using Automatic Scaling with a Custom Policy for Instance Groups](emr-automatic-scaling.md)
 + [Manually Resizing a Running Cluster](emr-manage-resize.md)
 + [Cluster Scale\-Down](emr-scaledown-behavior.md)

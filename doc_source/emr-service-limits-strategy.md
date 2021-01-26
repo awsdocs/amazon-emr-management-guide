@@ -1,0 +1,5 @@
+# How to manage Amazon EMR Service Quotas<a name="emr-service-limits-strategy"></a>
+
+Service Quotas is an AWS feature that you can use to view and manage your Amazon EMR service quotas, or limits, from a central location using the AWS Management Console, the API or the CLI\. To learn more about viewing quotas and requesting increases, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) in the *Amazon Web Services General Reference*\.
+
+For some APIs, setting up a CloudWatch event might be a better option than increasing service quotas\. You can also save time by using CloudWatch to set alarms and trigger increase requests proactively, before you reach the service quota\. For more details, see [When to set up EMR events in CloudWatch](emr-service-limits-cloudwatch-events.md)\.

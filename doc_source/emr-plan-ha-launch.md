@@ -1,4 +1,4 @@
-# Launching an EMR Cluster with Multiple Master Nodes<a name="emr-plan-ha-launch"></a>
+# Launch an EMR Cluster with Multiple Master Nodes<a name="emr-plan-ha-launch"></a>
 
 This topic provides configuration details and examples for launching an EMR cluster with multiple master nodes\.
 
@@ -18,24 +18,24 @@ You must specify an instance count value of three for the master node instance g
 **Note**  
 You must specify the subnet ID when you launch an EMR cluster with multiple master nodes using the AWS CLI\. Replace *22XXXX01* with your subnet ID in the following examples\.
 
-**Example –Launching an EMR cluster with multiple master nodes using a default AMI**  
+**Example – Launching an EMR cluster with multiple master nodes using a default AMI**  
 
 ```
 aws emr create-cluster \
 --name "ha-cluster" \
---release-label emr-5.29.0 \
+--release-label emr-5.32.0 \
 --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
 --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
 --service-role EMR_DefaultRole \
 --applications Name=Hadoop Name=Spark
 ```
 
-**Example –Launching an EMR cluster with multiple master nodes using a custom AMI**  
+**Example – Launching an EMR cluster with multiple master nodes using a custom AMI**  
 
 ```
 aws emr create-cluster \
 --name "custom-ami-ha-cluster" \
---release-label emr-5.29.0 \
+--release-label emr-5.32.0 \
 --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
 --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
 --service-role EMR_DefaultRole \
@@ -43,7 +43,7 @@ aws emr create-cluster \
 --custom-ami-id ami-MyAmiID
 ```
 
-**Example –Launching an EMR cluster with multiple master nodes with an external Hive Metastore**  
+**Example – Launching an EMR cluster with multiple master nodes with an external Hive Metastore**  
 To run Hive on an EMR cluster with multiple master nodes, you must specify an external metastore for Hive, as the following example demonstrates,  
 
 1. Create a temporary hiveConfiguration\.json file that contains credentials for your Hive metastore\.
@@ -62,12 +62,12 @@ To run Hive on an EMR cluster with multiple master nodes, you must specify an ex
    ]
    ```
 
-1. Launch the cluster with the Hive metastore\. 
+1. Launch the cluster with the Hive metastore\.
 
    ```
    aws emr create-cluster \
    --name "ha-cluster-with-hive-metastore" \
-   --release-label emr-5.29.0 \
+   --release-label emr-5.32.0 \
    --instance-groups InstanceGroupType=MASTER,InstanceCount=3,InstanceType=m5.xlarge InstanceGroupType=CORE,InstanceCount=4,InstanceType=m5.xlarge \
    --ec2-attributes KeyName=ec2_key_pair_name,InstanceProfile=EMR_EC2_DefaultRole,SubnetId=subnet-22XXXX01 \
    --service-role EMR_DefaultRole \

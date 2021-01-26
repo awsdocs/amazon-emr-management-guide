@@ -57,7 +57,7 @@ When you set up Amazon S3 server\-side encryption, Amazon S3 encrypts data at th
 
 You can choose between two different key management systems when you specify SSE in Amazon EMR: 
 + **SSE\-S3** – Amazon S3 manages keys for you\.
-+ **SSE\-KMS** – You use an AWS KMS customer master key \(CMK\) set up with policies suitable for Amazon EMR\. For more information about key requirements for Amazon EMR, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\. When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\.
++ **SSE\-KMS** – You use an AWS KMS customer master key \(CMK\) set up with policies suitable for Amazon EMR\. For more information about key requirements for Amazon EMR, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
 
 SSE with customer\-provided keys \(SSE\-C\) is not available for use with Amazon EMR\.
 

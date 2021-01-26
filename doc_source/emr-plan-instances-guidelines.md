@@ -18,7 +18,7 @@ One way to plan the instances of your cluster is to run a test cluster with a re
 In general, the master node type, which assigns tasks, doesn't require an EC2 instance with much processing power; EC2 instances for the core node type, which process tasks and store data in HDFS, need both processing power and storage capacity; EC2 instances for the task node type, which don't store data, need only processing power\. For guidelines about available EC2 instances and their configuration, see [Configure EC2 Instances](emr-plan-ec2-instances.md)\.
 
  The following guidelines apply to most Amazon EMR clusters\. 
-+ The master node does not have large computational requirements\. For most clusters of 50 or fewer nodes, consider using an m5\.xlarge instance\. For clusters of more than 50 nodes, consider using an m4\.xlarge\.
++ The master node does not have large computational requirements\. For most clusters of 50 or fewer nodes, consider using an m5\.xlarge instance\. For clusters of more than 50 nodes, consider using an m4\.xlarge, because vCores in m4\.xlarge are twice that of m5\.xlarge\.
 + The computational needs of the core and task nodes depend on the type of processing your application performs\. Many jobs can be run on m5\.xlarge instance types, which offer balanced performance in terms of CPU, disk space, and input/output\. If your application has external dependencies that introduce delays \(such as web crawling to collect data\), you may be able to run the cluster on t2\.medium instances to reduce costs while the instances are waiting for dependencies to finish\. For improved performance, consider running the cluster using m4\.xlarge instances for the core and task nodes\. If different phases of your cluster have different capacity needs, you can start with a small number of core nodes and increase or decrease the number of task nodes to meet your job flow's varying capacity requirements\. 
 + Most Amazon EMR clusters can run on standard EC2 instance types such as m5\.xlarge and m4\.xlarge\. Computation\-intensive clusters may benefit from running on High CPU instances, which have proportionally more CPU than RAM\. Database and memory\-caching applications may benefit from running on High Memory instances\. Network\-intensive and CPU\-intensive applications like parsing, NLP, and machine learning may benefit from running on Cluster Compute instances, which provide proportionally high CPU resources and increased network performance\.
 + The amount of data you can process depends on the capacity of your core nodes and the size of your data as input, during processing, and as output\. The input, intermediate, and output datasets all reside on the cluster during processing\. 
@@ -37,7 +37,7 @@ When you launch a cluster in Amazon EMR, you can choose to launch master, core, 
 
 ### Amazon EMR Settings To Prevent Job Failure Because of Task Node Spot Instance Termination<a name="emr-plan-spot-YARN"></a>
 
-Because Spot Instances are often used to run task nodes, Amazon EMR has default functionality for scheduling YARN jobs so that running jobs don’t fail when task nodes running on Spot Instances are terminated\. Amazon EMR does this by allowing application master processes to run only on core nodes\. The application master process controls running jobs and needs to stay alive for the life of the job\.
+Because Spot Instances are often used to run task nodes, Amazon EMR has default functionality for scheduling YARN jobs so that running jobs donâ€™t fail when task nodes running on Spot Instances are terminated\. Amazon EMR does this by allowing application master processes to run only on core nodes\. The application master process controls running jobs and needs to stay alive for the life of the job\.
 
 Amazon EMR release version 5\.19\.0 and later uses the built\-in [YARN node labels](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeLabel.html) feature to achieve this\. \(Earlier versions used a code patch\)\. Properties in the `yarn-site` and `capacity-scheduler` configuration classifications are configured by default so that the YARN capacity\-scheduler and fair\-scheduler take advantage of node labels\. Amazon EMR automatically labels core nodes with the `CORE` label, and sets properties so that application masters are scheduled only on nodes with the CORE label\. Manually modifying related properties in the yarn\-site and capacity\-scheduler configuration classifications, or directly in associated XML files, could break this feature or modify this functionality\.
 
@@ -55,6 +55,11 @@ Amazon EMR configures the following properties and values by default\. Use cauti
   + `yarn.scheduler.capacity.root.accessible-node-labels.CORE.capacity: 100`
   + `yarn.scheduler.capacity.root.default.accessible-node-labels: '*'`
   + `yarn.scheduler.capacity.root.default.accessible-node-labels.CORE.capacity: 100`
+
+**Note**  
+Beginning with Amazon EMR 6\.x release series, the YARN node labels feature is disabled by default\. The application master processes can run on both core and task nodes by default\. You can enable the YARN node labels feature by configuring following properties:   
+`yarn.node-labels.enabled: true`
+`yarn.node-labels.am.default-node-label-expression: 'CORE'`
 
 ### Master Node on a Spot Instance<a name="emr-dev-master-instance-group-spot"></a>
 

@@ -25,7 +25,7 @@ You can configure a cluster to periodically archive the log files stored on the 
 
 To have the log files archived to Amazon S3, you must enable this feature when you launch the cluster\. You can do this using the console, the CLI, or the API\. By default, clusters launched using the console have log archiving enabled\. For clusters launched using the CLI or API, logging to Amazon S3 must be manually enabled\.
 
-**To archive log files to Amazon S3 using the console**
+### To archive log files to Amazon S3 using the console<a name="emr-log-archive-console"></a>
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
@@ -33,19 +33,44 @@ To have the log files archived to Amazon S3, you must enable this feature when y
 
 1. Choose **Go to advanced options**\.
 
-1. In the **Cluster Configuration** section, in the **Logging** field, accept the default option: **Enabled**\. 
+1. In the **General options** section, in the **Logging** field, accept the default option: **Enabled**\. 
 
    This determines whether Amazon EMR captures detailed log data to Amazon S3\. You can only set this when the cluster is created\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\.
 
-1. In the **Log folder S3 location** field, type \(or browse to\) an Amazon S3 path to store your logs\. You may also allow the console to generate an Amazon S3 path for you\. If you type the name of a folder that does not exist in the bucket, it is created\.
+1. In the **S3 folder** field, type \(or browse to\) an Amazon S3 path to store your logs\. You may also allow the console to generate an Amazon S3 path for you\. If you type the name of a folder that does not exist in the bucket, it is created\.
 
    When this value is set, Amazon EMR copies the log files from the EC2 instances in the cluster to Amazon S3\. This prevents the log files from being lost when the cluster ends and the EC2 instances hosting the cluster are terminated\. These logs are useful for troubleshooting purposes\. 
 
-   For more information, see [View Log Files](emr-manage-view-web-log-files.md)\.
+   For more information, see [View Log Files](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)\.
+
+1. In the **Log encryption** field, select **Encrypt logs stored in S3 with an AWS KMS customer managed key**\. Then select an AWS KMS key from the list or enter a key ARN\. You may also create a new KMS key\.
+
+   This option is only available with Amazon EMR version 5\.30\.0 and later\. To use this option, add permission to KMS for your EC2 instance profile and EMR role\. For more information, see [To encrypt log files stored in Amazon S3 with an AWS KMS customer managed key](#emr-log-encryption)\.
 
 1. Proceed with creating the cluster as described in [Plan and Configure Clusters](emr-plan.md)\.
 
-**To archive log files to Amazon S3 using the AWS CLI**
+### To encrypt log files stored in Amazon S3 with an AWS KMS customer managed key<a name="emr-log-encryption"></a>
+
+With Amazon EMR version 5\.30\.0 and later \(except Amazon EMR 6\.0\.0\), you can encrypt log files stored in Amazon S3 with an AWS KMS customer managed key\. To enable this option in the console, follow the steps in [To archive log files to Amazon S3 using the console](#emr-log-archive-console)\. Your Amazon EC2 instance profile and your Amazon EMR role must meet the following prerequisites: 
++ The Amazon EC2 instance profile used for your cluster must have permission to use `kms:GenerateDataKey`\.
++ The Amazon EMR role used for your cluster must have permission to use `kms:DescribeKey`\.
++ The Amazon EC2 instance profile and Amazon EMR role must be added to the list of key users for the specified AWS KMS customer managed key, as the following steps demonstrate:
+
+  1. Open the AWS Key Management Service \(AWS KMS\) console at https://console\.aws\.amazon\.com/kms\.
+
+  1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
+
+  1. Select the alias of the CMK to modify\.
+
+  1. On the key details page under **Key Users**, choose **Add**\.
+
+  1. In the **Add key users** dialog box, select your Amazon EC2 instance profile and Amazon EMR role\.
+
+  1. Choose **Add**\.
+
+For more information, see [IAM Service Roles Used by Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-service-roles.html), and [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the AWS Key Management Service developer guide\.
+
+### To archive log files to Amazon S3 using the AWS CLI<a name="emr-log-archive-CLI"></a>
 
 To archive log files to Amazon S3 using the AWS CLI, type the `create-cluster` command and specify the Amazon S3 log path using the `--log-uri` parameter\. 
 + To log files to Amazon S3 type the following command and replace *myKey* with the name of your EC2 key pair\.
@@ -61,7 +86,7 @@ If you have not previously created the default EMR service role and EC2 instance
 
 For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-**To aggregate logs in Amazon S3 using the AWS CLI**
+### To aggregate logs in Amazon S3 using the AWS CLI<a name="emr-log-aggregate-CLI"></a>
 **Note**  
 You cannot currently use log aggregation with the `yarn logs` utility\. You can only use aggregation supported by this procedure\.
 
@@ -150,7 +175,7 @@ In this example, `new StepFactory()` uses `us-east-1` as the default region\. If
 
 ## Debugging Option Information<a name="emr-plan-debugging-info"></a>
 
-Amazon EMR release 4\.1 or later supports debugging in all regions\.
+Amazon EMR release 4\.1\.0 through 5\.27\.0 supports debugging in all regions\. Other EMR versions do not support the debugging option\.
 
 Amazon EMR creates an Amazon SQS queue to process debugging data\. Message charges may apply\. However, Amazon SQS does have Free Tier of up to 1,000,000 requests available\. For more information, see the [Amazon SQS detail page](https://aws.amazon.com/sqs)\.
 

@@ -28,7 +28,7 @@ With EMR Notebooks, the notebook editor you access from the Amazon EMR console i
 Only one user can have an EMR notebook open at a time from within Amazon EMR\. If another user tries to open an EMR notebook that is already open, an error occurs\.
 
 **Important**  
-Amazon EMR creates a unique pre\-signed URL for each notebook editor session, which is valid only for a short time\. We recommend that you do not share the notebook editor URL\. Doing this creates a security risk because recipients of the URL adopt your permissions to edit the notebook and run notebook code for the lifetime of the URL\. If others need access to a notebook, provide permissions to their IAM user through permissions policies\. For more information, see [EMR Notebooks Security and Access Control](emr-managed-notebooks-security.md)\.
+Amazon EMR creates a unique pre\-signed URL for each notebook editor session, which is valid only for a short time\. We recommend that you do not share the notebook editor URL\. Doing this creates a security risk because recipients of the URL adopt your permissions to edit the notebook and run notebook code for the lifetime of the URL\. If others need access to a notebook, provide permissions to their IAM user through permissions policies and ensure that the service role for EMR Notebooks has access to the Amazon S3 location\. For more information, see [EMR Notebooks Security and Access Control](emr-managed-notebooks-security.md) and [Service Role for EMR Notebooks](emr-managed-notebooks-service-role.md)\.
 
 **To open the notebook editor for an EMR notebook**
 
@@ -64,7 +64,7 @@ You can change the cluster that an EMR notebook is attached to without changing 
 
    —or—
 
-   Choose **Create a cluster** and then choose the cluster options\. For more information, see [Creating a Cluster When You Create a Notebook](emr-managed-notebooks-cluster.md#emr-managed-notebooks-new-cluster)\.
+   Choose **Create a cluster** and then choose the cluster options\. For more information, see [Cluster Requirements](emr-managed-notebooks-considerations.md#considerations-limitations)\.
 
 1. Choose an option for **Security groups**, and then choose **Change cluster and start notebook**\.
 
@@ -96,7 +96,9 @@ When you delete an EMR notebook using the Amazon EMR console, you delete the not
 
 ## Sharing Notebook Files<a name="emr-managed-notebooks-file-sharing"></a>
 
-Each EMR notebook is saved to Amazon S3 as a file named `NotebookName.ipynb`\. As long as a notebook file is compatible with the same version of Jupyter Notebook that EMR Notebooks is based on, you can open the notebook as an EMR notebook\. You can replace the file for an EMR notebook with a different notebook file of the same name\.
+Each EMR notebook is saved to Amazon S3 as a file named `NotebookName.ipynb`\. As long as a notebook file is compatible with the same version of Jupyter Notebook that EMR Notebooks is based on, you can open the notebook as an EMR notebook\.
+
+The easiest way to open a notebook file from another user is to save the \*\.ipynb file from another user to your local file system, and then use the upload feature in the Jupyter and JupyterLab editors\.
 
 You can use this process to use EMR notebooks shared by others, notebooks shared in the Jupyter community, or to restore a notebook that was deleted from the console when you still have the notebook file\.
 

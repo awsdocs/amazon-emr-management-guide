@@ -10,7 +10,8 @@ Beginning with Amazon EMR version 5\.24\.0, you can use a security configuration
 ## Best Practices and Considerations<a name="emr-custom-ami-considerations"></a>
 
 When you create a custom AMI for Amazon EMR, consider the following:
-+ You must use an Amazon Linux AMI\. Amazon Linux 2 AMIs are not supported\. Only 64\-bit Amazon Linux AMIs are supported\. Amazon Linux AMIs with multiple Amazon EBS volumes are not supported\.
++ Amazon EMR 5\.30\.0 and later, and the Amazon EMR 6\.x series are based on Amazon Linux 2\. For these EMR versions, you need to use images based on Amazon Linux 2 for custom AMIs\. To find a base custom AMI, see [Finding a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)\.
++ For Amazon EMR versions earlier than 5\.30\.0 and 6\.x, Amazon Linux 2 AMIs are not supported\. You must use a 64\-bit Amazon Linux AMI\. Amazon Linux AMIs with multiple Amazon EBS volumes are not supported\.
 + Base your customization on the most recent EBS\-backed [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\. For a list of Amazon Linux AMIs and corresponding AMI IDs, see [Amazon Linux AMI](https://aws.amazon.com/amazon-linux-ami/)\.
 + Do not copy a snapshot of an existing Amazon EMR instance to create a custom AMI\. This causes errors\.
 + Only the HVM virtualization type and instances compatible with Amazon EMR are supported\. Be sure to select the HVM image and an instance type compatible with Amazon EMR as you go through the AMI customization process\. For compatible instances and virtualization types, see [Supported Instance Types](emr-supported-instance-types.md)\.

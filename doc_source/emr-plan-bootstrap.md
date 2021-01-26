@@ -22,8 +22,8 @@ When you use the CLI, you can pass references to bootstrap action scripts to Ama
 
 **AWS CLI**
 
-```bash
---bootstrap-actions Path=s3://mybucket/filename",Args=[arg1,arg2]
+```
+--bootstrap-actions Path="s3://mybucket/filename",Args=[arg1,arg2]
 ```
 
 If the bootstrap action returns a nonzero error code, Amazon EMR treats it as a failure and terminates the instance\. If too many instances fail their bootstrap actions, then Amazon EMR terminates the cluster\. If just a few instances fail, Amazon EMR attempts to reallocate the failed instances and continue\. Use the cluster `lastStateChangeReason` error code to identify failures caused by a bootstrap action\.
@@ -42,7 +42,7 @@ When using the AWS CLI to include a bootstrap action, specify the `Path` and `Ar
 + To launch a cluster with a bootstrap action that conditionally runs a command when an instance\-specific value is found in the `instance.json` or `job-flow.json` file, type the following command and replace *myKey* with the name of your EC2 key pair\.
 
   ```
-  1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive --instance-count 1 --instance-type m5.xlarge --bootstrap-actions Path=s3://elasticmapreduce/bootstrap-actions/run-if,Args=["instance.isMaster=true","echo running on master node"]
+  1. aws emr create-cluster --name "Test cluster" --release-label emr-4.0.0 --use-default-roles --ec2-attributes KeyName=myKey --applications Name=Hive --instance-count 1 --instance-type m5.xlarge --bootstrap-actions Path="s3://elasticmapreduce/bootstrap-actions/run-if",Args=["instance.isMaster=true","echo running on master node"]
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single Master node is launched, and the remaining instances are launched as core nodes\. All nodes will use the instance type specified in the command\.
@@ -71,11 +71,11 @@ You can create a custom script to perform a customized bootstrap action\. Any of
 
 ### Add Custom Bootstrap Actions Using the AWS CLI or the Amazon EMR CLI<a name="CustombootstrapCLI"></a>
 
-The following example uses a bootstrap action script to download and extract a compressed TAR archive from Amazon S3\. The sample script is stored at [ http://elasticmapreduce\.s3\.amazonaws\.com/bootstrap\-actions/download\.sh](http://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/download.sh)\. 
+The following example uses a bootstrap action script to download and extract a compressed TAR archive from Amazon S3\. The sample script is stored at [ https://elasticmapreduce\.s3\.amazonaws\.com/bootstrap\-actions/download\.sh](https://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/download.sh)\. 
 
  The sample script looks like the following: 
 
-```bash
+```
 1. #!/bin/bash
 2. set -e
 3. wget -S -T 10 -t 5 http://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/file.tar.gz
@@ -139,15 +139,15 @@ You can use a bootstrap action to copy objects from Amazon S3 to each node in a 
 
 The following example demonstrates a simple bootstrap action script that copies a file, `myfile.jar`, from Amazon S3 to a local folder, `/mnt1/myfolder`, on each cluster node\. The script is saved to Amazon S3 with the file name `copymyfile.sh` with the following contents\.
 
-```bash
+```
 #!/bin/bash
-aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
+				aws s3 cp s3://mybucket/myfilefolder/myfile.jar /mnt1/myfolder
 ```
 
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
-```bash
-aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
+```
+aws emr create-cluster --name "Test cluster" --release-label emr-5.32.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m5.xlarge \

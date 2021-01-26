@@ -1,6 +1,6 @@
-# Monitoring Spark User and Job Activity<a name="emr-managed-notebooks-spark-monitor"></a>
+# Enabling User Impersonation to Monitor Spark User and Job Activity<a name="emr-managed-notebooks-spark-monitor"></a>
 
-EMR Notebooks allows you to configure user impersonation on a Spark cluster\. This feature helps you track job activity initiated from within the notebook editor\. In addition, EMR Notebooks has a built\-in Jupyter Notebook widget that lets you to view Spark job details alongside query output in the notebook editor\. The widget is available by default and requires no special configuration\. However, to view the history servers, your client must be configured to view Amazon EMR web interfaces that are hosted on the master node\.
+EMR Notebooks allows you to configure user impersonation on a Spark cluster\. This feature helps you track job activity initiated from within the notebook editor\. In addition, EMR Notebooks has a built\-in Jupyter Notebook widget to view Spark job details alongside query output in the notebook editor\. The widget is available by default and requires no special configuration\. However, to view the history servers, your client must be configured to view Amazon EMR web interfaces that are hosted on the master node\.
 
 ## Setting Up Spark User Impersonation<a name="emr-managed-notebooks-user-impersonation"></a>
 

@@ -41,7 +41,7 @@ When you create a cluster, you can specify a custom service role for Amazon EMR,
 
 You can specify a service role for EMR and a service role for cluster EC2 instances explicitly using options with the `create-cluster` command from the AWS CLI\. Use the `--service-role` option to specify the service role\. Use the `InstanceProfile` argument of the `--ec2-attributes` option to specify the role for the EC2 instance profile\.
 
-The Auto Scaling role is specified using a separate option, `--auto-scaling-role`\. For more information, see [Using Automatic Scaling in Amazon EMR](emr-automatic-scaling.md)\.
+The Auto Scaling role is specified using a separate option, `--auto-scaling-role`\. For more information, see [Using Automatic Scaling with a Custom Policy for Instance Groups ](emr-automatic-scaling.md)\.
 
 **To specify custom IAM roles using the AWS CLI**
 + The following command specifies the custom service role, *MyCustomServiceRoleForEMR*, and a custom role for the EC2 instance profile, *MyCustomServiceRoleForClusterEC2Instances*, when launching a cluster\. This example uses the default Amazon EMR role\.
@@ -49,7 +49,7 @@ The Auto Scaling role is specified using a separate option, `--auto-scaling-role
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.29.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.32.0 \
   --applications Name=Hive Name=Pig --service-role MyCustomServiceRoleForEMR \
   --ec2-attributes InstanceProfile=MyCustomServiceRoleForClusterEC2Instances,\
   KeyName=myKey --instance-type m5.xlarge --instance-count 3

@@ -1,8 +1,8 @@
-# Customize Proxy Agent Certificate<a name="emr-lf-TLS"></a>
+# Customize Your Proxy Agent Certificate<a name="emr-lf-TLS"></a>
 
-The proxy agent uses a self\-signed Transport Layer Security \(TLS\) certificate by default\. To use a custom certificate for the proxy agent, you must first obtain a certificate, certificate chain, and private key from your certificate authority\. With those items, a PKCS12 file will be used to protect the key material so it can be imported into the proxy agent’s key store\. The proxy agent is based on Apache Knox\. You can replace the default certificate with your custom certificate using the following steps\. 
+The proxy agent uses a self\-signed Transport Layer Security \(TLS\) certificate by default\. You must replace the default certificate with a custom certificate for the proxy agent\. To do that, you must first obtain a certificate, certificate chain, and private key from your certificate authority\. With those items, a PKCS12 file will be used to protect the key material so it can be imported into the proxy agent’s key store\. The proxy agent is based on Apache Knox\. 
 
-In the following steps, replace *MasterPublicDNS* with the value that appears for **Master public DNS** on the **Summary** tab of the **cluster details** pane\. For example, *ec2\-11\-222\-33\-44\.compute\-1\.amazonaws\.com*\.
+Take the following steps to replace the default certificate with your custom certificate\. Replace *MasterPublicDNS* with the value that appears for **Master public DNS** on the **Summary** tab of the **cluster details** pane\. For example, *ec2\-11\-222\-33\-44\.compute\-1\.amazonaws\.com*\.
 
 1. To create a PKCS12 file from your certificate, certificate chain, and private key, run the following command on a host with the certificate files, and `openssl` installed\.
 
