@@ -14,7 +14,7 @@ VPC offers the following capabilities:
 You can launch EMR clusters in both public and private VPC subnets\. This means you do not need internet connectivity to run an EMR cluster; however, you may need to configure network address translation \(NAT\) and VPN gateways to access services or resources located outside of the VPC, for example in a corporate intranet or public AWS service endpoints like AWS Key Management Service\.
 
 **Important**  
-Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or greater\.
+Amazon EMR supports launching clusters in private subnets only in releases 4\.2 or greater\.
 
 For more information about Amazon VPC, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
