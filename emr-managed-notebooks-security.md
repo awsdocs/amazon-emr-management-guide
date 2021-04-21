@@ -1,6 +1,0 @@
-# EMR Notebooks Security and Access Control<a name="emr-managed-notebooks-security"></a>
-
-Several features are available to help you tailor the security posture of EMR Notebooks\. This helps ensure that only authorized users have access to an EMR notebook, can work with notebooks, and use the notebook editor to execute code on the cluster\. These features work along with the security features available for Amazon EMR and Amazon EMR clusters\. For more information, see [Security](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security.html) in the *Amazon EMR Management Guide*\.
-+ You can use AWS Identity and Access Management policy statements together with notebook tags to limit access\. For more information, see [Using Tags to Control User Permissions](emr-managed-notebooks-tags.md)\.
-+ EC2 security groups act as virtual firewalls that control network traffic between the cluster's master instance and the notebook editor\. You can use defaults or customize these security groups\. For more information, see [Specifying EC2 Security Groups for EMR Notebooks and Clusters](emr-managed-notebooks-security-groups.md)\.
-+ You specify an AWS Service Role that determines what permissions an EMR notebook has when interacting with other AWS services\. For more information, see [Specifying the AWS Service Role](emr-managed-notebooks-service-role.md)\.
