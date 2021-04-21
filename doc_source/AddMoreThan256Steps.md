@@ -1,6 +1,6 @@
 # Add More than 256 Steps to a Cluster<a name="AddMoreThan256Steps"></a>
 
-With AMI 3\.1\.1 \(Hadoop 2\.x\) or later and AMI 2\.4\.8 \(Hadoop 1\.x\) or later, you can submit an unlimited number of steps over the lifetime of a long\-running cluster\. However, only 256 steps can be PENDING or ACTIVE at any given time\. For earlier AMI versions, the total number of steps that can be processed by a cluster is limited to 256, including system steps such as install Hive and install Pig\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\.
+With AMI 3\.1\.1 \(Hadoop 2\.x\) or later and AMI 2\.4\.8 \(Hadoop 1\.x\) or later, you can submit an unlimited number of steps over the lifetime of a long\-running cluster\. However, only 256 steps can be PENDING or RUNNING at any given time\. For earlier AMI versions, the total number of steps that can be processed by a cluster is limited to 256, including system steps such as install Hive and install Pig\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\.
 
 You can use one of several methods to overcome the 256\-step limit in AMI versions earlier than 3\.1\.1 and 2\.4\.8: 
 

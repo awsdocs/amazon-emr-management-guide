@@ -10,6 +10,7 @@ The following table lists web interfaces that you can view on cluster instances\
 
 |  Name of interface |   URI  | 
 | --- | --- | 
+| Flink history server \(EMR version 5\.33 and later\) | http://master\-public\-dns\-name:8082/ | 
 | Ganglia | http://master\-public\-dns\-name/ganglia/ | 
 | Hadoop HDFS NameNode \(EMR version pre\-6\.x\) | https://master\-public\-dns\-name:50470/ | 
 | Hadoop HDFS NameNode | http://master\-public\-dns\-name:50070/ | 

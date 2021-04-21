@@ -4,6 +4,9 @@ Amazon EMR block public access prevents a cluster from launching when any securi
 
 Block public access is enabled for each AWS Region for your AWS account\. In other words, each Region has block public access enabled for all clusters created by your account in that Region\.
 
+**Important**  
+We do not recommend turning off block public access for your account\.
+
 Block public access is only applicable during cluster creation\. Block public access does not block IAM principals with appropriate permissions from updating security group configurations to allow public access on running clusters\.
 
 Amazon EMR block public access is available in the following regions:

@@ -84,15 +84,15 @@ After you attach a cluster, you can finish the Workspace creation process\. When
 
 Advanced EMR Studio users can provision new EMR clusters running on Amazon EC2 to use with a Workspace\. When you create a new EMR cluster using EMR Studio, the cluster is launched in the same subnet as your Workspace\. The new cluster also has all of the big data applications that are required for EMR Studio installed by default\. 
 
-To create clusters, your Studio administrator must first give you permission using a session policy\. For more information, see [Step 1: Create Session Policies for Studio Users and Groups](emr-studio-user-role.md#emr-studio-session-policies)\.
+To create clusters, your Studio administrator must first give you permission using a session policy\. For more information, see [Create Session Policies for Studio Users and Groups](emr-studio-user-role.md#emr-studio-session-policies)\.
 
 You can create a new cluster in the **Create a Workspace** dialog box or from the **Cluster** panel in the Workspace UI\. Either way, you have two cluster creation options:
 
-1. **Create an EMR cluster** – Create an EMR cluster manually by choosing the Amazon EC2 instance type and Amazon S3 storage location for log files\.
+1. **Create an EMR cluster** – Create an EMR cluster by choosing the Amazon EC2 instance type and count\.
 
 1. **Use a cluster template** – Quickly provision a cluster by selecting a predefined cluster template\. This option only appears if you have permission to use cluster templates\.
 
-**To create an EMR cluster manually**
+**To create an EMR cluster by providing a cluster configuration**
 
 1. Choose a starting point\.  
 ****    
@@ -114,6 +114,8 @@ You can create a new cluster in the **Create a Workspace** dialog box or from th
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-create-use-clusters.html)
 
 1. Select a cluster template from the dropdown list\. Each available cluster template includes a brief description to help you make a selection\.
+
+1. The cluster template you choose may have additional parameters such as Amazon EMR release version or cluster name\. You can choose or insert values, or use the default values that your administrator selected\.
 
 1. Choose **Use cluster template** to provision the cluster and attach it to your Workspace\. It will take a few minutes for EMR Studio to create your cluster\. If you use the **Create a Workspace** dialog box, choose **Create Workspace** to create the Workspace and provision the cluster\. After EMR Studio provisions your new cluster, it automatically attaches the cluster to your Workspace\.
 

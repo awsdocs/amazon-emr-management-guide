@@ -22,7 +22,7 @@ The following procedure covers **Advanced options** when you create a cluster\. 
 
 1. Choose the **Network**, and then choose the **EC2 Subnet** for your cluster\. The subnet that you choose is associated with an Availability Group, which is listed with each subnet\. For more information, see [Configure Networking](emr-plan-vpc-subnet.md)\.
 **Note**  
-Your account and region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+Your account and Region may give you the option to choose **Launch into EC2\-Classic** for **Network**\. If you choose that option, choose an **EC2 Availability Zone** rather than an **EC2 Subnet**\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Within each **Node type** row:
    + Under **Node type**, if you want to change the default name of the instance group, click the pencil icon and then enter a friendly name\. If want to remove the **Task** instance group, click the X icon\. Choose **Add task instance group** to add additional **Task** instance groups\.
@@ -33,7 +33,7 @@ When you choose an instance type using the AWS Management Console, the number of
    + Under **Instance count**, enter the number of instances to use for each node type\.
    + Under **Purchasing option, **choose **On\-demand** or **Spot**\. If you choose **Spot**, select an option for the maximum price for Spot Instances\. By default, **Use on\-demand as max price** is selected\. You can select **Set max $/hr** and then enter your maximum price\. Availability Zone of the **EC2 Subnet ** you chose is below the **Maximum Spot price**\.
 **Tip**  
-Mouse over the information tooltip for **Spot** to see the current Spot price for Availability Zones in the current region\. The lowest Spot price is in green\. You might want to use this information to change your **EC2 Subnet** selection\.
+Pause on the information tooltip for **Spot** to see the current Spot price for Availability Zones in the current Region\. The lowest Spot price is in green\. You might want to use this information to change your **EC2 Subnet** selection\.
    + Under **Auto Scaling for Core and Task node types**, choose the pencil icon, and then configure the automatic scaling options\. For more information, see [Using Automatic Scaling with a Custom Policy for Instance Groups ](emr-automatic-scaling.md)\.
 
 1. Choose **Add task instance group** as desired and configure settings as described in the previous step\.

@@ -13,11 +13,11 @@ To add the required administrative permissions for EMR Studio, you need the foll
 ## Instructions<a name="emr-studio-admin-permissions-instructions"></a>
 
 1. Follow the instructions in [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) to create a policy using the following example\. Insert your own values for these items:
+   + Replace *`<your-resource-ARN>` *to specify the Amazon Resource Name \(ARN\) of the object or objects that the statement covers for your use cases\.
    + Replace *<region>* with the code of the AWS Region where you plan to create your Studio\.
    + Replace *<aws\_account\_id>* with the ID of the AWS account in which you plan to create the Studio\.
    + Replace *<EMRStudio\_Service\_Role>* and *<EMRStudio\_User\_Role>* with the names of your [EMR Studio service role](emr-studio-service-role.md) and [EMR Studio user role](emr-studio-user-role.md)\.
 **Note**  
-Change `"Resource":"*"` in the policy to specify the Amazon Resource Name \(ARN\) of the object or objects that the statement covers for your use cases\. `"Resource":"*"` is used here for example purposes only\.  
 AWS SSO and AWS SSO Directory APIs do not support specifying an ARN in the resource element of an IAM policy statement\. To allow access to AWS SSO and AWS SSO Directory, the following permissions specify all resources, "Resource":"\*", for AWS SSO actions\. For more information, see [Actions, resources, and condition keys for AWS SSO Directory](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsssodirectory.html#awsssodirectory-actions-as-permissions)\.
 
    ```
@@ -39,7 +39,7 @@ AWS SSO and AWS SSO Directory APIs do not support specifying an ARN in the resou
            },
            {
                "Effect": "Allow",
-               "Resource": "*",
+               "Resource": "<your-resource-ARN>",
                "Action": [
                    "elasticmapreduce:ListStudios",
                    "elasticmapreduce:ListStudioSessionMappings"
@@ -62,6 +62,8 @@ AWS SSO and AWS SSO Directory APIs do not support specifying an ARN in the resou
                    "sso:DeleteManagedApplicationInstance",
                    "sso:AssociateProfile",
                    "sso:DisassociateProfile",
+                   "sso:GetProfile",
+                   "sso:ListDirectoryAssociations",
                    "sso:ListProfiles",
                    "sso-directory:SearchUsers",
                    "sso-directory:SearchGroups",
@@ -73,7 +75,7 @@ AWS SSO and AWS SSO Directory APIs do not support specifying an ARN in the resou
    }
    ```
 
-1. Attach the policy to the IAM identity \(user, role, or group\) to which you want to grant EMR Studio administrative permissions\. For instructions, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.
+1. Attach the policy to your designated IAM identity \(user, role, or group\)\. For instructions, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.
 
 ## Permissions Required to Manage an EMR Studio<a name="emr-studio-admin-permissions-table"></a>
 
@@ -87,6 +89,8 @@ This table lists the actions related to creating and managing an EMR Studio, alo
 | Create a Studio |  <pre>"elasticmapreduce:CreateStudio", <br />"sso:CreateManagedApplicationInstance",<br />"iam:PassRole"</pre>  | 
 | Describe a Studio |  <pre>"elasticmapreduce:DescribeStudio",<br />"sso:GetManagedApplicationInstance"</pre>  | 
 | Delete a Studio |  <pre>"elasticmapreduce:DeleteStudio",<br />"sso:DeleteManagedApplicationInstance"</pre>  | 
-| Assign users or groups to a Studio |  <pre>"elasticmapreduce:CreateStudioSessionMapping",<br />"sso:GetManagedApplicationInstance",<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup"<br />"sso:ListProfiles",<br />"sso:AssociateProfile"</pre>  | 
-| Update the session policy attached to a user or group assigned to a Studio |  <pre>"elasticmapreduce:UpdateStudioSessionMapping"</pre>  | 
-| Remove a user or group from a Studio |  <pre>"elasticmapreduce:DeleteStudioSessionMapping",<br />"sso:GetManagedApplicationInstance",<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:ListProfiles",<br />"sso:DisassociateProfile"</pre>  | 
+| Assign users or groups to a Studio |  <pre>"elasticmapreduce:CreateStudioSessionMapping",<br />"sso:GetProfile",<br />"sso:ListDirectoryAssociations",<br />"sso:ListProfiles",<br />"sso:AssociateProfile"<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup"</pre>  | 
+| Retrieve Studio assignment details for a specific user or group with the GetStudioSessionMapping API |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:GetStudioSessionMapping"</pre>  | 
+| List all users and groups assigned to a Studio |  <pre>"elasticmapreduce:ListStudioSessionMappings"</pre>  | 
+| Update the session policy attached to a user or group assigned to a Studio |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:UpdateStudioSessionMapping"</pre>  | 
+| Remove a user or group from a Studio |  <pre>"elasticmapreduce:DeleteStudioSessionMapping",<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:ListDirectoryAssociations",<br />"sso:GetProfile",<br />"sso:GetManagedApplicationInstance"<br />"sso:ListProfiles",<br />"sso:DisassociateProfile"</pre>  | 

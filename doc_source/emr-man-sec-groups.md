@@ -92,6 +92,18 @@ The default managed security group for core and task instances in private subnet
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-man-sec-groups.html)
 
+### Editing Outbound Rules<a name="private-sg-egress-rules"></a>
+
+By default, Amazon EMR creates this security group with outbound rules that allow all outbound traffic on all protocols and ports\. Allowing all outbound traffic is selected because various Amazon EMR and customer applications that can run on Amazon EMR clusters may require different egress rules\. EMR is not able to anticipate these specific settings when creating default security groups\. You can scope down egress in your security groups to include only those rules that suit your use cases and security policies\. At minimum, this security group requires the following outbound rules, but some applications might need additional egress\.
+
+
+| Type | Protocol | Port Range | Destination | Details | 
+| --- | --- | --- | --- | --- | 
+| All TCP | TCP | All | pl\-xxxxxxxx | Managed Amazon S3 prefix list com\.amazonaws\.MyRegion\.s3\. | 
+| All Traffic | All | All | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-Slave\-Private security group\. | 
+| All Traffic | All | All | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-Master\-Private security group\. | 
+| Custom TCP | TCP | 9443 | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-ServiceAccess security group\. | 
+
 ## Amazon EMR\-Managed Security Group for Service Access \(Private Subnets\)<a name="emr-sg-elasticmapreduce-sa-private"></a>
 
 The default managed security group for service access in private subnets has the **Group Name** of **ElasticMapReduce\-ServiceAccess**\. It has inbound rules, and outbound rules that allow traffic over HTTPS \(port 8443, port 9443\) to the other managed security groups in private subnets\. These rules allow the cluster manager to communicate with the master node and with core and task nodes\. The same rules are needed if you are using custom security groups\.
@@ -99,8 +111,8 @@ The default managed security group for service access in private subnets has the
 
 | Type | Protocol | Port Range | Source | Details | 
 | --- | --- | --- | --- | --- | 
+| Inbound rules Required for EMR clusters with Amazon EMR release 5\.30\.0 and later\. | 
+| HTTPS \(9443\) | TCP | 9443 | The Group ID of the managed security group for master instance\.  |  This rule allows the communication between master instance's security group to the service access security group\. | 
 | Outbound rules Required for all EMR clusters | 
 | HTTPS \(8443\) | TCP | 8443 | The Group ID of the managed security group for master instance\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\. | 
 | HTTPS \(8443\) | TCP | 8443 | The Group ID of the managed security group for core and task instances\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\.  | 
-| Inbound rules Required for EMR clusters with Amazon EMR release 5\.30\.0 and later\. | 
-| HTTPS \(9443\) | TCP | 9443 | The Group ID of the managed security group for master instance\.  |  This rule allows the communication between master instance's security group to the service access security group\. | 

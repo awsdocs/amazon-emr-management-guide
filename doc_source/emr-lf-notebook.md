@@ -49,4 +49,4 @@ EMR notebooks can be created using the Amazon EMR console and used with an exist
 
 Once the Notebook has been created, select the notebook and click **Open**\. You will be redirected to the Proxy Agent on the Amazon EMR cluster\. Once you’ve accepted the Proxy Agent’s certificate, your browser will redirect you to your Identity Provider \(IdP\) to authenticate\. Once authenticated, you will be redirected to the EMR notebook\.
 
-For more information, see [Using Amazon EMR Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebook.html) in the *Amazon EMR Management Guide*\.
+For more information, see [Using Amazon EMR Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks.html) in the *Amazon EMR Management Guide*\.

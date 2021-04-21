@@ -4,25 +4,38 @@ Use the guidance in this section to help you determine the instance types, purch
 
 ## What Instance Type Should You Use?<a name="emr-instance-group-size"></a>
 
-There are several ways to add EC2 instances to a cluster, which depend on whether you use the instance groups configuration or the instance fleets configuration for the cluster\.
-+ **Instance Groups**
-  + Manually add instances of the same type to existing core and task instance groups\.
-  + Manually add a task instance group, which can use a different instance type\.
-  + Set up automatic scaling in Amazon EMR for an instance group, adding and removing instances automatically based on the value of an Amazon CloudWatch metric that you specify\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
-+ **Instance Fleets**
-  + Add a single task instance fleet\.
-  + Change the target capacity for On\-Demand and Spot Instances for existing core and task instance fleets\. For more information, see [Configure Instance Fleets](emr-instance-fleet.md)\.
+When you plan the instance types and number of instances that your cluster uses, we recommend that you run a test cluster with a representative sample set of data and monitor the utilization of the nodes in the cluster\. For more information, see [View and Monitor a Cluster](emr-manage-view.md)\. Before testing, review the guidelines in this section to find a starting point\.
 
-One way to plan the instances of your cluster is to run a test cluster with a representative sample set of data and monitor the utilization of the nodes in the cluster\. For more information, see [View and Monitor a Cluster](emr-manage-view.md)\. Another way is to calculate the capacity of the instances you are considering and compare that value against the size of your data\.
+By default, the total number of EC2 instances you can run on a single AWS account is 20\. This means that the total number of nodes you can have in a cluster is 20\. For more information about how to request a quota increase, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)\.
 
-In general, the master node type, which assigns tasks, doesn't require an EC2 instance with much processing power; EC2 instances for the core node type, which process tasks and store data in HDFS, need both processing power and storage capacity; EC2 instances for the task node type, which don't store data, need only processing power\. For guidelines about available EC2 instances and their configuration, see [Configure EC2 Instances](emr-plan-ec2-instances.md)\.
+The compute power and memory that each node requires depends on several factors:
++ The size of the datasets that you process and how quickly you need results\.
++ The suite of big data applications that you use\.
++ The number of nodes in the instance group that can share the task execution and storage burden\.
 
- The following guidelines apply to most Amazon EMR clusters\. 
-+ The master node does not have large computational requirements\. For most clusters of 50 or fewer nodes, consider using an m5\.xlarge instance\. For clusters of more than 50 nodes, consider using an m4\.xlarge, because vCores in m4\.xlarge are twice that of m5\.xlarge\.
-+ The computational needs of the core and task nodes depend on the type of processing your application performs\. Many jobs can be run on m5\.xlarge instance types, which offer balanced performance in terms of CPU, disk space, and input/output\. If your application has external dependencies that introduce delays \(such as web crawling to collect data\), you may be able to run the cluster on t2\.medium instances to reduce costs while the instances are waiting for dependencies to finish\. For improved performance, consider running the cluster using m4\.xlarge instances for the core and task nodes\. If different phases of your cluster have different capacity needs, you can start with a small number of core nodes and increase or decrease the number of task nodes to meet your job flow's varying capacity requirements\. 
-+ Most Amazon EMR clusters can run on standard EC2 instance types such as m5\.xlarge and m4\.xlarge\. Computation\-intensive clusters may benefit from running on High CPU instances, which have proportionally more CPU than RAM\. Database and memory\-caching applications may benefit from running on High Memory instances\. Network\-intensive and CPU\-intensive applications like parsing, NLP, and machine learning may benefit from running on Cluster Compute instances, which provide proportionally high CPU resources and increased network performance\.
-+ The amount of data you can process depends on the capacity of your core nodes and the size of your data as input, during processing, and as output\. The input, intermediate, and output datasets all reside on the cluster during processing\. 
-+ By default, the total number of EC2 instances you can run on a single AWS account is 20\. This means that the total number of nodes you can have in a cluster is 20\. For more information about how to request a limit increase for your account, see [AWS Limits](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-ec2-instances)\. 
+Most Amazon EMR clusters can run on [general purpose instance types](http://aws.amazon.com/ec2/instance-types/#General_Purpose) such as m5\.xlarge\. Computation\-intensive clusters that demand fast output may benefit from running on [compute optimized](http://aws.amazon.com/ec2/instance-types/#Compute_Optimized) or [accelerated computing](http://aws.amazon.com/ec2/instance-types/#Accelerated_Computing) instances\. Database and memory\-caching applications may benefit from running on [memory optimized](http://aws.amazon.com/ec2/instance-types/#Memory_Optimized) instances\. Network\-intensive and CPU\-intensive applications like parsing, natural language processing, and machine learning may benefit from running on instances that offer enhanced networking\. Instances that support enhanced networking often have an "n" in their identifier\. For more information, see the [Instance Type Explorer](http://aws.amazon.com/ec2/instance-explorer/)\.
+
+In addition, consider the following guidelines based on node type\.
+
+### Master Node Considerations<a name="emr-master-node-instance-type"></a>
+
+In general, the larger a cluster and the larger the dataset, the more memory the master node needs\. The default m5\.xlarge instance can be a good starting point, but consider using instance types with more memory, such as \*\.2xlarge or \*\.4xlarge, as a cluster grows\.
+
+For Spark workloads, consider increasing the memory capacity of the master node to an instance type that has 32 GiB of memory or more to avoid memory fragmentation\. 32 GiB should be adequate for most applications\. Consider using an instance with even more memory capacity if you run multiple sessions or use client mode with drivers running on the master node\. This includes notebook applications where Zeppelin or Jupyter may run multiple notebook sessions\.
+
+When choosing the features of the master node, consider metadata processing requirements\. Large clusters using local disk storage and HDFS might need additional memory to accommodate the HDFS NameNode daemon\. HBase clusters with large datasets might need additional memory to accommodate the HBase HMaster\. Clusters using Hive and Spark SQL might need additional memory for a large metastore with many partitions\.
+
+For Presto workloads, consider the expected size of query results\. Larger query results place greater demands on the master node, which will likely benefit from more memory capacity\.
+
+### Core and Task Node Considerations<a name="emr-core-node-instance-type"></a>
+
+The amount of data you can process depends on the storage capacity of your core nodes and the size of your data as input, during processing, and as output\. The input, intermediate, and output datasets are stored on the cluster during processing\.
+
+The computational needs of the core and task nodes depend on the type of processing that your application performs\. Adding task nodes can help alleviate the processing burden on the core nodes\. Many jobs can be run on m5\.xlarge\. If your application has external dependencies that introduce delays, such as web crawling to collect data, you may be able to run the cluster on less capable instances to reduce costs\. The instances can take more time to run jobs while external dependencies finish\.
+
+For improved performance, consider increasing the memory capacity, the processing power, or both for core and task nodes\. If different phases of your cluster have varying capacity requirements, you can start with a small number of core or task nodes and then increase or decrease the number on the fly\.
+
+For Spark workloads, consider that Spark reserves 8 GiB of memory for itself, which is a substantial baseline memory overhead\. For Spark workloads, consider instances with additional memory to accommodate that overhead and Spark executors\.
 
 ## When Should You Use Spot Instances?<a name="emr-plan-spot-instances"></a>
 
@@ -37,7 +50,7 @@ When you launch a cluster in Amazon EMR, you can choose to launch master, core, 
 
 ### Amazon EMR Settings To Prevent Job Failure Because of Task Node Spot Instance Termination<a name="emr-plan-spot-YARN"></a>
 
-Because Spot Instances are often used to run task nodes, Amazon EMR has default functionality for scheduling YARN jobs so that running jobs donâ€™t fail when task nodes running on Spot Instances are terminated\. Amazon EMR does this by allowing application master processes to run only on core nodes\. The application master process controls running jobs and needs to stay alive for the life of the job\.
+Because Spot Instances are often used to run task nodes, Amazon EMR has default functionality for scheduling YARN jobs so that running jobs do not fail when task nodes running on Spot Instances are terminated\. Amazon EMR does this by allowing application master processes to run only on core nodes\. The application master process controls running jobs and needs to stay alive for the life of the job\.
 
 Amazon EMR release version 5\.19\.0 and later uses the built\-in [YARN node labels](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeLabel.html) feature to achieve this\. \(Earlier versions used a code patch\)\. Properties in the `yarn-site` and `capacity-scheduler` configuration classifications are configured by default so that the YARN capacity\-scheduler and fair\-scheduler take advantage of node labels\. Amazon EMR automatically labels core nodes with the `CORE` label, and sets properties so that application masters are scheduled only on nodes with the CORE label\. Manually modifying related properties in the yarn\-site and capacity\-scheduler configuration classifications, or directly in associated XML files, could break this feature or modify this functionality\.
 
@@ -103,7 +116,7 @@ The following table is a quick reference to node type purchasing options and con
 
 #### Long\-Running Clusters and Data Warehouses<a name="emr-dev-when-use-spot-data-warehouses"></a>
 
-If you are running a persistent Amazon EMR cluster that has a predictable variation in computational capacity, such as a data warehouse, you can handle peak demand at lower cost with Spot Instances\. You can launch your master and core instance groups as On\-Demand Instances to handle the normal capacity and launch the task instance group as Spot Instances to handle your peak load requirements\.
+If you are running a persistent Amazon EMR cluster that has a predictable variation in computational capacity, such as a data warehouse, you can handle peak demand at lower cost with Spot Instances\. You can launch your master and core instance groups as On\-Demand Instances to handle the normal capacity and launch task instance groups as Spot Instances to handle your peak load requirements\.
 
 #### Cost\-Driven Workloads<a name="emr-dev-when-use-spot-cost-driven"></a>
 

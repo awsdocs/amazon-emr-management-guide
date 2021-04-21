@@ -2,17 +2,7 @@
 
 ## About Git Repositories for EMR Studio<a name="emr-studio-git-repo-about"></a>
 
-You can associate a maximum of three Git repositories with an EMR Studio Workspace\. EMR Studio supports the following Git\-based services:
-+ [AWS CodeCommit](http://aws.amazon.com/codecommit)
-+ [GitHub](https://github.com)
-+ [Bitbucket](https://bitbucket.org/)
-
- Associating a Git repository with your Workspace has the following benefits\.
-+ **Version control** – Record code changes in a version\-control system so that you can review the history of your changes and selectively reverse them\.
-+ **Collaboration** – Share code with team members working in different Workspaces through remote Git\-based repositories\. Workspaces can clone or merge code from remote repositories and push changes back to those repositories\.
-+ **Code reuse** – Many Jupyter notebooks that demonstrate data analysis or machine learning techniques are available in publicly\-hosted repositories, such as GitHub\. You can associate your Workspace with a GitHub repository to reuse the Jupyter notebooks contained in a repository\.
-
-By default, each Workspace lets you choose from a list of Git repositories that are associated with the same AWS account as your Studio\. You can also create a new Git repository as a resource for your Workspace\.
+You can associate a maximum of three Git repositories with an EMR Studio Workspace\. By default, each Workspace lets you choose from a list of Git repositories that are associated with the same AWS account as your Studio\. You can also create a new Git repository as a resource for your Workspace\.
 
 You can manually run Git commands like the following using a terminal command while connected to the master node of a cluster\. 
 

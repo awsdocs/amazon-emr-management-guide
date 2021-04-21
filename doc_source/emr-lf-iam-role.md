@@ -8,7 +8,7 @@ The integration between Amazon EMR and AWS Lake Formation relies on three key ro
 
 1. An IAM role for non\-Lake Formation AWS services\.
 
-This section gives an overview of these roles and the policies that you need to include for each role\.For information about creating these roles, see [Before You Begin](emr-lf-prerequisites.md)\.
+This section gives an overview of these roles and the policies that you need to include for each role\. For information about creating these roles, see [Before You Begin](emr-lf-prerequisites.md)\.
 
 ## EC2 Instance Profile<a name="emr-lf-iam-role-EC2"></a>
 
@@ -38,7 +38,9 @@ The IAM Role for Lake Formation defines what privileges a user logging in throug
         "glue:GetDatabases",
         "glue:CreateDatabase",
         "glue:GetUserDefinedFunction",
-        "glue:GetUserDefinedFunctions"
+        "glue:GetUserDefinedFunctions",
+        "glue:GetPartition",
+        "glue:GetPartitions"
       ],
       "Resource": "*"
     }

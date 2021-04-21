@@ -12,21 +12,24 @@ To enable the feature, do the following:
 Make sure that the permissions policy attached to the service role for EMR Notebooks allows the following action:  
 `elasticmapreduce:ListSteps`  
 For more information, see [Service Role for EMR Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-service-role.html)\.
-Use the AWS CLI to run a step on the cluster that sets up EMR Notebooks as shown in the following example\. For more information, see [Adding Steps to a Cluster Using the AWS CLI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/add-step-cli.html)\.  
+Use the AWS CLI to run a step on the cluster that sets up EMR Notebooks as shown in the following example\. Replace *us\-east\-1* with the Region in which your cluster resides\. For more information, see [Adding Steps to a Cluster Using the AWS CLI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/add-step-cli.html)\.  
 
    ```
    aws emr add-steps  --cluster-id MyClusterID --steps Type=CUSTOM_JAR,Name=EMRNotebooksSetup,ActionOnFailure=CONTINUE,Jar=s3://us-east-1.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://awssupportdatasvcs.com/bootstrap-actions/EMRNotebooksSetup/emr-notebooks-setup.sh"]
    ```
 
-You can install kernels and libraries by running `pip` or `conda` in `/emr/notebook-env/bin` on the master node\.
+You can install kernels and libraries by running `pip` or `conda` in `/emr/notebook-env/bin` on the master node\. 
 
 You can run `pip` as a terminal command from within a notebook cell\. Using `conda` requires sudo access\. You must connect to the master node using SSH and then run `conda` from the terminal\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\.
 
-The following example demonstrates installing `sas_kernel` using a terminal command while connected to the master node of a cluster:
+The following example demonstrates installing the Kotlin kernel using a terminal command while connected to the master node of a cluster:
 
 ```
-/emr/notebook-env/bin/pip install sas_kernel
+sudo /emr/notebook-env/bin/conda install kotlin-jupyter-kernel -c jetbrains
 ```
+
+**Note**  
+These instructions do not install kernel dependencies\. If your kernel has third\-party dependencies, you may need to take additional setup steps before you can use the kernel with your notebook\.
 
 ## Using Notebook\-Scoped Libraries<a name="emr-managed-notebooks-scoped-libraries"></a>
 

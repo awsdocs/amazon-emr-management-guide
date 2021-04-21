@@ -11,7 +11,7 @@ Explicitly denying permission for tagging actions is an important consideration\
 
 ## Example Identity\-Based Policy Statements for Clusters<a name="emr-cluster-access-resourcetag"></a>
 
-The examples below demonstrate identity\-based permissions policies that are used to control the actions that are allowed with EMR clusters\.
+The following examples demonstrate identity\-based permissions policies that are used to control the actions that are allowed with EMR clusters\.
 
 **Important**  
 The `ModifyInstanceGroup` action in Amazon EMR does not require that you specify a cluster ID\. For that reason, denying this action based on cluster tags requires additional consideration\. For more information, see [Denying the ModifyInstanceGroup Action](emr-cluster-deny-modifyinstancegroup.md)\.
@@ -25,7 +25,7 @@ The `ModifyInstanceGroup` action in Amazon EMR does not require that you specify
 
 ### Allow Actions Only on Clusters with Specific Tag Values<a name="emr-cluster-access-example-tagvalue"></a>
 
-The examples below demonstrate a policy that allows a user to perform actions based on the cluster tag `department` with the value `dev` and also allows a user to tag clusters with that same tag\. The final policy example demonstrates how to deny privileges to tag EMR clusters with anything but that same tag\.
+The following examples demonstrate a policy that allows a user to perform actions based on the cluster tag `department` with the value `dev` and also allows a user to tag clusters with that same tag\. The final policy example demonstrates how to deny privileges to tag EMR clusters with anything but that same tag\.
 
 In the following policy example, the `StringEquals` condition operator tries to match `dev` with the value for the tag `department`\. If the tag `department` hasn't been added to the cluster, or doesn't contain the value `dev`, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with clusters that have this tag with this value\.
 
@@ -99,7 +99,7 @@ As in the preceding example, the following example policy looks for the same mat
 
 ### Deny Access to Add and Remove Tags<a name="emr-cluster-deny-tagging-example"></a>
 
-In the following example, the EMR actions that allow the addition and removal of tags is combined with a `StringNotEquals` operator specifying the `dev` tag we've seen in earlier examples\. The effect of this policy is to deny a user the permission to add or remove any tags on EMR clusters that are tagged with a `department` tag that contains the `dev` value\.
+In the following example, the EMR actions that allow the addition and removal of tags is combined with a `StringNotEquals` operator specifying the `dev` tag we've seen in earlier examples\. This policy prevents a user from adding or removing tags on EMR clusters with a `department` tag whose value is not `dev`\.
 
 ```
 {
@@ -193,7 +193,7 @@ The following policy statement allows a user to create an EMR cluster only if th
 The example IAM policy statements in this section demonstrate common scenarios for using keys to limit allowed actions using EMR Notebooks\. As long as no other policy associated with the principal \(user\) allows the actions, the condition context keys limit allowed actions as indicated\.
 
 **Example – Allow access only to notebooks that a user creates based on tagging**  
-The example policy statement below, when attached to a role or user, allows the IAM user to work only with notebooks that they have created\. This policy statement uses the default tag applied when a notebook is created\.  
+The following example policy statement, when attached to a role or user, allows the IAM user to work only with notebooks that they have created\. This policy statement uses the default tag applied when a notebook is created\.  
 In the example, the `StringEquals` condition operator tries to match a variable representing the current users IAM user ID \(`{aws:userId}`\) with the value of the tag `creatorUserID`\. If the tag `creatorUserID` hasn't been added to the notebook, or doesn't contain the value of the current user's ID, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with notebooks that have this tag with this value\.  
 
 ```

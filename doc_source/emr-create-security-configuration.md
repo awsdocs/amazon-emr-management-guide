@@ -381,7 +381,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w201aac28c27c11c15b7"></a>
+### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w292aac28c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 
@@ -416,3 +416,56 @@ The following is an example JSON snippet for specifying custom IAM roles for EMR
 |    `"Role":` | Specifies the ARN identifier of an IAM role in the format `arn:aws:iam::account-id:role/role-name`\. This is the IAM role that Amazon EMR assumes if the EMRFS request to Amazon S3 matches any of the `Identifiers` specified\. | 
 |    `"IdentifierType":` | Can be one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)  | 
 |     `"Identifiers":`  |  Specifies one or more identifiers of the appropriate identifier type\. Separate multiple identifiers by commas with no spaces\.  | 
+
+## Configure Metadata Service Requests to Amazon EC2 Instances<a name="emr-security-configuration-imdsv2"></a>
+
+Instance metadata is data about your instance that you can use to configure or manage the running instance\. You can access instance metadata from a running instance using one of the following methods:
++ Instance Metadata Service Version 1 \(IMDSv1\) – a request/response method
++ Instance Metadata Service Version 2 \(IMDSv2\) – a session\-oriented method
+
+While Amazon EC2 supports both IMDSv1 and IMDSv2, Amazon EMR supports IMDSv2 in Amazon EMR 5\.23\.1, 5\.27\.1, 5\.32 or later, and 6\.2 or later\. In these releases, Amazon EMR components use IMDSv2 for all IMDS calls\. For IMDS calls in your application code, you can use both IMDSv1 and IMDSv2, or configure the IMDS to use only IMDSv2 for added security\. When you specify that IMDSv2 must be used, IMDSv1 no longer works\.
+
+For more information, see [Configure the instance metadata service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+**Note**  
+In earlier Amazon EMR 5\.x or 6\.x releases, turning off IMDSv1 causes cluster startup failure as Amazon EMR components use IMDSv1 for all IMDS calls\. When turning off IMDSv1, please ensure that any custom software that utilizes IMDSv1 is updated to IMDSv2\.
+
+### Specifying Instance Metadata Service Configuration Using the AWS CLI<a name="w292aac28c27c11c17c13"></a>
+
+The following is an example JSON snippet for specifying Amazon EC2 instance metadata service \(IMDS\) within a security configuration\.
+
+```
+{
+  "InstanceMetadataServiceConfiguration" : {
+      "MinimumInstanceMetadataServiceVersion": integer,
+      "HttpPutResponseHopLimit": integer
+   }
+}
+```
+
+
+| Parameter | Description | 
+| --- | --- | 
+|  `"InstanceMetadataServiceConfiguration":`  |  Required\.  | 
+|   `"MinimumInstanceMetadataServiceVersion":`  |  Required\. Specify `1` or `2`\. A value of `1` allows IMDSv1 and IMDSv2\. A value of `2` allows only IMDSv2\.  | 
+|   `"HttpPutResponseHopLimit":`  |  Required\. The desired HTTP PUT response hop limit for instance metadata requests\. The larger the number, the further instance metadata requests can travel\. Default: `1`\. Specify an integer from `1` to `64`\. | 
+
+### Specifying Instance Metadata Service Configuration Using the Console<a name="emr-security-configuration-imdsv2-console"></a>
+
+You can configure the use of IMDS for a cluster when you launch it from the Amazon EMR console\.
+
+![\[IMDS Security configurations controls in Amazon EMR console\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/imdsv2_hop_console_redline.png)
+
+**To configure the use of IMDS using the console:**
+
+1. When creating a new security configuration on the **Security configurations** page, select **Configure EC2 Instance metadata service** under the **EC2 Instance Metadata Service** setting\. This configuration is supported only in Amazon EMR 5\.23\.1, 5\.27\.1, 5\.32 or later, and 6\.2 or later\.
+
+1. For the **Minimum Instance Metadata Service Version** option, select either:
+   + **Turn off IMDSv1 and only allow IMDSv2**, if you want to allow only IMDSv2 on this cluster\. See [Transition to using Instance Metadata Service Version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
+   + **Allow both IMDSv1 and IMDSv2 on cluster**, if you want to allow IMDSv1 and session\-oriented IMDSv2 on this cluster\.
+
+1. For IMDSv2, you can also configure the allowable number of network hops for the metadata token by setting the **HTTP put response hop limit** to an integer between `1` and `64`\.
+
+For more information, see [Configure the instance metadata service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+See [Configure Instance Details](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html#configure_instance_details_step) and [Configure the Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.

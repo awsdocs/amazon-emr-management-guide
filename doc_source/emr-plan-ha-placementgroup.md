@@ -8,7 +8,7 @@ There is an initial limit from Amazon EC2 of 500 placement group strategy\-enabl
 
 ## Attaching the placement group managed policy to the EMR role<a name="emr-plan-ha-launch-pg-policy"></a>
 
-The placement group strategy requires a managed policy called `AmazonElasticMapReducePlacementGroupPolicy` in order to allow Amazon EMR to create, delete, and describe placement groups on EC2\. The managed policy must be attached to the EMR role before you launch the Amazon EMR multiple master cluster\. For more information, see [Service Role for Amazon EMR \(EMR Role\)](emr-iam-role.md)\.
+The placement group strategy requires a managed policy called `AmazonElasticMapReducePlacementGroupPolicy` in order to allow Amazon EMR to create, delete, and describe placement groups on Amazon EC2\. The managed policy must be attached to the Amazon EMR role before you launch the Amazon EMR multiple master cluster\. The Amazon EMR managed policy, `AmazonEMRServicePolicy_v2`, can be attached to the Amazon EMR role instead of the placement group managed policy\. `AmazonEMRServicePolicy_v2` allows the same access to placement groups on Amazon EC2 as the `AmazonElasticMapReducePlacementGroupPolicy`\. For more information, see [Service Role for Amazon EMR \(EMR Role\)](emr-iam-role.md)\.
 
 The `AmazonElasticMapReducePlacementGroupPolicy` managed policy is the following JSON text that is created and administered by Amazon EMR\.
 

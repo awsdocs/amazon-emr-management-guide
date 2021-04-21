@@ -1,6 +1,6 @@
 # Notebook execution Python samples<a name="emr-managed-notebooks-headless-python"></a>
 
-The following code example is a Boto3 \(Python AWS SDK\) file called `demo.py` that shows the notebook execution APIs\.
+The following code example is an SDK for Python \(Boto3\) file called `demo.py` that shows the notebook execution APIs\.
 
 For information about the EMR API NotebookExecution actions, see [EMR API Actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
 

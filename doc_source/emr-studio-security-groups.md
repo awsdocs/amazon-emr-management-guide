@@ -8,7 +8,13 @@ Amazon EMR Studio uses two security groups to control network traffic between Wo
 
 EMR Studio uses these security groups in addition to any security groups associated with an EMR cluster attached to a Workspace\. 
 
-You must create these security groups\. You can customize your security groups with rules tailored to your environment, but you must include the rules noted below\. For example, you might add custom rules to limit network traffic so that only a subset of Workspaces can run code on particular clusters\. 
+You must create these security groups when you use the AWS CLI to create a Studio\. You can customize your security groups with rules tailored to your environment, but you must include the rules noted on this page\.
+
+**Use the Default EMR Studio Security Groups**
+
+When you use the EMR console, you can choose the following default security groups, which include the minimum required inbound and outbound rules for the Workspaces in your EMR Studio\. 
++ `DefaultEngineSecurityGroup`
++ `DefaultWorkspaceSecurityGroupGit` or `DefaultWorkspaceSecurityGroupWithoutGit`
 
 ## Prerequisites<a name="emr-studio-security-group-prereqs"></a>
 
@@ -18,7 +24,7 @@ To create the security groups for EMR Studio, you need the following items:
 
 ## Instructions<a name="emr-studio-security-group-instructions"></a>
 
-Follow the instructions in [Creating a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#creating-security-group) in the *Amazon EC2 User Guide for Linux Instances* to create an engine security group and a Workspace security group in your designated VPC\. The security groups must include the rules noted below\.
+Follow the instructions in [Creating a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#creating-security-group) in the *Amazon EC2 User Guide for Linux Instances* to create an engine security group and a Workspace security group in your designated VPC\. The security groups must include the following rules\.
 
 When you create your security groups for EMR Studio, note the IDs for both\. You specify each security group by ID when you create a Studio\.
 

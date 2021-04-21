@@ -88,7 +88,7 @@ stop_resp = emr.stop_notebook_execution({
 
 EMR notebooks can be scheduled using either:
 + A cron job with bash script
-+ An AWS Cloudwatch event, which will trigger an AWS Lambda \(Java/Python/Javascript\)\. For more information, see [Using AWS Lambda with Amazon CloudWatch Events](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html)\.
++ An Amazon CloudWatch event, which will trigger an AWS Lambda \(Java/Python/Javascript\)\. For more information, see [Using AWS Lambda with Amazon CloudWatch Events](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html)\.
 
 ```
 #!/bin/bash

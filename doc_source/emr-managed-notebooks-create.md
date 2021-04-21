@@ -10,7 +10,7 @@ You create an EMR notebook using the Amazon EMR console\. Creating notebooks usi
 
 1. Enter a **Notebook name** and an optional **Notebook description**\.
 
-1. If you have an active cluster running Hadoop, Spark, and Livy to which you want to attach the notebook, leave the default **Choose an existing cluster** selected, click **Choose**, select a cluster from the list, and then click **Choose cluster**\. Only clusters that meet the requirements appear\. For more information, see [Considerations When Using EMR Notebooks](emr-managed-notebooks-considerations.md)\.
+1. If you have an active cluster to which you want to attach the notebook, leave the default **Choose an existing cluster** selected, click **Choose**, select a cluster from the list, and then click **Choose cluster**\. For information about cluster requirements for EMR Notebooks, see [Considerations When Using EMR Notebooks](emr-managed-notebooks-considerations.md)\.
 
    **—or—**
 

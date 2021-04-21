@@ -11,13 +11,16 @@ Consider the following requirements when you create clusters and develop solutio
   + EMR Notebooks works only with clusters created with `VisibleToAllUsers` set to `true`\. `VisibleToAllUsers` is `true` by default\. For more information, see [Understanding the EMR Cluster VisibleToAllUsers Setting](security_iam_emr-with-iam.md#security_set_visible_to_all_users)\.
   + The cluster must be launched within an EC2\-VPC\. Public and private subnets are supported\. The EC2\-Classic platform is not supported\.
   + The cluster must be launched with Hadoop, Spark, and Livy installed\. Other applications may be installed, but EMR Notebooks currently supports Spark clusters only\.
+**Important**  
+For EMR release versions 5\.32\.0 and later, or 6\.2\.0 and later, your cluster must also be running the Jupyter Enterprise Gateway application in order to work with EMR Notebooks\.
   + Clusters using Kerberos authentication are not supported\.
   + Clusters integrated with AWS Lake Formation support the installation of notebook\-scoped libraries only\. Installing kernels and libraries on the cluster are not supported\.
   + Clusters with multiple master nodes are not supported\.
+  + Clusters using Amazon EC2 instances based on AWS Graviton2 are not supported\.
 
 ## Differences in Capabilities by Cluster Release Version<a name="considerations-cluster-version"></a>
 
-We strongly recommend that you use EMR Notebooks with clusters created using Amazon EMR release version 5\.30\.0 or later, excluding 6\.0\.0\. With these version clusters, EMR Notebooks runs kernels on the attached Amazon EMR cluster\. Kernels and libraries can be installed directly on the cluster master node\. Using EMR Notebooks with these cluster versions has the following benefits:
+We strongly recommend that you use EMR Notebooks with clusters created using Amazon EMR release versions 5\.30\.0, 5\.32\.0 or later, or 6\.2\.0 or later\. With these versions, EMR Notebooks runs kernels on the attached Amazon EMR cluster\. Kernels and libraries can be installed directly on the cluster master node\. Using EMR Notebooks with these cluster versions has the following benefits:
 + **Improved performance** – Notebook kernels run on clusters with EC2 instance types that you select\. Earlier versions run kernels on a specialized instance that cannot be resized, accessed, or customized\. 
 + **Ability to add and customize kernels** – You can connect to the cluster to install kernel packages using `conda` and `pip`\. In addition, `pip` installation is supported using terminal commands within notebook cells\. In earlier versions, only pre\-installed kernels were available \(Python, PySpark, Spark, and SparkR\)\. For more information, see [Installing Kernels and Python Libraries on a Cluster Master Node](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel)\.
 + **Ability to install Python libraries** – You can [install Python libraries on the cluster master node](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel) using `conda` and `pip`\. We recommend using `conda`\. With earlier versions, only [notebook\-scoped libraries](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-scoped-libraries) for PySpark are supported\.
@@ -32,6 +35,7 @@ We strongly recommend that you use EMR Notebooks with clusters created using Ama
 |  5\.26\.0–5\.29\.0  |  [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-scoped-libraries)  |  No  |  No  | 
 |  5\.30\.0  |  [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-scoped-libraries)  |  [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel)  |  [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel)  | 
 |  6\.0\.0  |  No  |  No  |  No  | 
+| 5\.32\.0 and later, and 6\.2\.0 and later | [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-scoped-libraries) | [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel) | [Yes](emr-managed-notebooks-installing-libraries-and-kernels.md#emr-managed-notebooks-cluster-kernel) | 
 
 ## Limits for Concurrently Attached Notebooks<a name="emr-managed-notebooks-cluster-limits"></a>
 

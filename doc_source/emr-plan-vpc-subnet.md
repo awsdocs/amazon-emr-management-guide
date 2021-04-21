@@ -1,6 +1,8 @@
 # Configure Networking<a name="emr-plan-vpc-subnet"></a>
 
-There may be two network platform options you can choose for your cluster: **EC2\-Classic** or **EC2\-VPC**\. In EC2\-Classic, your instances run in a single, flat network that you share with other customers\. EC2\-Classic is available only with certain accounts in certain regions\. For more information, see [Amazon EC2 and Amazon VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html) in the *Amazon EC2 User Guide for Linux Instances*\. In EC2\-VPC, your cluster uses Amazon Virtual Private Cloud \(Amazon VPC\), and EC2 instances run in a VPC that's logically isolated within your AWS account\. Amazon VPC enables you to provision a virtual private cloud \(VPC\), an isolated area within AWS where you can configure a virtual network, controlling aspects such as private IP address ranges, subnets, routing tables, and network gateways\.
+Most clusters launch into a virtual network using Amazon Virtual Private Cloud \(Amazon VPC\)\. A VPC is an isolated virtual network within AWS that is logically isolated within your AWS account\. You can configure aspects such as private IP address ranges, subnets, routing tables, and network gateways\. For more information, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
+
+Your account may support EC2\-Classic\. With EC2\-Classic, your instances run in a single, flat network that you share with other customers\. EC2\-Classic is available only with certain accounts in certain Regions\. For more information, see [EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 VPC offers the following capabilities:
 + **Processing sensitive data**
@@ -14,7 +16,7 @@ VPC offers the following capabilities:
 You can launch EMR clusters in both public and private VPC subnets\. This means you do not need internet connectivity to run an EMR cluster; however, you may need to configure network address translation \(NAT\) and VPN gateways to access services or resources located outside of the VPC, for example in a corporate intranet or public AWS service endpoints like AWS Key Management Service\.
 
 **Important**  
-Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or greater\.
+Amazon EMR only supports launching clusters in private subnets in release version 4\.2 and later\.
 
 For more information about Amazon VPC, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 

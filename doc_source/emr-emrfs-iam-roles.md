@@ -15,7 +15,7 @@ When a cluster application makes a request to Amazon S3 through EMRFS, EMRFS eva
 
 ## Configure Roles<a name="emr-emrfs-iam-roles-role-configuration"></a>
 
-Before you set up a security configuration with IAM roles for EMRFS, plan and create the roles and permission policies to attach to the roles\. For more information, see [How Do Roles for EC2 Instances Work?](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. When creating permissions policies, we recommend that you start with the managed policy attached to the default EMR role for EC2, and then edit this policy according to your requirements\. The default role is `EMR_EC2_DefaultRole`, and the default managed policy to edit is `AmazonElasticMapReduceforEC2Role`\. For more information, see [Service Role for Cluster EC2 Instances \(EC2 Instance Profile\)](emr-iam-role-for-ec2.md)\.
+Before you set up a security configuration with IAM roles for EMRFS, plan and create the roles and permission policies to attach to the roles\. For more information, see [How Do Roles for EC2 Instances Work?](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. When creating permissions policies, we recommend that you start with the managed policy attached to the default EMR role for EC2, and then edit this policy according to your requirements\. The default role name is `EMR_EC2_DefaultRole`, and the default managed policy to edit is `AmazonElasticMapReduceforEC2Role`\. For more information, see [Service Role for Cluster EC2 Instances \(EC2 Instance Profile\)](emr-iam-role-for-ec2.md)\.
 
 ### Updating Trust Policies for Assume Role Permissions<a name="emr-emrfs-iam-role-trust-policy"></a>
 

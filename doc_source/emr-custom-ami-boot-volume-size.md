@@ -2,6 +2,8 @@
 
 This option is available only with Amazon EMR version 4\.x and later\. You can specify the volume size from 10 GiB \(the default\) up to 100 GiB when you create a cluster using the AWS Management Console, the AWS CLI, or the Amazon EMR API\. This sizing applies only to the EBS root device volume and applies to all instances in the cluster\. It does not apply to storage volumes, which you specify separately for each instance type when you create your cluster\.
 
+For more information about Amazon EBS, see [Amazon EC2 root device volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html)\.
+
 **Note**  
 If you use the default AMI, Amazon EMR attaches General Purpose SSD \(gp2\) as the root device volume type\. A custom AMI may have a different root device volume type\. For more information, see [Specifying a Custom AMI](emr-custom-ami.md#emr-specify-custom-ami)\.
 

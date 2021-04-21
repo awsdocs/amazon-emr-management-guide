@@ -8,11 +8,8 @@ EMR Studio Workspaces have the same underlying architecture as EMR notebooks\. Y
 
 ## Kernels and Libraries on Amazon EMR on EKS Clusters<a name="emr-studio-eks-kernels-libraries"></a>
 
-Amazon EMR on EKS clusters include the PySpark and Python 3\.7 kernels with a set of preinstalled libraries\. Amazon EMR on EKS does not currently support installing additional libraries or clusters\.
+Amazon EMR on EKS clusters include the PySpark and Python 3\.7 kernels with a set of pre\-installed libraries\. Amazon EMR on EKS does not currently support installing additional libraries or clusters\.
 
-**Note**  
-Amazon EMR on EKS clusters do not support SparkMagic commands for EMR Studio\.
-
-Each cluster comes with the following Python and PySpark libraries installed:
+Each Amazon EMR on EKS cluster comes with the following Python and PySpark libraries installed:
 + **Python**– boto3, cffi, future, ggplot, jupyter, kubernetes, matplotlib, numpy, pandas, plotly, pycryptodomex, py4j, requests, scikit\-learn, scipy, seaborn
 + **PySpark** – ggplot, jupyter, matplotlib, numpy, pandas, plotly, pycryptodomex, py4j, requests, scikit\-learn, scipy, seaborn

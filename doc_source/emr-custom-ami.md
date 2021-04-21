@@ -7,6 +7,9 @@ When you use Amazon EMR 5\.7\.0 or later, you can choose to specify a custom Ama
 **Note**  
 Beginning with Amazon EMR version 5\.24\.0, you can use a security configuration option to encrypt EBS root device and storage volumes when you specify AWS KMS as your key provider\. For more information, see [Local Disk Encryption](emr-data-encryption-options.md#emr-encryption-localdisk)\.
 
+**Important**  
+Amazon EMR clusters that are running Amazon Linux or Amazon Linux 2 AMIs \(Amazon Linux Machine Images\) use default Amazon Linux behavior, and do not automatically download and install important and critical kernel updates that require a reboot\. This is the same behavior as other Amazon EC2 instances running the default Amazon Linux AMI\. If new Amazon Linux software updates that require a reboot \(such as, kernel, NVIDIA, and CUDA updates\) become available after an EMR version is released, EMR cluster instances running the default AMI do not automatically download and install those updates\. To get kernel updates, you can [customize your Amazon EMR AMI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html) to [use the latest Amazon Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)\.
+
 ## Best Practices and Considerations<a name="emr-custom-ami-considerations"></a>
 
 When you create a custom AMI for Amazon EMR, consider the following:
@@ -61,7 +64,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
 ## Managing AMI Package Repository Updates<a name="emr-custom-ami-package-update"></a>
 
-On first boot, by default, Amazon Linux AMIs connect to package repositories to install security updates before other services start\. Depending on your requirements, you may choose to disable these updates when you specify a custom AMI for Amazon EMR\. The option to disable this feature is available only when you use a custom AMI\.
+On first boot, by default, Amazon Linux AMIs connect to package repositories to install security updates before other services start\. Depending on your requirements, you may choose to disable these updates when you specify a custom AMI for Amazon EMR\. The option to disable this feature is available only when you use a custom AMI\. By default, Amazon Linux kernel updates and other software packages that require a reboot are not updated\. Note that your networking configuration must allow for HTTP and HTTPS egress to Amazon Linux repositories in Amazon S3, otherwise security updates will not succeed\.
 
 **Warning**  
 We strongly recommend that you choose to update all installed packages on reboot when you specify a custom AMI\. Choosing not to update packages creates additional security risks\.

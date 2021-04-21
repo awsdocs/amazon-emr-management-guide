@@ -4,6 +4,8 @@
 
 When you launch an Amazon EMR cluster within a VPC, you can launch it within either a public, private, or shared subnet\. There are slight but notable differences in configuration, depending on the subnet type you choose for a cluster\.
 
+Amazon EMR also supports AWS Local Zones\. For more information, see [EMR Clusters on AWS Local Zones](emr-plan-localzones.md)\.
+
 ## Public Subnets<a name="emr-vpc-public-subnet"></a>
 
 EMR clusters in a public subnet require a connected internet gateway\. This is because Amazon EMR clusters must access AWS services and Amazon EMR\. If a service, such as Amazon S3, provides the ability to create a VPC endpoint, you can access those services using the endpoint instead of accessing a public endpoint through an internet gateway\. Additionally, Amazon EMR cannot communicate with clusters in public subnets through a network address translation \(NAT\) device\. An internet gateway is required for this purpose but you can still use a NAT instance or gateway for other traffic in more complex scenarios\.

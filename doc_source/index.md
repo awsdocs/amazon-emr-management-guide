@@ -1,7 +1,7 @@
 # Amazon EMR Management Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -20,26 +20,24 @@ Amazon's trademarks and trade dress may not be used in
    + [Overview of Amazon EMR Architecture](emr-overview-arch.md)
 + [Setting Up Amazon EMR](emr-setting-up.md)
 + [Tutorial: Getting Started with Amazon EMR](emr-gs.md)
-+ [Amazon EMR Studio (Preview)](emr-studio.md)
++ [Amazon EMR Studio](emr-studio.md)
    + [How Amazon EMR Studio Works](how-emr-studio-works.md)
    + [Considerations and Limitations](emr-studio-considerations.md)
-   + [Set Up an Amazon EMR Studio for Your Team](emr-studio-set-up.md)
+   + [Set Up and Manage an Amazon EMR Studio](emr-studio-set-up.md)
       + [Enable AWS Single Sign-On for Amazon EMR Studio](emr-studio-enable-sso.md)
+      + [Set Up Amazon EMR on EKS for Your Studio](emr-studio-create-eks-cluster.md)
       + [EMR Studio Security and Access Control](emr-studio-security.md)
          + [Create an EMR Studio Service Role](emr-studio-service-role.md)
          + [Create an EMR Studio User Role with Session Policies](emr-studio-user-role.md)
          + [Define Security Groups to Control EMR Studio Network Traffic](emr-studio-security-groups.md)
          + [Establish Access and Permissions for Git-Based Repositories](emr-studio-enable-git.md)
       + [Add Required Permissions to Create and Manage an EMR Studio](emr-studio-admin-permissions.md)
-      + [Set Up Amazon EMR on EKS for Your Studio](emr-studio-create-eks-cluster.md)
-      + [Create Cluster Templates in AWS Service Catalog](emr-studio-cluster-templates.md)
       + [Create an EMR Studio](emr-studio-create-studio.md)
-      + [Fetch Your EMR Studio ID](emr-studio-get-studio-id.md)
-      + [Assign a User or Group to Your EMR Studio](emr-studio-assign-users-groups.md)
-      + [Delete an Amazon EMR Studio](emr-studio-delete-studio.md)
+      + [Manage Users and Groups Assigned to Your Amazon EMR Studio](emr-studio-manage-users.md)
+      + [Manage and Monitor an Amazon EMR Studio](emr-studio-manage-studio.md)
+      + [Create Cluster Templates in AWS Service Catalog](emr-studio-cluster-templates.md)
    + [Work in an Amazon EMR Studio](work-with-an-emr-studio.md)
-      + [Tutorial: Getting Started with the Amazon EMR Studio Interface](tutorial-getting-started-emr-studio.md)
-      + [Configure a Workspace for EMR Studio](emr-studio-configure-workspace.md)
+      + [Workspaces in Amazon EMR Studio](emr-studio-configure-workspace.md)
       + [Attach a Cluster to Your Workspace](emr-studio-create-use-clusters.md)
       + [Link Git-Based Repositories to an EMR Studio Workspace](emr-studio-git-repo.md)
       + [Diagnose Applications and Jobs with EMR Studio](emr-studio-debug.md)
@@ -110,7 +108,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Configure Cluster Software](emr-plan-software.md)
       + [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)
    + [Configure Cluster Hardware and Networking](emr-plan-instances.md)
-      + [Understanding Master, Core, and Task Nodes](emr-master-core-task-nodes.md)
+      + [Understand Node Types: Master, Core, and Task Nodes](emr-master-core-task-nodes.md)
       + [Configure EC2 Instances](emr-plan-ec2-instances.md)
          + [Supported Instance Types](emr-supported-instance-types.md)
          + [Instance Purchasing Options](emr-instance-purchasing-options.md)
@@ -160,6 +158,10 @@ Amazon's trademarks and trade dress may not be used in
          + [Policy Best Practices for Amazon EMR](security_iam_emr-with-iam-policy-best-practices.md)
          + [Allow Users to View Their Own Permissions](security_iam_id-based-policy-examples-view-own-permissions.md)
          + [Amazon EMR Managed Policies](emr-managed-iam-policies.md)
+            + [IAM Managed Policy for Full Access (v2 Managed Default Policy)](emr-managed-policy-fullaccess-v2.md)
+            + [IAM Managed Policy for Full Access (On Path to Deprecation)](emr-managed-policy-fullaccess.md)
+            + [IAM Managed Policy for Read-Only Access (v2 Managed Default Policy)](emr-managed-policy-readonly-v2.md)
+            + [IAM Managed Policy for Read-Only Access (On Path to Deprecation)](emr-managed-policy-readonly.md)
          + [IAM Policies for Tag-Based Access to Clusters and EMR Notebooks](emr-fine-grained-cluster-access.md)
          + [Denying the ModifyInstanceGroup Action](emr-cluster-deny-modifyinstancegroup.md)
    + [Authenticate to Amazon EMR Cluster Nodes](emr-authenticate-cluster-connections.md)

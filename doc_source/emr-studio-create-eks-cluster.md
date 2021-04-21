@@ -1,5 +1,10 @@
 # Set Up Amazon EMR on EKS for Your Studio<a name="emr-studio-create-eks-cluster"></a>
 
+
+|  | 
+| --- |
+| The Amazon EMR on EKS managed endpoint feature is in preview release and is subject to change\. The feature is provided as a Preview service as defined in the AWS Service Terms\. | 
+
 ## About Amazon EMR on EKS Clusters for EMR Studio<a name="emr-studio-about-eks-clusters"></a>
 
 Amazon EMR Studio works with Amazon EMR on EKS so that Studio users can submit notebook code to Amazon Elastic Kubernetes Service \(EKS\)\. To provide Studio users access to EKS clusters, you must first create a virtual cluster using Amazon EMR on EKS\. After you create a virtual cluster, you must create one or more managed endpoints to which Studio users can connect a Workspace\. For more information about Amazon EMR on EKS, see the [https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html)\.
@@ -14,7 +19,7 @@ After you create a virtual cluster for Amazon EMR on EKS, you must set up one or
 The Python and PySpark kernels use the permissions defined in your Amazon EMR on EKS job execution role to invoke other AWS services\. All kernels and users that connect to the managed endpoint use this same role\. We recommend creating separate endpoints for different users who should not share the same IAM role\. For more information, see [Update trust policy in IAM roles for Job execution](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up.html#setting-up-trust-policy) in the *Amazon EMR on EKS Developer Guide*
 
 **AWS Load Balancer Controller**  
-The AWS Load Balancer Controller \(formerly called the AWS ALB Ingress Controller\) creates an application load balancer \(ALB\) for each managed endpoint that you create\. An ALB balances application traffic across Kubernetes pods\. Each ALB is HTTPS\-enabled and uses a private IP address within its VPC\. You only need to set up one AWS Load Balancer Controller per EKS cluster\. For more information, see [Application load balancing on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)\.   
+The AWS Load Balancer Controller \(formerly called the AWS ALB Ingress Controller\) creates an Application Load Balancer \(ALB\) for each managed endpoint that you create\. An ALB balances application traffic across Kubernetes pods\. Each ALB is HTTPS\-enabled and uses a private IP address within its VPC\. You only need to set up one AWS Load Balancer Controller per EKS cluster\. For more information, see [Application load balancing on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)\.   
 When you set up a managed endpoint for EMR Studio, Amazon EMR on EKS creates two default security groups to control inbound traffic and help ensure that only your EMR Studio can communicate with the ALB\. When you delete a managed endpoint, EMR on EKS deletes the ALB and default security groups\.  
 Additional charges accrue for the load balancer that Amazon EMR on EKS provisions for each managed endpoint that you create\.
 
@@ -38,9 +43,11 @@ Before you can set up Amazon EMR on EKS for Amazon EMR Studio, you must have the
 + A designated Amazon EKS cluster that you want to register as a virtual cluster with Amazon EMR on EKS\. Your cluster should be in the same Amazon Virtual Private Cloud as your Studio, and must have at least one private subnet to enable managed endpoints and linking Git\-based repositories\. For more information about EKS clusters, see [Creating an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)\. 
 **Note**  
 There must be *at least one private subnet in common* between your EMR Studio and the Amazon EKS cluster that you use to register your virtual cluster\. Otherwise, your managed endpoint will not appear as an option in your Studio Workspaces\. You can create an Amazon EKS cluster and associate it with the subnets that belong to your Studio\. Alternatively, you can create a Studio and specify your EKS cluster's private subnets\.
+[Amazon EKS optimized Arm Amazon Linux AMIs](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami) are not supported for EMR on EKS managed endpoints\.
+EMR Studio does not currently support Amazon EMR on EKS when you use an AWS Fargate\-only Amazon EKS cluster\.
 + An AWS Load Balancer Controller for your Amazon EKS cluster\. For instructions, see [Application load balancing on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)\. You only need to set up one AWS Load Balancer Controller per EKS cluster\.
 + A designated AWS Certificate Manager \(ACM\) certificate for EMR Studio\. For information about how to create a certificate, see [Issuing and Managing Certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs.html) in the *AWS Certificate Manager User Guide*\. Note the Amazon Resource Name \(ARN\) of the certificate, which you use when you create a managed endpoint\.
-+ The Amazon Resource Name \(ARN\) of your job execution IAM role for Amazon EMR on EKS\. For more information, see [Update trust policy in IAM roles for Job execution](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up.html#setting-up-trust-policy) in the *Amazon EMR on EKS Developer Guide*\. If you have never used Amazon EMR on EKS, you can retrieve the job execution role ARN in [Step 1: Create a Virtual Cluster](#emr-studio-set-up-virtual-cluster)\.
++ The Amazon Resource Name \(ARN\) of your job execution IAM role for Amazon EMR on EKS\. For more information, see [Update trust policy in IAM roles for Job execution](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up.html#setting-up-trust-policy)\. If you have never used Amazon EMR on EKS, you can retrieve the job execution role ARN in [Step 1: Create a Virtual Cluster](#emr-studio-set-up-virtual-cluster)\.
 
 ## Step 1: Create a Virtual Cluster<a name="emr-studio-set-up-virtual-cluster"></a>
 
@@ -90,10 +97,10 @@ You should see the following output in the terminal, which includes the name and
 
 ## Fetch Managed Endpoint Details<a name="emr-studio-describe-managed-endpoint"></a>
 
-After you create a managed endpoint, you can retrieve its details using the `describe-managed-endpoint` AWS CLI command\. Insert your own values for *<endpoint\-id>* and *<virtual\-cluster\-id>*\.
+After you create a managed endpoint, you can retrieve its details using the `describe-managed-endpoint` AWS CLI command\. Insert your own values for *<managed\-endpoint\-id>* and *<virtual\-cluster\-id>*\.
 
 ```
-aws emr-containers describe-managed-endpoint --endpoint-id <endpoint-id> --virtual-cluster-id <virtual-cluster-id>
+aws emr-containers describe-managed-endpoint --id <managed-endpoint-id> --virtual-cluster-id <virtual-cluster-id>
 ```
 
  The command returns details about the specified endpoint such as ARN, ID, and name\.
@@ -155,11 +162,11 @@ aws emr-containers list-managed-endpoints --virtual-cluster-id <virtual-cluster-
 ## Delete a Managed Endpoint<a name="emr-studio-delete-managed-endpoint"></a>
 
 To delete a managed endpoint associated with an Amazon EMR on EKS virtual cluster, use the `delete-managed-endpoint` AWS CLI command\. When you delete a managed endpoint, Amazon EMR on EKS removes the default security groups that were created for that endpoint\. Specify values for the following options:
-+ `--endpoint-id` – The ID of the managed endpoint that you want to delete\.
++ `--id` – The ID of the managed endpoint that you want to delete\.
 + `--virtual-cluster-id` – The ID of the virtual cluster associated with the managed endpoint that you want to delete\. This is the same virtual cluster ID that was specified when the managed endpoint was created\.
 
 ```
-aws emr-containers delete-managed-endpoint --endpoint-id <endpoint-id> --virtual-cluster-id <virtual-cluster-id>
+aws emr-containers delete-managed-endpoint --id <managed-endpoint-id> --virtual-cluster-id <virtual-cluster-id>
 ```
 
 The command returns output similar to the following example to confirm that the managed endpoint was deleted\.

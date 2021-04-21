@@ -6,7 +6,7 @@ When an EMR cluster is configured for Kerberos, which is a requirement for Apach
 
 **Configuring Hue**
 
-For instructions on configuring Hue to use LDAP as an authentication mechanism, see [Configure Hue for LDAP Users](https://docs.aws.amazon.com/latest/ReleaseGuide/hue-ldap.html) in the *Amazon EMR Release Guide*\.
+For instructions on configuring Hue to use LDAP as an authentication mechanism, see [Configure Hue for LDAP Users](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html) in the *Amazon EMR Release Guide*\.
 
 **Known Issues**
 

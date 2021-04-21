@@ -173,7 +173,7 @@ Before you can use IAM to delete a service\-linked role, you must first confirm 
 
 1. On the **Access Advisor** tab, review the recent activity for the service\-linked role\.
 **Note**  
-If you are unsure whether Amazon EMR is using the AWSServiceRoleForEMRCleanup role, you can try to delete the role\. If the service is using the role, then the deletion fails and you can view the regions where the role is being used\. If the role is being used, then you must wait for the session to end before you can delete the role\. You cannot revoke the session for a service\-linked role\. 
+If you are unsure whether Amazon EMR is using the AWSServiceRoleForEMRCleanup role, you can try to delete the role\. If the service is using the role, then the deletion fails and you can view the Regions where the role is being used\. If the role is being used, then you must wait for the session to end before you can delete the role\. You cannot revoke the session for a service\-linked role\. 
 
 **To remove Amazon EMR resources used by the AWSServiceRoleForEMRCleanup**
 + Terminate all clusters in your account\. For more information, see [Terminate a Cluster](UsingEMR_TerminateJobFlow.md)\.
@@ -230,7 +230,7 @@ You can use the IAM API to delete a service\-linked role\. Because a service\-li
 
 ## Supported Regions for Amazon EMR Service\-Linked Roles<a name="emr-slr-regions"></a>
 
-Amazon EMR supports using service\-linked roles in the following regions\.
+Amazon EMR supports using service\-linked roles in the following Regions\.
 
 
 ****  
@@ -242,7 +242,7 @@ Amazon EMR supports using service\-linked roles in the following regions\.
 | US West \(N\. California\) | us\-west\-1 | Yes | 
 | US West \(Oregon\) | us\-west\-2 | Yes | 
 | Asia Pacific \(Mumbai\) | ap\-south\-1 | Yes | 
-| Asia Pacific \(Osaka\-Local\) | ap\-northeast\-3 | Yes | 
+| Asia Pacific \(Osaka\) | ap\-northeast\-3 | Yes | 
 | Asia Pacific \(Seoul\) | ap\-northeast\-2 | Yes | 
 | Asia Pacific \(Singapore\) | ap\-southeast\-1 | Yes | 
 | Asia Pacific \(Sydney\) | ap\-southeast\-2 | Yes | 

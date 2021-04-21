@@ -28,7 +28,7 @@ If the node remains `UNHEALTHY` for more than 45 minutes, Amazon EMR takes the f
 
 | Termination Protection | Result | 
 | --- | --- | 
-|  Enabled \(Recommended\)  |  The Amazon EC2 instance remains in a blacklisted state and continues to count toward cluster capacity\. You can connect to the Amazon EC2 instance for configuration and data recovery, and resize your cluster to add capacity\. For more information, see [Resource Errors](emr-troubleshoot-error-resource.md)\.  | 
+|  Enabled \(Recommended\)  |  Amazon EC2 core instances remain in a blacklisted state and continue to count toward cluster capacity\. You can connect to an Amazon EC2 core instance for configuration and data recovery, and resize your cluster to add capacity\. For more information, see [Resource Errors](emr-troubleshoot-error-resource.md)\. Unhealthy task nodes are exempt from termination protection and will be terminated\.  | 
 |  Disabled  |  The Amazon EC2 instance is terminated\. Amazon EMR provisions a new instance based on the specified number of instances in the instance group or the target capacity for instance fleets\. If all core nodes are `UNHEALTHY` for more than 45 minutes, the cluster terminates, reporting a `NO_SLAVES_LEFT` status\.  HDFS data may be lost if a core instance terminates because of an unhealthy state\. If the node stored blocks that were not replicated to other nodes, these blocks are lost, which might lead to data loss\. We recommend that you use termination protection so that you can connect to instances and recover data as necessary\.   | 
 
 ## Termination Protection, Auto\-Termination, and Step Execution<a name="emr-termination-protection-steps"></a>

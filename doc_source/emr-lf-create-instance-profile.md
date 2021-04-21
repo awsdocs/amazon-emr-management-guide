@@ -1,6 +1,6 @@
 # Create a Customized EC2 Instance Profile<a name="emr-lf-create-instance-profile"></a>
 
-To orchestrate EMR cluster access to Lake Formation, you should define a customized EC2 instance profile \(service role\) that you will specify when you create your cluster\. For more information about creating a customized role, see [Creating a Service Role for Cluster EC2 Instances With Least\-Privileged Permissions](emr-iam-role-for-ec2.md#emr-ec2-role-least-privilege)\.
+To orchestrate EMR cluster access to Lake Formation, you should define a customized EC2 instance profile \(service role\) that you will specify when you create your cluster\. For more information about creating a customized role, see [Creating a Service Role for Cluster EC2 Instances With Least\-Privilege Permissions](emr-iam-role-for-ec2.md#emr-ec2-role-least-privilege)\.
 
 ## Public Subnet<a name="emr-lf-iam-role-EC2-public"></a>
 

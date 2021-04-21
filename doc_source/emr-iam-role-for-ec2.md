@@ -5,13 +5,13 @@ The service role for cluster EC2 instances \(also called the EC2 instance profil
 For more information about service roles for EC2 instances, see [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\.
 
 **Important**  
-The default service role for cluster EC2 instances and the managed policy it uses are configured with permissions that allow you to create a fully functional cluster as easily as possible\. We strongly recommend that you modify this policy to provide the least privileges required for your application\. For more information, see [Creating a Service Role for Cluster EC2 Instances With Least\-Privileged Permissions](#emr-ec2-role-least-privilege)\.
+The default service role for cluster EC2 instances and its associated AWS default managed policy, `AmazonElasticMapReduceforEC2Role` are on the path to deprecation, with no replacement AWS managed policies provided\. You'll need to create and specify an instance profile to replace the deprecated role and default policy\.
 
 ## Default Role and Managed Policy<a name="emr-ec2-role-default"></a>
-+ The default role is `EMR_EC2_DefaultRole`\.
-+ The default managed policy attached to `EMR_EC2_DefaultRole` is `AmazonElasticMapReduceforEC2Role`
++ The default role name is `EMR_EC2_DefaultRole`\.
++ The `EMR_EC2_DefaultRole` default managed policy, `AmazonElasticMapReduceforEC2Role`, is on the path to deprecation and will not be replaced with another default managed policy\. Instead of using a default managed policy for the EC2 instance profile, apply resource\-based policies to S3 buckets and other resources that Amazon EMR needs, or use your own customer managed policy with an IAM role as an instance profile\. For more information, see [Creating a Service Role for Cluster EC2 Instances With Least\-Privilege Permissions](#emr-ec2-role-least-privilege)
 
-The contents of version 3 of `AmazonElasticMapReduceforEC2Role` are shown below\.
+The following shows the contents of version 3 of `AmazonElasticMapReduceforEC2Role`\.
 
 ```
 {
@@ -73,13 +73,13 @@ The contents of version 3 of `AmazonElasticMapReduceforEC2Role` are shown below\
 }
 ```
 
-## Creating a Service Role for Cluster EC2 Instances With Least\-Privileged Permissions<a name="emr-ec2-role-least-privilege"></a>
+## Creating a Service Role for Cluster EC2 Instances With Least\-Privilege Permissions<a name="emr-ec2-role-least-privilege"></a>
 
-As a best practice, we strongly recommend that you create a service role for cluster EC2 instances and permissions policy so that it has the minimum permissions to other AWS services that your application requires\.
+As a best practice, we strongly recommend that you create a service role for cluster EC2 instances and permissions policy that has the minimum permissions to other AWS services required by your application\.
 
-The default managed policy, `AmazonElasticMapReduceforEC2Role`, provides permissions that make it easy to launch an initial cluster\. However, Amazon EMR does not require any permissions to launch, monitor, and manage a basic cluster\. If you launch a cluster without permissions in this way, the cluster is still created, and system logs are generated and pushed to Amazon S3 buckets owned by Amazon EMR using an alternative authorization method\. However, cluster applications won't be able to interact with other AWS services\. For example, the cluster won't be able to read to or write from Amazon S3\.
+The default managed policy, `AmazonElasticMapReduceforEC2Role`, provides permissions that make it easy to launch an initial cluster\. However, `AmazonElasticMapReduceforEC2Role` is on the path to deprecation and Amazon EMR will not provide a replacement AWS managed default policy for the deprecated role\. To launch an initial cluster, you need to provide a customer managed resource\-based or ID\-based policy\.
 
-The policy statements below provide examples of the permissions required for different features of Amazon EMR\. We recommend that you use these permissions to create a permissions policy that restricts access to only those features and resources that your cluster requires\. All example policy statements use the *us\-west\-2* region and the fictional AWS account ID *123456789012*\. Replace these as appropriate for your cluster\.
+The following policy statements provide examples of the permissions required for different features of Amazon EMR\. We recommend that you use these permissions to create a permissions policy that restricts access to only those features and resources that your cluster requires\. All example policy statements use the *us\-west\-2* Region and the fictional AWS account ID *123456789012*\. Replace these as appropriate for your cluster\.
 
 For more information about creating and specifying custom roles, see [Customize IAM Roles](emr-iam-roles-custom.md)\.
 
@@ -88,7 +88,7 @@ If you create a custom EMR role for EC2, follow the basic work flow, which autom
 
 ### Reading and Writing Data to Amazon S3 Using EMRFS<a name="emr-ec2-role-EMRFS"></a>
 
-When an application running on an Amazon EMR cluster references data using the `s3://mydata` format, Amazon EMR uses EMRFS to make the request\. Clusters typically read and write data to Amazon S3 in this way, and EMRFS uses the permissions attached to the service role for cluster EC2 instances by default\. When you have multiple cluster users and multiple data stores, you may want users to have different permissions to EMRFS data in Amazon S3\. To do this, you can you can use IAM roles for EMRFS\. This allows EMRFS to assume different roles with different permissions policies based on the user or group making the request or the location of EMRFS data in Amazon S3\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
+When an application running on an Amazon EMR cluster references data using the `s3://mydata` format, Amazon EMR uses the EC2 instance profile to make the request\. Clusters typically read and write data to Amazon S3 in this way, and Amazon EMR uses the permissions attached to the service role for cluster EC2 instances by default\. For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
 Because IAM roles for EMRFS will fall back to the permissions attached to the service role for cluster EC2 instances, as a best practice, we recommend that you use IAM roles for EMRFS, and limit the EMRFS and Amazon S3 permissions attached to the service role for cluster EC2 instances\.
 
@@ -213,7 +213,6 @@ The following policy statement allows actions that are required if you use the A
     "Statement": [
         {
             "Effect": "Allow",
-            "Resource": "*",
             "Action": [
                 "glue:CreateDatabase",
                 "glue:UpdateDatabase",
@@ -239,7 +238,8 @@ The following policy statement allows actions that are required if you use the A
                 "glue:DeleteUserDefinedFunction",
                 "glue:GetUserDefinedFunction",
                 "glue:GetUserDefinedFunctions"
-            ]
+            ],
+            "Resource": "*",
         }
     ]
 }

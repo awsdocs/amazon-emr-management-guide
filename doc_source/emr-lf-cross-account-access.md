@@ -20,9 +20,11 @@ To prepare your Data Catalog for cross\-account access, follow the steps in [Cro
 
 **To grant access to resources from Account A to Account B**
 
-1. Log in to the AWS Management Console with **Account A**\.
+1. Log in to the AWS Management Console with **Account A** and open the AWS Lake Formation console\.
 
-1. Register a storage location in Amazon S3 with a *user\-defined role* for your data lake\. To create a user\-defined service role, see [Creating a role for an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#roles-creatingrole-service-console) and [Requirements for Roles Used to Register Locations](https://docs.aws.amazon.com/lake-formation/latest/dg/registration-role.html)\. For instructions on registering a location, see [Registering an Amazon S3 Location](https://docs.aws.amazon.com/lake-formation/latest/dg/register-location.html)\. 
+1. Follow the instructions in [Requirements for Roles Used to Register Locations](https://docs.aws.amazon.com/lake-formation/latest/dg/registration-role.html) to create a *user\-defined* service role for your data lake\. 
+
+1. Register a storage location in Amazon S3 with the *user\-defined role* you created in the previous step using the instructions in [Registering an Amazon S3 Location](https://docs.aws.amazon.com/lake-formation/latest/dg/register-location.html)\.
 **Warning**  
 You must use a user\-defined role and not the Lake Formation service\-linked role when you register this data location\. Lake Formation does not support using its service\-linked role when you integrate with EMR\.
 
@@ -30,11 +32,13 @@ You must use a user\-defined role and not the Lake Formation service\-linked rol
 
 1. Create a table in the database you set up in the previous step\. For instructions, see [Creating Tables](https://docs.aws.amazon.com/lake-formation/latest/dg/creating-tables.html)\.
 
-1. In the AWS Lake Formation console, grant permissions to **Account B**\. Specify the following values:
+1. Grant permissions to **Account B**\. Specify the following values:
    + The database you created in step 3\.
    + The table you created in step 4\.
    + The account ID of the external AWS account to which you want to grant access \(**Account B**\)\.
-   + Choose **Select** for both **Table** and **Grantable** permissions\. When you grant permissions to an external account, the permissions do not extend to any of the principals in that external account\. You must allow grantable permissions so that Account B can *in turn* grant access to its IAM role for Lake Formation principal\. 
+   + Check the box next to **Select** under both **Table** and **Grantable** permissions\. You must also select the **Describe** permission for the table\. When you grant permissions to an external account, the permissions do not extend to any of the principals in that external account\. You must allow grantable permissions so that Account B can *in turn* grant access to its IAM role for Lake Formation principal\. 
+
+1. Complete the steps in [Allow Data Filtering on Amazon EMR](https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch) in the *Lake Formation Developer Guide* to opt in to data filtering for data lakes on Amazon EMR in Account A\. Specify the ID for Account B under **AWS account IDs** on the **External data filtering** page\.
 
 **To finish setting up cross\-account access in Account B**
 
@@ -50,13 +54,13 @@ You must use a user\-defined role and not the Lake Formation service\-linked rol
 
 1. In the **Actions** dropdown under **Permissions**, select **Grant**\. 
 
-1. For **IAM users and roles**, select your IAM role for Lake Formation and make sure **Describe** is enabled under **Resource Link Permissions**\. For more information, see [Granting Resource Link Permissions](https://docs.aws.amazon.com/lake-formation/latest/dg/granting-link-permissions.html)\.
+1. For **SAML and Amazon QuickSight users and groups**, select the SAML user\(s\) or group\(s\) you want to give access to, and make sure **Describe** is enabled under **Resource Link Permissions**\. For more information, see [Granting Resource Link Permissions](https://docs.aws.amazon.com/lake-formation/latest/dg/granting-link-permissions.html)\.
 
 1. Choose **Grant** to finish granting permissions to your resource link\. 
 
 1. In the **Actions** dropdown under **Permissions**, select **Grant on target**\. This step is required since granting permissions on a resource link does not grant permissions on a target \(linked\) database or table\. You must grant permissions on a target separately\. For more information, see [Granting Resource Link Permissions](https://docs.aws.amazon.com/lake-formation/latest/dg/granting-link-permissions.html)\.
 
-1. For **IAM users and roles**, select your IAM role for Lake Formation\.
+1. For **SAML and Amazon QuickSight users and groups**, select your the same SAML user\(s\) or group\(s\) you chose in Step 7\.
 
 1. Choose appropriate target permissions for your IAM role for Lake Formation, then choose **Grant**\.
 

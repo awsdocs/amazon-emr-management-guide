@@ -6,6 +6,9 @@ If you are terminating a cluster that has termination protection set on it, you 
 
 Depending on the configuration of the cluster, it may take up to 5\-20 minutes for the cluster to completely terminate and release allocated resources, such as EC2 instances\.
 
+**Note**  
+You can't restart a terminated cluster, but you can clone a terminated cluster to reuse its configuration for a new cluster\. For more information, see [Cloning a Cluster Using the Console](clone-console.md)\.
+
 ## Terminate a Cluster Using the Console<a name="emr-dev-terminate-job-flow-console"></a>
 
 You can terminate one or more clusters using the Amazon EMR console\. The steps to terminate a cluster in the console vary depending on whether termination protection is on or off\. To terminate a protected cluster, you must first disable termination protection\. 

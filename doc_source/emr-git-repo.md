@@ -4,6 +4,7 @@ You can associate Git\-based repositories with your Amazon EMR notebooks to save
 + [AWS CodeCommit](http://aws.amazon.com/codecommit)
 + [GitHub](https://www.github.com)
 + [Bitbucket](https://bitbucket.org/)
++ [Privately\-hosted GitLab](https://about.gitlab.com/)
 
 Associating Git\-based repositories with your notebook has the following benefits\.
 + **Version control** – You can record code changes in a version\-control system so that you can review the history of your changes and selectively reverse them\.

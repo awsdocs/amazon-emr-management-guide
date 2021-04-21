@@ -13,3 +13,5 @@ IAM principals \(users and groups\) who create, modify, and specify roles for a 
 + `iam:PassRole`
 
 The `iam:PassRole` permission allows cluster creation\. The remaining permissions allow the creation of the default roles\.
+
+For information about assigning permissions to an IAM user, see see [Changing permissions for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html) in the *IAM User Guide*\.

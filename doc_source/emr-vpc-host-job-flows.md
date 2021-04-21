@@ -6,7 +6,7 @@ Before you can launch clusters in a VPC, you must create a VPC, and a subnet\. F
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. In the navigation bar, select the region in which to run your cluster\.
+1. In the navigation bar, select the Region in which to run your cluster\.
 
 1.  Choose **Start VPC Wizard**\.
 
@@ -32,7 +32,7 @@ Before you can launch clusters in a VPC, you must create a VPC, and a subnet\. F
    + It is a best practice with Hadoop and related applications to ensure resolution of the fully qualified domain name \(FQDN\) for nodes\. To ensure proper DNS resolution, configure a VPC that includes a DHCP options set whose parameters are set to the following values:
      + **domain\-name** = **ec2\.internal**
 
-       Use **ec2\.internal** if your region is US East \(N\. Virginia\)\. For other regions, use *region\-name***\.compute\.internal**\. For examples in `us-west-2`, use **us\-west\-2\.compute\.internal**\. For the AWS GovCloud \(US\-West\) region, use **us\-gov\-west\-1\.compute\.internal**\.
+       Use **ec2\.internal** if your Region is US East \(N\. Virginia\)\. For other Regions, use *region\-name***\.compute\.internal**\. For examples in `us-west-2`, use **us\-west\-2\.compute\.internal**\. For the AWS GovCloud \(US\-West\) Region, use **us\-gov\-west\-1\.compute\.internal**\.
      + **domain\-name\-servers** = **AmazonProvidedDNS**
 
      For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon VPC User Guide*\.
