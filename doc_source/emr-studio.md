@@ -14,7 +14,7 @@ You can accomplish the following tasks with Amazon EMR Studio:
 + Run parameterized notebooks as part of scheduled workflows using an orchestration tool such as Apache Airflow or Amazon Managed Workflows for Apache Airflow\. For more information, see [ Orchestrating analytics jobs on Amazon EMR Notebooks using MWAA](http://aws.amazon.com/blogs/big-data/orchestrating-analytics-jobs-on-amazon-emr-notebooks-using-amazon-mwaa/) in the AWS Big Data Blog\.
 + Track and debug jobs using the Spark History Server, Tez UI, or YARN timeline server\. 
 
-You can create an EMR Studio at no cost\. Applicable charges for Amazon S3 storage and for Amazon EMR clusters apply when you use EMR Studio\. For more information about pricing options and details, see [Amazon EMR pricing](http://aws.amazon.com/emr/pricing/)\.
+You can create and use an EMR Studio at no cost\. Applicable charges for Amazon S3 storage and for Amazon EMR clusters apply when you use EMR Studio\. For more information about pricing options and details, see [Amazon EMR pricing](http://aws.amazon.com/emr/pricing/)\.
 
 For information about setting up one or more EMR Studios, see [Set Up and Manage an Amazon EMR Studio](emr-studio-set-up.md)\. To learn more about working in an EMR Studio, see [Work in an Amazon EMR Studio](work-with-an-emr-studio.md)\.
 

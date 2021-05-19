@@ -4,7 +4,16 @@
 
 We recommend that you enable your team to use cluster templates with an EMR Studio\. Doing so lets users quickly choose from a list of templates to create a cluster for a Workspace\. It also lets you specify how new clusters should be created, and it simplifies Workspace setup\. You can define cluster templates using AWS Service Catalog\. For more information about using templates with Amazon EMR, see the [Build a self\-service environment for each line of business using Amazon EMR and AWS Service Catalog](http://aws.amazon.com/blogs/big-data/build-a-self-service-environment-for-each-line-of-business-using-amazon-emr-and-aws-service-catalog/) blog post\.
 
-You can optionally use a `Parameters` section in your template, which lets Studio users input or select custom values for a cluster\. The following example `Parameters` section defines input parameters such as cluster name, Amazon EMR release version, and cluster instance type\.
+Each template must specify the following options:
++ Input parameters
+  + **SubnetId** – The ID of the subnet where the cluster should be launched\. EMR Studio uses the same subnet that is associated with the Workspace to fill in the **SubnetId** parameter when provisioning the cluster\.
+**Important**  
+In order for your cluster to appear in the Workspace after it has been launched, you must refer to the **SubnetId** parameter throughout your entire cluster template when you specify a subnet\. EMR Studio does not support multiple subnets for Amazon EMR cluster features such as instance fleets\.
+  + **ClusterName** – A name for the cluster to help users identify it after it has been provisioned\.
++ Output
+  + **ClusterId** – The ID of the newly\-provisioned EMR cluster\.
+
+You can also include additional options in the `Parameters` section in your template, which lets Studio users input or select custom values for a cluster\. The following example `Parameters` section defines additional input parameters such as **ClusterName**, **EmrRelease** version, and **ClusterInstanceType**\.
 
 ```
 Parameters:
@@ -43,15 +52,17 @@ Before you create a template, make sure you have IAM permissions to access the A
 
 1. Create a portfolio for your cluster templates in the same AWS account as your Studio\. For instructions, see [Creating and Deleting Portfolios](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/portfoliomgmt-create.html)\.
 
-1. Create cluster templates \(or *products*\) with AWS CloudFormation templates, which define the AWS resources used by a product\. 
+1. Create one or more cluster templates \(also called portfolio *products* in the context of AWS CloudFormation\)\. 
 
-   Use the following rules to name products, or check your product names against the pattern `[a-zA-Z0-9][a-zA-Z0-9._-]*`\.
-   + Names must start with a letter or a number\.
-   + Names can consist of only letters, numbers, periods \(\.\), underscores \(\_\), and hyphens \(\-\)\.
+   Use the following rules to name your templates, or check your names against the pattern `[a-zA-Z0-9][a-zA-Z0-9._-]*`\.
+   + Template names must start with a letter or a number\.
+   + Templates names can consist of only letters, numbers, periods \(\.\), underscores \(\_\), and hyphens \(\-\)\.
 
    Each template must include the following options: 
    + Input parameters
-     + **SubnetId** – The ID of the subnet where the cluster should be launched\.
+     + **SubnetId** – Denotes the ID of the subnet where the cluster should be launched\. EMR Studio uses the same subnet that is associated with the Workspace to fill in the **SubnetId** parameter when provisioning the cluster\.
+**Important**  
+In order for your cluster to appear in the Workspace after it has been launched, you must refer to the **SubnetId** parameter throughout your entire cluster template when you specify a subnet\. EMR Studio does not support multiple subnets for Amazon EMR cluster features such as instance fleets\.
      + **ClusterName** – A name for the cluster to help users identify it after it has been provisioned\.
    + Output
      + **ClusterId** – The ID of the newly\-provisioned EMR cluster\.

@@ -19,7 +19,7 @@ When writing dynamic partitions with partitionOverwriteMode set to dynamic\.
 When writing to custom partition locations, such as locations that don’t conform to the Hive default partition location convention\.
 When using file systems other than EMRFS, such as writing to HDFS or using the S3A file system\.
 To determine whether your application uses direct write in Amazon EMR 5\.14\.0 or later, enable Spark INFO logging\. If a log line containing the text “Direct Write: ENABLED” is present in either Spark driver logs or Spark executor container logs, then your Spark application wrote using direct write\.  
-By default, speculative execution is turned `OFF` on Amazon EMR clusters\. We highly recommend that you do not turn speculative execution on if both of these conditons are true:  
+By default, speculative execution is turned `OFF` on Amazon EMRclusters\. We highly recommend that you do not turn speculative execution on if both of these conditons are true:  
 You are writing data to Amazon S3\.
 Data is written in a format other than Apache Parquet or in Apache Parquet format not using the EMRFS S3\-optimized committer\.
 If you turn on Spark speculative execution and write data to Amazon S3 using EMRFS direct write, you may experience intermittent data loss\. When you write data to HDFS, or write data in Parquet using the EMRFS S3\-optimized committer, Amazon EMR does not use direct write and this issue does not occur\.  

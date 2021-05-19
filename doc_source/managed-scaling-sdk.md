@@ -90,7 +90,7 @@ public class CreateClusterWithManagedScalingWithIG {
 		// create the cluster with a managed scaling policy
 		RunJobFlowRequest request = new RunJobFlowRequest()
 	       		.withName("EMR_Managed_Scaling_TestCluster")
-	       		.withReleaseLabel("emr-5.32.0")          // Specifies the EMR release version label, we recommend the latest release
+	       		.withReleaseLabel("emr-5.33.0")          // Specifies the EMR release version label, we recommend the latest release
 	       		.withApplications(hive,spark,ganglia,zeppelin)
 	       		.withLogUri("s3://path/to/my/emr/logs")  // A URI in S3 for log files is required when debugging is enabled.
 	       		.withServiceRole("EMR_DefaultRole")      // If you use a custom IAM service role, replace the default role with the custom role.

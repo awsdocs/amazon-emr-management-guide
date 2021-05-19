@@ -33,20 +33,20 @@ Amazon EMR supports Amazon S3 multipart upload through the AWS SDK for Java\. Mu
 
 For more information, see [Multipart Upload Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html) in the *Amazon Simple Storage Service Developer Guide*\.
 
-In addition, Amazon EMR offers properties that allow you to more precisely control the clean up of failed multipart upload parts\.
+In addition, Amazon EMR offers properties that allow you to more precisely control the clean\-up of failed multipart upload parts\.
 
 The following table describes the Amazon EMR configuration properties for multipart upload\. You can configure these using the `core-site` configuration classification\. For more information, see [Configure Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/configure-apps.html) in the *Amazon EMR Release Guide*\.
 
 
 | Configuration Parameter Name | Default Value | Description | 
 | --- | --- | --- | 
-| fs\.s3n\.multipart\.uploads\.enabled | true | A boolean type that indicates whether to enable multipart uploads\. When EMRFS [Consistent View](emr-plan-consistent-view.md) is enabled, multipart uploads are enabled by default and setting this value to false is ignored\. | 
+| fs\.s3n\.multipart\.uploads\.enabled | true | A Boolean type that indicates whether to enable multipart uploads\. When EMRFS [Consistent View](emr-plan-consistent-view.md) is enabled, multipart uploads are enabled by default and setting this value to false is ignored\. | 
 | fs\.s3n\.multipart\.uploads\.split\.size | 134217728 | Specifies the maximum size of a part, in bytes, before EMRFS starts a new part upload when multipart uploads is enabled\. The minimum value is `5242880` \(5 MB\)\. If a lesser value is specified, `5242880` is used\. The maximum is `5368709120` \(5 GB\)\. If a greater value is specified, `5368709120` is used\. If EMRFS client\-side encryption is disabled and the Amazon S3 Optimized Committer is also disabled, this value also controls the maximum size that a data file can grow until EMRFS uses multipart uploads rather than a `PutObject` request to upload the file\. For more information, see  | 
-| fs\.s3n\.ssl\.enabled | true | A boolean type that indicates whether to use http or https\.  | 
-| fs\.s3\.buckets\.create\.enabled | false | A boolean type that indicates whether a bucket should be created if it does not exist\. Setting to false causes an exception on CreateBucket operations\. | 
-| fs\.s3\.multipart\.clean\.enabled | false | A boolean type that indicates whether to enable background periodic clean up of incomplete multipart uploads\. | 
+| fs\.s3n\.ssl\.enabled | true | A Boolean type that indicates whether to use http or https\.  | 
+| fs\.s3\.buckets\.create\.enabled | false | A Boolean type that indicates whether a bucket should be created if it does not exist\. Setting to false causes an exception on CreateBucket operations\. | 
+| fs\.s3\.multipart\.clean\.enabled | false | A Boolean type that indicates whether to enable background periodic clean\-up of incomplete multipart uploads\. | 
 | fs\.s3\.multipart\.clean\.age\.threshold | 604800 | A long type that specifies the minimum age of a multipart upload, in seconds, before it is considered for cleanup\. The default is one week\. | 
-| fs\.s3\.multipart\.clean\.jitter\.max | 10000 | An integer type that specifies the maximum amount of random jitter delay in seconds added to the 15\-minute fixed delay before scheduling next round of clean up\. | 
+| fs\.s3\.multipart\.clean\.jitter\.max | 10000 | An integer type that specifies the maximum amount of random jitter delay in seconds added to the 15\-minute fixed delay before scheduling next round of clean\-up\. | 
 
 ### Disable Multipart Upload Using the Amazon EMR Console<a name="emr-dev-multipart-upload-console"></a>
 
@@ -87,7 +87,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    1. aws emr create-cluster --name "Test cluster" \
-   2. --release-label emr-5.32.0 --applications Name=Hive Name=Pig \
+   2. --release-label emr-5.33.0 --applications Name=Hive Name=Pig \
    3. --use-default-roles --ec2-attributes KeyName=myKey --instance-type m5.xlarge \
    4. --instance-count 3 --configurations file://myConfig.json
    ```
@@ -112,10 +112,10 @@ EMR cluster components use multipart uploads via the AWS SDK for Java with Amazo
 + For buckets that you use with Amazon EMR, use a lifecycle configuration rule in Amazon S3 to remove incomplete multipart uploads three days after the upload initiation date\. Lifecycle configuration rules allow you to control the storage class and lifetime of objects\. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html), and [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)\.
 + Enable Amazon EMR's multipart cleanup feature by setting `fs.s3.multipart.clean.enabled` to `TRUE` and tuning other cleanup parameters\. This feature is useful at high volume, large scale, and with clusters that have limited uptime\. In this case, the `DaysAfterIntitiation` parameter of a lifecycle configuration rule may be too long, even if set to its minimum, causing spikes in Amazon S3 storage\. Amazon EMR's multipart cleanup allows more precise control\. For more information, see [Configure Multipart Upload for Amazon S3](#Config_Multipart)\. 
 
-### Manage Version Markers<a name="w292aac26c11c17c11b7c11b8"></a>
+### Manage Version Markers<a name="w293aac25c11c17c11b7c11b8"></a>
 
 We recommend that you enable a lifecycle configuration rule in Amazon S3 to remove expired object delete markers for versioned buckets that you use with Amazon EMR\. When deleting an object in a versioned bucket, a delete marker is created\. If all previous versions of the object subsequently expire, an expired object delete marker is left in the bucket\. While you are not charged for delete markers, removing expired markers can improve the performance of LIST requests\. For more information, see [Lifecycle Configuration for a Bucket with Versioning](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/lifecycle-configuration-bucket-with-versioning.html) in the Amazon Simple Storage Service Console User Guide\.
 
-### Performance best practices<a name="w292aac26c11c17c11b7c11c10"></a>
+### Performance best practices<a name="w293aac25c11c17c11b7c11c10"></a>
 
 Depending on your workloads, specific types of usage of EMR clusters and applications on those clusters can result in a high number of requests against a bucket\. For more information, see [Request Rate and Performance Considerations](https://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html) in the *Amazon Simple Storage Service Developer Guide*\. 

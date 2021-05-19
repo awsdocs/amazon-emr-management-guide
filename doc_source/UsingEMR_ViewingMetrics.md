@@ -123,8 +123,8 @@ The following metrics are available for clusters running Hadoop 2\.x versions\.
 |  MultiMasterInstanceGroupNodesRunningPercentage  |  The percentage of master nodes that are running over the requested master node instance count\.  Use case: Monitor master node failure and replacement Units: *Percent*  | 
 |  MultiMasterInstanceGroupNodesRequested  |  The number of requested master nodes\.  Use case: Monitor master node failure and replacement Units: *Count*  | 
 | IO | 
-|  S3BytesWritten  |  The number of bytes written to Amazon S3\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
-|  S3BytesRead  |  The number of bytes read from Amazon S3\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
+|  S3BytesWritten  |  The number of bytes written to Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on Amazon EMR\.  Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
+|  S3BytesRead  |  The number of bytes read from Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on Amazon EMR\.  Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
 |  HDFSUtilization  |  The percentage of HDFS storage currently used\. Use case: Analyze cluster performance Units: *Percent*  | 
 |  HDFSBytesRead  |  The number of bytes read from HDFS\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
 |  HDFSBytesWritten  |  The number of bytes written to HDFS\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
@@ -170,8 +170,8 @@ The following are Hadoop 1 metrics:
 |  TaskNodesPending  |  The number of task nodes waiting to be assigned\. All of the task nodes requested may not be immediately available; this metric reports the pending requests\. Data points for this metric are reported only when a corresponding instance group exists\. Use case: Monitor cluster health Units: *Count*  | 
 |  LiveTaskTrackers  |  The percentage of task trackers that are functional\. Use case: Monitor cluster health Units: *Percent*  | 
 | IO | 
-|  S3BytesWritten  |  The number of bytes written to Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
-|  S3BytesRead  |  The number of bytes read from Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
+|  S3BytesWritten  |  The number of bytes written to Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on Amazon EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
+|  S3BytesRead  |  The number of bytes read from Amazon S3\. This metric aggregates MapReduce jobs only, and does not apply for other workloads on Amazon EMR\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
 |  HDFSUtilization  |  The percentage of HDFS storage currently used\. Use case: Analyze cluster performance Units: *Percent*  | 
 |  HDFSBytesRead  |  The number of bytes read from HDFS\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 
 |  HDFSBytesWritten  |  The number of bytes written to HDFS\. Use case: Analyze cluster performance, Monitor cluster progress Units: *Count*  | 

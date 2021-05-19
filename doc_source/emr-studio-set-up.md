@@ -18,6 +18,8 @@ Use a *member* account in your AWS organization to set up an EMR Studio accordin
    + [Define Security Groups to Control EMR Studio Network Traffic](emr-studio-security-groups.md)
    + [Establish Access and Permissions for Git\-Based Repositories](emr-studio-enable-git.md)
 
+   You can also use AWS CloudFormation to create your EMR Studio resources\. For an example CloudFormation template, see `full_studio_dependencies.yml` in the [emr\-studio\-samples GitHub repository](https://github.com/aws-samples/emr-studio-samples/blob/main/full_studio_dependencies.yml)\. For more information about CloudFormation, see [Working with templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html) and [Working with stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)\.
+
 1. [Add Required Permissions to Create and Manage an EMR Studio](emr-studio-admin-permissions.md)
 
 1. [Create an EMR Studio](emr-studio-create-studio.md)

@@ -9,6 +9,10 @@ We do not recommend turning off block public access for your account\.
 
 Block public access is only applicable during cluster creation\. Block public access does not block IAM principals with appropriate permissions from updating security group configurations to allow public access on running clusters\.
 
+Block public access is an account level configuration that helps you centrally manage public network access to Amazon EMR clusters in a Region\. When account users launch clusters in the Region where you have enabled block public access configuration, Amazon EMR checks the port rules defined in the configuration and compare it with inbound traffic rules specified in the security groups associated with the clusters\. If these security groups have inbound rules that open ports to the public IP address but these ports are not configured as exceptions in block public access configuration, Amazon EMR will fail the cluster creation and send an exception to the user\. 
+
+You can update security groups and the block public access configuration in your accounts at any time\. Amazon EMR does not check your clusters that are already running against block public access configuration after such updates and will not fail clusters that are already running\.
+
 Amazon EMR block public access is available in the following regions:
 + US East \(N\. Virginia\) — us\-east\-1
 + US East \(Ohio\) — us\-east\-2

@@ -165,7 +165,7 @@ When the status progresses to **Waiting**, your cluster is up, running, and read
    ```
    aws emr create-cluster \
    --name "My First EMR Cluster" \
-   --release-label emr-5.32.0 \
+   --release-label emr-5.33.0 \
    --applications Name=Spark \
    --ec2-attributes KeyName=myEMRKeyPairName \
    --instance-type m5.xlarge \
@@ -287,7 +287,7 @@ You will know that the step finished successfully when the status changes to **C
    --steps Type=Spark,Name="My Spark Application",ActionOnFailure=CONTINUE,Args=[s3://DOC-EXAMPLE-BUCKET/health_violations.py,--data_source,s3://DOC-EXAMPLE-BUCKET/food_establishment_data.csv,--output_uri,s3://DOC-EXAMPLE-BUCKET/MyOutputFolder]
    ```
 
-   For more information about submitting steps using the CLI, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/emr/add-steps.html)\.
+   For more information about submitting steps using the CLI, see the [AWS CLICommand Reference](https://docs.aws.amazon.com/cli/latest/reference/emr/add-steps.html)\.
 
    After you submit the step, you should see output with a list of `StepIds`\. Since you submitted one step, there should be just one ID in the list\. Copy your step ID, which you will use to check the status of the step\.
 

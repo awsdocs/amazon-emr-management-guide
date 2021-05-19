@@ -28,7 +28,7 @@ Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a 
 1. Set up other security configuration options as appropriate and choose **Create**\. You must enable Kerberos authentication using the cluster\-dedicated or external KDC\. For more information, see [Configure EMR Security](emr-lf-security.md)\.
 
 **Note**  
-You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud Region\. Security configuration can be done using the CLI\.
+You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud \(US\) Region\. Security configuration can be done using the CLI\.
 
 ------
 #### [ CLI ]

@@ -38,7 +38,7 @@ Amazon EMR encryption settings govern SSE\. For more information, see [Encryptio
 ## Application Limitations<a name="emr-ranger-app-support-limitations"></a>
 
 There are several limitations to keep in mind when you integrate Amazon EMR and Apache Ranger:
-+ You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud Region\. Security configuration can be done using the CLI\.
++ You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud \(US\) Region\. Security configuration can be done using the CLI\.
 + Kerberos must be installed on your cluster\.
 + Application UIs \(user interfaces\) such as the YARN Resource Manager UI, HDFS NameNode UI, and Livy UI are not set with authentication by default\.
 + The HDFS default permissions `umask` are configured so that objects created are set to `world wide readable` by default\.

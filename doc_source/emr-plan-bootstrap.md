@@ -147,7 +147,7 @@ The following example demonstrates a simple bootstrap action script that copies 
 When you launch the cluster, you specify the script\. The following AWS CLI example demonstrates this:
 
 ```
-aws emr create-cluster --name "Test cluster" --release-label emr-5.32.0 \
+aws emr create-cluster --name "Test cluster" --release-label emr-5.33.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --applications Name=Hive Name=Pig \
 --instance-count 3 --instance-type m5.xlarge \

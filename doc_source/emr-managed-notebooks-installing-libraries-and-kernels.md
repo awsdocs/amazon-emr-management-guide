@@ -12,7 +12,7 @@ To enable the feature, do the following:
 Make sure that the permissions policy attached to the service role for EMR Notebooks allows the following action:  
 `elasticmapreduce:ListSteps`  
 For more information, see [Service Role for EMR Notebooks](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-service-role.html)\.
-Use the AWS CLI to run a step on the cluster that sets up EMR Notebooks as shown in the following example\. Replace *us\-east\-1* with the Region in which your cluster resides\. For more information, see [Adding Steps to a Cluster Using the AWS CLI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/add-step-cli.html)\.  
+Use the AWS CLI to run a step on the cluster that sets up EMR Notebooks as shown in the following example\. You must use the step name `EMRNotebooksSetup`\. Replace *us\-east\-1* with the Region in which your cluster resides\. For more information, see [Adding Steps to a Cluster Using the AWS CLI](https://docs.aws.amazon.com/emr/latest/ManagementGuide/add-step-cli.html)\.  
 
    ```
    aws emr add-steps  --cluster-id MyClusterID --steps Type=CUSTOM_JAR,Name=EMRNotebooksSetup,ActionOnFailure=CONTINUE,Jar=s3://us-east-1.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://awssupportdatasvcs.com/bootstrap-actions/EMRNotebooksSetup/emr-notebooks-setup.sh"]

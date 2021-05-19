@@ -94,7 +94,7 @@ Both the instance profile \(EMR\_EC2\_DefaultRole\) and the service role \(EMR\_
             "Arn": "arn:aws:iam::AccountID:role/EMR_EC2_DefaultRole"
 ```
 
-If the default roles do not exist, you can use the following AWS CLI command to create them:
+If the default roles do not exist, you can use the following command to create them:
 
 ```
 aws emr create-default-roles

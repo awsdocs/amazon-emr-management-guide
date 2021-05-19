@@ -44,18 +44,18 @@ The following table lists some of the log files you'll find on the master node\.
 
 By default, Amazon EMR clusters launched using the console automatically archive log files to Amazon S3\. You can specify your own log path, or you can allow the console to automatically generate a log path for you\. For clusters launched using the CLI or API, you must configure Amazon S3 log archiving manually\. 
 
- When Amazon EMR is configured to archive log files to Amazon S3, it stores the files in the S3 location you specified, in the /*JobFlowId*/ folder, where *JobFlowId* is the cluster identifier\. 
+ When Amazon EMR is configured to archive log files to Amazon S3, it stores the files in the S3 location you specified, in the /*cluster\-id*/ folder, where *cluster\-id* is the cluster ID\. 
 
 The following table lists some of the log files you'll find on Amazon S3\.
 
 
 | Location | Description | 
 | --- | --- | 
-|  /*JobFlowId*/node/  | Node logs, including bootstrap action, instance state, and application logs for the node\. The logs for each node are stored in a folder labeled with the identifier of the EC2 instance of that node\. | 
-|  /*JobFlowId*/node/*instanceId*/*application*  | The logs created by each application or daemon associated with an application\. For example, the Hive server log is located at `JobFlowId/node/instanceId/hive/hive-server.log`\. | 
-|  /*JobFlowId*/steps/*N*/  | Step logs that contain information about the processing of the step\. The value of *N* indicates the stepId assigned by Amazon EMR\. For example, a cluster has two steps: `s-1234ABCDEFGH` and `s-5678IJKLMNOP`\. The first step is located in `/mnt/var/log/hadoop/steps/s-1234ABCDEFGH/` and the second step in `/mnt/var/log/hadoop/steps/s-5678IJKLMNOP/`\.  The step logs written by Amazon EMR are as follows\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)  | 
-|  /*JobFlowId*/containers  |  Application container logs\. The logs for each YARN application are stored in these locations\.  | 
-|  /*JobFlowId*/hadoop\-mapreduce/  | The logs that contain information about configuration details and job history of MapReduce jobs\.  | 
+|  /*cluster\-id*/node/  | Node logs, including bootstrap action, instance state, and application logs for the node\. The logs for each node are stored in a folder labeled with the identifier of the EC2 instance of that node\. | 
+|  /*cluster\-id*/node/*instance\-id*/*application*  | The logs created by each application or daemon associated with an application\. For example, the Hive server log is located at `cluster-id/node/instance-id/hive/hive-server.log`\. | 
+|  /*cluster\-id*/steps/*step\-id*/  | Step logs that contain information about the processing of the step\. The value of *step\-id* indicates the step ID assigned by Amazon EMR\. For example, a cluster has two steps: `s-1234ABCDEFGH` and `s-5678IJKLMNOP`\. The first step is located in `/mnt/var/log/hadoop/steps/s-1234ABCDEFGH/` and the second step in `/mnt/var/log/hadoop/steps/s-5678IJKLMNOP/`\.  The step logs written by Amazon EMR are as follows\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)  | 
+|  /*cluster\-id*/containers  |  Application container logs\. The logs for each YARN application are stored in these locations\.  | 
+|  /*cluster\-id*/hadoop\-mapreduce/  | The logs that contain information about configuration details and job history of MapReduce jobs\.  | 
 
 **To view log files archived to Amazon S3 using the console**
 
@@ -65,9 +65,7 @@ The following table lists some of the log files you'll find on Amazon S3\.
 
 1.  Navigate to the log file containing the information to display\. The preceding table gives a list of the types of log files that are available and where you will find them\. 
 
-1.  Double\-click on a log file to view it in the browser\. 
-
- If you don't want to view the log files in the Amazon S3 console, you can download the files from Amazon S3 to your local machine using a tool such as the Amazon S3 Organizer plug\-in for the Firefox web browser, or by writing an application to retrieve the objects from Amazon S3\. For more information, see [Getting Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/GettingObjectsUsingAPIs.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+1. Download the log file object to view it\. For instructions, see [Downloading an object](https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html)\.
 
 ## View Log Files in the Debugging Tool<a name="emr-manage-view-web-log-files-debug"></a>
 

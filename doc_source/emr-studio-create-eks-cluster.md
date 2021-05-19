@@ -29,7 +29,8 @@ A TLS certificate used by the AWS Load Balancer Controller to enable secure HTTP
 ## Prerequisites<a name="emr-studio-emr-on-eks-prereqs"></a>
 
 Before you can set up Amazon EMR on EKS for Amazon EMR Studio, you must have the following items:
-+ Make sure that the IAM principal \(user or role\) that you use to set up EMR on EKS for EMR Studio has the following Amazon EC2 permissions\. These permissions enable Amazon EMR on EKS to create, manage, and delete the security groups that limit inbound traffic to your managed endpoint's load balancer\.
++ A designated AWS Certificate Manager \(ACM\) certificate for EMR Studio\. For information about how to create a certificate, see [Issuing and Managing Certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs.html) in the *AWS Certificate Manager User Guide*\. Note the Amazon Resource Name \(ARN\) of the certificate, which you use to set up IAM permissions and when you create a managed endpoint\.
++ Make sure that your IAM principal \(user or role\) has the following Amazon EC2 permissions\. These permissions enable Amazon EMR on EKS to create, manage, and delete the security groups that limit inbound traffic to your managed endpoint's load balancer\.
 
   ```
   "ec2:CreateSecurityGroup",
@@ -40,13 +41,25 @@ Before you can set up Amazon EMR on EKS for Amazon EMR Studio, you must have the
   "ec2:RevokeSecurityGroupIngress",
   "ec2:DeleteSecurityGroup"
   ```
+
+  You must also allow the `acm:DescribeCertificate` action so that your principal has permission to retrieve your ACM certificate and its metadata\. Replace *arn:aws:acm:*<region>*:*<account\-id>*:certificate/*<certificate\-id>** in the following example IAM policy statement with the ARN of your ACM certificate\.
+
+  ```
+  "Statement": [
+      {
+  
+          "Effect": "Allow",
+          "Action": "acm:DescribeCertificate",
+          "Resource": "<arn:aws:acm:region:account-id:certificate/certificate-id>"
+      }
+  ]
+  ```
 + A designated Amazon EKS cluster that you want to register as a virtual cluster with Amazon EMR on EKS\. Your cluster should be in the same Amazon Virtual Private Cloud as your Studio, and must have at least one private subnet to enable managed endpoints and linking Git\-based repositories\. For more information about EKS clusters, see [Creating an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)\. 
 **Note**  
 There must be *at least one private subnet in common* between your EMR Studio and the Amazon EKS cluster that you use to register your virtual cluster\. Otherwise, your managed endpoint will not appear as an option in your Studio Workspaces\. You can create an Amazon EKS cluster and associate it with the subnets that belong to your Studio\. Alternatively, you can create a Studio and specify your EKS cluster's private subnets\.
 [Amazon EKS optimized Arm Amazon Linux AMIs](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami) are not supported for EMR on EKS managed endpoints\.
 EMR Studio does not currently support Amazon EMR on EKS when you use an AWS Fargate\-only Amazon EKS cluster\.
 + An AWS Load Balancer Controller for your Amazon EKS cluster\. For instructions, see [Application load balancing on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)\. You only need to set up one AWS Load Balancer Controller per EKS cluster\.
-+ A designated AWS Certificate Manager \(ACM\) certificate for EMR Studio\. For information about how to create a certificate, see [Issuing and Managing Certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs.html) in the *AWS Certificate Manager User Guide*\. Note the Amazon Resource Name \(ARN\) of the certificate, which you use when you create a managed endpoint\.
 + The Amazon Resource Name \(ARN\) of your job execution IAM role for Amazon EMR on EKS\. For more information, see [Update trust policy in IAM roles for Job execution](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up.html#setting-up-trust-policy)\. If you have never used Amazon EMR on EKS, you can retrieve the job execution role ARN in [Step 1: Create a Virtual Cluster](#emr-studio-set-up-virtual-cluster)\.
 
 ## Step 1: Create a Virtual Cluster<a name="emr-studio-set-up-virtual-cluster"></a>

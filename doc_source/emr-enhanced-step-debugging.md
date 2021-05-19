@@ -23,7 +23,7 @@ If the step has failed and Amazon EMR can identify the root cause, you see the d
 + To get failure details for a step using the AWS CLI, use the describe\-step command\.
 
   ```
-  aws emr describe-step –cluster-id j-1K48XXXXXHCB –step-id s-3QM0XXXXXM1W
+  aws emr describe-step --cluster-id j-1K48XXXXXHCB --step-id s-3QM0XXXXXM1W
   ```
 
   The output will look similar to the following:

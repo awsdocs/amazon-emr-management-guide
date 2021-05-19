@@ -17,8 +17,6 @@ For information about configuring and using the application interfaces, see [The
 **Launch an on\-cluster UI from a notebook file**
 
 When you use Amazon EMR release versions 5\.33\.0 and later, you can launch the Spark web user interface \(the Spark UI or Spark History Server\), the YARN Timeline Server, or the YARN ResourceManager from a notebook in your Workspace\. On\-cluster UIs work with the PySpark, Spark, or SparkR kernels\. The maximum viewable file size for Spark event logs or container logs is 10 MB\. If your log files exceed 10 MB, we recommend that you use the persistent Spark History Server instead of the on\-cluster Spark UI to debug jobs\.
-
-The on\-cluster UIs are only available in the following AWS Regions: US East \(N\. Virginia\) and US West \(Oregon\)\.
 **Important**  
 In order for Amazon EMR Studio to launch on\-cluster application user interfaces from a Workspace, your cluster must be able to communicate with the Amazon API Gateway\. You must configure your EMR cluster to allow outgoing network traffic to Amazon API Gateway, and make sure that Amazon API Gateway is reachable from your cluster\.   
 The Spark UI accesses container logs by resolving hostnames\. If you use a custom domain name, you must make sure that the hostnames of your cluster nodes can be resolved by Amazon DNS or by the DNS server you specify\. To do so, set the Dynamic Host Configuration Protocol \(DHCP\) options for the Amazon Virtual Private Cloud \(VPC\) that is associated with your cluster\. For more information about DHCP options, see [DHCP option sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon Virtual Private Cloud* *User Guide\.*

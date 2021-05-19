@@ -34,7 +34,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
    --ec2-attributes '{"KeyName":"MyKeyPair","InstanceProfile":"EMR_EC2_DefaultRole",\
    "SubnetId":"subnet-xxxxxxxx","EmrManagedSlaveSecurityGroup":"sg-xxxxxxxx",\
    "EmrManagedMasterSecurityGroup":"sg-xxxxxxxx"}' \
-   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.32.0 \
+   --service-role EMR_DefaultRole --enable-debugging --release-label emr-5.33.0 \
    --log-uri 's3n://my-emr-log-bucket/' --name 'test-awscredentialsprovider-emrfs' \
    --instance-type=m5.xlarge --instance-count 3  \
    --configurations '[{"Classification":"emrfs-site",\

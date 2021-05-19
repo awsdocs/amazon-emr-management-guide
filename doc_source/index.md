@@ -1,7 +1,7 @@
 # Amazon EMR Management Guide
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -72,8 +72,8 @@ Amazon's trademarks and trade dress may not be used in
             + [Import files with Distributed Cache](emr-plan-input-distributed-cache.md)
             + [How to Process Compressed Files](HowtoProcessGzippedFiles.md)
             + [Import DynamoDB Data into Hive](emr-plan-input-dynamodb.md)
-            + [Connect to Data with AWS DirectConnect](emr-plan-input-directconnect.md)
-            + [Upload Large Amounts of Data with AWS Import/Export](emr-plan-input-import-export.md)
+            + [Connect to Data with AWS Direct Connect](emr-plan-input-directconnect.md)
+            + [Upload Large Amounts of Data with AWS Snowball](emr-plan-input-snowball.md)
       + [Configure an Output Location](emr-plan-output.md)
          + [What formats can Amazon EMR return?](emr-plan-output-formats.md)
          + [How to write data to an Amazon S3 bucket you don't own](emr-s3-acls.md)
@@ -120,8 +120,9 @@ Amazon's trademarks and trade dress may not be used in
          + [Minimum Amazon S3 Policy for Private Subnet](private-subnet-iampolicy.md)
       + [Create a Cluster with Instance Fleets or Uniform Instance Groups](emr-instance-group-configuration.md)
          + [Configure Instance Fleets](emr-instance-fleet.md)
-         + [Configure Uniform Instance Groups](emr-uniform-instance-group.md)
-      + [Cluster Configuration Guidelines and Best Practices](emr-plan-instances-guidelines.md)
+         + [Use Capacity Reservations with Instance Fleets](on-demand-capacity-reservations.md)
+         + [Configure uniform instance groups](emr-uniform-instance-group.md)
+         + [Cluster Configuration Guidelines and Best Practices](emr-plan-instances-guidelines.md)
    + [Configure Cluster Logging and Debugging](emr-plan-debugging.md)
    + [Tag Clusters](emr-plan-tags.md)
       + [Tag Restrictions](emr-plan-tags-restrictions.md)
@@ -210,7 +211,7 @@ Amazon's trademarks and trade dress may not be used in
             + [IAM Role for Other AWS Services](emr-ranger-iam-other-AWS.md)
             + [Validate your permissions](emr-ranger-iam-validate.md)
          + [Create the EMR Security Configuration](emr-ranger-security-config.md)
-         + [Store TLS Certificates in AWS Secret Manager](emr-ranger-tls-certificates.md)
+         + [Store TLS Certificates in AWS Secrets Manager](emr-ranger-tls-certificates.md)
          + [Start an EMR cluster](emr-ranger-start-emr-cluster.md)
          + [Considerations and Issues](emr-ranger-security-considerations.md)
       + [Apache Ranger Plugins](emr-ranger-plugins.md)

@@ -7,5 +7,5 @@ Amazon EMR provides several ways to get data onto a cluster\. The most common wa
 + [Import files with Distributed Cache](emr-plan-input-distributed-cache.md)
 + [How to Process Compressed Files](HowtoProcessGzippedFiles.md)
 + [Import DynamoDB Data into Hive](emr-plan-input-dynamodb.md)
-+ [Connect to Data with AWS DirectConnect](emr-plan-input-directconnect.md)
-+ [Upload Large Amounts of Data with AWS Import/Export](emr-plan-input-import-export.md)
++ [Connect to Data with AWS Direct Connect](emr-plan-input-directconnect.md)
++ [Upload Large Amounts of Data with AWS Snowball](emr-plan-input-snowball.md)

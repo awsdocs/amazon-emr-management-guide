@@ -28,7 +28,7 @@ FoxyProxy provides a set of proxy management tools\. It lets you use a proxy ser
 
 1. In Firefox, go to [https://addons\.mozilla\.org/](https://addons.mozilla.org/), search for FoxyProxy Standard, and follow the instructions to add FoxyProxy to Firefox\.
 
-1. Using a text editor, create an JSON file named `foxyproxy-settings.json` from the following example configuration\.
+1. Using a text editor, create a JSON file named `foxyproxy-settings.json` from the following example configuration\.
 
    ```
    {

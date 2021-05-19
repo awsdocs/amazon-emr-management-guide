@@ -18,7 +18,7 @@ For more information on Amazon EMR support for Kerberos and KDC, as well as link
 
    ```
    aws emr create-cluster --name "MyKerberosCluster" \
-   --release-label emr-5.32.0 \
+   --release-label emr-5.33.0 \
    --instance-type m5.xlarge \
    --instance-count 3 \
    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,KeyName=MyEC2KeyPair \

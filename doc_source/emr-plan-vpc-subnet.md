@@ -2,8 +2,6 @@
 
 Most clusters launch into a virtual network using Amazon Virtual Private Cloud \(Amazon VPC\)\. A VPC is an isolated virtual network within AWS that is logically isolated within your AWS account\. You can configure aspects such as private IP address ranges, subnets, routing tables, and network gateways\. For more information, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
-Your account may support EC2\-Classic\. With EC2\-Classic, your instances run in a single, flat network that you share with other customers\. EC2\-Classic is available only with certain accounts in certain Regions\. For more information, see [EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-
 VPC offers the following capabilities:
 + **Processing sensitive data**
 

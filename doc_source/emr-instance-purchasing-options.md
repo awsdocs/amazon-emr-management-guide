@@ -2,7 +2,7 @@
 
 When you set up a cluster, you choose a purchasing option for EC2 instances\. You can choose On\-Demand Instances, Spot Instances, or both\. Prices vary based on the instance type and Region\. For current pricing, see [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing)\.
 
-This topic provides a general overview of instance purchasing options in Amazon EMR\. For more information about suitable applications for each purchasing option and implications for data processing workloads, see [When Should You Use Spot Instances?](emr-plan-instances-guidelines.md#emr-plan-spot-instances)\.
+Your choice to use instance groups or instance fleets in your cluster determines how you can change instance purchasing options while a cluster is running\. If you choose uniform instance groups, the instance type and purchasing option apply to all EC2 instances in each instance group, and you can only specify the purchasing option for an instance group when you create it\. If you choose instance fleets, you can change purchasing options after you create the instance fleet, and you can mix purchasing options to fulfill a target capacity that you specify\. For more information about these configurations, see [Create a Cluster with Instance Fleets or Uniform Instance Groups](emr-instance-group-configuration.md)\.
 
 ## On\-Demand Instances<a name="emr-instances-on-demand"></a>
 
@@ -13,7 +13,7 @@ With On\-Demand Instances, you pay for compute capacity by the hour\. Optionally
 To use Reserved Instances in Amazon EMR, you use Amazon EC2 to purchase the Reserved Instance and specify the parameters of the reservation, including the scope of the reservation as applying to either a Region or an Availability Zone\. For more information, see [Amazon EC2 Reserved Instances](https://aws.amazon.com/ec2/reserved-instances/) and [Buying Reserved Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html) in the *Amazon EC2 User Guide for Linux Instances*\. After you purchase a Reserved Instance, if all of the following conditions are true, Amazon EMR uses the Reserved Instance when a cluster launches:
 + An On\-Demand Instance is specified in the cluster configuration that matches the Reserved Instance specification\.
 + The cluster is launched within the scope of the instance reservation \(the Availability Zone or Region\)\.
-+ The Reserved Instance capacity is still available\.
++ The Reserved Instance capacity is still available
 
 For example, let's say you purchase one `m5.xlarge` Reserved Instance with the instance reservation scoped to the US\-East Region\. You then launch an EMR cluster in US\-East that uses two `m5.xlarge` instances\. The first instance is billed at the Reserved Instance rate and the other is billed at the On\-Demand rate\. Reserved Instance capacity is used before any On\-Demand Instances are created\.
 

@@ -1,6 +1,6 @@
 # Network Traffic Rules<a name="emr-ranger-network"></a>
 
-When Apache Ranger is integrated with your EMR cluster, the cluster needs to communicate with additional servers and AWS services\.
+When Apache Ranger is integrated with your EMR cluster, the cluster needs to communicate with additional servers and AWS\.
 
 All Amazon EMR nodes, including core and task nodes, must be able to communicate with the Apache Ranger Admin servers to download policies\. If your Apache Ranger Admin is running on Amazon EC2, you need to update the security group to be able to take traffic from the EMR cluster\.
 

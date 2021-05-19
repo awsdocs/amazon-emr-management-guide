@@ -206,7 +206,7 @@ aws emr remove-auto-scaling-policy --cluster-id j-1EKZ3TYEVF1S2 --instance-group
 The `describe-cluster` command retrieves the policy configuration in the InstanceGroup block\. For example, the following command retrieves the configuration for the cluster with a cluster ID of `j-1CWOHP4PI30VJ`\.
 
 ```
-aws emr describe-cluster –-cluster-id j-1CWOHP4PI30VJ
+aws emr describe-cluster --cluster-id j-1CWOHP4PI30VJ
 ```
 
 The command produces the following example output\.

@@ -1,8 +1,12 @@
-# Configure Uniform Instance Groups<a name="emr-uniform-instance-group"></a>
+# Configure uniform instance groups<a name="emr-uniform-instance-group"></a>
 
 With the instance groups configuration, each node type \(master, core, or task\) consists of the same instance type and the same purchasing option for instances: On\-Demand or Spot\. You specify these settings when you create an instance group\. They can't be changed later\. You can, however, add instances of the same type and purchasing option to core and task instance groups\. You can also remove instances\.
 
+If the cluster’s On\-Demand instances match the attributes of open Capacity Reservations \(instance type, platform, tenancy and Availability Zone\) available in your account, the Capacity Reservations are applied automatically\. You can use open Capacity Reservations for master, core and/or task nodes\. However, you cannot use targeted Capacity Reservations or prevent instances from launching into open Capacity Reservations with matching attributes when provisioning clusters using instance groups\. If you want to use targeted Capacity Reservations or prevent instances from launching into open Capacity Reservations, use Instance Fleets instead\. For more information, see [Use Capacity Reservations with Instance Fleets](on-demand-capacity-reservations.md)\.
+
 To add different instance types after a cluster is created, you can add additional task instance groups\. You can choose different instance types and purchasing options for each instance group\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
+
+When launching instances, the on\-demand instance's Capacity Reservation preference defaults to `open`, which enables it to run in any open Capacity Reservation that has matching attributes \(instance type, platform, Availability Zone\)\. For more information about On\-Demand Capacity Reservations, see [Use Capacity Reservations with Instance Fleets](on-demand-capacity-reservations.md)\.
 
 This section covers creating a cluster with uniform instance groups\. For more information about modifying an existing instance group by adding or removing instances manually or with automatic scaling, see [Manage Clusters](emr-manage.md)\.
 
@@ -52,7 +56,7 @@ The following example demonstrates a `create-cluster` command that creates maste
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
 ```
-aws emr create-cluster --name "MySpotCluster" --release-label emr-5.32.0 \
+aws emr create-cluster --name "MySpotCluster" --release-label emr-5.33.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --instance-groups InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,BidPrice=0.25 \
 InstanceGroupType=CORE,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.03 \

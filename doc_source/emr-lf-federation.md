@@ -2,7 +2,7 @@
 
 To establish a trust relationship between your organization's Identity Provider \(IdP\) and AWS, you must do the following:
 + Tell your IdP about AWS as a service provider\. 
-+ Tell AWS about your external IdP by creating an IAM identity provider and role for SAML access in AWS IAM\. 
++ Tell AWS about your external IdP by creating an IAM identity provider and role for SAML access in AWS Identity and Access Management\. 
 
 This process is called adding a *relying party trust*\. For more information about relying party trusts, see [Configuring your SAML 2\.0 IdP with relying party trust and adding claims](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html) in the AWS Identity and Access Management User Guide\.
 

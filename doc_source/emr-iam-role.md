@@ -316,8 +316,8 @@ The following shows the contents of the current `AmazonEMRServicePolicy_v2` poli
 			"Action": "iam:PassRole",
 			"Resource": "arn:aws:iam::*:role/EMR_AutoScaling_DefaultRole",
 			"Condition": {
-				"StringEquals": {
-					"iam:PassedToService": "application-autoscaling.amazonaws.com"
+				"StringLike": {
+					"iam:PassedToService": "application-autoscaling.amazonaws.com*"
 				}
 			}
 		},
@@ -327,8 +327,8 @@ The following shows the contents of the current `AmazonEMRServicePolicy_v2` poli
 			"Action": "iam:PassRole",
 			"Resource": "arn:aws:iam::*:role/EMR_EC2_DefaultRole",
 			"Condition": {
-				"StringEquals": {
-					"iam:PassedToService": "ec2.amazonaws.com"
+				"StringLike": {
+					"iam:PassedToService": "ec2.amazonaws.com*"
 				}
 			}
 		}

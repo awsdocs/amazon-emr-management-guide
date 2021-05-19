@@ -58,6 +58,8 @@ Your EMR Studio service role must have read and write access to the bucket that 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-create-studio.html)
 
 1. Choose **Create Studio** to finish and navigate to the **Studios** page\. You should see your new Studio in the list with details such as **Studio name**, **Create date**, and **Studio access URL**\.
+**Important**  
+Make sure you disable proxy management tools such as FoxyProxy or SwitchyOmega in your browser\. Active proxies can cause errors when you choose **Create Studio**, and result in a **Network Failure **error message\.
 
 After you create a Studio, follow the instructions in [Assign a User or Group to Your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
