@@ -1,4 +1,4 @@
-# Service Role for EMR Notebooks<a name="emr-managed-notebooks-service-role"></a>
+# Service role for EMR Notebooks<a name="emr-managed-notebooks-service-role"></a>
 
 Each EMR notebook needs permissions to access other AWS resources and perform actions\. The IAM policies attached to this service role provide permissions for the notebook to interoperate with other AWS services\. When you create a notebook using the AWS Management Console, you specify an *AWS service role*\. You can use the default role, `EMR_Notebooks_DefaultRole`, or specify a role that you create\. If a notebook has not been created before, you can choose to create the default role\.
 + The default role name is `EMR_Notebooks_DefaultRole`\.

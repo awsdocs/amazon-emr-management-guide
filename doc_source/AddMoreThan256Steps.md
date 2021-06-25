@@ -1,6 +1,6 @@
-# Add More than 256 Steps to a Cluster<a name="AddMoreThan256Steps"></a>
+# Add more than 256 steps to a cluster<a name="AddMoreThan256Steps"></a>
 
-With AMI 3\.1\.1 \(Hadoop 2\.x\) or later and AMI 2\.4\.8 \(Hadoop 1\.x\) or later, you can submit an unlimited number of steps over the lifetime of a long\-running cluster\. However, only 256 steps can be PENDING or RUNNING at any given time\. For earlier AMI versions, the total number of steps that can be processed by a cluster is limited to 256, including system steps such as install Hive and install Pig\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\.
+With AMI 3\.1\.1 \(Hadoop 2\.x\) or later and AMI 2\.4\.8 \(Hadoop 1\.x\) or later, you can submit an unlimited number of steps over the lifetime of a long\-running cluster\. However, only 256 steps can be PENDING or RUNNING at any given time\. For earlier AMI versions, the total number of steps that can be processed by a cluster is limited to 256, including system steps such as install Hive and install Pig\. For more information, see [Submit work to a cluster](AddingStepstoaJobFlow.md)\.
 
 You can use one of several methods to overcome the 256\-step limit in AMI versions earlier than 3\.1\.1 and 2\.4\.8: 
 
@@ -14,4 +14,4 @@ You can use one of several methods to overcome the 256\-step limit in AMI versio
 
 1. Connect to your long\-running cluster via SSH and submit Hadoop jobs using the Hadoop API\. For more information, see [http://hadoop\.apache\.org/docs/current/api/org/apache/hadoop/mapred/JobClient\.html](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapred/JobClient.html)\.
 
-1. Connect to the master node and submit jobs to the cluster\. You can connect using an SSH client, such as PuTTY or OpenSSH, and manually submit jobs to the cluster, or you can use the `ssh` subcommand in the AWS CLI to both connect and submit jobs\. For more information about establishing an SSH connection with the master node, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. For more information about interactively submitting Hadoop jobs, see [Submit Hadoop Jobs Interactively](interactive-jobs.md)\.
+1. Connect to the master node and submit jobs to the cluster\. You can connect using an SSH client, such as PuTTY or OpenSSH, and manually submit jobs to the cluster, or you can use the `ssh` subcommand in the AWS CLI to both connect and submit jobs\. For more information about establishing an SSH connection with the master node, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. For more information about interactively submitting Hadoop jobs, see [Submit Hadoop jobs interactively](interactive-jobs.md)\.

@@ -1,4 +1,4 @@
-# Amazon EMR Components<a name="emr-lf-components"></a>
+# Amazon EMR components<a name="emr-lf-components"></a>
 
 Amazon EMR enables fine\-grained access control with Lake Formation through the following components: 
 + **Proxy agent** \- The proxy agent is based on Apache Knox\. It receives SAML\-authenticated requests from users and translates SAML claims to temporary credentials\. It also stores the temporary credentials in the secret agent\. The proxy agent runs on the master node as the `knox` system user and writes logs to the `/var/log/knox` directory\.

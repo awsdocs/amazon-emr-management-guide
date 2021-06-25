@@ -1,4 +1,4 @@
-# Update or Delete a Git\-based Repository<a name="emr-git-repo-delete"></a>
+# Update or delete a Git\-based repository<a name="emr-git-repo-delete"></a>
 
 **To update a Git\-based repository**
 
@@ -17,4 +17,4 @@
 1. On the repository page, choose **Delete**\.
 
 **Note**  
-To delete the local Git repository from Amazon EMR, you must first unlink any notebooks from this repository\. For more information, see [Link or Unlink a Git\-based Repository](emr-git-repo-link.md)\. Deleting a Git repository will not delete any secret created for the repository\. You can delete the secret in AWS Secrets Manager\.
+To delete the local Git repository from Amazon EMR, you must first unlink any notebooks from this repository\. For more information, see [Link or unlink a Git\-based repository](emr-git-repo-link.md)\. Deleting a Git repository will not delete any secret created for the repository\. You can delete the secret in AWS Secrets Manager\.

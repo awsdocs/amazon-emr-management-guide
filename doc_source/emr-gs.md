@@ -1,4 +1,4 @@
-# Tutorial: Getting Started with Amazon EMR<a name="emr-gs"></a>
+# Tutorial: Getting started with Amazon EMR<a name="emr-gs"></a>
 
 ## Overview<a name="emr-getting-started-overview"></a>
 
@@ -7,32 +7,32 @@ With Amazon EMR, you can set up a cluster to process and analyze data with big d
 ![\[Workflow diagram for Amazon EMR that outlines the three major workflow categories of Plan and Configure, Manage, and Clean Up.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/emr-workflow.png)
 
 **Prerequisites**
-+ Before you launch an Amazon EMR cluster, make sure you complete the tasks in [Setting Up Amazon EMR](emr-setting-up.md)\.
++ Before you launch an Amazon EMR cluster, make sure you complete the tasks in [Setting up Amazon EMR](emr-setting-up.md)\.
 
 **This tutorial introduces you to the following Amazon EMR tasks:**
 + [Step 1: Plan and Configure](#emr-getting-started-plan-and-configure)
-  + [Prepare Storage for Cluster Input and Output](#emr-getting-started-prepare-storage)
-  + [Develop and Prepare an Application for Amazon EMR](#emr-getting-started-prepare-app)
-  + [Launch an Amazon EMR Cluster](#emr-getting-started-launch-sample-cluster)
+  + [Prepare storage for cluster input and output](#emr-getting-started-prepare-storage)
+  + [Develop and prepare an application for Amazon EMR](#emr-getting-started-prepare-app)
+  + [Launch an Amazon EMR cluster](#emr-getting-started-launch-sample-cluster)
 + [Step 2: Manage](#emr-getting-started-manage)
-  + [Submit Work to Amazon EMR](#emr-getting-started-submit-spark-step)
-  + [View Results](#emr-getting-started-view-results)
-  + [\(Optional\) Set Up Cluster Connections](#emr-getting-started-connect-to-cluster)
+  + [Submit work to Amazon EMR](#emr-getting-started-submit-spark-step)
+  + [View results](#emr-getting-started-view-results)
+  + [\(Optional\) Set up cluster connections](#emr-getting-started-connect-to-cluster)
 + [Step 3: Clean Up](#emr-getting-started-clean-up)
   + [Shut down your cluster](#emr-getting-started-stop-cluster)
   + [Delete S3 resources](#emr-getting-started-delete-bucket)
 
-You'll find links to more detailed topics as you work through this tutorial, and ideas for additional steps in the [Next Steps](#emr-gs-next-steps) section\. If you have questions or get stuck, contact the Amazon EMR team on our [Discussion Forum](https://forums.aws.amazon.com/forum.jspa?forumID=52)\.
+You'll find links to more detailed topics as you work through this tutorial, and ideas for additional steps in the [Next steps](#emr-gs-next-steps) section\. If you have questions or get stuck, contact the Amazon EMR team on our [Discussion forum](https://forums.aws.amazon.com/forum.jspa?forumID=52)\.
 
 **Cost**
-+ The sample cluster that you create runs in a live environment\. The cluster will accrue minimal charges and will only run for the duration of this tutorial as long as you complete the cleanup tasks\. Charges accrue at the per\-second rate for Amazon EMR pricing and vary by Region\. For more information, see [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing)\.
-+ Minimal charges might also accrue for small files that you store in Amazon S3 for the tutorial\. Some or all of your charges for Amazon S3 might be waived if you are within the usage limits of the AWS Free Tier\. For more information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing) and [AWS Free Tier](https://aws.amazon.com/free/)\.
++ The sample cluster that you create runs in a live environment\. The cluster will accrue minimal charges and will only run for the duration of this tutorial as long as you complete the cleanup tasks\. Charges accrue at the per\-second rate for Amazon EMR pricing and vary by Region\. For more information, see [Amazon EMR pricing](https://aws.amazon.com/emr/pricing)\.
++ Minimal charges might also accrue for small files that you store in Amazon S3 for the tutorial\. Some or all of your charges for Amazon S3 might be waived if you are within the usage limits of the AWS Free Tier\. For more information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing) and [AWS Free Tier](https://aws.amazon.com/free/)\.
 
-## Step 1: Plan and Configure an Amazon EMR Cluster<a name="emr-getting-started-plan-and-configure"></a>
+## Step 1: Plan and configure an Amazon EMR cluster<a name="emr-getting-started-plan-and-configure"></a>
 
 In this step, you plan for and launch a simple Amazon EMR cluster with Apache Spark installed\. The setup process includes creating an Amazon S3 bucket to store a sample PySpark script, an input dataset, and cluster output\.
 
-### Prepare Storage for Cluster Input and Output<a name="emr-getting-started-prepare-storage"></a>
+### Prepare storage for cluster input and output<a name="emr-getting-started-prepare-storage"></a>
 
 Create an Amazon S3 bucket to store an example PySpark script, input data, and output data\. Create the bucket in the same AWS Region where you plan to launch your Amazon EMR cluster\. For example, US West \(Oregon\) us\-west\-2\. Buckets and folders that you use with Amazon EMR have the following limitations:
 + Names can consist of only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\.
@@ -40,9 +40,9 @@ Create an Amazon S3 bucket to store an example PySpark script, input data, and o
 + A bucket name must be unique *across all AWS accounts\.*
 + An output folder must be empty\.
 
-To create a bucket for this tutorial, see [How do I create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+To create a bucket for this tutorial, see [How do I create an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
-### Develop and Prepare an Application for Amazon EMR<a name="emr-getting-started-prepare-app"></a>
+### Develop and prepare an application for Amazon EMR<a name="emr-getting-started-prepare-app"></a>
 
 In this step, you upload a sample PySpark script to Amazon S3\. This is the most common way to prepare an application for Amazon EMR\. EMR lets you specify the Amazon S3 location of the script when you submit work to your cluster\. You also upload sample input data to Amazon S3 for the PySpark script to process\.
 
@@ -103,8 +103,8 @@ if __name__ == "__main__":
 **Input arguments**
 
 You must include values for the following arguments when you run the PySpark script as a step\.
-+ `--data_source` – The Amazon S3 URI of the food establishment data CSV file\. You will prepare this file below\.
-+ `--output_uri` – The URI of the Amazon S3 bucket where the output results will be saved\.
++ `--data_source` \- The Amazon S3 URI of the food establishment data CSV file\. You will prepare this file below\.
++ `--output_uri` \- The URI of the Amazon S3 bucket where the output results will be saved\.
 
 The input data is a modified version of a publicly available food establishment inspection dataset with Health Department inspection results in King County, Washington, from 2006 to 2020\. For more information, see [King County Open Data: Food Establishment Inspection Data](https://data.kingcounty.gov/Health-Wellness/Food-Establishment-Inspection-Data/f29f-zza5)\. Following are sample rows from the dataset\.
 
@@ -123,9 +123,9 @@ name, inspection_result, inspection_closed_business, violation_type, violation_p
 
 1. Upload the CSV file to the S3 bucket that you created for this tutorial\. For step\-by\-step instructions, see [How do I upload files and folders to an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
-For more information about setting up data for EMR, see [Prepare Input Data](emr-plan-input.md)\.
+For more information about setting up data for EMR, see [Prepare input data](emr-plan-input.md)\.
 
-### Launch an Amazon EMR Cluster<a name="emr-getting-started-launch-sample-cluster"></a>
+### Launch an Amazon EMR cluster<a name="emr-getting-started-launch-sample-cluster"></a>
 
 Now that you've completed the prework, you can launch a sample cluster with Apache Spark installed using the latest [Amazon EMR release](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)\.
 
@@ -143,11 +143,15 @@ If you created your AWS account after December 04, 2013, Amazon EMR sets up a cl
 
 1. On the **Create Cluster \- Quick Options** page, note the default values for **Release**, **Instance type**, **Number of instances**, and **Permissions**\. These fields autopopulate with values chosen for general\-purpose clusters\. For more information about the **Quick Options** configuration settings, see [Summary of Quick Options](emr-launch-with-quick-options.md#emr-quick-cluster-options)\.
 
-1. Change the following fields: 
-   + Enter a **Cluster name** to help you identify the cluster\. For example, *My First EMR Cluster*\.
-   + Leave **Logging** enabled, but replace the **S3 folder** value with the Amazon S3 bucket you created, followed by **/logs**\. For example, **s3://DOC\-EXAMPLE\-BUCKET/logs**\. This will create a new folder called 'logs' in your bucket, where EMR will copy the log files of your cluster\.
-   + Under **Applications**, choose the **Spark** option\. **Quick Options** lets you select from the most common application combinations to install on your cluster\.
-   + Under **Security and access**, choose the **EC2 key pair** that you designated or created in [Create an Amazon EC2 Key Pair for SSH](emr-setting-up.md#emr-setting-up-key-pair)\.
+1. Enter a **Cluster name** to help you identify the cluster\. For example, *My First EMR Cluster*\.
+
+1. Leave **Logging** enabled, but replace the **S3 folder** value with the Amazon S3 bucket you created, followed by **/logs**\. For example, **s3://DOC\-EXAMPLE\-BUCKET/logs**\. This will create a new folder called 'logs' in your bucket, where EMR will copy the log files of your cluster\.
+
+1. Under **Applications**, choose the **Spark** option to install Spark on your cluster\. **Quick Options** lets you select from the most common application combinations\.
+**Note**  
+It's important to choose the applications that you want to run on your Amazon EMR cluster before you launch the cluster\. You can't add or remove applications from a cluster after it has been launched\.
+
+1. Under **Security and access**, choose the **EC2 key pair** that you designated or created in [Create an Amazon EC2 key pair for SSH](emr-setting-up.md#emr-setting-up-key-pair)\.
 
 1. Choose **Create cluster** to launch the cluster and open the cluster status page\.
 
@@ -217,17 +221,17 @@ When the cluster status progresses to `WAITING`, your cluster is up, running, an
 
 ------
 
-For more information about reading the cluster summary, see [View Cluster Status and Details](emr-manage-view-clusters.md)\. For information about cluster status, see [Understanding the Cluster Lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.
+For more information about reading the cluster summary, see [View cluster status and details](emr-manage-view-clusters.md)\. For information about cluster status, see [Understanding the cluster lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.
 
-## Step 2: Manage Amazon EMR Clusters<a name="emr-getting-started-manage"></a>
+## Step 2: Manage your Amazon EMR cluster<a name="emr-getting-started-manage"></a>
 
 Now that your cluster is up and running, you can connect to it and manage it\. You can also submit work to your running cluster to process and analyze data\.
 
-### Submit Work to Amazon EMR<a name="emr-getting-started-submit-spark-step"></a>
+### Submit work to Amazon EMR<a name="emr-getting-started-submit-spark-step"></a>
 
 With your cluster up and running, you can submit `health_violations.py` as a *step*\. A step is a unit of cluster work made up of one or more jobs\. For example, you might submit a step to compute values, or to transfer and process data\. 
 
-You can submit multiple steps to accomplish a set of tasks on a cluster when you create the cluster, or after it's already running\. For more information, see [Submit Work to a Cluster](AddingStepstoaJobFlow.md)\.
+You can submit multiple steps to accomplish a set of tasks on a cluster when you create the cluster, or after it's already running\. For more information, see [Submit work to a cluster](AddingStepstoaJobFlow.md)\.
 
 ------
 #### [ Console ]
@@ -243,8 +247,8 @@ You can submit multiple steps to accomplish a set of tasks on a cluster when you
 1. Configure the step according to the following guidelines:
    + For **Step type**, choose **Spark application**\. You should see additional fields for **Deploy Mode**, **Spark\-submit options**, and **Application location** appear\.
    + For **Name**, leave the default value or type a new name\. If you have many steps in a cluster, naming each step helps you keep track of them\.
-   + For **Deploy mode**, leave the default value **Cluster**\. For more information about Spark deployment modes, see [Cluster Mode Overview](https://spark.apache.org/docs/latest/cluster-overview.html) in the Apache Spark documentation\.
-   + Leave the **Spark\-submit options** field blank\. For more information about `spark-submit` options, see [Launching Applications with spark\-submit](https://spark.apache.org/docs/latest/submitting-applications.html#launching-applications-with-spark-submit)\. 
+   + For **Deploy mode**, leave the default value **Cluster**\. For more information about Spark deployment modes, see [Cluster mode overview](https://spark.apache.org/docs/latest/cluster-overview.html) in the Apache Spark documentation\.
+   + Leave the **Spark\-submit options** field blank\. For more information about `spark-submit` options, see [Launching applications with spark\-submit](https://spark.apache.org/docs/latest/submitting-applications.html#launching-applications-with-spark-submit)\. 
    + For **Application location**, enter the location of your `health_violations.py` script in Amazon S3\. For example, *s3://DOC\-EXAMPLE\-BUCKET/health\_violations\.py*\.
    + In the **Arguments** field, enter the following arguments and values:
 
@@ -253,7 +257,7 @@ You can submit multiple steps to accomplish a set of tasks on a cluster when you
      --output_uri s3://DOC-EXAMPLE-BUCKET/myOutputFolder
      ```
 
-     Replace *s3://DOC\-EXAMPLE\-BUCKET/food\_establishment\_data\.csv* with the S3 URI of the input data you prepared in [Develop and Prepare an Application for Amazon EMR](#emr-getting-started-prepare-app)\.
+     Replace *s3://DOC\-EXAMPLE\-BUCKET/food\_establishment\_data\.csv* with the S3 URI of the input data you prepared in [Develop and prepare an application for Amazon EMR](#emr-getting-started-prepare-app)\.
 
      Replace *DOC\-EXAMPLE\-BUCKET* with the name of the bucket you created for this tutorial, and *myOutputFolder* with a name for your cluster output folder\.
    + For **Action on failure**, accept the default option **Continue** so that if the step fails, the cluster continues to run\.
@@ -269,7 +273,7 @@ You will know that the step finished successfully when the status changes to **C
 
 **To submit a Spark application as a step using the AWS CLI**
 
-1.  Make sure you have the `ClusterId` of the cluster you launched in [Launch an Amazon EMR Cluster](#emr-getting-started-launch-sample-cluster)\. You can also retrieve your cluster ID with the following command\.
+1.  Make sure you have the `ClusterId` of the cluster you launched in [Launch an Amazon EMR cluster](#emr-getting-started-launch-sample-cluster)\. You can also retrieve your cluster ID with the following command\.
 
    ```
    aws emr list-clusters --cluster-states WAITING
@@ -287,7 +291,7 @@ You will know that the step finished successfully when the status changes to **C
    --steps Type=Spark,Name="My Spark Application",ActionOnFailure=CONTINUE,Args=[s3://DOC-EXAMPLE-BUCKET/health_violations.py,--data_source,s3://DOC-EXAMPLE-BUCKET/food_establishment_data.csv,--output_uri,s3://DOC-EXAMPLE-BUCKET/MyOutputFolder]
    ```
 
-   For more information about submitting steps using the CLI, see the [AWS CLICommand Reference](https://docs.aws.amazon.com/cli/latest/reference/emr/add-steps.html)\.
+   For more information about submitting steps using the CLI, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/emr/add-steps.html)\.
 
    After you submit the step, you should see output with a list of `StepIds`\. Since you submitted one step, there should be just one ID in the list\. Copy your step ID, which you will use to check the status of the step\.
 
@@ -342,9 +346,9 @@ You will know that the step was successful when the `State` changes to `COMPLETE
 
 ------
 
-For more information about the step lifecycle, see [Running Steps to Process Data](emr-overview.md#emr-overview-steps)\.
+For more information about the step lifecycle, see [Running steps to process data](emr-overview.md#emr-overview-steps)\.
 
-### View Results<a name="emr-getting-started-view-results"></a>
+### View results<a name="emr-getting-started-view-results"></a>
 
 After a step runs successfully, you can view its output results in the Amazon S3 output folder you specified when you submitted the step\.
 
@@ -378,9 +382,9 @@ After a step runs successfully, you can view its output results in the Amazon S3
    HIMITSU TERIYAKI, 128
    ```
 
-For more information about Amazon EMR cluster output, see [Configure an Output Location](emr-plan-output.md)\.
+For more information about Amazon EMR cluster output, see [Configure an output location](emr-plan-output.md)\.
 
-### \(Optional\) Set Up Cluster Connections<a name="emr-getting-started-connect-to-cluster"></a>
+### \(Optional\) Set up cluster connections<a name="emr-getting-started-connect-to-cluster"></a>
 
 This step is not required, but you have the option to connect to cluster nodes with Secure Shell \(SSH\) for tasks like issuing commands, running applications interactively, and reading log files\.
 
@@ -439,15 +443,15 @@ You must first be logged in to AWS as a root user or as an IAM principal that is
 
 1. Optionally, choose **ElasticMapReduce\-slave** from the list and repeat the steps above to allow SSH client access to core and task nodes from trusted clients\.
 
-#### Connect to the Cluster<a name="emr-getting-started-connect-ssh"></a>
+#### Connect to the cluster<a name="emr-getting-started-connect-ssh"></a>
 
-After you configure your SSH rules, go to [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md) and follow the instructions to:
+After you configure your SSH rules, go to [Connect to the master node using SSH](emr-connect-master-node-ssh.md) and follow the instructions to:
 + Retrieve the public DNS name of the node to which you want to connect\.
 + Connect to your cluster using SSH\.
 
-For more information on how to authenticate to cluster nodes, see [Authenticate to Amazon EMR Cluster Nodes](emr-authenticate-cluster-connections.md)\.
+For more information on how to authenticate to cluster nodes, see [Authenticate to Amazon EMR cluster nodes](emr-authenticate-cluster-connections.md)\.
 
-## Step 3: Clean Up Amazon EMR Cluster Resources<a name="emr-getting-started-clean-up"></a>
+## Step 3: Clean up your Amazon EMR resources<a name="emr-getting-started-clean-up"></a>
 
 Now that you've submitted work to your cluster and viewed the results of your PySpark application, you can shut the cluster down and delete your designated Amazon S3 bucket to avoid additional charges\. 
 
@@ -471,7 +475,7 @@ The Amazon EMR console does not let you delete a cluster from the list view afte
 
 1. Choose **Terminate** to open the **Terminate cluster** prompt\.
 
-1. In the open prompt, choose **Terminate** again to shut down the cluster\. Depending on the cluster configuration, it may take 5 to 10 minutes to completely terminate and release allocated EC2 resources\. For more information about shutting down Amazon EMR clusters, see [Terminate a Cluster](UsingEMR_TerminateJobFlow.md)\.
+1. In the open prompt, choose **Terminate** again to shut down the cluster\. Depending on the cluster configuration, it may take 5 to 10 minutes to completely terminate and release allocated EC2 resources\. For more information about shutting down Amazon EMR clusters, see [Terminate a cluster](UsingEMR_TerminateJobFlow.md)\.
 **Note**  
 Clusters are often created with termination protection on to prevent accidental shutdown\. If you followed the tutorial closely, termination protection should be off\. If termination protection is on, you will see a prompt to change the setting before terminating the cluster\. Choose **Change**, then **Off**\.
 
@@ -494,7 +498,7 @@ Clusters are often created with termination protection on to prevent accidental 
    aws emr describe-cluster --cluster-id myClusterId
    ```
 
-   Following is example output in JSON format\. The cluster `Status` should change from **`TERMINATING`** to **`TERMINATED`**\. Depending on the cluster configuration, it may take 5 to 10 minutes to completely terminate and release allocated EC2 resources\. For more information about shutting down Amazon EMR clusters, see [Terminate a Cluster](UsingEMR_TerminateJobFlow.md)\.\.
+   Following is example output in JSON format\. The cluster `Status` should change from **`TERMINATING`** to **`TERMINATED`**\. Depending on the cluster configuration, it may take 5 to 10 minutes to completely terminate and release allocated EC2 resources\. For more information about shutting down Amazon EMR clusters, see [Terminate a cluster](UsingEMR_TerminateJobFlow.md)\.\.
 
    ```
    {
@@ -524,32 +528,32 @@ Delete the bucket you created earlier to remove all of the Amazon S3 objects use
 **Note**  
 Your cluster must be completely shut down before you delete your bucket\. Otherwise, you might run into issues when you try to empty the bucket\.
 
-Follow the instructions in [How Do I Delete an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide* to empty your bucket and delete it from S3\.
+Follow the instructions in [How do I delete an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide* to empty your bucket and delete it from S3\.
 
-## Next Steps<a name="emr-gs-next-steps"></a>
+## Next steps<a name="emr-gs-next-steps"></a>
 
 You've now launched your first Amazon EMR cluster from start to finish and walked through essential EMR tasks like preparing and submitting big data applications, viewing results, and shutting down a cluster\. 
 
 Here are some suggested topics to learn more about tailoring your Amazon EMR workflow\.
 
-### Explore Big Data Applications for Amazon EMR<a name="emr-gs-next-explore-apps"></a>
+### Explore big data applications for Amazon EMR<a name="emr-gs-next-explore-apps"></a>
 
 Discover and compare the big data applications you can install on a cluster in the [Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)\. The Release Guide also contains details about each EMR version and tips on how to configure and use frameworks such as Spark and Hadoop on Amazon EMR\.
 
-### Plan Cluster Hardware, Networking, and Security<a name="emr-gs-next-plan-clusters"></a>
+### Plan cluster hardware, networking, and security<a name="emr-gs-next-plan-clusters"></a>
 
-In this tutorial, you create a simple EMR cluster without configuring advanced options such as instance types, networking, and security\. For more information on planning and launching a cluster that meets *your* speed, capacity, and security requirements, see [Plan and Configure Clusters](emr-plan.md) and [Security in Amazon EMR](emr-security.md)\.
+In this tutorial, you create a simple EMR cluster without configuring advanced options such as instance types, networking, and security\. For more information on planning and launching a cluster that meets *your* speed, capacity, and security requirements, see [Plan and configure clusters](emr-plan.md) and [Security in Amazon EMR](emr-security.md)\.
 
-### Manage Clusters<a name="emr-gs-next-manage-clusters"></a>
+### Manage clusters<a name="emr-gs-next-manage-clusters"></a>
 
-Dive deeper into working with running clusters in [Manage Clusters](emr-manage.md), which covers how to connect to clusters, debug steps, and track cluster activities and health\. You can also learn more about adjusting cluster resources in response to workload demands with [EMR managed scaling](emr-managed-scaling.md)\.
+Dive deeper into working with running clusters in [Manage clusters](emr-manage.md), which covers how to connect to clusters, debug steps, and track cluster activities and health\. You can also learn more about adjusting cluster resources in response to workload demands with [EMR managed scaling](emr-managed-scaling.md)\.
 
-### Use a Different Interface<a name="emr-gs-next-interfaces"></a>
+### Use a different interface<a name="emr-gs-next-interfaces"></a>
 
-In addition to the Amazon EMR console, you can manage Amazon EMR using the AWS Command Line Interface, the web service API, or one of the many supported AWS SDKs\. For more information, see [Management Interfaces](emr-overview-benefits.md#emr-what-tools)\.
+In addition to the Amazon EMR console, you can manage Amazon EMR using the AWS Command Line Interface, the web service API, or one of the many supported AWS SDKs\. For more information, see [Management interfaces](emr-overview-benefits.md#emr-what-tools)\.
 
-There are many ways you can interact with applications installed on Amazon EMR clusters\. Some applications like Apache Hadoop publish web interfaces that you can view on cluster instances\. For more information, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. With Amazon EMR clusters running Apache Spark, you can use an EMR notebook in the Amazon EMR console to run queries and code\. For more information, see [Amazon EMR Notebooks](emr-managed-notebooks.md)\.
+There are many ways you can interact with applications installed on Amazon EMR clusters\. Some applications like Apache Hadoop publish web interfaces that you can view on cluster instances\. For more information, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\. With Amazon EMR clusters running Apache Spark, you can use an EMR notebook in the Amazon EMR console to run queries and code\. For more information, see [EMR Notebooks](emr-managed-notebooks.md)\.
 
-### Browse the EMR Technical Blog<a name="emr-gs-next-browse-blogs"></a>
+### Browse the EMR technical blog<a name="emr-gs-next-browse-blogs"></a>
 
-For sample walkthroughs and in\-depth technical discussion of EMR features, see the [AWS Big Data Blog](http://aws.amazon.com/blogs/big-data/tag/amazon-emr/)\.
+For sample walkthroughs and in\-depth technical discussion of EMR features, see the [AWS big data blog](http://aws.amazon.com/blogs/big-data/tag/amazon-emr/)\.

@@ -6,8 +6,8 @@ Create an EMR Studio for your team using the Amazon EMR console or the AWS CLI\.
 
 Before you create an EMR Studio, you must have the following:
 + AWS Single Sign\-On enabled\. For more information, see [Enable AWS Single Sign\-On for Amazon EMR Studio](emr-studio-enable-sso.md)\.
-+ Permission to create and manage an EMR Studio\. For more information, see [Add Required Permissions to Create and Manage an EMR Studio](emr-studio-admin-permissions.md)\.
-+ An IAM service role, IAM user role, IAM session policies, and security groups set up for Amazon EMR Studio\. For more information, see [EMR Studio Security and Access Control](emr-studio-security.md)\.
++ Permission to create and manage an EMR Studio\. For more information, see [Add required permissions to create and manage an EMR Studio](emr-studio-admin-permissions.md)\.
++ An IAM service role, IAM user role, IAM session policies, and security groups set up for Amazon EMR Studio\. For more information, see [EMR Studio security and access control](emr-studio-security.md)\.
 + A designated Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in your Studio\. Your EMR Studio service role must have read and write access to the bucket that you select\.
 + An Amazon Virtual Private Cloud \(VPC\) designated for your Studio\. If you plan to use Amazon EMR on EKS with EMR Studio, choose the same VPC to which your Amazon EKS cluster worker nodes belong\.
 + A maximum of five subnets that belong to your designated VPC to associate with the Studio\. If you plan to use publicly\-hosted Git repositories, you must use private subnets that have access to the internet through Network Address Translation \(NAT\)\. 
@@ -43,7 +43,7 @@ Make sure you disable proxy management tools such as FoxyProxy or SwitchyOmega i
 
 1. \(Optional\) Choose **Add new tag** to add one or more a key\-value tags to the Studio\. Tags help you manage, identify, organize, and filter resources\. For more information, see [Tagging AWS resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)\.
 
-1. Under **Define roles and S3 bucket**, choose a **Service Role** and a **User Role**\. For more information, see [Create an EMR Studio Service Role](emr-studio-service-role.md) and [Create an EMR Studio User Role with Session Policies](emr-studio-user-role.md)\.
+1. Under **Define roles and S3 bucket**, choose a **Service Role** and a **User Role**\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md) and [Create an EMR Studio user role with session policies](emr-studio-user-role.md)\.
 
 1. Under **S3 Bucket**, choose **Browse S3** to select the bucket that you designated for backing up Workspaces and notebook files\.
 **Note**  
@@ -53,7 +53,7 @@ Your EMR Studio service role must have read and write access to the bucket that 
 
 1. Under **Subnets**, select a maximum of five subnets from your VPC to associate with the Studio\. You have the option to add more subnets after you create the Studio\.
 
-1. For **Security and access**, choose either the default security groups or custom security groups\. For more information, see [Define Security Groups to Control EMR Studio Network Traffic](emr-studio-security-groups.md)\.  
+1. For **Security and access**, choose either the default security groups or custom security groups\. For more information, see [Define security groups to control EMR Studio network traffic](emr-studio-security-groups.md)\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-create-studio.html)
 
@@ -61,7 +61,7 @@ Your EMR Studio service role must have read and write access to the bucket that 
 **Important**  
 Make sure you disable proxy management tools such as FoxyProxy or SwitchyOmega in your browser\. Active proxies can cause errors when you choose **Create Studio**, and result in a **Network Failure **error message\.
 
-After you create a Studio, follow the instructions in [Assign a User or Group to Your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+After you create a Studio, follow the instructions in [Assign a user or group to your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
 ------
 #### [ CLI ]
@@ -105,6 +105,6 @@ The following is an example of the output you should see after you successfully 
 }
 ```
 
-Copy the **`StudioId`**, which you use to [Assign a User or Group to Your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\. You should also note the **`Url`**, which is the Studio access URL that your team can use to log in to the Studio\.
+Copy the **`StudioId`**, which you use to [Assign a user or group to your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\. You should also note the **`Url`**, which is the Studio access URL that your team can use to log in to the Studio\.
 
 ------

@@ -1,4 +1,4 @@
-# Set Up Ranger Admin Server<a name="emr-ranger-admin"></a>
+# Set up Ranger Admin server<a name="emr-ranger-admin"></a>
 
 For Amazon EMR integration, the Apache Ranger application plugins must communicate with the Admin server using TLS/SSL\.
 

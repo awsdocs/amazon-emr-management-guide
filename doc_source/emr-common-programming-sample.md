@@ -1,9 +1,9 @@
-# End\-to\-End Amazon EMR Java Source Code Sample<a name="emr-common-programming-sample"></a>
+# End\-to\-end Amazon EMR Java source code sample<a name="emr-common-programming-sample"></a>
 
 Developers can call the Amazon EMR API using custom Java code to do the same things possible with the Amazon EMR console or CLI\. This section provides the end\-to\-end steps necessary to install the AWS Toolkit for Eclipse and run a fully\-functional Java source code sample that adds steps to an Amazon EMR cluster\.
 
 **Note**  
-This example focuses on Java, but Amazon EMR also supports several programming languages with a collection of Amazon EMR SDKs\. For more information, see [Use SDKs to Call Amazon EMR APIs](call-emr-using-sdks.md)\.
+This example focuses on Java, but Amazon EMR also supports several programming languages with a collection of Amazon EMR SDKs\. For more information, see [Use SDKs to call Amazon EMR APIs](call-emr-using-sdks.md)\.
 
  This Java source code example demonstrates how to perform the following tasks using the Amazon EMR API: 
 + Retrieve AWS credentials and send them to Amazon EMR to make API calls
@@ -14,7 +14,7 @@ This example focuses on Java, but Amazon EMR also supports several programming l
 **Note**  
 This sample demonstrates how to add steps to an existing cluster and thus requires that you have an active cluster on your account\.
 
-Before you begin, install a version of the **Eclipse IDE for Java EE Developers** that matches your computer platform\. For more information, go to [Eclipse Downloads](http://www.eclipse.org/downloads/)\.
+Before you begin, install a version of the **Eclipse IDE for Java EE Developers** that matches your computer platform\. For more information, go to [Eclipse downloads](http://www.eclipse.org/downloads/)\.
 
 Next, install the Database Development plugin for Eclipse\.
 
@@ -56,7 +56,7 @@ Next, create a new AWS Java project and run the sample Java source code\.
 
 1. In the **New AWS Java Project** dialog, in the **Project name:** field, enter the name of your new project, for example **EMR\-sample\-code**\.
 
-1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
+1. Choose **Configure AWS accounts…**, enter your public and private access keys, and choose **Finish**\. For more information about creating access keys, see [How do I get security credentials?](https://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html) in the *Amazon Web Services General Reference*\.
 **Note**  
 You should **not** embed access keys directly in code\. The Amazon EMR SDK allows you to put access keys in known locations so that you do not have to keep them in code\.
 

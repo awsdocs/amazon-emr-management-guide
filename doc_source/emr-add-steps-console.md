@@ -1,4 +1,4 @@
-# Adding Steps to a Cluster Using the Console<a name="emr-add-steps-console"></a>
+# Adding steps to a cluster using the console<a name="emr-add-steps-console"></a>
 
 Use the following procedures to add steps to a cluster using the AWS Management Console\. For detailed information about how to submit steps for specific big data applications, see the *[Amazon EMR Release Guide](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)*\.
 
@@ -20,7 +20,7 @@ Running multiple steps in parallel is only supported with Amazon EMR version 5\.
 
 **To add steps to a running cluster**
 
-Using the AWS Management Console, you can add steps to a long\-running cluster—that is, a cluster with the auto\-terminate option disabled\. 
+Using the AWS Management Console, you can add steps to a long\-running cluster \- that is, a cluster with the auto\-terminate option disabled\. 
 
 1. In the [Amazon EMR console](https://console.aws.amazon.com/elasticmapreduce), on the **Cluster List** page, select the link for your cluster\. 
 

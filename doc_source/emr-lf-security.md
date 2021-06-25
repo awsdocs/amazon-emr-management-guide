@@ -1,8 +1,8 @@
-# Configure EMR Security<a name="emr-lf-security"></a>
+# Configure EMR security<a name="emr-lf-security"></a>
 
-## Create an Amazon EMR Security Configuration for Lake Formation<a name="emr-lf-security-config"></a>
+## Create an Amazon EMR security configuration for Lake Formation<a name="emr-lf-security-config"></a>
 
-Before you launch an Amazon EMR cluster integrated with AWS Lake Formation, you'll need to create a security configuration with the IAM roles and identity provider \(IdP\) metadata XML file you created in [Configure a Trust Relationship Between your IdP and Lake Formation](emr-lf-federation.md)\. You will specify this security configuration when you launch the cluster\.
+Before you launch an Amazon EMR cluster integrated with AWS Lake Formation, you'll need to create a security configuration with the IAM roles and identity provider \(IdP\) metadata XML file you created in [Configure a trust relationship between your IdP and Lake Formation](emr-lf-federation.md)\. You will specify this security configuration when you launch the cluster\.
 
 ------
 #### [ Console ]
@@ -17,15 +17,15 @@ Before you launch an Amazon EMR cluster integrated with AWS Lake Formation, you'
 
 1. Select your **IAM role for AWS Lake Formation** to apply\.
 **Note**  
-For more information, see [IAM Roles for Lake Formation](emr-lf-iam-role.md)\.
+For more information, see [IAM roles for Lake Formation](emr-lf-iam-role.md)\.
 
 1. Select your **IAM role for other AWS services** to apply\. 
 
 1. Upload your identify provider \(IdP\) metadata by specifying the S3 path where the metadata is located\. 
 **Note**  
-For more information, see [Configure a Trust Relationship Between your IdP and Lake Formation](emr-lf-federation.md)\.
+For more information, see [Configure a trust relationship between your IdP and Lake Formation](emr-lf-federation.md)\.
 
-1. Set up other security configuration options as appropriate and choose **Create**\. You must enable Kerberos authentication using the cluster\-dedicated KDC\. For more information, see [Configure EMR Security](#emr-lf-security)\. 
+1. Set up other security configuration options as appropriate and choose **Create**\. You must enable Kerberos authentication using the cluster\-dedicated KDC\. For more information, see [Configure EMR security](#emr-lf-security)\. 
 
 ------
 #### [ CLI ]
@@ -66,12 +66,12 @@ For more information, see [Configure a Trust Relationship Between your IdP and L
 
 ------
 
-## Configure Additional Security Features<a name="emr-lf-security-features"></a>
+## Configure additional security features<a name="emr-lf-security-features"></a>
 
 To securely integrate Amazon EMR with AWS Lake Formation, you should also configure the following EMR security features:
-+ Enable Kerberos authentication using the cluster\-dedicated KDC\. For instructions, see [Use Kerberos Authentication](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html)\.
-+ Configure your Amazon EC2 security group or Amazon VPC network access control list \(ACL\) to allow access to the proxy agent \(port 8442\) from your user's desktops\. For more information, see [Control Network Traffic with Security Groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html)\.
-+ \(Optional\) Enable encryption in transit or at rest\. For more information, see [Encryption Options](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-data-encryption-options.html) in the *Amazon EMR Management Guide*\. 
-+ \(Optional\) Create a custom Transport Layer Security \(TLS\) key pair for the proxy agent\. For more information, see [Customize Your Proxy Agent Certificate](emr-lf-TLS.md)\.
++ Enable Kerberos authentication using the cluster\-dedicated KDC\. For instructions, see [Use Kerberos authentication](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html)\.
++ Configure your Amazon EC2 security group or Amazon VPC network access control list \(ACL\) to allow access to the proxy agent \(port 8442\) from your user's desktops\. For more information, see [Control network traffic with security groups](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-groups.html)\.
++ \(Optional\) Enable encryption in transit or at rest\. For more information, see [Encryption options](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-data-encryption-options.html) in the *Amazon EMR Management Guide*\. 
++ \(Optional\) Create a custom Transport Layer Security \(TLS\) key pair for the proxy agent\. For more information, see [Customize your proxy agent certificate](emr-lf-notebook.md#emr-lf-TLS)\.
 
 For more information, see [Security in Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security.html)\.

@@ -1,4 +1,4 @@
-# How to Process Compressed Files<a name="HowtoProcessGzippedFiles"></a>
+# How to process compressed files<a name="HowtoProcessGzippedFiles"></a>
 
 Hadoop checks the file extension to detect compressed files\. The compression types supported by Hadoop are: gzip, bzip2, and LZO\. You do not need to take any additional action to extract files using these types of compression; Hadoop handles it for you\.
 

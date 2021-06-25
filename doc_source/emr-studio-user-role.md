@@ -1,10 +1,10 @@
-# Create an EMR Studio User Role with Session Policies<a name="emr-studio-user-role"></a>
+# Create an EMR Studio user role with session policies<a name="emr-studio-user-role"></a>
 
-## About the EMR Studio User Role and Session Policies<a name="emr-studio-about-user-role"></a>
+## About the EMR Studio user role and session policies<a name="emr-studio-about-user-role"></a>
 
 When a user logs in to an EMR Studio, the Studio assumes your EMR Studio user role\. The Studio then grants specific user permissions based on an IAM session policy that you specify when you assign the user to the Studio\.
 
-Session policies let you set specific Studio permissions for a user or group without the need to create multiple IAM roles\. For more information about session policies, see [Policies and Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *AWS Identity and Access Management User Guide*\. 
+Session policies let you set specific Studio permissions for a user or group without the need to create multiple IAM roles\. For more information about session policies, see [Policies and permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *AWS Identity and Access Management User Guide*\. 
 
 You must attach session policies to your EMR Studio user role\. Then, when you [assign users and groups](emr-studio-manage-users.md#emr-studio-assign-users-groups) to your Studio, you map a session policy to that user or group to apply fine\-grained permission controls\. You can also update the session policy that is mapped to a user or group at any time\. Amazon EMR stores these session policy mappings\.
 
@@ -17,14 +17,14 @@ To create a user role and session policies for EMR Studio, you need the followin
 + A designated AWS account for your EMR Studio\. You must create your EMR Studio user role and session policies in the same account\. If you use multiple accounts in your AWS organization, use a *member* account\. To learn more about AWS terminology, see [AWS Organizations terminology and concepts](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html)\. 
 + An IAM principal in your designated AWS account that has the necessary permissions to create a user role with permissions policies\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
 
-## Create Session Policies for Studio Users and Groups<a name="emr-studio-session-policies"></a>
+## Create session policies for Studio users and groups<a name="emr-studio-session-policies"></a>
 
 Follow the instructions in [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) to define different session policies for your Studio users and groups\. You can use the following examples as templates:
-+ [Example: Basic User Session Policy](#emr-studio-basic-session-policy)
-+ [Example: Intermediate User Session Policy](#emr-studio-intermediate-session-policy)
-+ [Example: Advanced User Session Policy](#emr-studio-advanced-session-policy)
++ [Example: Basic user session policy](#emr-studio-basic-session-policy)
++ [Example: Intermediate user session policy](#emr-studio-intermediate-session-policy)
++ [Example: Advanced user session policy](#emr-studio-advanced-session-policy)
 
-For more information about each example session policy and its permissions, see [Session Policy Permissions](#emr-studio-session-policy-table)\. The table also breaks down each Studio action that a user might perform and lists the minimum permissions needed to perform that action\.
+For more information about each example session policy and its permissions, see [Session policy permissions](#emr-studio-session-policy-table)\. The table also breaks down each Studio action that a user might perform and lists the minimum permissions needed to perform that action\.
 
 To modify the example session policies, use the following guidelines:
 + Replace *<region>* with the code of the AWS Region associated with your Studio\.
@@ -50,7 +50,7 @@ All session policies that you create must include the following statements\.
 }
 ```
 
-## Create an EMR Studio User Role<a name="emr-studio-create-user-role"></a>
+## Create an EMR Studio user role<a name="emr-studio-create-user-role"></a>
 
 1. Follow the instructions in [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *AWS Identity and Access Management User Guide* to create your EMR Studio user role\.
 
@@ -75,14 +75,14 @@ All session policies that you create must include the following statements\.
 
 1. Attach all of your EMR Studio session policies to your user role\.
 
-## Session Policy Permissions<a name="emr-studio-session-policy-table"></a>
+## Session policy permissions<a name="emr-studio-session-policy-table"></a>
 
 This table lists the actions that each of the following example session policies allows, along with the permissions needed to perform each action\. 
 
 This table also includes each Studio action that a user might perform, and lists the minimum permissions needed to perform that action\.
 
 
-| Action | Basic | Intermediate | Advanced | Associated Permissions | 
+| Action | Basic | Intermediate | Advanced | Associated permissions | 
 | --- | --- | --- | --- | --- | 
 | Create and delete Workspaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreateEditor", <br />"elasticmapreduce:DescribeEditor",<br />"elasticmapreduce:ListEditors", <br />"elasticmapreduce:DeleteEditor"</pre>  | 
 | See a list of Amazon S3 storage buckets in the same account as the Studio when creating a new EMR cluster, and access container logs when using a web UI to debug applications | Yes | Yes | Yes |  <pre>"s3:ListAllMyBuckets",<br />"s3:ListBucket", <br />"s3:GetBucketLocation",<br />"s3:GetObject"</pre>  | 
@@ -91,13 +91,13 @@ This table also includes each Studio action that a user might perform, and lists
 | Attach or detach Amazon EMR on EKS clusters  | Yes | Yes | Yes |  <pre>"elasticmapreduce:AttachEditor", <br />"elasticmapreduce:DetachEditor",<br />"emr-containers:ListVirtualClusters", <br />"emr-containers:DescribeVirtualCluster",<br />"emr-containers:ListManagedEndpoints",<br />"emr-containers:DescribeManagedEndpoint",<br />"emr-containers:CreateAccessTokenForManagedEndpoint"</pre>  | 
 | Debug Amazon EMR on EC2 jobs with persistent application user interfaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreatePersistentAppUI",<br />"elasticmapreduce:DescribePersistentAppUI",<br />"elasticmapreduce:GetPersistentAppUIPresignedURL",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:ListSteps",<br />"elasticmapreduce:DescribeCluster",<br />"s3:ListBucket",<br />"s3:GetObject"</pre>  | 
 | Debug Amazon EMR on EC2 jobs with on\-cluster application user interfaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:GetOnClusterAppUIPresignedURL"</pre>  | 
-| Debug Amazon EMR on EKS job runs using the Spark history server | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreatePersistentAppUI",<br />"elasticmapreduce:DescribePersistentAppUI",<br />"elasticmapreduce:GetPersistentAppUIPresignedURL",<br />"emr-containers:ListVirtualClusters",<br />"emr-containers:DescribeVirtualCluster",<br />"emr-containers:ListJobRuns",<br />"emr-containers:DescribeJobRun",<br />"s3:ListBucket",<br />"s3:GetObject"</pre>  | 
+| Debug Amazon EMR on EKS job runs using the Spark History Server | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreatePersistentAppUI",<br />"elasticmapreduce:DescribePersistentAppUI",<br />"elasticmapreduce:GetPersistentAppUIPresignedURL",<br />"emr-containers:ListVirtualClusters",<br />"emr-containers:DescribeVirtualCluster",<br />"emr-containers:ListJobRuns",<br />"emr-containers:DescribeJobRun",<br />"s3:ListBucket",<br />"s3:GetObject"</pre>  | 
 | Create and delete Git repositories | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreateRepository", <br />"elasticmapreduce:DeleteRepository",<br />"elasticmapreduce:ListRepositories",<br />"elasticmapreduce:DescribeRepository",<br />"secretsmanager:CreateSecret",<br />"secretsmanager:ListSecrets",<br />"secretsmanager:TagResource"</pre>  | 
 | Link and unlink Git repositories | Yes | Yes | Yes |  <pre>"elasticmapreduce:LinkRepository",<br />"elasticmapreduce:UnlinkRepository",<br />"elasticmapreduce:ListRepositories",<br />"elasticmapreduce:DescribeRepository"</pre>  | 
 | Create new clusters from predefined cluster templates | No | Yes | Yes |  <pre>"servicecatalog:SearchProducts", <br />"servicecatalog:DescribeProduct",<br />"servicecatalog:DescribeProductView",<br />"servicecatalog:DescribeProvisioningParameters",<br />"servicecatalog:ProvisionProduct",<br />"servicecatalog:UpdateProvisionedProduct",<br />"servicecatalog:ListProvisioningArtifacts", <br />"servicecatalog:DescribeRecord",<br />"servicecatalog:ListLaunchPaths",<br />"cloudformation:DescribeStackResources", <br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster"</pre>  | 
 | Create new clusters by explicitly providing a cluster configuration | No | No | Yes |  <pre>"elasticmapreduce:RunJobFlow",<br />"iam:PassRole",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster"</pre>  | 
 
-## Example: Basic User Session Policy<a name="emr-studio-basic-session-policy"></a>
+## Example: Basic user session policy<a name="emr-studio-basic-session-policy"></a>
 
 ```
 {
@@ -205,7 +205,7 @@ This table also includes each Studio action that a user might perform, and lists
 }
 ```
 
-## Example: Intermediate User Session Policy<a name="emr-studio-intermediate-session-policy"></a>
+## Example: Intermediate user session policy<a name="emr-studio-intermediate-session-policy"></a>
 
 ```
 {
@@ -330,7 +330,7 @@ This table also includes each Studio action that a user might perform, and lists
 }
 ```
 
-## Example: Advanced User Session Policy<a name="emr-studio-advanced-session-policy"></a>
+## Example: Advanced user session policy<a name="emr-studio-advanced-session-policy"></a>
 
 ```
 {

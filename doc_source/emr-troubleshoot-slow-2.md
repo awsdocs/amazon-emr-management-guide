@@ -1,18 +1,18 @@
-# Step 2: Check the Environment<a name="emr-troubleshoot-slow-2"></a>
+# Step 2: Check the environment<a name="emr-troubleshoot-slow-2"></a>
 
 **Topics**
-+ [Check for Service Outages](#emr-troubleshoot-slow-2-outages)
-+ [Check Usage Limits](#emr-troubleshoot-slow-2-limits)
-+ [Check the Amazon VPC Subnet Configuration](#emr-troubleshoot-slow-2-vpc)
-+ [Restart the Cluster](#emr-troubleshoot-slow-2-restart)
++ [Check for service outages](#emr-troubleshoot-slow-2-outages)
++ [Check usage limits](#emr-troubleshoot-slow-2-limits)
++ [Check the Amazon VPC subnet configuration](#emr-troubleshoot-slow-2-vpc)
++ [Restart the cluster](#emr-troubleshoot-slow-2-restart)
 
-## Check for Service Outages<a name="emr-troubleshoot-slow-2-outages"></a>
+## Check for service outages<a name="emr-troubleshoot-slow-2-outages"></a>
 
  Amazon EMR uses several Amazon Web Services internally\. It runs virtual servers on Amazon EC2, stores data and scripts on Amazon S3, indexes log files in Amazon SimpleDB, and reports metrics to CloudWatch\. Events that disrupt these services are rare — but when they occur — can cause issues in Amazon EMR\. 
 
  Before you go further, check the [Service Health Dashboard](http://status.aws.amazon.com)\. Check the region where you launched your cluster to see whether there are disruption events in any of these services\. 
 
-## Check Usage Limits<a name="emr-troubleshoot-slow-2-limits"></a>
+## Check usage limits<a name="emr-troubleshoot-slow-2-limits"></a>
 
  If you are launching a large cluster, have launched many clusters simultaneously, or you are an IAM user sharing an AWS account with other users, the cluster may have failed because you exceeded an AWS service limit\. 
 
@@ -22,10 +22,10 @@
 
  Amazon S3 limits the number of buckets created on an account to 100\. If your cluster creates a new bucket that exceeds this limit, the bucket creation will fail and may cause the cluster to fail\. 
 
-## Check the Amazon VPC Subnet Configuration<a name="emr-troubleshoot-slow-2-vpc"></a>
+## Check the Amazon VPC subnet configuration<a name="emr-troubleshoot-slow-2-vpc"></a>
 
-If your cluster was launched in a Amazon VPC subnet, the subnet needs to be configured as described in [Configure Networking](emr-plan-vpc-subnet.md)\. In addition, check that the subnet you launch the cluster into has enough free elastic IP addresses to assign one to each node in the cluster\.
+If your cluster was launched in a Amazon VPC subnet, the subnet needs to be configured as described in [Configure networking](emr-plan-vpc-subnet.md)\. In addition, check that the subnet you launch the cluster into has enough free elastic IP addresses to assign one to each node in the cluster\.
 
-## Restart the Cluster<a name="emr-troubleshoot-slow-2-restart"></a>
+## Restart the cluster<a name="emr-troubleshoot-slow-2-restart"></a>
 
  The slow down in processing may be caused by a transient condition\. Consider terminating and restarting the cluster to see if performance improves\. 

@@ -1,4 +1,4 @@
-# Use Kerberos Authentication<a name="emr-kerberos"></a>
+# Use Kerberos authentication<a name="emr-kerberos"></a>
 
 Amazon EMR release version 5\.10\.0 and later supports Kerberos, which is a network authentication protocol created by the Massachusetts Institute of Technology \(MIT\)\. Kerberos uses secret\-key cryptography to provide strong authentication so that passwords or other credentials aren't sent over the network in an unencrypted format\.
 
@@ -11,12 +11,12 @@ When you use Kerberos authentication, Amazon EMR configures Kerberos for the app
 **Important**  
 Amazon EMR does not support AWS Directory Service for Microsoft Active Directory in a cross\-realm trust or as an external KDC\.
 
-Before you configure Kerberos using Amazon EMR, we recommend that you become familiar with Kerberos concepts, the services that run on a KDC, and the tools for administering Kerberos services\. For more information, see [MIT Kerberos Documentation](http://web.mit.edu/kerberos/krb5-latest/doc/), which is published by the [Kerberos Consortium](http://kerberos.org/)\.
+Before you configure Kerberos using Amazon EMR, we recommend that you become familiar with Kerberos concepts, the services that run on a KDC, and the tools for administering Kerberos services\. For more information, see [MIT Kerberos documentation](http://web.mit.edu/kerberos/krb5-latest/doc/), which is published by the [Kerberos consortium](http://kerberos.org/)\.
 
 **Topics**
-+ [Supported Applications](emr-kerberos-principals.md)
-+ [Kerberos Architecture Options](emr-kerberos-options.md)
++ [Supported applications](emr-kerberos-principals.md)
++ [Kerberos architecture options](emr-kerberos-options.md)
 + [Configuring Kerberos on Amazon EMR](emr-kerberos-configure.md)
-+ [Using SSH to Connect to Kerberized Clusters](emr-kerberos-connect-ssh.md)
-+ [Tutorial: Configure a Cluster\-Dedicated KDC](emr-kerberos-cluster-kdc.md)
-+ [Tutorial: Configure a Cross\-Realm Trust with an Active Directory Domain](emr-kerberos-cross-realm.md)
++ [Using SSH to connect to Kerberized clusters](emr-kerberos-connect-ssh.md)
++ [Tutorial: Configure a cluster\-dedicated KDC](emr-kerberos-cluster-kdc.md)
++ [Tutorial: Configure a cross\-realm trust with an Active Directory domain](emr-kerberos-cross-realm.md)

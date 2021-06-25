@@ -1,12 +1,12 @@
-# Understanding How EMRFS Consistent View Tracks Objects in Amazon S3<a name="emrfs-files-tracked"></a>
+# Understanding how EMRFS consistent view tracks objects in Amazon S3<a name="emrfs-files-tracked"></a>
 
 EMRFS creates a consistent view of objects in Amazon S3 by adding information about those objects to the EMRFS metadata\. EMRFS adds these listings to its metadata when:
 +  An object written by EMRFS during the course of an Amazon EMR job\.
 +  An object is synced with or imported to EMRFS metadata by using the EMRFS CLI\.
 
-Objects read by EMRFS are not automatically added to the metadata\. When EMRFS deletes an object, a listing still remains in the metadata with a deleted state until that listing is purged using the EMRFS CLI\. To learn more about the CLI, see [EMRFS CLI Reference](emrfs-cli-reference.md)\. For more information about purging listings in the EMRFS metadata, see [EMRFS Consistent View Metadata](emrfs-metadata.md)\.
+Objects read by EMRFS are not automatically added to the metadata\. When EMRFS deletes an object, a listing still remains in the metadata with a deleted state until that listing is purged using the EMRFS CLI\. To learn more about the CLI, see [EMRFS CLI Command Reference](emrfs-cli-reference.md)\. For more information about purging listings in the EMRFS metadata, see [EMRFS consistent view metadata](emrfs-metadata.md)\.
 
-For every Amazon S3 operation, EMRFS checks the metadata for information about the set of objects in consistent view\. If EMRFS finds that Amazon S3 is inconsistent during one of these operations, it retries the operation according to parameters defined in `emrfs-site` configuration properties\. After EMRFS exhausts the retries, it either throws a `ConsistencyException` or logs the exception and continue the workflow\. For more information about retry logic, see [Retry Logic](emrfs-retry-logic.md)\. You can find `ConsistencyExceptions` in your logs, for example:
+For every Amazon S3 operation, EMRFS checks the metadata for information about the set of objects in consistent view\. If EMRFS finds that Amazon S3 is inconsistent during one of these operations, it retries the operation according to parameters defined in `emrfs-site` configuration properties\. After EMRFS exhausts the retries, it either throws a `ConsistencyException` or logs the exception and continue the workflow\. For more information about retry logic, see [Retry logic](emrfs-retry-logic.md)\. You can find `ConsistencyExceptions` in your logs, for example:
 +  listStatus: No Amazon S3 object for metadata item `/S3_bucket/dir/object`
 +  getFileStatus: Key `dir/file` is present in metadata but not Amazon S3
 

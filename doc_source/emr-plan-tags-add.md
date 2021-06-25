@@ -1,4 +1,4 @@
-# Adding Tags to an Existing Cluster<a name="emr-plan-tags-add"></a>
+# Adding tags to an existing cluster<a name="emr-plan-tags-add"></a>
 
 You can also add tags to an existing cluster\.
 

@@ -1,15 +1,15 @@
-# Terminate a Cluster<a name="UsingEMR_TerminateJobFlow"></a>
+# Terminate a cluster<a name="UsingEMR_TerminateJobFlow"></a>
 
-This section describes the methods of terminating a cluster\. For information about enabling termination protection and auto\-terminating clusters, see [Control Cluster Termination](emr-plan-termination.md)\. You can terminate clusters in the `STARTING`, `RUNNING`, or `WAITING` states\. A cluster in the `WAITING` state must be terminated or it runs indefinitely, generating charges to your account\. You can terminate a cluster that fails to leave the `STARTING` state or is unable to complete a step\. 
+This section describes the methods of terminating a cluster\. For information about enabling termination protection and auto\-terminating clusters, see [Control cluster termination](emr-plan-termination.md)\. You can terminate clusters in the `STARTING`, `RUNNING`, or `WAITING` states\. A cluster in the `WAITING` state must be terminated or it runs indefinitely, generating charges to your account\. You can terminate a cluster that fails to leave the `STARTING` state or is unable to complete a step\. 
 
 If you are terminating a cluster that has termination protection set on it, you must disable termination protection before you can terminate the cluster\. Clusters can be terminated using the console, the AWS CLI, or programmatically using the `TerminateJobFlows` API\.
 
 Depending on the configuration of the cluster, it may take up to 5\-20 minutes for the cluster to completely terminate and release allocated resources, such as EC2 instances\.
 
 **Note**  
-You can't restart a terminated cluster, but you can clone a terminated cluster to reuse its configuration for a new cluster\. For more information, see [Cloning a Cluster Using the Console](clone-console.md)\.
+You can't restart a terminated cluster, but you can clone a terminated cluster to reuse its configuration for a new cluster\. For more information, see [Cloning a cluster using the console](clone-console.md)\.
 
-## Terminate a Cluster Using the Console<a name="emr-dev-terminate-job-flow-console"></a>
+## Terminate a cluster using the console<a name="emr-dev-terminate-job-flow-console"></a>
 
 You can terminate one or more clusters using the Amazon EMR console\. The steps to terminate a cluster in the console vary depending on whether termination protection is on or off\. To terminate a protected cluster, you must first disable termination protection\. 
 
@@ -41,7 +41,7 @@ You can terminate one or more clusters using the Amazon EMR console\. The steps 
 
    Amazon EMR terminates the instances in the cluster and stops saving log data\.
 
-## Terminate a Cluster Using the AWS CLI<a name="emr-dev-terminate-job-flow-cli"></a>
+## Terminate a cluster using the AWS CLI<a name="emr-dev-terminate-job-flow-cli"></a>
 
 **To terminate an unprotected cluster using the AWS CLI**
 
@@ -84,10 +84,10 @@ To terminate a protected cluster using the AWS CLI, first disable termination pr
 
    For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Terminate a Cluster Using the API<a name="emr-dev-terminate-job-flow-api"></a>
+## Terminate a cluster using the API<a name="emr-dev-terminate-job-flow-api"></a>
 
 The `TerminateJobFlows` operation ends step processing, uploads any log data from Amazon EC2 to Amazon S3 \(if configured\), and terminates the Hadoop cluster\. A cluster also terminates automatically if you set `KeepJobAliveWhenNoSteps` to `False` in a `RunJobFlows` request\.
 
 You can use this action to terminate either a single cluster or a list of clusters by their cluster IDs\.
 
-For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common Request Parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/CommonParameters.html)\.
+For more information about the input parameters unique to `TerminateJobFlows`, see [ TerminateJobFlows](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_TerminateJobFlows.html)\. For more information about the generic parameters in the request, see [Common request parameters](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/CommonParameters.html)\.

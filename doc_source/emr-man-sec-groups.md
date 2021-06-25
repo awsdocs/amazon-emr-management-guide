@@ -1,6 +1,6 @@
-# Working With Amazon EMR\-Managed Security Groups<a name="emr-man-sec-groups"></a>
+# Working with Amazon EMR\-managed security groups<a name="emr-man-sec-groups"></a>
 
- Different managed security groups are associated with the master instance and with the core and task instances in a cluster\. An additional managed security group for service access is required when you create a cluster in a private subnet\. For more information about the role of managed security groups with respect to your network configuration, see [Amazon VPC Options](emr-clusters-in-a-vpc.md)\.
+ Different managed security groups are associated with the master instance and with the core and task instances in a cluster\. An additional managed security group for service access is required when you create a cluster in a private subnet\. For more information about the role of managed security groups with respect to your network configuration, see [Amazon VPC options](emr-clusters-in-a-vpc.md)\.
 
 When you specify managed security groups for a cluster, you must use the same type of security group, default or custom, for all managed security groups\. For example, you can't specify a custom security group for the master instance, and then not specify a custom security group for core and task instances\.
 
@@ -11,21 +11,21 @@ You can edit rules in managed security groups after clusters are created\. When 
 The default managed security groups are as follows:
 + **ElasticMapReduce\-master**
 
-  For rules in this security group, see [Amazon EMR\-Managed Security Group for the Master Instance \(Public Subnets\)](#emr-sg-elasticmapreduce-master)\.
+  For rules in this security group, see [Amazon EMR\-managed security group for the master instance \(public subnets\)](#emr-sg-elasticmapreduce-master)\.
 + **ElasticMapReduce\-slave**
 
-  For rules in this security group, see [Amazon EMR\-Managed Security Group for Core and Task Instances \(Public Subnets\)](#emr-sg-elasticmapreduce-slave)\.
+  For rules in this security group, see [Amazon EMR\-managed security group for core and task instances \(public subnets\)](#emr-sg-elasticmapreduce-slave)\.
 + **ElasticMapReduce\-Master\-Private**
 
-  For rules in this security group, see [Amazon EMR\-Managed Security Group for the Master Instance \(Private Subnets\)](#emr-sg-elasticmapreduce-master-private)\.
+  For rules in this security group, see [Amazon EMR\-managed security group for the master instance \(private subnets\)](#emr-sg-elasticmapreduce-master-private)\.
 + **ElasticMapReduce\-Slave\-Private**
 
-  For rules in this security group, see [Amazon EMR\-Managed Security Group for Core and Task Instances \(Private Subnets\)](#emr-sg-elasticmapreduce-slave-private)\.
+  For rules in this security group, see [Amazon EMR\-managed security group for core and task instances \(private subnets\)](#emr-sg-elasticmapreduce-slave-private)\.
 + **ElasticMapReduce\-ServiceAccess**
 
-  For rules in this security group, see [Amazon EMR\-Managed Security Group for Service Access \(Private Subnets\)](#emr-sg-elasticmapreduce-sa-private)\.
+  For rules in this security group, see [Amazon EMR\-managed security group for service access \(private subnets\)](#emr-sg-elasticmapreduce-sa-private)\.
 
-## Amazon EMR\-Managed Security Group for the Master Instance \(Public Subnets\)<a name="emr-sg-elasticmapreduce-master"></a>
+## Amazon EMR\-managed security group for the master instance \(public subnets\)<a name="emr-sg-elasticmapreduce-master"></a>
 
 The default managed security group for the master instance in public subnets has the **Group Name** of **ElasticMapReduce\-master**\. It has the following rules\. If you specify a custom managed security group, Amazon EMR will add all the same rules to your custom security group\.
 
@@ -74,42 +74,42 @@ You must first be logged in to AWS as a root user or as an IAM principal that is
 
 1. Optionally, choose **ElasticMapReduce\-slave** from the list and repeat the steps above to allow SSH client access to core and task nodes from trusted clients\.
 
-## Amazon EMR\-Managed Security Group for Core and Task Instances \(Public Subnets\)<a name="emr-sg-elasticmapreduce-slave"></a>
+## Amazon EMR\-managed security group for core and task instances \(public subnets\)<a name="emr-sg-elasticmapreduce-slave"></a>
 
 The default managed security group for core and task instances in public subnets has the **Group Name** of **ElasticMapReduce\-slave**\. The default managed security group has the following rules, and Amazon EMR adds the same rules if you specify a custom managed security group\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-man-sec-groups.html)
 
-## Amazon EMR\-Managed Security Group for the Master Instance \(Private Subnets\)<a name="emr-sg-elasticmapreduce-master-private"></a>
+## Amazon EMR\-managed security group for the master instance \(private subnets\)<a name="emr-sg-elasticmapreduce-master-private"></a>
 
 The default managed security group for the master instance in private subnets has the **Group Name** of **ElasticMapReduce\-Master\-Private**\. The default managed security group has the following rules, and Amazon EMR adds the same rules if you specify a custom managed security group\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-man-sec-groups.html)
 
-## Amazon EMR\-Managed Security Group for Core and Task Instances \(Private Subnets\)<a name="emr-sg-elasticmapreduce-slave-private"></a>
+## Amazon EMR\-managed security group for core and task instances \(private subnets\)<a name="emr-sg-elasticmapreduce-slave-private"></a>
 
 The default managed security group for core and task instances in private subnets has the **Group Name** of **ElasticMapReduce\-Slave\-Private**\. The default managed security group has the following rules, and Amazon EMR adds the same rules if you specify a custom managed security group\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-man-sec-groups.html)
 
-### Editing Outbound Rules<a name="private-sg-egress-rules"></a>
+### Editing outbound rules<a name="private-sg-egress-rules"></a>
 
 By default, Amazon EMR creates this security group with outbound rules that allow all outbound traffic on all protocols and ports\. Allowing all outbound traffic is selected because various Amazon EMR and customer applications that can run on Amazon EMR clusters may require different egress rules\. EMR is not able to anticipate these specific settings when creating default security groups\. You can scope down egress in your security groups to include only those rules that suit your use cases and security policies\. At minimum, this security group requires the following outbound rules, but some applications might need additional egress\.
 
 
-| Type | Protocol | Port Range | Destination | Details | 
+| Type | Protocol | Port range | Destination | Details | 
 | --- | --- | --- | --- | --- | 
 | All TCP | TCP | All | pl\-xxxxxxxx | Managed Amazon S3 prefix list com\.amazonaws\.MyRegion\.s3\. | 
 | All Traffic | All | All | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-Slave\-Private security group\. | 
 | All Traffic | All | All | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-Master\-Private security group\. | 
 | Custom TCP | TCP | 9443 | sg\-xxxxxxxxxxxxxxxxx | The ID of the ElasticMapReduce\-ServiceAccess security group\. | 
 
-## Amazon EMR\-Managed Security Group for Service Access \(Private Subnets\)<a name="emr-sg-elasticmapreduce-sa-private"></a>
+## Amazon EMR\-managed security group for service access \(private subnets\)<a name="emr-sg-elasticmapreduce-sa-private"></a>
 
 The default managed security group for service access in private subnets has the **Group Name** of **ElasticMapReduce\-ServiceAccess**\. It has inbound rules, and outbound rules that allow traffic over HTTPS \(port 8443, port 9443\) to the other managed security groups in private subnets\. These rules allow the cluster manager to communicate with the master node and with core and task nodes\. The same rules are needed if you are using custom security groups\.
 
 
-| Type | Protocol | Port Range | Source | Details | 
+| Type | Protocol | Port range | Source | Details | 
 | --- | --- | --- | --- | --- | 
 | Inbound rules Required for EMR clusters with Amazon EMR release 5\.30\.0 and later\. | 
 | HTTPS \(9443\) | TCP | 9443 | The Group ID of the managed security group for master instance\.  |  This rule allows the communication between master instance's security group to the service access security group\. | 

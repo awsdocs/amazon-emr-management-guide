@@ -1,8 +1,8 @@
-# Manually Resizing a Running Cluster<a name="emr-manage-resize"></a>
+# Manually resizing a running cluster<a name="emr-manage-resize"></a>
 
-You can add and remove instances from core and task instance groups and instance fleets in a running cluster using the AWS Management Console, AWS CLI, or the Amazon EMR API\. If a cluster uses instance groups, you explicitly change the instance count\. If your cluster uses instance fleets, you can change the target units for On\-Demand Instances and Spot Instances\. The instance fleet then adds and removes instances to meet the new target\. For more information, see [Instance Fleet Options](emr-instance-fleet.md#emr-instance-fleet-options)\. Applications can use newly provisioned Amazon EC2 instances to host nodes as soon as the instances are available\. When instances are removed, Amazon EMR terminates tasks in a way that does not interrupt jobs and safeguards against data loss\. For more information, see [Terminate at Task Completion](emr-scaledown-behavior.md#emr-scaledown-terminate-task)\.
+You can add and remove instances from core and task instance groups and instance fleets in a running cluster using the AWS Management Console, AWS CLI, or the Amazon EMR API\. If a cluster uses instance groups, you explicitly change the instance count\. If your cluster uses instance fleets, you can change the target units for On\-Demand Instances and Spot Instances\. The instance fleet then adds and removes instances to meet the new target\. For more information, see [Instance fleet options](emr-instance-fleet.md#emr-instance-fleet-options)\. Applications can use newly provisioned Amazon EC2 instances to host nodes as soon as the instances are available\. When instances are removed, Amazon EMR terminates tasks in a way that does not interrupt jobs and safeguards against data loss\. For more information, see [Terminate at task completion](emr-scaledown-behavior.md#emr-scaledown-terminate-task)\.
 
-## Resize a Cluster Using the Console<a name="resize-console"></a>
+## Resize a cluster using the console<a name="resize-console"></a>
 
 You can use the Amazon EMR console to resize a running cluster\.
 
@@ -22,7 +22,7 @@ You can use the Amazon EMR console to resize a running cluster\.
 
 When you make a change to the number of nodes, the **Status** of the instance group updates\. When the change you requested is complete, the **Status** is **Running**\.
 
-## Resize a Cluster Using the AWS CLI<a name="ResizingParameters"></a>
+## Resize a cluster using the AWS CLI<a name="ResizingParameters"></a>
 
 You can use the AWS CLI to resize a running cluster\. You can increase or decrease the number of task nodes, and you can increase the number of core nodes in a running cluster\. It is also possible to terminate an instance in the core instance group using the AWS CLI or the API\. This should be done with caution\. Terminating an instance in the core instance group risks data loss, and the instance is not automatically replaced\.
 
@@ -73,7 +73,7 @@ Using the AWS CLI, you can add from 1–48 task instance groups to a cluster wit
 
    For more information about using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Interrupting a Resize<a name="interruptible-resize"></a>
+## Interrupting a resize<a name="interruptible-resize"></a>
 
 Using Amazon EMR version 4\.1\.0 or later, you can issue a resize in the midst of an existing resize operation\. Additionally, you can stop a previously submitted resize request or submit a new request to override a previous request without waiting for it to finish\. You can also stop an existing resize from the console or using the `ModifyInstanceGroups` API call with the current count as the target count of the cluster\.
 
@@ -99,7 +99,7 @@ You can use the AWS CLI to stop a resize by using the `modify-instance-groups` s
 **Note**  
 Because this process is asynchronous, you may see instance counts change with respect to previous API requests before subsequent requests are honored\. In the case of shrinking, it is possible that if you have work running on the nodes, the instance group may not shrink until nodes have completed their work\.
 
-## Suspended State<a name="emr-manage-resizeSuspended"></a>
+## Suspended state<a name="emr-manage-resizeSuspended"></a>
 
 An instance group goes into a suspended state if it encounters too many errors while trying to start the new cluster nodes\. For example, if new nodes fail while performing bootstrap actions, the instance group goes into a *SUSPENDED* state, rather than continuously provisioning new nodes\. After you resolve the underlying issue, reset the desired number of nodes on the cluster's instance group, and then the instance group resumes allocating nodes\. Modifying an instance group instructs Amazon EMR to attempt to provision nodes again\. No running nodes are restarted or terminated\.
 

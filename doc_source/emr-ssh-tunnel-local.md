@@ -1,14 +1,14 @@
-# Option 1: Set Up an SSH Tunnel to the Master Node Using Local Port Forwarding<a name="emr-ssh-tunnel-local"></a>
+# Option 1: Set up an SSH tunnel to the master node using local port forwarding<a name="emr-ssh-tunnel-local"></a>
 
 To connect to the local web server on the master node, you create an SSH tunnel between your computer and the master node\. This is also known as *port forwarding*\. If you do not wish to use a SOCKS proxy, you can set up an SSH tunnel to the master node using local port forwarding\. With local port forwarding, you specify unused local ports that are used to forward traffic to specific remote ports on the master node's local web server\. 
 
-Setting up an SSH tunnel using local port forwarding requires the public DNS name of the master node and your key pair private key file\. For information about how to locate the master public DNS name, see [To retrieve the public DNS name of the master node using the Amazon EMR console](emr-connect-master-node-ssh.md#public-dns-name-master)\. For more information about accessing your key pair, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\. For more information about the sites you might want to view on the master node, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\.
+Setting up an SSH tunnel using local port forwarding requires the public DNS name of the master node and your key pair private key file\. For information about how to locate the master public DNS name, see [To retrieve the public DNS name of the master node using the Amazon EMR console](emr-connect-master-node-ssh.md#public-dns-name-master)\. For more information about accessing your key pair, see [Amazon EC2 key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\. For more information about the sites you might want to view on the master node, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\.
 
-## Set Up an SSH Tunnel to the Master Node Using Local Port Forwarding on Linux, Unix, and Mac OS X<a name="ssh-tunnel-local-linux"></a><a name="tunnel-local-linux"></a>
+## Set up an SSH tunnel to the master node using local port forwarding on Linux, Unix, and Mac OS X<a name="ssh-tunnel-local-linux"></a><a name="tunnel-local-linux"></a>
 
 **To set up an SSH tunnel using local port forwarding in terminal**
 
-1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 
 1. Open a terminal window\. On Mac OS X, choose **Applications > Utilities > Terminal**\. On other Linux distributions, terminal is typically found at **Applications > Accessories > Terminal**\.
 

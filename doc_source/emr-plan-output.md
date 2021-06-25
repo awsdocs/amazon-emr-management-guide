@@ -1,16 +1,16 @@
-# Configure an Output Location<a name="emr-plan-output"></a>
+# Configure an output location<a name="emr-plan-output"></a>
 
  The most common output format of an Amazon EMR cluster is as text files, either compressed or uncompressed\. Typically, these are written to an Amazon S3 bucket\. This bucket must be created before you launch the cluster\. You specify the S3 bucket as the output location when you launch the cluster\. 
 
 For more information, see the following topics:
 
 **Topics**
-+ [Create and Configure an Amazon S3 Bucket](#create-s3-bucket-output)
++ [Create and configure an Amazon S3 bucket](#create-s3-bucket-output)
 + [What formats can Amazon EMR return?](emr-plan-output-formats.md)
 + [How to write data to an Amazon S3 bucket you don't own](emr-s3-acls.md)
-+ [Compress the Output of your Cluster](emr-plan-output-compression.md)
++ [Compress the output of your cluster](emr-plan-output-compression.md)
 
-## Create and Configure an Amazon S3 Bucket<a name="create-s3-bucket-output"></a>
+## Create and configure an Amazon S3 bucket<a name="create-s3-bucket-output"></a>
 
 Amazon EMR \(Amazon EMR\) uses Amazon S3 to store input data, log files, and output data\. Amazon S3 refers to these storage locations as *buckets*\. Buckets have certain restrictions and limitations to conform with Amazon S3 and DNS requirements\. For more information, go to [Bucket Restrictions and Limitations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html) in the *Amazon Simple Storage Service Developers Guide*\.
 

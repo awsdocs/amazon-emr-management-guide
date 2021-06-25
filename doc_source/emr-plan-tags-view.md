@@ -1,4 +1,4 @@
-# View Tags on a Cluster<a name="emr-plan-tags-view"></a>
+# View tags on a cluster<a name="emr-plan-tags-view"></a>
 
 If you would like to see all the tags associated with a cluster, you can view them in the console or at the CLI\.
 

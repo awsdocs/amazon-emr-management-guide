@@ -1,6 +1,6 @@
-# Define Security Groups to Control EMR Studio Network Traffic<a name="emr-studio-security-groups"></a>
+# Define security groups to control EMR Studio network traffic<a name="emr-studio-security-groups"></a>
 
-## About the EMR Studio Security Groups<a name="emr-studio-about-security-groups"></a>
+## About the EMR Studio security groups<a name="emr-studio-about-security-groups"></a>
 
 Amazon EMR Studio uses two security groups to control network traffic between Workspaces in the Studio and an attached Amazon EMR cluster running on Amazon EC2:
 + An **engine security group**, which uses port 18888 to communicate with an attached Amazon EMR cluster running on Amazon EC2\.
@@ -8,7 +8,10 @@ Amazon EMR Studio uses two security groups to control network traffic between Wo
 
 EMR Studio uses these security groups in addition to any security groups associated with an EMR cluster attached to a Workspace\. 
 
-You must create these security groups when you use the AWS CLI to create a Studio\. You can customize your security groups with rules tailored to your environment, but you must include the rules noted on this page\.
+You must create these security groups when you use the AWS CLI to create a Studio\. 
+
+**Note**  
+You can customize your security groups for EMR Studio with rules tailored to your environment, but you must include the rules noted on this page\. Your Workspace security group can't allow any inbound traffic, and the engine security group must allow inbound traffic from the Workspace security group\.
 
 **Use the Default EMR Studio Security Groups**
 
@@ -30,10 +33,10 @@ When you create your security groups for EMR Studio, note the IDs for both\. You
 
 **Engine security group**  
 EMR Studio uses port 18888 to communicate with an attached cluster\.    
-**Inbound Rules**    
+**Inbound rules**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-security-groups.html)
 
 **Workspace security group**  
 This security group is associated with the Workspaces in an EMR Studio\.     
-**Outbound Rules**    
+**Outbound rules**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-security-groups.html)

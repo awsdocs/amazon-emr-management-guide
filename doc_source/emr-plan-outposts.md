@@ -1,4 +1,4 @@
-# EMR Clusters on AWS Outposts<a name="emr-plan-outposts"></a>
+# EMR clusters on AWS Outposts<a name="emr-plan-outposts"></a>
 
 Beginning with Amazon EMR version 5\.28\.0, you can create and run EMR clusters on AWS Outposts\. AWS Outposts enables native AWS services, infrastructure, and operating models in on\-premises facilities\. In AWS Outposts environments, you can use the same AWS APIs, tools, and infrastructure that you use in the AWS Cloud\. Amazon EMR on AWS Outposts is ideal for low latency workloads that need to be run in close proximity to on\-premises data and applications\. For more information about AWS Outposts, see [AWS Outposts User Guide](https://docs.aws.amazon.com/outposts/latest/userguide/)\. 
 
@@ -17,12 +17,12 @@ The following are the limitations of using Amazon EMR on AWS Outposts:
 + Only the following instance types are supported by Amazon EMR on AWS Outposts:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-outposts.html)
 
-## Network Connectivity Considerations<a name="emr-outposts-considerations"></a>
+## Network connectivity considerations<a name="emr-outposts-considerations"></a>
 + If network connectivity between your Outpost and its AWS Region is lost, your clusters will continue to run\. However, you cannot create new clusters or take new actions on existing clusters until connectivity is restored\. In case of instance failures, the instance will not be automatically replaced\. Additionally, actions such as adding steps to a running cluster, checking step execution status, and sending CloudWatch metrics and events will be delayed\. 
 + We recommend that you provide reliable and highly available network connectivity between your Outpost and the AWS Region\. If network connectivity between your Outpost and its AWS Region is lost for more than a few hours, clusters that have enabled terminate protection will continue to run, and clusters that have disabled terminate protection may be terminated\. 
 + If network connectivity will be impacted due to routine maintenance, we recommend proactively enabling terminate protection\. More generally, connectivity interruption means that any external dependencies that are not local to the Outpost or customer network will not be accessible\. This includes Amazon S3, DynamoDB used with EMRFS consistency view, and Amazon RDS if an in\-region instance is used for an EMR cluster with multiple master nodes\.
 
-## Creating an Amazon EMR Cluster on AWS Outposts<a name="emr-outposts-create"></a>
+## Creating an Amazon EMR cluster on AWS Outposts<a name="emr-outposts-create"></a>
 
 Creating an Amazon EMR cluster on AWS Outposts is similar to creating an Amazon EMR cluster in the AWS Cloud\. When you create an Amazon EMR cluster on AWS Outposts, you must specify an Amazon EC2 subnet associated with your Outpost\.
 

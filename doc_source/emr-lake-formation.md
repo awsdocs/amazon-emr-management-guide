@@ -15,7 +15,7 @@ If you currently use EMR clusters with Lake Formation in beta mode, you should u
 EMR integration with Lake Formation is not yet available for the EMR 6\.x series and does not currently support using AWS Single Sign\-On for federated single sign\-on\.
 
 **Topics**
-+ [Overview of Amazon EMR Integration with Lake Formation](emr-lf-conceptual.md)
-+ [Applications, Features, and Limitations](emr-lf-scope.md)
-+ [Before You Begin](emr-lf-prerequisites.md)
-+ [Launch an Amazon EMR Cluster with Lake Formation](emr-lf-launch.md)
++ [Overview of Amazon EMR integration with Lake Formation](emr-lf-conceptual.md)
++ [Applications, features, and limitations](emr-lf-scope.md)
++ [Before you begin](emr-lf-prerequisites.md)
++ [Launch an Amazon EMR cluster with Lake Formation](emr-lf-launch.md)

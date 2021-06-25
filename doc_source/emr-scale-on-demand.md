@@ -1,4 +1,4 @@
-# Scaling Cluster Resources<a name="emr-scale-on-demand"></a>
+# Scaling cluster resources<a name="emr-scale-on-demand"></a>
 
 You can adjust the number of Amazon EC2 instances available to an Amazon EMR cluster automatically or manually in response to workloads that have varying demands\. To use automatic scaling, you have two options\. You can enable EMR managed scaling or create a custom automatic scaling policy\. The following table describes the differences between the two options\.
 
@@ -17,7 +17,7 @@ You can adjust the number of Amazon EC2 instances available to an Amazon EMR clu
 + Reconfiguration and resizing of an instance group cannot occur at the same time\. If a reconfiguration is initiated while an instance group is resizing, then reconfiguration cannot start until the instance group has completed resizing, and the other way around\.
 
 **Topics**
-+ [Using EMR Managed Scaling in Amazon EMR](emr-managed-scaling.md)
-+ [Using Automatic Scaling with a Custom Policy for Instance Groups](emr-automatic-scaling.md)
-+ [Manually Resizing a Running Cluster](emr-manage-resize.md)
-+ [Cluster Scale\-Down](emr-scaledown-behavior.md)
++ [Using EMR managed scaling in Amazon EMR](emr-managed-scaling.md)
++ [Using automatic scaling with a custom policy for instance groups](emr-automatic-scaling.md)
++ [Manually resizing a running cluster](emr-manage-resize.md)
++ [Cluster scale\-down](emr-scaledown-behavior.md)

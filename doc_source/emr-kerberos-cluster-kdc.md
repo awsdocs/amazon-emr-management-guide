@@ -1,10 +1,10 @@
-# Tutorial: Configure a Cluster\-Dedicated KDC<a name="emr-kerberos-cluster-kdc"></a>
+# Tutorial: Configure a cluster\-dedicated KDC<a name="emr-kerberos-cluster-kdc"></a>
 
 This topic guides you through creating a cluster with a cluster\-dedicated *key distribution center \(KDC\)*, manually adding Linux user accounts to all cluster nodes, adding Kerberos principals to the KDC on the master node, and ensuring that client computers have a Kerberos client installed\.
 
-For more information on Amazon EMR support for Kerberos and KDC, as well as links to MIT Kerberos Documentation, see [Use Kerberos Authentication](emr-kerberos.md)\.
+For more information on Amazon EMR support for Kerberos and KDC, as well as links to MIT Kerberos Documentation, see [Use Kerberos authentication](emr-kerberos.md)\.
 
-## Step 1: Create the Kerberized Cluster<a name="emr-kerberos-clusterdedicated-cluster"></a>
+## Step 1: Create the Kerberized cluster<a name="emr-kerberos-clusterdedicated-cluster"></a>
 
 1. Create a security configuration that enables Kerberos\. The following example demonstrates a `create-security-configuration` command using the AWS CLI that specifies the security configuration as an inline JSON structure\. You can also reference a file saved locally\.
 
@@ -39,7 +39,7 @@ For more information on Amazon EMR support for Kerberos and KDC, as well as link
    sudo adduser user3
    ```
 
-## Step 2: Add Principals to the KDC, Create HDFS User Directories, and Configure SSH<a name="emr-kerberos-clusterdedicated-KDC"></a>
+## Step 2: Add principals to the KDC, create HDFS user directories, and configure SSH<a name="emr-kerberos-clusterdedicated-KDC"></a>
 
 The KDC running on the master node needs a principal added for the local host and for each user that you create on the cluster\. You may also create HDFS directories for each user if they need to connect to the cluster and run Hadoop jobs\. Similarly, configure the SSH service to enable GSSAPI authentication, which is required for Kerberos\. After you enable GSSAPI, restart the SSH service\.
 
@@ -79,4 +79,4 @@ sudo sed -i 's/^.*GSSAPICleanupCredentials.*$/GSSAPICleanupCredentials yes/' /et
 sudo /etc/init.d/sshd restart
 ```
 
-The users that you added should now be able to connect to the cluster using SSH\. For more information, see [Using SSH to Connect to Kerberized Clusters](emr-kerberos-connect-ssh.md)\.
+The users that you added should now be able to connect to the cluster using SSH\. For more information, see [Using SSH to connect to Kerberized clusters](emr-kerberos-connect-ssh.md)\.

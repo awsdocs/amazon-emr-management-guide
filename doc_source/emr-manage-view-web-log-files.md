@@ -1,15 +1,15 @@
-# View Log Files<a name="emr-manage-view-web-log-files"></a>
+# View log files<a name="emr-manage-view-web-log-files"></a>
 
  Amazon EMR and Hadoop both produce log files that report status on the cluster\. By default, these are written to the master node in the /mnt/var/log/ directory\. Depending on how you configured your cluster when you launched it, these logs may also be archived to Amazon S3 and may be viewable through the graphical debugging tool\. 
 
  There are many types of logs written to the master node\. Amazon EMR writes step, bootstrap action, and instance state logs\. Apache Hadoop writes logs to report the processing of jobs, tasks, and task attempts\. Hadoop also records logs of its daemons\. For more information about the logs written by Hadoop, go to [http://hadoop\.apache\.org/docs/stable/hadoop\-project\-dist/hadoop\-common/ClusterSetup\.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/ClusterSetup.html)\. 
 
 **Topics**
-+ [View Log Files on the Master Node](#emr-manage-view-web-log-files-master-node)
-+ [View Log Files Archived to Amazon S3](#emr-manage-view-web-log-files-s3)
-+ [View Log Files in the Debugging Tool](#emr-manage-view-web-log-files-debug)
++ [View log files on the master node](#emr-manage-view-web-log-files-master-node)
++ [View log files archived to Amazon S3](#emr-manage-view-web-log-files-s3)
++ [View log files in the debugging tool](#emr-manage-view-web-log-files-debug)
 
-## View Log Files on the Master Node<a name="emr-manage-view-web-log-files-master-node"></a>
+## View log files on the master node<a name="emr-manage-view-web-log-files-master-node"></a>
 
 The following table lists some of the log files you'll find on the master node\.
 
@@ -26,7 +26,7 @@ The following table lists some of the log files you'll find on the master node\.
 
 **To view log files on the master node**
 
-1.  Use SSH to connect to the master node as described in [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. 
+1.  Use SSH to connect to the master node as described in [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. 
 
 1.  Navigate to the directory that contains the log file information you wish to view\. The preceding table gives a list of the types of log files that are available and where you will find them\. The following example shows the command for navigating to the step log with an ID, `s-1234ABCDEFGH`\. 
 
@@ -40,7 +40,7 @@ The following table lists some of the log files you'll find on the master node\.
    less controller
    ```
 
-## View Log Files Archived to Amazon S3<a name="emr-manage-view-web-log-files-s3"></a>
+## View log files archived to Amazon S3<a name="emr-manage-view-web-log-files-s3"></a>
 
 By default, Amazon EMR clusters launched using the console automatically archive log files to Amazon S3\. You can specify your own log path, or you can allow the console to automatically generate a log path for you\. For clusters launched using the CLI or API, you must configure Amazon S3 log archiving manually\. 
 
@@ -67,7 +67,7 @@ The following table lists some of the log files you'll find on Amazon S3\.
 
 1. Download the log file object to view it\. For instructions, see [Downloading an object](https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html)\.
 
-## View Log Files in the Debugging Tool<a name="emr-manage-view-web-log-files-debug"></a>
+## View log files in the debugging tool<a name="emr-manage-view-web-log-files-debug"></a>
 
  Amazon EMR does not automatically enable the debugging tool\. You must configure this when you launch the cluster\. 
 

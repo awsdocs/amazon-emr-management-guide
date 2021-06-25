@@ -15,4 +15,4 @@ Apache Ranger uses two key components for authorization:
 
 **Topics**
 + [Architecture of Amazon EMR integration with Apache Ranger](emr-ranger-architecture.md)
-+ [Amazon EMR Components](emr-ranger-components.md)
++ [Amazon EMR components](emr-ranger-components.md)

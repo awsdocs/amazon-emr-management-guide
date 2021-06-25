@@ -1,4 +1,4 @@
-# Terms and Concepts<a name="emr-lf-terms"></a>
+# Terms and concepts<a name="emr-lf-terms"></a>
 
 This section provides definitions for concepts and terms that are used in the context of integrating Amazon EMR with AWS Lake Formation\. 
 
@@ -12,7 +12,7 @@ The process of permitting which actions a given user can take on a resource\. Wh
 
 **Federation**
 
-The creation of a trust relationship between an external identity provider \(IdP\) and AWS Identity and Access Management\(IAM\)\. Users can sign in through a compatible, Security Assertion Markup Language \(SAML\) 2\.0 identity provider \(IdP\), such as Microsoft Active Directory Federation Services\. For more information, see [Configure Third\-Party Providers for SAML](emr-lf-idp.md)\. When you use SAML 2\.0 to configure a trust relationship between an IdP and IAM, AWS assigns the user an IAM role\. The user also receives temporary credentials that allow the user to access your AWS Lake Formation resources\.
+The creation of a trust relationship between an external identity provider \(IdP\) and AWS Identity and Access Management\(IAM\)\. Users can sign in through a compatible, Security Assertion Markup Language \(SAML\) 2\.0 identity provider \(IdP\), such as Microsoft Active Directory Federation Services\. For more information, see [Configure third\-party providers for SAML](emr-lf-idp.md)\. When you use SAML 2\.0 to configure a trust relationship between an IdP and IAM, AWS assigns the user an IAM role\. The user also receives temporary credentials that allow the user to access your AWS Lake Formation resources\.
 
 **Trust policy**
 

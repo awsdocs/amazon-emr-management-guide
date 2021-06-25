@@ -1,4 +1,4 @@
-# Enable Consistent View<a name="enable-consistent-view"></a>
+# Enable consistent view<a name="enable-consistent-view"></a>
 
 You can enable Amazon S3 server\-side encryption or consistent view for EMRFS using the AWS Management Console, AWS CLI, or the `emrfs-site` configuration classification\.<a name="enable-emr-fs-console"></a>
 

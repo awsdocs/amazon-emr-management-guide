@@ -1,4 +1,4 @@
-# Hive Cluster Errors<a name="emr-troubleshoot-error-hive"></a>
+# Hive cluster errors<a name="emr-troubleshoot-error-hive"></a>
 
  You can usually find the cause of a Hive error in the `syslog` file, which you link to from the **Steps** pane\. If you can't determine the problem there, check in the Hadoop task attempt error message\. Link to it on the **Task Attempts** pane\. 
 
@@ -16,11 +16,11 @@ The following errors are common to Hive clusters\.
 
 ## Did you encounter a syntax error in the Hive script?<a name="emr-troubleshoot-error-hive-1"></a>
 
- If a step fails, look at the `stdout` file of the logs for the step that ran the Hive script\. If the error is not there, look at the `syslog` file of the task attempt logs for the task attempt that failed\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. 
+ If a step fails, look at the `stdout` file of the logs for the step that ran the Hive script\. If the error is not there, look at the `syslog` file of the task attempt logs for the task attempt that failed\. For more information, see [View log files](emr-manage-view-web-log-files.md)\. 
 
 ## Did a job fail when running interactively?<a name="emr-troubleshoot-error-hive-2"></a>
 
- If you are running Hive interactively on the master node and the cluster failed, look at the `syslog` entries in the task attempt log for the failed task attempt\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\. 
+ If you are running Hive interactively on the master node and the cluster failed, look at the `syslog` entries in the task attempt log for the failed task attempt\. For more information, see [View log files](emr-manage-view-web-log-files.md)\. 
 
 ## Are you having trouble loading data to or from Amazon S3 into Hive?<a name="emr-troubleshoot-error-hive-3"></a>
 

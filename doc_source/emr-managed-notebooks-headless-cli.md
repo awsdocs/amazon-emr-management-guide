@@ -12,7 +12,7 @@ The relative path for `python3.ipynb` is `my_folder/python3.ipynb` shown below\.
 
 ## EMR API NotebookExecution actions<a name="emr-managed-notebooks-api-actions"></a>
 
-For information about the EMR API NotebookExecution actions, see [EMR API Actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
+For information about the EMR API NotebookExecution actions, see [EMR API actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
 
 ```
 aws emr --region us-east-1 \

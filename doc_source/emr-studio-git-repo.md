@@ -1,6 +1,6 @@
-# Link Git\-Based Repositories to an EMR Studio Workspace<a name="emr-studio-git-repo"></a>
+# Link Git\-based repositories to an EMR Studio Workspace<a name="emr-studio-git-repo"></a>
 
-## About Git Repositories for EMR Studio<a name="emr-studio-git-repo-about"></a>
+## About Git repositories for EMR Studio<a name="emr-studio-git-repo-about"></a>
 
 You can associate a maximum of three Git repositories with an EMR Studio Workspace\. By default, each Workspace lets you choose from a list of Git repositories that are associated with the same AWS account as your Studio\. You can also create a new Git repository as a resource for your Workspace\.
 

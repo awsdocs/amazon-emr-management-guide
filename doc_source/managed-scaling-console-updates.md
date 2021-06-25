@@ -1,8 +1,8 @@
-# Updated Console Options for Cluster Scaling<a name="managed-scaling-console-updates"></a>
+# Updated console options for cluster scaling<a name="managed-scaling-console-updates"></a>
 
 The cluster scaling options in the console have changed\. The options are consolidated into one **Cluster Scaling** section on the **Hardware Configuration** page in **Create Cluster \- Advanced Options**\. The cluster scaling options can also be edited on the **Hardware tab** of a running cluster\. 
 
-You can select **Use EMR\-managed scaling** or **Create a custom automatic scaling policy** when you enable cluster scaling\. **Use EMR\-managed scaling** is only available with Amazon EMR version 5\.30\.0 and later\. For more information, see [Scaling Cluster Resources](emr-scale-on-demand.md)\.
+You can select **Use EMR\-managed scaling** or **Create a custom automatic scaling policy** when you enable cluster scaling\. **Use EMR\-managed scaling** is only available with Amazon EMR version 5\.30\.0 and later\. For more information, see [Scaling cluster resources](emr-scale-on-demand.md)\.
 
 The following screenshots show the differences between the previous automatic scaling and the current cluster scaling options in the console\. 
 

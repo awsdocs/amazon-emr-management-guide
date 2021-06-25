@@ -16,7 +16,7 @@ emr = Aws::EMR::Client.new(
 
 In this example, the S3 editor and EMR notebook are `s3://mybucket/notebooks/e-EA8VGAA429FEQTC8HC9ZHWISK/test.ipynb`\.
 
-For information about the EMR API NotebookExecution actions, see [EMR API Actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
+For information about the EMR API NotebookExecution actions, see [EMR API actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
 
 ```
 start_response = emr.start_notebook_execution({

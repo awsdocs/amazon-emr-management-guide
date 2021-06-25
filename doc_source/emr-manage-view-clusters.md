@@ -1,12 +1,12 @@
-# View Cluster Status and Details<a name="emr-manage-view-clusters"></a>
+# View cluster status and details<a name="emr-manage-view-clusters"></a>
 
 After you create a cluster, you can monitor its status and get detailed information about its execution and errors that may have occurred, even after it has terminated\. Amazon EMR saves metadata about terminated clusters for your reference for two months, after which the metadata is deleted\. You can't delete clusters from the cluster history, but using the AWS Management Console, you can use the **Filter**, and using the AWS CLI, you can use options with the `list-clusters` command to focus on the clusters that you care about\.
 
-You can access application history stored on\-cluster for one week from the time it is recorded, regardless of whether the cluster is running or terminated\. In addition, persistent application user interfaces store application history off\-cluster for 30 days after a cluster terminates\. See [View Application History](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-cluster-application-history.html)\.
+You can access application history stored on\-cluster for one week from the time it is recorded, regardless of whether the cluster is running or terminated\. In addition, persistent application user interfaces store application history off\-cluster for 30 days after a cluster terminates\. See [View application history](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-cluster-application-history.html)\.
 
-For more information about cluster states, such as Waiting and Running, see [Understanding the Cluster Lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.
+For more information about cluster states, such as Waiting and Running, see [Understanding the cluster lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.
 
-## View Cluster Status Using the AWS Management Console<a name="emr-view-cluster-console"></a>
+## View cluster status using the AWS Management Console<a name="emr-view-cluster-console"></a>
 
 The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com/elasticmapreduce/home) lists all the clusters in your account and AWS Region, including terminated clusters\. The list shows the following for each cluster: the **Name** and **ID**, the **Status**, the **Creation time**, the **Elapsed time** that the cluster was running, and the **Normalized instance hours** that have accrued for all EC2 instances in the cluster\. This list is the starting point for monitoring the status of your clusters\. It's designed so that you can drill down into each cluster's details for analysis and troubleshooting\.
 
@@ -23,11 +23,11 @@ The **Clusters List** in the [Amazon EMR console](https://console.aws.amazon.com
 ![\[Cluster information\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/viewcluster_summary.png)    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-clusters.html)
 
-## View Cluster Status Using the AWS CLI<a name="view-cluser-cli"></a>
+## View cluster status using the AWS CLI<a name="view-cluser-cli"></a>
 
-The following examples demonstrate how to retrieve cluster details using the AWS CLI\. For more information about available commands, see the [AWS CLI Command Reference for Amazon EMR](https://docs.aws.amazon.com/cli/latest/reference/emr)\. You can use the [describe\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/describe-cluster.html) command to view cluster\-level details including status, hardware and software configuration, VPC settings, bootstrap actions, instance groups, and so on\. For more information about cluster states, see [Understanding the Cluster Lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\. The following example demonstrates using the `describe-cluster` command, followed by examples of the [list\-clusters](https://docs.aws.amazon.com/cli/latest/reference/emr/describe-cluster.html) command\.
+The following examples demonstrate how to retrieve cluster details using the AWS CLI\. For more information about available commands, see the [AWS CLI Command Reference for Amazon EMR](https://docs.aws.amazon.com/cli/latest/reference/emr)\. You can use the [describe\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/describe-cluster.html) command to view cluster\-level details including status, hardware and software configuration, VPC settings, bootstrap actions, instance groups, and so on\. For more information about cluster states, see [Understanding the cluster lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\. The following example demonstrates using the `describe-cluster` command, followed by examples of the [list\-clusters](https://docs.aws.amazon.com/cli/latest/reference/emr/describe-cluster.html) command\.
 
-**Example Viewing Cluster Status**  
+**Example Viewing cluster status**  
 To use the `describe-cluster` command, you need the cluster ID\. This example demonstrates using to get a list of clusters created within a certain date range, and then using one of the cluster IDs returned to list more information about an individual cluster's status\.  
 The following command describes cluster *j\-1K48XXXXXXHCB*, which you replace with your cluster ID\.  
 
@@ -153,7 +153,7 @@ The output of your command is similar to the following:
 }
 ```
 
-**Example Listing Clusters by Creation Date**  
+**Example Listing clusters by creation date**  
 To retrieve clusters created within a specific data range, use the `list-clusters` command with the `--created-after` and `--created-before` parameters\.  
 The following command lists all clusters created between October 09, 2019 and October 12, 2019\.  
 
@@ -161,7 +161,7 @@ The following command lists all clusters created between October 09, 2019 and Oc
 aws emr list-clusters --created-after 2019-10-09T00:12:00 --created-before 2019-10-12T00:12:00
 ```
 
-**Example Listing Clusters by State**  
+**Example Listing clusters by state**  
 To list clusters by state, use the `list-clusters` command with the `--cluster-states` parameter\. Valid cluster states include: STARTING, BOOTSTRAPPING, RUNNING, WAITING, TERMINATING, TERMINATED, and TERMINATED\_WITH\_ERRORS\.   
 
 ```
@@ -181,4 +181,4 @@ aws emr list-clusters --cluster-states TERMINATED
 ```
 aws emr list-clusters --terminated
 ```
-For more information about cluster states, see [Understanding the Cluster Lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.
+For more information about cluster states, see [Understanding the cluster lifecycle](emr-overview.md#emr-overview-cluster-lifecycle)\.

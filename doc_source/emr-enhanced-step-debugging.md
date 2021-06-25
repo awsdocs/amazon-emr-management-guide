@@ -1,4 +1,4 @@
-# Enhanced Step Debugging<a name="emr-enhanced-step-debugging"></a>
+# Enhanced step debugging<a name="emr-enhanced-step-debugging"></a>
 
 If an Amazon EMR step fails and you submitted your work using the Step API operation with an AMI of version 5\.x or later, Amazon EMR can identify and return the root cause of the step failure in some cases, along with the name of the relevant log file and a portion of the application stack trace via API\. For example, the following failures can be identified: 
 + A common Hadoop error such as the output directory already exists, the input directory does not exist, or an application runs out of memory\.
@@ -7,7 +7,7 @@ If an Amazon EMR step fails and you submitted your work using the Step API opera
 
 This information is available using the [DescribeStep](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_DescribeStep.html) and [ListSteps](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_ListSteps.html) API operations\. The [FailureDetails](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_FailureDetails.html) field of the [StepSummary](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_StepSummary.html) returned by those operations\. To access the FailureDetails information, use the AWS CLI, console, or AWS SDK\.
 
-**To view failure details using the AWS Console**
+**To view failure details using the AWS console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 

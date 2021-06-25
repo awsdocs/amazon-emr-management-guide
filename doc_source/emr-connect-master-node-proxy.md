@@ -1,14 +1,14 @@
-# Option 2, Part 2: Configure Proxy Settings to View Websites Hosted on the Master Node<a name="emr-connect-master-node-proxy"></a>
+# Option 2, part 2: Configure proxy settings to view websites hosted on the master node<a name="emr-connect-master-node-proxy"></a>
 
 If you use an SSH tunnel with dynamic port forwarding, you must use a SOCKS proxy management add\-on to control the proxy settings in your browser\. Using a SOCKS proxy management tool allows you to automatically filter URLs based on text patterns and to limit the proxy settings to domains that match the form of the master node's public DNS name\. The browser add\-on automatically handles turning the proxy on and off when you switch between viewing websites hosted on the master node and those on the Internet\. To manage your proxy settings, configure your browser to use an add\-on such as FoxyProxy or SwitchyOmega\. 
 
-For more information about creating an SSH tunnel, see [Option 2, Part 1: Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding](emr-ssh-tunnel.md)\. For more information about the available web interfaces, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\. 
+For more information about creating an SSH tunnel, see [Option 2, part 1: Set up an SSH tunnel to the master node using dynamic port forwarding](emr-ssh-tunnel.md)\. For more information about the available web interfaces, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\. 
 
 
 
 Include the following settings when you set up your proxy add\-on:
 + Use **localhost** as the host address\.
-+ Use the same local port number that you selected to establish the SSH tunnel with the master node in [Option 2, Part 1: Set Up an SSH Tunnel to the Master Node Using Dynamic Port Forwarding](emr-ssh-tunnel.md)\. For example, port *8157*\. This port must also match the port number you use in PuTTY or any other terminal emulator you use to connect\.
++ Use the same local port number that you selected to establish the SSH tunnel with the master node in [Option 2, part 1: Set up an SSH tunnel to the master node using dynamic port forwarding](emr-ssh-tunnel.md)\. For example, port *8157*\. This port must also match the port number you use in PuTTY or any other terminal emulator you use to connect\.
 + Specify the **SOCKS v5** protocol\. SOCKS v5 lets you optionally set up user authorization\.
 + **URL Patterns**
 
@@ -126,7 +126,7 @@ FoxyProxy provides a set of proxy management tools\. It lets you use a proxy ser
 
 1. Choose **OK** when prompted to overwrite the existing settings and save your new configuration\.
 
-## Example: Configure SwitchyOmega for Chrome<a name="switchyomega"></a>
+## Example: Configure SwitchyOmega for chrome<a name="switchyomega"></a>
 
 The following example demonstrates how to set up the SwitchyOmega extension for Google Chrome\. SwitchyOmega lets you configure, manage, and switch between multiple proxies\.
 
@@ -157,7 +157,7 @@ The following example demonstrates how to set up the SwitchyOmega extension for 
 
 1. On the Chrome toolbar, choose SwitchyOmega and select the `emr-socks-proxy` profile\.
 
-## Access a Web Interface in the Browser<a name="connect-to-web-ui-browser"></a>
+## Access a web interface in the browser<a name="connect-to-web-ui-browser"></a>
 
 To open a web interface, enter the public DNS name of your master or core node followed by the port number for your chosen interface into your browser address bar\. The following example shows the URL you would enter to connect to the Spark HistoryServer\.
 
@@ -165,4 +165,4 @@ To open a web interface, enter the public DNS name of your master or core node f
 http://master-public-dns-name:18080/				
 ```
 
-For instructions on retrieving the public DNS name of a node, see [Retrieve the Public DNS Name of the Master Node](emr-connect-master-node-ssh.md#emr-connect-master-dns)\. For a complete list of web interface URLs, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\.
+For instructions on retrieving the public DNS name of a node, see [Retrieve the public DNS name of the master node](emr-connect-master-node-ssh.md#emr-connect-master-dns)\. For a complete list of web interface URLs, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\.

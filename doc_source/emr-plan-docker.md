@@ -1,10 +1,10 @@
 # Configure Docker<a name="emr-plan-docker"></a>
 
-Amazon EMR 6\.x supports Hadoop 3, which allows the YARN NodeManager to launch containers either directly on the EMR cluster host or inside a Docker container\. Docker containers provide custom execution environments in which application code runs\. The custom execution environment is isolated from the execution environment of the YARN NodeManager and other applications\.
+Amazon EMR 6\.x supports Hadoop 3, which allows the YARN NodeManager to launch containers either directly on the Amazon EMR cluster or inside a Docker container\. Docker containers provide custom execution environments in which application code runs\. The custom execution environment is isolated from the execution environment of the YARN NodeManager and other applications\.
 
 Docker containers can include special libraries used by the application and they can provide different versions of native tools and libraries, such as R and Python\. You can use familiar Docker tooling to define libraries and runtime dependencies for your applications\.
 
-Amazon EMR 6\.x clusters are configured by default to allow YARN applications, such as Spark, to run using Docker containers\. To customize your container configuration, edit the Docker support options defined in the `yarn-site.xml` and `container-executor.cfg` files available in the `/etc/hadoop/conf` directory\. For details about each configuration option and how it is used, see [Launching Applications Using Docker Containers](https://hadoop.apache.org/docs/r3.1.0/hadoop-yarn/hadoop-yarn-site/DockerContainers.html)\. 
+Amazon EMR 6\.x clusters are configured by default to allow YARN applications, such as Spark, to run using Docker containers\. To customize your container configuration, edit the Docker support options defined in the `yarn-site.xml` and `container-executor.cfg` files available in the `/etc/hadoop/conf` directory\. For details about each configuration option and how it is used, see [Launching applications using Docker containers](https://hadoop.apache.org/docs/r3.1.0/hadoop-yarn/hadoop-yarn-site/DockerContainers.html)\. 
 
 You can choose to use Docker when you submit a job\. Use the following variables to specify the Docker runtime and Docker image\.
 + `YARN_CONTAINER_RUNTIME_TYPE=docker`
@@ -24,15 +24,11 @@ Docker registries require network access from each host in the cluster\. This is
 
 **Public subnet**
 
-When EMR clusters are deployed in a public subnet, the nodes running YARN NodeManager can directly access any registry available over the internet, including Docker Hub, as shown in the following diagram\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/dockerhub_public_subnet.png)
+When EMR clusters are deployed in a public subnet, the nodes running YARN NodeManager can directly access any registry available over the internet, including Docker Hub\.
 
 **Private subnet**
 
-When EMR clusters are deployed in a private subnet, the nodes running YARN NodeManager don’t have direct access to the internet\. Docker images can be hosted in Amazon ECR and accessed through AWS PrivateLink, as shown in the following diagram\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/dockerhub_private_subnet.png)
+When EMR clusters are deployed in a private subnet, the nodes running YARN NodeManager don't have direct access to the internet\. Docker images can be hosted in Amazon ECR and accessed through AWS PrivateLink\.
 
 For more information about how to use AWS PrivateLink to allow access to Amazon ECR in a private subnet scenario, see [Setting up AWS PrivateLink for Amazon ECS, and Amazon ECR](https://aws.amazon.com/blogs/compute/setting-up-aws-privatelink-for-amazon-ecs-and-amazon-ecr/)\.
 
@@ -59,7 +55,7 @@ The following example shows how to configure the cluster to trust both a public 
 ]
 ```
 
-To launch an Amazon EMR 6\.0\.0 cluster with this configuration using the AWS Command Line Interface \(AWS CLI\), create a file named `container-executor.json` with the contents of the preceding container\-executor JSON configuration\. Then, use the following commands to launch the cluster\.
+To launch an Amazon EMR 6\.0\.0 cluster with this configuration using the AWS Command Line Interface \(AWS CLI\), create a file named `container-executor.json` with the contents of the preceding ontainer\-executor JSON configuration\. Then, use the following commands to launch the cluster\.
 
 ```
 export KEYPAIR=<Name of your Amazon EC2 key-pair>
@@ -80,7 +76,7 @@ aws emr create-cluster \
 
 ## Configuring YARN to access Amazon ECR on EMR 6\.0\.0 and earlier<a name="emr-docker-ECR"></a>
 
-If you’re new to Amazon ECR, follow the instructions in [Getting Started with Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_GetStarted.html) and verify that you have access to Amazon ECR from each instance in your Amazon EMR cluster\.
+If you're new to Amazon ECR, follow the instructions in [Getting started with Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_GetStarted.html) and verify that you have access to Amazon ECR from each instance in your Amazon EMR cluster\.
 
 On EMR 6\.0\.0 and earlier, to access Amazon ECR using the Docker command, you must first generate credentials\. To verify that YARN can access images from Amazon ECR, use the container environment variable `YARN_CONTAINER_RUNTIME_DOCKER_CLIENT_CONFIG` to pass a reference to the credentials that you generated\.
 
@@ -133,10 +129,10 @@ To enable this feature even when the ECR registry is not set in the trusted regi
 
 **How to disable automatic authentication**
 
- By default, automatic authentication is disabled if no Amazon ECR registry is detected in the trusted registry\.
+By default, automatic authentication is disabled if no Amazon ECR registry is detected in the trusted registry\.
 
 To disable automatic authentication, even when the Amazon ECR registry is set in the trusted registry, use the configuration classification to set `yarn.nodemanager.runtime.linux.docker.ecr-auto-authentication.enabled` to `false`\.
 
-**How to check if automatic authentication is enabled on a  cluster**
+**How to check if automatic authentication is enabled on a cluster**
 
 On the master node, use a text editor such as `vi` to view the contents of the file: `vi /etc/hadoop/conf.empty/yarn-site.xml`\. Check the value of `yarn.nodemanager.runtime.linux.docker.ecr-auto-authentication.enabled`\.

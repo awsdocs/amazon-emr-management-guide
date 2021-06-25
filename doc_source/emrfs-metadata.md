@@ -1,17 +1,17 @@
-# EMRFS Consistent View Metadata<a name="emrfs-metadata"></a>
+# EMRFS consistent view metadata<a name="emrfs-metadata"></a>
 
 EMRFS consistent view tracks consistency using a DynamoDB table to track objects in Amazon S3 that have been synced with or created by EMRFS\. The metadata is used to track all operations \(read, write, update, and copy\), and no actual content is stored in it\. This metadata is used to validate whether the objects or metadata received from Amazon S3 matches what is expected\. This confirmation gives EMRFS the ability to check list consistency and read\-after\-write consistency for new objects EMRFS writes to Amazon S3 or objects synced with EMRFS\. Multiple clusters can share the same metadata\.
 
 **How to add entries to metadata**  
-You can use the `sync` or `import` subcommands to add entries to metadata\. `sync` reflects the state of the Amazon S3 objects in a path, while `import` is used strictly to add new entries to the metadata\. For more information, see [EMRFS CLI Reference](emrfs-cli-reference.md)\.
+You can use the `sync` or `import` subcommands to add entries to metadata\. `sync` reflects the state of the Amazon S3 objects in a path, while `import` is used strictly to add new entries to the metadata\. For more information, see [EMRFS CLI Command Reference](emrfs-cli-reference.md)\.
 
 **How to check differences between metadata and objects in Amazon S3**  
-To check for differences between the metadata and Amazon S3, use the `diff` subcommand of the EMRFS CLI\. For more information, see [EMRFS CLI Reference](emrfs-cli-reference.md)\.
+To check for differences between the metadata and Amazon S3, use the `diff` subcommand of the EMRFS CLI\. For more information, see [EMRFS CLI Command Reference](emrfs-cli-reference.md)\.
 
 **How to know if metadata operations are being throttled**  
 EMRFS sets default throughput capacity limits on the metadata for its read and write operations at 500 and 100 units, respectively\. Large numbers of objects or buckets may cause operations to exceed this capacity, at which point DynamoDB will throttle operations\. For example, an application may cause EMRFS to throw a `ProvisionedThroughputExceededException` if you perform an operation that exceeds these capacity limits\. Upon throttling, the EMRFS CLI tool attempts to retry writing to the DynamoDB table using [exponential backoff](https://docs.aws.amazon.com/general/latest/gr/api-retries.html) until the operation finishes or when it reaches the maximum retry value for writing objects from Amazon EMR to Amazon S3\. 
 
-You can configure your own throughput capacity limits\. However, DynamoDB has strict partition limits of 3000 read capacity units \(RCUs\) and 1000 write capacity units \(WCUs\) per second for read and write operations\. To avoid `sync` failures caused by throttling, we recommend you limit throughput for read operations to fewer than 3000 RCUs and write operations to fewer than 1000 WCUs\. For instructions on setting custom throughput capacity limits, see [Configure Consistent View](emrfs-configure-consistent-view.md)\.
+You can configure your own throughput capacity limits\. However, DynamoDB has strict partition limits of 3000 read capacity units \(RCUs\) and 1000 write capacity units \(WCUs\) per second for read and write operations\. To avoid `sync` failures caused by throttling, we recommend you limit throughput for read operations to fewer than 3000 RCUs and write operations to fewer than 1000 WCUs\. For instructions on setting custom throughput capacity limits, see [Configure consistent view](emrfs-configure-consistent-view.md)\.
 
 You can also view Amazon CloudWatch metrics for your EMRFS metadata in the DynamoDB console where you can see the number of throttled read and write requests\. If you do have a non\-zero value for throttled requests, your application may potentially benefit from increasing allocated throughput capacity for read or write operations\. You may also realize a performance benefit if you see that your operations are approaching the maximum allocated throughput capacity in reads or writes for an extended period of time\.
 

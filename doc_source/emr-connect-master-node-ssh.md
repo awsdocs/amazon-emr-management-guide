@@ -1,14 +1,14 @@
-# Connect to the Master Node Using SSH<a name="emr-connect-master-node-ssh"></a>
+# Connect to the master node using SSH<a name="emr-connect-master-node-ssh"></a>
 
 Secure Shell \(SSH\) is a network protocol you can use to create a secure connection to a remote computer\. After you make a connection, the terminal on your local computer behaves as if it is running on the remote computer\. Commands you issue locally run on the remote computer, and the command output from the remote computer appears in your terminal window\. 
 
 When you use SSH with AWS, you are connecting to an EC2 instance, which is a virtual server running in the cloud\. When working with Amazon EMR, the most common use of SSH is to connect to the EC2 instance that is acting as the master node of the cluster\.
 
-Using SSH to connect to the master node gives you the ability to monitor and interact with the cluster\. You can issue Linux commands on the master node, run applications such as Hive and Pig interactively, browse directories, read log files, and so on\. You can also create a tunnel in your SSH connection to view the web interfaces hosted on the master node\. For more information, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\.
+Using SSH to connect to the master node gives you the ability to monitor and interact with the cluster\. You can issue Linux commands on the master node, run applications such as Hive and Pig interactively, browse directories, read log files, and so on\. You can also create a tunnel in your SSH connection to view the web interfaces hosted on the master node\. For more information, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\.
 
-To connect to the master node using SSH, you need the public DNS name of the master node\. In addition, the security group associated with the master node must have an inbound rule that allows SSH \(TCP port 22\) traffic from a source that includes the client where the SSH connection originates\. You may need to add a rule to allow an SSH connection from your client\. For more information about modifying security group rules, see [Control Network Traffic with Security Groups](emr-security-groups.md) and [Adding Rules to a Security Group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+To connect to the master node using SSH, you need the public DNS name of the master node\. In addition, the security group associated with the master node must have an inbound rule that allows SSH \(TCP port 22\) traffic from a source that includes the client where the SSH connection originates\. You may need to add a rule to allow an SSH connection from your client\. For more information about modifying security group rules, see [Control network traffic with security groups](emr-security-groups.md) and [Adding rules to a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## Retrieve the Public DNS Name of the Master Node<a name="emr-connect-master-dns"></a>
+## Retrieve the public DNS name of the master node<a name="emr-connect-master-dns"></a>
 
 You can retrieve the master public DNS name using the Amazon EMR console and the AWS CLI\. 
 
@@ -90,9 +90,9 @@ For more information, see [Amazon EMR commands in the AWS CLI](https://docs.aws.
 
 ------
 
-## Connect to the Master Node Using SSH and an Amazon EC2 Private Key on Linux, Unix, and Mac OS X<a name="emr-connect-linux"></a>
+## Connect to the master node using SSH and an Amazon EC2 private key on Linux, Unix, and Mac OS X<a name="emr-connect-linux"></a>
 
-To create an SSH connection authenticated with a private key file, you need to specify the Amazon EC2 key pair private key when you launch a cluster\. If you launch a cluster from the console, the Amazon EC2 key pair private key is specified in the **Security and Access** section on the **Create Cluster** page\. For more information about accessing your key pair, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+To create an SSH connection authenticated with a private key file, you need to specify the Amazon EC2 key pair private key when you launch a cluster\. If you launch a cluster from the console, the Amazon EC2 key pair private key is specified in the **Security and Access** section on the **Create Cluster** page\. For more information about accessing your key pair, see [Amazon EC2 key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 Your Linux computer most likely includes an SSH client by default\. For example, OpenSSH is installed on most Linux, Unix, and macOS operating systems\. You can check for an SSH client by typing ssh at the command line\. If your computer does not recognize the command, install an SSH client to connect to the master node\. The OpenSSH project provides a free implementation of the full suite of SSH tools\. For more information, see the [OpenSSH](http://www.openssh.org/) website\.
 
@@ -102,7 +102,7 @@ The following instructions demonstrate opening an SSH connection to the Amazon E
 
 Before you can use your Amazon EC2 key pair private key to create an SSH connection, you must set permissions on the `.pem` file so that only the key owner has permission to access the file\. This is required for creating an SSH connection using terminal or the AWS CLI\.
 
-1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 
 1. Locate your `.pem` file\. These instructions assume that the file is named `mykeypair.pem` and that it is stored in the current user's home directory\.
 
@@ -134,17 +134,17 @@ You must use the login name `hadoop` when you connect to the Amazon EMR master n
    exit
    ```
 
-## Connect to the Master Node Using SSH on Windows<a name="emr-connect-win"></a>
+## Connect to the master node using SSH on Windows<a name="emr-connect-win"></a>
 
 Windows users can use an SSH client such as PuTTY to connect to the master node\. Before connecting to the Amazon EMR master node, you should download and install PuTTY and PuTTYgen\. You can download these tools from the [PuTTY download page](http://www.chiark.greenend.org.uk/~sgtatham/putty/)\.
 
 PuTTY does not natively support the key pair private key file format \(`.pem`\) generated by Amazon EC2\. You use PuTTYgen to convert your key file to the required PuTTY format \(`.ppk`\)\. You must convert your key into this format \(`.ppk`\) before attempting to connect to the master node using PuTTY\.
 
-For more information about converting your key, see [Converting Your Private Key Using PuTTYgen](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) in the *Amazon EC2 User Guide for Linux Instances*\.<a name="emr-ssh-windows"></a>
+For more information about converting your key, see [Converting your private key using PuTTYgen](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) in the *Amazon EC2 User Guide for Linux Instances*\.<a name="emr-ssh-windows"></a>
 
 **To connect to the master node using PuTTY**
 
-1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 
 1. Open `putty.exe`\. You can also launch PuTTY from the Windows programs list\. 
 
@@ -164,13 +164,13 @@ When logging into the master node, type `hadoop` if you are prompted for a user 
 **Note**  
 To prevent the SSH connection from timing out, you can choose **Connection** in the **Category** list and select the option **Enable TCP\_keepalives**\. If you have an active SSH session in PuTTY, you can change your settings by opening the context \(right\-click\) for the PuTTY title bar and choosing **Change Settings**\.
 
-## Connect to the Master Node Using the AWS CLI<a name="emr-connect-cli"></a>
+## Connect to the master node using the AWS CLI<a name="emr-connect-cli"></a>
 
 You can create an SSH connection with the master node using the AWS CLI on Windows and on Linux, Unix, and Mac OS X\. Regardless of the platform, you need the public DNS name of the master node and your Amazon EC2 key pair private key\. If you are using the AWS CLI on Linux, Unix, or Mac OS X, you must also set permissions on the private key \(`.pem` or `.ppk`\) file as shown in [To configure the key pair private key file permissions](#emr-keypair-file-permission-config)\.<a name="emr-ssh-cli"></a>
 
 **To connect to the master node using the AWS CLI**
 
-1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before You Connect: Authorize Inbound Traffic](emr-connect-ssh-prereqs.md)\.
+1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 
 1. To retrieve the cluster identifier, type:
 

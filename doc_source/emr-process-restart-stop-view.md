@@ -1,12 +1,12 @@
-# Viewing and Restarting Amazon EMR and Application Processes \(Daemons\)<a name="emr-process-restart-stop-view"></a>
+# Viewing and restarting Amazon EMR and application processes \(daemons\)<a name="emr-process-restart-stop-view"></a>
 
-When you troubleshoot a cluster, you may want to list running processes\. You may also find it useful to stop or restart processes in some circumstances—for example, after you change a configuration or notice a problem with a particular process after you analyze log files and error messages\.
+When you troubleshoot a cluster, you may want to list running processes\. You may also find it useful to stop or restart processes in some circumstances \- for example, after you change a configuration or notice a problem with a particular process after you analyze log files and error messages\.
 
 There are two types of processes that run on a cluster: Amazon EMR processes \(for example, instance\-controller and Log Pusher\), and processes associated with the applications installed on the cluster \(for example, hadoop\-hdfs\-namenode, and hadoop\-yarn\-resourcemanager\)\.
 
-To work with processes directly on a cluster, you connect to the master node\. For more information, see [Connect to the Cluster](emr-connect-master-node.md)\.
+To work with processes directly on a cluster, you connect to the master node\. For more information, see [Connect to the cluster](emr-connect-master-node.md)\.
 
-## Viewing Running Processes<a name="emr-process-view"></a>
+## Viewing running processes<a name="emr-process-view"></a>
 
 If you are using Amazon EMR version 4\.x or later, application releases are packaged using a system based on Apache Bigtop, so these application processes are configured via \.conf scripts under the upstart init system\. Amazon EMR processes, on the other hand, are configured using SysV \(init\.d scripts\) which is backwards compatible with upstart\.
 
@@ -36,7 +36,7 @@ If you are using Amazon EMR version 4\.x or later, application releases are pack
   control-alt-delete.conf          hadoop-yarn-resourcemanager.conf                hive-metastore.conf 
   ```
 
-## Restarting Processes<a name="emr-process-restart"></a>
+## Restarting processes<a name="emr-process-restart"></a>
 
 After you determine which processes are running, you can stop and then restart them if necessary\. How you start and stop a service depends on whether it's an Amazon EMR service or a service associated with an application\.
 

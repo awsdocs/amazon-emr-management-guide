@@ -3,15 +3,15 @@
 When you are logged in to an Amazon EMR Studio, you can create and configure different *Workspaces* to organize and run notebooks\. This section provides instructions for creating and working with Workspaces\. For a conceptual overview, see [Workspaces in Amazon EMR Studio](how-emr-studio-works.md#emr-studio-workspaces)\.
 
 **Topics**
-+ [Understand Workspace Status](#emr-studio-workspace-status)
++ [Understand Workspace status](#emr-studio-workspace-status)
 + [Create an EMR Studio Workspace](#emr-studio-create-workspace)
 + [Launch a Workspace](#emr-studio-use-workspace)
-+ [Understand the Workspace User Interface](#emr-studio-workspace-ui)
-+ [Explore Notebook Examples](#emr-studio-notebook-examples)
-+ [Save Workspace Content](#emr-studio-save-workspace)
-+ [Delete a Workspace and Notebook Files](#emr-studio-delete-workspace)
++ [Understand the Workspace user interface](#emr-studio-workspace-ui)
++ [Explore Notebook examples](#emr-studio-notebook-examples)
++ [Save Workspace content](#emr-studio-save-workspace)
++ [Delete a Workspace and Notebook files](#emr-studio-delete-workspace)
 
-## Understand Workspace Status<a name="emr-studio-workspace-status"></a>
+## Understand Workspace status<a name="emr-studio-workspace-status"></a>
 
 After you create an EMR Studio Workspace, it will appear as a row in the **Workspaces** list with its name, status, creation time, and last modified timestamp\. The following table describes the possible Workspace statuses\.
 
@@ -48,7 +48,7 @@ You can create EMR Studio Workspaces to run notebook code using the EMR Studio i
 You must select a subnet for your Workspace before you can choose a cluster option under **Advanced configuration**\.   
 Provisioning a new cluster requires access permissions from your administrator\. 
 
-   Choose one of the cluster options for your Workspace and attach the cluster\. For more information about provisioning a cluster when you create a Workspace, see [Create a New EMR Cluster to Attach to Your Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
+   Choose one of the cluster options for your Workspace and attach the cluster\. For more information about provisioning a cluster when you create a Workspace, see [Create a new EMR Cluster to attach to your Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
 
 1. Choose **Create Workspace** in the lower right of the page\. 
 
@@ -66,20 +66,20 @@ To start working with notebook files, launch a Workspace to access the notebook 
 **Note**  
 Only one user can open and work in a Workspace at a time\. If you select a Workspace that is already in use, a notification appears at the top of the Studio when you try to open it\. The **User** column on the **Workspaces** page shows the user who is currently using the Workspace\.
 
-## Understand the Workspace User Interface<a name="emr-studio-workspace-ui"></a>
+## Understand the Workspace user interface<a name="emr-studio-workspace-ui"></a>
 
 The EMR Studio Workspace user interface is based on the [JupyterLab interface](https://jupyterlab.readthedocs.io/en/latest/user/interface.html) with icon\-denoted tabs on the left sidebar\. When you pause over an icon, you can see a tooltip that shows the name of the tab\. Choose tabs from the left sidebar to access the following panels\.
 + **File Browser** – Displays the files and directories in your Workspace, as well as the files and directories of your linked Git repositories\.
-+ **Running Kernels and Terminals** – Lists all of the kernels and terminals running in your Workspace\. For more information, see [Managing Kernels and Terminals](https://jupyterlab.readthedocs.io/en/latest/user/running.html) in the official JupyterLab documentation\.
++ **Running Kernels and Terminals** – Lists all of the kernels and terminals running in your Workspace\. For more information, see [Managing kernels and terminals](https://jupyterlab.readthedocs.io/en/latest/user/running.html) in the official JupyterLab documentation\.
 + **Git** – Provides a graphical user interface for performing commands in the Git repositories attached to your Workspace\. This panel is a JupyterLab extension called jupyterlab\-git\. For more information, see [jupyterlab\-git](https://github.com/jupyterlab/jupyterlab-git)\.
-+ **EMR Clusters** – Lets you attach a cluster to or detach a cluster from your Workspace to run code in your notebooks\. The EMR cluster configuration panel also provides advanced configuration options to help you create and attach a *new* cluster to your Workspace\. For more information, see [Create a New EMR Cluster to Attach to Your Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
-+ **EMR Git Repository** – Helps you link your Workspace with up to three Git repositories\. For details and instructions, see [Link Git\-Based Repositories to an EMR Studio Workspace](emr-studio-git-repo.md)\.
++ **EMR Clusters** – Lets you attach a cluster to or detach a cluster from your Workspace to run code in your notebooks\. The EMR cluster configuration panel also provides advanced configuration options to help you create and attach a *new* cluster to your Workspace\. For more information, see [Create a new EMR Cluster to attach to your Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
++ **EMR Git Repository** – Helps you link your Workspace with up to three Git repositories\. For details and instructions, see [Link Git\-based repositories to an EMR Studio Workspace](emr-studio-git-repo.md)\.
 + **Notebook Examples** – Provides a list of notebook examples that you can save to your Workspace\. You can also access the examples by choosing **Notebook Examples** on the **Launcher** page of your Workspace\. 
-+ **Commands** – Offers a keyboard\-driven way to search for and run JupyterLab commands\. For more information, see the [Command Palette](https://jupyterlab.readthedocs.io/en/latest/user/commands.html) page in the JupyterLab documentation\.
++ **Commands** – Offers a keyboard\-driven way to search for and run JupyterLab commands\. For more information, see the [Command palette](https://jupyterlab.readthedocs.io/en/latest/user/commands.html) page in the JupyterLab documentation\.
 + **Notebook Tools** – Lets you select and set options such as cell slide type and metadata\. The **Notebook Tools** option only appears in the left sidebar after you open a notebook file\.
-+ **Open Tabs** – Lists the open documents and activities in the main work area so that you can easily jump to an open tab\. For more information, see the [Tabs and Single\-Document Mode](https://jupyterlab.readthedocs.io/en/latest/user/interface.html#tabs-and-single-document-mode) page in the JupyterLab documentation\.
++ **Open Tabs** – Lists the open documents and activities in the main work area so that you can easily jump to an open tab\. For more information, see the [Tabs and single\-document mode](https://jupyterlab.readthedocs.io/en/latest/user/interface.html#tabs-and-single-document-mode) page in the JupyterLab documentation\.
 
-## Explore Notebook Examples<a name="emr-studio-notebook-examples"></a>
+## Explore Notebook examples<a name="emr-studio-notebook-examples"></a>
 
 Every EMR Studio Workspace includes a set of notebook examples that you can use to explore EMR Studio features\. To edit or run a notebook example, you can save it to your Workspace\.
 
@@ -91,17 +91,17 @@ Every EMR Studio Workspace includes a set of notebook examples that you can use 
 
 1. To save the notebook example to your Workspace, choose **Save to Workspace**\. EMR Studio saves the example in your home directory\. After you save a notebook example to your Workspace, you can rename, edit, and run it\.
 
-For more information about the notebook examples, see the [EMR Studio Notebook Examples GitHub repository](https://github.com/aws-samples/emr-studio-notebook-examples)\.
+For more information about the notebook examples, see the [EMR Studio Notebook examples GitHub repository](https://github.com/aws-samples/emr-studio-notebook-examples)\.
 
-## Save Workspace Content<a name="emr-studio-save-workspace"></a>
+## Save Workspace content<a name="emr-studio-save-workspace"></a>
 
 When you work in the notebook editor of a Workspace, EMR Studio automatically saves the content of your notebook cells and output in the Amazon S3 location associated with your Studio\. This backup process preserves your work between sessions\. 
 
 You can also manually save a notebook by pressing **CTRL\+S** in the open notebook tab or by using one of the save options under **File**\.
 
-Another way to back up the notebook files in your Workspace is to associate your Workspace with a Git\-based repository and sync your changes with the remote repository\. Doing so also lets you save and share your notebooks with team members who are using a different Workspace or Studio\. For instructions, see [Link Git\-Based Repositories to an EMR Studio Workspace](emr-studio-git-repo.md)\.
+Another way to back up the notebook files in your Workspace is to associate your Workspace with a Git\-based repository and sync your changes with the remote repository\. Doing so also lets you save and share your notebooks with team members who are using a different Workspace or Studio\. For instructions, see [Link Git\-based repositories to an EMR Studio Workspace](emr-studio-git-repo.md)\.
 
-## Delete a Workspace and Notebook Files<a name="emr-studio-delete-workspace"></a>
+## Delete a Workspace and Notebook files<a name="emr-studio-delete-workspace"></a>
 
 When you delete a notebook file from an EMR Studio Workspace, you delete the file from the** File browser**, and EMR Studio removes its backup copy in Amazon S3 You do not have to take any further steps to avoid storage charges when you delete a file from a Workspace\.
 

@@ -1,4 +1,4 @@
-# Canceling Steps<a name="emr-cancel-steps"></a>
+# Canceling steps<a name="emr-cancel-steps"></a>
 
 You can cancel pending and running steps using the AWS Management Console, the AWS CLI, or the Amazon EMR API\.
 

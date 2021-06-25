@@ -1,4 +1,4 @@
-# Configure Networking<a name="emr-plan-vpc-subnet"></a>
+# Configure networking<a name="emr-plan-vpc-subnet"></a>
 
 Most clusters launch into a virtual network using Amazon Virtual Private Cloud \(Amazon VPC\)\. A VPC is an isolated virtual network within AWS that is logically isolated within your AWS account\. You can configure aspects such as private IP address ranges, subnets, routing tables, and network gateways\. For more information, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
@@ -10,7 +10,7 @@ VPC offers the following capabilities:
 
   If your data source is located in a private network, it may be impractical or undesirable to upload that data to AWS for import into Amazon EMR, either because of the amount of data to transfer or because of the sensitive nature of the data\. Instead, you can launch the cluster into a VPC and connect your data center to your VPC through a VPN connection, enabling the cluster to access resources on your internal network\. For example, if you have an Oracle database in your data center, launching your cluster into a VPC connected to that network by VPN makes it possible for the cluster to access the Oracle database\. 
 
-****Public and Private Subnets****  
+****Public and private subnets****  
 You can launch EMR clusters in both public and private VPC subnets\. This means you do not need internet connectivity to run an EMR cluster; however, you may need to configure network address translation \(NAT\) and VPN gateways to access services or resources located outside of the VPC, for example in a corporate intranet or public AWS service endpoints like AWS Key Management Service\.
 
 **Important**  
@@ -19,13 +19,13 @@ Amazon EMR only supports launching clusters in private subnets in release versio
 For more information about Amazon VPC, see the [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
 **Topics**
-+ [Amazon VPC Options](emr-clusters-in-a-vpc.md)
-+ [Set up a VPC to Host Clusters](emr-vpc-host-job-flows.md)
-+ [Launch Clusters into a VPC](emr-vpc-launching-job-flows.md)
-+ [Minimum Amazon S3 Policy for Private Subnet](private-subnet-iampolicy.md)
-+ [More Resources for Learning About VPCs](#emr-resources-about-vpcs)
++ [Amazon VPC options](emr-clusters-in-a-vpc.md)
++ [Set up a VPC to host clusters](emr-vpc-host-job-flows.md)
++ [Launch clusters into a VPC](emr-vpc-launching-job-flows.md)
++ [Minimum Amazon S3 policy for private subnet](private-subnet-iampolicy.md)
++ [More resources for learning about VPCs](#emr-resources-about-vpcs)
 
-## More Resources for Learning About VPCs<a name="emr-resources-about-vpcs"></a>
+## More resources for learning about VPCs<a name="emr-resources-about-vpcs"></a>
 
 Use the following topics to learn more about VPCs and subnets\.
 + Private Subnets in a VPC

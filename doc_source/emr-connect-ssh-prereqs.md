@@ -1,8 +1,8 @@
-# Before You Connect: Authorize Inbound Traffic<a name="emr-connect-ssh-prereqs"></a>
+# Before you connect: Authorize inbound traffic<a name="emr-connect-ssh-prereqs"></a>
 
 Before you connect to an Amazon EMR cluster, you must authorize inbound SSH traffic \(port 22\) from trusted clients such as your computer's IP address\. In order to do so, edit the managed security group rules for the nodes to which you want to connect\. For example, the following instructions show you how to add an inbound rule for SSH access to the default ElasticMapReduce\-master security group\.
 
-For more information about using security groups with Amazon EMR, see [Control Network Traffic with Security Groups](emr-security-groups.md)\.
+For more information about using security groups with Amazon EMR, see [Control network traffic with security groups](emr-security-groups.md)\.
 
 **To allow SSH access for trusted sources for the ElasticMapReduce\-master security group**
 

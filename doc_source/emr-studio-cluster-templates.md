@@ -1,6 +1,6 @@
-# Create Cluster Templates in AWS Service Catalog<a name="emr-studio-cluster-templates"></a>
+# Create cluster templates in AWS Service Catalog<a name="emr-studio-cluster-templates"></a>
 
-## About EMR Studio Cluster Templates<a name="emr-studio-about-cluster-templates"></a>
+## About EMR Studio cluster templates<a name="emr-studio-about-cluster-templates"></a>
 
 We recommend that you enable your team to use cluster templates with an EMR Studio\. Doing so lets users quickly choose from a list of templates to create a cluster for a Workspace\. It also lets you specify how new clusters should be created, and it simplifies Workspace setup\. You can define cluster templates using AWS Service Catalog\. For more information about using templates with Amazon EMR, see the [Build a self\-service environment for each line of business using Amazon EMR and AWS Service Catalog](http://aws.amazon.com/blogs/big-data/build-a-self-service-environment-for-each-line-of-business-using-amazon-emr-and-aws-service-catalog/) blog post\.
 
@@ -44,13 +44,13 @@ For more information, see [Parameters](https://docs.aws.amazon.com/AWSCloudForma
 
 ## Prerequisites<a name="emr-studio-cluster-template-prereqs"></a>
 
-Before you create a template, make sure you have IAM permissions to access the AWS Service Catalog administrator console view as well as any IAM permissions needed to perform AWS Service Catalog administrative tasks\. For more information, see [Grant Permissions to AWS Service Catalog Administrators](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/getstarted-iamadmin.html)\. 
+Before you create a template, make sure you have IAM permissions to access the AWS Service Catalog administrator console view as well as any IAM permissions needed to perform AWS Service Catalog administrative tasks\. For more information, see [Grant permissions to AWS Service Catalog administrators](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/getstarted-iamadmin.html)\. 
 
 ## Instructions<a name="emr-studio-cluster-template-instructions"></a>
 
 **To create EMR cluster templates using AWS Service Catalog**
 
-1. Create a portfolio for your cluster templates in the same AWS account as your Studio\. For instructions, see [Creating and Deleting Portfolios](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/portfoliomgmt-create.html)\.
+1. Create a portfolio for your cluster templates in the same AWS account as your Studio\. For instructions, see [Creating and deleting portfolios](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/portfoliomgmt-create.html)\.
 
 1. Create one or more cluster templates \(also called portfolio *products* in the context of AWS CloudFormation\)\. 
 
@@ -67,7 +67,7 @@ In order for your cluster to appear in the Workspace after it has been launched,
    + Output
      + **ClusterId** – The ID of the newly\-provisioned EMR cluster\.
 
-   Following is an example AWS CloudFormation template for a cluster with two nodes and additional input parameters that meets all of the [Cluster Requirements for Amazon EMR Studio](emr-studio-considerations.md#emr-studio-cluster-requirements)\.
+   Following is an example AWS CloudFormation template for a cluster with two nodes and additional input parameters that meets all of the [Cluster requirements for Amazon EMR Studio](emr-studio-considerations.md#emr-studio-cluster-requirements)\.
 
    ```
    AWSTemplateFormatVersion: 2010-09-09
@@ -127,10 +127,10 @@ In order for your cluster to appear in the Workspace after it has been launched,
        Description: The ID of the EMR Cluster
    ```
 
-   For instructions, see [Creating Products](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/productmgmt-cloudresource.html)\.
+   For instructions, see [Creating products](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/productmgmt-cloudresource.html)\.
 
-1. Add your templates to the portfolio that you created in step 1\. For more information, see [Adding Products to Portfolios](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_adding-products.html)\.
+1. Add your templates to the portfolio that you created in step 1\. For more information, see [Adding products to portfolios](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_adding-products.html)\.
 
-1. For each template \(product\) in your portfolio, create a launch constraint and apply the constraint to that template\. A launch constraint specifies the AWS Identity and Access Management \(IAM\) role that AWS Service Catalog assumes when a user launches a product\. For more information and instructions, see [AWS Service Catalog Launch Constraints](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-launch.html)\.
+1. For each template \(product\) in your portfolio, create a launch constraint and apply the constraint to that template\. A launch constraint specifies the AWS Identity and Access Management \(IAM\) role that AWS Service Catalog assumes when a user launches a product\. For more information and instructions, see [AWS Service Catalog launch constraints](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-launch.html)\.
 
-1. Grant access to your portfolio to the [user role for EMR Studio](emr-studio-user-role.md)\. For instructions, see [Granting Access to Users](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)\. 
+1. Grant access to your portfolio to the [user role for EMR Studio](emr-studio-user-role.md)\. For instructions, see [Granting access to users](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)\. 

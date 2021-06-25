@@ -1,6 +1,6 @@
-# Create an EMR Studio Service Role<a name="emr-studio-service-role"></a>
+# Create an EMR Studio service role<a name="emr-studio-service-role"></a>
 
-## About the EMR Studio Service Role<a name="emr-studio-about-service-role"></a>
+## About the EMR Studio service role<a name="emr-studio-about-service-role"></a>
 
 Each Amazon EMR Studio uses an IAM role with permissions that let the Studio interact with other AWS services\. This service role must include permissions that allow EMR Studio to establish a secure network channel between Workspaces and clusters, to store notebook files in Amazon S3, and to access the AWS Secrets Manager while linking a Workspace to a Git repository\.
 
@@ -242,7 +242,7 @@ The following statements must remain unchanged in order for EMR Studio to work w
    "kms:DescribeKey"
    ```
 
-## EMR Studio Service Role Permissions<a name="emr-studio-service-role-permissions-table"></a>
+## EMR Studio service role permissions<a name="emr-studio-service-role-permissions-table"></a>
 
 This table lists the actions that EMR Studio takes using the service role, along with the permissions needed for each action\.
 

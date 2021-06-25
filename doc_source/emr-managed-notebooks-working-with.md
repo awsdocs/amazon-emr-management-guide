@@ -1,11 +1,11 @@
-# Working with Notebooks<a name="emr-managed-notebooks-working-with"></a>
+# Working with EMR Notebooks<a name="emr-managed-notebooks-working-with"></a>
 
 After you create an EMR notebook, the notebook takes a short time to start\. The **Status** in the **Notebooks** list shows **Starting**\. You can open a notebook when its status is **Ready**\. It might take a bit longer for a notebook to be **Ready** if you created a cluster along with it\.
 
 **Tip**  
 Refresh your browser or choose the refresh icon above the notebooks list to refresh notebook status\.
 
-## Understanding Notebook Status<a name="emr-managed-notebooks-status"></a>
+## Understanding Notebook status<a name="emr-managed-notebooks-status"></a>
 
 An EMR notebook can have the following for **Status** in the **Notebooks** list\.
 
@@ -19,7 +19,7 @@ An EMR notebook can have the following for **Status** in the **Notebooks** list\
 |  Stopped  |  The notebook has shut down\. You can start the notebook on the same cluster, as long as the cluster is still running\. You can change clusters, and delete the cluster\.  | 
 |  Deleting  |  The cluster is being removed from the list of available clusters\. The notebook file, `NotebookName.ipynb `remains in Amazon S3 and continues to accrue applicable storage charges\.  | 
 
-## Working with the Notebook Editor<a name="emr-managed-notebooks-editor"></a>
+## Working with the Notebook editor<a name="emr-managed-notebooks-editor"></a>
 
 An advantage of using an EMR notebook is that you can launch the notebook in Jupyter or JupyterLab directly from the console\.
 
@@ -28,7 +28,7 @@ With EMR Notebooks, the notebook editor you access from the Amazon EMR console i
 Only one user can have an EMR notebook open at a time from within Amazon EMR\. If another user tries to open an EMR notebook that is already open, an error occurs\.
 
 **Important**  
-Amazon EMR creates a unique pre\-signed URL for each notebook editor session, which is valid only for a short time\. We recommend that you do not share the notebook editor URL\. Doing this creates a security risk because recipients of the URL adopt your permissions to edit the notebook and run notebook code for the lifetime of the URL\. If others need access to a notebook, provide permissions to their IAM user through permissions policies and ensure that the service role for EMR Notebooks has access to the Amazon S3 location\. For more information, see [EMR Notebooks Security and Access Control](emr-managed-notebooks-security.md) and [Service Role for EMR Notebooks](emr-managed-notebooks-service-role.md)\.
+Amazon EMR creates a unique pre\-signed URL for each notebook editor session, which is valid only for a short time\. We recommend that you do not share the notebook editor URL\. Doing this creates a security risk because recipients of the URL adopt your permissions to edit the notebook and run notebook code for the lifetime of the URL\. If others need access to a notebook, provide permissions to their IAM user through permissions policies and ensure that the service role for EMR Notebooks has access to the Amazon S3 location\. For more information, see [EMR notebooks security and access control](emr-managed-notebooks-security.md) and [Service role for EMR Notebooks](emr-managed-notebooks-service-role.md)\.
 
 **To open the notebook editor for an EMR notebook**
 
@@ -42,13 +42,13 @@ Amazon EMR creates a unique pre\-signed URL for each notebook editor session, wh
 
    You are now ready to write and run code from within the notebook editor\.
 
-### Saving the Contents of a Notebook<a name="emr-managed-notebooks-saving"></a>
+### Saving the contents of a Notebook<a name="emr-managed-notebooks-saving"></a>
 
 When you work in the notebook editor, the contents of notebook cells and output are saved automatically to the notebook file periodically in Amazon S3\. A notebook that has no changes since the last time a cell was edited shows **\(autosaved\)** next to the notebook name in the editor\. If changes have not yet been saved, **unsaved changes** appears\.
 
 You can save a notebook manually\. From the **File** menu, choose **Save and Checkpoint** or press CTRL\+S\. This creates a file named `NotebookName.ipynb` in a **checkpoints** folder within the notebook folder in Amazon S3\. For example, `s3://MyBucket/MyNotebookFolder/NotebookID/checkpoints/NotebookName.ipynb`\. Only the most recent checkpoint file is saved in this location\.
 
-## Changing Clusters<a name="emr-managed-notebooks-changing-clusters"></a>
+## Changing clusters<a name="emr-managed-notebooks-changing-clusters"></a>
 
 You can change the cluster that an EMR notebook is attached to without changing the contents of the notebook itself\. You can change clusters for only those notebooks that have a **Stopped** status\.
 
@@ -64,11 +64,11 @@ You can change the cluster that an EMR notebook is attached to without changing 
 
    —or—
 
-   Choose **Create a cluster** and then choose the cluster options\. For more information, see [Cluster Requirements](emr-managed-notebooks-considerations.md#considerations-limitations)\.
+   Choose **Create a cluster** and then choose the cluster options\. For more information, see [Cluster requirements](emr-managed-notebooks-considerations.md#considerations-limitations)\.
 
 1. Choose an option for **Security groups**, and then choose **Change cluster and start notebook**\.
 
-## Deleting Notebooks and Notebook Files<a name="emr-managed-notebooks-deleting"></a>
+## Deleting Notebooks and Notebook files<a name="emr-managed-notebooks-deleting"></a>
 
 When you delete an EMR notebook using the Amazon EMR console, you delete the notebook from the list of available notebooks\. However, notebook files remain in Amazon S3 and continue to accrue storage charges\.
 
@@ -84,7 +84,7 @@ When you delete an EMR notebook using the Amazon EMR console, you delete the not
 
    The notebook is removed from the list, and notebook details can no longer be viewed\.
 
-1. Follow the instructions for [How do I Delete Folders from an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-folders.html) in the Amazon Simple Storage Service Console User Guide\. Navigate to the bucket and folder from step 3\.
+1. Follow the instructions for [How do I delete folders from an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-folders.html) in the Amazon Simple Storage Service Console User Guide\. Navigate to the bucket and folder from step 3\.
 
    —or—
 
@@ -94,7 +94,7 @@ When you delete an EMR notebook using the Amazon EMR console, you delete the not
    aws s3 rm s3://MyNotebookLocationPath/NotebookID
    ```
 
-## Sharing Notebook Files<a name="emr-managed-notebooks-file-sharing"></a>
+## Sharing Notebook files<a name="emr-managed-notebooks-file-sharing"></a>
 
 Each EMR notebook is saved to Amazon S3 as a file named `NotebookName.ipynb`\. As long as a notebook file is compatible with the same version of Jupyter Notebook that EMR Notebooks is based on, you can open the notebook as an EMR notebook\.
 
@@ -114,7 +114,7 @@ You can use this process to use EMR notebooks shared by others, notebooks shared
 
 1. Replace the old notebook file in the Amazon S3 location with the new one, using exactly the same name\.
 
-   The following AWS CLI command for Amazon S3 replaces a file saved to a local machine called `SharedNotebook.ipynb` for an EMR notebook with the name **MyNotebook**, an ID of `e-12A3BCDEFJHIJKLMNO45PQRST`, and created with `MyBucket/MyNotebooksFolder` specified in Amazon S3\. For information about using the Amazon S3 console to copy and replace files, see [Uploading, Downloading, and Managing Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   The following AWS CLI command for Amazon S3 replaces a file saved to a local machine called `SharedNotebook.ipynb` for an EMR notebook with the name **MyNotebook**, an ID of `e-12A3BCDEFJHIJKLMNO45PQRST`, and created with `MyBucket/MyNotebooksFolder` specified in Amazon S3\. For information about using the Amazon S3 console to copy and replace files, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
    ```
    aws s3 cp SharedNotebook.ipynb s3://MyBucket/MyNotebooksFolder/-12A3BCDEFJHIJKLMNO45PQRST/MyNotebook.ipynb

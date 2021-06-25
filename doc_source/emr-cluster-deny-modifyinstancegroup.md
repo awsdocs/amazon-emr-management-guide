@@ -1,4 +1,4 @@
-# Denying the ModifyInstanceGroup Action<a name="emr-cluster-deny-modifyinstancegroup"></a>
+# Denying the ModifyInstanceGroup action<a name="emr-cluster-deny-modifyinstancegroup"></a>
 
 The [ModifyInstanceGroups](https://docs.aws.amazon.com/emr/latest/APIReference/API_ModifyInstanceGroups.html) action in Amazon EMR does not require that you provide a cluster ID with the action\. Instead, you can specify only an instance group ID\. For this reason, an apparently simple deny policy for this action based on cluster ID or a cluster tag may not have the intended effect\. Consider the following example policy\.
 

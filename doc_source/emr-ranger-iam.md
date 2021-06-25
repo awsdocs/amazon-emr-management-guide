@@ -5,4 +5,4 @@ The integration between Amazon EMR and Apache Ranger relies on three key roles t
 + An IAM role for Apache Ranger Engines
 + An IAM role for other AWS services
 
-This section gives an overview of these roles and the policies that you need to include for each IAM role\. For information about creating these roles, see [Set Up Ranger Admin Server](emr-ranger-admin.md)\.
+This section gives an overview of these roles and the policies that you need to include for each IAM role\. For information about creating these roles, see [Set up Ranger Admin server](emr-ranger-admin.md)\.

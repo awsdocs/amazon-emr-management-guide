@@ -1,12 +1,12 @@
-# Configure Cluster Logging and Debugging<a name="emr-plan-debugging"></a>
+# Configure cluster logging and debugging<a name="emr-plan-debugging"></a>
 
 One of the things to decide as you plan your cluster is how much debugging support you want to make available\. When you are first developing your data processing application, we recommend testing the application on a cluster processing a small, but representative, subset of your data\. When you do this, you will likely want to take advantage of all the debugging tools that Amazon EMR offers, such as archiving log files to Amazon S3\. 
 
 When you've finished development and put your data processing application into full production, you may choose to scale back debugging\. Doing so can save you the cost of storing log file archives in Amazon S3 and reduce processing load on the cluster as it no longer needs to write state to Amazon S3\. The trade off, of course, is that if something goes wrong, you'll have fewer tools available to investigate the issue\. 
 
-## Default Log Files<a name="emr-plan-debugging-logs"></a>
+## Default log files<a name="emr-plan-debugging-logs"></a>
 
-By default, each cluster writes log files on the master node\. These are written to the `/mnt/var/log/` directory\. You can access them by using SSH to connect to the master node as described in [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. Because these logs exist on the master node, when the node terminates—either because the cluster was shut down or because an error occurred—these log files are no longer available\. 
+By default, each cluster writes log files on the master node\. These are written to the `/mnt/var/log/` directory\. You can access them by using SSH to connect to the master node as described in [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. Because these logs exist on the master node, when the node terminates—either because the cluster was shut down or because an error occurred—these log files are no longer available\. 
 
 You do not need to enable anything to have log files written on the master node\. This is the default behavior of Amazon EMR and Hadoop\. 
 
@@ -16,7 +16,7 @@ You do not need to enable anything to have log files written on the master node\
 + **Bootstrap action logs** — If your job uses bootstrap actions, the results of those actions are logged\. The log files are stored in /mnt/var/log/bootstrap\-actions/ on the master node\. Each bootstrap action logs its results in a separate numbered subdirectory: `/mnt/var/log/bootstrap-actions/1/` for the first bootstrap action,` /mnt/var/log/bootstrap-actions/2/`, for the second bootstrap action, and so on\. 
 + **Instance state logs** — These logs provide information about the CPU, memory state, and garbage collector threads of the node\. The log files are stored in `/mnt/var/log/instance-state/` on the master node\. 
 
-## Archive Log Files to Amazon S3<a name="emr-plan-debugging-logs-archive"></a>
+## Archive log files to Amazon S3<a name="emr-plan-debugging-logs-archive"></a>
 
 **Note**  
 You cannot currently use log aggregation to Amazon S3 with the `yarn logs` utility\.
@@ -35,19 +35,19 @@ To have the log files archived to Amazon S3, you must enable this feature when y
 
 1. In the **General options** section, in the **Logging** field, accept the default option: **Enabled**\. 
 
-   This determines whether Amazon EMR captures detailed log data to Amazon S3\. You can only set this when the cluster is created\. For more information, see [View Log Files](emr-manage-view-web-log-files.md)\.
+   This determines whether Amazon EMR captures detailed log data to Amazon S3\. You can only set this when the cluster is created\. For more information, see [View log files](emr-manage-view-web-log-files.md)\.
 
 1. In the **S3 folder** field, type \(or browse to\) an Amazon S3 path to store your logs\. You may also allow the console to generate an Amazon S3 path for you\. If you type the name of a folder that does not exist in the bucket, it is created\.
 
    When this value is set, Amazon EMR copies the log files from the EC2 instances in the cluster to Amazon S3\. This prevents the log files from being lost when the cluster ends and the EC2 instances hosting the cluster are terminated\. These logs are useful for troubleshooting purposes\. 
 
-   For more information, see [View Log Files](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)\.
+   For more information, see [View log files](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)\.
 
 1. In the **Log encryption** field, select **Encrypt logs stored in S3 with an AWS KMS customer managed key**\. Then select an AWS KMS key from the list or enter a key ARN\. You may also create a new KMS key\.
 
    This option is only available with Amazon EMR version 5\.30\.0 and later\. To use this option, add permission to KMS for your EC2 instance profile and EMR role\. For more information, see [To encrypt log files stored in Amazon S3 with an AWS KMS customer managed key](#emr-log-encryption)\.
 
-1. Proceed with creating the cluster as described in [Plan and Configure Clusters](emr-plan.md)\.
+1. Proceed with creating the cluster as described in [Plan and configure clusters](emr-plan.md)\.
 
 ### To encrypt log files stored in Amazon S3 with an AWS KMS customer managed key<a name="emr-log-encryption"></a>
 
@@ -56,7 +56,7 @@ With Amazon EMR version 5\.30\.0 and later \(except Amazon EMR 6\.0\.0\), you ca
 + The Amazon EMR role used for your cluster must have permission to use `kms:DescribeKey`\.
 + The Amazon EC2 instance profile and Amazon EMR role must be added to the list of key users for the specified AWS KMS customer managed key, as the following steps demonstrate:
 
-  1. Open the AWS Key Management Service \(AWS KMS\) console at https://console\.aws\.amazon\.com/kms\.
+  1. Open the AWS Key Management Service \(AWS KMS\) console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
 
   1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
 
@@ -68,7 +68,7 @@ With Amazon EMR version 5\.30\.0 and later \(except Amazon EMR 6\.0\.0\), you ca
 
   1. Choose **Add**\.
 
-For more information, see [IAM Service Roles Used by Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-service-roles.html), and [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the AWS Key Management Service developer guide\.
+For more information, see [IAM service roles used by Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-service-roles.html), and [Using key policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the AWS Key Management Service developer guide\.
 
 ### To archive log files to Amazon S3 using the AWS CLI<a name="emr-log-archive-CLI"></a>
 
@@ -122,9 +122,9 @@ If you have not previously created the default EMR service role and EC2 instance
 
 For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Enable the Debugging Tool<a name="emr-plan-debugging-logs-archive-debug"></a>
+## Enable the debugging tool<a name="emr-plan-debugging-logs-archive-debug"></a>
 
- The debugging tool allows you to more easily browse log files from the EMR console\. For more information, see [View Log Files in the Debugging Tool](emr-manage-view-web-log-files.md#emr-manage-view-web-log-files-debug)\. When you enable debugging on a cluster, Amazon EMR archives the log files to Amazon S3 and then indexes those files\. You can then use the console to browse the step, job, task, and task\-attempt logs for the cluster in an intuitive way\.
+ The debugging tool allows you to more easily browse log files from the EMR console\. For more information, see [View log files in the debugging tool](emr-manage-view-web-log-files.md#emr-manage-view-web-log-files-debug)\. When you enable debugging on a cluster, Amazon EMR archives the log files to Amazon S3 and then indexes those files\. You can then use the console to browse the step, job, task, and task\-attempt logs for the cluster in an intuitive way\.
 
  To use the debugging tool in the EMR console, you must enable debugging when you launch the cluster using the console, the CLI, or the API\. 
 
@@ -144,7 +144,7 @@ For more information on using Amazon EMR commands in the AWS CLI, see [https://d
 
    The debugging option creates an Amazon SQS exchange to publish debugging messages to the Amazon EMR service backend\. Charges for publishing messages to the exchange may apply\. For more information, see [https://aws.amazon.com/sqs](https://aws.amazon.com/sqs)\.
 
-1. Proceed with creating the cluster as described in [Plan and Configure Clusters](emr-plan.md)\.
+1. Proceed with creating the cluster as described in [Plan and configure clusters](emr-plan.md)\.
 
 **To enable the debugging tool using the AWS CLI**
 
@@ -173,10 +173,10 @@ Enable debugging using the following StepConfig:
 ```
 In this example, `new StepFactory()` uses `us-east-1` as the default region\. If your cluster is launched in a different region, you need to specify the region by using `new StepFactory("region_name.elasticmapreduce")`, such as `new StepFactory("ap-northeast-2.elasticmapreduce")`\.
 
-## Debugging Option Information<a name="emr-plan-debugging-info"></a>
+## Debugging option information<a name="emr-plan-debugging-info"></a>
 
 Amazon EMR release 4\.1\.0 through 5\.27\.0 supports debugging in all regions\. Other EMR versions do not support the debugging option\.
 
 Amazon EMR creates an Amazon SQS queue to process debugging data\. Message charges may apply\. However, Amazon SQS does have Free Tier of up to 1,000,000 requests available\. For more information, see the [Amazon SQS detail page](https://aws.amazon.com/sqs)\.
 
-Debugging requires the use of roles; your service role and instance profile must allow you to use all Amazon SQS API operations\. If your roles are attached to Amazon EMR managed policies, you do not need to do anything to modify your roles\. If you have custom roles, you need to add `sqs:*` permissions\. For more information, see [Configure IAM Service Roles for Amazon EMR Permissions to AWS Services and Resources](emr-iam-roles.md)\.
+Debugging requires the use of roles; your service role and instance profile must allow you to use all Amazon SQS API operations\. If your roles are attached to Amazon EMR managed policies, you do not need to do anything to modify your roles\. If you have custom roles, you need to add `sqs:*` permissions\. For more information, see [Configure IAM service roles for Amazon EMR permissions to AWS services and resources](emr-iam-roles.md)\.

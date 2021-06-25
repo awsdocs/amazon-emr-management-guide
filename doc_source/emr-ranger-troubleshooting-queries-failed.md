@@ -7,7 +7,7 @@ This section is common across all applications that integrate with the Ranger Pl
 **Common Error Messages**
 
 
-| Error Message | Cause | 
+| Error message | Cause | 
 | --- | --- | 
 |  ERROR PolicyRefresher:272 \- \[\] PolicyRefresher\(serviceName=policy\-repository\): failed to find service\. Will clean up local cache of policies \(\-1\)   |  This error messages means that the service name you provided in the EMR security configuration does not match a service policy repository in the Ranger Admin server\.  | 
 

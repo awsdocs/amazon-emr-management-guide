@@ -1,4 +1,4 @@
-# EMRFS CLI Reference<a name="emrfs-cli-reference"></a>
+# EMRFS CLI Command Reference<a name="emrfs-cli-reference"></a>
 
 The EMRFS CLI is installed by default on all cluster master nodes created using Amazon EMR release version 3\.2\.1 or later\. You can use the EMRFS CLI to manage the metadata for consistent view\. 
 
@@ -17,7 +17,7 @@ list-metadata-stores | diff | delete | sync | import ] [options] [arguments]
 Specify \[options\], with or without \[arguments\] as described in the following table\. For \[options\] specific to sub\-commands \(`describe-metadata`, `set-metadata-capacity`, etc\.\), see each sub\-command below\.
 
 
-**\[options\] for emrfs**  
+**\[Options\] for emrfs**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -29,7 +29,7 @@ Specify \[options\], with or without \[arguments\] as described in the following
 ## emrfs describe\-metadata sub\-command<a name="emrfs-describe-metadata"></a>
 
 
-**\[options\] for emrfs describe\-metadata**  
+**\[Options\] for emrfs describe\-metadata**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -50,7 +50,7 @@ EmrFSMetadata
 ## emrfs set\-metadata\-capacity sub\-command<a name="emrfs-set-metadata-capacity"></a>
 
 
-**\[options\] for emrfs set\-metadata\-capacity**  
+**\[Options\] for emrfs set\-metadata\-capacity**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -72,7 +72,7 @@ $ emrfs set-metadata-capacity --metadata-name EmrMetadataAlt  --read-capacity 60
 ## emrfs delete\-metadata sub\-command<a name="emrfs-delete-metadata"></a>
 
 
-**\[options\] for emrfs delete\-metadata**  
+**\[Options\] for emrfs delete\-metadata**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -88,7 +88,7 @@ $ emrfs delete-metadata
 ## emrfs create\-metadata sub\-command<a name="emrfs-create-metadata"></a>
 
 
-**\[options\] for emrfs create\-metadata**  
+**\[Options\] for emrfs create\-metadata**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -113,7 +113,7 @@ EmrFSMetadataAlt
 
 The emrfs list\-metadata\-stores sub\-command has no \[options\]\. 
 
-**Example list\-metadata\-stores example**  
+**Example List\-metadata\-stores example**  
 The following example lists your metadata tables\.  
 
 ```
@@ -124,7 +124,7 @@ $ emrfs list-metadata-stores
 ## emrfs diff sub\-command<a name="emrfs-diff"></a>
 
 
-**\[options\] for emrfs diff**  
+**\[Options\] for emrfs diff**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -154,7 +154,7 @@ DIR elasticmapreduce/samples/cloudfront/code/cloudfront-loganalyzer.tgz
 ## emrfs delete sub\-command<a name="emrfs-delete"></a>
 
 
-**\[options\] for emrfs delete**  
+**\[Options\] for emrfs delete**  
 
 |  Option  |  Description  |  Required  | 
 | --- | --- | --- | 
@@ -176,7 +176,7 @@ entries deleted: 11
 ## emrfs import sub\-command<a name="emrfs-import"></a>
 
 
-**\[options\] for emrfs import**  
+**\[Options\] for emrfs import**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -195,7 +195,7 @@ $ emrfs import s3://elasticmapreduce/samples/cloudfront
 ## emrfs sync sub\-command<a name="emrfs-sync"></a>
 
 
-**\[options\] for emrfs sync**  
+**\[Options\] for emrfs sync**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -221,7 +221,7 @@ folders written: 3
 ## emrfs read\-sqs sub\-command<a name="emrfs-read-sqs"></a>
 
 
-**\[options\] for emrfs read\-sqs**  
+**\[Options\] for emrfs read\-sqs**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
@@ -231,13 +231,13 @@ folders written: 3
 ## emrfs delete\-sqs sub\-command<a name="emrfs-delete-sqs"></a>
 
 
-**\[options\] for emrfs delete\-sqs**  
+**\[Options\] for emrfs delete\-sqs**  
 
 | Option  | Description  | Required  | 
 | --- | --- | --- | 
 |  `-q QUEUE_NAME \| --queue-name QUEUE_NAME`  |  *QUEUE\_NAME* is the name of the Amazon SQS queue configured in `emrfs-site.xml`\. The default value is **EMRFS\-Inconsistency\-<jobFlowId>**\.  |  Yes  | 
 
-## Submitting EMRFS CLI Commands as Steps<a name="emrfs-submit-steps-as-cli"></a>
+## Submitting EMRFS CLI commands as steps<a name="emrfs-submit-steps-as-cli"></a>
 
 The following example shows how to use the `emrfs` utility on the master node by leveraging the AWS CLI or API and the `command-runner.jar` to run the `emrfs` command as a step\. The example uses the AWS SDK for Python \(Boto3\) to add a step to a cluster which adds objects in an Amazon S3 bucket to the default EMRFS metadata table\.
 

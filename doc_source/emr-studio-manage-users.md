@@ -1,6 +1,6 @@
-# Manage Users and Groups Assigned to Your Amazon EMR Studio<a name="emr-studio-manage-users"></a>
+# Manage users and groups assigned to your Amazon EMR Studio<a name="emr-studio-manage-users"></a>
 
-## Assign a User or Group to Your EMR Studio<a name="emr-studio-assign-users-groups"></a>
+## Assign a user or group to your EMR Studio<a name="emr-studio-assign-users-groups"></a>
 
 After you create an EMR Studio, you can assign users and groups using the EMR console or the AWS CLI\. You can also use the [AWS::EMR::StudioSessionMapping](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-studiosessionmapping.html) resource template to assign users or groups using AWS CloudFormation\.
 
@@ -11,7 +11,7 @@ The final permissions for a user or group is an intersection of the permissions 
 
 **Prerequisites**
 + Make sure that you have enabled AWS SSO and configured your identity provider\. For more information, see [Enable AWS Single Sign\-On for Amazon EMR Studio](emr-studio-enable-sso.md)\.
-+ You must have the required permissions to create and manage an EMR Studio\. For more information, see [Add Required Permissions to Create and Manage an EMR Studio](emr-studio-admin-permissions.md)\.
++ You must have the required permissions to create and manage an EMR Studio\. For more information, see [Add required permissions to create and manage an EMR Studio](emr-studio-admin-permissions.md)\.
 + Use **version 1\.18\.184** or later, or **version 2\.1\.4** or later of the AWS Command Line Interface if you want to assign users or groups to your Studio using the AWS CLI\.
 
 ------
@@ -33,7 +33,7 @@ The final permissions for a user or group is an intersection of the permissions 
 
 1. After you select users and groups to add to your Studio, choose **Add**\. You should see the users and groups appear in the **Studio users** list\. It might take a few seconds for the list to refresh\.
 
-1. Follow the instructions in [Update Permissions for a User or Group Assigned to a Studio](#emr-studio-update-user) to refine the Studio permissions for a user or group\.
+1. Follow the instructions in [Update permissions for a user or group assigned to a Studio](#emr-studio-update-user) to refine the Studio permissions for a user or group\.
 
 ------
 #### [ CLI ]
@@ -41,10 +41,10 @@ The final permissions for a user or group is an intersection of the permissions 
 **To assign a user or group to an EMR Studio using the AWS CLI**
 
 Insert your own values for the following `create-studio-session-mapping` arguments\. For more information about the `create-studio-session-mapping` command, see the [https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio-session-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio-session-mapping.html)\.
-+ **`--studio-id`** – The ID of the Studio to which you want to assign the user or group\. For instructions on how to retrieve your Studio ID, see [View Studio Details](emr-studio-manage-studio.md#emr-studio-get-studio-id)\.
++ **`--studio-id`** – The ID of the Studio to which you want to assign the user or group\. For instructions on how to retrieve your Studio ID, see [View Studio details](emr-studio-manage-studio.md#emr-studio-get-studio-id)\.
 + `--identity-name` – The name of the user or group from the AWS SSO identity store\. For more information, see [UserName](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName) for users and [DisplayName](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName) for groups in the *AWS SSO Identity Store API Reference*\.
 + **`--identity-type`** – Use either `USER` or `GROUP` to specify the identity type\.
-+ **`--session-policy-arn`** – The Amazon Resource Name \(ARN\) for the session policy you want to associate with the user or group\. For example, `arn:aws:iam::<aws-account-id>:policy/EMRStudio_Advanced_User_Policy`\. For more information, see [Create Session Policies for Studio Users and Groups](emr-studio-user-role.md#emr-studio-session-policies)\.
++ **`--session-policy-arn`** – The Amazon Resource Name \(ARN\) for the session policy you want to associate with the user or group\. For example, `arn:aws:iam::<aws-account-id>:policy/EMRStudio_Advanced_User_Policy`\. For more information, see [Create session policies for Studio users and groups](emr-studio-user-role.md#emr-studio-session-policies)\.
 
 ```
 aws emr create-studio-session-mapping \
@@ -68,7 +68,7 @@ aws emr get-studio-session-mapping \
 
 ------
 
-## Update Permissions for a User or Group Assigned to a Studio<a name="emr-studio-update-user"></a>
+## Update permissions for a user or group assigned to a Studio<a name="emr-studio-update-user"></a>
 
 You can change the set of Studio permissions \(session policy\) assigned to a user or group using the EMR console or the AWS CLI\.
 
@@ -115,7 +115,7 @@ aws emr get-studio-session-mapping \
 
 ------
 
-## Remove a User or Group from a Studio<a name="emr-studio-remove-user"></a>
+## Remove a user or group from a Studio<a name="emr-studio-remove-user"></a>
 
 ------
 #### [ Console ]

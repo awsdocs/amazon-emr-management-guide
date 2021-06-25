@@ -1,6 +1,6 @@
-# Understanding Managed Scaling Metrics<a name="managed-scaling-metrics"></a>
+# Understanding managed scaling metrics<a name="managed-scaling-metrics"></a>
 
-Amazon EMR publishes high\-resolution metrics with data at a one\-minute granularity when managed scaling is enabled for a cluster\. You can view events on every resize initiation and completion controlled by managed scaling using Amazon EMR console or Amazon CloudWatch console\. For more information, see [Monitor CloudWatch Events](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-cloudwatch-events.html) in the *Amazon EMR Management Guide*\.
+Amazon EMR publishes high\-resolution metrics with data at a one\-minute granularity when managed scaling is enabled for a cluster\. You can view events on every resize initiation and completion controlled by managed scaling using Amazon EMR console or Amazon CloudWatch console\. For more information, see [Monitor CloudWatch events](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-cloudwatch-events.html) in the *Amazon EMR Management Guide*\.
 
 The following metrics indicate the current or target capacities of a cluster\. These metrics are only available when managed scaling is enabled\. For clusters composed of instance fleets, the cluster capacity metrics are measured in `Units`\. For clusters composed of instance groups, the cluster capacity metrics are measured in `Nodes` or `vCPU` based on the unit type used in the managed scaling policy\. 
 
@@ -31,7 +31,7 @@ The following metrics indicate the usage status of cluster and applications\. Th
 |  `MRActiveNodes`  |  The number of nodes presently running MapReduce tasks or jobs\. Equivalent to YARN metric `mapred.resourcemanager.NoOfActiveNodes`\. Use case: Monitor cluster progress Units: *Count*  | 
 |  `YARNMemoryAvailablePercentage`  |  The percentage of remaining memory available to YARN \(YARNMemoryAvailablePercentage = MemoryAvailableMB / MemoryTotalMB\)\. This value is useful for scaling cluster resources based on YARN memory usage\. Units: *Percent*  | 
 
-## Graphing Managed Scaling Metrics<a name="managed-scaling-graphic"></a>
+## Graphing managed scaling metrics<a name="managed-scaling-graphic"></a>
 
 You can graph metrics to visualize your cluster's workload patterns and corresponding scaling decisions made by EMR managed scaling as the following steps demonstrate\. 
 

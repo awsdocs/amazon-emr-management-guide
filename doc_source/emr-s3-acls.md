@@ -6,7 +6,7 @@
 +  Have the other AWS user grant you write permissions for their Amazon S3 bucket\. The cluster you launch runs under your AWS credentials, so any clusters you launch will also be able to write to that other AWS user's bucket\. 
 +  Set read permissions for the other AWS user on the files that you or the cluster write to the Amazon S3 bucket\. The easiest way to set these read permissions is to use canned access control lists \(ACLs\), a set of pre\-defined access policies defined by Amazon S3\. 
 
- For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing Bucket Permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+ For information about how the other AWS user can grant you permissions to write files to the other user's Amazon S3 bucket, see [Editing bucket permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
  For your cluster to use canned ACLs when it writes files to Amazon S3, set the `fs.s3.canned.acl` cluster configuration option to the canned ACL to use\. The following table lists the currently defined canned ACLs\. 
 
@@ -24,7 +24,7 @@
  There are many ways to set the cluster configuration options, depending on the type of cluster you are running\. The following procedures show how to set the option for common cases\. 
 
 **To write files using canned ACLs in Hive**
-+  From the Hive command prompt, set the `fs.s3.canned.acl` configuration option to the canned ACL you want to have the cluster set on files it writes to Amazon S3\. To access the Hive command prompt connect to the master node using SSH, and type Hive at the Hadoop command prompt\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. 
++  From the Hive command prompt, set the `fs.s3.canned.acl` configuration option to the canned ACL you want to have the cluster set on files it writes to Amazon S3\. To access the Hive command prompt connect to the master node using SSH, and type Hive at the Hadoop command prompt\. For more information, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. 
 
    The following example sets the `fs.s3.canned.acl` configuration option to `BucketOwnerFullControl`, which gives the owner of the Amazon S3 bucket complete control over the file\. Note that the set command is case sensitive and contains no quotation marks or spaces\. 
 
@@ -37,7 +37,7 @@
    The last two lines of the example create a table that is stored in Amazon S3 and write data to the table\. 
 
 **To write files using canned ACLs in Pig**
-+  From the Pig command prompt, set the `fs.s3.canned.acl` configuration option to the canned ACL you want to have the cluster set on files it writes to Amazon S3\. To access the Pig command prompt connect to the master node using SSH, and type Pig at the Hadoop command prompt\. For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. 
++  From the Pig command prompt, set the `fs.s3.canned.acl` configuration option to the canned ACL you want to have the cluster set on files it writes to Amazon S3\. To access the Pig command prompt connect to the master node using SSH, and type Pig at the Hadoop command prompt\. For more information, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. 
 
    The following example sets the `fs.s3.canned.acl` configuration option to BucketOwnerFullControl, which gives the owner of the Amazon S3 bucket complete control over the file\. Note that the set command includes one space before the canned ACL name and contains no quotation marks\. 
 

@@ -1,8 +1,8 @@
-# Submit Hadoop Jobs Interactively<a name="interactive-jobs"></a>
+# Submit Hadoop jobs interactively<a name="interactive-jobs"></a>
 
 In addition to adding steps to a cluster, you can connect to the master node using an SSH client or the AWS CLI and interactively submit Hadoop jobs\. For example, you can use PuTTY to establish an SSH connection with the master node and submit interactive Hive queries\. The queries are compiled into one or more Hadoop jobs\. 
 
-You can submit Hadoop jobs interactively by establishing an SSH connection to the master node\. Establish the SSH connection using an SSH client, such as PuTTY or OpenSSH, or using the SSH subcommand in the AWS CLI\. You can submit jobs interactively to the master node even if you have 256 active steps running on the cluster\. Note however that log records associated with interactively submitted jobs are included in the **step created jobs** section of the currently running step's controller log\. For more information about step logs, see [View Log Files](emr-manage-view-web-log-files.md)\. 
+You can submit Hadoop jobs interactively by establishing an SSH connection to the master node\. Establish the SSH connection using an SSH client, such as PuTTY or OpenSSH, or using the SSH subcommand in the AWS CLI\. You can submit jobs interactively to the master node even if you have 256 active steps running on the cluster\. Note however that log records associated with interactively submitted jobs are included in the **step created jobs** section of the currently running step's controller log\. For more information about step logs, see [View log files](emr-manage-view-web-log-files.md)\. 
 
 The following examples demonstrate interactively submitting Hadoop jobs and Hive jobs to the master node\. The process for submitting jobs for other programming frameworks, such as Pig, is similar to these examples\. 
 

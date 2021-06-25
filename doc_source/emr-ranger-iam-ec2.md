@@ -1,10 +1,10 @@
-# EC2 Instance Profile<a name="emr-ranger-iam-ec2"></a>
+# EC2 instance profile<a name="emr-ranger-iam-ec2"></a>
 
 Amazon EMR uses an IAM service roles to perform actions on your behalf to provision and manage clusters\. The service role for cluster EC2 instances, also called the EC2 instance profile for Amazon EMR, is a special type of service role assigned to every EC2 instance in a cluster at launch\.
 
 To define permissions for EMR cluster interaction with Amazon S3 data and with Hive metastore protected by Apache Ranger and other AWS services, define a custom EC2 instance profile to use instead of the EMR\_EC2\_DefaultRole when you launch your cluster\.
 
-For more information, see [Service Role for Cluster EC2 Instances \(EC2 Instance Profile\)](emr-iam-role-for-ec2.md) and [Customize IAM Roles](emr-iam-roles-custom.md)\.
+For more information, see [Service role for cluster EC2 instances \(EC2 instance profile\)](emr-iam-role-for-ec2.md) and [Customize IAM roles](emr-iam-roles-custom.md)\.
 
 You need to add the following statements to the default EC2 Instance Profile for Amazon EMR to be able to tag sessions and access the AWS Secrets Manager that stores TLS certificates\.
 
@@ -30,7 +30,7 @@ You need to add the following statements to the default EC2 Instance Profile for
 ```
 
 **Note**  
-For the Secrets Manager permissions, do not forget the wildcard \(“\*”\) at the end of the secret name or your requests will fail\. The wildcard is for secret versions\.
+For the Secrets Manager permissions, do not forget the wildcard \("\*"\) at the end of the secret name or your requests will fail\. The wildcard is for secret versions\.
 
 **Note**  
 Limit the scope of the AWS Secrets Manager policy to only the certificates that are required for provisioning\.

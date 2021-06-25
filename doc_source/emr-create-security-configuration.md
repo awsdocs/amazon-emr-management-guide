@@ -1,9 +1,9 @@
-# Create a Security Configuration<a name="emr-create-security-configuration"></a>
+# Create a security configuration<a name="emr-create-security-configuration"></a>
 
 This topic covers general procedures for creating a security configuration using the EMR console and the AWS CLI, followed by a reference for the parameters that comprise encryption, authentication, and IAM roles for EMRFS\. For more information about these features, see the following topics:
-+ [Encrypt Data at Rest and in Transit](emr-data-encryption.md)
-+ [Use Kerberos Authentication](emr-kerberos.md)
-+ [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)
++ [Encrypt data at rest and in transit](emr-data-encryption.md)
++ [Use Kerberos authentication](emr-kerberos.md)
++ [Configure IAM roles for EMRFS requests to Amazon S3](emr-emrfs-iam-roles.md)
 
 **To create a security configuration using the console**
 
@@ -24,16 +24,16 @@ This topic covers general procedures for creating a security configuration using
   aws emr create-security-configuration --name "SecConfigName" --security-configuration SecConfigDef
   ```
 
-## Configure Data Encryption<a name="emr-security-configuration-encryption"></a>
+## Configure data encryption<a name="emr-security-configuration-encryption"></a>
 
-Before you configure encryption in a security configuration, create the keys and certificates that are used for encryption\. For more information, see [Providing Keys for Encrypting Data at Rest with Amazon EMR](emr-encryption-enable.md#emr-encryption-create-keys) and [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates)\.
+Before you configure encryption in a security configuration, create the keys and certificates that are used for encryption\. For more information, see [Providing keys for encrypting data at rest with Amazon EMR](emr-encryption-enable.md#emr-encryption-create-keys) and [Providing certificates for encrypting data in transit with Amazon EMR encryption](emr-encryption-enable.md#emr-encryption-certificates)\.
 
-When you create a security configuration, you specify two sets of encryption options: at\-rest data encryption and in\-transit data encryption\. Options for at\-rest data encryption include both Amazon S3 with EMRFS and local\-disk encryption\. In\-transit encryption options enable the open\-source encryption features for certain applications that support Transport Layer Security \(TLS\)\. At\-rest options and in\-transit options can be enabled together or separately\. For more information, see [Encrypt Data at Rest and in Transit](emr-data-encryption.md)\.
+When you create a security configuration, you specify two sets of encryption options: at\-rest data encryption and in\-transit data encryption\. Options for at\-rest data encryption include both Amazon S3 with EMRFS and local\-disk encryption\. In\-transit encryption options enable the open\-source encryption features for certain applications that support Transport Layer Security \(TLS\)\. At\-rest options and in\-transit options can be enabled together or separately\. For more information, see [Encrypt data at rest and in transit](emr-data-encryption.md)\.
 
 **Note**  
 When you use AWS KMS, charges apply for the storage and use of encryption keys\. For more information, see [AWS KMS Pricing](http://aws.amazon.com/kms/pricing/)\.
 
-### Specifying Encryption Options Using the Console<a name="emr-security-configuration-encryption-console"></a>
+### Specifying encryption options using the console<a name="emr-security-configuration-encryption-console"></a>
 
 Choose options under **Encryption** according to the following guidelines\.
 + Choose options under **At rest encryption** to encrypt data stored within the file system\. 
@@ -47,38 +47,38 @@ Choose options under **Encryption** according to the following guidelines\.
     Specifies [Server\-side encryption with Amazon S3\-managed encryption keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You don't need to do anything more because Amazon S3 handles keys for you\.
   + **SSE\-KMS** or **CSE\-KMS**
 
-    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS customer master keys \(CMKs\) for encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **CSE\-Custom**
 
-    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-Custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
+    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
 + Under **Local disk encryption**, choose a value for **Key provider type**\.
   + **AWS KMS key**
 
-    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS key**, select a key\. The key must exist in the same region as your EMR cluster\. For more information about key requirements, see [Using AWS KMS Customer Master Keys \(CMKs\) for Encryption](emr-encryption-enable.md#emr-awskms-keys)\.
+    Select this option to specify an AWS KMS customer master key \(CMK\)\. For **AWS KMS key**, select a key\. The key must exist in the same region as your EMR cluster\. For more information about key requirements, see [Using AWS KMS customer master keys \(CMKs\) for encryption](emr-encryption-enable.md#emr-awskms-keys)\.
 
     **EBS Encryption**
 
-    When you specify AWS KMS as your key provider, you can enable EBS encryption to encrypt EBS root device and storage volumes\. To enable such option, you must grant the EMR service role `EMR_DefaultRole` with permissions to use the customer master key \(CMK\) that you specify\. For more information about key requirements, see [Enabling EBS Encryption by Providing Additional Permissions for AWS KMS CMKs](emr-encryption-enable.md#emr-awskms-ebs-encryption)\.
+    When you specify AWS KMS as your key provider, you can enable EBS encryption to encrypt EBS root device and storage volumes\. To enable such option, you must grant the EMR service role `EMR_DefaultRole` with permissions to use the customer master key \(CMK\) that you specify\. For more information about key requirements, see [Enabling EBS encryption by providing additional permissions for AWS KMS CMKs](emr-encryption-enable.md#emr-awskms-ebs-encryption)\.
   + **Custom**
 
     Select this option to specify a custom key provider\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. For **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\. The class name you provide here must be different from the class name provided for CSE\-Custom\.
 + Choose **In\-transit encryption** to enable the open\-source TLS encryption features for in\-transit data\. Choose a **Certificate provider type** according to the following guidelines: 
   + **PEM**
 
-    Select this option to use PEM files that you provide within a zip file\. Two artifacts are required within the zip file: privateKey\.pem and certificateChain\.pem\. A third file, trustedCertificates\.pem, is optional\. See [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for details\. For **S3 object**, specify the location in Amazon S3, or the Amazon S3 ARN, of the zip file field\. 
+    Select this option to use PEM files that you provide within a zip file\. Two artifacts are required within the zip file: privateKey\.pem and certificateChain\.pem\. A third file, trustedCertificates\.pem, is optional\. See [Providing certificates for encrypting data in transit with Amazon EMR encryption](emr-encryption-enable.md#emr-encryption-certificates) for details\. For **S3 object**, specify the location in Amazon S3, or the Amazon S3 ARN, of the zip file field\. 
   + **Custom**
 
     Select this option to specify a custom certificate provider and then, for **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom certificate\-provider JAR file\. For **Key provider class**, enter the full class name of a class declared in your application that implements the TLSArtifactsProvider interface\. 
 
-### Specifying Encryption Options Using the AWS CLI<a name="emr-security-configuration-encryption-cli"></a>
+### Specifying encryption options using the AWS CLI<a name="emr-security-configuration-encryption-cli"></a>
 
 The sections that follow use sample scenarios to illustrate well\-formed \-\-security\-configuration JSON for different configurations and key providers, followed by a reference for the JSON parameters and appropriate values\.
 
-#### Example In\-Transit Data Encryption Options<a name="emr-encryption-intransit-cli"></a>
+#### Example in\-transit data encryption options<a name="emr-encryption-intransit-cli"></a>
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is enabled and at\-rest data encryption is disabled\.
-+ A zip file with certificates in Amazon S3 is used as the key provider \(see [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\.
++ A zip file with certificates in Amazon S3 is used as the key provider \(see [Providing certificates for encrypting data in transit with Amazon EMR encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -97,7 +97,7 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is enabled and at\-rest data encryption is disabled\.
-+ A custom key provider is used \(see [Providing Certificates for Encrypting Data in Transit with Amazon EMR Encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\)\.
++ A custom key provider is used \(see [Providing certificates for encrypting data in transit with Amazon EMR encryption](emr-encryption-enable.md#emr-encryption-certificates) for certificate requirements\)\.
 
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
@@ -115,7 +115,7 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 }'
 ```
 
-#### Example At\-Rest Data Encryption Options<a name="emr-encryption-atrest-cli"></a>
+#### Example at\-rest data encryption options<a name="emr-encryption-atrest-cli"></a>
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
@@ -328,7 +328,7 @@ aws emr create-security-configuration --name "MyLocalDiskEncryptionConfig" --sec
 }'
 ```
 
-#### JSON Reference for Encryption Settings<a name="emr-encryption-cli-parameters"></a>
+#### JSON reference for encryption settings<a name="emr-encryption-cli-parameters"></a>
 
 The following table lists the JSON parameters for encryption settings and provides a description of acceptable values for each parameter\.
 
@@ -359,29 +359,29 @@ The following table lists the JSON parameters for encryption settings and provid
 | "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 |  `"EncryptionKeyProviderClass" : "MyLocalDiskKeyClassID"`  | Required only when Custom is specified for Type\. MyLocalDiskKeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyLocalDiskKeyProvider\. | 
 
-## Configure Kerberos Authentication<a name="emr-security-configuration-kerberos"></a>
+## Configure Kerberos authentication<a name="emr-security-configuration-kerberos"></a>
 
-A security configuration with Kerberos settings can only be used by a cluster that is created with Kerberos attributes or an error occurs\. For more information, see [Use Kerberos Authentication](emr-kerberos.md)\. Kerberos is only available in Amazon EMR release version 5\.10\.0 and later\.
+A security configuration with Kerberos settings can only be used by a cluster that is created with Kerberos attributes or an error occurs\. For more information, see [Use Kerberos authentication](emr-kerberos.md)\. Kerberos is only available in Amazon EMR release version 5\.10\.0 and later\.
 
-### Specifying Kerberos Settings Using the Console<a name="emr-security-configuration-console-kerberos"></a>
+### Specifying Kerberos settings using the console<a name="emr-security-configuration-console-kerberos"></a>
 
 Choose options under **Kerberos authentication** according to the following guidelines\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)
 
-### Specifying Kerberos Settings Using the AWS CLI<a name="emr-kerberos-cli-parameters"></a>
+### Specifying Kerberos settings using the AWS CLI<a name="emr-kerberos-cli-parameters"></a>
 
-The following reference table shows JSON parameters for Kerberos settings in a security configuration\. For example configurations, see, [Configuration Examples](emr-kerberos-config-examples.md)\.
+The following reference table shows JSON parameters for Kerberos settings in a security configuration\. For example configurations, see, [Configuration examples](emr-kerberos-config-examples.md)\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)
 
-## Configure IAM Roles for EMRFS Requests to Amazon S3<a name="emr-security-configuration-emrfs"></a>
+## Configure IAM roles for EMRFS requests to Amazon S3<a name="emr-security-configuration-emrfs"></a>
 
 IAM roles for EMRFS allow you to provide different permissions to EMRFS data in Amazon S3\. You create mappings that specify an IAM role that is used for permissions when an access request contains an identifier that you specify\. The identifier can be a Hadoop user or role, or an Amazon S3 prefix\. 
 
-For more information, see [Configure IAM Roles for EMRFS Requests to Amazon S3](emr-emrfs-iam-roles.md)\.
+For more information, see [Configure IAM roles for EMRFS requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM Roles for EMRFS Using the AWS CLI<a name="w293aac27c27c11c15b7"></a>
+### Specifying IAM roles for EMRFS using the AWS CLI<a name="w299aac27c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 
@@ -417,11 +417,11 @@ The following is an example JSON snippet for specifying custom IAM roles for EMR
 |    `"IdentifierType":` | Can be one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-create-security-configuration.html)  | 
 |     `"Identifiers":`  |  Specifies one or more identifiers of the appropriate identifier type\. Separate multiple identifiers by commas with no spaces\.  | 
 
-## Configure Metadata Service Requests to Amazon EC2 Instances<a name="emr-security-configuration-imdsv2"></a>
+## Configure metadata service requests to Amazon EC2 instances<a name="emr-security-configuration-imdsv2"></a>
 
 Instance metadata is data about your instance that you can use to configure or manage the running instance\. You can access instance metadata from a running instance using one of the following methods:
-+ Instance Metadata Service Version 1 \(IMDSv1\) – a request/response method
-+ Instance Metadata Service Version 2 \(IMDSv2\) – a session\-oriented method
++ Instance Metadata Service Version 1 \(IMDSv1\) \- a request/response method
++ Instance Metadata Service Version 2 \(IMDSv2\) \- a session\-oriented method
 
 While Amazon EC2 supports both IMDSv1 and IMDSv2, Amazon EMR supports IMDSv2 in Amazon EMR 5\.23\.1, 5\.27\.1, 5\.32 or later, and 6\.2 or later\. In these releases, Amazon EMR components use IMDSv2 for all IMDS calls\. For IMDS calls in your application code, you can use both IMDSv1 and IMDSv2, or configure the IMDS to use only IMDSv2 for added security\. When you specify that IMDSv2 must be used, IMDSv1 no longer works\.
 
@@ -430,7 +430,7 @@ For more information, see [Configure the instance metadata service](https://docs
 **Note**  
 In earlier Amazon EMR 5\.x or 6\.x releases, turning off IMDSv1 causes cluster startup failure as Amazon EMR components use IMDSv1 for all IMDS calls\. When turning off IMDSv1, please ensure that any custom software that utilizes IMDSv1 is updated to IMDSv2\.
 
-### Specifying Instance Metadata Service Configuration Using the AWS CLI<a name="w293aac27c27c11c17c13"></a>
+### Specifying instance metadata service configuration using the AWS CLI<a name="w299aac27c27c11c17c13"></a>
 
 The following is an example JSON snippet for specifying Amazon EC2 instance metadata service \(IMDS\) within a security configuration\.
 
@@ -450,7 +450,7 @@ The following is an example JSON snippet for specifying Amazon EC2 instance meta
 |   `"MinimumInstanceMetadataServiceVersion":`  |  Required\. Specify `1` or `2`\. A value of `1` allows IMDSv1 and IMDSv2\. A value of `2` allows only IMDSv2\.  | 
 |   `"HttpPutResponseHopLimit":`  |  Required\. The desired HTTP PUT response hop limit for instance metadata requests\. The larger the number, the further instance metadata requests can travel\. Default: `1`\. Specify an integer from `1` to `64`\. | 
 
-### Specifying Instance Metadata Service Configuration Using the Console<a name="emr-security-configuration-imdsv2-console"></a>
+### Specifying instance metadata service configuration using the console<a name="emr-security-configuration-imdsv2-console"></a>
 
 You can configure the use of IMDS for a cluster when you launch it from the Amazon EMR console\.
 
@@ -461,11 +461,11 @@ You can configure the use of IMDS for a cluster when you launch it from the Amaz
 1. When creating a new security configuration on the **Security configurations** page, select **Configure EC2 Instance metadata service** under the **EC2 Instance Metadata Service** setting\. This configuration is supported only in Amazon EMR 5\.23\.1, 5\.27\.1, 5\.32 or later, and 6\.2 or later\.
 
 1. For the **Minimum Instance Metadata Service Version** option, select either:
-   + **Turn off IMDSv1 and only allow IMDSv2**, if you want to allow only IMDSv2 on this cluster\. See [Transition to using Instance Metadata Service Version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
+   + **Turn off IMDSv1 and only allow IMDSv2**, if you want to allow only IMDSv2 on this cluster\. See [Transition to using instance metadata service version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
    + **Allow both IMDSv1 and IMDSv2 on cluster**, if you want to allow IMDSv1 and session\-oriented IMDSv2 on this cluster\.
 
 1. For IMDSv2, you can also configure the allowable number of network hops for the metadata token by setting the **HTTP put response hop limit** to an integer between `1` and `64`\.
 
 For more information, see [Configure the instance metadata service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-See [Configure Instance Details](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html#configure_instance_details_step) and [Configure the Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+See [Configure instance details](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html#configure_instance_details_step) and [Configure the instance metadata service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.

@@ -1,48 +1,48 @@
-# Import files with Distributed Cache<a name="emr-plan-input-distributed-cache"></a>
+# Import files with distributed cache<a name="emr-plan-input-distributed-cache"></a>
 
 **Topics**
-+ [Supported File Types](#emr-dev-supported-file-types)
-+ [Location of Cached Files](#locationofcache)
-+ [Access Cached Files From Streaming Applications](#cachemapper)
-+ [Access Cached Files From Streaming Applications Using the Amazon EMR Console](#cacheinconsole)
-+ [Access Cached Files From Streaming Applications Using the AWS CLI](#cacheinruby)
++ [Supported file types](#emr-dev-supported-file-types)
++ [Location of cached files](#locationofcache)
++ [Access cached files from streaming applications](#cachemapper)
++ [Access cached files from streaming applications using the Amazon EMR console](#cacheinconsole)
++ [Access cached files from streaming applications using the AWS CLI](#cacheinruby)
 
-Distributed Cache is a Hadoop feature that can boost efficiency when a map or a reduce task needs access to common data\. If your cluster depends on existing applications or binaries that are not installed when the cluster is created, you can use Distributed Cache to import these files\. This feature lets a cluster node read the imported files from its local file system, instead of retrieving the files from other cluster nodes\. 
+DistributedCache is a Hadoop feature that can boost efficiency when a map or a reduce task needs access to common data\. If your cluster depends on existing applications or binaries that are not installed when the cluster is created, you can use DistributedCache to import these files\. This feature lets a cluster node read the imported files from its local file system, instead of retrieving the files from other cluster nodes\. 
 
 For more information, go to [http://hadoop\.apache\.org/docs/stable/api/org/apache/hadoop/filecache/DistributedCache\.html](http://hadoop.apache.org/docs/stable/api/org/apache/hadoop/filecache/DistributedCache.html)\.
 
-You invoke Distributed Cache when you create the cluster\. The files are cached just before starting the Hadoop job and the files remain cached for the duration of the job\. You can cache files stored on any Hadoop\-compatible file system, for example HDFS or Amazon S3\. The default size of the file cache is 10GB\. To change the size of the cache, reconfigure the Hadoop parameter, `local.cache.size` using the bootstrap action\. For more information, see [Create Bootstrap Actions to Install Additional Software](emr-plan-bootstrap.md)\.
+You invoke DistributedCache when you create the cluster\. The files are cached just before starting the Hadoop job and the files remain cached for the duration of the job\. You can cache files stored on any Hadoop\-compatible file system, for example HDFS or Amazon S3\. The default size of the file cache is 10GB\. To change the size of the cache, reconfigure the Hadoop parameter, `local.cache.size` using the bootstrap action\. For more information, see [Create bootstrap actions to install additional software](emr-plan-bootstrap.md)\.
 
-## Supported File Types<a name="emr-dev-supported-file-types"></a>
+## Supported file types<a name="emr-dev-supported-file-types"></a>
 
-Distributed Cache allows both single files and archives\. Individual files are cached as read only\. Executables and binary files have execution permissions set\.
+DistributedCache allows both single files and archives\. Individual files are cached as read only\. Executables and binary files have execution permissions set\.
 
-Archives are one or more files packaged using a utility, such as `gzip`\. Distributed Cache passes the compressed files to each core node and decompresses the archive as part of caching\. Distributed Cache supports the following compression formats:
+Archives are one or more files packaged using a utility, such as `gzip`\. DistributedCache passes the compressed files to each core node and decompresses the archive as part of caching\. DistributedCache supports the following compression formats:
 + zip
 + tgz
 + tar\.gz
 + tar
 + jar
 
-## Location of Cached Files<a name="locationofcache"></a>
+## Location of cached files<a name="locationofcache"></a>
 
-Distributed Cache copies files to core nodes only\. If there are no core nodes in the cluster, Distributed Cache copies the files to the master node\.
+DistributedCache copies files to core nodes only\. If there are no core nodes in the cluster, DistributedCache copies the files to the master node\.
 
-Distributed Cache associates the cache files to the current working directory of the mapper and reducer using symlinks\. A symlink is an alias to a file location, not the actual file location\. The value of the parameter, `yarn.nodemanager.local-dirs` in `yarn-site.xml`, specifies the location of temporary files\. Amazon EMR sets this parameter to `/mnt/mapred`, or some variation based on instance type and EMR version\. For example, a setting may have `/mnt/mapred` and `/mnt1/mapred` because the instance type has two ephemeral volumes\. Cache files are located in a subdirectory of the temporary file location at `/mnt/mapred/taskTracker/archive`\. 
+DistributedCache associates the cache files to the current working directory of the mapper and reducer using symlinks\. A symlink is an alias to a file location, not the actual file location\. The value of the parameter, `yarn.nodemanager.local-dirs` in `yarn-site.xml`, specifies the location of temporary files\. Amazon EMR sets this parameter to `/mnt/mapred`, or some variation based on instance type and EMR version\. For example, a setting may have `/mnt/mapred` and `/mnt1/mapred` because the instance type has two ephemeral volumes\. Cache files are located in a subdirectory of the temporary file location at `/mnt/mapred/taskTracker/archive`\. 
 
-If you cache a single file, Distributed Cache puts the file in the `archive` directory\. If you cache an archive, Distributed Cache decompresses the file, creates a subdirectory in `/archive` with the same name as the archive file name\. The individual files are located in the new subdirectory\.
+If you cache a single file, DistributedCache puts the file in the `archive` directory\. If you cache an archive, DistributedCache decompresses the file, creates a subdirectory in `/archive` with the same name as the archive file name\. The individual files are located in the new subdirectory\.
 
-You can use Distributed Cache only when using Streaming\.
+You can use DistributedCache only when using Streaming\.
 
-## Access Cached Files From Streaming Applications<a name="cachemapper"></a>
+## Access cached files from streaming applications<a name="cachemapper"></a>
 
 To access the cached files from your mapper or reducer applications, make sure that you have added the current working directory \(\./\) into your application path and referenced the cached files as though they are present in the current working directory\.
 
-## Access Cached Files From Streaming Applications Using the Amazon EMR Console<a name="cacheinconsole"></a>
+## Access cached files from streaming applications using the Amazon EMR console<a name="cacheinconsole"></a>
 
 You can use the Amazon EMR console to create clusters that use Distributed Cache\. 
 
-**To specify Distributed Cache files using the console**
+**To specify distributed cache files using the console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
@@ -59,12 +59,12 @@ You can use the Amazon EMR console to create clusters that use Distributed Cache
 
 1. Proceed with configuring and launching your cluster\. Your cluster copies the files to the cache location before processing any cluster steps\.
 
-## Access Cached Files From Streaming Applications Using the AWS CLI<a name="cacheinruby"></a>
+## Access cached files from streaming applications using the AWS CLI<a name="cacheinruby"></a>
 
-You can use the CLI to create clusters that use Distributed Cache\. 
+You can use the CLI to create clusters that use distributed cache\. 
 
-**To specify Distributed Cache files using the AWS CLI**
-+ To submit a Streaming step when a cluster is created, type the `create-cluster` command with the `--steps` parameter\. To specify Distributed Cache files using the AWS CLI, specify the appropriate arguments when submitting a Streaming step\. 
+**To specify distributed cache files using the AWS CLI**
++ To submit a Streaming step when a cluster is created, type the `create-cluster` command with the `--steps` parameter\. To specify distributed cache files using the AWS CLI, specify the appropriate arguments when submitting a Streaming step\. 
 
        
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-input-distributed-cache.html)

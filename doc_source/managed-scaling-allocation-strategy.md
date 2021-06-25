@@ -1,8 +1,8 @@
-# Understanding Node Allocation Strategy and Scenarios<a name="managed-scaling-allocation-strategy"></a>
+# Understanding node allocation strategy and scenarios<a name="managed-scaling-allocation-strategy"></a>
 
 This section gives an overview of node allocation strategy and common scaling scenarios that you can use with EMR managed scaling\. 
 
-## Node Allocation Strategy<a name="node-allocation-strategy"></a>
+## Node allocation strategy<a name="node-allocation-strategy"></a>
 
 EMR managed scaling allocates core and task nodes based on the following scale\-up and scale\-down strategies: 
 
@@ -20,11 +20,11 @@ EMR managed scaling allocates core and task nodes based on the following scale\-
 
 If the cluster does not have any load, then Amazon EMR cancels the addition of new instances from a previous evaluation and performs scale\-down operations\. If the cluster has a heavy load, Amazon EMR cancels the removal of instances and performs scale\-up operations\.
 
-## Node Allocation Considerations<a name="node-allocation-considerations"></a>
+## Node allocation considerations<a name="node-allocation-considerations"></a>
 
 We recommend that you use the On\-Demand purchasing option for core nodes to avoid HDFS data loss in case of Spot reclamation\. You can use the Spot purchasing option for task nodes to reduce costs and get faster job execution when more Spot Instances are added to task nodes\.
 
-## Node Allocation Scenarios<a name="node-allocation-scenarios"></a>
+## Node allocation scenarios<a name="node-allocation-scenarios"></a>
 
 You can create various scaling scenarios based on your needs by setting up the Maximum, Minimum, On\-Demand limit, and Maximum core node parameters in different combinations\. 
 

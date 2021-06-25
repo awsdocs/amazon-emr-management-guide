@@ -1,4 +1,4 @@
-# Remove Tags from a Cluster<a name="emr-plan-tags-delete"></a>
+# Remove tags from a cluster<a name="emr-plan-tags-delete"></a>
 
 If you no longer need a tag, you can remove it from the cluster\. 
 

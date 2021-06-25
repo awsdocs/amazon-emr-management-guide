@@ -1,4 +1,4 @@
-# Using the AWS CLI to Configure Managed Scaling<a name="managed-scaling-cli"></a>
+# Using the AWS CLI to configure managed scaling<a name="managed-scaling-cli"></a>
 
 You can use AWS CLI commands for Amazon EMR to configure managed scaling when you create a cluster\. You can use a shorthand syntax, specifying the JSON configuration inline within the relevant commands, or you can reference a file containing the configuration JSON\. You can also apply a managed scaling policy to an existing cluster and remove a managed scaling policy that was previously applied\. In addition, you can retrieve details of a scaling policy configuration from a running cluster\.
 

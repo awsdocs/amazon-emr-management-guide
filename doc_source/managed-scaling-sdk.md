@@ -1,4 +1,4 @@
-# Using AWS SDK for Java to Configure Managed Scaling<a name="managed-scaling-sdk"></a>
+# Using AWS SDK for Java to configure managed scaling<a name="managed-scaling-sdk"></a>
 
 The following program excerpt shows how to configure managed scaling using the AWS SDK for Java:
 
@@ -105,7 +105,7 @@ public class CreateClusterWithManagedScalingWithIG {
 	   System.out.println("The cluster ID is " + result.toString());
 	}
 	
-	public static AWSCredentials getCreadentials(String profileName) {
+	public static AWSCredentials getCredentials(String profileName) {
 		// specifies any named profile in .aws/credentials as the credentials provider
 		try {
 			return new ProfileCredentialsProvider("AWS-Profile-Name-Here")

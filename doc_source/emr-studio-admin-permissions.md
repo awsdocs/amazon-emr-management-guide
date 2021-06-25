@@ -1,8 +1,8 @@
-# Add Required Permissions to Create and Manage an EMR Studio<a name="emr-studio-admin-permissions"></a>
+# Add required permissions to create and manage an EMR Studio<a name="emr-studio-admin-permissions"></a>
 
-## About the Required EMR Studio Permissions<a name="emr-studio-about-admin-permissions"></a>
+## About the required EMR Studio permissions<a name="emr-studio-about-admin-permissions"></a>
 
-Before you can create an Amazon EMR Studio, you must create an IAM policy that defines EMR Studio administrative permissions and add it to an identity \(user, group, or role\) in the AWS account that you designate for your Studio\. Doing so lets you assume an IAM principal that can take actions such as creating and managing a Studio, and assigning users and groups\. For detailed information about each required permission, see [Permissions Required to Manage an EMR Studio](#emr-studio-admin-permissions-table)\.
+Before you can create an Amazon EMR Studio, you must create an IAM policy that defines EMR Studio administrative permissions and add it to an identity \(user, group, or role\) in the AWS account that you designate for your Studio\. Doing so lets you assume an IAM principal that can take actions such as creating and managing a Studio, and assigning users and groups\. For detailed information about each required permission, see [Permissions required to manage an EMR Studio](#emr-studio-admin-permissions-table)\.
 
 ## Prerequisites<a name="emr-studio-admin-permissions-prereqs"></a>
 
@@ -77,7 +77,7 @@ AWS SSO and AWS SSO Directory APIs do not support specifying an ARN in the resou
 
 1. Attach the policy to your designated IAM identity \(user, role, or group\)\. For instructions, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.
 
-## Permissions Required to Manage an EMR Studio<a name="emr-studio-admin-permissions-table"></a>
+## Permissions required to manage an EMR Studio<a name="emr-studio-admin-permissions-table"></a>
 
 This table lists the actions related to creating and managing an EMR Studio, along with the permissions needed for each action\.
 

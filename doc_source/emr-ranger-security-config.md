@@ -1,8 +1,8 @@
-# Create the EMR Security Configuration<a name="emr-ranger-security-config"></a>
+# Create the EMR security configuration<a name="emr-ranger-security-config"></a>
 
 **Creating an Amazon EMR Security Configuration for Apache Ranger**
 
-Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a security configuration with the IAM roles and identity provider \(IdP\) metadata XML file you created in [Configure a Trust Relationship Between your IdP and Lake Formation](emr-lf-federation.md)\. You specify this security configuration when you launch the cluster\.
+Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a security configuration with the IAM roles and identity provider \(IdP\) metadata XML file you created in [Configure a trust relationship between your IdP and Lake Formation](emr-lf-federation.md)\. You specify this security configuration when you launch the cluster\.
 
 ------
 #### [ Console ]
@@ -25,7 +25,7 @@ Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a 
 
    If you do not configure Apache Spark or Apache Hive, and they are selected as an application for your cluster, the request fails\.
 
-1. Set up other security configuration options as appropriate and choose **Create**\. You must enable Kerberos authentication using the cluster\-dedicated or external KDC\. For more information, see [Configure EMR Security](emr-lf-security.md)\.
+1. Set up other security configuration options as appropriate and choose **Create**\. You must enable Kerberos authentication using the cluster\-dedicated or external KDC\. For more information, see [Configure EMR security](emr-lf-security.md)\.
 
 **Note**  
 You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud \(US\) Region\. Security configuration can be done using the CLI\.
@@ -35,9 +35,9 @@ You cannot currently use the console to create a security configuration that spe
 
 **To create a security configuration for Apache Ranger integration**
 
-1. Replace `<AWS ACCOUNT ID>` with your AWS account ID\.
+1. Replace `<ACCOUNT ID>` with your AWS account ID\.
 
-1. Replace `<AWS REGION>` with the Region that the resource is in\.
+1. Replace `<REGION>` with the Region that the resource is in\.
 
 1. Specify a value for `TicketLifetimeInHours` to determine the period for which a Kerberos ticket issued by the KDC is valid\.
 
@@ -56,30 +56,30 @@ You cannot currently use the console to create a security configuration that spe
     "AuthorizationConfiguration":{
       "RangerConfiguration":{
          "AdminServerURL":"https://_<RANGER ADMIN SERVER IP>_:6182",
-         "RoleForRangerPluginsARN":"arn:aws:iam::_<AWS ACCOUNT ID>_:role/_<RANGER PLUGIN DATA ACCESS ROLE NAME>_",
-         "RoleForOtherAWSServicesARN":"arn:aws:iam::_<AWS ACCOUNT ID>_:role/_<USER ACCESS ROLE NAME>_",
-         "AdminServerSecretARN":"arn:aws:secretsmanager:_<AWS REGION>_:_<AWS ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES ADMIN SERVERS PUBLIC TLS CERTICATE WITHOUT VERSION>_",
+         "RoleForRangerPluginsARN":"arn:aws:iam::_<ACCOUNT ID>_:role/_<RANGER PLUGIN DATA ACCESS ROLE NAME>_",
+         "RoleForOtherAWSServicesARN":"arn:aws:iam::_<ACCOUNT ID>_:role/_<USER ACCESS ROLE NAME>_",
+         "AdminServerSecretARN":"arn:aws:secretsmanager:_<REGION>_:_<ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES ADMIN SERVERS PUBLIC TLS CERTICATE WITHOUT VERSION>_",
          "RangerPluginConfigurations":[
             {
                "App":"Spark",
-               "ClientSecretARN":"arn:aws:secretsmanager:_<AWS REGION>_:_<AWS ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES SPARK PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
+               "ClientSecretARN":"arn:aws:secretsmanager:_<REGION>_:_<ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES SPARK PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
                "PolicyRepositoryName":"<SPARK SERVICE NAME eg. amazon-emr-spark>"
             },
             {
                "App":"Hive",
-               "ClientSecretARN":"arn:aws:secretsmanager:_<AWS REGION>_:_<AWS ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES HIVE PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
-               "PolicyRepositoryName":"<HIVE SERVICE NAME eg. hivedev>"
+               "ClientSecretARN":"arn:aws:secretsmanager:_<REGION>_:_<ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES Hive PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
+               "PolicyRepositoryName":"<HIVE SERVICE NAME eg. Hivedev>"
             },
             {
                "App":"EMRFS-S3",
-               "ClientSecretARN":"arn:aws:secretsmanager:_<AWS REGION>_:_<AWS ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES EMRFS S3 PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
+               "ClientSecretARN":"arn:aws:secretsmanager:_<REGION>_:_<ACCOUNT ID>_:secret:_<SECRET NAME THAT PROVIDES EMRFS S3 PLUGIN PRIVATE TLS CERTICATE WITHOUT VERSION>_",
                "PolicyRepositoryName":"<EMRFS S3 SERVICE NAME eg amazon-emr-emrfs>"
             }
          ],
          "AuditConfiguration":{
             "Destinations":{
                "AmazonCloudWatchLogs":{
-                  "CloudWatchLogGroup":"arn:aws:logs:<AWS REGION>:_<AWS ACCOUNT ID>_:log-group:_<LOG GROUP NAME FOR AUDIT EVENTS>_"
+                  "CloudWatchLogGroup":"arn:aws:logs:<REGION>:_<ACCOUNT ID>_:log-group:_<LOG GROUP NAME FOR AUDIT EVENTS>_"
                }
             }
          }
@@ -103,7 +103,7 @@ aws emr create-security-configuration \
 **Configure Additional Security Features**
 
 To securely integrate Amazon EMR with Apache Ranger, configure the following EMR security features:
-+ Enable Kerberos authentication using the cluster\-dedicated or external KDC\. For instructions, see [Use Kerberos Authentication](emr-kerberos.md)\.
-+ \(Optional\) Enable encryption in transit or at rest\. For more information, see [Encryption Options](emr-data-encryption-options.md)\.
++ Enable Kerberos authentication using the cluster\-dedicated or external KDC\. For instructions, see [Use Kerberos authentication](emr-kerberos.md)\.
++ \(Optional\) Enable encryption in transit or at rest\. For more information, see [Encryption options](emr-data-encryption-options.md)\.
 
 For more information, see [Security in Amazon EMR](emr-security.md)\.

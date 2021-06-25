@@ -1,16 +1,16 @@
-# Considerations and Issues<a name="emr-ranger-security-considerations"></a>
+# Considerations and issues<a name="emr-ranger-security-considerations"></a>
 
 **Configuring Kerberos on EMR**
 
-When an EMR cluster is configured for Kerberos, which is a requirement for Apache Ranger integration with Amazon EMR, Kerberos needs to be configured for users to be able to authenticate\. See [Configuring Kerberos on Amazon EMR](emr-kerberos-configure.md) for more information on configuring Kerberos, and [Configuring a Cluster for Kerberos\-Authenticated HDFS Users and SSH Connections](emr-kerberos-configuration-users.md) for information on how users and Kerberos principals can be created\.
+When an EMR cluster is configured for Kerberos, which is a requirement for Apache Ranger integration with Amazon EMR, Kerberos needs to be configured for users to be able to authenticate\. See [Configuring Kerberos on Amazon EMR](emr-kerberos-configure.md) for more information on configuring Kerberos, and [Configuring a cluster for Kerberos\-authenticated HDFS users and SSH connections](emr-kerberos-configuration-users.md) for information on how users and Kerberos principals can be created\.
 
 **Configuring Hue**
 
-For instructions on configuring Hue to use LDAP as an authentication mechanism, see [Configure Hue for LDAP Users](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html) in the *Amazon EMR Release Guide*\.
+For instructions on configuring Hue to use LDAP as an authentication mechanism, see [Configure Hue for LDAP users](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html) in the *Amazon EMR Release Guide*\.
 
 **Known Issues**
 
-There is a known issue within Amazon EMR release 5\.32 in which the permissions for hive\-site\.xml was changed so that only privileged users can read it as there may be credentials stored within it\. This could prevent Hue from reading hive\-site\.xml and cause webpages to continuously reload\. If you experience this issue, add the following configuration to fix the issue:
+There is a known issue within Amazon EMR release 5\.32 in which the permissions for Hive\-site\.xml was changed so that only privileged users can read it as there may be credentials stored within it\. This could prevent Hue from reading Hive\-site\.xml and cause webpages to continuously reload\. If you experience this issue, add the following configuration to fix the issue:
 
 ```
    {
@@ -30,7 +30,7 @@ There is a known issue within Amazon EMR release 5\.32 in which the permissions 
 
 **Configuring Zeppelin**
 
-Use Apache Zeppelin as a notebook for interactive data exploration\. For more information about Zeppelin, see [Apache Zeppelin](https://zeppelin.apache.org/)\. Zeppelin is included in Amazon EMR release version 5\.0\.0 and later\. Earlier release versions include Zeppelin as a sandbox application\. For more information, see [Amazon EMR 4\.x Release Versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-4x.html) in the *Amazon EMR Release Guide*\.
+Use Apache Zeppelin as a notebook for interactive data exploration\. For more information about Zeppelin, see [Apache Zeppelin](https://zeppelin.apache.org/)\. Zeppelin is included in Amazon EMR release version 5\.0\.0 and later\. Earlier release versions include Zeppelin as a sandbox application\. For more information, see [Amazon EMR 4\.x release versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-4x.html) in the *Amazon EMR Release Guide*\.
 
 By default, Zeppelin is configured with a default login and password which in a multi\-tenant environment is not secure\.
 
@@ -54,7 +54,7 @@ zeppelin ALL=(ALL) NOPASSWD:ALL"
 
 **Step 2b\. Modify interpreters settings to run user jobs in their own processes**\.
 
-For all interpreters, configure them to instantiate the interpreters “Per User” in “isolated” processes as shown below\.
+For all interpreters, configure them to instantiate the interpreters "Per User" in "isolated" processes as shown below\.
 
 ![\[Amazon EMR and Apache Ranger architecture diagram.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/per_user.png)
 
@@ -89,7 +89,7 @@ sudo systemctl restart zeppelin
 
 **Application UIs**
 
-By default, Application UI’s do not perform authentication\. This includes the ResourceManager UI, NodeManager UI, Livy UI, among others\. In addition, any user that has the ability to access the UIs is able to view information about all other users' jobs\.
+By default, Application UI's do not perform authentication\. This includes the ResourceManager UI, NodeManager UI, Livy UI, among others\. In addition, any user that has the ability to access the UIs is able to view information about all other users' jobs\.
 
 If this behavior is not desired, you should ensure that a security group is used to restrict access to the application UIs by users\.
 

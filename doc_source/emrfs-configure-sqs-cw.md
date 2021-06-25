@@ -1,4 +1,4 @@
-# Configure Consistency Notifications for CloudWatch and Amazon SQS<a name="emrfs-configure-sqs-cw"></a>
+# Configure consistency notifications for CloudWatch and Amazon SQS<a name="emrfs-configure-sqs-cw"></a>
 
 You can enable CloudWatch metrics and Amazon SQS messages in EMRFS for Amazon S3 eventual consistency issues\. 
 

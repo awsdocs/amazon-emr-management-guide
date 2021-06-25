@@ -1,4 +1,4 @@
-# Amazon EMR Managed Policies<a name="emr-managed-iam-policies"></a>
+# Amazon EMR managed policies<a name="emr-managed-iam-policies"></a>
 
 The easiest way to grant full access or read\-only access to required Amazon EMR actions is to use the IAM managed policies for Amazon EMR\. Managed policies offer the benefit of updating automatically if permission requirements change\. If you use inline policies, service changes may occur that cause permission errors to appear\. 
 
@@ -12,14 +12,14 @@ The v1 policies will be marked deprecated with a warning icon next to them in th
 The following table summarizes the changes between current policies and v2 policies\.
 
 
-**EMR Managed Policy Changes**  
+**EMR managed policy changes**  
 
-| Policy Type | Policy Names | Policy Purpose | Changes to v2 Policy | 
+| Policy type | Policy names | Policy purpose | Changes to v2 policy | 
 | --- | --- | --- | --- | 
 |  Default IAM managed policy for full EMR access by attached user, role, or group  |  Deprecated policy name: [`AmazonElasticMapReduceFullAccess`](emr-managed-policy-fullaccess.md)  v2 \(scoped\)policy name: [`AmazonEMRFullAccessPolicy_v2`](emr-managed-policy-fullaccess-v2.md)  |  Allows users full permissions for EMR actions\. Includes iam:PassRole permissions for resources\.  |  Policy adds a prerequisite that users must add user tags to resources before they can use this policy\. See [Tagging resources to use managed policies](#manually-tagged-resources)\. iam:PassRole action requires iam:PassedToService condition set to specified service\. Access to Amazon EC2, Amazon S3, and other services is not allowed by default\. See [IAM Managed Policy for Full Access \(v2 Managed Default Policy\)](emr-managed-policy-fullaccess-v2.md)\.  | 
 |  IAM managed policy for read\-only access by attached user, role, or group  |  Deprecated policy name: [`AmazonElasticMapReduceReadOnlyAccess`](emr-managed-policy-readonly.md)  v2 \(scoped\) policy name: [`AmazonEMRReadOnlyAccessPolicy_v2`](emr-managed-policy-readonly-v2.md)  |  Allows users read\-only permissions for Amazon EMR actions\.  |  Permissions allow only specified elasticmapreduce read\-only actions\. Access to Amazon S3 is access not allowed by default\. See [IAM Managed Policy for Read\-Only Access \(v2 Managed Default Policy\)](emr-managed-policy-readonly-v2.md)\.  | 
-|  Default EMR service role and attached managed policy  |   Role name: **EMR\_DefaultRole** Deprecated policy name: **AmazonElasticMapReduceRole** \(EMR Service Role\)  V2 \(scoped\-down\) policy name: [`AmazonEMRServicePolicy_v2`](emr-iam-role.md)  |  Allows Amazon EMR to call other AWS services on your behalf when provisioning resources and performing service\-level actions\. This role is required for all clusters\.  |  The v2 service role and v2 default policy replace the deprecated role and policy\. The policy adds a prerequisite that users must add user tags to resources before they can use this policy\. See [Tagging resources to use managed policies](#manually-tagged-resources)\. See [Service Role for Amazon EMR \(EMR Role\)](emr-iam-role.md)\.  | 
-|  Service role for cluster EC2 instances \(EC2 instance profile\)  |  Deprecated role name: **EMR\_EC2\_DefaultRole** \(instance profile\) Deprecated policy name: **AmazonElasticMapReduceforEC2Role**  |  Allows applications running on an EMR cluster to access other AWS resources, such as Amazon S3\. For example, if you run Apache Spark jobs that process data from Amazon S3, the policy needs to allow access to such resources\.  |  Both default role and default policy are on the path to deprecation\. There is no replacement AWS default managed role or policy\. You need to provide a resource\-based or identity\-based policy\. This means that, by default, applications running on an EMR cluster do not have access to Amazon S3 or other resource unless you manually add these to the policy\. See [Default Role and Managed Policy](emr-iam-role-for-ec2.md#emr-ec2-role-default)\.  | 
+|  Default EMR service role and attached managed policy  |   Role name: **EMR\_DefaultRole** Deprecated policy name: **AmazonElasticMapReduceRole** \(EMR Service Role\)  V2 \(scoped\-down\) policy name: [`AmazonEMRServicePolicy_v2`](emr-iam-role.md)  |  Allows Amazon EMR to call other AWS services on your behalf when provisioning resources and performing service\-level actions\. This role is required for all clusters\.  |  The v2 service role and v2 default policy replace the deprecated role and policy\. The policy adds a prerequisite that users must add user tags to resources before they can use this policy\. See [Tagging resources to use managed policies](#manually-tagged-resources)\. See [Service role for Amazon EMR \(EMR role\)](emr-iam-role.md)\.  | 
+|  Service role for cluster EC2 instances \(EC2 instance profile\)  |  Deprecated role name: **EMR\_EC2\_DefaultRole** \(instance profile\) Deprecated policy name: **AmazonElasticMapReduceforEC2Role**  |  Allows applications running on an EMR cluster to access other AWS resources, such as Amazon S3\. For example, if you run Apache Spark jobs that process data from Amazon S3, the policy needs to allow access to such resources\.  |  Both default role and default policy are on the path to deprecation\. There is no replacement AWS default managed role or policy\. You need to provide a resource\-based or identity\-based policy\. This means that, by default, applications running on an EMR cluster do not have access to Amazon S3 or other resource unless you manually add these to the policy\. See [Default role and managed policy](emr-iam-role-for-ec2.md#emr-ec2-role-default)\.  | 
 |  Other EC2 service role policies  |  Current policy names: **AmazonElasticMapReduceforAutoScalingRole, AmazonElasticMapReduceEditorsRole, AmazonEMRCleanupPolicy**  |  Provides permissions that EMR needs to access other AWS resources and perform actions if using auto scaling, notebooks, or to clean up EC2 resources\.  |  No changes for v2\.  | 
 
 ## Securing iam:PassRole<a name="securing-iampassrole"></a>
@@ -34,7 +34,7 @@ We recommend that you create new clusters using v2 managed policies\.
 
 To create custom policies, we recommend that you begin with the managed policies and edit them according to your requirements\.
 
-For information about how to attach policies to IAM users \(principals\), see [Working with Managed Policies Using the AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console) in the *IAM User Guide*\.
+For information about how to attach policies to IAM users \(principals\), see [Working with managed policies using the AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console) in the *IAM User Guide*\.
 
 ## Tagging resources to use managed policies<a name="manually-tagged-resources"></a>
 
@@ -63,7 +63,7 @@ Amazon EMR tags EC2 security groups that it creates with the tag that is require
 **Manually\-tagged cluster resources**  
 You must manually tag some cluster resources so that they can be accessed by Amazon EMR default roles\.
 + You must manually tag EC2 security groups and EC2 subnets with the Amazon EMR managed policy tag `for-use-with-amazon-emr-managed-policies`\.
-+ You must manually tag a VPC if you want Amazon EMR to create default security groups\. EMR will try to create a security group with the specific tag if the default security group doesn’t already exist\.
++ You must manually tag a VPC if you want Amazon EMR to create default security groups\. EMR will try to create a security group with the specific tag if the default security group doesn't already exist\.
 
 Amazon EMR automatically tags the following resources:
 + EMR\-created EC2 Security Groups

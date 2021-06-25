@@ -1,4 +1,4 @@
-# Specifying Amazon EMR\-Managed and Additional Security Groups<a name="emr-sg-specify"></a>
+# Specifying Amazon EMR\-managed and additional security groups<a name="emr-sg-specify"></a>
 
 You can specify security groups using the AWS Management Console, the AWS CLI, or the EMR API\. If you don't specify security groups, Amazon EMR creates default security groups\. Specifying additional security groups is optional\. You can assign additional security groups for master instances, core and task instances, and service access \(private subnets only\)\.
 
@@ -22,7 +22,7 @@ You can specify security groups using the AWS Management Console, the AWS CLI, o
 
 1. Choose **Create Cluster**\.
 
-## Specifying Security Groups Using the AWS CLI<a name="emr-sg-specify-cli"></a>
+## Specifying security groups using the AWS CLI<a name="emr-sg-specify-cli"></a>
 
 To specify security groups using the AWS CLI you use the `create-cluster` command with the following parameters of the `--ec2-attributes` option:
 
@@ -35,7 +35,7 @@ To specify security groups using the AWS CLI you use the `create-cluster` comman
 |  `AdditionalMasterSecurityGroups`  |  Use this parameter to specify up to four additional security groups for the master instance\.  | 
 |  `AdditionalSlaveSecurityGroups`  |  Use this parameter to specify up to four additional security groups for core and task instances\.  | 
 
-**Example — Specify Custom Amazon EMR\-Managed Security Groups and Additional Security Groups**  
+**Example — specify custom Amazon EMR\-managed security groups and additional security groups**  
 The following example specifies custom Amazon EMR managed security groups for a cluster in a private subnet, multiple additional security groups for the master instance, and a single additional security group for core and task instances\.  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 

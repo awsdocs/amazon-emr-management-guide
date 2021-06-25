@@ -1,4 +1,4 @@
-# Permissions Errors<a name="emr-troubleshoot-error-permissions"></a>
+# Permissions errors<a name="emr-troubleshoot-error-permissions"></a>
 
 The following errors are common when using permissions or credentials\.
 
@@ -27,10 +27,10 @@ You must use the login name `hadoop` when you connect to an Amazon EMR cluster n
 1. ssh -i mykey.pem hadoop@ec2-01-001-001-1.compute-1.amazonaws.com				
 ```
 
- For more information, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\. 
+ For more information, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. 
 
 ## If you are using IAM, do you have the proper Amazon EC2 policies set?<a name="check-iam-permissions"></a>
 
- Because Amazon EMR uses EC2 instances as nodes, IAM users of Amazon EMR also need to have certain Amazon EC2 policies set in order for Amazon EMR to be able to manage those instances on the IAM user’s behalf\. If you do not have the required permissions set, Amazon EMR returns the error: **"User account is not authorized to call EC2\."** 
+ Because Amazon EMR uses EC2 instances as nodes, IAM users of Amazon EMR also need to have certain Amazon EC2 policies set in order for Amazon EMR to be able to manage those instances on the IAM user's behalf\. If you do not have the required permissions set, Amazon EMR returns the error: **"User account is not authorized to call EC2\."** 
 
- For more information about the Amazon EC2 policies your IAM account needs to set to run Amazon EMR, see [How Amazon EMR Works with IAM](security_iam_emr-with-iam.md)\. 
+ For more information about the Amazon EC2 policies your IAM account needs to set to run Amazon EMR, see [How Amazon EMR works with IAM](security_iam_emr-with-iam.md)\. 

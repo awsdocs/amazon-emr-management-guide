@@ -1,6 +1,6 @@
-# Application Support and Limitations<a name="emr-ranger-app-support"></a>
+# Application support and limitations<a name="emr-ranger-app-support"></a>
 
-## Supported Applications<a name="emr-ranger-app-support-list"></a>
+## Supported applications<a name="emr-ranger-app-support-list"></a>
 
 The integration between Amazon EMR and Apache Ranger in which EMR installs Ranger plugins currently supports the following applications:
 + Apache Spark \(Available with EMR 5\.32 and later\)
@@ -35,7 +35,7 @@ The following Amazon EMR features can be used with Amazon EMR and Apache Ranger:
 **Note**  
 Amazon EMR encryption settings govern SSE\. For more information, see [Encryption Options](emr-data-encryption-options.md)\.
 
-## Application Limitations<a name="emr-ranger-app-support-limitations"></a>
+## Application limitations<a name="emr-ranger-app-support-limitations"></a>
 
 There are several limitations to keep in mind when you integrate Amazon EMR and Apache Ranger:
 + You cannot currently use the console to create a security configuration that specifies the AWS Ranger integration option in the AWS GovCloud \(US\) Region\. Security configuration can be done using the CLI\.

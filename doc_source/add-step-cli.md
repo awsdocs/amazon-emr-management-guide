@@ -1,4 +1,4 @@
-# Adding Steps to a Cluster Using the AWS CLI<a name="add-step-cli"></a>
+# Adding steps to a cluster using the AWS CLI<a name="add-step-cli"></a>
 
 The following procedures demonstrate adding steps to a newly created cluster and to a running cluster using the AWS CLI\. In both examples, the `--steps` subcommand is used to add steps to the cluster\. 
 

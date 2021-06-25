@@ -1,6 +1,6 @@
-# IAM Role for Apache Ranger<a name="emr-ranger-iam-ranger"></a>
+# IAM role for Apache Ranger<a name="emr-ranger-iam-ranger"></a>
 
-This role provides credentials for trusted execution engines, such as Apache Hive and Amazon EMR Record Server [Amazon EMR Components](emr-lf-components.md), to access Amazon S3 data\. Use only this role to access Amazon S3 data, including any KMS keys, if you are using S3 SSE\-KMS\.
+This role provides credentials for trusted execution engines, such as Apache Hive and Amazon EMR Record Server [Amazon EMR components](emr-lf-components.md), to access Amazon S3 data\. Use only this role to access Amazon S3 data, including any KMS keys, if you are using S3 SSE\-KMS\.
 
 This role must be created with the minimum policy stated in the following example\.
 

@@ -1,11 +1,14 @@
-# Configuring a Cluster to Auto\-Terminate or Continue<a name="emr-plan-longrunning-transient"></a>
+# Configuring a cluster to auto\-terminate or continue<a name="emr-plan-longrunning-transient"></a>
 
 By default, clusters that you create using the console or the AWS CLI continue to run until you shut them down\. To have a cluster terminate after running steps, you need to enable auto\-termination\. In contrast, clusters that you launch using the EMR API have auto\-termination enabled by default\.
+
+**Note**  
+Amazon EMR automatically enables termination protection for all clusters with multiple master nodes, and overrides any auto\-termination settings that you supply when you create the cluster\. To shut down a cluster with multiple master nodes, you must first modify the cluster attributes to disable termination protection\. For instructions, see [Terminate an EMR Cluster with multiple master nodes](emr-plan-ha-launch.md#emr-plan-ha-launch-terminate)\.
 
 **To disable auto\-termination using the EMR API**
 + When using the [RunJobFlow](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_RunJobFlow.html) action to create a cluster, set the [KeepJobFlowAliveWhenNoSteps](https://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_JobFlowInstancesConfig.html#EMR-Type-JobFlowInstancesConfig-KeepJobFlowAliveWhenNoSteps) property to `true`\.
 
-**To enable auto\-termination using Quick Options in the AWS Management Console**
+**To enable auto\-termination using quick options in the AWS Management Console**
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
@@ -44,4 +47,4 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
   --instance-type m5.xlarge --instance-count 3 --auto-terminate
   ```
 
-For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+For more information on using Amazon EMR commands in the AWS CLI, see [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

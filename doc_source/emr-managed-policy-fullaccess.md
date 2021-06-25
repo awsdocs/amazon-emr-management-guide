@@ -1,4 +1,4 @@
-# IAM Managed Policy for Full Access \(On Path to Deprecation\)<a name="emr-managed-policy-fullaccess"></a>
+# IAM managed policy for full access \(on path to deprecation\)<a name="emr-managed-policy-fullaccess"></a>
 
 The `AmazonElasticMapReduceFullAccess` managed policy grants all the required actions for Amazon EMR and other services\. The `AmazonElasticMapReduceFullAccess` managed policy is on the path to deprecation, but not yet deprecated\. When the policy is eventually deprecated, you will not abe able to attach it to a role\. However, a role that already has an attached deprecated policy can still be attached to a cluster\. `AmazonElasticMapReduceFullAccess` has been replaced with [`AmazonEMRFullAccessPolicy_v2`](emr-managed-policy-fullaccess-v2.md) as the Amazon EMR default managed policy\.
 

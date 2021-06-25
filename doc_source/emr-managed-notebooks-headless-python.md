@@ -2,7 +2,7 @@
 
 The following code example is an SDK for Python \(Boto3\) file called `demo.py` that shows the notebook execution APIs\.
 
-For information about the EMR API NotebookExecution actions, see [EMR API Actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
+For information about the EMR API NotebookExecution actions, see [EMR API actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
 
 ```
     demo.py:

@@ -1,16 +1,16 @@
-# Create Bootstrap Actions to Install Additional Software<a name="emr-plan-bootstrap"></a>
+# Create bootstrap actions to install additional software<a name="emr-plan-bootstrap"></a>
 
 You can use a *bootstrap action* to install additional software or customize the configuration of cluster instances\. Bootstrap actions are scripts that run on cluster after Amazon EMR launches the instance using the Amazon Linux Amazon Machine Image \(AMI\)\. Bootstrap actions run before Amazon EMR installs the applications that you specify when you create the cluster and before cluster nodes begin processing data\. If you add nodes to a running cluster, bootstrap actions also run on those nodes in the same way\. You can create custom bootstrap actions and specify them when you create your cluster\. 
 
-Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x Release Versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
+Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x release versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
 
 **Topics**
-+ [Bootstrap Action Basics](#bootstrapUses)
-+ [Run If Bootstrap Action](#emr-bootstrap-runif)
-+ [Shutdown Actions](#bootstrap_Shutown)
-+ [Use Custom Bootstrap Actions](#bootstrapCustom)
++ [Bootstrap action basics](#bootstrapUses)
++ [Run if bootstrap action](#emr-bootstrap-runif)
++ [Shutdown actions](#bootstrap_Shutown)
++ [Use custom bootstrap actions](#bootstrapCustom)
 
-## Bootstrap Action Basics<a name="bootstrapUses"></a>
+## Bootstrap action basics<a name="bootstrapUses"></a>
 
 Bootstrap actions execute as the Hadoop user by default\. You can execute a bootstrap action with root privileges by using `sudo`\. 
 
@@ -28,7 +28,7 @@ When you use the CLI, you can pass references to bootstrap action scripts to Ama
 
 If the bootstrap action returns a nonzero error code, Amazon EMR treats it as a failure and terminates the instance\. If too many instances fail their bootstrap actions, then Amazon EMR terminates the cluster\. If just a few instances fail, Amazon EMR attempts to reallocate the failed instances and continue\. Use the cluster `lastStateChangeReason` error code to identify failures caused by a bootstrap action\.
 
-## Run If Bootstrap Action<a name="emr-bootstrap-runif"></a>
+## Run if bootstrap action<a name="emr-bootstrap-runif"></a>
 
 Amazon EMR provides this predefined bootstrap action to run a command conditionally when an instance\-specific value is found in the `instance.json` or `job-flow.json` file\. The command can refer to a file in Amazon S3 that Amazon EMR can download and execute\. 
 
@@ -51,25 +51,25 @@ If you have not previously created the default Amazon EMR service role and EC2 i
 
   For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Shutdown Actions<a name="bootstrap_Shutown"></a>
+## Shutdown actions<a name="bootstrap_Shutown"></a>
 
 A bootstrap action script can create one or more shutdown actions by writing scripts to the `/mnt/var/lib/instance-controller/public/shutdown-actions/` directory\. When a cluster is terminated, all the scripts in this directory are executed in parallel\. Each script must run and complete within 60 seconds\. 
 
 Shutdown action scripts are not guaranteed to run if the node terminates with an error\. 
 
 **Note**  
-When using Amazon EMR versions 4\.0 and later, you must manually create the `/mnt/var/lib/instance-controller/public/shutdown-actions/` directory on the master node\. It doesn't exist by default; however, after being created, scripts in this directory nevertheless run before shutdown\. For more information about connecting to the Master node to create directories, see [Connect to the Master Node Using SSH](emr-connect-master-node-ssh.md)\.
+When using Amazon EMR versions 4\.0 and later, you must manually create the `/mnt/var/lib/instance-controller/public/shutdown-actions/` directory on the master node\. It doesn't exist by default; however, after being created, scripts in this directory nevertheless run before shutdown\. For more information about connecting to the Master node to create directories, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\.
 
-## Use Custom Bootstrap Actions<a name="bootstrapCustom"></a>
+## Use custom bootstrap actions<a name="bootstrapCustom"></a>
 
 You can create a custom script to perform a customized bootstrap action\. Any of the Amazon EMR interfaces can reference a custom bootstrap action\.
 
 **Topics**
-+ [Add Custom Bootstrap Actions Using the AWS CLI or the Amazon EMR CLI](#CustombootstrapCLI)
-+ [Add Custom Bootstrap Actions Using the Console](#CustombootstrapConsole)
-+ [Use a Custom Bootstrap Action to Copy an Object from Amazon S3 to Each Node](#CustomBootstrapCopyS3Object)
++ [Add custom bootstrap actions using the AWS CLI or the Amazon EMR CLI](#CustombootstrapCLI)
++ [Add custom bootstrap actions using the console](#CustombootstrapConsole)
++ [Use a custom bootstrap action to copy an object from Amazon S3 to each node](#CustomBootstrapCopyS3Object)
 
-### Add Custom Bootstrap Actions Using the AWS CLI or the Amazon EMR CLI<a name="CustombootstrapCLI"></a>
+### Add custom bootstrap actions using the AWS CLI or the Amazon EMR CLI<a name="CustombootstrapCLI"></a>
 
 The following example uses a bootstrap action script to download and extract a compressed TAR archive from Amazon S3\. The sample script is stored at [ https://elasticmapreduce\.s3\.amazonaws\.com/bootstrap\-actions/download\.sh](https://elasticmapreduce.s3.amazonaws.com/bootstrap-actions/download.sh)\. 
 
@@ -108,7 +108,7 @@ If you have not previously created the default Amazon EMR service role and EC2 i
 
   For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-### Add Custom Bootstrap Actions Using the Console<a name="CustombootstrapConsole"></a>
+### Add custom bootstrap actions using the console<a name="CustombootstrapConsole"></a>
 
 The following procedure describes how to use your own custom bootstrap action\.
 
@@ -130,10 +130,10 @@ The following procedure describes how to use your own custom bootstrap action\.
 
 While the cluster's master node is running, you can connect to the master node and see the log files that the bootstrap action script generated in the `/mnt/var/log/bootstrap-actions/1` directory\.
 
-**Related Topics**
-+ [View Log Files](emr-manage-view-web-log-files.md)
+**Related topics**
++ [View log files](emr-manage-view-web-log-files.md)
 
-### Use a Custom Bootstrap Action to Copy an Object from Amazon S3 to Each Node<a name="CustomBootstrapCopyS3Object"></a>
+### Use a custom bootstrap action to copy an object from Amazon S3 to each node<a name="CustomBootstrapCopyS3Object"></a>
 
 You can use a bootstrap action to copy objects from Amazon S3 to each node in a cluster before your applications are installed\. The AWS CLI is installed on each node of a cluster, so your bootstrap action can call AWS CLI commands\.
 

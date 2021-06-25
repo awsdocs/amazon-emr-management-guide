@@ -1,4 +1,4 @@
-# Add a Git\-based Repository to Amazon EMR<a name="emr-git-repo-add"></a>
+# Add a Git\-based repository to Amazon EMR<a name="emr-git-repo-add"></a>
 
 **To add a Git\-based repository as a resource in your Amazon EMR account**
 

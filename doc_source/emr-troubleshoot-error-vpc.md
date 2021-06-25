@@ -1,23 +1,23 @@
-# VPC Errors<a name="emr-troubleshoot-error-vpc"></a>
+# VPC errors<a name="emr-troubleshoot-error-vpc"></a>
 
 The following errors are common to VPC configuration in Amazon EMR\.
 
 **Topics**
-+ [Invalid Subnet Configuration](#emr-troubleshoot-error-gateway)
++ [Invalid subnet configuration](#emr-troubleshoot-error-gateway)
 + [Missing DHCP Options Set](#emr-troubleshoot-error-dhcp)
-+ [Permissions Errors](#emr-troubleshoot-error-denied)
-+ [Errors That Result in `START_FAILED`](#emr-troubleshoot-error-vpc-dns)
-+ [Cluster `Terminated with errors` and NameNode Fails to Start](#emr-troubleshoot-namenode-dns)
++ [Permissions errors](#emr-troubleshoot-error-denied)
++ [Errors that result in `START_FAILED`](#emr-troubleshoot-error-vpc-dns)
++ [Cluster `Terminated with errors` and NameNode fails to start](#emr-troubleshoot-namenode-dns)
 
-## Invalid Subnet Configuration<a name="emr-troubleshoot-error-gateway"></a>
+## Invalid subnet configuration<a name="emr-troubleshoot-error-gateway"></a>
 
  On the **Cluster Details** page, in the **Status** field, you see an error similar to the following:
 
 `The subnet configuration was invalid: Cannot find route to InternetGateway in main RouteTable rtb-id for vpc vpc-id.`
 
-To solve this problem, you must create an Internet Gateway and attach it to your VPC\. For more information, see [Adding an Internet Gateway to Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)\.
+To solve this problem, you must create an Internet Gateway and attach it to your VPC\. For more information, see [Adding an internet gateway to your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)\.
 
-Alternatively, verify that you have configured your VPC with **Enable DNS resolution** and **Enable DNS hostname support** enabled\. For more information, see [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
+Alternatively, verify that you have configured your VPC with **Enable DNS resolution** and **Enable DNS hostname support** enabled\. For more information, see [Using DNS with your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
 
 ## Missing DHCP Options Set<a name="emr-troubleshoot-error-dhcp"></a>
 
@@ -40,7 +40,7 @@ If you use the AWS GovCloud \(US\-West\) region, set domain\-name to **us\-gov\-
 
 For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\.
 
-## Permissions Errors<a name="emr-troubleshoot-error-denied"></a>
+## Permissions errors<a name="emr-troubleshoot-error-denied"></a>
 
 A failure in the `stderr` log for a step indicates that an Amazon S3 resource does not have the appropriate permissions\. This is a 403 error and the error looks like:
 
@@ -66,13 +66,13 @@ A few ways to troubleshoot this problem include:
   15/03/25 23:46:20 DEBUG http.wire: >> "Host: us-west-2.elasticmapreduce.s3.amazonaws.com[\r][\n]"
   ```
 
-## Errors That Result in `START_FAILED`<a name="emr-troubleshoot-error-vpc-dns"></a>
+## Errors that result in `START_FAILED`<a name="emr-troubleshoot-error-vpc-dns"></a>
 
 Before AMI 3\.7\.0, for VPCs where a hostname is specified, Amazon EMR maps the internal hostnames of the subnet with custom domain addresses as follows: `ip-X.X.X.X.customdomain.com.tld`\. For example, if the hostname was `ip-10.0.0.10` and the VPC has the domain name option set to customdomain\.com, the resulting hostname mapped by Amazon EMR would be `ip-10.0.1.0.customdomain.com`\. An entry is added in `/etc/hosts` to resolve the hostname to 10\.0\.0\.10\. This behavior is changed with AMI 3\.7\.0 and now Amazon EMR honors the DHCP configuration of the VPC entirely\. Previously, customers could also use a bootstrap action to specify a hostname mapping\.
 
 If you would like to preserve this behavior, you must provide the DNS and forward resolution setup you require for the custom domain\.
 
-## Cluster `Terminated with errors` and NameNode Fails to Start<a name="emr-troubleshoot-namenode-dns"></a>
+## Cluster `Terminated with errors` and NameNode fails to start<a name="emr-troubleshoot-namenode-dns"></a>
 
 When launching an EMR cluster in a VPC which makes use of a custom DNS domain name, your cluster may fail with the following error message in the console:
 

@@ -1,10 +1,10 @@
-# Architecture of SAML\-Enabled Single Sign\-On and Fine\-Grained Access Control<a name="emr-lf-architecture"></a>
+# Architecture of SAML\-enabled single sign\-on and fine\-grained access control<a name="emr-lf-architecture"></a>
 
 The following diagram illustrates the architecture of SAML\-enabled single sign\-on and fine\-grained access control with Lake Formation and Amazon EMR\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/EMR-saml-based-federation.png)
 
-1. An unauthenticated user uses the proxy agent to access EMR notebook or Zeppelin\. The user is redirected to your organization’s Identity Provider \(IdP\) sign\-on page\. 
+1. An unauthenticated user uses the proxy agent to access EMR notebook or Zeppelin\. The user is redirected to your organization's Identity Provider \(IdP\) sign\-on page\. 
 
 1. The IdP verifies the user's identity in your organization\.
 
@@ -18,8 +18,8 @@ The following diagram illustrates the architecture of SAML\-enabled single sign\
 
 1. The proxy agent enables successful user login\.
 
-1. When the user runs a Spark job by using the EMR notebooks or Zeppelin, the record server calls the secret agent to obtain temporary user credentials\. 
+1. When the user runs a Spark job by using the EMR Notebooks or Zeppelin, the record server calls the secret agent to obtain temporary user credentials\. 
 
 1. The record server reads and filters data from Amazon S3 based on the policies defined in Lake Formation\. 
 
-From the user's perspective, this process happens transparently\. The user starts at your organization's authentication page and ends up at the EMR notebooks or Zeppelin interface through the browser without ever having to supply any AWS credentials\.
+From the user's perspective, this process happens transparently\. The user starts at your organization's authentication page and ends up at the EMR Notebooks or Zeppelin interface through the browser without ever having to supply any AWS credentials\.

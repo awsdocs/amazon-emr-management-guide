@@ -1,8 +1,8 @@
-# Specify a Security Configuration for a Cluster<a name="emr-specify-security-configuration"></a>
+# Specify a security configuration for a cluster<a name="emr-specify-security-configuration"></a>
 
 You can specify encryption settings when you create a cluster by specifying the security configuration\. You can use the AWS Management Console or the AWS CLI\.
 
-## Specifying a Security Configuration Using the Console<a name="emr-specify-security-configuration-console"></a>
+## Specifying a security configuration using the console<a name="emr-specify-security-configuration-console"></a>
 
 When using the AWS console to create an EMR cluster, you choose the security configuration during **Step 4: Security** of the advanced options creation process\.
 
@@ -18,7 +18,7 @@ When using the AWS console to create an EMR cluster, you choose the security con
 
 1. Configure other security options as desired and choose **Create cluster**\.
 
-## Specifying a Security Configuration Using the CLI<a name="emr-specify-security-configuration-cli"></a>
+## Specifying a security configuration using the CLI<a name="emr-specify-security-configuration-cli"></a>
 
 When you use `aws emr create-cluster`, you can optionally apply a security configuration using `--security-configuration MySecConfig`, where `MySecConfig` is the name of the security configuration, as shown in the following example\. The `--release-label` specified must be 4\.8\.0 or later and the `--instance-type` can be any available\.
 

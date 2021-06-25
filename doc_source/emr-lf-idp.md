@@ -1,4 +1,4 @@
-# Configure Third\-Party Providers for SAML<a name="emr-lf-idp"></a>
+# Configure third\-party providers for SAML<a name="emr-lf-idp"></a>
 
 SAML 2\.0\-based federation for Amazon EMR with AWS Lake Formation has been tested with Auth0, Microsoft Active Directory Federation Services \(AD FS\), and Okta\. 
 
@@ -6,7 +6,7 @@ This topic provides information to help you configure the tested identity provid
 
 ## Auth0<a name="emr-lf-auth0"></a>
 
-The [AWS Integration in Auth0](https://auth0.com/docs/integrations/aws) page on the Auth0 documentation website describes how to set up single sign\-on \(SSO\) with the AWS Management Console\. It also includes a JavaScript example\.
+The [AWS integration in Auth0](https://auth0.com/docs/integrations/aws) page on the Auth0 documentation website describes how to set up single sign\-on \(SSO\) with the AWS Management Console\. It also includes a JavaScript example\.
 
 To enable federated access to Lake Formation, modify the following steps in the Auth0 documentation:
 + When providing an application callback URL, provide a temporary URL, as shown in the following example\. Update *public\-dns* with the actual DNS name for your master node after launching your cluster\. 
@@ -53,7 +53,7 @@ To enable federated access to Lake Formation, modify the following steps in the 
 
 ## Microsoft Active Directory Federation Services \(AD FS\)<a name="emr-lf-adfs"></a>
 
-The [AWS Federated Authentication with Active Directory Federation Services \(AD FS\)](https://aws.amazon.com/blogs/security/aws-federated-authentication-with-active-directory-federation-services-ad-fs/) AWS Security Blog shows how to configure AD FS and enable SAML federation with AWS\.
+The [AWS federated authentication with Active Directory Federation Services \(AD FS\)](https://aws.amazon.com/blogs/security/aws-federated-authentication-with-active-directory-federation-services-ad-fs/) AWS Security Blog shows how to configure AD FS and enable SAML federation with AWS\.
 
 To enable federated access to Lake Formation, modify the following steps in the blog post:
 + To add relying party trust, manually enter data about the relying party instead of importing metadata from the existing URL\. Select the **Permit all users to access this relying party** option\. For the endpoint trusted URL, provide a temporary URL, as shown in the following example\. Update *public\-dns* with the actual DNS name for your master node after launching your cluster\. 
@@ -61,11 +61,11 @@ To enable federated access to Lake Formation, modify the following steps in the 
   ```
   https://public-dns:8442/gateway/knoxsso/api/v1/websso?pac4jCallback=true&client_name=SAML2Client 
   ```
-+ In the step of **Edit Claim Issuance Policy**, customize the three rules `NameId`, `RoleSessionName`, and `Role` based on the values for the attribute elements in [Configure a Trust Relationship Between your IdP and Lake Formation](emr-lf-federation.md)\.
++ In the step of **Edit Claim Issuance Policy**, customize the three rules `NameId`, `RoleSessionName`, and `Role` based on the values for the attribute elements in [Configure a trust relationship between your IdP and Lake Formation](emr-lf-federation.md)\.
 
 ## Okta<a name="emr-lf-okta"></a>
 
-The [Set up a SAML Application in Okta](https://developer.okta.com/docs/guides/saml-application-setup/overview/) page on the Okta support site includes instructions on how to configure Okta by providing metadata about the relying party\.
+The [Set up a SAML application in Okta](https://developer.okta.com/docs/guides/saml-application-setup/overview/) page on the Okta support site includes instructions on how to configure Okta by providing metadata about the relying party\.
 
 To enable federated access to Lake Formation, modify the following steps from the Okta support site:
 + When configuring SAML, for the **Single sign\-on URL**, use the temporary URL, as shown in the following example\. Update the *public\-dns* with the actual DNS name for your master node after launching your cluster\.

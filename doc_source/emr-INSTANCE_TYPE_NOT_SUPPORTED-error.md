@@ -1,4 +1,4 @@
-# Instance Type Not Supported<a name="emr-INSTANCE_TYPE_NOT_SUPPORTED-error"></a>
+# Instance type not supported<a name="emr-INSTANCE_TYPE_NOT_SUPPORTED-error"></a>
 
 If you create a cluster, and it fails with the error message "The requested instance type *InstanceType* is not supported in the requested Availability Zone," it means that you created the cluster and specified an instance type for one or more instance groups that is not supported by Amazon EMR in the Region and Availability Zone where the cluster was created\. Amazon EMR may support an instance type in one Availability Zone within a Region and not another\. The subnet you select for a cluster determines the Availability Zone within the Region\.
 
@@ -14,5 +14,5 @@ If you create a cluster, and it fails with the error message "The requested inst
   For instructions on finding an AMI ID, see [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)\. To find a subnet ID, you can use the [describe\-subnets](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-subnets.html) command\.
 
 After you determine the instance types available, you can do any of the following:
-+ Create the cluster in the same Region and EC2 Subnet, and choose a different instance type with similar capabilities as your initial choice\. For a list of supported instance types, see [Supported Instance Types](emr-supported-instance-types.md)\. To compare capabilities of EC2 instance types, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
++ Create the cluster in the same Region and EC2 Subnet, and choose a different instance type with similar capabilities as your initial choice\. For a list of supported instance types, see [Supported instance types](emr-supported-instance-types.md)\. To compare capabilities of EC2 instance types, see [Amazon EC2 instance types](https://aws.amazon.com/ec2/instance-types/)\.
 + Choose a subnet for the cluster in an Availability Zone where the instance type is available and supported by Amazon EMR\. 

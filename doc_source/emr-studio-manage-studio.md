@@ -1,6 +1,6 @@
-# Manage and Monitor an Amazon EMR Studio<a name="emr-studio-manage-studio"></a>
+# Manage and monitor an Amazon EMR Studio<a name="emr-studio-manage-studio"></a>
 
-## View Studio Details<a name="emr-studio-get-studio-id"></a>
+## View Studio details<a name="emr-studio-get-studio-id"></a>
 
 ------
 #### [ Console ]
@@ -52,9 +52,9 @@ The following is an example return value for the `list-studios` command in JSON 
 
 ------
 
-## Monitor Amazon EMR Studio Actions<a name="emr-studio-monitor"></a>
+## Monitor Amazon EMR Studio actions<a name="emr-studio-monitor"></a>
 
-### View Amazon EMR Studio and API Activity<a name="emr-studio-cloudtrail-events"></a>
+### View Amazon EMR Studio and API activity<a name="emr-studio-cloudtrail-events"></a>
 
 Amazon EMR Studio is integrated with AWS CloudTrail, a service that provides a record of actions taken by an IAM user, by an IAM role, or by another AWS service in Amazon EMR Studio\. CloudTrail captures API calls for EMR Studio as events, which you can view using the CloudTrail console at [https://console\.aws\.amazon\.com/cloudtrail/](https://console.aws.amazon.com/cloudtrail/)\. 
 
@@ -103,11 +103,11 @@ The EMR Studio API event for DescribeStudio purposefully excludes a value for `r
 }
 ```
 
-### View Spark User and Job Activity<a name="emr-studio-monitor-spark-job-by-user"></a>
+### View Spark user and job activity<a name="emr-studio-monitor-spark-job-by-user"></a>
 
 To view Spark job activity by Amazon EMR Studio users, you can configure user impersonation on a cluster\. With user impersonation, each Spark job that is submitted from a Workspace is associated with the Studio user who ran the code\.
 
-When user impersonation is enabled, Amazon EMR creates an HDFS user directory on the cluster’s master node for each user that runs code in the Workspace\. For example, if user `studio-user-1@example.com` runs code, you can connect to the master node and see that `hadoop fs -ls /user` has a directory for `studio-user-1@example.com`\.
+When user impersonation is enabled, Amazon EMR creates an HDFS user directory on the cluster's master node for each user that runs code in the Workspace\. For example, if user `studio-user-1@example.com` runs code, you can connect to the master node and see that `hadoop fs -ls /user` has a directory for `studio-user-1@example.com`\.
 
 To set up Spark user impersonation, set the following properties in the following configuration classifications:
 + `core-site`
@@ -131,7 +131,7 @@ To set up Spark user impersonation, set the following properties in the followin
 ]
 ```
 
-To view history server pages, see [Diagnose Applications and Jobs with EMR Studio](emr-studio-debug.md)\. You can also connect to the master node of the cluster using SSH to view application web interfaces\. For more information, see [View Web Interfaces Hosted on Amazon EMR Clusters](emr-web-interfaces.md)\.
+To view history server pages, see [Diagnose applications and jobs with EMR Studio](emr-studio-debug.md)\. You can also connect to the master node of the cluster using SSH to view application web interfaces\. For more information, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\.
 
 ## Update an Amazon EMR Studio<a name="emr-studio-update-studio"></a>
 
@@ -188,4 +188,4 @@ aws emr delete-studio --studio-id <id-of-studio-to-delete>
 
 ------
 
-When you delete a Studio, EMR Studio deletes all of the user and group assignments associated with the Studio\. You might need to take extra steps to remove the notebook files associated with the Studio from Amazon S3\. For more information, see [Delete a Workspace and Notebook Files](emr-studio-configure-workspace.md#emr-studio-delete-workspace)\.
+When you delete a Studio, EMR Studio deletes all of the user and group assignments associated with the Studio\. You might need to take extra steps to remove the notebook files associated with the Studio from Amazon S3\. For more information, see [Delete a Workspace and Notebook files](emr-studio-configure-workspace.md#emr-studio-delete-workspace)\.

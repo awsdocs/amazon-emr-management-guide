@@ -1,17 +1,17 @@
-# Specifying the Amazon EBS Root Device Volume Size<a name="emr-custom-ami-boot-volume-size"></a>
+# Specifying the Amazon EBS root device volume size<a name="emr-custom-ami-boot-volume-size"></a>
 
 This option is available only with Amazon EMR version 4\.x and later\. You can specify the volume size from 10 GiB \(the default\) up to 100 GiB when you create a cluster using the AWS Management Console, the AWS CLI, or the Amazon EMR API\. This sizing applies only to the EBS root device volume and applies to all instances in the cluster\. It does not apply to storage volumes, which you specify separately for each instance type when you create your cluster\.
 
 For more information about Amazon EBS, see [Amazon EC2 root device volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html)\.
 
 **Note**  
-If you use the default AMI, Amazon EMR attaches General Purpose SSD \(gp2\) as the root device volume type\. A custom AMI may have a different root device volume type\. For more information, see [Specifying a Custom AMI](emr-custom-ami.md#emr-specify-custom-ami)\.
+If you use the default AMI, Amazon EMR attaches General Purpose SSD \(gp2\) as the root device volume type\. A custom AMI may have a different root device volume type\. However, the minimum root volume size for a custom AMI is also 10 GiB\. For more information, see [Specifying a custom AMI](emr-custom-ami.md#emr-specify-custom-ami)\.
 
 The cost of the EBS root device volume is pro\-rated by the hour, based on the monthly EBS charges for that volume type in the region where the cluster runs\. The same is true of storage volumes\. Charges are in GB, but you specify the size of the root volume in GiB, so you may want to consider this in your estimates \(1 GB is 0\.931323 GiB\)\. To estimate the charges associated with EBS root device volumes in your cluster, use the following formula:
 
-\($EBS GB­month\)×0\.931323÷30÷24×EMR\_EBSRootGiB×InstanceCount
+\($EBS GB/month\) \* 0\.931323 / 30 / 24 \* EMR\_EBSRootGiB \* InstanceCount
 
-For example, take a cluster that has a master node, a core node, and uses the base Amazon Linux AMI, with the default 10 GiB root device volume\. If the EBS cost in the region is USD$0\.10/GB\-Month, that works out to be approximately $0\.00129 per instance per hour and $0\.00258 per hour for the cluster \($0\.10 GB\-month divided by 30 days, divided by 24 hours, multiplied by 10 GB, multiplied by 2 cluster instances\)\.
+For example, take a cluster that has a master node, a core node, and uses the base Amazon Linux AMI, with the default 10 GiB root device volume\. If the EBS cost in the region is USD $0\.10/GB/month, that works out to be approximately $0\.00129 per instance per hour and $0\.00258 per hour for the cluster \($0\.10/GB/month divided by 30 days, divided by 24 hours, multiplied by 10 GB, multiplied by 2 cluster instances\)\.
 
 **To specify the EBS root device volume size using the console**
 

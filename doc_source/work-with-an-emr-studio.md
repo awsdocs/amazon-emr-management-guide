@@ -4,7 +4,7 @@ After your EMR Studio has been set up and configured, you can log directly into 
 
 **Topics**
 + [Workspaces in Amazon EMR Studio](emr-studio-configure-workspace.md)
-+ [Attach a Cluster to Your Workspace](emr-studio-create-use-clusters.md)
-+ [Link Git\-Based Repositories to an EMR Studio Workspace](emr-studio-git-repo.md)
-+ [Diagnose Applications and Jobs with EMR Studio](emr-studio-debug.md)
-+ [Install and Use Kernels and Libraries](emr-studio-install-libraries-and-kernels.md)
++ [Attach a cluster to your Workspace](emr-studio-create-use-clusters.md)
++ [Link Git\-based repositories to an EMR Studio Workspace](emr-studio-git-repo.md)
++ [Diagnose applications and jobs with EMR Studio](emr-studio-debug.md)
++ [Install and use kernels and libraries](emr-studio-install-libraries-and-kernels.md)

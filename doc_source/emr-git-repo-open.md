@@ -1,4 +1,4 @@
-# Use Git Repositories in a Notebook<a name="emr-git-repo-open"></a>
+# Use Git repositories in a Notebook<a name="emr-git-repo-open"></a>
 
 You can choose to **Open in JupyterLab** or **Open in Jupyter** when you open a notebook\. 
 

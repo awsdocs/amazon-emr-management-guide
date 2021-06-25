@@ -1,4 +1,4 @@
-# Link or Unlink a Git\-based Repository<a name="emr-git-repo-link"></a>
+# Link or unlink a Git\-based repository<a name="emr-git-repo-link"></a>
 
 **To link a Git\-based repository to an EMR notebook**
 
@@ -31,9 +31,9 @@ Or
 **Note**  
 Linking a Git repository to a notebook clones the remote repository to your local Jupyter notebook\. Unlinking the Git repository from a notebook only disconnects the notebook from the remote repository but does not delete the local Git repository\. 
 
-## Understanding Repository Status<a name="emr-managed-notebooks-repository-status"></a>
+## Understanding repository status<a name="emr-managed-notebooks-repository-status"></a>
 
-A Git repository may have any of the following status in the repository list\. For more information about linking EMR notebooks with Git repositories, see [Link or Unlink a Git\-based Repository](#emr-git-repo-link)\.
+A Git repository may have any of the following status in the repository list\. For more information about linking EMR notebooks with Git repositories, see [Link or unlink a Git\-based repository](#emr-git-repo-link)\.
 
 
 | Status | Meaning | 
