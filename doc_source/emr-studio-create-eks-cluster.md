@@ -90,7 +90,7 @@ aws emr-containers create-managed-endpoint \
 --virtual-cluster-id <0b0qvauoy3ch1nqodxxxxxxxx> \
 --name <example-endpoint-name> \
 --execution-role-arn arn:aws:iam::<aws-account-id>:role/<EKSClusterRole> \
---release-label <emr-6.2.0-latest>
+--release-label <emr-6.2.0-latest> \
 --certificate-arn <arn:aws:acm:region:123xxxxxxxxx:certificate/12345678-xxxx-xxxx-xxxx-123456789012>
 ```
 
