@@ -23,12 +23,14 @@ Use the following instructions to configure privately\-hosted repositories for E
 **Prerequisites**
 
 Before you configure a privately\-hosted Git repository for EMR Notebooks, you must have the following:
-+ An Amazon S3 location where files for your EMR notebook will be saved\.
++ An Amazon S3 Control location where files for your EMR notebook will be saved\.
 
 **To configure one or more privately\-hosted Git repositories for EMR Notebooks**
 
 1. Create a configuration file using the provided template\. Include the following values for each Git server that you want to specify in your configuration:
-   + **`DnsServerIpV4`**\- The IPv4 address of your DNS server\.
+   + **`DnsServerIpV4`**\- The IPv4 address of your DNS server\. If you provide values for both `DnsServerIpV4` and `GitServerIpV4List`, the value for `DnsServerIpV4` takes precedence and will be used to resolve your `GitServerDnsName`\.
+**Note**  
+To use privately\-hosted Git repositories, your DNS server must allow inbound access from EMR Notebooks\. We strongly recommend that you secure your DNS server against other, unauthorized access\.
    + **`GitServerDnsName`** \- The DNS name of your Git server\. For example `"git.example.com"`\.
    + **`GitServerIpV4List`** \- A list of IPv4 addresses that belong to your Git server\(s\)\.
 
@@ -62,6 +64,6 @@ Before you configure a privately\-hosted Git repository for EMR Notebooks, you m
 
 1. Upload the configuration file into your designated Amazon S3 storage location in a folder called `life-cycle-configuration`\. For example, if your default S3 location is `s3://DOC-EXAMPLE-BUCKET/notebooks`, your configuration file should be located at `s3://DOC-EXAMPLE-BUCKET/notebooks/life-cycle-configuration/configuration.json`\.
 **Important**  
-We strongly recommend that you restrict access to your `life-cycle-configuration` folder to only your EMR Notebooks administrators, and to the service role for EMR Notebooks\. For instructions, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)\.
+We strongly recommend that you restrict access to your `life-cycle-configuration` folder to only your EMR Notebooks administrators, and to the service role for EMR Notebooks\. You should also secure `configuration.json` against unauthorized access\. For instructions, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html) or [Security Best Practices for Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html)\.
 
    For upload instructions, see [Creating a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html#create-folder) and [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the *Amazon Simple Storage Service User Guide*\.

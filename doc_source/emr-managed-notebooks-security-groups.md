@@ -42,5 +42,5 @@ To link a Git repository to your notebook, the security group for the EMR notebo
   None
 + Outbound
 
-  Allow the notebook to route traffic to the internet via the cluster, as the following example demonstrates:    
+  Allow the notebook to route traffic to the internet via the cluster, as the following example demonstrates\. The value 0\.0\.0\.0/0 is used for example purposes\. You can modify this rule to specify the IP address\(es\) for your Git\-based repositories\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html)

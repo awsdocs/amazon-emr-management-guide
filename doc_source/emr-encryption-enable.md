@@ -46,6 +46,8 @@ The procedure below describes how to add the default EMR service role, `EMR_Defa
 
 1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
 
+1. Choose **Customer managed keys** in the left sidebar\.
+
 1. Select the alias of the CMK to modify\.
 
 1. On the key details page under **Key Users**, choose **Add**\.
@@ -58,7 +60,7 @@ The procedure below describes how to add the default EMR service role, `EMR_Defa
 
 When using a security configuration, you must specify a different provider class name for local disk encryption and Amazon S3 encryption\.
 
-When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
+When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
 
 The encryption algorithm used for custom encryption materials must be **AES/GCM/NoPadding**\.
 
@@ -123,7 +125,7 @@ public class MyEncryptionMaterialsProviders implements EncryptionMaterialsProvid
 
 With Amazon EMR release version 4\.8\.0 or later, you have two options for specifying artifacts for encrypting data in transit using a security configuration: 
 + You can manually create PEM certificates, include them in a \.zip file, and then reference the \.zip file in Amazon S3\.
-+ You can implement a custom certificate provider as a Java class\. You specify the JAR file of the application in Amazon S3, and then provide the full class name of the provider as declared in the application\. The class must implement the [TLSArtifactsProvider](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/TLSArtifactsProvider.html) interface available beginning with the AWS SDK for Java version 1\.11\.0\.
++ You can implement a custom certificate provider as a Java class\. You specify the JAR file of the application in Amazon S3, and then provide the full class name of the provider as declared in the application\. The class must implement the [TLSArtifactsProvider](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/spi/security/TLSArtifactsProvider.html) interface available beginning with the AWS SDK for Java version 1\.11\.0\.
 
 Amazon EMR automatically downloads artifacts to each node in the cluster and later uses them to implement the open\-source, in\-transit encryption features\. For more information about available options, see [Encryption in transit](emr-data-encryption-options.md#emr-encryption-intransit)\.
 
@@ -140,7 +142,9 @@ When you specify a \.zip file for in\-transit encryption, the security configura
 | certificateChain\.pem | Required | Certificate chain | 
 | trustedCertificates\.pem | Optional | Required if the provided certificate is not signed by either the Java default trusted root certification authority \(CA\) or an intermediate CA that can link to the Java default trusted root CA\. The Java default trusted root CAs can be found in jre/lib/security/cacerts\. | 
 
-You likely want to configure the private key PEM file to be a wildcard certificate that enables access to the Amazon VPC domain in which your cluster instances reside\. For example, if your cluster resides in us\-east\-1 \(N\. Virginia\), you could specify a common name in the certificate configuration that allows access to the cluster by specifying `CN=*.ec2.internal` in the certificate subject definition\. If your cluster resides in us\-west\-2 \(Oregon\), you could specify `CN=*.us-west-2.compute.internal`\. For more information about EMR cluster configuration within Amazon VPC, see [Select an Amazon VPC subnet for the cluster](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-vpc-subnet.html)\. 
+You likely want to configure the private key PEM file to be a wildcard certificate that enables access to the Amazon VPC domain in which your cluster instances reside\. For example, if your cluster resides in us\-east\-1 \(N\. Virginia\), you could specify a common name in the certificate configuration that allows access to the cluster by specifying `CN=*.ec2.internal` in the certificate subject definition\. If your cluster resides in us\-west\-2 \(Oregon\), you could specify `CN=*.us-west-2.compute.internal`\.
+
+If the provided PEM file in the encryption artifact doesn't have a wildcard character in the CN for the domain, you must change the value of `hadoop.ssl.hostname.verifier` to `ALLOW_ALL`\. This is done with the `core-site` classification when submitting configurations to a cluster or by adding this value in the `core-site.xml` file\. This change is required because the default hostname verifier won't accept a hostname without the wildcard, resulting in an error\. For more information about EMR cluster configuration within Amazon VPC, see [Select an Amazon VPC subnet for the cluster](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-vpc-subnet.html)\.
 
 The following example demonstrates how to use [OpenSSL](https://www.openssl.org/) to generate a self\-signed X\.509 certificate with a 1024\-bit RSA private key\. The key allows access to the issuer's Amazon EMR cluster instances in the us\-west\-2 \(Oregon\) region as specified by the `*.us-west-2.compute.internal` domain name as the common name\.
 

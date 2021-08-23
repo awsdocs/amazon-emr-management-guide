@@ -1,6 +1,6 @@
 # Instance purchasing options<a name="emr-instance-purchasing-options"></a>
 
-When you set up a cluster, you choose a purchasing option for EC2 instances\. You can choose On\-Demand Instances, Spot Instances, or both\. Prices vary based on the instance type and Region\. For current pricing, see [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing)\.
+When you set up a cluster, you choose a purchasing option for EC2 instances\. You can choose On\-Demand Instances, Spot Instances, or both\. Prices vary based on the instance type and Region\. The Amazon EMR price is in addition to the Amazon EC2 price \(the price for the underlying servers\) and Amazon EBS price \(if attaching Amazon EBS volumes\)\. For current pricing, see [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing)\.
 
 Your choice to use instance groups or instance fleets in your cluster determines how you can change instance purchasing options while a cluster is running\. If you choose uniform instance groups, you can only specify the purchasing option for an instance group when you create it, and the instance type and purchasing option apply to all EC2 instances in each instance group\. If you choose instance fleets, you can change purchasing options after you create the instance fleet, and you can mix purchasing options to fulfill a target capacity that you specify\. For more information about these configurations, see [Create a cluster with instance fleets or uniform instance groups](emr-instance-group-configuration.md)\.
 
@@ -26,7 +26,7 @@ Amazon EMR does not support setting the `dedicated` attribute on individual inst
 
 ## Spot Instances<a name="emr-spot-instances"></a>
 
-Spot Instances in Amazon EMR provide an option for you to purchase Amazon EC2 instance capacity at a reduced cost as compared to On\-Demand purchasing\. The disadvantage of using Spot Instances is that instances may terminate unpredictably as prices fluctuate\. For more information about when using Spot Instances may be appropriate for your application, see [When should you use Spot Instances?](emr-plan-instances-guidelines.md#emr-plan-spot-instances)\.
+Spot Instances in Amazon EMR provide an option for you to purchase Amazon EC2 instance capacity at a reduced cost as compared to On\-Demand purchasing\. The disadvantage of using Spot Instances is that instances may terminate if Spot capacity becomes unavailable for the instance type you are running\. For more information about when using Spot Instances may be appropriate for your application, see [When should you use Spot Instances?](emr-plan-instances-guidelines.md#emr-plan-spot-instances)\.
 
 When Amazon EC2 has unused capacity, it offers EC2 instances at a reduced cost, called the *Spot price*\. This price fluctuates based on availability and demand, and is established by Region and Availability Zone\. When you choose Spot Instances, you specify the maximum Spot price that you're willing to pay for each EC2 instance type\. When the Spot price in the cluster's Availability Zone is below the maximum Spot price specified for that instance type, the instances launch\. While instances run, you're charged at the current Spot price *not your maximum Spot price*\.
 

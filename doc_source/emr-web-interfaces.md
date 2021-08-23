@@ -40,6 +40,9 @@ There are two remaining options for accessing web interfaces on the master node 
 + Option 1 \(recommended for more technical users\): Use an SSH client to connect to the master node, configure SSH tunneling with local port forwarding, and use an Internet browser to open web interfaces hosted on the master node\. This method allows you to configure web interface access without using a SOCKS proxy\.
 + Option 2 \(recommended for new users\): Use an SSH client to connect to the master node, configure SSH tunneling with dynamic port forwarding, and configure your Internet browser to use an add\-on such as FoxyProxy for Firefox or SwitchyOmega for Chrome to manage your SOCKS proxy settings\. This method lets you automatically filter URLs based on text patterns and limit the proxy settings to domains that match the form of the master node's DNS name\. For more information about how to configure FoxyProxy for Firefox and Google Chrome, see [Option 2, part 2: Configure proxy settings to view websites hosted on the master node](emr-connect-master-node-proxy.md)\.
 
+**Note**  
+If you modify the port where an application runs via cluster configuration, the hyperlink to the port will not update in the Amazon EMR console\. This is because the console doesn't have the functionality to read `server.port` configuration\.
+
 With Amazon EMR version 5\.25\.0 or later, you can access Spark history server UI from the console without setting up a web proxy through an SSH connection\. For more information, see [One\-click access to persistent Spark history server](https://docs.aws.amazon.com/emr/latest/ManagementGuide/app-history-spark-UI.html)\.
 
 **Topics**

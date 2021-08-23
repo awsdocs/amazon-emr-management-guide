@@ -6,9 +6,9 @@ Using a proxy management add\-on allows you to automatically filter URLs based o
 
 Before you begin, you need the public DNS name of the master node and your key pair private key file\. For information about how to locate the master public DNS name, see [To retrieve the public DNS name of the master node using the Amazon EMR console](emr-connect-master-node-ssh.md#public-dns-name-master)\. For more information about accessing your key pair, see [Amazon EC2 key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*\. For more information about the sites you might want to view on the master node, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\.
 
-## Set up an SSH tunnel to the master node using dynamic port forwarding on Linux, Unix, and Mac OS X<a name="emr-ssh-tunnel-linux"></a><a name="emr-ssh-tunnel-unix"></a>
+## Set up an SSH tunnel to the master node using dynamic port forwarding with OpenSSH<a name="emr-ssh-tunnel-linux"></a><a name="emr-ssh-tunnel-unix"></a>
 
-**To set up an SSH tunnel using dynamic port forwarding on Linux, Unix, and Mac OS X**
+**To set up an SSH tunnel using dynamic port forwarding with OpenSSH**
 
 1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 
@@ -76,7 +76,7 @@ The socks command automatically configures dynamic port forwarding on local port
 
    For more information on using Amazon EMR commands in the AWS CLI, see [https://docs.aws.amazon.com/cli/latest/reference/emr](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
 
-## Set up an SSH tunnel to the master node using dynamic port forwarding on Windows<a name="emr-ssh-tunnel-win"></a>
+## Set up an SSH tunnel to the master node using PuTTY<a name="emr-ssh-tunnel-win"></a>
 
 Windows users can use an SSH client such as PuTTY to create an SSH tunnel to the master node\. Before connecting to the Amazon EMR master node, you should download and install PuTTY and PuTTYgen\. You can download these tools from the [PuTTY download page](http://www.chiark.greenend.org.uk/~sgtatham/putty/)\.
 
@@ -84,7 +84,7 @@ PuTTY does not natively support the key pair private key file format \(`.pem`\) 
 
 For more information about converting your key, see [Converting your private key using PuTTYgen](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) in the *Amazon EC2 User Guide for Linux Instances*\.<a name="emr-ssh-tunnel-putty"></a>
 
-**To set up an SSH tunnel using dynamic port forwarding on Windows**
+**To set up an SSH tunnel using dynamic port forwarding using PuTTY**
 
 1. Ensure you've allowed inbound SSH traffic\. For instructions, see [Before you connect: Authorize inbound traffic](emr-connect-ssh-prereqs.md)\.
 

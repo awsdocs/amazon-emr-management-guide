@@ -6,7 +6,7 @@ Amazon EBS works differently within Amazon EMR than it does with regular Amazon 
 
 Other caveats for using Amazon EBS with EMR clusters are:
 + You can't snapshot an EBS volume and then restore it within Amazon EMR\. To create reusable custom configurations, use a custom AMI \(available in Amazon EMR version 5\.7\.0 and later\)\. For more information, see [Using a custom AMI](emr-custom-ami.md)\.
-+ An encrypted EBS root device volume is supported only when using a custom AMI\. For more information, see [Creating a custom AMI with an encrypted Amazon EBS root device volume](emr-custom-ami.md#emr-custom-ami-encrypted)\. 
++ An encrypted EBS root device volume is supported only when using a custom AMI\. For more information, see [Creating a custom AMI with an encrypted Amazon EBS root device volume](emr-specify-custom-ami.md#emr-custom-ami-encrypted)\. 
 + If you apply tags using the Amazon EMR API, those operations are applied to EBS volumes\.
 + There is a limit of 25 volumes per instance\.
 + The EBS volumes on core nodes cannot be less than 5 GB\.

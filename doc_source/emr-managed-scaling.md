@@ -1,6 +1,9 @@
 # Using EMR managed scaling in Amazon EMR<a name="emr-managed-scaling"></a>
 
-With Amazon EMR versions 5\.30\.0 and later \(except for Amazon EMR 6\.0\.0\), you can enable EMR managed scaling to automatically increase or decrease the number of instances or units in your cluster based on workload\. EMR continuously evaluates cluster metrics to make scaling decisions that optimize your clusters for cost and speed\. This feature is available for clusters composed of either instance groups or instance fleets\.
+**Important**  
+We strongly recommend that you use the latest Amazon EMR releases for managed scaling\. In earlier Amazon EMR versions, you could experience intermittent application failures or delay in scaling\. This issue was fixed in Amazon EMR 5\.33\.0 and 6\.3\.0\.
+
+With Amazon EMR versions 5\.30\.0 and later \(except for Amazon EMR 6\.0\.0\), you can enable EMR managed scaling\. Managed scaling lets you automatically increase or decrease the number of instances or units in your cluster based on workload\. EMR continuously evaluates cluster metrics to make scaling decisions that optimize your clusters for cost and speed\. Managed scaling is available for clusters composed of either instance groups or instance fleets\.
 
 You need to configure the following parameters for managed scaling\. The limit only applies to the core and task nodes\. The master node cannot be scaled after initial configuration\.
 + **Minimum** \(`MinimumCapacityUnits`\) – The lower boundary of allowed EC2 capacity in a cluster\. It is measured through virtual central processing unit \(vCPU\) cores or instances for instance groups\. It is measured through units for instance fleets\. 

@@ -6,7 +6,7 @@ For best performance, you should launch the cluster in the same region as your d
 
 If you plan to associate an Amazon EC2 key pair with the cluster \(required for using SSH to log on to the master node\), the key pair must be created in the same region as the cluster\. Similarly, the security groups that Amazon EMR creates to manage the cluster are created in the same region as the cluster\. 
 
-If you signed up for an AWS account on or after May 17, 2017, the default region when you access a resource from the AWS Management Console is US East \(Ohio\) \(us\-east\-2\); for older accounts, the default region is either US West \(Oregon\) \(us\-west\-2\) or US East \(N\. Virginia\) \(us\-east\-1\)\. For more information, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\. 
+If you signed up for an AWS account on or after May 17, 2017, the default Region when you access a resource from the AWS Management Console is US East \(Ohio\) \(us\-east\-2\); for older accounts, the default Region is either US West \(Oregon\) \(us\-west\-2\) or US East \(N\. Virginia\) \(us\-east\-1\)\. For more information, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\. 
 
 Some AWS features are available only in limited regions\. For example, Cluster Compute instances are available only in the US East \(N\. Virginia\) region, and the Asia Pacific \(Sydney\) region supports only Hadoop 1\.0\.3 and later\. When choosing a region, check that it supports the features you want to use\.
 

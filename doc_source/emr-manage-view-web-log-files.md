@@ -16,11 +16,11 @@ The following table lists some of the log files you'll find on the master node\.
 
 | Location | Description | 
 | --- | --- | 
-|  /mnt/var/log/bootstrap\-actions  | Logs written during the processing of the bootstrap actions\. | 
+|  /emr/instance\-controller/log/bootstrap\-actions  | Logs written during the processing of the bootstrap actions\. | 
 |  /mnt/var/log/hadoop\-state\-pusher  | Logs written by the Hadoop state pusher process\. | 
-|  /mnt/var/log/instance\-controller \(Amazon EMR 4\.6\.0 and earlier\) /emr/instance\-controller \(Amazon EMR 4\.7\.0 and later\)  | Instance controller logs\. | 
-|  /mnt/var/log/instance\-state  | Instance state logs\. These contain information about the CPU, memory state, and garbage collector threads of the node\. | 
-|  /mnt/var/log/service\-nanny \(Amazon EMR 4\.6\.0 and earlier\) /emr/service\-nanny \(Amazon EMR 4\.7\.0 and later\)  | Logs written by the service nanny process\. | 
+|  /emr/instance\-controller/log  | Instance controller logs\. | 
+|  /emr/instance\-state  | Instance state logs\. These contain information about the CPU, memory state, and garbage collector threads of the node\. | 
+|  /emr/service\-nanny  | Logs written by the service nanny process\. | 
 |  /mnt/var/log/*application*  | Logs specific to an application such as Hadoop, Spark, or Hive\. | 
 |  /mnt/var/log/hadoop/steps/*N*  | Step logs that contain information about the processing of the step\. The value of *N* indicates the stepId assigned by Amazon EMR\. For example, a cluster has two steps: `s-1234ABCDEFGH` and `s-5678IJKLMNOP`\. The first step is located in `/mnt/var/log/hadoop/steps/s-1234ABCDEFGH/` and the second step in `/mnt/var/log/hadoop/steps/s-5678IJKLMNOP/`\.  The step logs written by Amazon EMR are as follows\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-manage-view-web-log-files.html)  | 
 

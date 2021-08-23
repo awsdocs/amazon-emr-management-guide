@@ -7,14 +7,14 @@ The instance fleet configuration for Amazon EMR clusters lets you select a wide 
 
 In an instance fleet configuration, you specify a *target capacity* for [On\-Demand Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html) and [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html) within each fleet\. When the cluster launches, Amazon EMR provisions instances until the targets are fulfilled\. When EC2 reclaims a Spot Instance in a running cluster because of a price increase or instance failure, Amazon EMR tries to replace the instance with any of the instance types that you specify\. This makes it easier to regain capacity during a spike in Spot pricing\. 
 
-You can specify a maximum of five EC2 instance types per fleet for Amazon EMR to use when fulfilling the targets, or a maximum of 30 EC2 instance types per fleet when you use the [allocation strategy](#emr-instance-fleet-allocation-strategy) option for On\-Demand and Spot Instances\. 
+You can specify a maximum of five EC2 instance types per fleet for Amazon EMR to use when fulfilling the targets, or a maximum of 30 EC2 instance types per fleet when you create a cluster using the AWS CLI or Amazon EMR API and an [allocation strategy](#emr-instance-fleet-allocation-strategy) for On\-Demand and Spot Instances\. 
 
 You can also select multiple subnets for different Availability Zones\. When Amazon EMR launches the cluster, it looks across those subnets to find the instances and purchasing options you specify\. If Amazon EMR detects an AWS large\-scale event in one or more of the Availability Zones, Amazon EMR automatically attempts to route traffic away from the impacted Availability Zones and tries to launch clusters in alternate Availability Zones according to your selections\.
 
 ## **Considerations**<a name="emr-key-feature-summary"></a>
 
 Consider the following items when you use instance fleets with Amazon EMR\.
-+ You can have one instance fleet, and only one, per node type \(master, core, task\)\. You can specify up to five EC2 instance types specified for each fleet \(or a maximum of 30 types per instance fleet when you use [Allocation strategy for instance fleets](#emr-instance-fleet-allocation-strategy)\)\. 
++ You can have one instance fleet, and only one, per node type \(master, core, task\)\. You can specify up to five EC2 instance types specified for each fleet \(or a maximum of 30 types per instance fleet when you create a cluster using the AWS CLI or Amazon EMR API and an [Allocation strategy for instance fleets](#emr-instance-fleet-allocation-strategy)\)\. 
 + Amazon EMR chooses any or all of the specified EC2 instance types to provision with both Spot and On\-Demand purchasing options\.
 + You can establish target capacities for Spot and On\-Demand Instances for the core fleet and task fleet\. Use vCPU or a generic unit assigned to each EC2 instance that counts toward the targets\. Amazon EMR provisions instances until each target capacity is totally fulfilled\. For the master fleet, the target is always one\.
 + You can choose one subnet \(Availability Zone\) or a range\. If you choose a range, Amazon EMR provisions capacity in the Availability Zone that is the best fit\.
@@ -24,6 +24,7 @@ Consider the following items when you use instance fleets with Amazon EMR\.
   + For each fleet, define a timeout period for provisioning Spot Instances\. If Amazon EMR can't provision Spot capacity, you can terminate the cluster or switch to provisioning On\-Demand capacity instead\.
 + For each fleet, you can choose to apply an allocation strategy \- lowest\-price for On\-Demand Instances; capacity\-optimized for Spot Instances\.
 + For each fleet with On\-Demand `allocation strategy - lowest-price`, you can choose to apply capacity reservation options\.
++ Check your subnet size before launching your cluster\. When you provision a cluster with a task fleet and there aren't enough IP addresses available in the corresponding subnet, the fleet will go into a suspended state instead of terminating the cluster with an error\. To avoid this issue, we recommend increasing the number of IP addresses in your subnets\.
 
 ## Instance fleet options<a name="emr-instance-fleet-options"></a>
 
@@ -38,7 +39,7 @@ When you use the console, the vCPUs of the EC2 instance type are used as the cou
 **Important**  
 When you choose an instance type using the AWS Management Console, the number of **vCPU** shown for each **Instance type** is the number of YARN vcores for that instance type, not the number of EC2 vCPUs for that instance type\. For more information on the number of vCPUs for each instance type, see [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)\.
 
-For each fleet, you specify up to five EC2 instance types\. If you use an [Allocation strategy for instance fleets](#emr-instance-fleet-allocation-strategy), you can specify up to 30 EC2 instance types per instance fleet\. Amazon EMR chooses any combination of these EC2 instance types to fulfill your target capacities\. Because Amazon EMR wants to fill target capacity completely, an overage might happen\. For example, if there are two unfulfilled units, and Amazon EMR can only provision an instance with a count of five units, the instance still gets provisioned, meaning that the target capacity is exceeded by three units\. 
+For each fleet, you specify up to five EC2 instance types\. If you use an [Allocation strategy for instance fleets](#emr-instance-fleet-allocation-strategy) and create a cluster using the AWS CLI or the Amazon EMR API, you can specify up to 30 EC2 instance types per instance fleet\. Amazon EMR chooses any combination of these EC2 instance types to fulfill your target capacities\. Because Amazon EMR wants to fill target capacity completely, an overage might happen\. For example, if there are two unfulfilled units, and Amazon EMR can only provision an instance with a count of five units, the instance still gets provisioned, meaning that the target capacity is exceeded by three units\. 
 
 If you reduce the target capacity to resize a running cluster, Amazon EMR attempts to complete application tasks and terminates instances to meet the new target\. For more information, see [Terminate at task completion](emr-scaledown-behavior.md#emr-scaledown-terminate-task)\. Amazon EMR has a 60\-minute timeout for completing a resize operation\. In some cases, a node may still have tasks running after 60 minutes, and Amazon EMR reports that the resize operation was successful and that the new target was not met\.
 
@@ -66,8 +67,8 @@ Because the master instance fleet is only a single instance, its configuration i
 
 ## Allocation strategy for instance fleets<a name="emr-instance-fleet-allocation-strategy"></a>
 
-With Amazon EMR versions 5\.12\.1 and later, you can use the allocation strategy option with On\-Demand and Spot Instances for each cluster node\. When you use the allocation strategy option, you can specify a maximum of 30 EC2 instance types per fleet, as opposed to the five allowed when you use the default EMR cluster instance fleet configuration\. We recommend that you use the allocation strategy option for faster cluster provisioning, more accurate Spot Instance allocation, and fewer Spot Instance interruptions\.
-+ **On\-Demand Instances** use a lowest\-price strategy, which launches the lowest\-priced instances first\. When you launch On\-Demand Instances, you have the option to use open or targeted capacity reservations in your accounts\. You can use open capacity reservations for master, core and task nodes\. For more information, see [Use capacity reservations with instance fleets](on-demand-capacity-reservations.md)\.
+With Amazon EMR versions 5\.12\.1 and later, you can use the allocation strategy option with On\-Demand and Spot Instances for each cluster node\. When you create a cluster using the AWS CLI or Amazon EMR API and an allocation strategy option, you can specify a maximum of 30 EC2 instance types per fleet, as opposed to the five allowed when you use the default EMR cluster instance fleet configuration\. We recommend that you use the allocation strategy option for faster cluster provisioning, more accurate Spot Instance allocation, and fewer Spot Instance interruptions\.
++ **On\-Demand Instances** use a lowest\-price strategy, which launches the lowest\-priced instances first\. When you launch On\-Demand Instances, you have the option to use open or targeted capacity reservations in your accounts\. You can use open capacity reservations for master, core and task nodes\. You may experience insufficient capacity when using On\-Demand Instances with allocation strategy for instance fleets\. We recommend specifying a larger number of instance types to diversify and reduce the chance of experiencing insufficient capacity\. For more information, see [Use capacity reservations with instance fleets](on-demand-capacity-reservations.md)\.
 + **Spot Instances** use a capacity\-optimized strategy, which launches Spot Instances from Spot Instance pools that have optimal capacity for the number of instances that are launching\.
 
 Using the allocation strategy option requires several IAM permissions that are automatically included in the default EMR service role and EMR managed policy \(EMR\_DefaultRole and AmazonEMRServicePolicy\_v2\)\. If you use a custom service role or managed policy for your cluster, you must add these permissions before you create the cluster\. For more information, see [Required IAM permissions to use an allocation strategy](#create-cluster-allocation-policy)\.
@@ -193,8 +194,19 @@ If you set a **Defined duration**, special defined duration pricing applies\. Fo
 1. Choose **Create Cluster**\.
 
 ## Use the CLI to configure instance fleets<a name="emr-instance-fleet-cli"></a>
++ To create and launch a cluster with instance fleets, use the `create-cluster` command along with `--instance-fleet` parameters\.
++ To get configuration details about the instance fleets in a cluster, use the `list-instance-fleets` command\.
++ To add multiple custom Amazon Linux AMIs to a cluster you’re creating, use the `CustomAmiId` option with each `InstanceType` specification\. You can configure instance fleet nodes with multiple instance types and multiple custom AMIs to fit your requirements\. See [Create a cluster with the instance fleets configuration](#create-cluster-instance-fleet-cli)\. 
++ To make changes to the target capacity for an instance fleet, use the `modify-instance-fleet` command\.
++ To add a task instance fleet to a cluster that doesn't already have one, use the `add-instance-fleet` command\.
++ Multiple custom AMIs can be added to the task instance fleet using the CustomAmiId argument with the add\-instance\-fleet command\. See [Create a cluster with the instance fleets configuration](#create-cluster-instance-fleet-cli)\.
++ To use the allocation strategy option when creating an instance fleet, update the service role to include the example policy document in the following section\.
++ To use the capacity reservations options when creating an instance fleet with On\-Demand allocation strategy, update the service role to include the example policy document in the following section\.
++ The instance fleets are automatically included in the default EMR service role and EMR managed policy \(EMR\_DefaultRole and AmazonEMRServicePolicy\_v2\)\. If you are using a custom service role or custom managed policy for your cluster, you must add the new permissions for allocation strategy in the following section\.
 
-To create and launch a cluster with instance fleets, use the `create-cluster` command along with `--instance-fleet` parameters\. The following examples demonstrate how to use the `create-cluster` command with a variety of options that you can combine\.
+## Create a cluster with the instance fleets configuration<a name="create-cluster-instance-fleet-cli"></a>
+
+The following examples demonstrate `create-cluster` commands with a variety of options that you can combine\.
 
 **Note**  
 If you have not previously created the default EMR service role and EC2 instance profile, use `aws emr create-default-roles` to create them before using the `create-cluster` command\.
@@ -261,6 +273,21 @@ LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=60,TimeoutActio
 InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5,\
 EbsConfiguration={EbsOptimized=true,EbsBlockDeviceConfigs=[{VolumeSpecification={VolumeType=gp2,\
 SizeIn GB=100}},{VolumeSpecification={VolumeType=io1,SizeInGB=100,Iop s=100},VolumesPerInstance=4}]}}']
+```
+
+**Example Multiple custom AMIs, multiple instance types, on\-demand master, on\-demand core**  
+
+```
+aws emr create-cluster —instance-fleets 
+InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge, CustomAmiId=ami-123456},{InstanceType=m6g.xlarge, CustomAmiId=ami-234567}'] 
+InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,CustomAmiId=ami-123456},{InstanceType=m6g.xlarge, CustomAmiId=ami-234567}']
+```
+
+**Example Add a task node to a running cluster with multiple instance types and multiple custom AMIs**  
+
+```
+aws emr add-instance-fleet —cluster-id j-123456 —instance-fleet 
+InstanceFleetType=Task,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,CustomAmiId=ami-123456}', '{InstanceType=m6g.xlarge,CustomAmiId=ami-234567}']
 ```
 
 **Example Use a JSON configuration file**  

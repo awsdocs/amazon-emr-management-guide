@@ -1,6 +1,6 @@
 # Using the default Amazon Linux AMI for Amazon EMR<a name="emr-default-ami"></a>
 
-Each Amazon EMR release version uses a default Amazon Linux AMI for Amazon EMR unless you specify a custom AMI\. The default AMI is based on the most up\-to\-date Amazon Linux AMI available at the time of the Amazon EMR release\. The AMI is tested for compatibility with the big\-data applications and Amazon EMR features included with that release version\.
+Each Amazon EMR release version uses a default Amazon Linux AMI for Amazon EMR unless you specify a custom AMI\. The default AMI is based on the most up\-to\-date Amazon Linux AMI available at the time of the Amazon EMR release\. The AMI is tested for compatibility with the big data applications and Amazon EMR features included with that release version\.
 
 Each Amazon EMR release version is "locked" to the Amazon Linux AMI version to maintain compatibility\. This means that the same Amazon Linux AMI version is used for an Amazon EMR release version even when newer Amazon Linux AMIs become available\. For this reason, we recommend that you use the latest Amazon EMR release version \(currently 5\.33\.0\) unless you need an earlier version for compatibility and are unable to migrate\.
 
@@ -20,7 +20,7 @@ We strongly recommend that you do not run `sudo yum update` on cluster instances
 
 **Best practices for managing software updates**
 + If you use an earlier release version of Amazon EMR, consider and test a migration to the latest release before updating software packages\.
-+ If you migrate to a later release version or you upgrade software packages, test the implementation in a non\-production environment first\. The option to clone clusters using the Amazon EMR management console is helpful for this\.
++ If you migrate to a later release version or you upgrade software packages, test the implementation in a non\-production environment first\. The option to clone clusters using the Amazon EMR console is helpful for this\.
 + Evaluate software updates for your applications and for your version of Amazon Linux AMI on an individual basis\. Only test and install packages in production environments that you determine to be absolutely necessary for your security posture, application functionality, or performance\.
 + Watch the [Amazon Linux Security Center](https://alas.aws.amazon.com/) for updates\.
 + Avoid installing packages by connecting to individual cluster instances using SSH\. Instead, use a bootstrap action to install and update packages on all cluster instances as necessary\. This requires that you terminate a cluster and relaunch it\. For more information, see [Create bootstrap actions to install additional software](emr-plan-bootstrap.md)\.

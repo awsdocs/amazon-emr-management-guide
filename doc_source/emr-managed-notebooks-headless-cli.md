@@ -2,17 +2,19 @@
 
 The following is an example of the demo EMR Notebook seen from the EMR Notebook console\. The notebook to run is located using the file path relative to the home directory\. In this example, there are two notebook files that can be run: demo\_pyspark\.ipynb and my\_folder/python3\.ipynb\. 
 
-The relative path for file `demo_pyspark.ipynb` is `demo_pyspark.ipynb` shown below\.
+The relative path for file `demo_pyspark.ipynb` is `demo_pyspark.ipynb`, shown below\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/notebook_exe_folder_structure_1.png)
 
-The relative path for `python3.ipynb` is `my_folder/python3.ipynb` shown below\.
+The relative path for `python3.ipynb` is `my_folder/python3.ipynb`, shown below\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/notebook_exe_folder_structure_2.png)
 
-## EMR API NotebookExecution actions<a name="emr-managed-notebooks-api-actions"></a>
+For more information about the EMR API NotebookExecution actions, see EMR API actions\.
 
-For information about the EMR API NotebookExecution actions, see [EMR API actions\.](https://docs.aws.amazon.com/emr/latest/APIReference/API_Operations.html)
+## Run a notebook<a name="emr-managed-notebooks-api-actions"></a>
+
+You can use the AWS CLI to run your notebook using the `start-notebook-execution` action, as the following example demonstrates\. 
 
 ```
 aws emr --region us-east-1 \
@@ -30,13 +32,15 @@ start-notebook-execution \
 }
 ```
 
-## Output of CLI command EMR notebook<a name="emr-managed-notebooks-headless-cli-output"></a>
+## Notebook output<a name="emr-managed-notebooks-headless-cli-output"></a>
 
- Here's a sample output notebook\. Cell \[3\] shows the newly\-injected parameter values\.
+ Here's a sample notebook's output\. Cell \[3\] shows the newly\-injected parameter values\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/HelloWorld_notebook.png)
 
-## Describing notebook execution CLI command<a name="emr-managed-notebooks-headless-cli-describe"></a>
+## Describe a notebook<a name="emr-managed-notebooks-headless-cli-describe"></a>
+
+You can use the `describe-notebook-execution` action to access information about a specific notebook execution\.
 
 ```
 aws emr --region us-east-1 \
@@ -63,7 +67,9 @@ describe-notebook-execution --notebook-execution-id ex-IZWZZVR9DKQ9WQ7VZWXJZR29U
 }
 ```
 
-## Stopping notebook execution CLI command<a name="emr-managed-notebooks-headless-cli-stop"></a>
+## Stop a notebook<a name="emr-managed-notebooks-headless-cli-stop"></a>
+
+If your notebook is running an execution that you'd like to stop, you can do so with the `stop-notebook-execution` command\.
 
 ```
 # stop a running execution
@@ -94,7 +100,9 @@ describe-notebook-execution --notebook-execution-id ex-IZWZX78UVPAATC8LHJR129B1R
 }
 ```
 
-## Listing notebook execution by start time CLI command<a name="emr-managed-notebooks-headless-cli-list"></a>
+## List a notebook's executions by start time<a name="emr-managed-notebooks-headless-cli-list"></a>
+
+You can pass a `--from` parameter to `list-notebook-executions` to list your notebook's executions by start time\.
 
 ```
 # filter by start time 
@@ -142,7 +150,9 @@ list-notebook-executions --from 1593400000.000
 }
 ```
 
-## Listing notebook execution by start time and status CLI command<a name="emr-managed-notebooks-headless-cli-list"></a>
+## List a notebook's executions by start time and status<a name="emr-managed-notebooks-headless-cli-list"></a>
+
+The `list-notebook-executions` command can also take a `--status` parameter to filter results\.
 
 ```
 # filter by start time and status 

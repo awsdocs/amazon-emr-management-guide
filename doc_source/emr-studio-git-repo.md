@@ -13,6 +13,7 @@ You can manually run Git commands like the following using a terminal command wh
 Alternatively, you can use he jupyterlab\-git extension, which is installed and available to use in each Workspace\. Open it from the left sidebar by choosing the **Git** icon\. For information about the jupyterlab\-git extension for JupyterLab, see [jupyterlab\-git](https://github.com/jupyterlab/jupyterlab-git)\.
 
 ## Prerequisites<a name="emr-studio-git-prereqs"></a>
++ To associate a Git repository with your Workspace, your Studio must be configured to allow Git repository linking\. Your Studio administrator should take steps to [Establish access and permissions for Git\-based repositories](emr-studio-enable-git.md)\.
 + If you use a CodeCommit repository, you must use Git credentials and HTTPS\. SSH keys and HTTPS with the AWS Command Line Interface credential helper are not supported\. CodeCommit also does not support personal access tokens \(PATs\)\. For more information, see [Using IAM with CodeCommit](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html) in the *IAM User Guide* and [Setup for HTTPS users using Git credentials](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html) in the *AWS CodeCommit User Guide*\.
 
 ## Instructions<a name="emr-studio-link-git-repo"></a>

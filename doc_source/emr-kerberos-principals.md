@@ -6,7 +6,7 @@ Amazon EMR does not support cross\-realm trusts with AWS Directory Service for M
 
 Amazon EMR only configures the open\-source Kerberos authentication features for the applications and components listed below\. Any other applications installed are not Kerberized, which can result in an inability to communicate with Kerberized components and cause application errors\. Applications and components that are not Kerberized do not have authentication enabled\. Supported applications and components may vary by Amazon EMR release version\.
 
-No web user interfaces hosted on the cluster are Kerberized\.
+The Livy user interface is the only web user interface hosted on the cluster that is Kerberized\.
 + **Hadoop MapReduce**
 + **Hbase**
 + **HCatalog**
@@ -17,6 +17,7 @@ No web user interfaces hosted on the cluster are Kerberized\.
   + Hue user authentication isn't set automatically and can be configured using the configuration API\.
   + Hue server is Kerberized\. The Hue front\-end \(UI\) is not configured for authentication\. LDAP authentication can be configured for the Hue UI\. 
 + **Livy**
+  + Livy impersonation with Kerberized clusters is supported in Amazon EMR release version 5\.22\.0 and later\.
 + **Oozie**
 + **Phoenix**
 + **Spark**
@@ -24,6 +25,6 @@ No web user interfaces hosted on the cluster are Kerberized\.
 + **YARN**
 + **Zeppelin**
   + Zeppelin is only configured to use Kerberos with the Spark interpreter\. It is not configured for other interpreters\.
-  + Zeppelin impersonation with Kerberos is not supported\. All users logged in to Zeppelin use the same Zeppelin user principal to run Spark jobs and authenticate to YARN\.
+  + User impersonation is not supported for Kerberized Zeppelin interpreters other than Spark\.
 + **Zookeeper**
   + Zookeeper client is not supported\.

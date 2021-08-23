@@ -33,19 +33,19 @@ The default managed security group for the master instance in public subnets has
 
 **To allow SSH access for trusted sources for the ElasticMapReduce\-master security group**
 
-You must first be logged in to AWS as a root user or as an IAM principal that is allowed to manage security groups for the VPC that the cluster is in\. For more information, see [Changing Permissions for an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html) and the [Example Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_ec2_securitygroups-vpc.html) that allows managing EC2 security groups in the *IAM User Guide*\.
+To edit your security groups, you must have permission to manage security groups for the VPC that the cluster is in\. For more information, see [Changing Permissions for an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html) and the [Example Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_ec2_securitygroups-vpc.html) that allows managing EC2 security groups in the *IAM User Guide*\.
 
 1. Open the Amazon EMR console at [https://console\.aws\.amazon\.com/elasticmapreduce/](https://console.aws.amazon.com/elasticmapreduce/)\.
 
 1. Choose **Clusters**\.
 
-1. Choose the **Name** of the cluster\.
+1. Choose the **Name** of the cluster you want to modify\.
 
-1. Under **Security and access** choose the **Security groups for Master** link\.
+1. Choose the **Security groups for Master** link under **Security and access**\.
 
 1. Choose **ElasticMapReduce\-master** from the list\.
 
-1. Choose **Inbound**, **Edit**\.
+1. Choose the **Inbound rules** tab and then **Edit inbound rules**\.
 
 1. Check for an inbound rule that allows public access with the following settings\. If it exists, choose **Delete** to remove it\.
    + **Type**
@@ -58,21 +58,19 @@ You must first be logged in to AWS as a root user or as an IAM principal that is
 
      Custom 0\.0\.0\.0/0
 **Warning**  
- Before December 2020, the default EMR\-managed security group for the master instance in public subnets was created with a pre\-configured rule to allow inbound traffic on Port 22 from all sources\. This rule was created to simplify initial SSH connections to the master node\. We strongly recommend that you remove this inbound rule and restrict traffic only from trusted sources\.
+Before December 2020, the ElasticMapReduce\-master security group had a pre\-configured rule to allow inbound traffic on Port 22 from all sources\. This rule was created to simplify initial SSH connections to the master node\. We strongly recommend that you remove this inbound rule and restrict traffic to trusted sources\.
 
 1. Scroll to the bottom of the list of rules and choose **Add Rule**\.
 
 1. For **Type**, select **SSH**\.
 
-   This automatically enters **TCP** for **Protocol** and **22** for **Port Range**\.
+   Selecting SSH automatically enters **TCP** for **Protocol** and **22** for **Port Range**\.
 
-1. For source, select **My IP**\.
-
-   This automatically adds the IP address of your client computer as the source address\. Alternatively, you can add a range of **Custom** trusted client IP addresses and choose **Add rule** to create additional rules for other clients\. Many network environments dynamically allocate IP addresses, so you might need to periodically edit security group rules to update IP addresses for trusted clients\.
+1. For source, select **My IP** to automatically add your IP address as the source address\. You can also add a range of **Custom** trusted client IP addresses, or create additional rules for other clients\. Many network environments dynamically allocate IP addresses, so you might need to update your IP addresses for trusted clients in the future\.
 
 1. Choose **Save**\.
 
-1. Optionally, choose **ElasticMapReduce\-slave** from the list and repeat the steps above to allow SSH client access to core and task nodes from trusted clients\.
+1. Optionally, choose **ElasticMapReduce\-slave** from the list and repeat the steps above to allow SSH client access to core and task nodes\.
 
 ## Amazon EMR\-managed security group for core and task instances \(public subnets\)<a name="emr-sg-elasticmapreduce-slave"></a>
 
@@ -112,7 +110,7 @@ The default managed security group for service access in private subnets has the
 | Type | Protocol | Port range | Source | Details | 
 | --- | --- | --- | --- | --- | 
 | Inbound rules Required for EMR clusters with Amazon EMR release 5\.30\.0 and later\. | 
-| HTTPS \(9443\) | TCP | 9443 | The Group ID of the managed security group for master instance\.  |  This rule allows the communication between master instance's security group to the service access security group\. | 
+| Custom TCP | TCP | 9443 | The Group ID of the managed security group for master instance\.  |  This rule allows the communication between master instance's security group to the service access security group\. | 
 | Outbound rules Required for all EMR clusters | 
-| HTTPS \(8443\) | TCP | 8443 | The Group ID of the managed security group for master instance\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\. | 
-| HTTPS \(8443\) | TCP | 8443 | The Group ID of the managed security group for core and task instances\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\.  | 
+| Custom TCP | TCP | 8443 | The Group ID of the managed security group for master instance\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\. | 
+| Custom TCP | TCP | 8443 | The Group ID of the managed security group for core and task instances\.  |  These rules allow the cluster manager to communicate with the master node and with core and task nodes\.  | 

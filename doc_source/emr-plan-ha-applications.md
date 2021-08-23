@@ -95,7 +95,7 @@ The following are considerations for working with steps in an EMR cluster with m
 
 ### Automatic termination protection<a name="emr-plan-ha-termination-protection"></a>
 
-Amazon EMR automatically enables termination protection for all clusters with multiple master nodes, and overrides any auto\-termination settings that you supply when you create the cluster\. To shut down a cluster with multiple master nodes, you must first modify the cluster attributes to disable termination protection\. For instructions, see [Terminate an EMR Cluster with multiple master nodes](emr-plan-ha-launch.md#emr-plan-ha-launch-terminate)\.
+Amazon EMR automatically enables termination protection for all clusters with multiple master nodes, and overrides any auto\-termination settings that you supply when you create the cluster\. You cannot enable auto\-termination after the cluster has launched, so multi\-master clusters cannot use auto\-termination\. You can disable termination protection after the cluster has been launched\. See [Configuring termination protection for running clusters](UsingEMR_TerminationProtection.md#emr-termination-protection-running-cluster)\. To shut down a cluster with multiple master nodes, you must first modify the cluster attributes to disable termination protection\. For instructions, see [Terminate an EMR Cluster with multiple master nodes](emr-plan-ha-launch.md#emr-plan-ha-launch-terminate)\.
 
 For more information about termination protection, see [Using termination protection](UsingEMR_TerminationProtection.md)\.
 

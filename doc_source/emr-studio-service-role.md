@@ -2,12 +2,12 @@
 
 ## About the EMR Studio service role<a name="emr-studio-about-service-role"></a>
 
-Each Amazon EMR Studio uses an IAM role with permissions that let the Studio interact with other AWS services\. This service role must include permissions that allow EMR Studio to establish a secure network channel between Workspaces and clusters, to store notebook files in Amazon S3, and to access the AWS Secrets Manager while linking a Workspace to a Git repository\.
+Each Amazon EMR Studio uses an IAM role with permissions that let the Studio interact with other AWS services\. This service role must include permissions that allow EMR Studio to establish a secure network channel between Workspaces and clusters, to store notebook files in Amazon S3 Control, and to access the AWS Secrets Manager while linking a Workspace to a Git repository\.
 
 Use the Studio service role \(instead of session policies that are associated with your user role\) to define all Amazon S3 access permissions for storing notebook files, and to define AWS Secrets Manager access permissions\.
 
 **Important**  
-The EMR Studio service role uses tag\-based access control to identify and access the following Studio resources\. You must make sure these resources are tagged with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\.  
+The EMR Studio service role uses tag\-based access control to identify and access the following Studio resources\. You must make sure these resources are tagged with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\. Although resource tags may be optional in older policies, they're required in all updated versions of policies, including the policies documented in the following examples\.  
 The Amazon Virtual Private Cloud associated with your Studio\.
 Each subnet that you associate with your Studio\.
 Your EMR Studio security groups\. You must tag custom security groups\. EMR Studio automatically tags the default security groups at creation time\. Security groups that were created during the EMR Studio preview period must be tagged manually if you want to continue to use them\. 

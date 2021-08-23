@@ -21,7 +21,6 @@ The `ModifyInstanceGroup` action in Amazon EMR does not require that you specify
 + [Require cluster tagging when a cluster is created](#emr-cluster-access-example-require-tagging)
 + [Deny access to add and remove tags](#emr-cluster-deny-tagging-example)
 + [Allow actions on clusters with a specific tag, regardless of tag value](#emr-cluster-access-example-tag)
-+ [Require users to add tags when creating a cluster](#emr-cluster-access-requesttag)
 
 ### Allow actions only on clusters with specific tag values<a name="emr-cluster-access-example-tagvalue"></a>
 
@@ -71,30 +70,36 @@ You can also specify multiple tag values using a condition operator\. For exampl
 
 ### Require cluster tagging when a cluster is created<a name="emr-cluster-access-example-require-tagging"></a>
 
-As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a tag that matches the specified value\.
+As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a cluster with a tag that matches the specified value\. For the `passrole` resource, you need to provide the AWS account ID or alias, and the service role name\. For more information about the IAM ARN format, see [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *IAM User Guide*\.
 
 ```
  1. {
- 2.   "Version": "2012-10-17",
- 3.   "Statement": [
- 4.     {
- 5.       "Sid": "Stmt1479334524000",
- 6.       "Effect": "Allow",
- 7.       "Action": [
- 8.         "elasticmapreduce:RunJobFlow",
- 9.         "iam:PassRole"
-10.       ],
-11.       "Resource": [
-12.         "*"
-13.       ],
-14.       "Condition": {
-15.         "StringEquals": {
-16.           "elasticmapreduce:RequestTag/department": "dev"
-17.         }
-18.       }
-19.     }
-20.   ]
-21. }
+ 2.     "Version": "2012-10-17",
+ 3.     "Statement": [{
+ 4.             "Sid": "RunJobFlowExplicitlyWithTag",
+ 5.             "Effect": "Allow",
+ 6.             "Action": [
+ 7.                 "elasticmapreduce:RunJobFlow"
+ 8.             ],
+ 9.             "Resource": "*",
+10.             "Condition": {
+11.                 "StringEquals": {
+12.                     "aws:RequestTag/department": "dev"
+13.                 }
+14.             }
+15.         },
+16.         {
+17.             "Sid": "PolicyPassroleXYZ",
+18.             "Effect": "Allow",
+19.             "Action": [
+20.                 "iam:passrole"
+21.             ],
+22.             "Resource": [
+23.                 "arn:aws:iam::AccountId:role/Role-Name-With-Path"
+24.             ]
+25.         }
+26.     ]
+27. }
 ```
 
 ### Deny access to add and remove tags<a name="emr-cluster-deny-tagging-example"></a>
@@ -140,48 +145,31 @@ The following policy statement allows a user to create an EMR cluster only if th
 
 ```
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-    "Action": [
-      "elasticmapreduce:RunJobFlow",
-      "iam:PassRole"
-      ],
-    "Condition": {
-      "Null": {
-        "elasticmapreduce:RequestTag/department": "false"
-        }
-      },
-    "Effect": "Allow",
-    "Resource": [
-      "*"
-      ]
-    }
-  ]
-}
-```
-
-### Require users to add tags when creating a cluster<a name="emr-cluster-access-requesttag"></a>
-
-The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag that contains the value `dev` when it is created\.
-
-```
-{
     "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "elasticmapreduce:RunJobFlow",
-                "iam:PassRole"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "elasticmapreduce:RequestTag/department": "dev"
-                }
-            },
+    "Statement": [{
+            "Sid": "PolicyCreateClusterTagNullPassroleXYZ",
             "Effect": "Allow",
+            "Action": [
+                "elasticmapreduce:RunJobFlow"
+            ],
             "Resource": [
                 "*"
+            ],
+            "Condition": {
+                "Null": {
+                    "aws:RequestTag/department": "false"
+                }
+            }
+        },
+        {
+            "Sid": "PolicyPassroleXYZ",
+            "Effect": "Allow",
+            "Action": [
+                "iam:passrole"
+            ],
+
+            "Resource": [
+                "arn:aws:iam::AccountId:role/Role-Name-With-Path"
             ]
         }
     ]

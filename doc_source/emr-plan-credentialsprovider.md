@@ -8,7 +8,7 @@ Alternatively, if your Amazon EMR solution has demands beyond what IAM roles for
 
 ## Creating a custom credentials provider for EMRFS data in Amazon S3<a name="emr-create-credentialsprovider"></a>
 
-To create a custom credentials provider, you implement the [AWSCredentialsProvider](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProvider.html) and the Hadoop [Configurable](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/conf/Configurable.html) classes\.
+To create a custom credentials provider, you implement the [AWSCredentialsProvider](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/auth/AWSCredentialsProvider.html) and the Hadoop [Configurable](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/conf/Configurable.html) classes\.
 
 For a detailed explanation of this approach, see [Securely analyze data from another AWS account with EMRFS](http://aws.amazon.com/blogs/big-data/securely-analyze-data-from-another-aws-account-with-emrfs) in the AWS Big Data blog\. The blog post includes a tutorial that walks you through the process end\-to\-end, from creating IAM roles to launching the cluster\. It also provides a Java code example that implements the custom credential provider class\.
 

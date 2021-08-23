@@ -26,4 +26,4 @@ Use a *member* account in your AWS organization to set up an EMR Studio accordin
 
 1. [Assign a user or group to your EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)
 
-1. \(Optional\) Though not required, we recommend that you enable your team to use cluster templates with your EMR Studio\. For more information, see [Create cluster templates in AWS Service Catalog](emr-studio-cluster-templates.md)\.
+1. \(Optional\) Though not required, we recommend that you enable your team to use cluster templates with your EMR Studio\. For more information, see [Create AWS CloudFormation templates for Amazon EMR Studio](emr-studio-cluster-templates.md)\.

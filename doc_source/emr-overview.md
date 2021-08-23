@@ -1,6 +1,6 @@
 # Overview of Amazon EMR<a name="emr-overview"></a>
 
- This topic provides an overview of Amazon EMR clusters, including how to submit work to a cluster, how that data is processed, and the various states that the cluster goes through during processing\. 
+This topic provides an overview of Amazon EMR clusters, including how to submit work to a cluster, how that data is processed, and the various states that the cluster goes through during processing\. 
 
 **Topics**
 + [Understanding clusters and nodes](#emr-overview-clusters)

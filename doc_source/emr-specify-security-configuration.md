@@ -10,7 +10,7 @@ When using the AWS console to create an EMR cluster, you choose the security con
 
 1. Choose **Create cluster**, **Go to advanced options**\.
 
-1. On the**Step 1: Software and Steps** screen, from the **Release ** list, choose **emr\-4\.8\.0 ** or a more recent release\. Choose the settings you want and choose **Next**\.
+1. On the **Step 1: Software and Steps** screen, from the **Release ** list, choose **emr\-4\.8\.0 ** or a more recent release\. Choose the settings you want and choose **Next**\.
 
 1. On the **Step 2: Hardware** screen, choose the settings you want and choose **Next**\. Do the same for **Step 3: General Cluster Settings**\.
 

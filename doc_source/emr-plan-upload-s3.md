@@ -14,11 +14,12 @@ Amazon EMR uses the AWS SDK for Java with Amazon S3 to store input data, log fil
 This section shows you how to use the Amazon S3 AWS Management Console to create and then set permissions for an Amazon S3 bucket\. You can also create and set permissions for an Amazon S3 bucket using the Amazon S3 API or AWS CLI\. You can also use curl along with a modification to pass the appropriate authentication parameters for Amazon S3\.
 
 See the following resources:
-+ To create a bucket using the console, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
-+ To create and work with buckets using the AWS CLI, see [Using high\-level S3 commands with the AWS Command Line Interface](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-s3-commands.html) in the *Amazon Simple Storage Service Console User Guide*\.
++ To create a bucket using the console, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket.html) in the *Amazon S3 User Guide*\.
++ To create and work with buckets using the AWS CLI, see [Using high\-level S3 commands with the AWS Command Line Interface](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-s3-commands.html) in the *Amazon S3 User Guide*\.
 + To create a bucket using an SDK, see [Examples of creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html) in the *Amazon Simple Storage Service Developer Guide*\.
 + To work with buckets using curl, see [Amazon S3 authentication tool for curl](https://aws.amazon.com/code/amazon-s3-authentication-tool-for-curl/)\.
 + For more information on specifying Region\-specific buckets, see [Accessing a bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro) in the *Amazon Simple Storage Service Developer Guide*\.
++ To work with buckets using Amazon S3 Access Points, see [Using a bucket\-style alias for your access point](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-alias.html) in the *Amazon S3 User Guide*\. You can easily use Amazon S3 Access Points with the Amazon S3 Access Point Alias instead of the Amazon S3 bucket name\. You can use the Amazon S3 Access Point Alias for both existing and new applications, including Spark, Hive, Presto and others\.
 
 **Note**  
 If you enable logging for a bucket, it enables only bucket access logs, not Amazon EMR cluster logs\. 
@@ -112,10 +113,10 @@ EMR cluster components use multipart uploads via the AWS SDK for Java with Amazo
 + For buckets that you use with Amazon EMR, use a lifecycle configuration rule in Amazon S3 to remove incomplete multipart uploads three days after the upload initiation date\. Lifecycle configuration rules allow you to control the storage class and lifetime of objects\. For more information, see [Object lifecycle management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html), and [Aborting incomplete multipart uploads using a bucket lifecycle policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)\.
 + Enable Amazon EMR's multipart cleanup feature by setting `fs.s3.multipart.clean.enabled` to `TRUE` and tuning other cleanup parameters\. This feature is useful at high volume, large scale, and with clusters that have limited uptime\. In this case, the `DaysAfterIntitiation` parameter of a lifecycle configuration rule may be too long, even if set to its minimum, causing spikes in Amazon S3 storage\. Amazon EMR's multipart cleanup allows more precise control\. For more information, see [Configure multipart upload for Amazon S3](#Config_Multipart)\. 
 
-### Manage version markers<a name="w299aac25c11c17c11b7c11b8"></a>
+### Manage version markers<a name="w305aac25c11c17c11b7c11b8"></a>
 
 We recommend that you enable a lifecycle configuration rule in Amazon S3 to remove expired object delete markers for versioned buckets that you use with Amazon EMR\. When deleting an object in a versioned bucket, a delete marker is created\. If all previous versions of the object subsequently expire, an expired object delete marker is left in the bucket\. While you are not charged for delete markers, removing expired markers can improve the performance of LIST requests\. For more information, see [Lifecycle configuration for a bucket with versioning](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/lifecycle-configuration-bucket-with-versioning.html) in the Amazon Simple Storage Service Console User Guide\.
 
-### Performance best practices<a name="w299aac25c11c17c11b7c11c10"></a>
+### Performance best practices<a name="w305aac25c11c17c11b7c11c10"></a>
 
 Depending on your workloads, specific types of usage of EMR clusters and applications on those clusters can result in a high number of requests against a bucket\. For more information, see [Request rate and performance considerations](https://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html) in the *Amazon Simple Storage Service Developer Guide*\. 

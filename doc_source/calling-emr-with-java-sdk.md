@@ -1,16 +1,13 @@
 # Using the AWS SDK for Java to create an Amazon EMR cluster<a name="calling-emr-with-java-sdk"></a>
 
 The AWS SDK for Java provides three packages with Amazon EMR functionality:
-+  [com\.amazonaws\.services\.elasticmapreduce](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/package-summary.html) 
-+  [com\.amazonaws\.services\.elasticmapreduce\.model](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/model/package-summary.html) 
-+  [com\.amazonaws\.services\.elasticmapreduce\.util](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/util/package-summary.html) 
++  [com\.amazonaws\.services\.elasticmapreduce](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/package-summary.html) 
++  [com\.amazonaws\.services\.elasticmapreduce\.model](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/model/package-summary.html) 
++  [com\.amazonaws\.services\.elasticmapreduce\.util](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/util/package-summary.html) 
 
-For more information about these packages, see the [AWS SDK for Java API Reference](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/)\.
+For more information about these packages, see the [AWS SDK for Java API Reference](https://docs.aws.amazon.com/sdk-for-java/latest/reference/)\.
 
- The following example illustrates how the SDKs can simplify programming with Amazon EMR\. The code sample below uses the `StepFactory` object, a helper class for creating common Amazon EMR step types, to create an interactive Hive cluster with debugging enabled\. 
-
-**Note**  
-The static credentials used in this example may expire\. Do not use a static credentials provider for managing your EMR clusters if the credentials need to be automatically refreshed\.
+The following example illustrates how the SDKs can simplify programming with Amazon EMR\. The code sample below uses the `StepFactory` object, a helper class for creating common Amazon EMR step types, to create an interactive Hive cluster with debugging enabled\. 
 
 ```
 import com.amazonaws.AmazonClientException;
@@ -25,9 +22,9 @@ import com.amazonaws.services.elasticmapreduce.util.StepFactory;
 public class Main {
 
 	public static void main(String[] args) {
-		AWSCredentials credentials_profile = null;		
+		AWSCredentialsProvider profile = null;		
 		try {
-			credentials_profile = new ProfileCredentialsProvider("default").getCredentials(); // specifies any named profile in .aws/credentials as the credentials provider
+			credentials_profile = new ProfileCredentialsProvider("default"); // specifies any named profile in .aws/credentials as the credentials provider
         } catch (Exception e) {
             throw new AmazonClientException(
                     "Cannot load credentials from .aws/credentials file. " +
@@ -37,7 +34,7 @@ public class Main {
 		
 		// create an EMR client using the credentials and region specified in order to create the cluster
 		AmazonElasticMapReduce emr = AmazonElasticMapReduceClientBuilder.standard()
-			.withCredentials(new AWSStaticCredentialsProvider(credentials_profile))
+			.withCredentials(credentials_profile)
 			.withRegion(Regions.US_WEST_1)
 			.build();
         

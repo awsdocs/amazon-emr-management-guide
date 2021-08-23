@@ -4,7 +4,7 @@ Use this section to understand how Amazon EMR uses each of these node types and 
 
 ## Master node<a name="emr-plan-master"></a>
 
-The master node manages the cluster and typically runs master components of distributed applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications\. It also runs the HDFS NameNode service, tracks the status of jobs submitted to the cluster, and monitors the health of the instance groups\.
+The master node manages the cluster and typically runs master components of distributed applications\. For example, the master node runs the YARN ResourceManager service to manage resources for applications\. It also runs the HDFS NameNode service, tracks the status of jobs submitted to the cluster, and monitors the health of the instance groups\.
 
 To monitor the progress of a cluster and interact directly with applications, you can connect to the master node over SSH as the Hadoop user\. For more information, see [Connect to the master node using SSH](emr-connect-master-node-ssh.md)\. Connecting to the master node allows you to access directories and files, such as Hadoop log files, directly\. For more information, see [View log files](emr-manage-view-web-log-files.md)\. You can also view user interfaces that applications publish as websites running on the master node\. For more information, see [View web interfaces hosted on Amazon EMR clusters](emr-web-interfaces.md)\. 
 

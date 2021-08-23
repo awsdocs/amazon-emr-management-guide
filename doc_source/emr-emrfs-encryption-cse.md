@@ -15,7 +15,7 @@ Amazon S3 CSE only ensures that EMRFS data exchanged with Amazon S3 is encrypted
 
 ## Creating a custom key provider<a name="emr-emrfs-create-cse-key"></a>
 
-When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
+When you create a custom key provider, the application is expected to implement the [EncryptionMaterialsProvider interface](https://docs.aws.amazon.com/sdk-for-java/latest/reference/com/amazonaws/services/elasticmapreduce/spi/security/EncryptionMaterialsProvider.html), which is available in the AWS SDK for Java version 1\.11\.0 and later\. The implementation can use any strategy to provide encryption materials\. You may, for example, choose to provide static encryption materials or integrate with a more complex key management system\.
 
 The encryption algorithm used for custom encryption materials must be **AES/GCM/NoPadding**\.
 

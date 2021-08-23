@@ -71,9 +71,9 @@ After you determine which processes are running, you can stop and then restart t
 1. Type the following command to restart the process:
 
    ```
-   $  sudo sbin/start processname
+   $  sudo /sbin/start processname
    ```
 
-   For example, `sudo sbin/start instance-controller`\.
+   For example, `sudo /sbin/start instance-controller`\.
 **Note**  
-The `sbin/start, stop` and `restart` commands are symlinks to `/sbin/intictl`\. For more information about `initctl`, see the initctl man page by typing `man initctl` at the command prompt\.
+The `/sbin/start, stop` and `restart` commands are symlinks to `/sbin/intictl`\. For more information about `initctl`, see the initctl man page by typing `man initctl` at the command prompt\.

@@ -64,6 +64,22 @@ InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=4,BidPrice=0.03 \
 InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.04
 ```
 
+Using the CLI, you can create uniform instance group clusters that specify a unique custom AMI for each instance type in the instance group\. This allows you to use different instance architectures in the same instance group\. Each instance type must use a custom AMI with a matching architecture\. For example, you would configure an m5\.xlarge instance type with an x86\_64 architecture custom AMI, and an m6g\.xlarge instance type with a corresponding `AWS AARCH64` \(ARM\) architecture custom AMI\. 
+
+The following example shows a uniform instance group cluster created with two instance types, each with its own custom AMI\. Notice that the custom AMIs are specified only at the instance type level, not at the cluster level\. This is to avoid conflicts between the instance type AMIs and an AMI at the cluster level, which would cause the cluster launch to fail\. 
+
+```
+aws emr create-cluster --instance-groups 
+InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-123456 
+InstanceGroupType=CORE,InstanceType=m6g.xlarge,InstanceCount=1,CustomAmiId=ami-234567
+```
+
+You can add multiple custom AMIs to an instance group that you add to a running cluster\. The `CustomAmiId` argument can be used with the `add-instance-groups` command as shown in the following example\.
+
+```
+aws emr add-instance-groups —cluster-id j-123456 —instance-groups InstanceGroupType=Task,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-123456
+```
+
 ## Use the Java SDK to create an instance group<a name="emr-instance-group-sdk"></a>
 
 You instantiate an `InstanceGroupConfig` object that specifies the configuration of an instance group for a cluster\. To use Spot Instances, you set the `withBidPrice` and `withMarket` properties on the `InstanceGroupConfig` object\. The following code shows how to define master, core, and task instance groups that run Spot Instances\.
