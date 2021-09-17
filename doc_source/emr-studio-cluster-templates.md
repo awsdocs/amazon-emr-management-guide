@@ -4,7 +4,7 @@
 
 You can create AWS CloudFormation templates to help EMR Studio users launch new Amazon EMR clusters in a Workspace\. CloudFormation templates are formatted text files in JSON or YAML\. In a template, you describe a stack of AWS resources and tell CloudFormation how to provision those resources for you\. For EMR Studio, you can create one or more templates that describe an Amazon EMR cluster\. 
 
-You organize your templates in AWS Service Catalog\. AWS Service Catalog lets you create and manage commonly deployed IT services called *products* on AWS\. You collect your templates as products in a *portfolio* that you share with your EMR Studio users\. After you create cluster templates, Studio users can launch a new cluster for a Workspace with one of your templates\. Users must have permission to create new clusters from templates\. You can set user permissions in your [EMR Studio session policies](emr-studio-user-role.md#emr-studio-session-policies)\.
+You organize your templates in AWS Service Catalog\. AWS Service Catalog lets you create and manage commonly deployed IT services called *products* on AWS\. You collect your templates as products in a *portfolio* that you share with your EMR Studio users\. After you create cluster templates, Studio users can launch a new cluster for a Workspace with one of your templates\. Users must have permission to create new clusters from templates\. You can set user permissions in your [EMR Studio permissions policies](emr-studio-user-permissions.md)\.
 
 To learn more about CloudFormation templates, see [Templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html#w2ab1b5c15b7) in the *AWS CloudFormation User Guide*\. For more information about AWS Service Catalog, see [What is AWS Service Catalog](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)\.
 
@@ -14,7 +14,7 @@ The following video demonstrates how to set up cluster templates in AWS Service 
 
 ### Optional template parameters<a name="emr-studio-cluster-template-parameters"></a>
 
-You can include additional options in the [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html) section of your template\. Parameters let Studio users input or select custom values for a cluster\. For example, you could add a parameter that lets users select a particular Amazon EMR release\. For more information, see [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html) in the *AWS CloudFormation User Guide*\.
+You can include additional options in the [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html) section of your template\. *Parameters* let Studio users input or select custom values for a cluster\. For example, you could add a parameter that lets users select a particular Amazon EMR release\. For more information, see [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html) in the *AWS CloudFormation User Guide*\.
 
 The following example `Parameters` section defines additional input parameters such as `ClusterName`, `EmrRelease` version, and `ClusterInstanceType`\.
 
@@ -170,10 +170,12 @@ Use the SubnetId parameter name throughout your whole cluster template when you 
 
    1. Select your launch constraint role in the **Launch constraint** section, then choose **Create**\.
 
-1. Grant your [user role for EMR Studio](emr-studio-user-role.md) access to your portfolio\.
+1. Grant access to your portfolio\.
 
    1. Select your portfolio from the **Portfolios** page in the AWS Service Catalog management console\.
 
    1. Expand the **Groups, roles, and users** tab and choose **Add groups, roles, users**\.
 
-   1. Search for your EMR Studio user role in the **Roles** tab, select your role, and choose **Add access**\.
+   1. Search for your EMR Studio IAM role in the **Roles** tab, select your role, and choose **Add access**\.  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-cluster-templates.html)

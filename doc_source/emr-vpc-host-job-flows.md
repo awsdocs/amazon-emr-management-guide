@@ -19,13 +19,13 @@ Do not choose **Your VPCs** in the navigation pane; you cannot access the VPC wi
 1. On the configuration page, enter a name for your VPC in the **VPC name** field and enter a name for your subnet in the **Subnet name** field\. This helps you to identify the VPC and subnet in the Amazon VPC console after you've created them\. Confirm the other VPC settings, using the information below as a guide\.
    + To work with Amazon EMR, the VPC with a public subnet must have both an internet gateway and a subnet\.
 
-     For a VPC in a private subnet, all EC2 instances must at minimum have a route to Amazon EMR through the elastic network interface\. In the console, this is automatically configured for you\.
+     For a VPC in a private subnet, all Amazon EC2 instances must at minimum have a route to Amazon EMR through the elastic network interface\. In the console, this is automatically configured for you\.
    + Use a private IP address space for your VPC to ensure proper DNS hostname resolution; otherwise, you may experience Amazon EMR cluster failures\. This includes the following IP address ranges: 
      + 10\.0\.0\.0 \- 10\.255\.255\.255
      + 172\.16\.0\.0 \- 172\.31\.255\.255
      + 192\.168\.0\.0 \- 192\.168\.255\.255
    + Choose **Use a NAT instance instead** and select options as appropriate\.
-   + Optionally choose to **Add endpoints for S3 to your subnets**\.
+   + Optionally choose to **Add endpoints for Amazon S3 to your subnets**\.
    + Verify that **Enable DNS hostnames** is checked\. You have the option to enable DNS hostnames when you create the VPC\. To change the setting of DNS hostnames, select your VPC in the VPC list, then choose **Edit** in the details pane\. To create a DNS entry that does not include a domain name, create a value for **DHCP Options Set**, and then associate it with your VPC\. You cannot edit the domain name using the console after the DNS option set has been created\.
 
      For more information, see [Using DNS with your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\.
@@ -41,4 +41,4 @@ Do not choose **Your VPCs** in the navigation pane; you cannot access the VPC wi
 
 1. A status window shows the work in progress\. When the work completes, choose **OK** to close the status window\. The **Your VPCs** page displays your default VPC and the VPC that you just created\. The VPC that you created is a nondefault VPC, therefore the **Default VPC** column displays **No**\. 
 
-1. After the VPC is created, go to the **Subnets** page and note the identifier of one of the subnets of your VPC\. You use this information when you launch the EMR cluster into the VPC\.
+1. After the VPC is created, go to the **Subnets** page and note the identifier of one of the subnets of your VPC\. You use this information when you launch the Amazon EMR cluster into the VPC\.

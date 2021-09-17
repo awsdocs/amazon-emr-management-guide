@@ -134,6 +134,8 @@ You must use the login name `hadoop` when you connect to the Amazon EMR master n
    exit
    ```
 
+If you're experiencing difficulty with using SSH to connect to your master node, see [Troubleshoot connecting to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html)\.
+
 ## Connect to the master node using SSH on Windows<a name="emr-connect-win"></a>
 
 Windows users can use an SSH client such as PuTTY to connect to the master node\. Before connecting to the Amazon EMR master node, you should download and install PuTTY and PuTTYgen\. You can download these tools from the [PuTTY download page](http://www.chiark.greenend.org.uk/~sgtatham/putty/)\.
@@ -163,6 +165,8 @@ When logging into the master node, type `hadoop` if you are prompted for a user 
 1. When you are done working on the master node, you can close the SSH connection by closing PuTTY\.
 **Note**  
 To prevent the SSH connection from timing out, you can choose **Connection** in the **Category** list and select the option **Enable TCP\_keepalives**\. If you have an active SSH session in PuTTY, you can change your settings by opening the context \(right\-click\) for the PuTTY title bar and choosing **Change Settings**\.
+
+If you're experiencing difficulty with using SSH to connect to your master node, see [Troubleshoot connecting to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html)\.
 
 ## Connect to the master node using the AWS CLI<a name="emr-connect-cli"></a>
 
@@ -204,4 +208,4 @@ You can create an SSH connection with the master node using the AWS CLI on Windo
 
 1. When you are done working on the master node, close the AWS CLI window\. 
 
-   For more information, see [Amazon EMR commands in the AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/emr)\.
+   For more information, see [Amazon EMR commands in the AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/emr)\. If you're experiencing difficulty with using SSH to connect to your master node, see [Troubleshoot connecting to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html)\.

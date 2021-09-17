@@ -15,7 +15,7 @@ With Amazon EMR 5\.23\.0 and later, you can launch a cluster with three master n
 
 Core nodes are managed by the master node\. Core nodes run the Data Node daemon to coordinate data storage as part of the Hadoop Distributed File System \(HDFS\)\. They also run the Task Tracker daemon and perform other parallel computation tasks on data that installed applications require\. For example, a core node runs YARN NodeManager daemons, Hadoop MapReduce tasks, and Spark executors\.
 
-There is only one core instance group or instance fleet per cluster, but there can be multiple nodes running on multiple EC2 instances in the instance group or instance fleet\. With instance groups, you can add and remove EC2 instances while the cluster is running\. You can also set up automatic scaling to add instances based on the value of a metric\. For more information about adding and removing EC2 instances with the instance groups configuration, see [Scaling cluster resources](emr-scale-on-demand.md)\.
+There is only one core instance group or instance fleet per cluster, but there can be multiple nodes running on multiple Amazon EC2 instances in the instance group or instance fleet\. With instance groups, you can add and remove Amazon EC2 instances while the cluster is running\. You can also set up automatic scaling to add instances based on the value of a metric\. For more information about adding and removing Amazon EC2 instances with the instance groups configuration, see [Scaling cluster resources](emr-scale-on-demand.md)\.
 
 With instance fleets, you can effectively add and remove instances by modifying the instance fleet's *target capacities* for On\-Demand and Spot accordingly\. For more information about target capacities, see [Instance fleet options](emr-instance-fleet.md#emr-instance-fleet-options)\.
 
@@ -24,9 +24,9 @@ Removing HDFS daemons from a running core node or terminating core nodes risks d
 
 ## Task nodes<a name="emr-plan-task"></a>
 
-You can use task nodes to add power to perform parallel computation tasks on data, such as Hadoop MapReduce tasks and Spark executors\. Task nodes don't run the Data Node daemon, nor do they store data in HDFS\. As with core nodes, you can add task nodes to a cluster by adding EC2 instances to an existing uniform instance group or by modifying target capacities for a task instance fleet\.
+You can use task nodes to add power to perform parallel computation tasks on data, such as Hadoop MapReduce tasks and Spark executors\. Task nodes don't run the Data Node daemon, nor do they store data in HDFS\. As with core nodes, you can add task nodes to a cluster by adding Amazon EC2 instances to an existing uniform instance group or by modifying target capacities for a task instance fleet\.
 
-With the uniform instance group configuration, you can have up to a total of 48 task instance groups\. The ability to add instance groups in this way allows you to mix EC2 instance types and pricing options, such as On\-Demand Instances and Spot Instances\. This gives you flexibility to respond to workload requirements in a cost\-effective way\.
+With the uniform instance group configuration, you can have up to a total of 48 task instance groups\. The ability to add instance groups in this way allows you to mix Amazon EC2 instance types and pricing options, such as On\-Demand Instances and Spot Instances\. This gives you flexibility to respond to workload requirements in a cost\-effective way\.
 
 With the instance fleet configuration, the ability to mix instance types and purchasing options is built in, so there is only one task instance fleet\.
 

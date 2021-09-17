@@ -27,7 +27,7 @@ To manage the cluster on a VPC, Amazon EMR attaches a network device to the mast
 **Important**  
 In order to create a NAT instance from the Amazon EMR, you need ec2:CreateRoute, `ec2:RevokeSecurityGroupEgress`, `ec2:AuthorizeSecurityGroupEgress`, `cloudformation:DescribeStackEvents` and `cloudformation:CreateStack` permissions\.
 **Note**  
-There is an additional cost for launching an EC2 instance for your NAT device\.
+There is an additional cost for launching an Amazon EC2 instance for your NAT device\.
 
 1. Proceed with creating the cluster\.
 
@@ -35,15 +35,15 @@ There is an additional cost for launching an EC2 instance for your NAT device\.
 **Note**  
 The AWS CLI does not provide a way to create a NAT instance automatically and connect it to your private subnet\. However, to create a S3 endpoint in your subnet, you can use the Amazon VPCCLI commands\. Use the console to create NAT instances and launch clusters in a private subnet\.
 
-After your VPC is configured, you can launch EMR clusters in it by using the `create-cluster` subcommand with the `--ec2-attributes` parameter\. Use the `--ec2-attributes` parameter to specify the VPC subnet for your cluster\.
-+ To create a cluster in a specific subnet, type the following command, replace *myKey* with the name of your EC2 key pair, and replace *77XXXX03* with your subnet ID\.
+After your VPC is configured, you can launch Amazon EMR clusters in it by using the `create-cluster` subcommand with the `--ec2-attributes` parameter\. Use the `--ec2-attributes` parameter to specify the VPC subnet for your cluster\.
++ To create a cluster in a specific subnet, type the following command, replace *myKey* with the name of your Amazon EC2 key pair, and replace *77XXXX03* with your subnet ID\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,SubnetId=subnet-77XXXX03 --instance-type m5.xlarge --instance-count 3
+  aws Amazon EMR create-cluster --name "Test cluster" --release-label emr-4.2.0 --applications Name=Hadoop Name=Hive Name=Pig --use-default-roles --ec2-attributes KeyName=myKey,SubnetId=subnet-77XXXX03 --instance-type m5.xlarge --instance-count 3
   ```
 
   When you specify the instance count without using the `--instance-groups` parameter, a single master node is launched, and the remaining instances are launched as core nodes\. All nodes use the instance type specified in the command\.
 **Note**  
-If you have not previously created the default Amazon EMR service role and EC2 instance profile, type `aws emr create-default-roles` to create them before typing the `create-cluster` subcommand\.
+If you have not previously created the default Amazon EMR service role and EC2 instance profile, type `aws Amazon EMR create-default-roles` to create them before typing the `create-cluster` subcommand\.
 
 For more information about using Amazon EMR commands in the AWS CLI, see the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/emr)\.

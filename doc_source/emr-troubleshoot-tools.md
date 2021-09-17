@@ -4,6 +4,7 @@
 
 **Topics**
 + [Tools to display cluster details](#emr-troubleshoot-tools-details)
++ [Tools to run scripts and configure processes](#emr-troubleshoot-tools-commands)
 + [Tools to view log files](#emr-troubleshoot-tools-logs)
 + [Tools to monitor cluster performance](#emr-troubleshoot-tools-performance)
 
@@ -25,13 +26,25 @@ The **Application user interfaces** available in the cluster details page can be
 
  You can locate details about a cluster from the API using the `DescribeJobFlows` action\. 
 
+## Tools to run scripts and configure processes<a name="emr-troubleshoot-tools-commands"></a>
+
+As part of your troubleshooting process, you might find it helpful to run custom scripts on your cluster or view and configure cluster processes\.
+
+### View and restart application processes<a name="emr-troubleshoot-tools-stop-start-processes"></a>
+
+It can be helpful to view running processes on your cluster in order to diagnose potential issues\. You can stop and restart cluster processes by connecting to the master node of your cluster\. For more information, see [Viewing and restarting Amazon EMR and application processes \(daemons\)](emr-process-restart-stop-view.md)\.
+
+### Run commands and scripts without an SSH connection<a name="emr-troubleshoot-tools-run-scripts"></a>
+
+To run a command or a script on your cluster as a step, you can use the `command-runner.jar` or `script-runner.jar` tools without establishing an SSH connection to the master node\. For more information, see [Run commands and scripts on an Amazon EMR cluster](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html)\.
+
 ## Tools to view log files<a name="emr-troubleshoot-tools-logs"></a>
 
- Amazon EMR and Hadoop both generate log files as the cluster runs\. You can access these log files from several different tools, depending on the configuration you specified when you launched the cluster\. For more information, see [Configure cluster logging and debugging](emr-plan-debugging.md)\. 
+Amazon EMR and Hadoop both generate log files as the cluster runs\. You can access these log files from several different tools, depending on the configuration you specified when you launched the cluster\. For more information, see [Configure cluster logging and debugging](emr-plan-debugging.md)\. 
 
 ### Log files on the master node<a name="emr-troubleshoot-tools-logs-master"></a>
 
- Every cluster publishes logs files to the /mnt/var/log/ directory on the master node\. These log files are only available while the cluster is running\. 
+Every cluster publishes logs files to the /mnt/var/log/ directory on the master node\. These log files are only available while the cluster is running\. 
 
 ### Log files archived to Amazon S3<a name="emr-troubleshoot-tools-logs-s3"></a>
 

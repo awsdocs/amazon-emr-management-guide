@@ -70,7 +70,9 @@ You can also specify multiple tag values using a condition operator\. For exampl
 
 ### Require cluster tagging when a cluster is created<a name="emr-cluster-access-example-require-tagging"></a>
 
-As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a cluster with a tag that matches the specified value\. For the `passrole` resource, you need to provide the AWS account ID or alias, and the service role name\. For more information about the IAM ARN format, see [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *IAM User Guide*\.
+As in the preceding example, the following example policy looks for the same matching tag: the value `dev` for the `department` tag\. In this case, however, the `RequestTag` condition key specifies that the policy applies during tag creation, so the user must create a cluster with a tag that matches the specified value\. For the `PassRole` resource, you need to provide the AWS account ID or alias, and the service role name\. For more information about the IAM ARN format, see [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *IAM User Guide*\.
+
+For more information specifying matching tag\-key values, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag) in the *IAM User Guide*\.
 
 ```
  1. {
@@ -92,7 +94,7 @@ As in the preceding example, the following example policy looks for the same mat
 17.             "Sid": "PolicyPassroleXYZ",
 18.             "Effect": "Allow",
 19.             "Action": [
-20.                 "iam:passrole"
+20.                 "iam:PassRole"
 21.             ],
 22.             "Resource": [
 23.                 "arn:aws:iam::AccountId:role/Role-Name-With-Path"
@@ -141,7 +143,9 @@ You can also allow actions only on clusters that have a particular tag, regardle
 5. }
 ```
 
-The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag, which can contain any value\. 
+The following policy statement allows a user to create an EMR cluster only if the cluster will have a `department` tag, which can contain any value\. For the `PassRole` resource, you need to provide the AWS account ID or alias, and the service role name\. For more information about the IAM ARN format, see [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *IAM User Guide*\.
+
+For more information specifying the null \("false"\) condition operator, see [Condition operator to check existence of condition keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_Null) in the *IAM User Guide*\.
 
 ```
 {
@@ -165,7 +169,7 @@ The following policy statement allows a user to create an EMR cluster only if th
             "Sid": "PolicyPassroleXYZ",
             "Effect": "Allow",
             "Action": [
-                "iam:passrole"
+                "iam:PassRole"
             ],
 
             "Resource": [

@@ -19,10 +19,10 @@ Submitting a step to the cluster after you create it or when you create the clus
 The following example submits a bash script `configureCluster.sh` to a cluster that already exists, referencing its cluster ID\. The script is saved to Amazon S3\. 
 
 ```
-aws emr add-steps --cluster-id j-01234567 \
+aws emr add-steps --cluster-id <j-2AL4XXXXXX5T9> \
 --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,\
-Jar=s3://myregion.elasticmapreduce/libs/script-runner/script-runner.jar,\
-Args=["s3://mybucket/configureCluster.sh"]
+Jar=s3://region.elasticmapreduce/libs/script-runner/script-runner.jar,\
+Args=["s3://DOC-EXAMPLE-BUCKET/configureCluster.sh"]
 ```
 
 The following example demonstrates the contents of the `configureCluster.sh` script\. The script also handles creating HDFS user directories and enabling GSSAPI for SSH, which are covered in the following sections\.
@@ -64,9 +64,9 @@ Submitting a step to the cluster after you create it or when you create the clus
 The following example submits a bash script `AddHDFSUsers.sh` to a cluster that already exists, referencing its cluster ID\. The script is saved to Amazon S3\. 
 
 ```
-aws emr add-steps --cluster-id ClusterID \
+aws emr add-steps --cluster-id <j-2AL4XXXXXX5T9> \
 --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,\
-Jar=s3://MyRegion.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://MyBucketPath/AddHDFSUsers.sh"]
+Jar=s3://region.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://DOC-EXAMPLE-BUCKET/AddHDFSUsers.sh"]
 ```
 
 The following example demonstrates the contents of the `AddHDFSUsers.sh` script\.

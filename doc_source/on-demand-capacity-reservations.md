@@ -71,7 +71,7 @@ When you use the `RunJobFlow` action to create an instance fleet\-based cluster,
 You can also use the Amazon EMR CLI to create an instance fleet\-based cluster using open capacity reservations\.
 
 ```
-aws emr create-cluster \
+aws Amazon EMR create-cluster \
 --name "open-ODCR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -151,10 +151,10 @@ When you use the `RunJobFlow` action to create an instance fleet\-based cluster,
     }
 ```
 
-You can also use the EMR CLI to create an instance\-fleet based cluster using capacity reservations first\.
+You can also use the Amazon EMR CLI to create an instance\-fleet based cluster using capacity reservations first\.
 
 ```
-aws emr create-cluster \
+aws Amazon EMR create-cluster \
 --name "use-CR-first-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -170,7 +170,7 @@ Where,
 
 ## Use targeted capacity reservations first<a name="on-demand-capacity-reservations-targeted"></a>
 
-When you provision an EMR cluster, you can choose to override the lowest\-price allocation strategy and prioritize using available targeted capacity reservations first\. In this case, Amazon EMR evaluates all the instance pools with targeted capacity reservations specified in the launch request and picks the one with the lowest price that has sufficient capacity to launch all the requested core nodes\. If none of the instance pools with targeted capacity reservations have sufficient capacity for core nodes, Amazon EMR falls back to the best\-effort case described earlier\. That is, Amazon EMR re\-evaluates all the instance pools specified in the launch request and selects the one with the lowest price that has sufficient capacity to launch all the requested core nodes\. Available open capacity reservations which match the instance pool get applied automatically\. However, targeted capacity reservations remain unused\.
+When you provision an Amazon EMR cluster, you can choose to override the lowest\-price allocation strategy and prioritize using available targeted capacity reservations first\. In this case, Amazon EMR evaluates all the instance pools with targeted capacity reservations specified in the launch request and picks the one with the lowest price that has sufficient capacity to launch all the requested core nodes\. If none of the instance pools with targeted capacity reservations have sufficient capacity for core nodes, Amazon EMR falls back to the best\-effort case described earlier\. That is, Amazon EMR re\-evaluates all the instance pools specified in the launch request and selects the one with the lowest price that has sufficient capacity to launch all the requested core nodes\. Available open capacity reservations which match the instance pool get applied automatically\. However, targeted capacity reservations remain unused\.
 
 Once the core nodes are provisioned, the Availability Zone is selected and fixed\. Amazon EMR provisions task nodes into instance pools with targeted capacity reservations, starting with the lowest\-priced ones first, in the selected Availability Zone until all the task nodes are provisioned\. Amazon EMR tries to use the available targeted capacity reservations available across each instance pool in the selected Availability Zone first\. Then, only if required, Amazon EMR uses the lowest\-price strategy to provision any remaining task nodes\.
 
@@ -235,10 +235,10 @@ When you use the `RunJobFlow` action to create an instance\-fleet based cluster,
 
 Where `arn:aws:resource-groups:sa-east-1:123456789012:group/MyCRGroup` is replaced with your resource group ARN\.
 
-You can also use the EMR CLI to create an instance fleet\-based cluster using targeted capacity reservations\.
+You can also use the Amazon EMR CLI to create an instance fleet\-based cluster using targeted capacity reservations\.
 
 ```
-aws emr create-cluster \
+aws Amazon EMR create-cluster \
 --name "targeted-CR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -272,7 +272,7 @@ If you want to avoid unexpectedly using any of your open capacity reservations w
 You can also use the Amazon EMR CLI to create an instance fleet\-based cluster without using any open capacity reservations\.  
 
 ```
-aws emr create-cluster \
+aws Amazon EMR create-cluster \
 --name "none-CR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \

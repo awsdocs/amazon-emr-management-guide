@@ -31,7 +31,7 @@ AWS doesn't allow the following magic commands because of security concerns:
 ## Accessing all magic and Sparkmagic commands<a name="accessing-all-magic-commands"></a>
 
 Use the following commands to list all available magic commands:
-+ `%ismagic` lists all currently\-available magic functions
++ `%lsmagic` lists all currently\-available magic functions
 + `%%help` lists currently\-available Spark\-related magic functions provided by the Sparkmagic package
 
 ## Configuring Spark with `%%configure`<a name="using-configure-sparkmagic"></a>

@@ -46,17 +46,17 @@ Pause on the information tooltip for **Spot** to see the current Spot price for 
 
 ## Use the AWS CLI to create a cluster with uniform instance groups<a name="emr-uniform-instance-group-cli"></a>
 
-To specify the instance groups configuration for a cluster using the AWS CLI, use the `create-cluster` command along with the `--instance-groups` parameter\. Amazon EMR assumes the On\-Demand Instance option unless you specify the `BidPrice` argument for an instance group\. For examples of `create-cluster` commands that launch uniform instance groups with On\-Demand Instances and a variety of cluster options, type `aws emr create-cluster help `at the command line, or see [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
+To specify the instance groups configuration for a cluster using the AWS CLI, use the `create-cluster` command along with the `--instance-groups` parameter\. Amazon EMR assumes the On\-Demand Instance option unless you specify the `BidPrice` argument for an instance group\. For examples of `create-cluster` commands that launch uniform instance groups with On\-Demand Instances and a variety of cluster options, type `aws Amazon EMR create-cluster help `at the command line, or see [create\-cluster](https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html) in the *AWS CLI Command Reference*\.
 
 You can use the AWS CLI to create uniform instance groups in a cluster that use Spot Instances\. The offered Spot price depends on Availability Zone\. When you use the CLI or API, you can specify the Availability Zone either with the `AvailabilityZone` argument \(if you're using an EC2\-classic network\) or the `SubnetID `argument of the `--ec2-attributes `parameter\. The Availability Zone or subnet that you select applies to the cluster, so it's used for all instance groups\. If you don't specify an Availability Zone or subnet explicitly, Amazon EMR selects the Availability Zone with the lowest Spot price when it launches the cluster\.
 
-The following example demonstrates a `create-cluster` command that creates master, core, and two task instance groups that all use Spot Instances\. Replace *myKey* with the name of your EC2 key pair\. 
+The following example demonstrates a `create-cluster` command that creates master, core, and two task instance groups that all use Spot Instances\. Replace *myKey* with the name of your Amazon EC2 key pair\. 
 
 **Note**  
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
 ```
-aws emr create-cluster --name "MySpotCluster" --release-label emr-5.33.0 \
+aws Amazon EMR create-cluster --name "MySpotCluster" --release-label emr-5.33.0 \
 --use-default-roles --ec2-attributes KeyName=myKey \
 --instance-groups InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,BidPrice=0.25 \
 InstanceGroupType=CORE,InstanceType=m5.xlarge,InstanceCount=2,BidPrice=0.03 \
@@ -69,7 +69,7 @@ Using the CLI, you can create uniform instance group clusters that specify a uni
 The following example shows a uniform instance group cluster created with two instance types, each with its own custom AMI\. Notice that the custom AMIs are specified only at the instance type level, not at the cluster level\. This is to avoid conflicts between the instance type AMIs and an AMI at the cluster level, which would cause the cluster launch to fail\. 
 
 ```
-aws emr create-cluster --instance-groups 
+aws Amazon EMR create-cluster --instance-groups 
 InstanceGroupType=MASTER,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-123456 
 InstanceGroupType=CORE,InstanceType=m6g.xlarge,InstanceCount=1,CustomAmiId=ami-234567
 ```
@@ -77,7 +77,7 @@ InstanceGroupType=CORE,InstanceType=m6g.xlarge,InstanceCount=1,CustomAmiId=ami-2
 You can add multiple custom AMIs to an instance group that you add to a running cluster\. The `CustomAmiId` argument can be used with the `add-instance-groups` command as shown in the following example\.
 
 ```
-aws emr add-instance-groups —cluster-id j-123456 —instance-groups InstanceGroupType=Task,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-123456
+aws Amazon EMR add-instance-groups —cluster-id j-123456 —instance-groups InstanceGroupType=Task,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-123456
 ```
 
 ## Use the Java SDK to create an instance group<a name="emr-instance-group-sdk"></a>

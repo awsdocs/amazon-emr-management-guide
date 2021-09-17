@@ -4,6 +4,8 @@ Automatic scaling with a custom policy in Amazon EMR release versions 4\.0 and l
 
 **Note**  
 To use the automatic scaling with a custom policy feature in Amazon EMR, you must set `true` for the `VisibleToAllUsers` parameter when you create a cluster\. For more information, see [SetVisibleToAllUsers](https://docs.aws.amazon.com/emr/latest/APIReference/API_SetVisibleToAllUsers.html)\.
+Amazon CloudWatch metrics are critical for Amazon EMR automatic scaling to operate\. We recommend that you closely monitor Amazon CloudWatch metrics to make sure data is not missing\. For more information about how you can configure CloudWatch alarms to detect missing metrics, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\. 
+ Automatic scaling with a custom policy in Amazon EMR release versions 5\.18 to 5\.28 may experience scaling failure caused by data intermittently missing in Amazon CloudWatch metrics\. We recommend that customers use the most recent Amazon EMR versions for an improved autoscaling experience\. You can also reach out to Amazon EMR via AWS Support for a patch if you wish to use a release version between 5\.18 and 5\.28\.
 
 The scaling policy is part of an instance group configuration\. You can specify a policy during initial configuration of an instance group, or by modifying an instance group in an existing cluster, even when that instance group is active\. Each instance group in a cluster, except the master instance group, can have its own scaling policy, which consists of scale\-out and scale\-in rules\. Scale\-out and scale\-in rules can be configured independently, with different parameters for each rule\.
 

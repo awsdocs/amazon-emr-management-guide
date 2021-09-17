@@ -83,12 +83,12 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : true,
-		"EnableAtRestEncryption" : false,
-		"InTransitEncryptionConfiguration" : {
-			"TLSCertificateConfiguration" : {
-				"CertificateProviderType" : "PEM",
-				"S3Object" : "s3://MyConfigStore/artifacts/MyCerts.zip"
+		"EnableInTransitEncryption": true,
+		"EnableAtRestEncryption": false,
+		"InTransitEncryptionConfiguration": {
+			"TLSCertificateConfiguration": {
+				"CertificateProviderType": "PEM",
+				"S3Object": "s3://MyConfigStore/artifacts/MyCerts.zip"
 			}
 		}
 	}
@@ -102,13 +102,13 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : true,
-		"EnableAtRestEncryption" : false,
-		"InTransitEncryptionConfiguration" : {
-			"TLSCertificateConfiguration" : {
-				"CertificateProviderType" : "Custom",
-				"S3Object" : "s3://MyConfig/artifacts/MyCerts.jar",
-				"CertificateProviderClass" : "com.mycompany.MyCertProvider"
+		"EnableInTransitEncryption": true,
+		"EnableAtRestEncryption": false,
+		"InTransitEncryptionConfiguration": {
+			"TLSCertificateConfiguration": {
+				"CertificateProviderType": "Custom",
+				"S3Object": "s3://MyConfig/artifacts/MyCerts.jar",
+				"CertificateProviderClass": "com.mycompany.MyCertProvider"
 			}
 		}
  	}
@@ -125,15 +125,15 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : false,
-		"EnableAtRestEncryption" : true,
-		"AtRestEncryptionConfiguration" : {
-			"S3EncryptionConfiguration" : {
-				"EncryptionMode" : "SSE-S3"
+		"EnableInTransitEncryption": false,
+		"EnableAtRestEncryption": true,
+		"AtRestEncryptionConfiguration": {
+			"S3EncryptionConfiguration": {
+				"EncryptionMode": "SSE-S3"
 			},
-			"LocalDiskEncryptionConfiguration" : {
-				"EncryptionKeyProviderType" : "AwsKms",
-				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+			"LocalDiskEncryptionConfiguration": {
+				"EncryptionKeyProviderType": "AwsKms",
+				"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
 			}
 		}
  	}
@@ -148,22 +148,22 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : true,
-		"EnableAtRestEncryption" : true,
-		"InTransitEncryptionConfiguration" : {
-			"TLSCertificateConfiguration" : {
-				"CertificateProviderType" : "PEM",
-				"S3Object" : "arn:aws:s3:::MyConfigStore/artifacts/MyCerts.zip"
+		"EnableInTransitEncryption": true,
+		"EnableAtRestEncryption": true,
+		"InTransitEncryptionConfiguration": {
+			"TLSCertificateConfiguration": {
+				"CertificateProviderType": "PEM",
+				"S3Object": "arn:aws:s3:::MyConfigStore/artifacts/MyCerts.zip"
 			}
 		},
-		"AtRestEncryptionConfiguration" : {
-			"S3EncryptionConfiguration" : {
-				"EncryptionMode" : "SSE-KMS",
-				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+		"AtRestEncryptionConfiguration": {
+			"S3EncryptionConfiguration": {
+				"EncryptionMode": "SSE-KMS",
+				"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
 			},
-			"LocalDiskEncryptionConfiguration" : {
-				"EncryptionKeyProviderType" : "AwsKms",
-				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+			"LocalDiskEncryptionConfiguration": {
+				"EncryptionKeyProviderType": "AwsKms",
+				"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
 			}
 		}
 	}
@@ -178,23 +178,23 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : true,
-		"EnableAtRestEncryption" : true,
-		"InTransitEncryptionConfiguration" : {
-			"TLSCertificateConfiguration" : {
-				"CertificateProviderType" : "PEM",
-				"S3Object" : "s3://MyConfigStore/artifacts/MyCerts.zip"
+		"EnableInTransitEncryption": true,
+		"EnableAtRestEncryption": true,
+		"InTransitEncryptionConfiguration": {
+			"TLSCertificateConfiguration": {
+				"CertificateProviderType": "PEM",
+				"S3Object": "s3://MyConfigStore/artifacts/MyCerts.zip"
 			}
 		},
-		"AtRestEncryptionConfiguration" : {
-			"S3EncryptionConfiguration" : {
-				"EncryptionMode" : "CSE-KMS",
-				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+		"AtRestEncryptionConfiguration": {
+			"S3EncryptionConfiguration": {
+				"EncryptionMode": "CSE-KMS",
+				"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
 			},
-			"LocalDiskEncryptionConfiguration" : {
-				"EncryptionKeyProviderType" : "Custom",
-				"S3Object" : "arn:aws:s3:::artifacts/MyKeyProvider.jar",
-				"EncryptionKeyProviderClass" : "com.mycompany.MyKeyProvider.jar"
+			"LocalDiskEncryptionConfiguration": {
+				"EncryptionKeyProviderType": "Custom",
+				"S3Object": "arn:aws:s3:::artifacts/MyKeyProvider.jar",
+				"EncryptionKeyProviderClass": "com.mycompany.MyKeyProvider.jar"
 			}
 		}
 	}
@@ -209,25 +209,25 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MySecConfig" --security-configuration '{
 	"EncryptionConfiguration": {
-		"EnableInTransitEncryption" : "true",
-		"EnableAtRestEncryption" : "true",
-		"InTransitEncryptionConfiguration" : {
-			"TLSCertificateConfiguration" : {
-				"CertificateProviderType" : "Custom",
-				"S3Object" : "s3://MyConfig/artifacts/MyCerts.jar", 
-				"CertificateProviderClass" : "com.mycompany.MyCertProvider"
+		"EnableInTransitEncryption": "true",
+		"EnableAtRestEncryption": "true",
+		"InTransitEncryptionConfiguration": {
+			"TLSCertificateConfiguration": {
+				"CertificateProviderType": "Custom",
+				"S3Object": "s3://MyConfig/artifacts/MyCerts.jar", 
+				"CertificateProviderClass": "com.mycompany.MyCertProvider"
 			}
 		},
-		"AtRestEncryptionConfiguration" : {
-			"S3EncryptionConfiguration" : {
-				"EncryptionMode" : "CSE-Custom",
-				"S3Object" : "s3://MyConfig/artifacts/MyCerts.jar", 
-				"EncryptionKeyProviderClass" : "com.mycompany.MyKeyProvider"
+		"AtRestEncryptionConfiguration": {
+			"S3EncryptionConfiguration": {
+				"EncryptionMode": "CSE-Custom",
+				"S3Object": "s3://MyConfig/artifacts/MyCerts.jar", 
+				"EncryptionKeyProviderClass": "com.mycompany.MyKeyProvider"
 				},
-			"LocalDiskEncryptionConfiguration" : {
-				"EncryptionKeyProviderType" : "Custom",
-				"S3Object" : "s3://MyConfig/artifacts/MyCerts.jar",
-				"EncryptionKeyProviderClass" : "com.mycompany.MyKeyProvider"
+			"LocalDiskEncryptionConfiguration": {
+				"EncryptionKeyProviderType": "Custom",
+				"S3Object": "s3://MyConfig/artifacts/MyCerts.jar",
+				"EncryptionKeyProviderClass": "com.mycompany.MyKeyProvider"
 			}
 		}
 	}
@@ -236,7 +236,8 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
 
 The example below illustrates the following scenario:
 + In\-transit data encryption is disabled and at\-rest data encryption is enabled\.
-+ Amazon S3 encryption is enabled with SSE\-KMS and encryption exceptions are applied to individual S3 buckets\.
++ Amazon S3 encryption is enabled with SSE\-KMS\.
++ Multiple AWS KMS keys are used, one per each S3 bucket, and encryption exceptions are applied to these individual S3 buckets\.
 + Local disk encryption is disabled\.
 
 ```
@@ -244,22 +245,22 @@ aws emr create-security-configuration --name "MySecConfig" --security-configurat
   	"EncryptionConfiguration": {
    		"AtRestEncryptionConfiguration": {
       	     	"S3EncryptionConfiguration": {
-        			"EncryptionMode" : "SSE-KMS",
-        			"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012",
-        			"Overrides" : [
+        			"EncryptionMode": "SSE-KMS",
+        			"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012",
+        			"Overrides": [
          				 {
-           				 "BucketName" : "sse-s3-bucket-name",
-            				"EncryptionMode" : "SSE-S3"
+           				 "BucketName": "sse-s3-bucket-name",
+            				"EncryptionMode": "SSE-S3"
           				},
           				{
-            				"BucketName" : "cse-kms-bucket-name",
-           				 "EncryptionMode" : "CSE-KMS",
-            				"AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+            				"BucketName": "cse-kms-bucket-name",
+           				 "EncryptionMode": "CSE-KMS",
+            				"AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
          				 },
          				 {
-           				 "BucketName" : "sse-kms-bucket-name",
-          				  "EncryptionMode" : "SSE-KMS",
-           				 "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+           				 "BucketName": "sse-kms-bucket-name",
+          				  "EncryptionMode": "SSE-KMS",
+           				 "AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
           				}
         					]
       							}
@@ -277,11 +278,11 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MyS3EncryptionConfig" --security-configuration '{
     "EncryptionConfiguration": {
-        "EnableInTransitEncryption" : false,
-        "EnableAtRestEncryption" : true,
-        "AtRestEncryptionConfiguration" : {
-            "S3EncryptionConfiguration" : {
-                "EncryptionMode" : "SSE-S3"
+        "EnableInTransitEncryption": false,
+        "EnableAtRestEncryption": true,
+        "AtRestEncryptionConfiguration": {
+            "S3EncryptionConfiguration": {
+                "EncryptionMode": "SSE-S3"
             }
         }
      }
@@ -295,12 +296,12 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MyLocalDiskEncryptionConfig" --security-configuration '{
     "EncryptionConfiguration": {
-        "EnableInTransitEncryption" : false,
-        "EnableAtRestEncryption" : true,
-        "AtRestEncryptionConfiguration" : {
-            "LocalDiskEncryptionConfiguration" : {
-                "EncryptionKeyProviderType" : "AwsKms",
-                "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+        "EnableInTransitEncryption": false,
+        "EnableAtRestEncryption": true,
+        "AtRestEncryptionConfiguration": {
+            "LocalDiskEncryptionConfiguration": {
+                "EncryptionKeyProviderType": "AwsKms",
+                "AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
             }
         }
      }
@@ -315,13 +316,13 @@ The example below illustrates the following scenario:
 ```
 aws emr create-security-configuration --name "MyLocalDiskEncryptionConfig" --security-configuration '{
     "EncryptionConfiguration": {
-        "EnableInTransitEncryption" : false,
-        "EnableAtRestEncryption" : true,
-        "AtRestEncryptionConfiguration" : {
-            "LocalDiskEncryptionConfiguration" : {
-                "EnableEbsEncryption" : true,
-                "EncryptionKeyProviderType" : "AwsKms",
-                "AwsKmsKey" : "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+        "EnableInTransitEncryption": false,
+        "EnableAtRestEncryption": true,
+        "AtRestEncryptionConfiguration": {
+            "LocalDiskEncryptionConfiguration": {
+                "EnableEbsEncryption": true,
+                "EncryptionKeyProviderType": "AwsKms",
+                "AwsKmsKey": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
             }
         }
      }
@@ -336,11 +337,11 @@ The following table lists the JSON parameters for encryption settings and provid
 | Parameter | Description | 
 | --- |--- |
 | "EnableInTransitEncryption" : true \| false | Specify true to enable in\-transit encryption and false to disable it\. If omitted, false is assumed, and in\-transit encryption is disabled\. | 
-| "EnableAtRestEncryption" : true \| false | Specify true to enable at\-rest encryption and false to disable it\. If omitted, false is assumed and at\-rest encryption is disabled\. | 
+| "EnableAtRestEncryption": true \| false | Specify true to enable at\-rest encryption and false to disable it\. If omitted, false is assumed and at\-rest encryption is disabled\. | 
 | **In\-transit encryption parameters** | 
 | --- |
 | "InTransitEncryptionConfiguration" : | Specifies a collection of values used to configure in\-transit encryption when EnableInTransitEncryption is true\. | 
-|  "CertificateProviderType" : "PEM" \| "Custom" | Specifies whether to use PEM certificates referenced with a zipped file, or a Custom certificate provider\. If PEM is specified, S3Object must be a reference to the location in Amazon S3 of a zip file containing the certificates\. If Custom is specified, S3Object must be a reference to the location in Amazon S3 of a JAR file, followed by a CertificateProviderClass entry\. | 
+|  "CertificateProviderType": "PEM" \| "Custom" | Specifies whether to use PEM certificates referenced with a zipped file, or a Custom certificate provider\. If PEM is specified, S3Object must be a reference to the location in Amazon S3 of a zip file containing the certificates\. If Custom is specified, S3Object must be a reference to the location in Amazon S3 of a JAR file, followed by a CertificateProviderClass entry\. | 
 |  "S3Object" : "ZipLocation" \| "JarLocation" | Provides the location in Amazon S3 to a zip file when PEM is specified, or to a JAR file when Custom is specified\. The format can be a path \(for example, s3://MyConfig/artifacts/CertFiles\.zip\) or an ARN \(for example, arn:aws:s3:::Code/MyCertProvider\.jar\)\. If a zip file is specified, it must contain files named exactly privateKey\.pem and certificateChain\.pem\. A file named trustedCertificates\.pem is optional\. | 
 |   "CertificateProviderClass" : "MyClassID" | Required only if Custom is specified for CertificateProviderType\. MyClassID specifies a full class name declared in the JAR file, which implements the TLSArtifactsProvider interface\. For example, com\.mycompany\.MyCertProvider\. | 
 | **At\-rest encryption parameters** | 
@@ -348,13 +349,14 @@ The following table lists the JSON parameters for encryption settings and provid
 | "AtRestEncryptionConfiguration" :  | Specifies a collection of values for at\-rest encryption when EnableAtRestEncryption is true, including Amazon S3 encryption and local disk encryption\. | 
 | Amazon S3 encryption parameters | 
 | "S3EncryptionConfiguration" : | Specifies a collection of values used for Amazon S3 encryption with the EMR File System \(EMRFS\)\. | 
-| "EncryptionMode" : "SSE\-S3" \| "SSE\-KMS" \| "CSE\-KMS" \| "CSE\-Custom" | Specifies the type of Amazon S3 encryption to use\. If SSE\-S3 is specified, no further Amazon S3 encryption values are required\. If either SSE\-KMS or CSE\-KMS is specified, an AWS KMS customer master key \(CMK\) ARN must be specified as the AwsKmsKey value\. If CSE\-Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
+| "EncryptionMode": "SSE\-S3" \| "SSE\-KMS" \| "CSE\-KMS" \| "CSE\-Custom" | Specifies the type of Amazon S3 encryption to use\. If SSE\-S3 is specified, no further Amazon S3 encryption values are required\. If either SSE\-KMS or CSE\-KMS is specified, an AWS KMS customer master key \(CMK\) ARN must be specified as the AwsKmsKey value\. If CSE\-Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
 | "AwsKmsKey" : "MyKeyARN" | Required only when either SSE\-KMS or CSE\-KMS is specified for EncryptionMode\. MyKeyARN must be a fully specified ARN to a key \(for example, arn:aws:kms:us\-east\-1:123456789012:key/12345678\-1234\-1234\-1234\-123456789012\)\. | 
 |  "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 | "EncryptionKeyProviderClass" : "MyS3KeyClassID" | Required only when CSE\-Custom is specified for EncryptionMode\. MyS3KeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyS3KeyProvider\. | 
 | Local disk encryption parameters | 
 | "LocalDiskEncryptionConfiguration" | Specifies the key provider and corresponding values to be used for local disk encryption\. | 
-| "EncryptionKeyProviderType" : "AwsKms" \| "Custom" | Specifies the key provider\. If AwsKms is specified, an AWS KMS CMK ARN must be specified as the AwsKmsKey value\. If Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
+| "EnableEbsEncryption": true \| false | Specify true to enable EBS encryption\. EBS encryption encrypts the EBS root device volume and attached storage volumes\. To use EBS encryption, you must specify AwsKms as your EncryptionKeyProviderType\. | 
+| "EncryptionKeyProviderType": "AwsKms" \| "Custom" | Specifies the key provider\. If AwsKms is specified, an AWS KMS CMK ARN must be specified as the AwsKmsKey value\. If Custom is specified, S3Object and EncryptionKeyProviderClass values must be specified\. | 
 | "AwsKmsKey : "MyKeyARN" | Required only when AwsKms is specified for Type\. MyKeyARN must be a fully specified ARN to a key \(for example, arn:aws:kms:us\-east\-1:123456789012:key/12345678\-1234\-1234\-1234\-456789012123\)\. | 
 | "S3Object" : "JarLocation" | Required only when CSE\-Custom is specified for CertificateProviderType\. JarLocation provides the location in Amazon S3 to a JAR file\. The format can be a path \(for example, s3://MyConfig/artifacts/MyKeyProvider\.jar\) or an ARN \(for example, arn:aws:s3:::Code/MyKeyProvider\.jar\)\. | 
 |  `"EncryptionKeyProviderClass" : "MyLocalDiskKeyClassID"`  | Required only when Custom is specified for Type\. MyLocalDiskKeyClassID specifies a full class name of a class declared in the application that implements the EncryptionMaterialsProvider interface; for example, com\.mycompany\.MyLocalDiskKeyProvider\. | 
@@ -381,7 +383,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM roles for EMRFS requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM roles for EMRFS using the AWS CLI<a name="w305aac27c27c11c15b7"></a>
+### Specifying IAM roles for EMRFS using the AWS CLI<a name="w331aac27c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 
@@ -430,7 +432,7 @@ For more information, see [Configure the instance metadata service](https://docs
 **Note**  
 In earlier Amazon EMR 5\.x or 6\.x releases, turning off IMDSv1 causes cluster startup failure as Amazon EMR components use IMDSv1 for all IMDS calls\. When turning off IMDSv1, please ensure that any custom software that utilizes IMDSv1 is updated to IMDSv2\.
 
-### Specifying instance metadata service configuration using the AWS CLI<a name="w305aac27c27c11c17c13"></a>
+### Specifying instance metadata service configuration using the AWS CLI<a name="w331aac27c27c11c17c13"></a>
 
 The following is an example JSON snippet for specifying Amazon EC2 instance metadata service \(IMDS\) within a security configuration\.
 

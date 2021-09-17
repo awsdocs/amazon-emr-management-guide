@@ -22,7 +22,7 @@ To create a an Amazon S3 bucket, follow the instructions on the [Creating a buck
 **Note**  
 For more information on specifying Region\-specific buckets, refer to [Buckets and Regions](https://docs.aws.amazon.com/AmazonS3/latest/dev/LocationSelection.html) in the *Amazon Simple Storage Service Developer Guide* and [ Available Region Endpoints for the AWS SDKs ](https://aws.amazon.com/articles/available-region-endpoints-for-the-aws-sdks/)\.
 
- After you create your bucket you can set the appropriate permissions on it\. Typically, you give yourself \(the owner\) read and write access and authenticated users read access\. See [Bucket policies and user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-iam-policies.html) for instructions\. 
+ After you create your bucket you can set the appropriate permissions on it\. Typically, you give yourself \(the owner\) read and write access\. We strongly recommend that you follow [Security Best Practices for Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html) when configuring your bucket\. 
 
  Required Amazon S3 buckets must exist before you can create a cluster\. You must upload any required scripts or data referenced in the cluster to Amazon S3\. The following table describes example data, scripts, and log file locations\. 
 

@@ -9,7 +9,7 @@ The default service role for cluster EC2 instances and its associated AWS defaul
 
 ## Default role and managed policy<a name="emr-ec2-role-default"></a>
 + The default role name is `EMR_EC2_DefaultRole`\.
-+ The `EMR_EC2_DefaultRole` default managed policy, `AmazonElasticMapReduceforEC2Role`, is on the path to deprecation and will not be replaced with another default managed policy\. Instead of using a default managed policy for the EC2 instance profile, apply resource\-based policies to S3 buckets and other resources that Amazon EMR needs, or use your own customer managed policy with an IAM role as an instance profile\. For more information, see [Creating a service role for cluster EC2 instances with least\-privilege permissions](#emr-ec2-role-least-privilege)
++ The `EMR_EC2_DefaultRole` default managed policy, `AmazonElasticMapReduceforEC2Role`, is on the path to deprecation and will not be replaced with another default managed policy\. Instead of using a default managed policy for the EC2 instance profile, apply resource\-based policies to S3 buckets and other resources that Amazon EMR needs, or use your own customer managed policy with an IAM role as an instance profile\. For more information, see [Creating a service role for cluster EC2 instances with least\-privilege permissions](#emr-ec2-role-least-privilege)\.
 
 The following shows the contents of version 3 of `AmazonElasticMapReduceforEC2Role`\.
 
@@ -94,7 +94,7 @@ Because IAM roles for EMRFS will fall back to the permissions attached to the se
 
 The sample statement below demonstrates the permissions that EMRFS requires to make requests to Amazon S3\.
 + *my\-data\-bucket\-in\-s3\-for\-emrfs\-reads\-and\-writes* specifies the bucket in Amazon S3 where the cluster reads and writes data and all sub\-folders using */\**\. Add only those buckets and folders that your application requires\.
-+ The policy statement that allows `dynamodb` actions is required only if EMRFS consistent view is enabled\. *EmrFSMetadata* specifies the default folder for EMRFS consistent view\. For more information, see [Enable consistent view](enable-consistent-view.md)\.
++ The policy statement that allows `dynamodb` actions is required only if EMRFS consistent view is enabled\. *EmrFSMetadata* specifies the default folder for EMRFS consistent view\.
 
 ```
 {

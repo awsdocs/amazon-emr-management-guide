@@ -5,7 +5,7 @@ This option is available only with Amazon EMR version 4\.x and later\. You can s
 For more information about Amazon EBS, see [Amazon EC2 root device volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html)\.
 
 **Note**  
-If you use the default AMI, Amazon EMR attaches General Purpose SSD \(gp2\) as the root device volume type\. A custom AMI may have a different root device volume type\. However, the minimum root volume size for a custom AMI is also 10 GiB\. For more information, see [Specifying a custom AMI](emr-specify-custom-ami.md)\.
+If you use the default AMI, Amazon EMR attaches General Purpose SSD \(gp2\) as the root device volume type\. A custom AMI may have a different root device volume type\. However, the minimum root volume size for a custom AMI is also 10 GiB\. For more information, see [Using a custom AMI](emr-custom-ami.md)\.
 
 The cost of the EBS root device volume is pro\-rated by the hour, based on the monthly EBS charges for that volume type in the Region where the cluster runs\. The same is true of storage volumes\. Charges are in GB, but you specify the size of the root volume in GiB, so you may want to consider this in your estimates \(1 GB is 0\.931323 GiB\)\. To estimate the charges associated with EBS root device volumes in your cluster, use the following formula:
 

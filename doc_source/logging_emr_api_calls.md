@@ -21,7 +21,7 @@ Every event or log entry contains information about who generated the request\. 
 + Whether the request was made with temporary security credentials for a role or federated user\.
 + Whether the request was made by another AWS service\.
 
-For more information, see the [CloudTrail userIdentity element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\.
+In the case where a process, rather than an IAM user, creates a cluster, you can use the `principalId` identifier to determine the user associated with the cluster's creation\. For more information, see the [CloudTrail userIdentity element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\.
 
 ## Example: Amazon EMR log file entries<a name="understanding-emr-entries"></a>
 

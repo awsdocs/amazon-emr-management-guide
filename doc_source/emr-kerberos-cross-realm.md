@@ -150,9 +150,9 @@ To allow your users to log in to the cluster to run Hadoop jobs, you must add HD
 Run the following command to add a step to the cluster that runs a script, *AddHDFSUsers\.sh*\.
 
 ```
-aws emr add-steps --cluster-id ClusterID \
+aws emr add-steps --cluster-id <j-2AL4XXXXXX5T9> \
 --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,\
-Jar=s3://MyRegion.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://MyBucketPath/AddHDFSUsers.sh"]
+Jar=s3://region.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://DOC-EXAMPLE-BUCKET/AddHDFSUsers.sh"]
 ```
 
 The contents of the file *AddHDFSUsers\.sh* is as follows\.

@@ -2,9 +2,9 @@
 
 Each EMR notebook needs permissions to access other AWS resources and perform actions\. The IAM policies attached to this service role provide permissions for the notebook to interoperate with other AWS services\. When you create a notebook using the AWS Management Console, you specify an *AWS service role*\. You can use the default role, `EMR_Notebooks_DefaultRole`, or specify a role that you create\. If a notebook has not been created before, you can choose to create the default role\.
 + The default role name is `EMR_Notebooks_DefaultRole`\.
-+ The default managed policy attached to `EMR_Notebooks_DefaultRole` is `AmazonElasticMapReduceEditorsRole`\.
++ The default managed policies attached to `EMR_Notebooks_DefaultRole` are `AmazonElasticMapReduceEditorsRole` and `S3FullAccessPolicy`\.
 
-The contents of version 1 of `AmazonElasticMapReduceEditorsRole` are shown below\.
+The contents of version 1 of `AmazonElasticMapReduceEditorsRole` are as follows\.
 
 ```
 {
@@ -49,7 +49,22 @@ The contents of version 1 of `AmazonElasticMapReduceEditorsRole` are shown below
 }
 ```
 
-Whether you use the default role for EMR Notebooks or a custom role, you must give the role read and write access to the Amazon S3 location where you want to save your notebook files\. Use the following minimum set of permissions\.
+Following is the contents of the `S3FullAccessPolicy`\. The `S3FullAccessPolicy` allows your service role for EMR Notebooks to perform all Amazon S3 actions on objects in your AWS account\. When you create a custom service role for EMR Notebooks, you must give your service role Amazon S3 permissions\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+You can scope down read and write access for your service role to the Amazon S3 location where you want to save your notebook files\. Use the following minimum set of Amazon S3 permissions\.
 
 ```
 "s3:PutObject",

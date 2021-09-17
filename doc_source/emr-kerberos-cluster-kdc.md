@@ -11,7 +11,7 @@ For more information on Amazon EMR support for Kerberos and KDC, as well as link
    ```
    aws emr create-security-configuration --name MyKerberosConfig \
    --security-configuration '{"AuthenticationConfiguration": {"KerberosConfiguration": 
-   {"Provider": "ClusterDedicatedKdc", "ClusterDedicatedKdcConfiguration": {"TicketLifetimeInHours": 24}}}}}'
+   {"Provider": "ClusterDedicatedKdc", "ClusterDedicatedKdcConfiguration": {"TicketLifetimeInHours": 24}}}}'
    ```
 
 1. Create a cluster that references the security configuration, establishes Kerberos attributes for the cluster, and adds Linux accounts using a bootstrap action\. The following example demonstrates a `create-cluster `command using the AWS CLI\. The command references the security configuration that you created above, `MyKerberosConfig`\. It also references a simple script, `createlinuxusers.sh`, as a bootstrap action, which you create and upload to Amazon S3 before creating the cluster\.
@@ -27,10 +27,10 @@ For more information on Amazon EMR support for Kerberos and KDC, as well as link
    --applications Name=Hadoop Name=Hive Name=Oozie Name=Hue Name=HCatalog Name=Spark \
    --kerberos-attributes Realm=EC2.INTERNAL,\
    KdcAdminPassword=MyClusterKDCAdminPwd \
-   --bootstrap-actions Path=s3://mybucket/createlinuxusers.sh
+   --bootstrap-actions Path=s3://DOC-EXAMPLE-BUCKET/createlinuxusers.sh
    ```
 
-   The following example demonstrates the contents of the `createlinuxusers.sh` script, which adds user1, user2, and user3 to each node in the cluster\. In the next step, you add these users as KDC principals\.
+   The following code demonstrates the contents of the `createlinuxusers.sh` script, which adds user1, user2, and user3 to each node in the cluster\. In the next step, you add these users as KDC principals\.
 
    ```
    #!/bin/bash
@@ -46,10 +46,10 @@ The KDC running on the master node needs a principal added for the local host an
 The easiest way to accomplish these tasks is to submit a step to the cluster\. The following example submits a bash script `configurekdc.sh` to the cluster you created in the previous step, referencing its cluster ID\. The script is saved to Amazon S3\. Alternatively, you can connect to the master node using an EC2 key pair to run the commands or submit the step during cluster creation\.
 
 ```
-aws emr add-steps --cluster-id j-01234567 --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,Jar=s3://myregion.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://mybucket/configurekdc.sh"]
+aws emr add-steps --cluster-id <j-2AL4XXXXXX5T9> --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,Jar=s3://myregion.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://DOC-EXAMPLE-BUCKET/configurekdc.sh"]
 ```
 
-The following example demonstrates the contents of the `configurekdc.sh` script\.
+The following code demonstrates the contents of the `configurekdc.sh` script\.
 
 ```
 #!/bin/bash

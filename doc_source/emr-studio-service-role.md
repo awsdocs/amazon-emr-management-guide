@@ -4,22 +4,22 @@
 
 Each Amazon EMR Studio uses an IAM role with permissions that let the Studio interact with other AWS services\. This service role must include permissions that allow EMR Studio to establish a secure network channel between Workspaces and clusters, to store notebook files in Amazon S3 Control, and to access the AWS Secrets Manager while linking a Workspace to a Git repository\.
 
-Use the Studio service role \(instead of session policies that are associated with your user role\) to define all Amazon S3 access permissions for storing notebook files, and to define AWS Secrets Manager access permissions\.
+Use the Studio service role \(instead of session policies\) to define all Amazon S3 access permissions for storing notebook files, and to define AWS Secrets Manager access permissions\.
 
 **Important**  
-The EMR Studio service role uses tag\-based access control to identify and access the following Studio resources\. You must make sure these resources are tagged with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\. Although resource tags may be optional in older policies, they're required in all updated versions of policies, including the policies documented in the following examples\.  
-The Amazon Virtual Private Cloud associated with your Studio\.
-Each subnet that you associate with your Studio\.
-Your EMR Studio security groups\. You must tag custom security groups\. EMR Studio automatically tags the default security groups at creation time\. Security groups that were created during the EMR Studio preview period must be tagged manually if you want to continue to use them\. 
-Secrets maintained in AWS Secrets Manager that are used to link Git repositories to a Workspace\. Secrets created outside of EMR Studio or during the preview period must be tagged manually\. 
-You can apply tags to resources using the **Tags** tab on the relevant resource screen in the AWS Management Console\. Alternatively, you can use the AWS Resource Groups Tag Editor to apply the required tag to all of your EMR Studio resources at once\. For more information, see [Tag Editor](https://docs.aws.amazon.com/ARG/latest/userguide/tag-editor.html) in the *AWS Resource Groups* *User Guide\.*
+The example service role policy below uses tag\-based access control to identify and access the following Studio resources\. When you use the example policy, you must tag these resources with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\.  
+The Amazon Virtual Private Cloud associated with the Studio\.
+Each subnet that you associate with the Studio\.
+Your EMR Studio security groups\. You must tag custom security groups\. EMR Studio tags the default security groups at creation time\. You must tag any security groups that you created during the EMR Studio preview period if you want to continue to use them\. 
+Secrets maintained in AWS Secrets Manager that Studio users use to link Git repositories to a Workspace\. Tag secrets created outside of EMR Studio, or during the preview period, manually\. 
+You can apply tags to resources using the **Tags** tab on the relevant resource screen in the AWS Management Console\. You can also use the AWS Resource Groups Tag Editor to apply the required tag to each EMR Studio resource at the same time\. For more information, see [Tag Editor](https://docs.aws.amazon.com/ARG/latest/userguide/tag-editor.html) in the *AWS Resource Groups* *User Guide\.*
 
 ## Prerequisites<a name="emr-studio-service-role-prereqs"></a>
 
 To create an Amazon EMR Studio service role, you need the following items:
-+ A designated AWS account for your EMR Studio\. You must create your EMR Studio service role in the same account as your Studio\. If you use multiple accounts in your AWS organization, use a *member* account\. To learn more about AWS terminology, see [AWS Organizations terminology and concepts](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html)\. 
-+ An IAM principal in your designated AWS account that has the necessary permissions to create a service role\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
-+ An Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in your Studio\. Your service role must include read and write access to this bucket\.
++ A designated AWS account for the EMR Studio\. Create the EMR Studio service role in the same account as the Studio\.
++ An IAM entity in your designated AWS account that has the necessary permissions to create a service role\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
++ An Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in the Studio\. Your service role must include read and write access to this bucket\.
 
 ## Instructions<a name="emr-studio-service-role-instructions"></a>
 
@@ -40,11 +40,11 @@ To create an Amazon EMR Studio service role, you need the following items:
    }
    ```
 
-1. Remove any default permissions associated with the role, and include the permissions from the following sample IAM permissions policy\. 
+1. Remove any default permissions associated with the role, and include the permissions from the following sample IAM permissions policy\. Alternatively, you can create a custom policy that includes the [EMR Studio service role permissions](#emr-studio-service-role-permissions-table)\.
 **Note**  
-Where applicable, you should change `"Resource":"*"` in the following policy to specify the Amazon Resource Name \(ARN\) of the resource or resources that the statement covers for your use cases\. 
-Access for the `ModifyNetworkInterfaceAttribute` API must remain as\-is in the following policy, and cannot be scoped down using resource tagging\. This is due to technical limitations with Amazon EC2 tag\-based access control and the way in which EMR Studio uses `ModifyNetworkInterfaceAttribute`\.
-The following statements must remain unchanged in order for EMR Studio to work with your service role: `AllowAddingEMRTagsDuringDefaultSecurityGroupCreation` and `AllowAddingTagsDuringEC2ENICreation`\.
+Where applicable, change `"Resource":"*"` in the following policy to specify the Amazon Resource Name \(ARN\) of the resource or resources that the statement covers for your use cases\. 
+Access for the `ModifyNetworkInterfaceAttribute` API must remain as\-is in the following policy due to technical limitations with Amazon EC2 tag\-based access control and the way EMR Studio uses `ModifyNetworkInterfaceAttribute`\.
+The following statements must remain unchanged in order for EMR Studio to work with the service role: `AllowAddingEMRTagsDuringDefaultSecurityGroupCreation` and `AllowAddingTagsDuringEC2ENICreation`\.
 
    ```
    {
@@ -233,7 +233,7 @@ The following statements must remain unchanged in order for EMR Studio to work w
    "s3:DeleteObject"
    ```
 
-   If your Amazon S3 bucket is encrypted, you must also include the following permissions for AWS Key Management Service\.
+   If you encrypt your Amazon S3 bucket, include the following permissions for AWS Key Management Service\.
 
    ```
    "kms:Decrypt",
@@ -244,14 +244,14 @@ The following statements must remain unchanged in order for EMR Studio to work w
 
 ## EMR Studio service role permissions<a name="emr-studio-service-role-permissions-table"></a>
 
-This table lists the actions that EMR Studio takes using the service role, along with the permissions needed for each action\.
+The following table lists the operations that EMR Studio performs using the service role, along with the IAM actions required for each operation\.
 
 
 ****  
 
-| Action | Permissions | 
+| Operation | Actions | 
 | --- | --- | 
 | Establish a secure network channel between a Workspace and an EMR cluster, and perform necessary cleanup actions\. |  <pre>"ec2:CreateNetworkInterface", <br />"ec2:CreateNetworkInterfacePermission", <br />"ec2:DeleteNetworkInterface", <br />"ec2:DeleteNetworkInterfacePermission", <br />"ec2:DescribeNetworkInterfaces", <br />"ec2:ModifyNetworkInterfaceAttribute", <br />"ec2:AuthorizeSecurityGroupEgress", <br />"ec2:AuthorizeSecurityGroupIngress", <br />"ec2:CreateSecurityGroup",<br />"ec2:DescribeSecurityGroups", <br />"ec2:RevokeSecurityGroupEgress",<br />"ec2:DescribeTags",<br />"ec2:DescribeInstances",<br />"ec2:DescribeSubnets",<br />"ec2:DescribeVpcs",<br />"elasticmapreduce:ListInstances", <br />"elasticmapreduce:DescribeCluster", <br />"elasticmapreduce:ListSteps"</pre>  | 
 | Use Git credentials stored in AWS Secrets Manager to link Git repositories to a Workspace\. |  <pre>"secretsmanager:GetSecretValue"</pre>  | 
 | Apply AWS tags to the network interface and default security groups that EMR Studio creates while setting up the secure network channel\. For more information, see [Tagging AWS resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)\. |  <pre>"ec2:CreateTags"</pre>  | 
-| Access or upload notebook files and metadata to Amazon S3\. |  <pre>"s3:PutObject",<br />"s3:GetObject",<br />"s3:GetEncryptionConfiguration",<br />"s3:ListBucket",<br />"s3:DeleteObject" </pre> The following permissions are only required if you use an encrypted Amazon S3 bucket\. <pre>"kms:Decrypt",<br />"kms:GenerateDataKey",<br />"kms:ReEncrypt",<br />"kms:DescribeKey"</pre>  | 
+| Access or upload notebook files and metadata to Amazon S3\. |  <pre>"s3:PutObject",<br />"s3:GetObject",<br />"s3:GetEncryptionConfiguration",<br />"s3:ListBucket",<br />"s3:DeleteObject" </pre> If you use an encrypted Amazon S3 bucket, include the following permissions\. <pre>"kms:Decrypt",<br />"kms:GenerateDataKey",<br />"kms:ReEncrypt",<br />"kms:DescribeKey"</pre>  | 

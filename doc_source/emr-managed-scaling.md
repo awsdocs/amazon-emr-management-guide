@@ -19,6 +19,7 @@ For more information about managed scaling parameters, see [https://docs.aws.ama
 
 **Considerations and limitations**
 + EMR managed scaling is currently available in 22 AWS Regions: US East \(N\. Virginia and Ohio\), US West \(Oregon and N\. California\), South America \(São Paulo\), Europe \(Frankfurt, Ireland, London, Milan, Paris, and Stockholm\), Canada \(Central\), Asia Pacific \(Hong Kong, Mumbai, Seoul, Singapore, Sydney, and Tokyo\), Middle East \(Bahrain\), Africa \(Cape Town\), China \(Beijing\) operated by Sinnet, and China \(Ningxia\) operated by NWCD\.
++ Amazon CloudWatch metrics are critical for Amazon EMR managed scaling to operate\. We recommend that you closely monitor Amazon CloudWatch metrics to make sure data is not missing\. For more information about how you can configure CloudWatch alarms to detect missing metrics, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\. 
 + Managed scaling operations on 5\.30\.0 and 5\.30\.1 clusters without Presto installed may cause application failures or cause a uniform instance group or instance fleet to stay in the `ARRESTED` state, particularly when a scale down operation is followed quickly by a scale up operation\.
 
   As a workaround, choose Presto as an application to install when you create a cluster, even if your job does not require Presto\.
