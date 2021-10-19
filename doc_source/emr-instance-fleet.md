@@ -205,12 +205,12 @@ Your account and Region may give you the option to choose **Launch into EC2\-Cla
 The following examples demonstrate `create-cluster` commands with a variety of options that you can combine\.
 
 **Note**  
-If you have not previously created the default Amazon EMR service role and EC2 instance profile, use `aws Amazon EMR create-default-roles` to create them before using the `create-cluster` command\.
+If you have not previously created the default Amazon EMR service role and EC2 instance profile, use `aws emr create-default-roles` to create them before using the `create-cluster` command\.
 
 **Example: On\-Demand master, On\-Demand core with single instance type, Default VPC**  
 
 ```
-aws Amazon EMR create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
+aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge}'] \
 InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge}']
@@ -219,7 +219,7 @@ InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceT
 **Example: Spot master, Spot core with single instance type, default VPC**  
 
 ```
-aws Amazon EMR create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
+aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5}'] \
 InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5}']
@@ -228,7 +228,7 @@ InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=
 **Example: On\-Demand master, mixed core with single instance type, single EC2 subnet**  
 
 ```
-aws Amazon EMR create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
+aws emr create-cluster --release-label emr-5.3.1 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole,SubnetIds=['subnet-ab12345c'] \
 --instance-fleets InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge}'] \
 InstanceFleetType=CORE,TargetOnDemandCapacity=2,TargetSpotCapacity=6,InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5,WeightedCapacity=2}']
@@ -262,7 +262,7 @@ InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5,WeightedCapacity=3}']
 **Example: Spot master, no core or task, Amazon EBS configuration, default VPC**  
 
 ```
-aws Amazon EMR create-cluster --release-label Amazon EMR 5.3.1 -service-role EMR_DefaultRole \ 
+aws emr create-cluster --release-label Amazon EMR 5.3.1 -service-role EMR_DefaultRole \ 
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,\
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=60,TimeoutAction=TERMINATE_CLUSTER}'},\
@@ -274,7 +274,7 @@ SizeIn GB=100}},{VolumeSpecification={VolumeType=io1,SizeInGB=100,Iop s=100},Vol
 **Example Multiple custom AMIs, multiple instance types, on\-demand master, on\-demand core**  
 
 ```
-aws Amazon EMR create-cluster —instance-fleets 
+aws emr create-cluster —instance-fleets 
 InstanceFleetType=MASTER,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge, CustomAmiId=ami-123456},{InstanceType=m6g.xlarge, CustomAmiId=ami-234567}'] 
 InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,CustomAmiId=ami-123456},{InstanceType=m6g.xlarge, CustomAmiId=ami-234567}']
 ```
@@ -282,7 +282,7 @@ InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceT
 **Example Add a task node to a running cluster with multiple instance types and multiple custom AMIs**  
 
 ```
-aws Amazon EMR add-instance-fleet —cluster-id j-123456 —instance-fleet 
+aws emr add-instance-fleet —cluster-id j-123456 —instance-fleet 
 InstanceFleetType=Task,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,CustomAmiId=ami-123456}', '{InstanceType=m6g.xlarge,CustomAmiId=ami-234567}']
 ```
 
@@ -290,7 +290,7 @@ InstanceFleetType=Task,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=
 You can configure instance fleet parameters in a JSON file, and then reference the JSON file as the sole parameter for instance fleets\. For example, the following command references a JSON configuration file, `my-fleet-config.json`:  
 
 ```
-aws Amazon EMR create-cluster --release-label emr-5.30.0 --service-role EMR_DefaultRole \
+aws emr create-cluster --release-label emr-5.30.0 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets file://my-fleet-config.json
 ```
@@ -374,7 +374,7 @@ The *my\-fleet\-config\.json* file specifies master, core, and task instance fle
 Use the `modify-instance-fleet` command to specify new target capacities for an instance fleet\. You must specify the cluster ID and the instance fleet ID\. Use the `list-instance-fleets` command to retrieve instance fleet IDs\.
 
 ```
-aws Amazon EMR modify-instance-fleet --cluster-id <cluster-id> /
+aws emr modify-instance-fleet --cluster-id <cluster-id> /
 --instance-fleet InstanceFleetId='<instance-fleet-id>',TargetOnDemandCapacity=1,TargetSpotCapacity=1
 ```
 
@@ -383,7 +383,7 @@ aws Amazon EMR modify-instance-fleet --cluster-id <cluster-id> /
 If a cluster has only master and core instance fleets, you can use the `add-instance-fleet` command to add a task instance fleet\. You can only use this to add task instance fleets\.
 
 ```
-aws Amazon EMR add-instance-fleet --cluster-id <cluster-id> --instance-fleet  InstanceFleetType=TASK,TargetSpotCapacity=1,/
+aws emr add-instance-fleet --cluster-id <cluster-id> --instance-fleet  InstanceFleetType=TASK,TargetSpotCapacity=1,/
 LaunchSpecifications={SpotSpecification='{TimeoutDurationMinutes=20,TimeoutAction=TERMINATE_CLUSTER}'},/
 InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.5}']
 ```
