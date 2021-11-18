@@ -1,10 +1,10 @@
-# EMR integration with EC2 placement groups<a name="emr-plan-ha-placementgroup"></a>
+# Amazon EMR integration with EC2 placement groups<a name="emr-plan-ha-placementgroup"></a>
 
 When you launch an Amazon EMR multiple master node cluster on Amazon EC2, you have the option to use placement group strategies to specify how you want the master node instances deployed to protect against hardware failure\.
 
 Placement group strategies are supported starting with Amazon EMR version 5\.23\.0 as an option for multiple master node clusters\. Currently, only master node types are supported by the placement group strategy, and the `SPREAD` strategy is applied to those master nodes\. The `SPREAD` strategy places a small group of instances across separate underlying hardware to guard against the loss of multiple master nodes in the event of a hardware failure\. Note that an instance launch request could fail if there is insufficient unique hardware to fulfill the request\. For more information about EC2 placement strategies and limitations, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *EC2 User Guide for Linux Instances*\.
 
-There is an initial limit from Amazon EC2 of 500 placement group strategy\-enabled clusters that can be launched per AWS region\. Contact AWS support to request an increase in the number of allowed placement groups\. You can identify EC2 placement groups EMR creates by tracking the key\-value pair that Amazon EMR associates with the EMR placement group strategy\. For more information about EC2 cluster instance tags, see [View cluster instances in Amazon EC2](UsingEMR_Tagging.md)\.
+There is an initial limit from Amazon EC2 of 500 placement group strategy\-enabled clusters that can be launched per AWS region\. Contact AWS support to request an increase in the number of allowed placement groups\. You can identify EC2 placement groups Amazon EMR creates by tracking the key\-value pair that Amazon EMR associates with the Amazon EMR placement group strategy\. For more information about EC2 cluster instance tags, see [View cluster instances in Amazon EC2](UsingEMR_Tagging.md)\.
 
 ## Attaching the placement group managed policy to the EMR role<a name="emr-plan-ha-launch-pg-policy"></a>
 
@@ -28,7 +28,7 @@ Because the `AmazonElasticMapReducePlacementGroupPolicy` managed policy is updat
          ]
       },
       {
-         "Resource":"arn:aws:ec2:*:*:placement-group/EMR_*",
+         "Resource":"arn:aws:ec2:*:*:placement-group/pg-*",
          "Effect":"Allow",
          "Action":[
             "ec2:CreatePlacementGroup"
@@ -40,11 +40,11 @@ Because the `AmazonElasticMapReducePlacementGroupPolicy` managed policy is updat
 
 ## Launch an Amazon EMR multiple master cluster with placement group strategy<a name="emr-plan-ha-launch-pg-strategy"></a>
 
-To launch an Amazon EMR multiple master cluster with a placement group strategy, attach the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` to the EMR role\. For more information, see [Attaching the placement group managed policy to the EMR role](#emr-plan-ha-launch-pg-policy)\.
+To launch an Amazon EMR multiple master cluster with a placement group strategy, attach the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` to the Amazon EMR role\. For more information, see [Attaching the placement group managed policy to the EMR role](#emr-plan-ha-launch-pg-policy)\.
 
-Every time you use this role to start an Amazon EMR multiple master cluster, EMR attempts to launch a cluster with `SPREAD` strategy applied to its master nodes\. If you use a role that does not have the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` attached to it, EMR attempts to launch an Amazon EMR multiple master cluster without a placement group strategy\.
+Every time you use this role to start an Amazon EMR multiple master cluster, Amazon EMR attempts to launch a cluster with `SPREAD` strategy applied to its master nodes\. If you use a role that does not have the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` attached to it, Amazon EMR attempts to launch an Amazon EMR multiple master cluster without a placement group strategy\.
 
-If you launch an Amazon EMR multiple master cluster with the `placement-group-configs` parameter using the EMR API or CLI, EMR only launches the cluster if the EMR role has the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` attached\. If the EMR role does not have the policy attached, the Amazon EMR multiple master cluster start fails\.
+If you launch an Amazon EMR multiple master cluster with the `placement-group-configs` parameter using the EMR API or CLI, Amazon EMR only launches the cluster if the EMR role has the placement group managed policy `AmazonElasticMapReducePlacementGroupPolicy` attached\. If the EMR role does not have the policy attached, the Amazon EMR multiple master cluster start fails\.
 
 **Example – Launching an Amazon EMR multiple master cluster with placement group strategy using the EMR API\.**  
 When you use the RunJobFlow action to create an Amazon EMR multiple master cluster, set the `PlacementGroupConfigs` property to the following\. Currently, the `MASTER` instance role automatically uses `SPREAD` as the placement group strategy\.  

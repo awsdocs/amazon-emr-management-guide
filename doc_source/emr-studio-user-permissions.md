@@ -13,6 +13,9 @@ To set Amazon S3 access permissions for storing notebook files and AWS Secrets M
 
 To set user permissions when you use IAM authentication for EMR Studio, you allow actions such as `elasticmapreduce:RunJobFlow` in an IAM permissions policy\. You can create one or more permissions policies to use\. For example, you might create a basic policy that does not allow a user to create new Amazon EMR clusters, and another policy that does allow cluster creation\. For a list of all Studio actions, see [AWS Identity and Access Management permissions for EMR Studio users](emr-studio-iam-permissions-table.md)\.
 
+**Note**  
+To assign a user to a Studio when you use IAM authentication mode, you must also allow the `CreateStudioPresignedUrl` action in a permissions policy attached to the user\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+
 After you create your policies, you attach the policies to your IAM identities \(users, groups of users, or roles\) for EMR Studio\. 
 
 The following table summarizes how to attach a permissions policy when you use IAM authentication\.
@@ -111,7 +114,11 @@ For more information about the permissions in each example policy, see [AWS Iden
 
 ## Example: Basic user policy<a name="emr-studio-basic-permissions-policy"></a>
 
-The following basic user policy allows most EMR Studio actions, but does not let a user create new Amazon EMR clusters\. The policy includes `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
+The following basic user policy allows most EMR Studio actions, but does not let a user create new Amazon EMR clusters\. 
+
+This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+
+The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 To modify the example permissions policy, use the following guidelines:
 + Replace *<region>* with the code of the AWS Region associated with the Studio\.
@@ -226,7 +233,11 @@ To modify the example permissions policy, use the following guidelines:
 
 ## Example: Intermediate user policy<a name="emr-studio-intermediate-permissions-policy"></a>
 
-The following intermediate user policy allows most EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates\. The policy includes `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
+The following intermediate user policy allows most EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates\. 
+
+This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+
+The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 To modify the example permissions policy, use the following guidelines:
 + Replace *<region>* with the code of the AWS Region associated with the Studio\.
@@ -358,7 +369,11 @@ To modify the example permissions policy, use the following guidelines:
 
 ## Example: Advanced user policy<a name="emr-studio-advanced-permissions-policy"></a>
 
-The following intermediate user policy allows all EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates or by providing a cluster configuration\. The policy includes `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
+The following intermediate user policy allows all EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates or by providing a cluster configuration\. 
+
+This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+
+The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 To modify the example permissions policy, use the following guidelines:
 + Replace *<region>* with the code of the AWS Region associated with the Studio\.

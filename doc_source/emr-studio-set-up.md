@@ -2,11 +2,16 @@
 
 This section is for Amazon EMR Studio administrators\. It covers how to set up an Amazon EMR Studio for your team and provides instructions for tasks such as assigning users and groups, setting up cluster templates, and optimizing Apache Spark for Amazon EMR Studio\.
 
-## Before you start<a name="emr-studio-set-up-prereqs"></a>
+## Quickstart: The EMR Studio workshop<a name="emr-studio-workshop"></a>
 
+The [Amazon EMR developer experience workshop](https://emr-developer-experience.workshop.aws/) helps you build a foundational knowledge of Amazon EMR Studio through a series of lab activities\. In the workshop, you set up a Studio, create and attach an Amazon EMR cluster to a Workspace in the Studio, and analyze data using a sample notebook\.
+
+## How to set up an Amazon EMR Studio<a name="emr-studio-set-up-instructions"></a>
+
+The steps below cover how to set up resources for an Amazon EMR Studio, how to create a Studio, and how to assign users and groups\.
+
+**Note**  
 If you plan to use EMR Studio with Amazon EMR on EKS, we recommend that you [Set up Amazon EMR on EKS for Amazon EMR Studio](emr-studio-create-eks-cluster.md) before you set up a Studio\.
-
-## Instructions<a name="emr-studio-set-up-instructions"></a>
 
 **To set up an EMR Studio**
 
@@ -20,7 +25,7 @@ If you plan to use EMR Studio with Amazon EMR on EKS, we recommend that you [Set
 
    You can also use AWS CloudFormation to create EMR Studio resources\. For an example CloudFormation template, see `full_studio_dependencies.yml` in the [emr\-studio\-samples GitHub repository](https://github.com/aws-samples/emr-studio-samples/blob/main/full_studio_dependencies.yml)\. For more information about CloudFormation, see [Working with templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html) and [Working with stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)\.
 
-1. Add the [Permissions required to create and manage an EMR Studio](emr-studio-admin-permissions.md)
+1. Add the [Administrator permissions to create and manage an EMR Studio](emr-studio-admin-permissions.md)
 
 1. [Create an EMR Studio](emr-studio-create-studio.md)
 

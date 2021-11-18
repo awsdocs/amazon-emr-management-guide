@@ -60,18 +60,6 @@ The following condition keys are available in Amazon EMR:
 + Use the `elasticmapreduce:ResourceTag/TagKeyString` condition context key to allow or deny user actions on clusters or notebooks with tags that have the `TagKeyString` that you specify\. If an action passes both `ClusterID` and `NotebookID`, the condition applies to both the cluster and the notebook\. This means that both resources must have the tag key string or key\-value combination that you specify\. You can use the `Resource` element to limit the statement so that it applies only to clusters or notebooks as required\. For more information, see [Amazon EMR identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 + Use the `elasticmapreduce:RequestTag/TagKeyString` condition context key to require a specific tag with actions/API calls\. For example, you can use this condition context key along with the `CreateEditor` action to require that a key with `TagKeyString` is applied to a notebook when it is created\.
 
-## Understanding the EMR Cluster VisibleToAllUsers setting<a name="security_set_visible_to_all_users"></a>
-
-`VisibleToAllUsers` is a cluster setting unique to Amazon EMR that works together with IAM policies\. When this setting is `true`, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow\. When `false`, only the IAM principal that created the cluster and the AWS account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals\.
-
-When you create a cluster using the console, the default value is `true`\. You can use advanced cluster creation options to modify the setting by selecting or clearing the **Cluster visible to all IAM users in account** setting on the **Security** page\.
-
-When you create a cluster using the Amazon EMR API or the AWS CLI, the value defaults to `false` unless a value is provided\. When using the AWS CLI to create a cluster, use the `--visible-to-all-users` or `--no-visible-to-all-users` options of the [emr create\-cluster](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/emr/create-cluster.html) command to set the value to `true` or `false` respectively\. When using the Amazon EMR API to create a cluster, use the [VisibleToAllUsers](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html#EMR-RunJobFlow-request-VisibleToAllUsers) property of the `RunJobFlow` action to set the value\.
-
-On a running cluster that has `VisibleToAllUsers` set to `false`, only the IAM principal that created the cluster and the AWS account root user can change the setting\. If `VisibleToAllUsers` is set to `true`, IAM principals that are allowed to use the [SetVisibleToAllUsers](https://docs.aws.amazon.com/emr/latest/APIReference/API_SetVisibleToAllUsers.html) action can change the setting\.
-
-On a running cluster, you can't change the value using the Amazon EMR console\. You must use the `SetVisibleToAllUsers` action of the Amazon EMR API or the [modify\-cluster\-attributes](https://docs.aws.amazon.com/cli/latest/reference/emr/modify-cluster-attributes.html) AWS CLI command with either the `--visible-to-all-users` or the `--no-visible-to-all-users` option\.
-
 ## Examples<a name="security_iam_emr-with-iam-id-based-policies-examples"></a>
 
 To view examples of Amazon EMR identity\-based policies, see [Amazon EMR identity\-based policy examples](security_iam_id-based-policy-examples.md)\.

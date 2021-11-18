@@ -21,7 +21,7 @@ Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a 
 
 1. Configure the plugins to connect to the Ranger Admin server by entering the Secret Manager ARN for the Admin server and the address\.
 
-1. Select the applications to configure Ranger Plugins\. Fill in the Secret Manager ARN that contain the private TLS certificate for the plugin\.
+1. Select the applications to configure Ranger plugins\. Fill in the Secret Manager ARN that contain the private TLS certificate for the plugin\.
 
    If you do not configure Apache Spark or Apache Hive, and they are selected as an application for your cluster, the request fails\.
 

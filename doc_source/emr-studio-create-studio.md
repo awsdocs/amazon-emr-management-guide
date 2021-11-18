@@ -6,14 +6,10 @@ You can create an EMR Studio for your team using the Amazon EMR console or the A
 
 Before you create an EMR Studio, you need the following:
 + Authentication set up for EMR Studio\. For more information, see [Choose an authentication mode for Amazon EMR Studio](emr-studio-authentication.md)\.
-+ Permission to create and manage an EMR Studio\. For more information, see [Permissions required to create and manage an EMR Studio](emr-studio-admin-permissions.md)\.
++ Permission to create and manage an EMR Studio\. For more information, see [Administrator permissions to create and manage an EMR Studio](emr-studio-admin-permissions.md)\.
 + An IAM service role, IAM permissions policies, and security groups set up for Amazon EMR Studio\. For more information, see [Configure EMR Studio security](emr-studio-security.md)\.
-+ A designated Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in the Studio\. Your EMR Studio service role must have read and write access to the bucket that you select\.
-+ An Amazon Virtual Private Cloud \(VPC\) designated for the Studio\. If you plan to use Amazon EMR on EKS with EMR Studio, choose the same VPC as your Amazon EKS cluster worker nodes\.
-+ A maximum of five subnets in your designated VPC to associate with the Studio\. If you plan to use publicly hosted Git repositories, use private subnets that have access to the internet through Network Address Translation \(NAT\)\. 
-**Note**  
-There must be *at least one subnet in common* between the EMR Studio and the Amazon EKS cluster that you use to register your virtual cluster\. Otherwise, the managed endpoint won't appear as an option in Studio Workspaces\. You can create an Amazon EKS cluster and associate it with a subnet that belongs to the Studio, or create a Studio and specify your EKS cluster's subnets\.
-+ The AWS Command Line Interface **version 1\.18\.184** or later, or **version 2\.1\.4** or later if you want to use the AWS CLI\. Use credentials for the AWS account which you have designated for the Studio\.
++ An Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in the Studio\. Your EMR Studio service role must have read and write access to the bucket that you select\.
++ An Amazon Virtual Private Cloud \(VPC\) for the Studio, and a maximum of five subnets\. For tips on how to configure networking, see [VPC and subnet best practices](emr-studio-considerations.md#emr-studio-vpc-subnet-best-practices)\.
 + The following EMR Studio resources tagged so that the EMR Studio service role can identify and access them\. You can skip this step if you use a custom service role that does not apply tag\-based access control\. Apply the tag key `"for-use-with-amazon-emr-managed-policies"` and set its value to `"true"`\. 
   + Your VPC
   + Each subnet that you want to associate with your Studio

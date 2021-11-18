@@ -1,8 +1,8 @@
-# Permissions required to create and manage an EMR Studio<a name="emr-studio-admin-permissions"></a>
+# Administrator permissions to create and manage an EMR Studio<a name="emr-studio-admin-permissions"></a>
 
 ## About the required EMR Studio permissions<a name="emr-studio-about-admin-permissions"></a>
 
-These permissions described on this page let you create and manage EMR Studios\. Before you create an Amazon EMR Studio, make sure you have these permissions\. For detailed information about each required permission, see [Permissions required to manage an EMR Studio](#emr-studio-admin-permissions-table)\.
+The IAM permissions described on this page let you create and manage an EMR Studio\. For detailed information about each required permission, see [Permissions required to manage an EMR Studio](#emr-studio-admin-permissions-table)\.
 
 ## Prerequisites<a name="emr-studio-admin-permissions-prereqs"></a>
 

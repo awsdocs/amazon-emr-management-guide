@@ -89,7 +89,7 @@ The following shows the contents of the current `AmazonEMRServicePolicy_v2` poli
 				"arn:aws:ec2:*::image/ami-*",
 				"arn:aws:ec2:*:*:key-pair/*",
 				"arn:aws:ec2:*:*:capacity-reservation/*",
-				"arn:aws:ec2:*:*:placement-group/EMR_*",
+				"arn:aws:ec2:*:*:placement-group/pg-*",
 				"arn:aws:ec2:*:*:fleet/*",
 				"arn:aws:ec2:*:*:dedicated-host/*",
 				"arn:aws:resource-groups:*:*:group/*"
@@ -177,7 +177,7 @@ The following shows the contents of the current `AmazonEMRServicePolicy_v2` poli
 				"ec2:DeleteTags"
 			],
 			"Resource": [
-				"arn:aws:ec2:*:*:placement-group/EMR_*"
+				"arn:aws:ec2:*:*:placement-group/pg-*"
 			]
 		},
 		{
@@ -269,7 +269,7 @@ The following shows the contents of the current `AmazonEMRServicePolicy_v2` poli
 			"Action": [
 				"ec2:CreatePlacementGroup"
 			],
-			"Resource": "arn:aws:ec2:*:*:placement-group/EMR_*"
+			"Resource": "arn:aws:ec2:*:*:placement-group/pg-*"
 		},
 		{
 			"Sid": "DeletePlacementGroups",

@@ -2,7 +2,7 @@
 
 You can use a *bootstrap action* to install additional software or customize the configuration of cluster instances\. Bootstrap actions are scripts that run on cluster after Amazon EMR launches the instance using the Amazon Linux Amazon Machine Image \(AMI\)\. Bootstrap actions run before Amazon EMR installs the applications that you specify when you create the cluster and before cluster nodes begin processing data\. If you add nodes to a running cluster, bootstrap actions also run on those nodes in the same way\. You can create custom bootstrap actions and specify them when you create your cluster\. 
 
-Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [Differences in Amazon EMR 4\.x release versions](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-differences.html) in the Amazon EMR Release Guide\.
+Most predefined bootstrap actions for Amazon EMR AMI versions 2\.x and 3\.x are not supported in Amazon EMR releases 4\.x\. For example, `configure-Hadoop` and `configure-daemons` are not supported in Amazon EMR release 4\.x\. Instead, Amazon EMR release 4\.x natively provides this functionality\. For more information about how to migrate bootstrap actions from Amazon EMR AMI versions 2\.x and 3\.x to Amazon EMR release 4\.x, go to [ Customizing cluster and application configuration with earlier AMI versions of Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-3x-customizeappconfig.html) in the Amazon EMR Release Guide\.
 
 **Topics**
 + [Bootstrap action basics](#bootstrapUses)
@@ -63,6 +63,9 @@ When using Amazon EMR versions 4\.0 and later, you must manually create the `/mn
 ## Use custom bootstrap actions<a name="bootstrapCustom"></a>
 
 You can create a custom script to perform a customized bootstrap action\. Any of the Amazon EMR interfaces can reference a custom bootstrap action\.
+
+**Note**  
+For the best performance, we recommend that you store custom bootstrap actions, scripts, and other files that you want to use with Amazon EMR in an Amazon S3 bucket that is in the same AWS Region as your cluster\.
 
 **Topics**
 + [Add custom bootstrap actions using the AWS CLI or the Amazon EMR CLI](#CustombootstrapCLI)

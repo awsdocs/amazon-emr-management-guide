@@ -50,7 +50,7 @@ Choose options under **Encryption** according to the following guidelines\.
     Specifies [server\-side encryption with AWS KMS\-managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) or [client\-side encryption with AWS KMS\-managed keys \(CSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)\. For **AWS KMS key**, select a key\. The key must exist in the same region as your EMR cluster\. For key requirements, see [Using AWS KMS customer master keys \(CMKs\) for encryption](emr-encryption-enable.md#emr-awskms-keys)\.
   + **CSE\-Custom**
 
-    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-custom\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryptionUpload.html)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
+    Specifies [client\-side encryption using a custom client\-side master key \(CSE\-custom\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingClientSideEncryption.html#client-side-encryption-client-side-master-key-intro)\. For **S3 object**, enter the location in Amazon S3, or the Amazon S3 ARN, of your custom key\-provider JAR file\. Then, for **Key provider class**, enter the full class name of a class declared in your application that implements the EncryptionMaterialsProvider interface\.
 + Under **Local disk encryption**, choose a value for **Key provider type**\.
   + **AWS KMS key**
 
@@ -383,7 +383,7 @@ IAM roles for EMRFS allow you to provide different permissions to EMRFS data in 
 
 For more information, see [Configure IAM roles for EMRFS requests to Amazon S3](emr-emrfs-iam-roles.md)\.
 
-### Specifying IAM roles for EMRFS using the AWS CLI<a name="w331aac27c27c11c15b7"></a>
+### Specifying IAM roles for EMRFS using the AWS CLI<a name="w346aac27c27c11c15b7"></a>
 
 The following is an example JSON snippet for specifying custom IAM roles for EMRFS within a security configuration\. It demonstrates role mappings for the three different identifier types, followed by a parameter reference\. 
 
@@ -432,7 +432,7 @@ For more information, see [Configure the instance metadata service](https://docs
 **Note**  
 In earlier Amazon EMR 5\.x or 6\.x releases, turning off IMDSv1 causes cluster startup failure as Amazon EMR components use IMDSv1 for all IMDS calls\. When turning off IMDSv1, please ensure that any custom software that utilizes IMDSv1 is updated to IMDSv2\.
 
-### Specifying instance metadata service configuration using the AWS CLI<a name="w331aac27c27c11c17c13"></a>
+### Specifying instance metadata service configuration using the AWS CLI<a name="w346aac27c27c11c17c13"></a>
 
 The following is an example JSON snippet for specifying Amazon EC2 instance metadata service \(IMDS\) within a security configuration\.
 

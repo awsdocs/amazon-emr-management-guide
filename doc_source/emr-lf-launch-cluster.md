@@ -12,7 +12,7 @@ After you launch your cluster, ensure you [update the callback or single sign\-o
 
 ## Example: Create an EMR Cluster with Lake Formation using the AWS CLI<a name="emr-lf-launch-cluster-example"></a>
 
-The following example AWS CLI command launches an Amazon EMR cluster with Zeppelin integrated with AWS Lake Formation\. It includes specified values for `--kerberos-attributes`, `--security-configuration`, and `InstanceProfile` as required for EMR integration with Lake Formation\.
+The following AWS CLI command launches an Amazon EMR cluster in a public subnet with Zeppelin integrated with AWS Lake Formation\. It includes specified values for `--kerberos-attributes`, `--security-configuration`, and `InstanceProfile` as required for EMR integration with Lake Formation\.
 
 ```
 aws emr create-cluster --region us-east-1 \
@@ -26,6 +26,8 @@ InstanceGroupType=CORE,InstanceCount=1,InstanceType=m4.xlarge \
 --security-configuration security-configuration \
 --name cluster-name
 ```
+
+If you're launching your cluster in a private subnet without a Network Address Translation \(NAT\) Gateway attached, you'll need to add both a AWS Glue Data Catalog and interface VPC endpoints in order for your cluster to integrate with Lake Formation\. For more information, see [AWS Lake Formation and interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/lake-formation/latest/dg/privatelink.html)\.
 
 ## Update the callback or single sign\-on URL with your Identity Provider<a name="emr-lf-url"></a>
 

@@ -84,7 +84,7 @@ When you delete an EMR notebook using the Amazon EMR console, you delete the not
 
    The notebook is removed from the list, and notebook details can no longer be viewed\.
 
-1. Follow the instructions for [How do I delete folders from an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-folders.html) in the Amazon Simple Storage Service Console User Guide\. Navigate to the bucket and folder from step 3\.
+1. Follow the instructions for [How do I delete folders from an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-folders.html) in the Amazon Simple Storage Service User Guide\. Navigate to the bucket and folder from step 3\.
 
    —or—
 
@@ -114,7 +114,7 @@ You can use this process to use EMR notebooks shared by others, notebooks shared
 
 1. Replace the old notebook file in the Amazon S3 location with the new one, using exactly the same name\.
 
-   The following AWS CLI command for Amazon S3 replaces a file saved to a local machine called `SharedNotebook.ipynb` for an EMR notebook with the name **MyNotebook**, an ID of `e-12A3BCDEFJHIJKLMNO45PQRST`, and created with `MyBucket/MyNotebooksFolder` specified in Amazon S3\. For information about using the Amazon S3 console to copy and replace files, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   The following AWS CLI command for Amazon S3 replaces a file saved to a local machine called `SharedNotebook.ipynb` for an EMR notebook with the name **MyNotebook**, an ID of `e-12A3BCDEFJHIJKLMNO45PQRST`, and created with `MyBucket/MyNotebooksFolder` specified in Amazon S3\. For information about using the Amazon S3 console to copy and replace files, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
 
    ```
    aws s3 cp SharedNotebook.ipynb s3://MyBucket/MyNotebooksFolder/-12A3BCDEFJHIJKLMNO45PQRST/MyNotebook.ipynb

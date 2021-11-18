@@ -71,7 +71,7 @@ When you use the `RunJobFlow` action to create an instance fleet\-based cluster,
 You can also use the Amazon EMR CLI to create an instance fleet\-based cluster using open capacity reservations\.
 
 ```
-aws Amazon EMR create-cluster \
+aws emr create-cluster \
 --name "open-ODCR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -154,7 +154,7 @@ When you use the `RunJobFlow` action to create an instance fleet\-based cluster,
 You can also use the Amazon EMR CLI to create an instance\-fleet based cluster using capacity reservations first\.
 
 ```
-aws Amazon EMR create-cluster \
+aws emr create-cluster \
 --name "use-CR-first-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -238,7 +238,7 @@ Where `arn:aws:resource-groups:sa-east-1:123456789012:group/MyCRGroup` is replac
 You can also use the Amazon EMR CLI to create an instance fleet\-based cluster using targeted capacity reservations\.
 
 ```
-aws Amazon EMR create-cluster \
+aws emr create-cluster \
 --name "targeted-CR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \
@@ -272,7 +272,7 @@ If you want to avoid unexpectedly using any of your open capacity reservations w
 You can also use the Amazon EMR CLI to create an instance fleet\-based cluster without using any open capacity reservations\.  
 
 ```
-aws Amazon EMR create-cluster \
+aws emr create-cluster \
 --name "none-CR-cluster" \
 --release-label emr-5.30.0 \
 --service-role EMR_DefaultRole \

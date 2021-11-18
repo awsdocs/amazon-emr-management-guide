@@ -6,12 +6,12 @@ To be able to configure service definitions, REST calls must be made to the Rang
 
 **Installing Apache Spark's Service Definition**
 
-To install Apache Spark's service definition, see [Apache Spark plugin](emr-ranger-plugins.md#emr-ranger-spark)\.
+To install Apache Spark's service definition, see [Apache Spark plugin](emr-ranger-spark.md)\.
 
 **Installing EMRFS Service Definition**
 
-To install the S3 service definition for Amazon EMR, see [EMRFS S3 plugin](emr-ranger-plugins.md#emr-ranger-emrfs)\.
+To install the S3 service definition for Amazon EMR, see [EMRFS S3 plugin](emr-ranger-emrfs.md)\.
 
 **Using Hive Service Definition**
 
-Apache Hive can use the existing Ranger service definition that ships with Apache Ranger 2\.0 and later\. For more information, see [Apache Hive plugin](emr-ranger-plugins.md#emr-ranger-hive)\.
+Apache Hive can use the existing Ranger service definition that ships with Apache Ranger 2\.0 and later\. For more information, see [Apache Hive plugin](emr-ranger-hive.md)\.

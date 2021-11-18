@@ -118,10 +118,10 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
 ## Use multiple custom AMIs in an Amazon EMR cluster<a name="multiple-custom-ami"></a>
 
-To create a cluster using multiple custom AMIs, use the AWS CLI, AWS SDK or the Amazon EMR [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html) in the *Amazon EMR API Reference*\. AWS CloudFormation and AWS Management Console currently do not support creating a cluster using multiple custom AMIs\. 
+To create a cluster using multiple custom AMIs, use the AWS CLI version 1\.20\.21 or later, AWS SDK or the Amazon EMR [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html) in the *Amazon EMR API Reference*\. AWS CloudFormation and AWS Management Console currently do not support creating a cluster using multiple custom AMIs\. 
 
 **Example \- Use the AWS CLI to create an instance group cluster using multiple custom AMIs**  
-Using the AWS CLI, you can assign a single custom AMI to the entire cluster, or you can assign multiple custom AMIs to every instance node in your cluster\.  
+Using the AWS CLI version 1\.20\.21 or later, you can assign a single custom AMI to the entire cluster, or you can assign multiple custom AMIs to every instance node in your cluster\.  
 The following example shows a uniform instance group cluster created with two instance types \(m5\.xlarge\) used across node types \(master, core, task\)\. Each node has multiple custom AMIs\. The example illustrates several features of the multiple custom AMI configuration:   
 + There is no custom AMI assigned at the cluster level\. This is to avoid conflicts between the multiple custom AMIs and a single custom AMI, which would cause the cluster launch to fail\.
 + The cluster can have multiple custom AMIs across master, core, and individual task nodes\. This allows individual AMI customizations, such as pre\-installed applications, sophisticated cluster configurations, and encrypted Amazon EBS root device volumes\.
@@ -136,8 +136,8 @@ InstanceGroupType=TASK,InstanceType=m6g.xlarge,InstanceCount=1,CustomAmiId=ami-3
 InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-456789
 ```
 
-**Example \- Use the AWS CLI to add a task node to a running instance group cluster with multiple instance types and multiple custom AMIs**  
-Using the AWS CLI, you can add multiple custom AMIs to an instance group that you add to a running cluster\. The `CustomAmiId` argument can be used with the `add-instance-groups` command as shown in the following example\. Notice that the same multiple custom AMI ID \(ami\-123456\) is used in more than one node\.   
+**Example \- Use the AWS CLI version 1\.20\.21 or later to add a task node to a running instance group cluster with multiple instance types and multiple custom AMIs**  
+Using the AWS CLI version 1\.20\.21 or later, you can add multiple custom AMIs to an instance group that you add to a running cluster\. The `CustomAmiId` argument can be used with the `add-instance-groups` command as shown in the following example\. Notice that the same multiple custom AMI ID \(ami\-123456\) is used in more than one node\.   
 
 ```
 aws emr create-cluster --instance-groups 
@@ -153,7 +153,7 @@ InstanceGroupType=TASK,InstanceType=m5.xlarge,InstanceCount=1,CustomAmiId=ami-23
 aws emr add-instance-groups --cluster-id j-123456 --instance-groups InstanceGroupType=Task,InstanceType=m6g.xlarge,InstanceCount=1,CustomAmiId=ami-345678
 ```
 
-**Example \- Use the AWS CLI to create an instance fleet cluster, multiple custom AMIs, multiple instance types, On\-Demand master, On\-Demand core, multiple core and task nodes**  
+**Example \- Use the AWS CLI version 1\.20\.21 or later to create an instance fleet cluster, multiple custom AMIs, multiple instance types, On\-Demand master, On\-Demand core, multiple core and task nodes**  
 
 ```
 aws emr create-cluster --instance-fleets 
@@ -162,7 +162,7 @@ InstanceFleetType=CORE,TargetOnDemandCapacity=1,InstanceTypeConfigs=['{InstanceT
 InstanceFleetType=TASK,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,CustomAmiId=ami-456789},{InstanceType=m6g.xlarge, CustomAmiId=ami-567890}']
 ```
 
-**Example \- Use the AWS CLI to add task nodes to a running cluster with multiple instance types and multiple custom AMIs**  
+**Example \- Use the AWS CLI version 1\.20\.21 or later to add task nodes to a running cluster with multiple instance types and multiple custom AMIs**  
 
 ```
 aws emr create-cluster --instance-fleets 

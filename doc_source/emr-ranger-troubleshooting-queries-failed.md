@@ -2,7 +2,7 @@
 
 **Check Apache Ranger plugin logs \(Apache Hive, EMR RecordServer, EMR SecretAgent, etc\., logs\)**
 
-This section is common across all applications that integrate with the Ranger Plugin, such as Apache Hive, EMR Record Server, and EMR SecretAgent\.
+This section is common across all applications that integrate with the Ranger plugin, such as Apache Hive, EMR Record Server, and EMR SecretAgent\.
 
 **Common Error Messages**
 

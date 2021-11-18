@@ -4,6 +4,7 @@ Amazon EMR provides several ways to get data onto a cluster\. The most common wa
 
 **Topics**
 + [Upload data to Amazon S3](emr-plan-upload-s3.md)
++ [Upload data with AWS DataSync](emr-plan-upload-datasync.md)
 + [Import files with distributed cache](emr-plan-input-distributed-cache.md)
 + [How to process compressed files](HowtoProcessGzippedFiles.md)
 + [Import DynamoDB data into Hive](emr-plan-input-dynamodb.md)

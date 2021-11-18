@@ -67,7 +67,7 @@ Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console
 
 ### Specifying a role as a key user<a name="emr-emrfs-iam-role-key-user"></a>
 
-If a role allows access to a location in Amazon S3 that is encrypted using an AWS Key Management Service customer master key \(CMK\), make sure that the role is specified as a key user\. This gives the role permission to use the CMK\. For more information, see [Using key policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide*\.
+If a role allows access to a location in Amazon S3 that is encrypted using an AWS Key Management Service customer master key \(CMK\), make sure that the role is specified as a key user\. This gives the role permission to use the CMK\. For more information, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) in the *AWS Key Management Service Developer Guide*\.
 
 ## Set up a security configuration with IAM roles for EMRFS<a name="emr-emrfs-iam-roles-setup"></a>
 

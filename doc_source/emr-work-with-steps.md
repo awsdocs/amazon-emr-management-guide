@@ -6,6 +6,9 @@ With Amazon EMR versions 4\.8\.0 and later, except version 5\.0\.0, you can canc
 
 With Amazon EMR versions 5\.28\.0 and later, you can cancel both pending and running steps\. You can also choose to run multiple steps in parallel to improve cluster utilization and save cost\.
 
+**Note**  
+For the best performance, we recommend that you store custom bootstrap actions, scripts, and other files that you want to use with Amazon EMR in an Amazon S3 bucket that is in the same AWS Region as your cluster\.
+
 **Topics**
 + [Adding steps to a cluster using the console](emr-add-steps-console.md)
 + [Adding steps to a cluster using the AWS CLI](add-step-cli.md)

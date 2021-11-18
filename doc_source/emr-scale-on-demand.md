@@ -15,9 +15,3 @@ You can adjust the number of Amazon EC2 instances available to an Amazon EMR clu
 **Considerations**
 + An Amazon EMR cluster always consists of one or three master nodes\. You can't scale the number of master nodes after you initially configure the cluster\. You can only scale core and task nodes in a cluster\. 
 + Reconfiguration and resizing of an instance group cannot occur at the same time\. If a reconfiguration is initiated while an instance group is resizing, then reconfiguration cannot start until the instance group has completed resizing, and the other way around\.
-
-**Topics**
-+ [Using EMR managed scaling in Amazon EMR](emr-managed-scaling.md)
-+ [Using automatic scaling with a custom policy for instance groups](emr-automatic-scaling.md)
-+ [Manually resizing a running cluster](emr-manage-resize.md)
-+ [Cluster scale\-down](emr-scaledown-behavior.md)

@@ -30,7 +30,7 @@ The following errors are common in cluster input and output operations\.
 
 ## Are you referencing an Amazon S3 bucket using an invalid name format?<a name="validdnsname"></a>
 
- If you attempt to use a bucket name such as "*DOC\-EXAMPLE\-BUCKET1*\.1" with Amazon EMR, your cluster will fail because Amazon EMR requires that bucket names be valid RFC 2396 host names; the name cannot end with a number\. In addition, because of the requirements of Hadoop, Amazon S3 bucket names used with Amazon EMR must contain only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\. For more information about how to format Amazon S3 bucket names, see [Bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/index.html?BucketRestrictions.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+ If you attempt to use a bucket name such as "*DOC\-EXAMPLE\-BUCKET1*\.1" with Amazon EMR, your cluster will fail because Amazon EMR requires that bucket names be valid RFC 2396 host names; the name cannot end with a number\. In addition, because of the requirements of Hadoop, Amazon S3 bucket names used with Amazon EMR must contain only lowercase letters, numbers, periods \(\.\), and hyphens \(\-\)\. For more information about how to format Amazon S3 bucket names, see [Bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/index.html?BucketRestrictions.html) in the *Amazon Simple Storage Service User Guide*\. 
 
 ## Are you experiencing trouble loading data to or from Amazon S3?<a name="emr-troubleshoot-errors-io-1"></a>
 
@@ -48,4 +48,4 @@ The following errors are common in cluster input and output operations\.
 +  Consider disabling Hadoop's speculative execution feature if your cluster is experiencing Amazon S3 concurrency issues\. This is also useful when you are troubleshooting a slow cluster\. You do this by setting the `mapreduce.map.speculative` and `mapreduce.reduce.speculative` properties to `false`\. When you launch a cluster, you can set these values using the `mapred-env` configuration classification\. For more information, see [Configuring Applications](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html) in the *Amazon EMR Release Guide*\. 
 +  If you are running a Hive cluster, see [Are you having trouble loading data to or from Amazon S3 into Hive?](emr-troubleshoot-error-hive.md#emr-troubleshoot-error-hive-3)\. 
 
- For additional information, see [Amazon S3 error best practices](https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+ For additional information, see [Amazon S3 error best practices](https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html) in the *Amazon Simple Storage Service User Guide*\. 

@@ -50,7 +50,7 @@ You can use the following approach to add an external JAR file dependency to any
 }
 ```
 
-**Example Configure Hudi**  
+**Example : Configure Hudi**  
 You can use the notebook editor to configure your EMR notebook to use Hudi\.  
 
 ```

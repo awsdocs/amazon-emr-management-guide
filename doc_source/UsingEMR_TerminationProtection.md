@@ -21,23 +21,23 @@ If an instance is created as part of an Amazon EMR cluster with termination prot
 
 ## Termination protection and unhealthy YARN nodes<a name="emr-termination-protection-unhealthy"></a>
 
-Amazon EMR periodically checks the Apache Hadoop YARN status of nodes running on core and task Amazon EC2 instances in a cluster\. The health status is reported by the [NodeManager health checker service](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeManager.html#Health_checker_service)\. If a node reports `UNHEALTHY`, the Amazon EMR instance controller blacklists the node and does not allocate YARN containers to it until it becomes healthy again\. A common reason for unhealthy nodes is that disk utilization goes above 90%\. For more information about identifying unhealthy nodes and recovering, see [Resource errors](emr-troubleshoot-error-resource.md)\.
+Amazon EMR periodically checks the Apache Hadoop YARN status of nodes running on core and task Amazon EC2 instances in a cluster\. The health status is reported by the [NodeManager health checker service](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/NodeManager.html#Health_checker_service)\. If a node reports `UNHEALTHY`, the Amazon EMR instance controller deny lists the node and does not allocate YARN containers to it until it becomes healthy again\. A common reason for unhealthy nodes is that disk utilization goes above 90%\. For more information about identifying unhealthy nodes and recovering, see [Resource errors](emr-troubleshoot-error-resource.md)\.
 
 If the node remains `UNHEALTHY` for more than 45 minutes, Amazon EMR takes the following action based on the status of termination protection\.
 
 
 | Termination protection | Result | 
 | --- | --- | 
-|  Enabled \(Recommended\)  |  Amazon EC2 core instances remain in a blacklisted state and continue to count toward cluster capacity\. You can connect to an Amazon EC2 core instance for configuration and data recovery, and resize your cluster to add capacity\. For more information, see [Resource errors](emr-troubleshoot-error-resource.md)\. Unhealthy task nodes are exempt from termination protection and will be terminated\.  | 
+|  Enabled \(Recommended\)  |  Amazon EC2 core instances remain in a deny\-listed state and continue to count toward cluster capacity\. You can connect to an Amazon EC2 core instance for configuration and data recovery, and resize your cluster to add capacity\. For more information, see [Resource errors](emr-troubleshoot-error-resource.md)\. Unhealthy task nodes are exempt from termination protection and will be terminated\.  | 
 |  Disabled  |  The Amazon EC2 instance is terminated\. Amazon EMR provisions a new instance based on the specified number of instances in the instance group or the target capacity for instance fleets\. If all core nodes are `UNHEALTHY` for more than 45 minutes, the cluster terminates, reporting a `NO_SLAVES_LEFT` status\.  HDFS data may be lost if a core instance terminates because of an unhealthy state\. If the node stored blocks that were not replicated to other nodes, these blocks are lost, which might lead to data loss\. We recommend that you use termination protection so that you can connect to instances and recover data as necessary\.   | 
 
-## Termination protection, auto\-termination, and step execution<a name="emr-termination-protection-steps"></a>
+## Termination protection and step execution<a name="emr-termination-protection-steps"></a>
 
-The auto\-terminate setting takes precedence over termination protection\. If both are enabled, when steps finish executing, the cluster terminates instead of entering a waiting state\.
+When you enable step execution and *also* enable termination protection, Amazon EMR ignores the termination protection\.
 
 When you submit steps to a cluster, you can set the `ActionOnFailure` property to determine what happens if the step can't complete execution because of an error\. The possible values for this setting are `TERMINATE_CLUSTER` \(`TERMINATE_JOB_FLOW` with earlier versions\), `CANCEL_AND_WAIT`, and `CONTINUE`\. For more information, see [Work with steps using the AWS CLI and console](emr-work-with-steps.md)\.
 
-If a step fails that is configured with `ActionOnFailure` set to `CANCEL_AND_WAIT`, if auto\-termination is enabled, the cluster terminates without executing subsequent steps\.
+If a step fails that is configured with `ActionOnFailure` set to `CANCEL_AND_WAIT`, if step execution is enabled, the cluster terminates without executing subsequent steps\.
 
 If a step fails that is configured with `ActionOnFailure` set to `TERMINATE_CLUSTER`, use the table of settings below to determine the outcome\.
 
@@ -45,7 +45,7 @@ If a step fails that is configured with `ActionOnFailure` set to `TERMINATE_CLUS
 
 ## Termination protection and Spot Instances<a name="emr-termination-protection-spot"></a>
 
-Amazon EMR termination protection does not prevent an Amazon EC2 Spot Instance from terminating when the Spot Price rises above the maximum Spot price\.
+Amazon EMR termination protection does not prevent an Amazon EC2 Spot Instance from terminating when the Spot price rises above the maximum Spot price\.
 
 ## Configuring termination protection when you launch a cluster<a name="emr-termination-protection-create-cluster"></a>
 

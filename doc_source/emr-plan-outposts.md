@@ -14,6 +14,7 @@ Beginning with Amazon EMR version 5\.28\.0, you can create and run EMR clusters 
 The following are the limitations of using Amazon EMR on AWS Outposts:
 + On\-Demand Instances are the only supported option for Amazon EC2 instances\. Spot Instances are not available for Amazon EMR on AWS Outposts\.
 + If you need additional Amazon EBS storage volumes, only General Purpose SSD \(GP2\) is supported\. 
++ S3 is the only supported option for Amazon EMR on Outposts\. S3 on Outposts is not supported for Amazon EMR on AWS Outposts\.
 + Only the following instance types are supported by Amazon EMR on AWS Outposts:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-outposts.html)
 

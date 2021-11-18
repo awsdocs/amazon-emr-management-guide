@@ -1,11 +1,16 @@
 # Using automatic scaling with a custom policy for instance groups<a name="emr-automatic-scaling"></a>
 
+**Topics**
++ [Creating the IAM role for automatic scaling](#emr-automatic-scaling-iam-role)
++ [Understanding automatic scaling rules](#emr-scaling-rules)
++ [Considerations and limitations](#emr-automatic-scaling-considerations)
++ [Using the AWS Management Console to configure automatic scaling](#emr-automatic-scale-console)
++ [Using the AWS CLI to configure automatic scaling](#emr-automatic-scale-cli)
+
 Automatic scaling with a custom policy in Amazon EMR release versions 4\.0 and later allows you to programmatically scale out and scale in core nodes and task nodes based on a CloudWatch metric and other parameters that you specify in a *scaling policy*\. Automatic scaling with a custom policy is available with the instance groups configuration and is not available when you use instance fleets\. For more information about instance groups and instance fleets, see [Create a cluster with instance fleets or uniform instance groups](emr-instance-group-configuration.md)\.
 
 **Note**  
 To use the automatic scaling with a custom policy feature in Amazon EMR, you must set `true` for the `VisibleToAllUsers` parameter when you create a cluster\. For more information, see [SetVisibleToAllUsers](https://docs.aws.amazon.com/emr/latest/APIReference/API_SetVisibleToAllUsers.html)\.
-Amazon CloudWatch metrics are critical for Amazon EMR automatic scaling to operate\. We recommend that you closely monitor Amazon CloudWatch metrics to make sure data is not missing\. For more information about how you can configure CloudWatch alarms to detect missing metrics, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\. 
- Automatic scaling with a custom policy in Amazon EMR release versions 5\.18 to 5\.28 may experience scaling failure caused by data intermittently missing in Amazon CloudWatch metrics\. We recommend that customers use the most recent Amazon EMR versions for an improved autoscaling experience\. You can also reach out to Amazon EMR via AWS Support for a patch if you wish to use a release version between 5\.18 and 5\.28\.
 
 The scaling policy is part of an instance group configuration\. You can specify a policy during initial configuration of an instance group, or by modifying an instance group in an existing cluster, even when that instance group is active\. Each instance group in a cluster, except the master instance group, can have its own scaling policy, which consists of scale\-out and scale\-in rules\. Scale\-out and scale\-in rules can be configured independently, with different parameters for each rule\.
 
@@ -40,6 +45,11 @@ The parameters listed here are based on the AWS Management Console for Amazon EM
 + An **evaluation period**, in five\-minute increments, for which the CloudWatch metric must be in a trigger condition before scaling activity is triggered\.
 + A **Cooldown period**, in seconds, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it\. When an instance group has finished a scaling activity and reached its post\-scale state, the cooldown period provides an opportunity for the CloudWatch metrics that might trigger subsequent scaling activities to stabilize\. For more information, see [Auto Scaling cooldowns](https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the *Amazon EC2 Auto Scaling User Guide*\.  
 ![\[AWS Management Console automatic scaling rule parameters for Amazon EMR.\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/auto-scaling-rule-params.png)
+
+## Considerations and limitations<a name="emr-automatic-scaling-considerations"></a>
++ Amazon CloudWatch metrics are critical for Amazon EMR automatic scaling to operate\. We recommend that you closely monitor Amazon CloudWatch metrics to make sure data is not missing\. For more information about how you can configure Amazon CloudWatch alarms to detect missing metrics, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\.
++ Over\-utilization of EBS volumes can cause Managed Scaling issues\. We recommend that you monitor EBS volume usage closely to make sure EBS volume is below 90% utilization\. See [Instance storage](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage.html) for information on specifying additional EBS volumes\.
++ Automatic scaling with a custom policy in Amazon EMR release versions 5\.18 to 5\.28 may experience scaling failure caused by data intermittently missing in Amazon CloudWatch metrics\. We recommend that you use the most recent Amazon EMR versions for improved autoscaling\. You can also contact [AWS Support](https://aws.amazon.com/premiumsupport/) for a patch if you wish to use an Amazon EMR release version between 5\.18 and 5\.28\.
 
 ## Using the AWS Management Console to configure automatic scaling<a name="emr-automatic-scale-console"></a>
 

@@ -20,8 +20,6 @@ The following example `Parameters` section defines additional input parameters s
 
 ```
 Parameters:
-  SubnetId:
-    Type: "String"
   ClusterName:
     Type: "String"
     Default: "Cluster_Name_Placeholder"
@@ -60,22 +58,17 @@ Before you create a cluster template, make sure you have IAM permissions to acce
    Each cluster template that you create must include the following options: 
 
    **Input parameters**
-   + SubnetId – The ID of the subnet where the cluster will be launched\. EMR Studio fills this value the Workspace's subnet ID\.
-**Important**  
-Use the SubnetId parameter name throughout your whole cluster template when you specify a subnet\. EMR Studio does not support multiple subnets for Amazon EMR cluster features like instance fleets\.
    + ClusterName – A name for the cluster to help users identify it after it has been provisioned\.
 
    **Output**
    + ClusterId – The ID of the newly\-provisioned EMR cluster\.
 
-   Following is an example AWS CloudFormation template in YAML format for a cluster with two nodes\. The example template includes the required template options, and defines additional input parameters for `EmrRelease` and `ClusterInstanceType`\.
+   Following is an example AWS CloudFormation template in YAML format for a cluster with two nodes\. The example template includes the required template options and defines additional input parameters for `EmrRelease` and `ClusterInstanceType`\.
 
    ```
    AWSTemplateFormatVersion: 2010-09-09
    
    Parameters:
-     SubnetId:
-       Type: "String"
      ClusterName:
        Type: "String"
        Default: "Example_Two_Node_Cluster"
@@ -111,7 +104,7 @@ Use the SubnetId parameter name throughout your whole cluster template when you 
            Fn::Sub: 's3://aws-logs-${AWS::AccountId}-${AWS::Region}/elasticmapreduce/'
          Instances:
            TerminationProtected: false
-           Ec2SubnetId: !Ref SubnetId
+           Ec2SubnetId: 'subnet-ab12345c'
            MasterInstanceGroup:
              InstanceCount: 1
              InstanceType: !Ref ClusterInstanceType

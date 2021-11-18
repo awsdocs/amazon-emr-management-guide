@@ -1,11 +1,12 @@
 # Workspaces in Amazon EMR Studio<a name="emr-studio-configure-workspace"></a>
 
-When you use an Amazon EMR Studio, you can create and configure different *Workspaces* to organize and run notebooks\. This section covers creating and working with Workspaces\. For a conceptual overview, see [Workspaces](how-emr-studio-works.md#emr-studio-workspaces)\.
+When you use an Amazon EMR Studio, you can create and configure different *Workspaces* to organize and run notebooks\. This section covers creating and working with Workspaces\. For a conceptual overview, see [Workspaces](how-emr-studio-works.md#emr-studio-workspaces) on the [How Amazon EMR Studio works](how-emr-studio-works.md) page\.
 
 **Topics**
 + [Understand Workspace status](#emr-studio-workspace-status)
 + [Create an EMR Studio Workspace](#emr-studio-create-workspace)
 + [Launch a Workspace](#emr-studio-use-workspace)
++ [Resolve Workspace connectivity issues](#emr-studio-workspace-stop-start)
 + [Understand the Workspace user interface](#emr-studio-workspace-ui)
 + [Explore notebook examples](#emr-studio-notebook-examples)
 + [Save Workspace content](#emr-studio-save-workspace)
@@ -41,11 +42,8 @@ You can create EMR Studio Workspaces to run notebook code using the EMR Studio i
 
 1. Enter a **Workspace name** and a **Description**\. Naming a Workspace helps you identify it on the **Workspaces** page\.
 
-1. Expand the **Subnet** dropdown list and select a subnet for the Workspace\. Each subnet in the dropdown list belongs to the same Amazon Virtual Private Cloud \(VPC\) as the Studio\.
-
 1. \(Optional\) To attach a cluster to a Workspace when you create the Workspace, expand the **Advanced configuration** section\. 
 **Note**  
-You must select a subnet for a Workspace before you can choose a cluster option under **Advanced configuration**\.   
 Provisioning a new cluster requires access permissions from your administrator\. 
 
    Choose one of the cluster options for the Workspace and attach the cluster\. For more information about provisioning a cluster when you create a Workspace, see [Create a new EMR Cluster for a Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
@@ -65,6 +63,24 @@ To start working with notebook files, launch a Workspace to access the notebook 
 1. Choose the Workspace name to launch the Workspace in a new browser tab\. It may take a few minutes for the Workspace to open if it's **Idle**\. 
 **Note**  
 Only one user can open and work in a Workspace at a time\. If you select a Workspace that is already in use, EMR Studio displays a notification when you try to open it\. The **User** column on the **Workspaces** page shows the user working in the Workspace\.
+
+## Resolve Workspace connectivity issues<a name="emr-studio-workspace-stop-start"></a>
+
+To resolve Workspace connectivity issues, you can stop and restart a Workspace\. When you restart a Workspace, EMR Studio launches the Workspace in a different Availability Zone or a different subnet that is associated with your Studio\.
+
+**To stop and restart an EMR Studio Workspace**
+
+1. Close the Workspace in your browser\.
+
+1. Navigate to the **Workspace** list in the EMR Studio UI\.
+
+1. Select your Workspace from the list and choose **Actions**\.
+
+1. Choose **Stop** and wait for the Workspace status to change from **Stopping** to **Idle**\.
+
+1. Choose **Actions** again, and then choose **Start** to restart the Workspace\.
+
+1. Wait for the Workspace status to change from **Starting** to **Ready**, then choose the Workspace name to reopen it in a new browser tab\.
 
 ## Understand the Workspace user interface<a name="emr-studio-workspace-ui"></a>
 

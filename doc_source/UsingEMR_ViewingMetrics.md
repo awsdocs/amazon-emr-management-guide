@@ -130,7 +130,9 @@ The following are Hadoop 1 metrics:
 
 #### Cluster capacity metrics<a name="emr-metrics-managed-scaling"></a>
 
-The following metrics indicate the current or target capacities of a cluster\. These metrics are only available when managed scaling is enabled\. For clusters composed of instance fleets, the cluster capacity metrics are measured in `Units`\. For clusters composed of instance groups, the cluster capacity metrics are measured in `Nodes` or `VCPU` based on the unit type used in the managed scaling policy\. For more information, see [Using EMR\-managed scaling](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-scaling.html) in the *Amazon EMR Management Guide*\.
+The following metrics indicate the current or target capacities of a cluster\. These metrics are only available when managed scaling or auto\-termination is enabled\. 
+
+For clusters composed of instance fleets, the cluster capacity metrics are measured in `Units`\. For clusters composed of instance groups, the cluster capacity metrics are measured in `Nodes` or `VCPU` based on the unit type used in the managed scaling policy\. For more information, see [Using EMR\-managed scaling](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-scaling.html) in the *Amazon EMR Management Guide*\.
 
 
 | Metric | Description | 
@@ -141,6 +143,16 @@ The following metrics indicate the current or target capacities of a cluster\. T
 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The current number of CORE units/nodes/vCPUs running in a cluster\. Units: *Count*  | 
 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The target number of TASK units/nodes/vCPUs in a cluster as determined by managed scaling\. Units: *Count*  | 
 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html)  |  The current number of TASK units/nodes/vCPUs running in a cluster\. Units: *Count*  | 
+
+Amazon EMR emits the following metrics at a one\-minute granularity when you enable auto\-termination using an auto\-termination policy\. Some metrics are only available for Amazon EMR versions 6\.4\.0 and later\. To learn more about auto\-termination, see [Using an auto\-termination policy](emr-auto-termination-policy.md)\.
+
+
+****  
+
+| Metric | Description | 
+| --- | --- | 
+| TotalNotebookKernels | The total number of running and idle notebook kernels on the cluster\. This metric is only available for Amazon EMR versions 6\.4\.0 and later\. | 
+| AutoTerminationIsClusterIdle | Indicates whether the cluster is in use\.A value of **0** indicates that the cluster is in active use by one of the following components:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_ViewingMetrics.html) A value of **1** indicates that the cluster is idle\. Amazon EMR checks for continuous cluster idleness \(`AutoTerminationIsClusterIdle` = 1\)\. When a cluster's idle time equals the `IdleTimeout` value in your auto\-termination policy, Amazon EMR terminates the cluster\.  | 
 
 ### Dimensions for Amazon EMR metrics<a name="emr-metrics-dimensions"></a>
 

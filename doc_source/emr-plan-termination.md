@@ -1,13 +1,17 @@
 # Control cluster termination<a name="emr-plan-termination"></a>
 
-When you create a cluster using Amazon EMR, you can choose to create a transient cluster that auto\-terminates after steps complete, or you can create a long\-running cluster that continues to run until you terminate it deliberately\. When a cluster terminates, all Amazon EC2 instances in the cluster terminate, and data in the instance store and EBS volumes is no longer available and not recoverable\. Understanding and managing cluster termination is critical to developing a strategy to manage and preserve data by writing to Amazon S3 and balancing cost\. For information about how to terminate a cluster manually, see [Terminate a cluster](UsingEMR_TerminateJobFlow.md)\.
+This section describes your options for shutting down Amazon EMR clusters\. It covers auto\-termination and termination protection, and how they interact with other Amazon EMR features\.
 
-When you use auto\-termination, the cluster starts, runs any bootstrap actions that you specify, and then executes steps that typically input data, process the data, and then produce and save output\. When the steps finish, Amazon EMR automatically terminates the cluster Amazon EC2 instances\. This is an effective model for a cluster that performs a periodic processing task, such as a daily data processing run\. Auto\-terminating a cluster helps ensure that you are billed only for the time required to process your data\. For more information about steps, see [Work with steps using the AWS CLI and console](emr-work-with-steps.md)\.
+You can shut down an Amazon EMR cluster in the following ways:
++ **Termination after last step execution** \- Create a transient cluster that shuts down after all steps complete\.
++ **Auto\-termination \(after idle\)** \- Create a cluster with an auto\-termination policy that shuts down after a specified idle time\. For more information, see [Using an auto\-termination policy](emr-auto-termination-policy.md)\.
++ **Manual termination** \- Create a long\-running cluster that continues to run until you terminate it deliberately\. For information about how to terminate a cluster manually, see [Terminate a cluster](UsingEMR_TerminateJobFlow.md)\.
 
-With a long\-running cluster, the cluster starts the same way\. You can specify steps as you would with a cluster that terminates automatically, but the cluster continues to run and accrue charges after steps complete\. This model is effective when you need to interactively or automatically query data, or interact with big data applications hosted on the cluster on an ongoing basis\. It is also effective if you periodically process a data set so large or so frequently that it is inefficient to launch new clusters and load data each time\. You can enable termination protection on long\-running clusters to help prevent accidental shutdown\. You can also take advantage of features like automatic scaling and instance fleets to dynamically size the cluster to balance performance and cost in response to workload demands\. For more information, see [Scaling cluster resources](emr-scale-on-demand.md) and [Configure instance fleets](emr-instance-fleet.md)\.
+You can also set termination protection on a cluster to avoid shutting down EC2 instances by accident or error\.
 
-This section describes how termination protection and auto\-termination work, and how they interact with one another, other Amazon EMR features, and other data processes\.
+When Amazon EMR shuts down your cluster, all Amazon EC2 instances in the cluster shut down\. Data in the instance store and EBS volumes is no longer available and not recoverable\. Understanding and managing cluster termination is critical to developing a strategy to manage and preserve data by writing to Amazon S3 and balancing cost\. 
 
 **Topics**
-+ [Configuring a cluster to auto\-terminate or continue](emr-plan-longrunning-transient.md)
++ [Configuring a cluster to continue or terminate after step execution](emr-plan-longrunning-transient.md)
++ [Using an auto\-termination policy](emr-auto-termination-policy.md)
 + [Using termination protection](UsingEMR_TerminationProtection.md)

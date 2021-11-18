@@ -4,7 +4,7 @@
 
 **To test a cluster step by step**
 
-1.  Launch a new cluster, with both keep alive and termination protection enabled\. Keep alive keeps the cluster running after it has processed all of its pending steps\. Termination protection prevents a cluster from shutting down in the event of an error\. For more information, see [Configuring a cluster to auto\-terminate or continue](emr-plan-longrunning-transient.md) and [Using termination protection](UsingEMR_TerminationProtection.md)\. 
+1.  Launch a new cluster, with both keep alive and termination protection enabled\. Keep alive keeps the cluster running after it has processed all of its pending steps\. Termination protection prevents a cluster from shutting down in the event of an error\. For more information, see [Configuring a cluster to continue or terminate after step execution](emr-plan-longrunning-transient.md) and [Using termination protection](UsingEMR_TerminationProtection.md)\. 
 
 1.  Submit a step to the cluster\. For more information, see [Submit work to a cluster](AddingStepstoaJobFlow.md)\. 
 

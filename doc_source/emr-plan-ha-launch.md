@@ -1,9 +1,9 @@
-# Launch an EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch"></a>
+# Launch an Amazon EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch"></a>
 
 This topic provides configuration details and examples for launching an EMR cluster with multiple master nodes\.
 
 **Note**  
-Amazon EMR automatically enables termination protection for all clusters with multiple master nodes, and overrides any auto\-termination settings that you supply when you create the cluster\. To shut down a cluster with multiple master nodes, you must first modify the cluster attributes to disable termination protection\. For instructions, see [Terminate an EMR Cluster with multiple master nodes](#emr-plan-ha-launch-terminate)\.
+Amazon EMR automatically enables termination protection for all clusters with multiple master nodes, and overrides any auto\-termination settings that you supply when you create the cluster\. To shut down a cluster with multiple master nodes, you must first modify the cluster attributes to disable termination protection\. For instructions, see [Terminate an Amazon EMR Cluster with multiple master nodes](#emr-plan-ha-launch-terminate)\.
 
 ## Prerequisites<a name="emr-plan-ha-launch-config"></a>
 + You can launch an EMR cluster with multiple master nodes in both public and private VPC subnets\. **EC2\-Classic** is not supported\. To launch an EMR cluster with multiple master nodes in a public subnet, you must enable the instances in this subnet to receive a public IP address by selecting **Auto\-assign IPv4** in the console or running the following command\. Replace *22XXXX01* with your subnet ID\.
@@ -12,9 +12,9 @@ Amazon EMR automatically enables termination protection for all clusters with mu
   aws ec2 modify-subnet-attribute --subnet-id subnet-22XXXX01 --map-public-ip-on-launch					
   ```
 + To run Hive, Hue, or Oozie on an EMR cluster with multiple master nodes, you must create an external metastore\. For more information, see [Configuring an external metastore for Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-metastore-external-hive.html), [Using Hue with a remote database in Amazon RDS](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-rds.html), or [Apache Oozie](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-oozie.html)\.
-+ To use Kerberos authentication in your cluster, you must configure an external KDC\. For more information, see [Configuring Kerberos on Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos-configure.html)\.
++ To use Kerberos authentication in your cluster, you must configure an external KDC\. For more information, see [Configuring Kerberos on Amazon Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos-configure.html)\.
 
-## Launch an EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch-examples"></a>
+## Launch an Amazon EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch-examples"></a>
 
 You must specify an instance count value of three for the master node instance group when you launch an EMR cluster with multiple master nodes\. The following examples demonstrate how to launch the cluster using the default AMI or a custom AMI\. 
 
@@ -78,7 +78,7 @@ To run Hive on an EMR cluster with multiple master nodes, you must specify an ex
    --configurations ./hiveConfiguration.json
    ```
 
-## Terminate an EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch-terminate"></a>
+## Terminate an Amazon EMR Cluster with multiple master nodes<a name="emr-plan-ha-launch-terminate"></a>
 
 To terminate an EMR cluster with multiple master nodes, you must disable termination protection before terminating the cluster, as the following example demonstrates\. Replace *j\-3KVTXXXXXX7UG* with your cluster ID\.
 

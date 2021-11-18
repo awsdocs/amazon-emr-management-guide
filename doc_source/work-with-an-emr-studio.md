@@ -13,3 +13,4 @@ The following video covers practical information such as how to create a new Wor
 + [Debug applications and jobs with EMR Studio](emr-studio-debug.md)
 + [Install kernels and libraries in an EMR Studio Workspace](emr-studio-install-libraries-and-kernels.md)
 + [Enhance kernels with magic commands](emr-studio-magics.md)
++ [Multi\-language support for Spark kernels](emr-multi-language-kernels.md)

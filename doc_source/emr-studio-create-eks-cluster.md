@@ -54,7 +54,7 @@ Before you can set up Amazon EMR on EKS for Amazon EMR Studio, you must have the
       }
   ]
   ```
-+ An Amazon EKS cluster that you want to register as a virtual cluster with Amazon EMR on EKS\. Your cluster should be in the same Amazon Virtual Private Cloud as your Studio, and must have at least one private subnet to enable managed endpoints and linking Git\-based repositories\. For more information about EKS clusters, see [Creating an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)\. 
++ An Amazon EKS cluster that you will register as a virtual cluster with Amazon EMR on EKS\. Your cluster should be in the same Amazon Virtual Private Cloud as your Studio, and must have at least one private subnet to enable managed endpoints and linking Git\-based repositories\. For more information about EKS clusters, see [Creating an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)\. 
 **Note**  
 There must be *at least one private subnet in common* between your EMR Studio and the Amazon EKS cluster that you use to register your virtual cluster\. Otherwise, your managed endpoint will not appear as an option in your Studio Workspaces\. You can create an Amazon EKS cluster and associate it with the subnets that belong to your Studio\. Alternatively, you can create a Studio and specify your EKS cluster's private subnets\.
 [Amazon EKS optimized Arm Amazon Linux AMIs](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami) are not supported for EMR on EKS managed endpoints\.

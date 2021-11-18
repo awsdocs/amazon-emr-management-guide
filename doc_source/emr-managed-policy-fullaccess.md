@@ -10,74 +10,7 @@ You can view the JSON version of the [AmazonEMRFullAccessPolicy\_v2](https://con
 
 We recommend that you create new clusters using v2 managed policies\.
 
-Following are the contents of Version 7 of this policy\. You can also use the AWS Management Console link [https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AmazonElasticMapReduceFullAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AmazonElasticMapReduceFullAccess) to view the policy\.
+You can view the contents of this policy using the AWS Management Console link [https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AmazonElasticMapReduceFullAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AmazonElasticMapReduceFullAccess)\.
 
 **Note**  
-The `ec2:TerminateInstances` action enables the IAM user or role that assumes this policy to terminate any of the Amazon EC2 instances associated with the IAM account, even those that are not part of an Amazon EMR cluster\.
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "cloudwatch:*",
-                "cloudformation:CreateStack",
-                "cloudformation:DescribeStackEvents",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:CancelSpotInstanceRequests",
-                "ec2:CreateRoute",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateTags",
-                "ec2:DeleteRoute",
-                "ec2:DeleteTags",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DescribeAvailabilityZones",
-                "ec2:DescribeAccountAttributes",
-                "ec2:DescribeInstances",
-                "ec2:DescribeKeyPairs",
-                "ec2:DescribeRouteTables",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSpotInstanceRequests",
-                "ec2:DescribeSpotPriceHistory",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcAttribute",
-                "ec2:DescribeVpcs",
-                "ec2:DescribeRouteTables",
-                "ec2:DescribeNetworkAcls",
-                "ec2:CreateVpcEndpoint",
-                "ec2:ModifyImageAttribute",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:RequestSpotInstances",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RunInstances",
-                "ec2:TerminateInstances",
-                "elasticmapreduce:*",
-                "iam:GetPolicy",
-                "iam:GetPolicyVersion",
-                "iam:ListRoles",
-                "iam:PassRole",
-                "kms:List*",
-                "s3:*",
-                "sdb:*"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "iam:CreateServiceLinkedRole",
-            "Resource": "*",
-            "Condition": {
-                "StringLike": {
-                    "iam:AWSServiceName": [
-                        "elasticmapreduce.amazonaws.com",
-                        "elasticmapreduce.amazonaws.com.cn"
-                    ]
-                }
-            }
-        }
-    ]
-}
-```
+The `ec2:TerminateInstances` action in the policy enables the IAM user or role that assumes this policy to terminate any of the Amazon EC2 instances associated with the IAM account, even those that are not part of an Amazon EMR cluster\.

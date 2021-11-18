@@ -34,7 +34,15 @@ To create an Amazon EMR Studio service role, you need the following items:
          "Principal": {
            "Service": "elasticmapreduce.amazonaws.com"
          },
-         "Action": "sts:AssumeRole"
+         "Action": "sts:AssumeRole",
+         "Condition": {
+           "StringEquals": {
+             "aws:SourceAccount": "<account-id>"
+           },
+           "ArnLike": {
+             "aws:SourceArn": "arn:aws:elasticmapreduce:<region>:<account-id>:*"
+           }
+         }
        }
      ]
    }

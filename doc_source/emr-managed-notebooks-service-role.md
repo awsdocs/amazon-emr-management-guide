@@ -4,6 +4,34 @@ Each EMR notebook needs permissions to access other AWS resources and perform ac
 + The default role name is `EMR_Notebooks_DefaultRole`\.
 + The default managed policies attached to `EMR_Notebooks_DefaultRole` are `AmazonElasticMapReduceEditorsRole` and `S3FullAccessPolicy`\.
 
+Your service role should use the following trust policy\.
+
+**Important**  
+Your trust policy may be out of date if your service role for EMR Notebooks was created before November 2021\. We strongly recommend that you update your role to use the following trust policy, which restricts the `sts:AssumeRole` action\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "elasticmapreduce.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "<account-id>"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:elasticmapreduce:<region>:<account-id>:*"
+        }
+      }
+    }
+  ]
+}
+```
+
 The contents of version 1 of `AmazonElasticMapReduceEditorsRole` are as follows\.
 
 ```

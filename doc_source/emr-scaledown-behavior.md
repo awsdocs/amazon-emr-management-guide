@@ -8,7 +8,7 @@ With Amazon EMR release versions 5\.1\.0 through 5\.9\.1, there are two options 
 **Warning**  
 If you use the AWS CLI to issue a `modify-instance-groups` with `EC2InstanceIdsToTerminate`, these instances are terminated immediately, without consideration for these settings, and regardless of the status of applications running on them\. Terminating an instance in this way risks data loss and unpredictable cluster behavior\.
 
-When terminate at task completion is specified, Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances\. With either behavior specified, Amazon EMR does not terminate Amazon EC2 instances in core instance groups if it could lead to HDFS corruption\. 
+When terminate at task completion is specified, Amazon EMR deny lists and drains tasks from nodes before terminating the Amazon EC2 instances\. With either behavior specified, Amazon EMR does not terminate Amazon EC2 instances in core instance groups if it could lead to HDFS corruption\. 
 
 ## Terminate at task completion<a name="emr-scaledown-terminate-task"></a>
 

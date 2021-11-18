@@ -499,7 +499,7 @@ You might need to take extra steps to delete stored files if you saved your PySp
 **Note**  
 Your cluster must be terminated before you delete your bucket\. Otherwise, you may not be allowed to empty the bucket\.
 
-To delete your bucket, follow the instructions in [How do I delete an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+To delete your bucket, follow the instructions in [How do I delete an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Next steps<a name="emr-gs-next-steps"></a>
 

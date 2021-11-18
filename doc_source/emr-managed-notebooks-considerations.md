@@ -8,7 +8,7 @@ Consider the following requirements when you create clusters and develop solutio
   + Only clusters created using Amazon EMR are supported\. You can create a cluster independently within Amazon EMR and then attach an EMR notebook, or you can create a compatible cluster when you create an EMR notebook\.
   + Only clusters created using Amazon EMR release version 5\.18\.0 and later are supported\. See [Differences in capabilities by cluster release version](#considerations-cluster-version)\.
   + Clusters created using Amazon EC2 instances with AMD EPYC processors—for example, m5a\.\* and r5a\.\* instance types—are not supported\.
-  + EMR Notebooks works only with clusters created with `VisibleToAllUsers` set to `true`\. `VisibleToAllUsers` is `true` by default\. For more information, see [Understanding the EMR Cluster VisibleToAllUsers setting](security_iam_emr-with-iam.md#security_set_visible_to_all_users)\.
+  + EMR Notebooks works only with clusters created with `VisibleToAllUsers` set to `true`\. `VisibleToAllUsers` is `true` by default\.
   + The cluster must be launched within an EC2\-VPC\. Public and private subnets are supported\. The EC2\-Classic platform is not supported\.
   + The cluster must be launched with Hadoop, Spark, and Livy installed\. Other applications may be installed, but EMR Notebooks currently supports Spark clusters only\.
 **Important**  
