@@ -21,13 +21,11 @@ When you use the EMR console, you can choose the following default security grou
 
 ## Prerequisites<a name="emr-studio-security-group-prereqs"></a>
 
-To create the security groups for EMR Studio, you need the following items:
-+ A designated AWS account for the EMR Studio\. Create the EMR Studio security groups in the same account\.
-+ An Amazon Virtual Private Cloud \(VPC\) designated for the Studio in your chosen account\. You choose this VPC when you create the security groups\. This should be the same VPC that you specify when you create the Studio\. If you plan to use Amazon EMR on EKS with EMR Studio, choose the VPC for your Amazon EKS cluster worker nodes\.
+To create the security groups for EMR Studio, you need an Amazon Virtual Private Cloud \(VPC\) for the Studio\. You choose this VPC when you create the security groups\. This should be the same VPC that you specify when you create the Studio\. If you plan to use Amazon EMR on EKS with EMR Studio, choose the VPC for your Amazon EKS cluster worker nodes\.
 
 ## Instructions<a name="emr-studio-security-group-instructions"></a>
 
-Follow the instructions in [Creating a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#creating-security-group) in the *Amazon EC2 User Guide for Linux Instances* to create an engine security group and a Workspace security group in your designated VPC\. The security groups must include the rules summarized in the following tables\.
+Follow the instructions in [Creating a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#creating-security-group) in the *Amazon EC2 User Guide for Linux Instances* to create an engine security group and a Workspace security group in your VPC\. The security groups must include the rules summarized in the following tables\.
 
 When you create security groups for EMR Studio, note the IDs for both\. You specify each security group by ID when you create a Studio\.
 

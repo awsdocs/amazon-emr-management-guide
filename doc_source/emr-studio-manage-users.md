@@ -11,7 +11,7 @@ To learn more about authentication for Amazon EMR Studio, see [Choose an authent
 ------
 #### [ IAM ]
 
-When you use [IAM authentication mode for Amazon EMR Studio](emr-studio-authentication.md#emr-studio-iam-authentication), you must allow the `CreateStudioPresignedUrl` action in a user's IAM permissions policy and restrict the user to a particular Studio\. You can include `CreateStudioPresignedUrl` in your [User permissions for IAM authentication mode](emr-studio-user-permissions.md#emr-studio-iam-authorization) or use a separate policy\.
+When you use [Set up IAM authentication mode for Amazon EMR Studio](emr-studio-authentication.md#emr-studio-iam-authentication), you must allow the `CreateStudioPresignedUrl` action in a user's IAM permissions policy and restrict the user to a particular Studio\. You can include `CreateStudioPresignedUrl` in your [User permissions for IAM authentication mode](how-emr-studio-works.md#emr-studio-iam-authorization) or use a separate policy\.
 
 To restrict a user to a Studio \(or set of Studios\), you can use attribute\-based access control \(ABAC\) or specify the Amazon Resource Name \(ARN\) of a Studio in the `Resource` element of the permissions policy\. 
 
@@ -67,7 +67,7 @@ The following example permissions policy allows the `CreateStudioPresignedUrl` a
 **Example Assign a user to a Studio using the aws:SourceIdentity global condition key**  
 When you use IAM federation, you can use the global condition key `aws:SourceIdentity` in a permissions policy to give users Studio access when they assume your IAM role for federation\.   
 You must first configure your identity provider \(IdP\) to return an identifying string, such as an email address or username, when a user authenticates and assumes your IAM role for federation\. IAM sets the global condition key `aws:SourceIdentity` to the identifying string returned by your IdP\.  
-For more information, see the [How to relate IAM role activity to corporate identity](http://aws.amazon.com/blogs/security/how-to-relate-iam-role-activity-to-corporate-identity/) blog post in the AWS Security Blog and the [aws:SourceIdentity](https://docs.aws.amazon.com/https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceidentity) entry in the global condition keys reference\.   
+For more information, see the [How to relate IAM role activity to corporate identity](http://aws.amazon.com/blogs/security/how-to-relate-iam-role-activity-to-corporate-identity/) blog post in the AWS Security Blog and the [aws:SourceIdentity](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceidentity) entry in the global condition keys reference\.   
 The following example policy allows the `CreateStudioPresignedUrl` action and gives users with an `aws:SourceIdentity` that matches the *<example\-source\-identity>* access to the EMR Studio specified by *<example\-studio\-arn>*\.  
 
 ```
@@ -151,7 +151,7 @@ aws emr get-studio-session-mapping \
 
 To update user or group permissions when you use IAM authentication mode, use IAM to change the IAM permissions policies attached to your IAM identities \(users, groups, or roles\)\. 
 
-For more information, see [User permissions for IAM authentication mode](emr-studio-user-permissions.md#emr-studio-iam-authorization)\.
+For more information, see [User permissions for IAM authentication mode](how-emr-studio-works.md#emr-studio-iam-authorization)\.
 
 ------
 #### [ AWS SSO ]

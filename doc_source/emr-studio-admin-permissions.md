@@ -1,16 +1,31 @@
 # Administrator permissions to create and manage an EMR Studio<a name="emr-studio-admin-permissions"></a>
 
-## About the required EMR Studio permissions<a name="emr-studio-about-admin-permissions"></a>
+The IAM permissions described on this page permit you to create and manage an EMR Studio\. For detailed information about each required permission, see [Permissions required to manage an EMR Studio](#emr-studio-admin-permissions-table)\.
 
-The IAM permissions described on this page let you create and manage an EMR Studio\. For detailed information about each required permission, see [Permissions required to manage an EMR Studio](#emr-studio-admin-permissions-table)\.
+## Permissions required to manage an EMR Studio<a name="emr-studio-admin-permissions-table"></a>
 
-## Prerequisites<a name="emr-studio-admin-permissions-prereqs"></a>
+The following table lists the operations related to creating and managing an EMR Studio\. The table also displays the permissions needed for each operation\.
 
-To add the required administrative permissions for EMR Studio, you need the following items:
-+ A designated AWS account for the EMR Studio\.
-+ An IAM identity \(user, role, or group\) in the designated AWS account that you want to grant EMR Studio administrative permissions to\.
+**Note**  
+You only need AWS SSO and Studio `SessionMapping` actions when you use AWS SSO authentication mode\.
 
-## Instructions<a name="emr-studio-admin-permissions-instructions"></a>
+
+**Permissions to create and manage an EMR Studio**  
+
+| Operation | Permissions | 
+| --- | --- | 
+| Create a Studio |  <pre>"elasticmapreduce:CreateStudio", <br />"sso:CreateManagedApplicationInstance",<br />"iam:PassRole"</pre>  | 
+| Describe a Studio |  <pre>"elasticmapreduce:DescribeStudio",<br />"sso:GetManagedApplicationInstance"</pre>  | 
+| List Studios |  <pre>"elasticmapreduce:ListStudios"</pre>  | 
+| Delete a Studio |  <pre>"elasticmapreduce:DeleteStudio",<br />"sso:DeleteManagedApplicationInstance"</pre>  | 
+| Additional permissions required when you use AWS SSO mode | 
+|  Assign users or groups to a Studio  |  <pre>"elasticmapreduce:CreateStudioSessionMapping",<br />"sso:GetProfile",<br />"sso:ListDirectoryAssociations",<br />"sso:ListProfiles",<br />"sso:AssociateProfile"<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup"</pre>  | 
+|  Retrieve Studio assignment details for a specific user or group  |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:GetStudioSessionMapping"</pre>  | 
+| List all users and groups assigned to a Studio |  <pre>"elasticmapreduce:ListStudioSessionMappings"</pre>  | 
+| Update the session policy attached to a user or group assigned to a Studio |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:UpdateStudioSessionMapping"</pre>  | 
+| Remove a user or group from a Studio |  <pre>"elasticmapreduce:DeleteStudioSessionMapping",<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:ListDirectoryAssociations",<br />"sso:GetProfile",<br />"sso:GetManagedApplicationInstance"<br />"sso:ListProfiles",<br />"sso:DisassociateProfile"</pre>  | 
+
+**To create a policy with admin permissions for EMR Studio**
 
 1. Follow the instructions in [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) to create a policy using one of the following examples\. The permissions you need depend on your [authentication mode for Amazon EMR Studio](emr-studio-authentication.md)\. 
 
@@ -19,7 +34,7 @@ To add the required administrative permissions for EMR Studio, you need the foll
    + Replace *<region>* with the code of the AWS Region where you plan to create the Studio\.
    + Replace *<aws\-account\_id>* with the ID of the AWS account for the Studio\.
    + Replace *<EMRStudio\-Service\-Role>* and *<EMRStudio\-User\-Role>* with the names of your [EMR Studio service role](emr-studio-service-role.md) and [EMR Studio user role](emr-studio-user-permissions.md#emr-studio-create-user-role)\.  
-**Example Admin permissions when you use IAM authentication mode**  
+**Example policy: Admin permissions when you use IAM authentication mode**  
 
    ```
    {
@@ -51,7 +66,7 @@ To add the required administrative permissions for EMR Studio, you need the foll
        ]
    }
    ```  
-**Example Admin permissions when you use AWS SSO authentication mode**  
+**Example policy: Admin permissions when you use AWS SSO authentication mode**  
 **Note**  
 AWS SSO and AWS SSO Directory APIs don't support specifying an ARN in the resource element of an IAM policy statement\. To allow access to AWS SSO and AWS SSO Directory, the following permissions specify all resources, "Resource":"\*", for AWS SSO actions\. For more information, see [Actions, resources, and condition keys for AWS SSO Directory](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsssodirectory.html#awsssodirectory-actions-as-permissions)\.
 
@@ -110,27 +125,4 @@ AWS SSO and AWS SSO Directory APIs don't support specifying an ARN in the resour
    }
    ```
 
-1. Attach the policy to your designated IAM identity \(user, role, or group\)\. For instructions, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.
-
-## Permissions required to manage an EMR Studio<a name="emr-studio-admin-permissions-table"></a>
-
-The following table lists the operations related to creating and managing an EMR Studio\. The table also displays the permissions needed for each operation\.
-
-**Note**  
-You only need AWS SSO and Studio `SessionMapping` actions when you use AWS SSO authentication mode\.
-
-
-****  
-
-| Operation | Permissions | 
-| --- | --- | 
-| Create a Studio |  <pre>"elasticmapreduce:CreateStudio", <br />"sso:CreateManagedApplicationInstance",<br />"iam:PassRole"</pre>  | 
-| Describe a Studio |  <pre>"elasticmapreduce:DescribeStudio",<br />"sso:GetManagedApplicationInstance"</pre>  | 
-| List Studios |  <pre>"elasticmapreduce:ListStudios"</pre>  | 
-| Delete a Studio |  <pre>"elasticmapreduce:DeleteStudio",<br />"sso:DeleteManagedApplicationInstance"</pre>  | 
-| Additional permissions required when you use AWS SSO mode | 
-|  Assign users or groups to a Studio  |  <pre>"elasticmapreduce:CreateStudioSessionMapping",<br />"sso:GetProfile",<br />"sso:ListDirectoryAssociations",<br />"sso:ListProfiles",<br />"sso:AssociateProfile"<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup"</pre>  | 
-|  Retrieve Studio assignment details for a specific user or group  |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:GetStudioSessionMapping"</pre>  | 
-| List all users and groups assigned to a Studio |  <pre>"elasticmapreduce:ListStudioSessionMappings"</pre>  | 
-| Update the session policy attached to a user or group assigned to a Studio |  <pre>"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:GetManagedApplicationInstance",<br />"elasticmapreduce:UpdateStudioSessionMapping"</pre>  | 
-| Remove a user or group from a Studio |  <pre>"elasticmapreduce:DeleteStudioSessionMapping",<br />"sso-directory:SearchUsers",<br />"sso-directory:SearchGroups",<br />"sso-directory:DescribeUser",<br />"sso-directory:DescribeGroup",<br />"sso:ListDirectoryAssociations",<br />"sso:GetProfile",<br />"sso:GetManagedApplicationInstance"<br />"sso:ListProfiles",<br />"sso:DisassociateProfile"</pre>  | 
+1. Attach the policy to your IAM identity \(user, role, or group\)\. For instructions, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.

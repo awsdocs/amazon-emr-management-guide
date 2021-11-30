@@ -25,7 +25,7 @@ Use the following instructions to configure privately hosted repositories for Am
 **Prerequisites**
 
 Before you configure a privately hosted Git repository for EMR Studio, you need the following:
-+ A designated Amazon S3 storage location where EMR Studio can back up the Workspaces and notebook files in the Studio\. Use the same S3 bucket that you specify when you create a Studio\.
++ An Amazon S3 storage location where EMR Studio can back up the Workspaces and notebook files in the Studio\. Use the same S3 bucket that you specify when you create a Studio\.
 
 **To configure one or more privately hosted Git repositories for EMR Studio**
 
@@ -64,7 +64,7 @@ To use privately hosted Git repositories, your DNS server must allow inbound acc
 
 1. Save your configuration file as `configuration.json`\.
 
-1. Upload the configuration file into the designated Amazon S3 storage location in a folder called `life-cycle-configuration`\. For example, if your default S3 location is `s3://DOC-EXAMPLE-BUCKET/studios`, your configuration file would be in `s3://DOC-EXAMPLE-BUCKET/studios/life-cycle-configuration/configuration.json`\.
+1. Upload the configuration file into your Amazon S3 storage location in a folder called `life-cycle-configuration`\. For example, if your default S3 location is `s3://DOC-EXAMPLE-BUCKET/studios`, your configuration file would be in `s3://DOC-EXAMPLE-BUCKET/studios/life-cycle-configuration/configuration.json`\.
 **Important**  
 We urge you to restrict access to your `life-cycle-configuration` folder to Studio administrators and to your EMR Studio service role, and that you secure `configuration.json` against unauthorized access\. For instructions, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html) or [Security Best Practices for Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html)\.
 

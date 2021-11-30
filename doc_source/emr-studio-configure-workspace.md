@@ -1,4 +1,4 @@
-# Workspaces in Amazon EMR Studio<a name="emr-studio-configure-workspace"></a>
+# Learn Workspace basics<a name="emr-studio-configure-workspace"></a>
 
 When you use an Amazon EMR Studio, you can create and configure different *Workspaces* to organize and run notebooks\. This section covers creating and working with Workspaces\. For a conceptual overview, see [Workspaces](how-emr-studio-works.md#emr-studio-workspaces) on the [How Amazon EMR Studio works](how-emr-studio-works.md) page\.
 
@@ -46,7 +46,7 @@ You can create EMR Studio Workspaces to run notebook code using the EMR Studio i
 **Note**  
 Provisioning a new cluster requires access permissions from your administrator\. 
 
-   Choose one of the cluster options for the Workspace and attach the cluster\. For more information about provisioning a cluster when you create a Workspace, see [Create a new EMR Cluster for a Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
+   Choose one of the cluster options for the Workspace and attach the cluster\. For more information about provisioning a cluster when you create a Workspace, see [Create a new EMR cluster](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
 
 1. Choose **Create Workspace** in the lower right of the page\. 
 
@@ -88,7 +88,7 @@ The EMR Studio Workspace user interface is based on the [JupyterLab interface](h
 + **File Browser** – Displays the files and directories in the Workspace, as well as the files and directories of linked Git repositories\.
 + **Running Kernels and Terminals** – Lists all of the kernels and terminals running in the Workspace\. For more information, see [Managing kernels and terminals](https://jupyterlab.readthedocs.io/en/latest/user/running.html) in the official JupyterLab documentation\.
 + **Git** – Provides a graphical user interface for performing commands in the Git repositories attached to the Workspace\. This panel is a JupyterLab extension called jupyterlab\-git\. For more information, see [jupyterlab\-git](https://github.com/jupyterlab/jupyterlab-git)\.
-+ **EMR Clusters** – Lets you attach a cluster to or detach a cluster from the Workspace to run notebook code\. The EMR cluster configuration panel also provides advanced configuration options to help you create and attach a *new* cluster to the Workspace\. For more information, see [Create a new EMR Cluster for a Workspace](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
++ **EMR Clusters** – Lets you attach a cluster to or detach a cluster from the Workspace to run notebook code\. The EMR cluster configuration panel also provides advanced configuration options to help you create and attach a *new* cluster to the Workspace\. For more information, see [Create a new EMR cluster](emr-studio-create-use-clusters.md#emr-studio-create-cluster)\.
 + **EMR Git Repository** – Helps you link the Workspace with up to three Git repositories\. For details and instructions, see [Link Git\-based repositories to an EMR Studio Workspace](emr-studio-git-repo.md)\.
 + **Notebook Examples** – Provides a list of notebook examples that you can save to the Workspace\. You can also access the examples by choosing **Notebook Examples** on the **Launcher** page of the Workspace\. 
 + **Commands** – Offers a keyboard\-driven way to search for and run JupyterLab commands\. For more information, see the [Command palette](https://jupyterlab.readthedocs.io/en/latest/user/commands.html) page in the JupyterLab documentation\.

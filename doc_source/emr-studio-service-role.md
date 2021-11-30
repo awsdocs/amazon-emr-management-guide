@@ -6,24 +6,11 @@ Each Amazon EMR Studio uses an IAM role with permissions that let the Studio int
 
 Use the Studio service role \(instead of session policies\) to define all Amazon S3 access permissions for storing notebook files, and to define AWS Secrets Manager access permissions\.
 
+## How to create a service role for EMR Studio<a name="emr-studio-service-role-instructions"></a>
+
+1. Follow the instructions in [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to create the service role using the following trust policy\. 
 **Important**  
-The example service role policy below uses tag\-based access control to identify and access the following Studio resources\. When you use the example policy, you must tag these resources with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\.  
-The Amazon Virtual Private Cloud associated with the Studio\.
-Each subnet that you associate with the Studio\.
-Your EMR Studio security groups\. You must tag custom security groups\. EMR Studio tags the default security groups at creation time\. You must tag any security groups that you created during the EMR Studio preview period if you want to continue to use them\. 
-Secrets maintained in AWS Secrets Manager that Studio users use to link Git repositories to a Workspace\. Tag secrets created outside of EMR Studio, or during the preview period, manually\. 
-You can apply tags to resources using the **Tags** tab on the relevant resource screen in the AWS Management Console\. You can also use the AWS Resource Groups Tag Editor to apply the required tag to each EMR Studio resource at the same time\. For more information, see [Tag Editor](https://docs.aws.amazon.com/ARG/latest/userguide/tag-editor.html) in the *AWS Resource Groups* *User Guide\.*
-
-## Prerequisites<a name="emr-studio-service-role-prereqs"></a>
-
-To create an Amazon EMR Studio service role, you need the following items:
-+ A designated AWS account for the EMR Studio\. Create the EMR Studio service role in the same account as the Studio\.
-+ An IAM entity in your designated AWS account that has the necessary permissions to create a service role\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
-+ An Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in the Studio\. Your service role must include read and write access to this bucket\.
-
-## Instructions<a name="emr-studio-service-role-instructions"></a>
-
-1. Follow the instructions in [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to create the service role using the following trust policy\.
+The following trust policy includes the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition keys to limit the permissions that you give EMR Studio to particular resources in your account\. Doing so can protect you against [the confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
 
    ```
    {
@@ -48,11 +35,18 @@ To create an Amazon EMR Studio service role, you need the following items:
    }
    ```
 
-1. Remove any default permissions associated with the role, and include the permissions from the following sample IAM permissions policy\. Alternatively, you can create a custom policy that includes the [EMR Studio service role permissions](#emr-studio-service-role-permissions-table)\.
-**Note**  
-Where applicable, change `"Resource":"*"` in the following policy to specify the Amazon Resource Name \(ARN\) of the resource or resources that the statement covers for your use cases\. 
+1. Remove the default role permissions\. Then, include the permissions from the following sample IAM permissions policy\. Alternatively, you can create a custom policy that uses the [EMR Studio service role permissions](#emr-studio-service-role-permissions-table)\.
+
+   Where applicable, change `"Resource":"*"` in the following policy to specify the Amazon Resource Name \(ARN\) of the resource or resources that the statement covers for your use cases\. 
+**Important**  
 Access for the `ModifyNetworkInterfaceAttribute` API must remain as\-is in the following policy due to technical limitations with Amazon EC2 tag\-based access control and the way EMR Studio uses `ModifyNetworkInterfaceAttribute`\.
 The following statements must remain unchanged in order for EMR Studio to work with the service role: `AllowAddingEMRTagsDuringDefaultSecurityGroupCreation` and `AllowAddingTagsDuringEC2ENICreation`\.
+To use the example policy, you must tag the following resources with the key `"for-use-with-amazon-emr-managed-policies"` and value `"true"`\.  
+Your Amazon Virtual Private Cloud \(VPC\) for EMR Studio\.
+Each subnet that you want to use with the Studio\.
+Any custom EMR Studio security groups\. You must tag any security groups that you created during the EMR Studio preview period if you want to continue to use them\. 
+Secrets maintained in AWS Secrets Manager that Studio users use to link Git repositories to a Workspace\.
+You can apply tags to resources using the **Tags** tab on the relevant resource screen in the AWS Management Console\.
 
    ```
    {
@@ -231,7 +225,7 @@ The following statements must remain unchanged in order for EMR Studio to work w
    }
    ```
 
-1. Give your service role read and write access to the Amazon S3 directory where you want to back up Workspaces and notebook files\. Use the following minimum set of permissions\. For more information, see the [Amazon S3: Allows read and write access to objects in an S3 Bucket, programmatically and in the console](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket-console.html) example\.
+1. Give your service role read and write access to your Amazon S3 location for EMR Studio\. Use the following minimum set of permissions\. For more information, see the [Amazon S3: Allows read and write access to objects in an S3 Bucket, programmatically and in the console](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket-console.html) example\.
 
    ```
    "s3:PutObject",

@@ -1,27 +1,15 @@
 # Create an EMR Studio<a name="emr-studio-create-studio"></a>
 
-You can create an EMR Studio for your team using the Amazon EMR console or the AWS CLI\. You can also use the [AWS::EMR::Studio](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-studio.html) resource template to create a Studio using AWS CloudFormation\. 
+You can create an EMR Studio for your team using the Amazon EMR console or the AWS CLI\. Creating a Studio instance is part of setting up Amazon EMR Studio\.
 
-## Prerequisites<a name="emr-studio-create-studio-prereqs"></a>
+**Prerequisites**
 
-Before you create an EMR Studio, you need the following:
-+ Authentication set up for EMR Studio\. For more information, see [Choose an authentication mode for Amazon EMR Studio](emr-studio-authentication.md)\.
-+ Permission to create and manage an EMR Studio\. For more information, see [Administrator permissions to create and manage an EMR Studio](emr-studio-admin-permissions.md)\.
-+ An IAM service role, IAM permissions policies, and security groups set up for Amazon EMR Studio\. For more information, see [Configure EMR Studio security](emr-studio-security.md)\.
-+ An Amazon S3 bucket where EMR Studio can back up the Workspaces and notebook files in the Studio\. Your EMR Studio service role must have read and write access to the bucket that you select\.
-+ An Amazon Virtual Private Cloud \(VPC\) for the Studio, and a maximum of five subnets\. For tips on how to configure networking, see [VPC and subnet best practices](emr-studio-considerations.md#emr-studio-vpc-subnet-best-practices)\.
-+ The following EMR Studio resources tagged so that the EMR Studio service role can identify and access them\. You can skip this step if you use a custom service role that does not apply tag\-based access control\. Apply the tag key `"for-use-with-amazon-emr-managed-policies"` and set its value to `"true"`\. 
-  + Your VPC
-  + Each subnet that you want to associate with your Studio
-  + Your EMR Studio security groups \(if using custom security groups\)
-  + Any *existing* AWS Secrets Manager secrets that Studio users might use to link Git repositories to a Workspace
+Before you create a Studio, make sure you've completed the previous tasks in [Set up an EMR Studio](emr-studio-set-up.md)\.
 
-  You can apply tags to resources using the **Tags** tab on the relevant resource screen in the AWS Management Console\.
+To create a Studio using the AWS CLI, you should have the latest version installed\. For more information, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
 
 **Important**  
-Make sure you deactivate proxy management tools such as FoxyProxy or SwitchyOmega in the browser before you create a Studio\. Active proxies can cause errors when you choose **Create Studio**, and result in a **Network Failure ** error message\.
-
-## Instructions<a name="emr-studio-create-studio-instructions"></a>
+Deactivate proxy management tools such as FoxyProxy or SwitchyOmega in the browser before you create a Studio\. Active proxies can result in a **Network Failure ** error message when you choose **Create Studio**\.
 
 ------
 #### [ Console ]
@@ -52,26 +40,23 @@ Make sure you deactivate proxy management tools such as FoxyProxy or SwitchyOmeg
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-create-studio.html)
 
-1. Under **Workspace storage**, choose **Browse S3** to select the Amazon S3 bucket that you designated for backing up Workspaces and notebook files\.
+1. Under **Workspace storage**, choose **Browse S3** to select your Amazon S3 bucket for backing up Workspaces and notebook files\.
 **Note**  
 Your EMR Studio service role must have read and write access to the bucket that you select\.
 
 1. Choose **Create Studio** to finish and navigate to the **Studios** page\. Your new Studio appears in the list with details such as **Studio name**, **Creation date**, and **Studio access URL**\.
-**Important**  
-Make sure you deactivate proxy management tools such as FoxyProxy or SwitchyOmega in the browser\. Active proxies can cause errors when you choose **Create Studio**, and result in a **Network Failure ** error message\.
 
 After you create a Studio, follow the instructions in [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
 ------
 #### [ CLI ]
 
-Use the `create-studio` AWS CLI command\. Insert your own values for the options in the following examples\. For more information about the `create-studio` command, see [https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio.html](https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio.html)\.
+**Note**  
+Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
 **Example CLI command to create an EMR Studio with IAM authentication mode**  
-The following example AWS CLI command creates an EMR Studio that uses IAM authentication mode\. When you use IAM authentication or federation for the Studio, you don't specify a `--user-role`\.   
-To let federated users log in using the Studio URL and credentials for your identity provider \(IdP\), specify your `--idp-auth-url` and `--idp-relay-state-parameter-name`\. The `--idp-auth-url` is the URL your IdP uses for login, and `--idp-relay-state-parameter-name` is the name that your IdP uses for its RelayState parameter\. For example, `RelayState` or `TargetSource`\.  
-For a list of IdP authentication URLs and RelayState names, see [Identity provider RelayState parameters and authentication URLs](#emr-studio-idp-reference-table)\.  
-For more information about IAM authentication mode, see [IAM authentication mode for Amazon EMR Studio](emr-studio-authentication.md#emr-studio-iam-authentication)\.  
+The following example AWS CLI command creates an EMR Studio with IAM authentication mode\. When you use IAM authentication or federation for the Studio, you don't specify a `--user-role`\.   
+To let federated users log in using the Studio URL and credentials for your identity provider \(IdP\), specify your `--idp-auth-url` and `--idp-relay-state-parameter-name`\. For a list of IdP authentication URLs and RelayState names, see [Identity provider RelayState parameters and authentication URLs](#emr-studio-idp-reference-table)\.  
 
 ```
 aws emr create-studio \
@@ -89,7 +74,7 @@ aws emr create-studio \
 
 **Example CLI command to create an EMR Studio with AWS SSO authentication mode**  
 The following AWS CLI example command creates an EMR Studio that uses AWS SSO authentication mode\. When you use AWS SSO authentication, you must specify a `--user-role`\.   
-For more information about AWS SSO authentication mode, see [SSO authentication mode for Amazon EMR Studio](emr-studio-authentication.md#emr-studio-enable-sso)\.  
+For more information about AWS SSO authentication mode, see [Set up SSO authentication mode for Amazon EMR Studio](emr-studio-authentication.md#emr-studio-enable-sso)\.  
 
 ```
 aws emr create-studio \
@@ -104,9 +89,6 @@ aws emr create-studio \
 --default-s3-location <example-s3-location>
 ```
 
-**Note**  
-Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
-
 **Example CLI output for `aws emr create-studio`**  
 The following is an example of the output that appears after you create a Studio\.  
 
@@ -116,6 +98,8 @@ The following is an example of the output that appears after you create a Studio
     Url: "https://es-123XXXXXXXXX.emrstudio-prod.us-east-1.amazonaws.com"
 }
 ```
+
+For more information about the `create-studio` command, see [https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio.html](https://docs.aws.amazon.com/cli/latest/reference/emr/create-studio.html)\.
 
 ------
 

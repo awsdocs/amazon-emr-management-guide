@@ -1,52 +1,13 @@
 # Configure EMR Studio user permissions<a name="emr-studio-user-permissions"></a>
 
-In Amazon EMR Studio, you configure user authorization \(permissions\) with AWS Identity and Access Management \(IAM\) identity\-based policies\. In these policies, you specify allowed actions and resources, as well as the conditions under which the actions are allowed\.
-
-You can follow the same steps to create permissions policies for EMR Studio regardless of authentication mode\. However, the method you use to *apply* a policy to a user differs by authentication mode\. 
-+ With IAM authentication or federation, you create one or more IAM permissions policies for EMR Studio and apply the policies directly to IAM identities \(users, groups, or roles\) for EMR Studio\. 
-+ With AWS SSO authentication, you create a single EMR Studio user role with session policies\. Then, when you [assign users and groups](emr-studio-manage-users.md#emr-studio-assign-users-groups) to a Studio, you map a session policy to that user or group to apply the permissions\.
+You must configure user permissions policies for Amazon EMR Studio so that you can set fine\-grained user and group permissions\. For information about how user permissions work in EMR Studio, see [Access control](how-emr-studio-works.md#emr-studio-access-control) in [How Amazon EMR Studio works](how-emr-studio-works.md)\. 
 
 **Note**  
-To set Amazon S3 access permissions for storing notebook files and AWS Secrets Manager access permissions to read secrets while linking Workspaces to Git repositories, use the EMR Studio service role\. 
-
-## User permissions for IAM authentication mode<a name="emr-studio-iam-authorization"></a>
-
-To set user permissions when you use IAM authentication for EMR Studio, you allow actions such as `elasticmapreduce:RunJobFlow` in an IAM permissions policy\. You can create one or more permissions policies to use\. For example, you might create a basic policy that does not allow a user to create new Amazon EMR clusters, and another policy that does allow cluster creation\. For a list of all Studio actions, see [AWS Identity and Access Management permissions for EMR Studio users](emr-studio-iam-permissions-table.md)\.
-
-**Note**  
-To assign a user to a Studio when you use IAM authentication mode, you must also allow the `CreateStudioPresignedUrl` action in a permissions policy attached to the user\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
-
-After you create your policies, you attach the policies to your IAM identities \(users, groups of users, or roles\) for EMR Studio\. 
-
-The following table summarizes how to attach a permissions policy when you use IAM authentication\.
-
-
-****  
-
-| When you use\.\.\. | Attach the policy to\.\.\. | 
-| --- | --- | 
-| IAM authentication | Your IAM identities \(users, groups of users, or roles\)\. For example, you can attach a permissions policy to a user in your AWS account\. | 
-| IAM federation with an external identity provider \(IdP\) |  The IAM role or roles that you create for your external IdP\. For example, an IAM role for SAML 2\.0 federation\.  EMR Studio uses the permissions that you attach to your IAM roles for users with federated access to a Studio\.  | 
-
-For information about the difference between IAM authentication and IAM federation, see [Choose an authentication mode for Amazon EMR Studio](emr-studio-authentication.md)\.
-
-## User permissions for AWS SSO authentication mode<a name="emr-studio-sso-authorization"></a>
-
-When you use AWS SSO authentication, you create a single EMR Studio user role\. The *user role* is a dedicated IAM role that a Studio assumes when a user logs in\.
-
-You attach IAM session policies to the EMR Studio user role\. A *session policy* is a special kind of IAM permissions policy that limits what a federated user can do during a Studio login session\. Session policies let you set specific permissions for a user or group without creating multiple user roles for EMR Studio\.
-
-When you [assign users and groups](emr-studio-manage-users.md#emr-studio-assign-users-groups) to a Studio, you map a session policy to that user or group to apply fine\-grained permissions\. You can also update a user or group's session policy at any time\. Amazon EMR stores each session policy mapping that you create\.
-
-For more information about session policies, see [Policies and permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *AWS Identity and Access Management User Guide*\. 
+The permissions covered in this section don't enforce data access control\. To manage access to input datasets, you should configure permissions for the clusters that your Studio uses\. For more information, see [Security in Amazon EMR](emr-security.md)\.
 
 ## Create an EMR Studio user role for AWS SSO authentication mode<a name="emr-studio-create-user-role"></a>
 
-When you use AWS SSO authentication mode for EMR Studio, you must create a user role\. The user role is a dedicated IAM role that your Studio assumes when a user logs in\. 
-
-Before you create a user role for EMR Studio, you need the following:
-+ An AWS account for your EMR Studio\. Create your user role and session policies in the same account\. If you use multiple accounts in your AWS organization, use a *member* account\. To learn more about AWS terminology, see [AWS Organizations terminology and concepts](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html)\. 
-+ The necessary permissions to create an IAM role\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
+You must create an EMR Studio user role when you use AWS SSO authentication mode\. 
 
 **To create a user role for EMR Studio**
 
@@ -69,19 +30,20 @@ Before you create a user role for EMR Studio, you need the following:
    }
    ```
 
-1. Remove the default permissions or policies associated with the role\. 
+1. Remove the default role permissions and policies\. 
 
-1. Attach all of your EMR Studio session policies to the user role before you assign users and groups to a Studio\. For instructions on how to create session policies, see [Create permissions policies for EMR Studio users](#emr-studio-permissions-policies)\.
+1. Attach your EMR Studio session policies to the user role before you assign users and groups to a Studio\. For instructions on how to create session policies, see [Create permissions policies for EMR Studio users](#emr-studio-permissions-policies)\.
 
 ## Create permissions policies for EMR Studio users<a name="emr-studio-permissions-policies"></a>
 
-You can use the following instructions to create permissions policies for EMR Studio regardless of the authentication mode that you use \(IAM or AWS SSO\)\. 
+Complete the following steps to create permissions policies for EMR Studio\.
 
-Before you create a policy, you must be authorized to create IAM resources\. For more information, see [Service role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#id_roles_create_service-permissions) in the *AWS Identity and Access Management User Guide*\.
+**Note**  
+To set Amazon S3 access permissions for storing notebook files and AWS Secrets Manager access permissions to read secrets while linking Workspaces to Git repositories, use the EMR Studio service role\. 
 
-For more information about the permissions in each example policy, see [AWS Identity and Access Management permissions for EMR Studio users](emr-studio-iam-permissions-table.md)\.
+1. Create one or more IAM permissions policy that specify which actions a user can take in your Studio\. For example, you can create three separate policies for basic, intermediate, and advanced Studio users with the example policies on this page\. 
 
-1. Follow the instructions in [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) to create a permissions policy\. The [AWS Identity and Access Management permissions for EMR Studio users](emr-studio-iam-permissions-table.md) table breaks down each Studio operation that a user might perform and lists the minimum IAM actions required to perform that operation\.
+   The [AWS Identity and Access Management permissions for EMR Studio users](#emr-studio-iam-permissions-table) table breaks down each Studio operation that a user might perform and lists the minimum IAM actions required to perform that operation\. For instructions, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)\.
 
    Your permissions policy must include the following statements\.
 
@@ -102,28 +64,43 @@ For more information about the permissions in each example policy, see [AWS Iden
    }
    ```
 
-   You can repeat this step to create different permissions policies as you see fit\. For example, you might create three separate policies for basic, intermediate, and advanced Studio users\.
-
 1. Attach the permissions policy to your IAM identity\. 
 
    The following table summarizes which IAM identity you attach a permissions policy to, depending on your EMR Studio authentication mode\. For instructions on how to attach a policy, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-permissions.html)
 
-   For information about the differences between IAM authentication, IAM federation, and AWS SSO authentication, see [Choose an authentication mode for Amazon EMR Studio](emr-studio-authentication.md)\.
+## AWS Identity and Access Management permissions for EMR Studio users<a name="emr-studio-iam-permissions-table"></a>
+
+The following table includes each Amazon EMR Studio operation that a user might perform, and lists the minimum IAM actions needed to perform that operation\. You allow these actions in your IAM permissions policies \(when you use IAM authentication\) or in your session policies \(when you use AWS SSO authentication\) for EMR Studio\.
+
+The table also displays the operations allowed in each of example permissions policy for EMR Studio\. For more information about the example permissions policies, see [Create permissions policies for EMR Studio users](#emr-studio-permissions-policies)\.
+
+
+| Action | Basic | Intermediate | Advanced | Associated actions | 
+| --- | --- | --- | --- | --- | 
+| Create and delete Workspaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreateEditor", <br />"elasticmapreduce:DescribeEditor",<br />"elasticmapreduce:ListEditors", <br />"elasticmapreduce:DeleteEditor"</pre>  | 
+| See a list of Amazon S3 Control storage buckets in the same account as the Studio when creating a new EMR cluster, and access container logs when using a web UI to debug applications | Yes | Yes | Yes |  <pre>"s3:ListAllMyBuckets",<br />"s3:ListBucket", <br />"s3:GetBucketLocation",<br />"s3:GetObject"</pre>  | 
+| Access Workspaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:DescribeEditor", <br />"elasticmapreduce:ListEditors",<br />"elasticmapreduce:StartEditor", <br />"elasticmapreduce:StopEditor",<br />"elasticmapreduce:OpenEditorInConsole"</pre>  | 
+| Attach or detach existing Amazon EMR clusters associated with the Workspace | Yes | Yes | Yes |  <pre>"elasticmapreduce:AttachEditor",<br />"elasticmapreduce:DetachEditor",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster",<br />"elasticmapreduce:ListInstanceGroups",<br />"elasticmapreduce:ListBootstrapActions"</pre>  | 
+| Attach or detach Amazon EMR on EKS clusters  | Yes | Yes | Yes |  <pre>"elasticmapreduce:AttachEditor", <br />"elasticmapreduce:DetachEditor",<br />"emr-containers:ListVirtualClusters", <br />"emr-containers:DescribeVirtualCluster",<br />"emr-containers:ListManagedEndpoints",<br />"emr-containers:DescribeManagedEndpoint",<br />"emr-containers:CreateAccessTokenForManagedEndpoint"</pre>  | 
+| Debug Amazon EMR on EC2 jobs with persistent application user interfaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreatePersistentAppUI",<br />"elasticmapreduce:DescribePersistentAppUI",<br />"elasticmapreduce:GetPersistentAppUIPresignedURL",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:ListSteps",<br />"elasticmapreduce:DescribeCluster",<br />"s3:ListBucket",<br />"s3:GetObject"</pre>  | 
+| Debug Amazon EMR on EC2 jobs with on\-cluster application user interfaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:GetOnClusterAppUIPresignedURL"</pre>  | 
+| Debug Amazon EMR on EKS job runs using the Spark History Server | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreatePersistentAppUI",<br />"elasticmapreduce:DescribePersistentAppUI",<br />"elasticmapreduce:GetPersistentAppUIPresignedURL",<br />"emr-containers:ListVirtualClusters",<br />"emr-containers:DescribeVirtualCluster",<br />"emr-containers:ListJobRuns",<br />"emr-containers:DescribeJobRun",<br />"s3:ListBucket",<br />"s3:GetObject"</pre>  | 
+| Create and delete Git repositories | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreateRepository", <br />"elasticmapreduce:DeleteRepository",<br />"elasticmapreduce:ListRepositories",<br />"elasticmapreduce:DescribeRepository",<br />"secretsmanager:CreateSecret",<br />"secretsmanager:ListSecrets",<br />"secretsmanager:TagResource"</pre>  | 
+| Link and unlink Git repositories | Yes | Yes | Yes |  <pre>"elasticmapreduce:LinkRepository",<br />"elasticmapreduce:UnlinkRepository",<br />"elasticmapreduce:ListRepositories",<br />"elasticmapreduce:DescribeRepository"</pre>  | 
+| Create new clusters from predefined cluster templates | No | Yes | Yes |  <pre>"servicecatalog:SearchProducts", <br />"servicecatalog:DescribeProduct",<br />"servicecatalog:DescribeProductView",<br />"servicecatalog:DescribeProvisioningParameters",<br />"servicecatalog:ProvisionProduct",<br />"servicecatalog:UpdateProvisionedProduct",<br />"servicecatalog:ListProvisioningArtifacts", <br />"servicecatalog:DescribeRecord",<br />"servicecatalog:ListLaunchPaths",<br />"cloudformation:DescribeStackResources", <br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster"</pre>  | 
+| Create new clusters by providing a cluster configuration | No | No | Yes |  <pre>"elasticmapreduce:RunJobFlow",<br />"iam:PassRole",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster"</pre>  | 
+| Assign a user to a Studio when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\. | No | No | No |  <pre>"elasticmapreduce:CreateStudioPresignedUrl"</pre>  | 
 
 ## Example: Basic user policy<a name="emr-studio-basic-permissions-policy"></a>
 
 The following basic user policy allows most EMR Studio actions, but does not let a user create new Amazon EMR clusters\. 
 
-This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+**Important**  
+The example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
-The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
-
-To modify the example permissions policy, use the following guidelines:
-+ Replace *<region>* with the code of the AWS Region associated with the Studio\.
-+ Replace *<aws\-account\-id>* with the ID of the AWS account associated with the Studio\.
-+ Replace *<your\-emr\-studio\-service\-role>* with the name of your EMR Studio service role\.
+The example policy includes `Condition` elements to enforce tag\-based access control \(TBAC\) so that you can use the policy with the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 ```
 {
@@ -235,14 +212,10 @@ To modify the example permissions policy, use the following guidelines:
 
 The following intermediate user policy allows most EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates\. 
 
-This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+**Important**  
+The example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
-The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
-
-To modify the example permissions policy, use the following guidelines:
-+ Replace *<region>* with the code of the AWS Region associated with the Studio\.
-+ Replace *<aws\-account\-id>* with the ID of the AWS account associated with the Studio\.
-+ Replace *<your\-emr\-studio\-service\-role>* with the name of your EMR Studio service role\.
+The example policy includes `Condition` elements to enforce tag\-based access control \(TBAC\) so that you can use the policy with the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 ```
 {
@@ -371,14 +344,10 @@ To modify the example permissions policy, use the following guidelines:
 
 The following intermediate user policy allows all EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates or by providing a cluster configuration\. 
 
-This example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. `CreateStudioPresignedUrl` assigns a user to the Studios that you specify in the corresponding `Resource` element of your permissions policy\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
+**Important**  
+The example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
 
-The policy uses `Condition` elements, which enforce tag\-based access control \(TBAC\) for the `"for-use-with-amazon-emr-managed-policies": "true"` tag\. The same TBAC is defined in the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
-
-To modify the example permissions policy, use the following guidelines:
-+ Replace *<region>* with the code of the AWS Region associated with the Studio\.
-+ Replace *<aws\-account\-id>* with the ID of the AWS account associated with the Studio\.
-+ Replace *<your\-emr\-studio\-service\-role>* with the name of your EMR Studio service role\.
+The example policy includes `Condition` elements to enforce tag\-based access control \(TBAC\) so that you can use the policy with the example service role for EMR Studio\. For more information, see [Create an EMR Studio service role](emr-studio-service-role.md)\.
 
 ```
 {

@@ -1,7 +1,7 @@
 # Considerations and limitations<a name="emr-studio-considerations"></a>
 
 Consider the following when you work with Amazon EMR Studio:
-+ EMR Studio is available in the following AWS Regions: US East \(N\. Virginia, Ohio\), US West \(Oregon\), Asia Pacific \(Mumbai, Seoul, Singapore, Sydney, Tokyo\), Canada \(Central\), EU \(Frankfurt, Ireland, London, Stockholm\)\.
++ EMR Studio is available in the following AWS Regions: US East \(N\. Virginia, Ohio\), US West \(Oregon\), Asia Pacific \(Mumbai, Seoul, Singapore, Sydney, Tokyo\), Canada \(Central\), EU \(Frankfurt, Ireland, London, Paris, Stockholm\), and South America \(Sao Paulo\)\.
 + EMR Studio works with Amazon EMR versions 5\.32\.0 \(EMR 5\.x series\) or 6\.2\.0 \(EMR 6\.x series\) and later\.
 + To let users provision new EMR clusters running on Amazon EC2 for a Workspace, you can associate an EMR Studio with a set of cluster templates\. Administrators can define cluster templates with AWS Service Catalog and can choose whether a user or group can access the cluster templates, or no cluster templates, within a Studio\.
 + When you define access permissions to notebook files stored in Amazon S3 or read secrets from AWS Secrets Manager, use the EMR service role\. Defining these permissions using session policies isn't supported\.

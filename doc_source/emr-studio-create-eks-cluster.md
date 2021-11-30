@@ -29,7 +29,7 @@ A TLS certificate used by the AWS Load Balancer Controller to enable secure HTTP
 ## Prerequisites<a name="emr-studio-emr-on-eks-prereqs"></a>
 
 Before you can set up Amazon EMR on EKS for Amazon EMR Studio, you must have the following items:
-+ A designated AWS Certificate Manager \(ACM\) certificate for EMR Studio\. You can specify any domain name when you create the certificate\. For information about how to create a certificate, see [Issuing and managing certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs.html) in the *AWS Certificate Manager User Guide*\. Note the Amazon Resource Name \(ARN\) of the certificate\. You use the ARN to set up IAM permissions and when you create a managed endpoint\.
++ An AWS Certificate Manager \(ACM\) certificate for EMR Studio\. You can specify any domain name when you create the certificate\. For information about how to create a certificate, see [Issuing and managing certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs.html) in the *AWS Certificate Manager User Guide*\. Note the Amazon Resource Name \(ARN\) of the certificate\. You use the ARN to set up IAM permissions and when you create a managed endpoint\.
 + Make sure that your IAM entity \(user or role\) has the following Amazon EC2 permissions\. These permissions enable Amazon EMR on EKS to create, manage, and delete the security groups that limit inbound traffic to your managed endpoint's load balancer\.
 
   ```

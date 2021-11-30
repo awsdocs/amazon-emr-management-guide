@@ -7,7 +7,7 @@ Each EMR notebook needs permissions to access other AWS resources and perform ac
 Your service role should use the following trust policy\.
 
 **Important**  
-Your trust policy may be out of date if your service role for EMR Notebooks was created before November 2021\. We strongly recommend that you update your role to use the following trust policy, which restricts the `sts:AssumeRole` action\.
+We strongly recommend that you use the following trust policy, which includes the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition keys to limit the permissions that you give Amazon EMR to particular resources in your account\. Doing so can protect you against [the confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
 
 ```
 {

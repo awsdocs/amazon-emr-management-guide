@@ -3,14 +3,14 @@
 Amazon EMR Studio runs notebook commands using a kernel on an EMR cluster\. Before you can select a kernel, you should attach the Workspace to a cluster that uses Amazon EC2 instances, or to an EMR on EKS cluster\. EMR Studio lets you attach Workspaces to new or existing clusters, and gives you the flexibility to change clusters without closing the Workspace\.
 
 **Topics**
-+ [Attach a running cluster to a Workspace to run notebooks](#emr-studio-attach-cluster)
-+ [Use an Amazon EMR on EKS cluster to run Notebook code](#emr-studio-use-eks-cluster)
-+ [Create a new EMR Cluster for a Workspace](#emr-studio-create-cluster)
-+ [Detach a cluster from a Workspace](#emr-studio-detach-cluster)
++ [Attach a running cluster](#emr-studio-attach-cluster)
++ [Use an Amazon EMR on EKS cluster](#emr-studio-use-eks-cluster)
++ [Create a new EMR cluster](#emr-studio-create-cluster)
++ [Detach a cluster](#emr-studio-detach-cluster)
 
-## Attach a running cluster to a Workspace to run notebooks<a name="emr-studio-attach-cluster"></a>
+## Attach a running cluster<a name="emr-studio-attach-cluster"></a>
 
-You can attach an existing EMR cluster running on Amazon EC2 to a Workspace when you create the Workspace, or you can choose a cluster from the Workspace user interface\. If you want to create and attach a *new* cluster, see [Create a new EMR Cluster for a Workspace](#emr-studio-create-cluster)\.
+You can attach an existing EMR cluster running on Amazon EC2 to a Workspace when you create the Workspace, or you can choose a cluster from the Workspace user interface\. If you want to create and attach a *new* cluster, see [Create a new EMR cluster](#emr-studio-create-cluster)\.
 
 ------
 #### [ Create a Workspace dialog box ]
@@ -40,7 +40,7 @@ After you attach a cluster, you can finish the Workspace creation process\. When
 
 ------
 
-## Use an Amazon EMR on EKS cluster to run Notebook code<a name="emr-studio-use-eks-cluster"></a>
+## Use an Amazon EMR on EKS cluster<a name="emr-studio-use-eks-cluster"></a>
 
 In addition to using Amazon EMR clusters running on Amazon EC2, you can attach a Workspace to an Amazon EMR on EKS cluster to run notebook code\. For more information about EMR on EKS, see [What is Amazon EMR on EKS](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html)\.
 
@@ -80,7 +80,7 @@ After you attach a cluster, you can finish the Workspace creation process\. When
 
 ------
 
-## Create a new EMR Cluster for a Workspace<a name="emr-studio-create-cluster"></a>
+## Create a new EMR cluster<a name="emr-studio-create-cluster"></a>
 
 Advanced EMR Studio users can provision new EMR clusters running on Amazon EC2 to use with a Workspace\. The new cluster has all of the big data applications that are required for EMR Studio installed by default\. 
 
@@ -123,7 +123,7 @@ You can create a new cluster in the **Create a Workspace** dialog box or from th
 
 1. Choose **Use cluster template** to provision the cluster and attach it to the Workspace\. It will take a few minutes for EMR Studio to create the cluster\. If you use the **Create a Workspace** dialog box, choose **Create Workspace** to create the Workspace and provision the cluster\. After EMR Studio provisions the new cluster, it attaches the cluster to your Workspace\.
 
-## Detach a cluster from a Workspace<a name="emr-studio-detach-cluster"></a>
+## Detach a cluster<a name="emr-studio-detach-cluster"></a>
 
 To exchange the cluster attached to a Workspace, you can detach a cluster from the Workspace UI\.
 

@@ -1,4 +1,4 @@
-# Multi\-language support for Spark kernels<a name="emr-multi-language-kernels"></a>
+# Use multi\-language notebooks with Spark kernels<a name="emr-multi-language-kernels"></a>
 
 Each Jupyter notebook kernel has a default language\. For example, the Spark kernel’s default language is Scala, and the PySpark kernels’s default language is Python\. With Amazon EMR 6\.4\.0 and later, EMR Studio supports multi\-language notebooks\. This means that each kernel in EMR Studio can support the following languages in addition to the default language: Python, Spark, R, and Spark SQL\.
 
@@ -44,7 +44,7 @@ The `%%scalaspark` cell magic allows users to execute Spark Scala code in all Sp
 val a = 1
 ```
 
-## Sharing data across language interpreters using temporary tables<a name="emr-temp-tables"></a>
+## Share data across language interpreters with temporary tables<a name="emr-temp-tables"></a>
 
 You can also share data between language interpreters using temporary tables\. The following example uses `%%pyspark` in one cell to create a temporary table in Python and uses `%%scalaspark` in the following cell to read data from that table in Scala\.
 

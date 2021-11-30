@@ -38,6 +38,14 @@ If your cluster will be in a public subnet, use the following example policy for
             "Resource": "*",
             "Action": "lakeformation:GetTemporaryUserCredentialsWithSAML"
         }
+	 {
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:PassRole"
+            ],
+            "Resource": "*"
+        }
     ]
 }
 ```
@@ -45,6 +53,8 @@ If your cluster will be in a public subnet, use the following example policy for
 ## Private subnet<a name="emr-lf-iam-role-EC2-private"></a>
 
 If your cluster will be in a private subnet, use the following example policy for your customized EC2 instance profile\. Replace *My\-S3\-Bucket\-for\-IdP\-Metadata* with the S3 bucket containing your identify provider \(IdP\) metadata\. Replace the *MyEMRClusterLogs* with the S3 bucket for storing EMR logs\.
+
+When using Amazon EMR clusters in a private subnet, make sure your EMR cluster can access the AWS Lake Formation service to fetch required metadata and query policies and the AWS IAM service to extract IAM role session duration value\. To access AWS Lake Formation service, you can either set up a NAT Gateway or go through VPC Endpoint for AWS Lake Formation\. To access AWS IAM service, you need to set up a NAT Gateway, as currently AWS IAM does not support VPC Endpoint\. Note that you will incur cost when using either NAT Gateway or VPC Endpoint service\.
 
 ```
 {
@@ -77,6 +87,14 @@ If your cluster will be in a private subnet, use the following example policy fo
             "Effect": "Allow",
             "Resource": "*",
             "Action": "lakeformation:GetTemporaryUserCredentialsWithSAML"
+        }
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:PassRole"
+            ],
+            "Resource": "*"
         }
     ]
 }
