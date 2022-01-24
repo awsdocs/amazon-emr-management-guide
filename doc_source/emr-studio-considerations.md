@@ -1,7 +1,7 @@
 # Considerations and limitations<a name="emr-studio-considerations"></a>
 
 Consider the following when you work with Amazon EMR Studio:
-+ EMR Studio is available in the following AWS Regions: US East \(N\. Virginia, Ohio\), US West \(Oregon\), Asia Pacific \(Mumbai, Seoul, Singapore, Sydney, Tokyo\), Canada \(Central\), EU \(Frankfurt, Ireland, London, Paris, Stockholm\), and South America \(Sao Paulo\)\.
++ EMR Studio is available in the following AWS Regions: US East \(N\. Virginia, Ohio\), US West \(N\. California, Oregon\), Asia Pacific \(Mumbai, Seoul, Singapore, Sydney, Tokyo\), Canada \(Central\), EU \(Frankfurt, Ireland, London, Paris, Stockholm\), and South America \(Sao Paulo\)\.
 + EMR Studio works with Amazon EMR versions 5\.32\.0 \(EMR 5\.x series\) or 6\.2\.0 \(EMR 6\.x series\) and later\.
 + To let users provision new EMR clusters running on Amazon EC2 for a Workspace, you can associate an EMR Studio with a set of cluster templates\. Administrators can define cluster templates with AWS Service Catalog and can choose whether a user or group can access the cluster templates, or no cluster templates, within a Studio\.
 + When you define access permissions to notebook files stored in Amazon S3 or read secrets from AWS Secrets Manager, use the EMR service role\. Defining these permissions using session policies isn't supported\.
@@ -87,7 +87,8 @@ Use the following best practices to set up an Amazon Virtual Private Cloud \(Ama
 All Amazon EMR clusters running on Amazon EC2 that you create for an EMR Studio Workspace must meet the following requirements\. Clusters that you create using the EMR Studio interface automatically meet these requirements\.
 + The cluster must use Amazon EMR versions 5\.32\.0 \(EMR 5\.x series\) or 6\.2\.0 \(EMR 6\.x series\) or later\. You can create a cluster using the Amazon EMR console, AWS Command Line Interface, or SDK, and then attach it to an EMR Studio Workspace\. Studio users can also provision and attach clusters when creating or working in an Amazon EMR Workspace\. For more information, see [Attach a cluster to a Workspace](emr-studio-create-use-clusters.md)\.
 + The cluster must be within an Amazon Virtual Private Cloud\. The EC2\-Classic platform isn't supported\.
-+ The cluster must have Spark, Livy, and Jupyter Enterprise Gateway installed\. You can install other applications, but EMR Studio is designed to work with Spark clusters\. 
++ The cluster must have Spark, Livy, and Jupyter Enterprise Gateway installed\. If you plan to use the cluster for SQL Explorer, you should install Presto instead of Spark\. We recommend that you use separate clusters for Presto and Spark because the two engines use difference resource managers which can result in resource contention\.
++ To use SQL Explorer, the cluster must use Amazon EMR versions 6\.4\.0 or later and have Presto installed\. If you want to specify the AWS Glue Data Catalog as the Hive metastore for Presto, you must configure it on the cluster\. For more information, see [Using Presto with the AWS Glue Data Catalog](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-presto-glue.html)\.
 + The cluster must be in a private subnet with network address translation \(NAT\) to use publicly\-hosted Git repositories with EMR Studio\.
 
 We recommend the following cluster configurations when you work with EMR Studio\.

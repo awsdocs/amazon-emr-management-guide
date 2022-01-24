@@ -36,7 +36,7 @@ The following example policy gives a user access to a particular EMR Studio by a
 
 **Example Assign a user to a Studio with ABAC for IAM authentication**  
 There are multiple ways to configure attribute\-based access control \(ABAC\) for a Studio\. For example, you might attach one or more tags to an EMR Studio, and then create an IAM policy that restricts the `CreateStudioPresignedUrl` action to a particular Studio or set of Studios with those tags\.   
-You can add tags during or after Studio creation\. To add tags to an existing Studio, you can use the [AWS CLI `emr add-tags`](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/emr/add-tags.html) command\. The following example adds a tag with the key\-value pair `Team = Data Analytics` to an EMR Studio\.   
+You can add tags during or after Studio creation\. To add tags to an existing Studio, you can use the [AWS CLI`emr add-tags`](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/emr/add-tags.html) command\. The following example adds a tag with the key\-value pair `Team = Data Analytics` to an EMR Studio\.   
 
 ```
 aws emr add-tags --resource-id <example-studio-id> --tags team="Data Analytics"

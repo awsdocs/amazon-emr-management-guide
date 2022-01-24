@@ -1,6 +1,14 @@
 # Apache Spark plugin<a name="emr-ranger-spark"></a>
 
-Amazon EMR has integrated EMR RecordServer to be able to provide fine\-grained access control for SparkSQL as well as EMRFS S3 Ranger plugin to provide course grained access control\. EMR's RecordServer is a privileged process running on all nodes on an Apache Ranger enabled cluster\. When a Spark driver or executor runs a SparkSQL statement, all metadata and data requests go through the RecordServer\.
+Amazon EMR has integrated EMR RecordServer to provide fine\-grained access control for SparkSQL\. EMR's RecordServer is a privileged process running on all nodes on an Apache Ranger\-enabled cluster\. When a Spark driver or executor runs a SparkSQL statement, all metadata and data requests go through the RecordServer\. To learn more about EMR RecordServer, see the [Amazon EMR components](emr-ranger-components.md) page\.
+
+**Topics**
++ [Supported features](#emr-ranger-spark-supported-features)
++ [Redeploy service definition to use INSERT INTO, INSERT OVERWRITE, or ALTER TABLE statements](#emr-ranger-spark-redeploy-service-definition)
++ [Installation of service definition](#emr-ranger-spark-install-servicedef)
++ [Creating SparkSQL policies](#emr-ranger-spark-create-sparksql)
++ [Considerations](#emr-ranger-spark-considerations)
++ [Limitations](#emr-ranger-spark-limitations)
 
 ## Supported features<a name="emr-ranger-spark-supported-features"></a>
 
@@ -15,8 +23,8 @@ Amazon EMR has integrated EMR RecordServer to be able to provide fine\-grained a
 |  DESCRIBE TABLE  |  Supported  |  As of 5\.32  | 
 |  CREATE TABLE  |  Not Supported  |    | 
 |  UPDATE TABLE  |  Not Supported  |    | 
-|  INSERT OVERWRITE  |  Supported  |  As of 6\.4  | 
-| INSERT INTO | Supported | As of 6\.4 | 
+|  INSERT OVERWRITE  |  Supported  |  As of 5\.34 and 6\.4  | 
+| INSERT INTO | Supported | As of 5\.34 and 6\.4 | 
 |  ALTER TABLE  |  Supported  |  As of 6\.4  | 
 |  DELETE FROM  |  Not Supported  |    | 
 
@@ -131,7 +139,7 @@ To specify the users and groups, enter the users and groups below to grant permi
 
 After specifying the allow and deny conditions, click **Save**\.
 
-## Additional considerations<a name="emr-ranger-spark-considerations"></a>
+## Considerations<a name="emr-ranger-spark-considerations"></a>
 
 Each node within the EMR cluster must be able to connect to the master node on port 9083\.
 
@@ -145,7 +153,7 @@ The following are current limitations for the Apache Spark plugin:
 + Ranger Admin server does not support auto\-complete\.
 + The SparkSQL plugin for Amazon EMR does not support row filters or data masking\.
 + When using ALTER TABLE with Spark SQL, a partition location must be the child directory of a table location\. Inserting data into a partition where the partition location is different from the table location is not supported\.
-+ We only support the following ALTER TABLE statements: 
++ We support only the following ALTER TABLE statements: 
   + [ADD COLUMN](https://spark.apache.org/docs/latest/sql-ref-syntax-ddl-alter-table.html#add-columns)
   + [ADD PARTITION](https://spark.apache.org/docs/latest/sql-ref-syntax-ddl-alter-table.html#add-partition)
   + [SET TABLE PROPERTIES](https://spark.apache.org/docs/latest/sql-ref-syntax-ddl-alter-table.html#set-table-properties)

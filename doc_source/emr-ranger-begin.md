@@ -8,4 +8,5 @@ Before you install Apache Ranger, review the information in this section to make
 + [Create the EMR security configuration](emr-ranger-security-config.md)
 + [Store TLS certificates in AWS Secrets Manager](emr-ranger-tls-certificates.md)
 + [Start an EMR cluster](emr-ranger-start-emr-cluster.md)
-+ [Considerations and issues](emr-ranger-security-considerations.md)
++ [Configure Zeppelin for Apache Ranger\-enabled Amazon EMR clusters](emr-ranger-configure-zeppelin.md)
++ [Known issues](emr-ranger-security-considerations.md)

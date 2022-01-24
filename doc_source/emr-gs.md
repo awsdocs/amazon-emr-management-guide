@@ -145,7 +145,7 @@ Your cluster status changes to **Waiting** when the cluster is up, running, and 
    ```
    aws emr create-cluster \
    --name "<My First EMR Cluster>" \
-   --release-label <emr-5.33.0> \
+   --release-label <emr-5.34.0> \
    --applications Name=Spark \
    --ec2-attributes KeyName=<myEMRKeyPairName> \
    --instance-type m5.xlarge \

@@ -2,6 +2,12 @@
 
 Apache Hive is a popular execution engine within the Hadoop ecosystem\. Amazon EMR provides an Apache Ranger plugin to be able to provide fine\-grained access controls for Hive\. The plugin is compatible with open source Apache Ranger Admin server version 2\.0 and later\.
 
+**Topics**
++ [Supported features](#emr-ranger-supported-features)
++ [Installation of service configuration](#emr-ranger-hive-service-config)
++ [Considerations](#emr-ranger-hive-considerations)
++ [Limitations](#emr-ranger-hive-limitations)
+
 ## Supported features<a name="emr-ranger-supported-features"></a>
 
 The Apache Ranger plugin for Hive on EMR supports all the functionality of the open source plugin, which includes database, table, column level access controls and row filtering and data masking\. For a table of Hive commands and associated Ranger permissions, see [Hive commands to Ranger permission mapping](https://cwiki.apache.org/confluence/display/RANGER/Hive+Commands+to+Ranger+Permission+Mapping)\.
@@ -33,7 +39,7 @@ The **Test Connection** button tests whether the values above can be used to suc
 
 ![\[Connected to the HiveServer2 instance\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/ranger_config_connected.png)
 
-## Other considerations<a name="emr-ranger-hive-considerations"></a>
+## Considerations<a name="emr-ranger-hive-considerations"></a>
 
 **Hive Metadata Server**
 

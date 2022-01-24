@@ -2,7 +2,7 @@
 
 **Creating an Amazon EMR Security Configuration for Apache Ranger**
 
-Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a security configuration with the IAM roles and identity provider \(IdP\) metadata XML file you created in [Configure a trust relationship between your IdP and Lake Formation](emr-lf-federation.md)\. You specify this security configuration when you launch the cluster\.
+Before you launch an Amazon EMR cluster integrated with Apache Ranger, create a security configuration\.
 
 ------
 #### [ Console ]

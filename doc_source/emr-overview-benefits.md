@@ -19,6 +19,9 @@ Amazon EMR pricing depends on the instance type and number of Amazon EC2 instanc
 **Note**  
 If you use Amazon S3, Amazon Kinesis, or DynamoDB with your EMR cluster, there are additional charges for those services that are billed separately from your Amazon EMR usage\.
 
+**Note**  
+For Amazon EMR clusters in private subnets, we recommend that you use [VPC endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html)\. With VPC endpoints, traffic from S3 stays within the VPC and there are no additional NAT gateway charges when your cluster interacts with data in S3\.
+
 For more information about pricing options and details, see [Amazon EMR pricing](https://aws.amazon.com/elasticmapreduce/pricing/)\.
 
 ## AWS integration<a name="emr-benefits-integration"></a>
@@ -83,7 +86,7 @@ Amazon EMR supports launching clusters in a virtual private cloud \(VPC\) in Ama
 
 ### AWS CloudTrail<a name="emr-benefits-cloudtrail"></a>
 
-Amazon EMR integrates with CloudTrail to log information about requests made by or on behalf of your AWS account\. With this information, you can track who is accessing your cluster when, and the IP address from which they made the request\. For more information, see [Logging Amazon EMR API calls in AWS CloudTrail ](logging_emr_api_calls.md)\.
+Amazon EMR integrates with CloudTrail to log information about requests made by or on behalf of your AWS account\. With this information, you can track who is accessing your cluster when, and the IP address from which they made the request\. For more information, see [Logging Amazon EMR API calls in AWS CloudTrail](logging_emr_api_calls.md)\.
 
 ### Amazon EC2 key pairs<a name="emr-benefits-key-pairs"></a>
 

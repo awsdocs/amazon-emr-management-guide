@@ -81,11 +81,17 @@ You can use only one of the two options when provisioning an EMR cluster, and yo
 |  Use both x86 and Graviton2 processors with custom AMIs in the same cluster  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-no.png) ☓ Not supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  | 
 |  AMI customization varies across instance types  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-no.png) ☓ Not supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  | 
 |  Change custom AMIs when adding new task instance groups/fleets to a running cluster\. Note: you cannot change the custom AMI of existing instance groups/fleets\.  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-no.png) ☓ Not supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  | 
-|  Use AWS Console or AWS CloudFormation to start a cluster  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-no.png) ☓ Not supported, only API, CLI and SDK support available  | 
+|  Use AWS Console to start a cluster  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-no.png) ☓ Not supported  | 
+|  Use AWS CloudFormation to start a cluster  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  |   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/images/icon-yes.png) ✓ Supported  | 
 
 ## Use a single custom AMI in an EMR cluster<a name="single-custom-ami"></a>
 
-You can specify a custom AMI ID when you create a cluster using the AWS Management Console, AWS CLI, Amazon EMR SDK, Amazon EMR API, the [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html), or [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html)\. <a name="single-custom-ami-console"></a>
+To specify a custom AMI ID when you create a cluster, use one of the following:
++ AWS Management Console
++ AWS CLI
++ Amazon EMR SDK
++ Amazon EMR API [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html)
++ AWS CloudFormation \(see the `CustomAmiID` property in [Cluster InstanceGroupConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancegroupconfig.html), [Cluster InstanceTypeConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancetypeconfig.html), [Resource InstanceGroupConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-instancegroupconfig.html), or [Resource InstanceFleetConfig\-InstanceTypeConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancefleetconfig-instancetypeconfig.html)\)<a name="single-custom-ami-console"></a>
 
 **To use a single custom AMI in the console**
 
@@ -118,7 +124,13 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
 ## Use multiple custom AMIs in an Amazon EMR cluster<a name="multiple-custom-ami"></a>
 
-To create a cluster using multiple custom AMIs, use the AWS CLI version 1\.20\.21 or later, AWS SDK or the Amazon EMR [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html) in the *Amazon EMR API Reference*\. AWS CloudFormation and AWS Management Console currently do not support creating a cluster using multiple custom AMIs\. 
+To create a cluster using multiple custom AMIs, use one of the following: 
++ AWS CLI version 1\.20\.21 or later
++ AWS SDK
++ Amazon EMR [RunJobFlow](https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html) in the *Amazon EMR API Reference*
++ AWS CloudFormation \(see the `CustomAmiID` property in [Cluster InstanceGroupConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancegroupconfig.html), [Cluster InstanceTypeConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancetypeconfig.html), [Resource InstanceGroupConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-instancegroupconfig.html), or [Resource InstanceFleetConfig\-InstanceTypeConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancefleetconfig-instancetypeconfig.html)\)
+
+The AWS Management Console currently does not support creating a cluster using multiple custom AMIs\.
 
 **Example \- Use the AWS CLI to create an instance group cluster using multiple custom AMIs**  
 Using the AWS CLI version 1\.20\.21 or later, you can assign a single custom AMI to the entire cluster, or you can assign multiple custom AMIs to every instance node in your cluster\.  

@@ -54,7 +54,7 @@ The following example creates an Amazon EMR cluster on an Outpost\. Replace *sub
 ```
 aws emr create-cluster \
 --name "Outpost cluster" \
---release-label emr-5.33.0 \
+--release-label emr-5.34.0 \
 --applications Name=Spark \
 --ec2-attributes KeyName=myKey SubnetId=subnet-22XXXX01 \
 --instance-type m5.xlarge --instance-count 3 --use-default-roles

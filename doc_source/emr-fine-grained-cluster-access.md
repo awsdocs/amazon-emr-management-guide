@@ -184,7 +184,7 @@ For more information specifying the null \("false"\) condition operator, see [Co
 
 The example IAM policy statements in this section demonstrate common scenarios for using keys to limit allowed actions using EMR Notebooks\. As long as no other policy associated with the principal \(user\) allows the actions, the condition context keys limit allowed actions as indicated\.
 
-**Example – Allow access only to notebooks that a user creates based on tagging**  
+**Example – Allow access only to EMR Notebooks that a user creates based on tagging**  
 The following example policy statement, when attached to a role or user, allows the IAM user to work only with notebooks that they have created\. This policy statement uses the default tag applied when a notebook is created\.  
 In the example, the `StringEquals` condition operator tries to match a variable representing the current users IAM user ID \(`{aws:userId}`\) with the value of the tag `creatorUserID`\. If the tag `creatorUserID` hasn't been added to the notebook, or doesn't contain the value of the current user's ID, the policy doesn't apply, and the actions aren't allowed by this policy\. If no other policy statements allow the actions, the user can only work with notebooks that have this tag with this value\.  
 

@@ -9,7 +9,7 @@ You can enable managed scaling during cluster launch as the following example de
 ```
 aws emr create-cluster \
  --service-role EMR_DefaultRole \
- --release-label emr-5.33.0 \
+ --release-label emr-5.34.0 \
  --name EMR_Managed_Scaling_Enabled_Cluster \
  --applications Name=Spark Name=Hbase \
  --ec2-attributes KeyName=keyName,InstanceProfile=EMR_EC2_DefaultRole \

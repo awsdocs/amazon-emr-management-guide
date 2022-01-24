@@ -24,7 +24,7 @@ To enable one\-click access to persistent application user interfaces, Amazon EM
 If you need to disable this feature for privacy reasons, you can stop the daemon by using a bootstrap script when you create a cluster, as the following example demonstrates\.
 
 ```
-aws emr create-cluster --name "Stop Application UI Support" --release-label emr-5.33.0 \
+aws emr create-cluster --name "Stop Application UI Support" --release-label emr-5.34.0 \
 --applications Name=Hadoop Name=Spark --ec2-attributes KeyName=<myEMRKeyPairName> \
 --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m3.xlarge InstanceGroupType=CORE,InstanceCount=1,InstanceType=m3.xlarge InstanceGroupType=TASK,InstanceCount=1,InstanceType=m3.xlarge \
 --use-default-roles --bootstrap-actions Path=s3://region.elasticmapreduce/bootstrap-actions/run-if,Args=["instance.isMaster=true","echo Stop Application UI | sudo tee /etc/apppusher/run-apppusher; sudo systemctl stop apppusher || exit 0"]

@@ -1,6 +1,6 @@
 # How Amazon EMR Studio works<a name="how-emr-studio-works"></a>
 
-An Amazon EMR Studio is an Amazon EMR resource that you create for a team of users\. Each Studio is a self\-contained integrated development environment for Jupyter notebooks that run on Amazon EMR clusters\. Users log in to a Studio using corporate credentials\. 
+An Amazon EMR Studio is an Amazon EMR resource that you create for a team of users\. Each Studio is a self\-contained, web\-based integrated development environment for Jupyter notebooks that run on Amazon EMR clusters\. Users log in to a Studio using corporate credentials\. 
 
 Each EMR Studio that you create uses the following AWS resources: 
 + **An Amazon Virtual Private Cloud \(VPC\) with subnets **\- Users run Studio kernels and applications on Amazon EMR and Amazon EMR on EKS clusters in the specified VPC\. An EMR Studio can connect to any cluster in the subnets that you specify when you create the Studio\.
@@ -90,6 +90,8 @@ Similar to [workspaces in JupyterLab](https://jupyterlab.readthedocs.io/en/lates
 
 The following list includes key features of EMR Studio Workspaces:
 + Workspace visibility is Studio\-based\. Workspaces that you create in one Studio aren't visible in other Studios\.
++ By default, a Workspace is shared and can be seen by all Studio users\. However, only one user can open and work in a Workspace at a time\. To work simultaneously with other users, you can [Configure Workspace collaboration](emr-studio-workspace-collaboration.md)
++ You can collaborate simultaneously with other users in a Workspace when you enable Workspace collaboration\. For more information, see [Configure Workspace collaboration](emr-studio-workspace-collaboration.md)\.
 + Notebooks in a Workspace share the same EMR cluster to run commands\. You can attach a Workspace to an Amazon EMR cluster running on Amazon EC2 or to an Amazon EMR on EKS virtual cluster and managed endpoint\.
 + Workspaces can switch over to another Availability Zone that you associate with a Studio's subnets\. You can stop and restart a Workspace to prompt the failover process\. When you restart a Workspace, EMR Studio launches the Workspace in a different Availability Zone in the Studio's VPC when the Studio is configured with access to multiple Availability Zones\. If the Studio has only one Availability Zone, EMR Studio attempts to launch the Workspace in a different subnet\. For more information, see [Resolve Workspace connectivity issues](emr-studio-configure-workspace.md#emr-studio-workspace-stop-start)\.
 + A Workspace can connect to clusters in any of the subnets that are associated with a Studio\.

@@ -3,31 +3,14 @@
 When you use an Amazon EMR Studio, you can create and configure different *Workspaces* to organize and run notebooks\. This section covers creating and working with Workspaces\. For a conceptual overview, see [Workspaces](how-emr-studio-works.md#emr-studio-workspaces) on the [How Amazon EMR Studio works](how-emr-studio-works.md) page\.
 
 **Topics**
-+ [Understand Workspace status](#emr-studio-workspace-status)
 + [Create an EMR Studio Workspace](#emr-studio-create-workspace)
 + [Launch a Workspace](#emr-studio-use-workspace)
-+ [Resolve Workspace connectivity issues](#emr-studio-workspace-stop-start)
 + [Understand the Workspace user interface](#emr-studio-workspace-ui)
 + [Explore notebook examples](#emr-studio-notebook-examples)
 + [Save Workspace content](#emr-studio-save-workspace)
 + [Delete a Workspace and notebook files](#emr-studio-delete-workspace)
-
-## Understand Workspace status<a name="emr-studio-workspace-status"></a>
-
-After you create an EMR Studio Workspace, it appears as a row in the **Workspaces** list in your Studio with its name, status, creation time, and last modified timestamp\. The following table describes Workspace statuses\.
-
-
-****  
-
-| Status | Description | 
-| --- | --- | 
-| Starting | The Workspace is being prepared, but is not yet ready to use\. You can't open a Workspace when its status is Starting\. | 
-| Ready | You can open the Workspace to use the notebook editor, but you must attach the Workspace to an EMR cluster before you can run notebook code\. | 
-| Attaching | The Workspace is being attached to a cluster\. | 
-| Attached | The Workspace is attached to an EMR cluster and ready for you to write and run notebook code\. If a Workspace's status is not Attached, you must attach it to a cluster before you can run notebook code\. | 
-| Idle | The Workspace is stopped and idle\. To reactivate an idle Workspace, select it from the Workspaces list\. The status changes from Idle to Starting to Ready when you select the Workspace\. | 
-| Stopping | The Workspace is being stopped and will be set to Idle\. EMR Studio stops notebooks that have been inactive for a long time\. | 
-| Deleting | When you delete a Workspace, EMR Studio marks it for deletion and starts the deletion process\. After the deletion process completes, the Workspace disappears from the list\. | 
++ [Understand Workspace status](#emr-studio-workspace-status)
++ [Resolve Workspace connectivity issues](#emr-studio-workspace-stop-start)
 
 ## Create an EMR Studio Workspace<a name="emr-studio-create-workspace"></a>
 
@@ -37,10 +20,11 @@ You can create EMR Studio Workspaces to run notebook code using the EMR Studio i
 
 1. Log in to your EMR Studio\.
 
-1. Launch the **Create a Workspace** dialog box\. You can start the Workspace creation dialog box in an EMR Studio in three ways\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-configure-workspace.html)
+1. Choose **Create Workspace**\.
 
 1. Enter a **Workspace name** and a **Description**\. Naming a Workspace helps you identify it on the **Workspaces** page\.
+
+1. \(Optional\) Enable Workspace collaboration if you want to work with other Studio users in this Workspace in real time\. You configurare collaborators after you launch the Workspace\.
 
 1. \(Optional\) To attach a cluster to a Workspace when you create the Workspace, expand the **Advanced configuration** section\. 
 **Note**  
@@ -52,9 +36,11 @@ Provisioning a new cluster requires access permissions from your administrator\.
 
 After you create a Workspace, EMR Studio will open the **Workspaces** page\. You will see a green success banner at the top of the page and can find the newly\-created Workspace in the list\.
 
+By default, a Workspace is shared and can be seen by all Studio users\. However, only one user can open and work in a Workspace at a time\. To work simultaneously with other users, you can [Configure Workspace collaboration](emr-studio-workspace-collaboration.md)
+
 ## Launch a Workspace<a name="emr-studio-use-workspace"></a>
 
-To start working with notebook files, launch a Workspace to access the notebook editor\. The Workspace page of a Studio lists all of the Workspaces created in that Studio with details including **Name**, **Status**, **Creation time**, and **Last modified**\. 
+To start working with notebook files, launch a Workspace to access the notebook editor\. The **Workspaces** page in a Studio lists all of the Workspaces that you have access to with details including **Name**, **Status**, **Creation time**, and **Last modified**\. 
 
 **To launch a Workspace for editing and running notebooks**
 
@@ -63,24 +49,6 @@ To start working with notebook files, launch a Workspace to access the notebook 
 1. Choose the Workspace name to launch the Workspace in a new browser tab\. It may take a few minutes for the Workspace to open if it's **Idle**\. 
 **Note**  
 Only one user can open and work in a Workspace at a time\. If you select a Workspace that is already in use, EMR Studio displays a notification when you try to open it\. The **User** column on the **Workspaces** page shows the user working in the Workspace\.
-
-## Resolve Workspace connectivity issues<a name="emr-studio-workspace-stop-start"></a>
-
-To resolve Workspace connectivity issues, you can stop and restart a Workspace\. When you restart a Workspace, EMR Studio launches the Workspace in a different Availability Zone or a different subnet that is associated with your Studio\.
-
-**To stop and restart an EMR Studio Workspace**
-
-1. Close the Workspace in your browser\.
-
-1. Navigate to the **Workspace** list in the EMR Studio UI\.
-
-1. Select your Workspace from the list and choose **Actions**\.
-
-1. Choose **Stop** and wait for the Workspace status to change from **Stopping** to **Idle**\.
-
-1. Choose **Actions** again, and then choose **Start** to restart the Workspace\.
-
-1. Wait for the Workspace status to change from **Starting** to **Ready**, then choose the Workspace name to reopen it in a new browser tab\.
 
 ## Understand the Workspace user interface<a name="emr-studio-workspace-ui"></a>
 
@@ -94,6 +62,7 @@ The EMR Studio Workspace user interface is based on the [JupyterLab interface](h
 + **Commands** – Offers a keyboard\-driven way to search for and run JupyterLab commands\. For more information, see the [Command palette](https://jupyterlab.readthedocs.io/en/latest/user/commands.html) page in the JupyterLab documentation\.
 + **Notebook Tools** – Lets you select and set options such as cell slide type and metadata\. The **Notebook Tools** option appears in the left sidebar after you open a notebook file\.
 + **Open Tabs** – Lists the open documents and activities in the main work area so that you can jump to an open tab\. For more information, see the [Tabs and single\-document mode](https://jupyterlab.readthedocs.io/en/latest/user/interface.html#tabs-and-single-document-mode) page in the JupyterLab documentation\.
++ **Collaboration** – Lets you enable or disable Workspace collaboration, and manage collaborators\. To see the **Collaboration** panel, you must have the necessary permissions\. For more information, see [Set ownership for Workspace collaboration](emr-studio-user-permissions.md#emr-studio-workspace-collaboration-permissions)\.
 
 ## Explore notebook examples<a name="emr-studio-notebook-examples"></a>
 
@@ -138,3 +107,38 @@ When you delete *an entire Workspace*, EMR Studio does not remove any correspond
 1. Choose **Delete** in the upper right of the **Workspaces** list and confirm that you want to delete the selected Workspaces\. Choose **Delete** to confirm\.
 
 1. Follow the instructions for [Deleting objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-objects.html) in the *Amazon Simple Storage Service* *Console User Guide* to remove the notebook files associated with the deleted Workspace from Amazon S3\. If you did not create the Studio, consult your Studio administrator to determine the Amazon S3 backup location for the deleted Workspace\.
+
+## Understand Workspace status<a name="emr-studio-workspace-status"></a>
+
+After you create an EMR Studio Workspace, it appears as a row in the **Workspaces** list in your Studio with its name, status, creation time, and last modified timestamp\. The following table describes Workspace statuses\.
+
+
+****  
+
+| Status | Description | 
+| --- | --- | 
+| Starting | The Workspace is being prepared, but is not yet ready to use\. You can't open a Workspace when its status is Starting\. | 
+| Ready | You can open the Workspace to use the notebook editor, but you must attach the Workspace to an EMR cluster before you can run notebook code\. | 
+| Attaching | The Workspace is being attached to a cluster\. | 
+| Attached | The Workspace is attached to an EMR cluster and ready for you to write and run notebook code\. If a Workspace's status is not Attached, you must attach it to a cluster before you can run notebook code\. | 
+| Idle | The Workspace is stopped and idle\. To reactivate an idle Workspace, select it from the Workspaces list\. The status changes from Idle to Starting to Ready when you select the Workspace\. | 
+| Stopping | The Workspace is being stopped and will be set to Idle\. EMR Studio stops notebooks that have been inactive for a long time\. | 
+| Deleting | When you delete a Workspace, EMR Studio marks it for deletion and starts the deletion process\. After the deletion process completes, the Workspace disappears from the list\. | 
+
+## Resolve Workspace connectivity issues<a name="emr-studio-workspace-stop-start"></a>
+
+To resolve Workspace connectivity issues, you can stop and restart a Workspace\. When you restart a Workspace, EMR Studio launches the Workspace in a different Availability Zone or a different subnet that is associated with your Studio\.
+
+**To stop and restart an EMR Studio Workspace**
+
+1. Close the Workspace in your browser\.
+
+1. Navigate to the **Workspace** list in the EMR Studio UI\.
+
+1. Select your Workspace from the list and choose **Actions**\.
+
+1. Choose **Stop** and wait for the Workspace status to change from **Stopping** to **Idle**\.
+
+1. Choose **Actions** again, and then choose **Start** to restart the Workspace\.
+
+1. Wait for the Workspace status to change from **Starting** to **Ready**, then choose the Workspace name to reopen it in a new browser tab\.

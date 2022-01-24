@@ -4,6 +4,13 @@ To make it easier to provide access controls against objects in S3 on a multi\-t
 
 To achieve this, when your application attempts to access data within S3, EMRFS sends a request for credentials to the Secret Agent process, where the request is authenticated and authorized against an Apache Ranger plugin\. If the request is authorized, then the Secret Agent assumes the IAM role for Apache Ranger Engines with a restricted policy to generate credentials that only have access to the Ranger policy that allowed the access\. The credentials are then passed back to EMRFS to access S3\.
 
+**Topics**
++ [Supported features](#emr-ranger-emrfs-features)
++ [Installation of service configuration](#emr-ranger-emrfs-service-config)
++ [Creating EMRFS S3 policies](#emr-ranger-emrfs-create-policies)
++ [EMRFS S3 policies usage notes](#emr-ranger-emrfs-considerations)
++ [Limitations](#emr-ranger-emrfs-limitations)
+
 ## Supported features<a name="emr-ranger-emrfs-features"></a>
 
 EMRFS S3 plugin provides storage level authorization\. Policies can be created to provide access to users and groups to S3 buckets and prefixes\. Authorization is done only against EMRFS\.

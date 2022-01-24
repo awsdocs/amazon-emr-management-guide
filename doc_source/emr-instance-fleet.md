@@ -9,7 +9,7 @@ In an instance fleet configuration, you specify a *target capacity* for [On\-Dem
 
 You can specify a maximum of five Amazon EC2 instance types per fleet for Amazon EMR to use when fulfilling the targets, or a maximum of 30 Amazon EC2 instance types per fleet when you create a cluster using the AWS CLI or Amazon EMR API and an [allocation strategy](#emr-instance-fleet-allocation-strategy) for On\-Demand and Spot Instances\. 
 
-You can also select multiple subnets for different Availability Zones\. When Amazon EMR launches the cluster, it looks across those subnets to find the instances and purchasing options you specify\. If Amazon EMR detects an AWS large\-scale event in one or more of the Availability Zones, Amazon EMR automatically attempts to route traffic away from the impacted Availability Zones and tries to launch clusters in alternate Availability Zones according to your selections\.
+You can also select multiple subnets for different Availability Zones\. When Amazon EMR launches the cluster, it looks across those subnets to find the instances and purchasing options you specify\. If Amazon EMR detects an AWS large\-scale event in one or more of the Availability Zones, Amazon EMR automatically attempts to route traffic away from the impacted Availability Zones and tries to launch new clusters that you create in alternate Availability Zones according to your selections\. Note that cluster Availability Zone selection happens only at cluster creation\. Existing cluster nodes are not automatically re\-launched in a new Availability Zone in the event of an Availability Zone outage\.
 
 ## **Considerations**<a name="emr-key-feature-summary"></a>
 

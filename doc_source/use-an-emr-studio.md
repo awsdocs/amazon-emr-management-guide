@@ -8,6 +8,8 @@ The following video covers practical information such as how to create a new Wor
 
 **Topics**
 + [Learn Workspace basics](emr-studio-configure-workspace.md)
++ [Configure Workspace collaboration](emr-studio-workspace-collaboration.md)
++ [Browse data with SQL Explorer](emr-studio-sql-explorer.md)
 + [Attach a cluster to a Workspace](emr-studio-create-use-clusters.md)
 + [Link Git\-based repositories to an EMR Studio Workspace](emr-studio-git-repo.md)
 + [Debug applications and jobs with EMR Studio](emr-studio-debug.md)

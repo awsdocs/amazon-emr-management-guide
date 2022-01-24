@@ -1,8 +1,8 @@
 # Start an EMR cluster<a name="emr-ranger-start-emr-cluster"></a>
 
-Before you launch an Amazon EMR cluster with Apache Ranger, make sure each component meets the minimum version requirement:
-+ Amazon EMR release should be at least 5\.32 or later\. EMR 6\.x is currently not supported\.
-+ Apache Ranger Admin server is 2\.x\.
+Before you launch an Amazon EMR cluster with Apache Ranger, make sure each component meets the following minimum version requirement:
++ Amazon EMR 5\.32\.0 or later, or 6\.3\.0 or later\. We recommend that you use the latest Amazon EMR release version\.
++ Apache Ranger Admin server 2\.x\.
 
 Complete the following steps\.
 + Install Apache Ranger if you haven't already\. For more information, see [Apache Ranger 0\.5\.0 installation](https://cwiki.apache.org/confluence/display/RANGER/Apache+Ranger+0.5.0+Installation)\.

@@ -6,7 +6,7 @@ Before you can launch clusters in a VPC, you must create a VPC and a subnet\. Fo
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. On the top\-right of the page, choose the [ AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) for your VPC\.
+1. On the top\-right of the page, choose the [AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) for your VPC\.
 
 1. Choose **Launch VPC Wizard**\.
 **Note**  

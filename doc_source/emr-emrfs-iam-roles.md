@@ -1,8 +1,10 @@
 # Configure IAM roles for EMRFS requests to Amazon S3<a name="emr-emrfs-iam-roles"></a>
 
-When an application running on an Amazon EMR cluster references data using the `s3://mydata` format, Amazon EMR uses EMRFS to make the request\. To interact with Amazon S3, EMRFS assumes the permissions policies attached to the Amazon EC2 instance specified when the cluster was created\. The same service role for cluster EC2 instances is used regardless of the user or group using the application or the location of the data in Amazon S3\. If you have clusters with multiple users who need different levels of access to data in Amazon S3 through EMRFS, you can set up a security configuration with IAM roles for EMRFS\. EMRFS can assume a different service role for cluster EC2 instances based on the user or group making the request, or based on the location of data in Amazon S3\. Each IAM role for EMRFS can have different permissions for data access in Amazon S3\. For more information about the service role for cluster EC2 instances, see [Service role for cluster EC2 instances \(EC2 instance profile\)](emr-iam-role-for-ec2.md)\.
+When an application running on a cluster references data using the `s3://mydata` format, Amazon EMR uses EMRFS to make the request\. To interact with Amazon S3, EMRFS assumes the permissions policies that are attached to your [Amazon EC2 instance profile](emr-iam-role-for-ec2.md)\. The same Amazon EC2 instance profile is used regardless of the user or group running the application or the location of the data in Amazon S3\. 
 
-IAM roles for EMRFS are available with Amazon EMR release version 5\.10\.0 and later\. If you use an earlier release version or have requirements beyond what IAM roles for EMRFS provide, you can create a custom credentials provider instead\. For more information, see [Authorizing access to EMRFS data in Amazon S3](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-plan-credentialsprovider)\. For more information about EMRFS, see [EMR File System \(EMRFS\)](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-fs)\.
+If you have a cluster with multiple users who need different levels of access to data in Amazon S3 through EMRFS, you can set up a security configuration with IAM roles for EMRFS\. EMRFS can assume a different service role for cluster EC2 instances based on the user or group making the request, or based on the location of data in Amazon S3\. Each IAM role for EMRFS can have different permissions for data access in Amazon S3\. For more information about the service role for cluster EC2 instances, see [Service role for cluster EC2 instances \(EC2 instance profile\)](emr-iam-role-for-ec2.md)\.
+
+Using custom IAM roles for EMRFS is supported in Amazon EMR versions 5\.10\.0 and later\. If you use an earlier version or have requirements beyond what IAM roles for EMRFS provide, you can create a custom credentials provider instead\. For more information, see [Authorizing access to EMRFS data in Amazon S3](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-plan-credentialsprovider)\. 
 
 When you use a security configuration to specify IAM roles for EMRFS, you set up role mappings\. Each role mapping specifies an IAM role that corresponds to identifiers\. These identifiers determine the basis for access to Amazon S3 through EMRFS\. The identifiers can be users, groups, or Amazon S3 prefixes that indicate a data location\. When EMRFS makes a request to Amazon S3, if the request matches the basis for access, EMRFS has cluster EC2 instances assume the corresponding IAM role for the request\. The IAM permissions attached to that role apply instead of the IAM permissions attached to the service role for cluster EC2 instances\.
 
@@ -137,7 +139,7 @@ Linux line continuation characters \(\\\) are included for readability\. They ca
 
    ```
    aws emr create-cluster --name MyEmrFsS3RolesCluster \
-   --release-label emr-5.33.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
+   --release-label emr-5.34.0 --ec2-attributes InstanceProfile=EC2_Role_EMR_Restrict_S3,KeyName=MyKey \
    --instance-type m5.xlarge --instance-count 3 \
    --security-configuration EMRFS_Roles_Security_Configuration
    ```

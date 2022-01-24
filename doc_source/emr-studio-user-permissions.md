@@ -64,6 +64,42 @@ To set Amazon S3 access permissions for storing notebook files and AWS Secrets M
    }
    ```
 
+   **Set ownership for Workspace collaboration**
+
+   Workspace collaboration lets multiple users work simultaneously in the same Workspace and can be configured with the **Collaboration** panel in the Workspace UI\. In order to see and use the **Collaboration** panel, a user must have the following permissions\. Any user with these permissions can see and use the **Collaboration** panel\.
+
+   ```
+   "elasticmapreduce:UpdateEditor",
+   "elasticmapreduce:PutWorkspaceAccess",
+   "elasticmapreduce:DeleteWorkspaceAccess",
+   "elasticmapreduce:ListWorkspaceAccessIdentities"
+   ```
+
+   To restrict access to the **Collaboration** panel, you can use tag\-based access control\. When a user creates a Workspace, EMR Studio applies a default tag with a key of `creatorUserId` whose value is the ID of the user creating the Workspace\. 
+**Note**  
+EMR Studio did not add the `creatorUserId` tag to Workspaces that were created before November 16, 2021\. To restrict who can configure collaboration, we recommend that you manually add the `creatorUserId` tag to your Workspace and then use tag\-based access control in your user permissions policies\.
+
+   The following example statement allows a user to configure collaboration for any Workspace with the tag key `creatorUserId` whose value matches the user's ID \(indicated by the policy variable `aws:userId`\)\. In other words, the statement lets a user configure collaboration for the Workspaces that they create\. To learn more about policy variables, see [IAM policy elements: Variables and tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html)\.
+
+   ```
+       {
+           "Sid": "UserRolePermissionsForCollaboration",
+           "Action": [
+               "elasticmapreduce:UpdateEditor",
+               "elasticmapreduce:PutWorkspaceAccess",
+               "elasticmapreduce:DeleteWorkspaceAccess",
+               "elasticmapreduce:ListWorkspaceAccessIdentities"
+           ],
+           "Resource": "*",
+           "Effect": "Allow",
+           "Condition": {
+               "StringEquals": {
+                   "elasticmapreduce:ResourceTag/creatorUserId": "${aws:userId}"
+               }
+           }
+       }
+   ```
+
 1. Attach the permissions policy to your IAM identity\. 
 
    The following table summarizes which IAM identity you attach a permissions policy to, depending on your EMR Studio authentication mode\. For instructions on how to attach a policy, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html)\.  
@@ -80,6 +116,7 @@ The table also displays the operations allowed in each of example permissions po
 | Action | Basic | Intermediate | Advanced | Associated actions | 
 | --- | --- | --- | --- | --- | 
 | Create and delete Workspaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:CreateEditor", <br />"elasticmapreduce:DescribeEditor",<br />"elasticmapreduce:ListEditors", <br />"elasticmapreduce:DeleteEditor"</pre>  | 
+| View the Collaboration panel, enable Workspace collaboration, and add collaborators\. For more information, see [Set ownership for Workspace collaboration](#emr-studio-workspace-collaboration-permissions)\. | Yes | Yes | Yes |  <pre>"elasticmapreduce:UpdateEditor",<br />"elasticmapreduce:PutWorkspaceAccess",<br />"elasticmapreduce:DeleteWorkspaceAccess",<br />"elasticmapreduce:ListWorkspaceAccessIdentities"</pre>  | 
 | See a list of Amazon S3 Control storage buckets in the same account as the Studio when creating a new EMR cluster, and access container logs when using a web UI to debug applications | Yes | Yes | Yes |  <pre>"s3:ListAllMyBuckets",<br />"s3:ListBucket", <br />"s3:GetBucketLocation",<br />"s3:GetObject"</pre>  | 
 | Access Workspaces | Yes | Yes | Yes |  <pre>"elasticmapreduce:DescribeEditor", <br />"elasticmapreduce:ListEditors",<br />"elasticmapreduce:StartEditor", <br />"elasticmapreduce:StopEditor",<br />"elasticmapreduce:OpenEditorInConsole"</pre>  | 
 | Attach or detach existing Amazon EMR clusters associated with the Workspace | Yes | Yes | Yes |  <pre>"elasticmapreduce:AttachEditor",<br />"elasticmapreduce:DetachEditor",<br />"elasticmapreduce:ListClusters",<br />"elasticmapreduce:DescribeCluster",<br />"elasticmapreduce:ListInstanceGroups",<br />"elasticmapreduce:ListBootstrapActions"</pre>  | 
@@ -107,49 +144,33 @@ The example policy includes `Condition` elements to enforce tag\-based access co
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllowEMRBasicActions",
+            "Sid": "AllowDefaultEC2SecurityGroupsCreationInVPCWithEMRTags",
+            "Effect": "Allow",
             "Action": [
-                "elasticmapreduce:CreateEditor",
-                "elasticmapreduce:DescribeEditor",
-                "elasticmapreduce:ListEditors",
-                "elasticmapreduce:StartEditor",
-                "elasticmapreduce:StopEditor",
-                "elasticmapreduce:DeleteEditor",
-                "elasticmapreduce:OpenEditorInConsole",
-                "elasticmapreduce:AttachEditor",
-                "elasticmapreduce:DetachEditor",
-                "elasticmapreduce:CreateRepository",
-                "elasticmapreduce:DescribeRepository",
-                "elasticmapreduce:DeleteRepository",
-                "elasticmapreduce:ListRepositories",
-                "elasticmapreduce:LinkRepository",
-                "elasticmapreduce:UnlinkRepository",
-                "elasticmapreduce:DescribeCluster",
-                "elasticmapreduce:ListInstanceGroups",
-                "elasticmapreduce:ListBootstrapActions",
-                "elasticmapreduce:ListClusters",
-                "elasticmapreduce:ListSteps",
-                "elasticmapreduce:CreatePersistentAppUI",
-                "elasticmapreduce:DescribePersistentAppUI",
-                "elasticmapreduce:GetPersistentAppUIPresignedURL",
-                "elasticmapreduce:GetOnClusterAppUIPresignedURL"
+                "ec2:CreateSecurityGroup"
             ],
-            "Resource": "*",
-            "Effect": "Allow"
+            "Resource": [
+                "arn:aws:ec2:*:*:vpc/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/for-use-with-amazon-emr-managed-policies": "true"
+                }
+            }
         },
         {
-            "Sid": "AllowEMRContainersBasicActions",
+            "Sid": "AllowAddingEMRTagsDuringDefaultSecurityGroupCreation",
+            "Effect": "Allow",
             "Action": [
-                "emr-containers:DescribeVirtualCluster",
-                "emr-containers:ListVirtualClusters",
-                "emr-containers:DescribeManagedEndpoint",
-                "emr-containers:ListManagedEndpoints",
-                "emr-containers:CreateAccessTokenForManagedEndpoint",
-                "emr-containers:DescribeJobRun",
-                "emr-containers:ListJobRuns"
+                "ec2:CreateTags"
             ],
-            "Resource": "*",
-            "Effect": "Allow"
+            "Resource": "arn:aws:ec2:*:*:security-group/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestTag/for-use-with-amazon-emr-managed-policies": "true",
+                    "ec2:CreateAction": "CreateSecurityGroup"
+                }
+            }
         },
         {
             "Sid": "AllowSecretManagerListSecrets",
@@ -203,6 +224,21 @@ The example policy includes `Condition` elements to enforce tag\-based access co
                 "arn:aws:s3:::aws-logs-<aws-account-id>-<region>/elasticmapreduce/*"
             ],
             "Effect": "Allow"
+        },
+        {
+            "Sid": "AllowConfigurationForWorkspaceCollaboration",
+            "Action": [
+                "elasticmapreduce:UpdateEditor",
+                "elasticmapreduce:PutWorkspaceAccess",
+                "elasticmapreduce:DeleteWorkspaceAccess",
+                "elasticmapreduce:ListWorkspaceAccessIdentities"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "StringEquals": {
+                    "elasticmapreduce:ResourceTag/creatorUserId": "${aws:userId}"
+            }
         }
     ]
 }
@@ -210,7 +246,7 @@ The example policy includes `Condition` elements to enforce tag\-based access co
 
 ## Example: Intermediate user policy<a name="emr-studio-intermediate-permissions-policy"></a>
 
-The following intermediate user policy allows most EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates\. 
+The following intermediate user policy allows most EMR Studio actions, and lets a user create new Amazon EMR clusters using a cluster template\. 
 
 **Important**  
 The example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
@@ -335,6 +371,21 @@ The example policy includes `Condition` elements to enforce tag\-based access co
                 "arn:aws:s3:::aws-logs-<aws-account-id>-<region>/elasticmapreduce/*"
             ],
             "Effect": "Allow"
+        },
+        {
+            "Sid": "AllowConfigurationForWorkspaceCollaboration",
+            "Action": [
+                "elasticmapreduce:UpdateEditor",
+                "elasticmapreduce:PutWorkspaceAccess",
+                "elasticmapreduce:DeleteWorkspaceAccess",
+                "elasticmapreduce:ListWorkspaceAccessIdentities"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "StringEquals": {
+                    "elasticmapreduce:ResourceTag/creatorUserId": "${aws:userId}"
+            }
         }
     ]
 }
@@ -342,7 +393,7 @@ The example policy includes `Condition` elements to enforce tag\-based access co
 
 ## Example: Advanced user policy<a name="emr-studio-advanced-permissions-policy"></a>
 
-The following intermediate user policy allows all EMR Studio actions, and lets a user create new Amazon EMR clusters using cluster templates or by providing a cluster configuration\. 
+The following intermediate user policy allows all EMR Studio actions, and lets a user create new Amazon EMR clusters using a cluster template or by providing a cluster configuration\. 
 
 **Important**  
 The example policy does not include the `CreateStudioPresignedUrl` permission, which you must allow for a user when you use IAM authentication mode\. For more information, see [Assign a user or group to an EMR Studio](emr-studio-manage-users.md#emr-studio-assign-users-groups)\.
@@ -478,6 +529,22 @@ The example policy includes `Condition` elements to enforce tag\-based access co
                 "arn:aws:s3:::aws-logs-<aws-account-id>-<region>/elasticmapreduce/*"
             ],
             "Effect": "Allow"
+        },
+        {
+            "Sid": "AllowConfigurationForWorkspaceCollaboration",
+            "Action": [
+                "elasticmapreduce:UpdateEditor",
+                "elasticmapreduce:PutWorkspaceAccess",
+                "elasticmapreduce:DeleteWorkspaceAccess",
+                "elasticmapreduce:ListWorkspaceAccessIdentities"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "StringEquals": {
+                    "elasticmapreduce:ResourceTag/creatorUserId": "${aws:userId}"
+                }
+            }
         }
     ]
 }

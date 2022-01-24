@@ -107,6 +107,7 @@ The following Amazon EMR features are currently not available in an EMR cluster 
 + Instance fleets
 + One\-click access to persistent Spark history server
 + Persistent application user interfaces
++ One\-click access to persistent application user interfaces is currently not available for Amazon EMR clusters with multiple master nodes or for EMR clusters integrated with AWS Lake Formation\.
 
 **Note**  
  To use Kerberos authentication in your cluster, you must configure an external KDC\.  

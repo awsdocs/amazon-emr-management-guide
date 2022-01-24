@@ -49,7 +49,7 @@ The Auto Scaling role is specified using a separate option, `--auto-scaling-role
 Linux line continuation characters \(\\\) are included for readability\. They can be removed or used in Linux commands\. For Windows, remove them or replace with a caret \(^\)\.
 
   ```
-  aws emr create-cluster --name "Test cluster" --release-label emr-5.33.0 \
+  aws emr create-cluster --name "Test cluster" --release-label emr-5.34.0 \
   --applications Name=Hive Name=Pig --service-role MyCustomServiceRoleForEMR \
   --ec2-attributes InstanceProfile=MyCustomServiceRoleForClusterEC2Instances,\
   KeyName=myKey --instance-type m5.xlarge --instance-count 3

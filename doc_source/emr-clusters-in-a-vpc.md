@@ -24,12 +24,12 @@ The following diagram shows how to set up a VPC so that a cluster in the VPC can
 
 ## Private subnets<a name="emr-vpc-private-subnet"></a>
 
-Private subnets allow you to launch AWS resources without requiring the subnet to have an attached internet gateway\. This might be useful, for example, in an application that uses these private resources in the backend\. Those resources can then initiate outbound traffic using a NAT instance located in another subnet that has an internet gateway attached\. For more information about this scenario, see [Scenario 2: VPC with Public and Private Subnets \(NAT\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)\. 
+A private subnet lets you launch AWS resources without requiring the subnet to have an attached internet gateway\. Amazon EMR supports launching clusters in private subnets with release versions 4\.2\.0 or later\.
 
-**Important**  
-Amazon EMR only supports launching clusters in private subnets in releases 4\.2 or later\.
+**Note**  
+For Amazon EMR clusters in private subnets, we recommend that you use [VPC endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html)\. With VPC endpoints, traffic from S3 stays within the VPC and there are no additional NAT gateway charges when your cluster interacts with data in S3\.
 
-The following are differences from public subnets:
+Private subnets differ from public subnets in the following ways:
 + To access AWS services that do not provide a VPC endpoint, you still must use a NAT instance or an internet gateway\.
 + At a minimum, you must provide a route to the Amazon EMR service logs bucket and Amazon Linux repository in Amazon S3\. For more information, see [Minimum Amazon S3 policy for private subnet](private-subnet-iampolicy.md)
 + If you use EMRFS features, you need to have an Amazon S3 VPC endpoint and a route from your private subnet to DynamoDB\.
