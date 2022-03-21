@@ -408,7 +408,7 @@ Before December 2020, the ElasticMapReduce\-master security group had a pre\-con
 
 Regardless of your operating system, you can create an SSH connection to your cluster using the AWS CLI\.
 
-**To connect to your cluster an view log files using the AWS CLI**
+**To connect to your cluster and view log files using the AWS CLI**
 
 1. Use the following command to open an SSH connection to your cluster\. Replace *<mykeypair\.key>* with the full path and file name of your key pair file\. For example, `C:\Users\<username>\.ssh\mykeypair.pem`\.
 
