@@ -1,6 +1,6 @@
 # When to set up EMR events in CloudWatch<a name="emr-service-limits-cloudwatch-events"></a>
 
-For some polling APIs, such as DescribeCluster, DescribeStep, and ListClusters, setting up a CouldWatch event can reduce the response time to changes and free up your service quotas\. For example, if you have a Lambda function set up to run when a cluster's state changes, such as when a step completes or a cluster terminates, you can use that trigger to start the next action in your workflow instead of waiting for the next poll\. Otherwise, if you have dedicated Amazon EC2 instances or Lambda functions constantly polling the EMR API for changes, you not only waste compute resources but might also reach your service quota\.
+For some polling APIs, such as DescribeCluster, DescribeStep, and ListClusters, setting up a CloudWatch event can reduce the response time to changes and free up your service quotas\. For example, if you have a Lambda function set up to run when a cluster's state changes, such as when a step completes or a cluster terminates, you can use that trigger to start the next action in your workflow instead of waiting for the next poll\. Otherwise, if you have dedicated Amazon EC2 instances or Lambda functions constantly polling the EMR API for changes, you not only waste compute resources but might also reach your service quota\.
 
 Following are a few cases when you might benefit by moving to an event\-driven architecture\.
 
