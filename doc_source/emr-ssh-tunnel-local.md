@@ -17,7 +17,7 @@ Setting up an SSH tunnel using local port forwarding requires the public DNS nam
    In the command, replace *\~/mykeypair\.pem* with the location and file name of your `.pem` file and replace *ec2\-\#\#\#\-\#\#\-\#\#\-\#\#\#\.compute\-1\.amazonaws\.com* with the master public DNS name of your cluster\. To access a different web interface, replace `8088` with the appropriate port number\. For example, replace `8088` with `8890` for the Zeppelin interface\.
 
    ```
-   ssh -i ~/mykeypair.pem -N -L 8157:ec2-###-##-##-###.compute-1.amazonaws.com:8088 hadoop@ec2-###-##-##-###.compute-1.amazonaws.com
+   ssh -i ~/mykeypair.pem -N -L 8157:ec2-###-##-##-###.compute-1.amazonaws.com:8088 hadoop@ec2-###-##-##-###.compute-1.amazonaws.com
    ```
 
    `-L` signifies the use of local port forwarding which allows you to specify a local port used to forward data to the identified remote port on the master node's local web server\.
